@@ -10,6 +10,7 @@
 		93C0211D1AB0A6330014096A /* Automattic_Tracks_iOS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 93C0211C1AB0A6330014096A /* Automattic_Tracks_iOS.h */; };
 		93C0211F1AB0A6330014096A /* Automattic_Tracks_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0211E1AB0A6330014096A /* Automattic_Tracks_iOS.m */; };
 		93C021251AB0A6330014096A /* libAutomattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */; };
+		93C021361AB0BB100014096A /* TracksEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021351AB0BB100014096A /* TracksEvent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -41,6 +42,8 @@
 		93C0211E1AB0A6330014096A /* Automattic_Tracks_iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Automattic_Tracks_iOS.m; sourceTree = "<group>"; };
 		93C021241AB0A6330014096A /* Automattic-Tracks-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Automattic-Tracks-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93C0212A1AB0A6330014096A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93C021341AB0BB100014096A /* TracksEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEvent.h; sourceTree = "<group>"; };
+		93C021351AB0BB100014096A /* TracksEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEvent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +86,7 @@
 		93C0211B1AB0A6330014096A /* Automattic-Tracks-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				93C021331AB0BAF50014096A /* Model */,
 				93C0211C1AB0A6330014096A /* Automattic_Tracks_iOS.h */,
 				93C0211E1AB0A6330014096A /* Automattic_Tracks_iOS.m */,
 			);
@@ -103,6 +107,15 @@
 				93C0212A1AB0A6330014096A /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		93C021331AB0BAF50014096A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				93C021341AB0BB100014096A /* TracksEvent.h */,
+				93C021351AB0BB100014096A /* TracksEvent.m */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				93C021361AB0BB100014096A /* TracksEvent.m in Sources */,
 				93C0211F1AB0A6330014096A /* Automattic_Tracks_iOS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
