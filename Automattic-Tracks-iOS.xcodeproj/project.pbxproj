@@ -1,0 +1,371 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		93C0211D1AB0A6330014096A /* Automattic_Tracks_iOS.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = 93C0211C1AB0A6330014096A /* Automattic_Tracks_iOS.h */; };
+		93C0211F1AB0A6330014096A /* Automattic_Tracks_iOS.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0211E1AB0A6330014096A /* Automattic_Tracks_iOS.m */; };
+		93C021251AB0A6330014096A /* libAutomattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		93C021261AB0A6330014096A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 93C021111AB0A6330014096A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 93C021181AB0A6330014096A;
+			remoteInfo = "Automattic-Tracks-iOS";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		93C021171AB0A6330014096A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				93C0211D1AB0A6330014096A /* Automattic_Tracks_iOS.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAutomattic-Tracks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93C0211C1AB0A6330014096A /* Automattic_Tracks_iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Automattic_Tracks_iOS.h; sourceTree = "<group>"; };
+		93C0211E1AB0A6330014096A /* Automattic_Tracks_iOS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Automattic_Tracks_iOS.m; sourceTree = "<group>"; };
+		93C021241AB0A6330014096A /* Automattic-Tracks-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Automattic-Tracks-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93C0212A1AB0A6330014096A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		93C021161AB0A6330014096A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93C021211AB0A6330014096A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93C021251AB0A6330014096A /* libAutomattic-Tracks-iOS.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		93C021101AB0A6330014096A = {
+			isa = PBXGroup;
+			children = (
+				93C0211B1AB0A6330014096A /* Automattic-Tracks-iOS */,
+				93C021281AB0A6330014096A /* Automattic-Tracks-iOSTests */,
+				93C0211A1AB0A6330014096A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		93C0211A1AB0A6330014096A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */,
+				93C021241AB0A6330014096A /* Automattic-Tracks-iOSTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		93C0211B1AB0A6330014096A /* Automattic-Tracks-iOS */ = {
+			isa = PBXGroup;
+			children = (
+				93C0211C1AB0A6330014096A /* Automattic_Tracks_iOS.h */,
+				93C0211E1AB0A6330014096A /* Automattic_Tracks_iOS.m */,
+			);
+			path = "Automattic-Tracks-iOS";
+			sourceTree = "<group>";
+		};
+		93C021281AB0A6330014096A /* Automattic-Tracks-iOSTests */ = {
+			isa = PBXGroup;
+			children = (
+				93C021291AB0A6330014096A /* Supporting Files */,
+			);
+			path = "Automattic-Tracks-iOSTests";
+			sourceTree = "<group>";
+		};
+		93C021291AB0A6330014096A /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				93C0212A1AB0A6330014096A /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		93C021181AB0A6330014096A /* Automattic-Tracks-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93C0212D1AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */;
+			buildPhases = (
+				93C021151AB0A6330014096A /* Sources */,
+				93C021161AB0A6330014096A /* Frameworks */,
+				93C021171AB0A6330014096A /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Automattic-Tracks-iOS";
+			productName = "Automattic-Tracks-iOS";
+			productReference = 93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		93C021231AB0A6330014096A /* Automattic-Tracks-iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 93C021301AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */;
+			buildPhases = (
+				93C021201AB0A6330014096A /* Sources */,
+				93C021211AB0A6330014096A /* Frameworks */,
+				93C021221AB0A6330014096A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				93C021271AB0A6330014096A /* PBXTargetDependency */,
+			);
+			name = "Automattic-Tracks-iOSTests";
+			productName = "Automattic-Tracks-iOSTests";
+			productReference = 93C021241AB0A6330014096A /* Automattic-Tracks-iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		93C021111AB0A6330014096A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0620;
+				ORGANIZATIONNAME = "Automattic Inc.";
+				TargetAttributes = {
+					93C021181AB0A6330014096A = {
+						CreatedOnToolsVersion = 6.2;
+					};
+					93C021231AB0A6330014096A = {
+						CreatedOnToolsVersion = 6.2;
+					};
+				};
+			};
+			buildConfigurationList = 93C021141AB0A6330014096A /* Build configuration list for PBXProject "Automattic-Tracks-iOS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 93C021101AB0A6330014096A;
+			productRefGroup = 93C0211A1AB0A6330014096A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				93C021181AB0A6330014096A /* Automattic-Tracks-iOS */,
+				93C021231AB0A6330014096A /* Automattic-Tracks-iOSTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		93C021221AB0A6330014096A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		93C021151AB0A6330014096A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93C0211F1AB0A6330014096A /* Automattic_Tracks_iOS.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93C021201AB0A6330014096A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		93C021271AB0A6330014096A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 93C021181AB0A6330014096A /* Automattic-Tracks-iOS */;
+			targetProxy = 93C021261AB0A6330014096A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		93C0212B1AB0A6330014096A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		93C0212C1AB0A6330014096A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		93C0212E1AB0A6330014096A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		93C0212F1AB0A6330014096A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		93C021311AB0A6330014096A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		93C021321AB0A6330014096A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(SDKROOT)/Developer/Library/Frameworks",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		93C021141AB0A6330014096A /* Build configuration list for PBXProject "Automattic-Tracks-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93C0212B1AB0A6330014096A /* Debug */,
+				93C0212C1AB0A6330014096A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93C0212D1AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93C0212E1AB0A6330014096A /* Debug */,
+				93C0212F1AB0A6330014096A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		93C021301AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93C021311AB0A6330014096A /* Debug */,
+				93C021321AB0A6330014096A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 93C021111AB0A6330014096A /* Project object */;
+}
