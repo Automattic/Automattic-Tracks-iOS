@@ -1,0 +1,10 @@
+PODS:
+  - WordPressCom-Analytics-iOS (0.0.29)
+
+DEPENDENCIES:
+  - WordPressCom-Analytics-iOS
+
+SPEC CHECKSUMS:
+  WordPressCom-Analytics-iOS: d56f093a0379f543ea49edb265db67afc534dc00
+
+COCOAPODS: 0.35.0

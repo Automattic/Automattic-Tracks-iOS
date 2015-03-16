@@ -8,4 +8,6 @@
 @property (nonatomic, copy) NSString *userAgent;
 @property (nonatomic, copy) NSString *userType;
 
+@property (nonatomic, readonly) NSDictionary *dictionaryRepresentation;
+
 @end
