@@ -12,6 +12,7 @@
 		93C021361AB0BB100014096A /* TracksEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021351AB0BB100014096A /* TracksEvent.m */; };
 		93C0213A1AB1BFF30014096A /* TracksServiceRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021391AB1BFF30014096A /* TracksServiceRemote.m */; };
 		93C0213D1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
+		93F595511AB9B7A800280F9E /* TracksService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F595501AB9B7A800280F9E /* TracksService.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -46,6 +47,8 @@
 		93C021391AB1BFF30014096A /* TracksServiceRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceRemote.m; sourceTree = "<group>"; };
 		93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceRemoteIntegrationTests.m; sourceTree = "<group>"; };
 		93C0213E1AB75F770014096A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
+		93F5954F1AB9B7A800280F9E /* TracksService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksService.h; sourceTree = "<group>"; };
+		93F595501AB9B7A800280F9E /* TracksService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksService.m; sourceTree = "<group>"; };
 		C2FC310E80CC6BB7A70F0437 /* libPods-Automattic-Tracks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D630E0FC48A734E57A5E171E /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		E6AEB57AC59A348062F35F65 /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -149,6 +152,8 @@
 			children = (
 				93C021381AB1BFF30014096A /* TracksServiceRemote.h */,
 				93C021391AB1BFF30014096A /* TracksServiceRemote.m */,
+				93F5954F1AB9B7A800280F9E /* TracksService.h */,
+				93F595501AB9B7A800280F9E /* TracksService.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -286,6 +291,7 @@
 			files = (
 				93C021361AB0BB100014096A /* TracksEvent.m in Sources */,
 				93C0213A1AB1BFF30014096A /* TracksServiceRemote.m in Sources */,
+				93F595511AB9B7A800280F9E /* TracksService.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
