@@ -1,0 +1,14 @@
+PODS:
+  - Automattic-Tracks-iOS (0.0.0)
+
+DEPENDENCIES:
+  - Automattic-Tracks-iOS (from `../`)
+
+EXTERNAL SOURCES:
+  Automattic-Tracks-iOS:
+    :path: ../
+
+SPEC CHECKSUMS:
+  Automattic-Tracks-iOS: e701119bde01a0450fa594bdbbb5cf9cfbf6b3e1
+
+COCOAPODS: 0.35.0
