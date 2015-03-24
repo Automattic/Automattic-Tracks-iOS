@@ -8,6 +8,7 @@
 @end
 
 static NSTimeInterval const EVENT_TIMER_FIVE_MINUTES = 5 * 60;
+NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 
 @implementation TracksService
 
@@ -48,6 +49,8 @@ static NSTimeInterval const EVENT_TIMER_FIVE_MINUTES = 5 * 60;
     [self.remote sendBatchOfEvents:events withSharedProperties:@{} completionHandler:^{
         // Assume no errors for now
         [weakSelf resetTimer];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceDidSendQueuedEventsNotification object:nil];
     }];
 }
 

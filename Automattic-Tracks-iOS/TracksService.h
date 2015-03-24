@@ -2,6 +2,8 @@
 #import "TracksEvent.h"
 #import "TracksServiceRemote.h"
 
+extern NSString *const TrackServiceDidSendQueuedEventsNotification;
+
 @interface TracksService : NSObject
 
 @property (nonatomic, strong) TracksServiceRemote *remote;

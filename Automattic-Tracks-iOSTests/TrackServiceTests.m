@@ -56,9 +56,17 @@
         return ([obj count] == 1);
     }]
                               withSharedProperties:[OCMArg isNotNil]
-                                 completionHandler:[OCMArg isNotNil]]);
+                                 completionHandler:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)()) {
+        passedBlock();
+        
+        return YES;
+    }]]);
+    
+    [self expectationForNotification:TrackServiceDidSendQueuedEventsNotification object:nil handler:nil];
 
     [self.subject sendQueuedEvents];
+    
+    [self waitForExpectationsWithTimeout:2.0 handler:nil];
     
     OCMVerifyAll((id)self.subject.remote);
 }
