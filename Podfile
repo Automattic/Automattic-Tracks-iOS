@@ -6,6 +6,6 @@ target 'Automattic-Tracks-iOS' do
 end
 
 target 'Automattic-Tracks-iOSTests' do
-
+  pod 'OCMock'
 end
 
