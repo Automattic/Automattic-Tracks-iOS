@@ -163,12 +163,12 @@
 		93C021371AB1BFA40014096A /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				93C021381AB1BFF30014096A /* TracksServiceRemote.h */,
-				93C021391AB1BFF30014096A /* TracksServiceRemote.m */,
-				93F5954F1AB9B7A800280F9E /* TracksService.h */,
-				93F595501AB9B7A800280F9E /* TracksService.m */,
 				937632821AC1F45600086BC6 /* TracksEventService.h */,
 				937632831AC1F45600086BC6 /* TracksEventService.m */,
+				93F5954F1AB9B7A800280F9E /* TracksService.h */,
+				93F595501AB9B7A800280F9E /* TracksService.m */,
+				93C021381AB1BFF30014096A /* TracksServiceRemote.h */,
+				93C021391AB1BFF30014096A /* TracksServiceRemote.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
