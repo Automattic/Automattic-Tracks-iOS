@@ -9,6 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: e701119bde01a0450fa594bdbbb5cf9cfbf6b3e1
+  Automattic-Tracks-iOS: c93c1492b32a7b3a13708a3afe45d84aabd19c4e
 
 COCOAPODS: 0.35.0

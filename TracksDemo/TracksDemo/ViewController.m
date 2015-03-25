@@ -1,14 +1,11 @@
-//
-//  ViewController.m
-//  TracksDemo
-//
-//  Created by Aaron Douglas on 3/24/15.
-//  Copyright (c) 2015 Automattic Inc. All rights reserved.
-//
-
 #import "ViewController.h"
+#import <TracksEventService.h>
+#import <TracksService.h>
 
 @interface ViewController ()
+
+@property (nonatomic, strong) TracksEventService *tracksEventService;
+@property (nonatomic, strong) TracksService *tracksService;
 
 @end
 
@@ -16,12 +13,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+
+    self.tracksEventService = [[TracksEventService alloc] init];
+    self.tracksService = [[TracksService alloc] init];
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+
+- (IBAction)sendTestEvent:(id)sender
+{
+    TracksEvent *tracksEvent = [self.tracksEventService createTracksEventWithName:@"test_event"];
+    [self.tracksService trackEvent:tracksEvent];
 }
 
 @end
