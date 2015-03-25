@@ -18,6 +18,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     if (self) {
         _simpleStorage = [NSMutableArray new];
         _remote = [TracksServiceRemote new];
+        _queueSendInterval = EVENT_TIMER_FIVE_MINUTES;
         [self resetTimer];
     }
     
@@ -69,7 +70,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     [self.timer invalidate];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.queueSendInterval target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
 }
 
 
@@ -82,6 +83,13 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 - (void)dealloc
 {
     [self.timer invalidate];
+}
+
+
+- (void)setQueueSendInterval:(NSTimeInterval)queueSendInterval
+{
+    _queueSendInterval = queueSendInterval;
+    [self resetTimer];
 }
 
 @end

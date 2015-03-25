@@ -16,6 +16,7 @@
 
     self.tracksEventService = [[TracksEventService alloc] init];
     self.tracksService = [[TracksService alloc] init];
+    self.tracksService.queueSendInterval = 1.0;
 }
 
 
