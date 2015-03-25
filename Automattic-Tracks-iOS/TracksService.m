@@ -17,6 +17,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     self = [super init];
     if (self) {
         _simpleStorage = [NSMutableArray new];
+        _remote = [TracksServiceRemote new];
         [self resetTimer];
     }
     
@@ -45,10 +46,19 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     NSArray *events = [NSArray arrayWithArray:self.simpleStorage];
     [self.simpleStorage removeAllObjects];
     
-    __weak TracksService *weakSelf = self;
-    [self.remote sendBatchOfEvents:events withSharedProperties:@{} completionHandler:^{
+    if (events.count == 0) {
+        [self resetTimer];
+        return;
+    }
+
+    NSMutableArray *jsonEvents = [NSMutableArray arrayWithCapacity:events.count];
+    for (TracksEvent *tracksEvent in events) {
+        [jsonEvents addObject:tracksEvent.dictionaryRepresentation];
+    }
+    
+    [self.remote sendBatchOfEvents:jsonEvents withSharedProperties:@{} completionHandler:^{
         // Assume no errors for now
-        [weakSelf resetTimer];
+        [self resetTimer];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceDidSendQueuedEventsNotification object:nil];
     }];
@@ -59,8 +69,15 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     [self.timer invalidate];
     
-    self.timer = [NSTimer timerWithTimeInterval:EVENT_TIMER_FIVE_MINUTES target:self selector:@selector(sendQueuedEvents) userInfo:nil repeats:NO];
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
 }
+
+
+- (void)timerFireMethod:(NSTimer *)timer
+{
+    [self sendQueuedEvents];
+}
+
 
 - (void)dealloc
 {
