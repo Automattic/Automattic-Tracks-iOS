@@ -26,11 +26,16 @@ static NSString *const USER_LOGIN_NAME_KEY = @"_ul";
     NSString *uuid = [[NSUUID UUID] UUIDString];
     uuid = [uuid stringByReplacingOccurrencesOfString:@"-" withString:@""];
     
-    NSDictionary *dict = @{EVENT_NAME_KEY : self.eventName,
-                           USER_AGENT_NAME_KEY : @"WPiOS",
-                           TIMESTAMP_KEY : @(lround(self.date.timeIntervalSince1970 * 1000)),
-                           USER_TYPE_KEY : USER_TYPE_ANON,
-                           USER_ID_ANON : uuid};
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    dict[EVENT_NAME_KEY] = self.eventName;
+    dict[USER_AGENT_NAME_KEY] = @"WPiOS";
+    dict[TIMESTAMP_KEY] = @(lround(self.date.timeIntervalSince1970 * 1000));
+    dict[USER_ID_ANON] = uuid;
+    
+    if (self.userType == TracksEventUserTypeAnonymous) {
+        dict[USER_TYPE_KEY] = USER_TYPE_ANON;
+    }
+    
     return dict;
 }
 

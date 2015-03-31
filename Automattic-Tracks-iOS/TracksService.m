@@ -1,9 +1,11 @@
 #import "TracksService.h"
+#import <FMDB.h>
 
 @interface TracksService ()
 
 @property (nonatomic, strong) NSMutableArray *simpleStorage;
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) FMDatabase *database;
 
 @end
 
@@ -19,6 +21,12 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
         _simpleStorage = [NSMutableArray new];
         _remote = [TracksServiceRemote new];
         _queueSendInterval = EVENT_TIMER_FIVE_MINUTES;
+        
+        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+        NSString *basePath = ([paths count] > 0) ? [paths objectAtIndex:0] : nil;
+        _database = [FMDatabase databaseWithPath:[NSString stringWithFormat:@"%@/tracks.db", basePath]];
+        [_database open];
+            
         [self resetTimer];
     }
     

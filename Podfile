@@ -2,7 +2,6 @@
 # platform :ios, '6.0'
 
 target 'Automattic-Tracks-iOS' do
-  pod 'WordPressCom-Analytics-iOS'
 end
 
 target 'Automattic-Tracks-iOSTests' do
