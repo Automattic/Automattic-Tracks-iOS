@@ -50,5 +50,22 @@
     return tracksEvent;
 }
 
+- (NSUInteger)numberOfTracksEvents
+{
+    return [self.persistenceService countAllTracksEvents];
+}
+
+
+- (NSArray *)allTracksEvents
+{
+    return nil;
+}
+
+
+- (void)removeTracksEvents:(NSArray *)tracksEvents
+{
+    
+}
+
 
 @end

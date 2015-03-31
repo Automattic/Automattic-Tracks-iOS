@@ -1,8 +1,9 @@
 #import "TracksService.h"
+#import "TracksEventService.h"
 
 @interface TracksService ()
 
-@property (nonatomic, strong) NSMutableArray *simpleStorage;
+@property (nonatomic, strong) TracksEventService *tracksEventService;
 @property (nonatomic, strong) NSTimer *timer;
 
 @end
@@ -16,7 +17,6 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     self = [super init];
     if (self) {
-        _simpleStorage = [NSMutableArray new];
         _remote = [TracksServiceRemote new];
         _queueSendInterval = EVENT_TIMER_FIVE_MINUTES;
         
@@ -26,17 +26,17 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     return self;
 }
 
-- (void)trackEvent:(TracksEvent *)event
+- (void)trackEventName:(NSString *)eventName
 {
-    NSParameterAssert(event != nil);
+    NSParameterAssert(eventName.length > 0);
     
-    [self.simpleStorage addObject:event];
+    [self.tracksEventService createTracksEventWithName:eventName];
 }
 
 
 - (NSUInteger)queuedEventCount
 {
-    return self.simpleStorage.count;
+    return [self.tracksEventService numberOfTracksEvents];
 }
 
 
@@ -45,9 +45,8 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     NSLog(@"Sending queued events");
     [self.timer invalidate];
     
-    NSArray *events = [NSArray arrayWithArray:self.simpleStorage];
-    [self.simpleStorage removeAllObjects];
-    
+    NSArray *events = [self.tracksEventService allTracksEvents];
+
     if (events.count == 0) {
         [self resetTimer];
         return;
@@ -59,6 +58,9 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     }
     
     [self.remote sendBatchOfEvents:jsonEvents withSharedProperties:@{} completionHandler:^{
+        // Delete the events since they sent or errored
+        [self.tracksEventService removeTracksEvents:events];
+        
         // Assume no errors for now
         [self resetTimer];
         

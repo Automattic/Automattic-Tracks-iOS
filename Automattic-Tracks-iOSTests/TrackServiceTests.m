@@ -34,10 +34,7 @@
 
 - (void)testTrackEvent
 {
-    TracksEvent *event = [TracksEvent new];
-    event.eventName = @"Test";
-    
-    [self.subject trackEvent:event];
+    [self.subject trackEventName:@"Test"];
     
     XCTAssertEqual(1, self.subject.queuedEventCount);
 }
@@ -45,10 +42,7 @@
 
 - (void)testSendQueuedEventsOneEvent
 {
-    TracksEvent *event = [TracksEvent new];
-    event.eventName = @"Test";
-    
-    [self.subject trackEvent:event];
+    [self.subject trackEventName:@"Test"];
     
     OCMExpect([self.subject.remote sendBatchOfEvents:[OCMArg checkWithBlock:^BOOL(id obj) {
         XCTAssertTrue([obj isKindOfClass:[NSArray class]]);

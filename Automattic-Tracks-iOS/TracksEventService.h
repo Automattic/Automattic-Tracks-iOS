@@ -14,4 +14,10 @@
                                   userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date;
 
+- (NSArray *)allTracksEvents;
+
+- (NSUInteger)numberOfTracksEvents;
+
+- (void)removeTracksEvents:(NSArray *)tracksEvents;
+
 @end

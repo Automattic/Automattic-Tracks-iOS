@@ -10,7 +10,7 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 @property (nonatomic, assign) NSTimeInterval queueSendInterval;
 @property (nonatomic, readonly) NSUInteger queuedEventCount;
 
-- (void)trackEvent:(TracksEvent *)event;
+- (void)trackEventName:(NSString *)eventName;
 
 - (void)sendQueuedEvents;
 

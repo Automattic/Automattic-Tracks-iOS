@@ -29,6 +29,27 @@
 }
 
 
+- (NSArray *)fetchAllTracksEvents
+{
+    return nil;
+}
+
+
+- (NSUInteger)countAllTracksEvents
+{
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
+    
+    NSError *error;
+    NSUInteger count = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+    
+    if (error) {
+        NSLog(@"Error while fetching count of TracksEvent: %@", error);
+    }
+    
+    return count;
+}
+
+
 - (TracksEventCoreData *)findTracksEventCoreDataWithUUID:(NSUUID *)uuid
 {
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];

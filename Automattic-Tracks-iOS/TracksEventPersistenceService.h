@@ -8,4 +8,8 @@
 
 - (void)persistTracksEvent:(TracksEvent *)tracksEvent;
 
+- (NSArray *)fetchAllTracksEvents;
+
+- (NSUInteger)countAllTracksEvents;
+
 @end
