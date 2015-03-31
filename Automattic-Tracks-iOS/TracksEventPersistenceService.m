@@ -31,7 +31,23 @@
 
 - (NSArray *)fetchAllTracksEvents
 {
-    return nil;
+    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
+    
+    NSError *error;
+    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    if (error) {
+        NSLog(@"Error while fetching all TracksEvent: %@", error);
+        return nil;
+    }
+    
+    NSMutableArray *transformedResults = [[NSMutableArray alloc] initWithCapacity:results.count];
+    for (TracksEventCoreData *eventCoreData in results) {
+        TracksEvent *tracksEvent = [self mapToTracksEventWithTracksEventCoreData:eventCoreData];
+        [transformedResults addObject:tracksEvent];
+    }
+    
+    return transformedResults;
 }
 
 
@@ -49,6 +65,22 @@
     return count;
 }
 
+
+- (void)removeTracksEvents:(NSArray *)tracksEvents
+{
+    [self.managedObjectContext performBlockAndWait:^{
+        for (TracksEvent *tracksEvent in tracksEvents) {
+            TracksEventCoreData *tracksEventCoreData = [self findTracksEventCoreDataWithUUID:tracksEvent.uuid];
+            
+            [self.managedObjectContext deleteObject:tracksEventCoreData];
+        }
+        
+        [self saveManagedObjectContext];
+    }];
+}
+
+
+#pragma mark - Private methods
 
 - (TracksEventCoreData *)findTracksEventCoreDataWithUUID:(NSUUID *)uuid
 {
@@ -71,6 +103,7 @@
 - (TracksEventCoreData *)createTracksEventCoreDataWithTracksEvent:(TracksEvent *)tracksEvent
 {
     TracksEventCoreData *tracksEventCoreData = [NSEntityDescription insertNewObjectForEntityForName:@"TracksEvent" inManagedObjectContext:self.managedObjectContext];
+    tracksEventCoreData.uuid = tracksEvent.uuid.UUIDString;
     tracksEventCoreData.eventName = tracksEvent.eventName;
     tracksEventCoreData.date = tracksEvent.date;
     tracksEventCoreData.user = tracksEvent.user;
@@ -90,6 +123,20 @@
     }
     
     return result;
+}
+
+
+- (TracksEvent *)mapToTracksEventWithTracksEventCoreData:(TracksEventCoreData *)tracksEventCoreData
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.uuid = [[NSUUID alloc] initWithUUIDString:tracksEventCoreData.uuid];
+    tracksEvent.eventName = tracksEventCoreData.eventName;
+    tracksEvent.date = tracksEventCoreData.date;
+    tracksEvent.user = tracksEventCoreData.user;
+    tracksEvent.userAgent = tracksEventCoreData.userAgent;
+    tracksEvent.userType = tracksEventCoreData.userType.unsignedIntegerValue;
+    
+    return tracksEvent;
 }
 
 @end

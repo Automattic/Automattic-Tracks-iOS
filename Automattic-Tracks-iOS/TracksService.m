@@ -1,9 +1,7 @@
 #import "TracksService.h"
-#import "TracksEventService.h"
 
 @interface TracksService ()
 
-@property (nonatomic, strong) TracksEventService *tracksEventService;
 @property (nonatomic, strong) NSTimer *timer;
 
 @end

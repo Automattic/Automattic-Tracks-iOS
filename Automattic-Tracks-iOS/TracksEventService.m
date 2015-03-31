@@ -35,7 +35,9 @@
                                   userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date
 {
-    NSParameterAssert(name.length > 0);
+    if (name == nil) {
+        return nil;
+    }
     
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.uuid = [NSUUID UUID];
@@ -58,13 +60,13 @@
 
 - (NSArray *)allTracksEvents
 {
-    return nil;
+    return [self.persistenceService fetchAllTracksEvents];
 }
 
 
 - (void)removeTracksEvents:(NSArray *)tracksEvents
 {
-    
+    [self.persistenceService removeTracksEvents:tracksEvents];
 }
 
 

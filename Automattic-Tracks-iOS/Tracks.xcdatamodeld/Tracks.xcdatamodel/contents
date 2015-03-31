@@ -6,8 +6,9 @@
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userAgent" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
+        <attribute name="uuid" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TracksEvent" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="TracksEvent" positionX="-63" positionY="-18" width="128" height="135"/>
     </elements>
 </model>

@@ -12,4 +12,6 @@
 
 - (NSUInteger)countAllTracksEvents;
 
+- (void)removeTracksEvents:(NSArray *)tracksEvents;
+
 @end

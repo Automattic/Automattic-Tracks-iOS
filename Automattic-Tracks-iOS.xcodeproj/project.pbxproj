@@ -8,13 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		2C703C8DCF81D025F7CB1410 /* libPods-Automattic-Tracks-iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148BAA4989EB1CFF84CBF8A4 /* libPods-Automattic-Tracks-iOSTests.a */; };
+		9333CA981ACAF41200ACE506 /* TracksEventCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9333CA971ACAF41200ACE506 /* TracksEventCoreData.m */; };
 		937632841AC1F45600086BC6 /* TracksEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632831AC1F45600086BC6 /* TracksEventService.m */; };
 		937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */; };
 		93AD39931AC713110069344D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AD39921AC713110069344D /* CoreData.framework */; };
 		93AD39971AC713F20069344D /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
 		93AD399A1AC714A80069344D /* TracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39991AC714A80069344D /* TracksContextManager.m */; };
 		93AD399E1ACACC560069344D /* libAutomattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */; };
-		93AD39A11ACACC9A0069344D /* TracksEventCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39A01ACACC9A0069344D /* TracksEventCoreData.m */; };
 		93AD39A41ACADA650069344D /* TracksEventPersistenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39A31ACADA650069344D /* TracksEventPersistenceService.m */; };
 		93C021361AB0BB100014096A /* TracksEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021351AB0BB100014096A /* TracksEvent.m */; };
 		93C0213A1AB1BFF30014096A /* TracksServiceRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021391AB1BFF30014096A /* TracksServiceRemote.m */; };
@@ -47,6 +47,8 @@
 
 /* Begin PBXFileReference section */
 		148BAA4989EB1CFF84CBF8A4 /* libPods-Automattic-Tracks-iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		9333CA961ACAF41200ACE506 /* TracksEventCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventCoreData.h; sourceTree = "<group>"; };
+		9333CA971ACAF41200ACE506 /* TracksEventCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventCoreData.m; sourceTree = "<group>"; };
 		937632821AC1F45600086BC6 /* TracksEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventService.h; sourceTree = "<group>"; };
 		937632831AC1F45600086BC6 /* TracksEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventService.m; sourceTree = "<group>"; };
 		937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventServiceTests.m; sourceTree = "<group>"; };
@@ -55,8 +57,6 @@
 		93AD39961AC713F20069344D /* Tracks.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tracks.xcdatamodel; sourceTree = "<group>"; };
 		93AD39981AC714A80069344D /* TracksContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksContextManager.h; sourceTree = "<group>"; };
 		93AD39991AC714A80069344D /* TracksContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksContextManager.m; sourceTree = "<group>"; };
-		93AD399F1ACACC9A0069344D /* TracksEventCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventCoreData.h; sourceTree = "<group>"; };
-		93AD39A01ACACC9A0069344D /* TracksEventCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventCoreData.m; sourceTree = "<group>"; };
 		93AD39A21ACADA650069344D /* TracksEventPersistenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventPersistenceService.h; sourceTree = "<group>"; };
 		93AD39A31ACADA650069344D /* TracksEventPersistenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventPersistenceService.m; sourceTree = "<group>"; };
 		93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAutomattic-Tracks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -172,8 +172,8 @@
 				93AD39991AC714A80069344D /* TracksContextManager.m */,
 				93C021341AB0BB100014096A /* TracksEvent.h */,
 				93C021351AB0BB100014096A /* TracksEvent.m */,
-				93AD399F1ACACC9A0069344D /* TracksEventCoreData.h */,
-				93AD39A01ACACC9A0069344D /* TracksEventCoreData.m */,
+				9333CA961ACAF41200ACE506 /* TracksEventCoreData.h */,
+				9333CA971ACAF41200ACE506 /* TracksEventCoreData.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -331,7 +331,7 @@
 				93AD39A41ACADA650069344D /* TracksEventPersistenceService.m in Sources */,
 				93AD39971AC713F20069344D /* Tracks.xcdatamodeld in Sources */,
 				937632841AC1F45600086BC6 /* TracksEventService.m in Sources */,
-				93AD39A11ACACC9A0069344D /* TracksEventCoreData.m in Sources */,
+				9333CA981ACAF41200ACE506 /* TracksEventCoreData.m in Sources */,
 				93F595511AB9B7A800280F9E /* TracksService.m in Sources */,
 				93AD399A1AC714A80069344D /* TracksContextManager.m in Sources */,
 			);

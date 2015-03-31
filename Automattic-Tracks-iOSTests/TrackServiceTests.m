@@ -6,6 +6,8 @@
 @interface TrackServiceTests : XCTestCase
 
 @property (nonatomic, strong) TracksService *subject;
+@property (nonatomic, strong) TracksServiceRemote *tracksServiceRemote;
+@property (nonatomic, strong) TracksEventService *tracksEventService;
 
 @end
 
@@ -15,7 +17,11 @@
     [super setUp];
 
     self.subject = [[TracksService alloc] init];
-    self.subject.remote = OCMClassMock([TracksServiceRemote class]);
+    self.tracksServiceRemote = OCMClassMock([TracksServiceRemote class]);
+    self.tracksEventService = OCMClassMock([TracksEventService class]);
+    
+    self.subject.tracksEventService = self.tracksEventService;
+    self.subject.remote = self.tracksServiceRemote;
 }
 
 
@@ -34,15 +40,22 @@
 
 - (void)testTrackEvent
 {
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"Test";
+    OCMExpect([self.tracksEventService createTracksEventWithName:@"Test"]).andReturn(tracksEvent);
+    
     [self.subject trackEventName:@"Test"];
     
-    XCTAssertEqual(1, self.subject.queuedEventCount);
+    OCMVerifyAll((id)self.tracksEventService);
 }
 
 
 - (void)testSendQueuedEventsOneEvent
 {
-    [self.subject trackEventName:@"Test"];
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"Test";
+    NSArray *events = @[tracksEvent];
+    OCMExpect([self.tracksEventService allTracksEvents]).andReturn(events);
     
     OCMExpect([self.subject.remote sendBatchOfEvents:[OCMArg checkWithBlock:^BOOL(id obj) {
         XCTAssertTrue([obj isKindOfClass:[NSArray class]]);
