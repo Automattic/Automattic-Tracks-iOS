@@ -17,6 +17,8 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     if (self) {
         _remote = [TracksServiceRemote new];
         _queueSendInterval = EVENT_TIMER_FIVE_MINUTES;
+        _contextManager = [TracksContextManager new];
+        _tracksEventService = [[TracksEventService alloc] initWithContextManager:_contextManager];
         
         [self resetTimer];
     }

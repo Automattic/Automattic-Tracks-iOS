@@ -1,11 +1,5 @@
 PODS:
-  - Automattic-Tracks-iOS (0.0.0):
-    - FMDB (= 2.5)
-  - FMDB (2.5):
-    - FMDB/standard (= 2.5)
-  - FMDB/common (2.5)
-  - FMDB/standard (2.5):
-    - FMDB/common
+  - Automattic-Tracks-iOS (0.0.0)
 
 DEPENDENCIES:
   - Automattic-Tracks-iOS (from `../`)
@@ -15,7 +9,6 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: e150f797f79ccd75e87a8b707030b13871bf3ed9
-  FMDB: 0efa188cf0dd1ce82c27a478cd5f5fa245308677
+  Automattic-Tracks-iOS: 80601ba6925e90b76f7422a8dbcee0303d204ca1
 
 COCOAPODS: 0.35.0

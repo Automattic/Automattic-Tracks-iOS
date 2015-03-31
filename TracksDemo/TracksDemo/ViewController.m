@@ -1,10 +1,8 @@
 #import "ViewController.h"
-#import <TracksEventService.h>
 #import <TracksService.h>
 
 @interface ViewController ()
 
-@property (nonatomic, strong) TracksEventService *tracksEventService;
 @property (nonatomic, strong) TracksService *tracksService;
 
 @end
@@ -14,7 +12,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    self.tracksEventService = [[TracksEventService alloc] init];
     self.tracksService = [[TracksService alloc] init];
     self.tracksService.queueSendInterval = 1.0;
 }
@@ -28,8 +25,7 @@
 
 - (IBAction)sendTestEvent:(id)sender
 {
-    TracksEvent *tracksEvent = [self.tracksEventService createTracksEventWithName:@"test_event"];
-    [self.tracksService trackEvent:tracksEvent];
+    [self.tracksService trackEventName:@"test_event"];
 }
 
 @end
