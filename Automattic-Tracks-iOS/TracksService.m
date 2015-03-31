@@ -42,12 +42,12 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 
 - (void)sendQueuedEvents
 {
-    NSLog(@"Sending queued events");
     [self.timer invalidate];
     
     NSArray *events = [self.tracksEventService allTracksEvents];
 
     if (events.count == 0) {
+        NSLog(@"No events to send.");
         [self resetTimer];
         return;
     }
@@ -57,6 +57,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
         [jsonEvents addObject:tracksEvent.dictionaryRepresentation];
     }
     
+    NSLog(@"Sending queued events");
     [self.remote sendBatchOfEvents:jsonEvents withSharedProperties:@{} completionHandler:^{
         // Delete the events since they sent or errored
         [self.tracksEventService removeTracksEvents:events];
