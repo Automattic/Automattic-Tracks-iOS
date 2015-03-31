@@ -1,47 +1,51 @@
 #import "TracksEventService.h"
+#import "TracksEventPersistenceService.h"
 
 @interface TracksEventService ()
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) TracksContextManager *contextManager;
+@property (nonatomic, strong) TracksEventPersistenceService *persistenceService;
 
 @end
 
 @implementation TracksEventService
 
-- (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext
+- (instancetype)initWithContextManager:(TracksContextManager *)contextManager
 {
+    self = [self init];
     
+    if (self) {
+        _contextManager = contextManager;
+        _persistenceService = [[TracksEventPersistenceService alloc] initWithManagedObjectContext:contextManager.managedObjectContext];
+    }
+    
+    return self;
 }
 
 
 - (TracksEvent *)createTracksEventWithName:(NSString *)name
 {
-    return [self createTracksEventWithName:name username:nil userAgent:nil userType:nil eventDate:[NSDate date]];
+    return [self createTracksEventWithName:name username:nil userAgent:nil userType:TracksEventUserTypeAnonymous eventDate:[NSDate date]];
 }
 
 
 - (TracksEvent *)createTracksEventWithName:(NSString *)name
                                   username:(NSString *)username
                                  userAgent:(NSString *)userAgent
-                                  userType:(NSString *)userType
+                                  userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date
 {
     NSParameterAssert(name.length > 0);
     
-    TracksEvent *tracksEvent = [NSEntityDescription insertNewObjectForEntityForName:@"TracksEvent" inManagedObjectContext:self.managedObjectContext];
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.uuid = [NSUUID UUID];
     tracksEvent.eventName = name;
     tracksEvent.user = username;
     tracksEvent.userAgent = userAgent;
     tracksEvent.userType = userType;
     tracksEvent.date = date;
     
-    NSError *error;
-    BOOL success = [self.managedObjectContext save:&error];
-    
-    if (!success) {
-        NSLog(@"Error saving: %@", error);
-        return nil;
-    }
+    [self.persistenceService persistTracksEvent:tracksEvent];
     
     return tracksEvent;
 }

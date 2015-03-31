@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="6751" systemVersion="14C1510" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="TracksEntity" representedClassName="TracksEntity" syncable="YES">
+    <entity name="TracksEvent" representedClassName="TracksEventCoreData" syncable="YES">
         <attribute name="date" optional="YES" attributeType="Date" syncable="YES"/>
         <attribute name="eventName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="user" optional="YES" attributeType="String" syncable="YES"/>
@@ -8,6 +8,6 @@
         <attribute name="userType" optional="YES" attributeType="Integer 32" defaultValueString="0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TracksEntity" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="TracksEvent" positionX="-63" positionY="-18" width="128" height="120"/>
     </elements>
 </model>

@@ -1,17 +1,17 @@
 #import <Foundation/Foundation.h>
 #import "TracksEvent.h"
-#import <CoreData/CoreData.h>
+#import "TracksContextManager.h"
 
 @interface TracksEventService : NSObject
 
-- (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
+- (instancetype)initWithContextManager:(TracksContextManager *)contextManager;
 
 - (TracksEvent *)createTracksEventWithName:(NSString *)name;
 
 - (TracksEvent *)createTracksEventWithName:(NSString *)name
                                   username:(NSString *)username
                                  userAgent:(NSString *)userAgent
-                                  userType:(NSString *)userType
+                                  userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date;
 
 @end

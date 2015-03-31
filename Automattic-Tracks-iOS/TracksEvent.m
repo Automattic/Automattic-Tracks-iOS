@@ -11,12 +11,12 @@ static NSString *const USER_LOGIN_NAME_KEY = @"_ul";
 
 @implementation TracksEvent
 
-
 - (instancetype)init
 {
     self = [super init];
     if (self) {
         _date = [NSDate date];
+        _uuid = [NSUUID UUID];
     }
     return self;
 }
