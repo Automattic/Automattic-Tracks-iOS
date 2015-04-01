@@ -9,5 +9,9 @@
 @dynamic userAgent;
 @dynamic userType;
 @dynamic uuid;
+@dynamic retryCount;
+@dynamic userProperties;
+@dynamic deviceInfo;
+@dynamic customProperties;
 
 @end
