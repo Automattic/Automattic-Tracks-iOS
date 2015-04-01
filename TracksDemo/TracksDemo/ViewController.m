@@ -13,7 +13,7 @@
     [super viewDidLoad];
 
     self.tracksService = [[TracksService alloc] init];
-    self.tracksService.queueSendInterval = 1.0;
+    self.tracksService.queueSendInterval = 10.0;
 }
 
 

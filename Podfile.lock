@@ -1,10 +1,13 @@
 PODS:
   - OCMock (3.1.2)
+  - UIDeviceIdentifier (0.4.4)
 
 DEPENDENCIES:
   - OCMock
+  - UIDeviceIdentifier (~> 0.4)
 
 SPEC CHECKSUMS:
   OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  UIDeviceIdentifier: 2eb1070f189a069184611e21b5e8832443e6f8ec
 
 COCOAPODS: 0.35.0

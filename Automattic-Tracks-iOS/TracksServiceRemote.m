@@ -35,7 +35,9 @@
 - (void)sendBatchOfEvents:(NSArray *)events withSharedProperties:(NSDictionary *)properties completionHandler:(void (^)(void))completion
 {
     NSDictionary *dataToSend = @{@"events" : events,
-                                 @"commonProps" : properties};
+                                 @"commonProps" : [self normalizeCommonProperties:properties]};
+    NSLog(@"Data to send: \n%@", dataToSend);
+    
     NSError *error = nil;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://public-api.wordpress.com/rest/v1.1/tracks/record"]];
     request.HTTPMethod = @"POST";
@@ -60,6 +62,18 @@
             }];
     
     [task resume];
+}
+
+
+- (NSDictionary *)normalizeCommonProperties:(NSDictionary *)commonProps
+{
+    NSString *USER_AGENT_NAME_KEY = @"_via_ua";
+    NSString *DEFAULT_USER_AGENT = @"Nosara Client for iOS 0.0.0";
+    NSMutableDictionary *normalizedProps = [NSMutableDictionary dictionaryWithDictionary:commonProps];
+    
+    normalizedProps[USER_AGENT_NAME_KEY] = DEFAULT_USER_AGENT;
+    
+    return normalizedProps;
 }
 
 @end

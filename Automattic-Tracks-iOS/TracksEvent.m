@@ -28,7 +28,7 @@ static NSString *const USER_LOGIN_NAME_KEY = @"_ul";
     
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[EVENT_NAME_KEY] = self.eventName;
-    dict[USER_AGENT_NAME_KEY] = @"WPiOS";
+//    dict[USER_AGENT_NAME_KEY] = @"WPiOS";
     dict[TIMESTAMP_KEY] = @(lround(self.date.timeIntervalSince1970 * 1000));
     dict[USER_ID_ANON] = uuid;
     

@@ -1,5 +1,10 @@
 #import "TracksService.h"
 
+#import <CoreTelephony/CTTelephonyNetworkInfo.h>
+#import <CoreTelephony/CTCarrier.h>
+#import <UIDeviceHardware.h>
+
+
 @interface TracksService ()
 
 @property (nonatomic, strong) NSTimer *timer;
@@ -58,15 +63,18 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     }
     
     NSLog(@"Sending queued events");
-    [self.remote sendBatchOfEvents:jsonEvents withSharedProperties:@{} completionHandler:^{
-        // Delete the events since they sent or errored
-        [self.tracksEventService removeTracksEvents:events];
-        
-        // Assume no errors for now
-        [self resetTimer];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceDidSendQueuedEventsNotification object:nil];
-    }];
+    [self.remote sendBatchOfEvents:jsonEvents
+              withSharedProperties:[self generateCommonProperties]
+                 completionHandler:^{
+                     // Delete the events since they sent or errored
+                     [self.tracksEventService removeTracksEvents:events];
+                     
+                     // Assume no errors for now
+                     [self resetTimer];
+                     
+                     [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceDidSendQueuedEventsNotification object:nil];
+                 }
+     ];
 }
 
 
@@ -94,6 +102,45 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     _queueSendInterval = queueSendInterval;
     [self resetTimer];
+}
+
+- (NSDictionary *)generateCommonProperties
+{
+    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+    CTCarrier *carrier = [netInfo subscriberCellularProvider];
+    NSString *type = nil;
+    if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
+        type = [netInfo currentRadioAccessTechnology];
+    }
+    NSString *carrierName = nil;
+    if (carrier) {
+        carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
+    }
+    
+//    DDLogInfo(@"Reachability - WordPress.com - WiFi: %@  WWAN: %@  Carrier: %@  Type: %@", wifi, wwan, carrierName, type);
+
+    NSString *REQUEST_TIMESTAMP_KEY = @"_rt";
+    NSString *DEVICE_HEIGHT_PIXELS_KEY = @"_ht";
+    NSString *DEVICE_WIDTH_PIXELS_KEY = @"_wd";
+    NSString *DEVICE_LANG_KEY = @"_lg";
+    NSString *DEVICE_INFO_PREFIX = @"device_info_";
+    NSString *deviceInfoOS = [NSString stringWithFormat:@"%@os", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoOSVersion = [NSString stringWithFormat:@"%@os_version", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoBrand = [NSString stringWithFormat:@"%@brand", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoManufacturer = [NSString stringWithFormat:@"%@manufacturer", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoModel = [NSString stringWithFormat:@"%@model", DEVICE_INFO_PREFIX];
+    CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+
+    return @{ REQUEST_TIMESTAMP_KEY : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
+              deviceInfoBrand : @"Apple",
+              deviceInfoManufacturer : @"Apple",
+              deviceInfoModel : [UIDeviceHardware platformString],
+              deviceInfoOS : [[UIDevice currentDevice] systemName],
+              deviceInfoOSVersion : [[UIDevice currentDevice] systemVersion],
+              DEVICE_HEIGHT_PIXELS_KEY : @(screenSize.height),
+              DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width),
+              DEVICE_LANG_KEY : [[NSLocale currentLocale] localeIdentifier],
+              };
 }
 
 @end

@@ -41,7 +41,8 @@
     
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.uuid = [NSUUID UUID];
-    tracksEvent.eventName = name;
+    // TODO :: Abstract out the prevent of the event name somewhere
+    tracksEvent.eventName = [NSString stringWithFormat:@"wpios_%@", name];
     tracksEvent.user = username;
     tracksEvent.userAgent = userAgent;
     tracksEvent.userType = userType;

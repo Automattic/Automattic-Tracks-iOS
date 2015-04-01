@@ -9,4 +9,7 @@ Pod::Spec.new do |spec|
   spec.source_files = 'Automattic-Tracks-iOS/**/*.{h,m}'
   spec.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
   spec.framework    = 'CoreData'
+  spec.framework    = 'CoreTelephony'
+
+  spec.dependency 'UIDeviceIdentifier', '~> 0.4'
 end
