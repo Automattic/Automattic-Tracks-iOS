@@ -60,7 +60,7 @@
 
 - (NSString *)appName
 {
-    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleDisplayName"];;
+    return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleName"];;
 }
 
 - (NSString *)appVersion
