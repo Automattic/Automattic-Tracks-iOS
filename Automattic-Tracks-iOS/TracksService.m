@@ -1,9 +1,5 @@
 #import "TracksService.h"
-
-#import <CoreTelephony/CTTelephonyNetworkInfo.h>
-#import <CoreTelephony/CTCarrier.h>
-#import <UIDeviceHardware.h>
-
+#import "TracksDeviceInformation.h"
 
 @interface TracksService ()
 
@@ -106,24 +102,16 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 
 - (NSDictionary *)generateCommonProperties
 {
-    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-    CTCarrier *carrier = [netInfo subscriberCellularProvider];
-    NSString *type = nil;
-    if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
-        type = [netInfo currentRadioAccessTechnology];
-    }
-    NSString *carrierName = nil;
-    if (carrier) {
-        carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
-    }
+    TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
     
-//    DDLogInfo(@"Reachability - WordPress.com - WiFi: %@  WWAN: %@  Carrier: %@  Type: %@", wifi, wwan, carrierName, type);
-
     NSString *REQUEST_TIMESTAMP_KEY = @"_rt";
     NSString *DEVICE_HEIGHT_PIXELS_KEY = @"_ht";
     NSString *DEVICE_WIDTH_PIXELS_KEY = @"_wd";
     NSString *DEVICE_LANG_KEY = @"_lg";
     NSString *DEVICE_INFO_PREFIX = @"device_info_";
+    NSString *deviceInfoAppName = [NSString stringWithFormat:@"%@app_name", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoAppVersion = [NSString stringWithFormat:@"%@app_version", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoAppBuild = [NSString stringWithFormat:@"%@app_version_code", DEVICE_INFO_PREFIX];
     NSString *deviceInfoOS = [NSString stringWithFormat:@"%@os", DEVICE_INFO_PREFIX];
     NSString *deviceInfoOSVersion = [NSString stringWithFormat:@"%@os_version", DEVICE_INFO_PREFIX];
     NSString *deviceInfoBrand = [NSString stringWithFormat:@"%@brand", DEVICE_INFO_PREFIX];
@@ -132,14 +120,17 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
 
     return @{ REQUEST_TIMESTAMP_KEY : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
-              deviceInfoBrand : @"Apple",
-              deviceInfoManufacturer : @"Apple",
-              deviceInfoModel : [UIDeviceHardware platformString],
-              deviceInfoOS : [[UIDevice currentDevice] systemName],
-              deviceInfoOSVersion : [[UIDevice currentDevice] systemVersion],
+              deviceInfoAppBuild : deviceInformation.appBuild,
+              deviceInfoAppName : deviceInformation.appName,
+              deviceInfoAppVersion : deviceInformation.appVersion,
+              deviceInfoBrand : deviceInformation.brand,
+              deviceInfoManufacturer : deviceInformation.manufacturer,
+              deviceInfoModel : deviceInformation.model,
+              deviceInfoOS : deviceInformation.os,
+              deviceInfoOSVersion : deviceInformation.version,
               DEVICE_HEIGHT_PIXELS_KEY : @(screenSize.height),
               DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width),
-              DEVICE_LANG_KEY : [[NSLocale currentLocale] localeIdentifier],
+              DEVICE_LANG_KEY : deviceInformation.deviceLanguage,
               };
 }
 
