@@ -6,7 +6,10 @@
 @property (nonatomic, strong) TracksService *tracksService;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
+@property (nonatomic, weak) IBOutlet UIProgressView *progressView;
 @property (nonatomic, weak) IBOutlet UILabel *objectCountLabel;
+@property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) NSDate *startTime;
 
 @end
 
@@ -14,9 +17,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     self.tracksService = [[TracksService alloc] init];
     self.tracksService.queueSendInterval = 10.0;
+    [self resetTimer];
+    
     
     NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
@@ -28,12 +33,20 @@
     self.fetchedResultsController.delegate = self;
     [self.fetchedResultsController performFetch:nil];
     [self updateObjectCountLabel];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetTimer) name:TrackServiceWillSendQueuedEventsNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetTimer) name:TrackServiceDidSendQueuedEventsNotification object:nil];
 }
 
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 
@@ -65,5 +78,32 @@
 {
     self.objectCountLabel.text = [NSString stringWithFormat:@"Number of events queued: %@", @(self.fetchedResultsController.fetchedObjects.count)];
 }
+
+- (void)resetTimer
+{
+    [self.timer invalidate];
+    self.startTime = [NSDate date];
+    self.progressView.progress = 0.0f;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.tracksService.queueSendInterval / 100
+                                                  target:self
+                                                selector:@selector(timerFireMethod:)
+                                                userInfo:nil
+                                                 repeats:YES];
+}
+
+
+- (void)timerFireMethod:(NSTimer *)timer
+{
+    NSDate *fireDate = timer.fireDate;
+    
+    if ([fireDate timeIntervalSinceDate:self.startTime] > self.tracksService.queueSendInterval) {
+        [self.timer invalidate];
+    }
+    
+    CGFloat progress = [fireDate timeIntervalSinceDate:self.startTime] / self.tracksService.queueSendInterval;
+    self.progressView.progress = progress;
+}
+
 
 @end

@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -50,18 +51,26 @@
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of events queued: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usv-EB-VcP">
                                 <rect key="frame" x="191" y="178" width="219" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S78-AU-IJX">
+                                <rect key="frame" x="36" y="578" width="528" height="2"/>
+                            </progressView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="S78-AU-IJX" secondAttribute="trailing" constant="20" id="D1K-jO-Dhv"/>
                             <constraint firstItem="Ork-Vm-gMc" firstAttribute="leading" secondItem="Usv-EB-VcP" secondAttribute="leading" id="Eij-Bq-mAy"/>
                             <constraint firstItem="p2M-wW-PMO" firstAttribute="top" secondItem="Ork-Vm-gMc" secondAttribute="bottom" constant="8" symbolic="YES" id="Erd-RF-Exv"/>
+                            <constraint firstAttribute="centerX" secondItem="S78-AU-IJX" secondAttribute="centerX" id="JjN-48-fWs"/>
                             <constraint firstItem="Usv-EB-VcP" firstAttribute="top" secondItem="5LV-F0-8DU" secondAttribute="bottom" constant="8" symbolic="YES" id="KUQ-GS-b4i"/>
                             <constraint firstItem="Ork-Vm-gMc" firstAttribute="centerX" secondItem="p2M-wW-PMO" secondAttribute="centerX" id="LTc-36-hDJ"/>
                             <constraint firstItem="p2M-wW-PMO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PVY-eN-c4R"/>
+                            <constraint firstAttribute="centerX" secondItem="S78-AU-IJX" secondAttribute="centerX" id="QbN-qf-zAr"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="S78-AU-IJX" secondAttribute="bottom" constant="20" id="WMB-hE-o9H"/>
                             <constraint firstItem="jve-X8-UVU" firstAttribute="top" secondItem="p2M-wW-PMO" secondAttribute="bottom" constant="8" symbolic="YES" id="Yzx-Ef-do1"/>
+                            <constraint firstItem="S78-AU-IJX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="caD-MN-yCR"/>
                             <constraint firstItem="Ork-Vm-gMc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="daW-V6-oQb"/>
                             <constraint firstItem="Usv-EB-VcP" firstAttribute="centerX" secondItem="5LV-F0-8DU" secondAttribute="centerX" id="jrJ-W9-Zti"/>
                             <constraint firstItem="5LV-F0-8DU" firstAttribute="top" secondItem="jve-X8-UVU" secondAttribute="bottom" constant="8" symbolic="YES" id="oGH-ky-mxv"/>
@@ -70,6 +79,7 @@
                     </view>
                     <connections>
                         <outlet property="objectCountLabel" destination="Usv-EB-VcP" id="NJv-0n-Tsg"/>
+                        <outlet property="progressView" destination="S78-AU-IJX" id="ikn-4A-qT9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

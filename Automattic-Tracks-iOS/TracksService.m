@@ -12,6 +12,7 @@
 @end
 
 static NSTimeInterval const EVENT_TIMER_FIVE_MINUTES = 5 * 60;
+NSString *const TrackServiceWillSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 
 @implementation TracksService
@@ -50,6 +51,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 - (void)sendQueuedEvents
 {
     [self.timer invalidate];
+    [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceWillSendQueuedEventsNotification object:nil];
     
     NSArray *events = [self.tracksEventService allTracksEvents];
 
