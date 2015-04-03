@@ -21,8 +21,10 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSString *path = [[NSBundle mainBundle] pathsForResourcesOfType:@"bundle" inDirectory:nil][0];
-    NSURL *modelURL = [[NSBundle bundleWithPath:path] URLForResource:@"Tracks" withExtension:@"momd"];
+    
+    NSString *path = [[NSBundle mainBundle] pathsForResourcesOfType:@"bundle" inDirectory:nil].firstObject;
+    NSBundle *bundle = path != nil ? [NSBundle bundleWithPath:path] : [NSBundle mainBundle];
+    NSURL *modelURL = [bundle URLForResource:@"Tracks" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }

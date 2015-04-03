@@ -13,6 +13,7 @@ typedef NS_ENUM(NSUInteger, TracksEventUserType) {
 @property (nonatomic, copy) NSString *user;
 @property (nonatomic, copy) NSString *userAgent;
 @property (nonatomic, assign) TracksEventUserType userType;
+@property (nonatomic, readonly) NSMutableDictionary *customProperties;
 
 @property (nonatomic, readonly) NSDictionary *dictionaryRepresentation;
 

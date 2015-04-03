@@ -43,6 +43,9 @@
                                 <state key="normal" title="Crash Application">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="crashApplicationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oea-cX-vdJ"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of events queued: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usv-EB-VcP">
                                 <rect key="frame" x="191" y="178" width="219" height="21"/>

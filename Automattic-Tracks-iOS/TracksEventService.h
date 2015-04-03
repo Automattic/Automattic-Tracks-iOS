@@ -14,6 +14,9 @@
                                   userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date;
 
+- (TracksEvent *)createTracksEventForAliasingWordPressComUser:(NSString *)username
+                                        withAnonymousUsername:(NSString *)anonymousUsername;
+
 - (NSArray *)allTracksEvents;
 
 - (NSUInteger)numberOfTracksEvents;

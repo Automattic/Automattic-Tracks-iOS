@@ -10,6 +10,7 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 @property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksEventService *tracksEventService;
 @property (nonatomic, strong) TracksServiceRemote *remote;
+
 @property (nonatomic, assign) NSTimeInterval queueSendInterval;
 @property (nonatomic, readonly) NSUInteger queuedEventCount;
 
@@ -17,5 +18,8 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
 - (void)sendQueuedEvents;
 
+- (void)switchToAuthenticatedWithUsername:(NSString *)username;
+
+- (void)switchToAnonymousUser;
 
 @end

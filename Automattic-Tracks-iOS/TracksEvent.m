@@ -17,24 +17,24 @@ static NSString *const USER_LOGIN_NAME_KEY = @"_ul";
     if (self) {
         _date = [NSDate date];
         _uuid = [NSUUID UUID];
+        _customProperties = [NSMutableDictionary new];
     }
     return self;
 }
 
 - (NSDictionary *)dictionaryRepresentation
 {
-    NSString *uuid = [[NSUUID UUID] UUIDString];
-    uuid = [uuid stringByReplacingOccurrencesOfString:@"-" withString:@""];
-    
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[EVENT_NAME_KEY] = self.eventName;
 //    dict[USER_AGENT_NAME_KEY] = @"WPiOS";
     dict[TIMESTAMP_KEY] = @(lround(self.date.timeIntervalSince1970 * 1000));
-    dict[USER_ID_ANON] = uuid;
+//    dict[USER_ID_ANON] = uuid;
     
     if (self.userType == TracksEventUserTypeAnonymous) {
         dict[USER_TYPE_KEY] = USER_TYPE_ANON;
     }
+    
+    [dict addEntriesFromDictionary:self.customProperties];
     
     return dict;
 }

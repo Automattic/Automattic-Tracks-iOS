@@ -42,7 +42,7 @@
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.uuid = [NSUUID UUID];
     // TODO :: Abstract out the prevent of the event name somewhere
-    tracksEvent.eventName = [NSString stringWithFormat:@"wpios_%@", name];
+    tracksEvent.eventName = name;
     tracksEvent.user = username;
     tracksEvent.userAgent = userAgent;
     tracksEvent.userType = userType;
@@ -52,6 +52,21 @@
     
     return tracksEvent;
 }
+
+
+- (TracksEvent *)createTracksEventForAliasingWordPressComUser:(NSString *)username
+                                        withAnonymousUsername:(NSString *)anonymousUsername
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"_aliasUser";
+    tracksEvent.customProperties[@"anonUser"] = anonymousUsername;
+    tracksEvent.user = username;
+    tracksEvent.userType = TracksEventUserTypeWordPressCom;
+    tracksEvent.date = [NSDate date];
+    
+    return tracksEvent;
+}
+
 
 - (NSUInteger)numberOfTracksEvents
 {

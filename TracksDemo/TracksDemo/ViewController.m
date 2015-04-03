@@ -27,6 +27,7 @@
                                                                                    cacheName:nil];
     self.fetchedResultsController.delegate = self;
     [self.fetchedResultsController performFetch:nil];
+    [self updateObjectCountLabel];
 }
 
 
@@ -36,15 +37,31 @@
 }
 
 
+#pragma mark - IBAction methods
+
 - (IBAction)sendTestEvent:(id)sender
 {
     [self.tracksService trackEventName:@"test_event"];
 }
 
 
+- (IBAction)crashApplicationTapped:(id)sender
+{
+    abort();
+}
+
+
 #pragma mark - Fetched results delegate methods
 
 - (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type newIndexPath:(NSIndexPath *)newIndexPath;
+{
+    [self updateObjectCountLabel];
+}
+
+
+#pragma mark - Private helper methods
+
+- (void)updateObjectCountLabel
 {
     self.objectCountLabel.text = [NSString stringWithFormat:@"Number of events queued: %@", @(self.fetchedResultsController.fetchedObjects.count)];
 }

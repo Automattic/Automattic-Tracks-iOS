@@ -5,6 +5,10 @@
 
 @property (nonatomic, strong) NSTimer *timer;
 
+@property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *eventNamePrefix;
+@property (nonatomic, assign, getter=isAnonymous) BOOL anonymous;
+
 @end
 
 static NSTimeInterval const EVENT_TIMER_FIVE_MINUTES = 5 * 60;
@@ -16,6 +20,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     self = [super init];
     if (self) {
+        _eventNamePrefix = @"wpios_";
         _remote = [TracksServiceRemote new];
         _queueSendInterval = EVENT_TIMER_FIVE_MINUTES;
         _contextManager = [TracksContextManager new];
@@ -31,6 +36,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     NSParameterAssert(eventName.length > 0);
     
+    eventName = [NSString stringWithFormat:@"%@%@", self.eventNamePrefix, eventName];
     [self.tracksEventService createTracksEventWithName:eventName];
 }
 
@@ -72,6 +78,24 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
                  }
      ];
 }
+
+
+- (void)switchToAuthenticatedWithUsername:(NSString *)username
+{
+    self.anonymous = NO;
+    self.username = username;
+    
+}
+
+
+- (void)switchToAnonymousUser
+{
+    self.anonymous = YES;
+    self.username = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+}
+
+
+#pragma mark - Private methods
 
 
 - (void)resetTimer
