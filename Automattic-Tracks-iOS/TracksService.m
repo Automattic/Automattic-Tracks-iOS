@@ -144,17 +144,17 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
 
     return @{ REQUEST_TIMESTAMP_KEY : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
-              deviceInfoAppBuild : deviceInformation.appBuild,
-              deviceInfoAppName : deviceInformation.appName,
-              deviceInfoAppVersion : deviceInformation.appVersion,
-              deviceInfoBrand : deviceInformation.brand,
-              deviceInfoManufacturer : deviceInformation.manufacturer,
-              deviceInfoModel : deviceInformation.model,
-              deviceInfoOS : deviceInformation.os,
-              deviceInfoOSVersion : deviceInformation.version,
-              DEVICE_HEIGHT_PIXELS_KEY : @(screenSize.height),
-              DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width),
-              DEVICE_LANG_KEY : deviceInformation.deviceLanguage,
+              deviceInfoAppBuild : deviceInformation.appBuild ?: @"Unknown",
+              deviceInfoAppName : deviceInformation.appName ?: @"Unknown",
+              deviceInfoAppVersion : deviceInformation.appVersion ?: @"Unknown",
+              deviceInfoBrand : deviceInformation.brand ?: @"Unknown",
+              deviceInfoManufacturer : deviceInformation.manufacturer ?: @"Unknown",
+              deviceInfoModel : deviceInformation.model ?: @"Unknown",
+              deviceInfoOS : deviceInformation.os ?: @"Unknown",
+              deviceInfoOSVersion : deviceInformation.version ?: @"Unknown",
+              DEVICE_HEIGHT_PIXELS_KEY : @(screenSize.height) ?: @0,
+              DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width) ?: @0,
+              DEVICE_LANG_KEY : deviceInformation.deviceLanguage ?: @"Unknown",
               };
 }
 

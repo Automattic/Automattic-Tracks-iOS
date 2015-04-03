@@ -42,7 +42,7 @@
 {
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.eventName = @"Test";
-    OCMExpect([self.tracksEventService createTracksEventWithName:@"Test"]).andReturn(tracksEvent);
+    OCMExpect([self.tracksEventService createTracksEventWithName:@"wpios_Test"]).andReturn(tracksEvent);
     
     [self.subject trackEventName:@"Test"];
     

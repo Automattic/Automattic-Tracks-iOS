@@ -23,7 +23,7 @@
     }
     
     NSString *path = [[NSBundle mainBundle] pathsForResourcesOfType:@"bundle" inDirectory:nil].firstObject;
-    NSBundle *bundle = path != nil ? [NSBundle bundleWithPath:path] : [NSBundle mainBundle];
+    NSBundle *bundle = path != nil ? [NSBundle bundleWithPath:path] : [NSBundle bundleForClass:[self class]];
     NSURL *modelURL = [bundle URLForResource:@"Tracks" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
