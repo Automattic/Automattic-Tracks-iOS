@@ -12,23 +12,10 @@
 @property (nonatomic, readonly) NSString *appVersion;
 @property (nonatomic, readonly) NSString *appBuild;
 
+// This information has the tendency to change
 @property (nonatomic, readonly) NSString *deviceLanguage;
-//@property (nonatomic, readonly) BOOL hasNFC;
-//@property (nonatomic, readonly) BOOL isTelephone;
-//@property (nonatomic, readonly) NSString *displayMetrics;
-
-/*
- mImmutableDeviceInfoJSON.put("has_NFC", hasNFC());
- mImmutableDeviceInfoJSON.put("has_telephony", hasTelephony());
- mImmutableDeviceInfoJSON.put("display_density_dpi", dMetrics.densityDpi);
- mImmutableDeviceInfoJSON.put("bluetooth_version", getBluetoothVersion());
-
- mutable
- mutableDeviceInfo.put("bluetooth_enabled", isBluetoothEnabled());
- mutableDeviceInfo.put("current_network_operator", getCurrentNetworkOperator());
- mutableDeviceInfo.put("phone_radio_type", getPhoneRadioType()); // NONE - GMS - CDMA - SIP
- mutableDeviceInfo.put("wifi_connected", isWifiConnected());
-
- */
+@property (nonatomic, readonly) NSString *currentNetworkOperator;
+@property (nonatomic, readonly) NSString *currentNetworkRadioType;
+@property (nonatomic, readonly) BOOL isWiFiConnected;
 
 @end

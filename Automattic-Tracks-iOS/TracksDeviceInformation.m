@@ -5,23 +5,42 @@
 
 @implementation TracksDeviceInformation
 
-//CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-//CTCarrier *carrier = [netInfo subscriberCellularProvider];
-//NSString *type = nil;
-//if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
-//    type = [netInfo currentRadioAccessTechnology];
-//}
-//NSString *carrierName = nil;
-//if (carrier) {
-//    carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
-//}
-//
-//DDLogInfo(@"Reachability - WordPress.com - WiFi: %@  WWAN: %@  Carrier: %@  Type: %@", wifi, wwan, carrierName, type);
-
-
 - (NSString *)brand
 {
     return @"Apple";
+}
+
+
+- (NSString *)currentNetworkOperator
+{
+    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+    CTCarrier *carrier = [netInfo subscriberCellularProvider];
+
+    NSString *carrierName = nil;
+    if (carrier) {
+        carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
+    }
+    
+    return carrierName;
+}
+
+
+- (NSString *)currentNetworkRadioType
+{
+    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+    NSString *type = nil;
+    if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
+        type = [netInfo currentRadioAccessTechnology];
+    }
+
+    return type;
+}
+
+
+- (BOOL)isWiFiConnected
+{
+    // TODO - Implement this with Reachability
+    return NO;
 }
 
 
