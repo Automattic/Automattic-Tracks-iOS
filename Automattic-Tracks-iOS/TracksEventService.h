@@ -6,8 +6,6 @@
 
 - (instancetype)initWithContextManager:(TracksContextManager *)contextManager;
 
-- (TracksEvent *)createTracksEventWithName:(NSString *)name;
-
 - (TracksEvent *)createTracksEventWithName:(NSString *)name
                                   username:(NSString *)username
                                  userAgent:(NSString *)userAgent

@@ -38,7 +38,12 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     NSParameterAssert(eventName.length > 0);
     
     eventName = [NSString stringWithFormat:@"%@%@", self.eventNamePrefix, eventName];
-    [self.tracksEventService createTracksEventWithName:eventName];
+    
+    [self.tracksEventService createTracksEventWithName:eventName
+                                              username:self.username
+                                             userAgent:nil
+                                              userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeWordPressCom
+                                             eventDate:[NSDate date]];
 }
 
 

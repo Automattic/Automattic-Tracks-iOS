@@ -24,12 +24,6 @@
 
 
 - (TracksEvent *)createTracksEventWithName:(NSString *)name
-{
-    return [self createTracksEventWithName:name username:nil userAgent:nil userType:TracksEventUserTypeAnonymous eventDate:[NSDate date]];
-}
-
-
-- (TracksEvent *)createTracksEventWithName:(NSString *)name
                                   username:(NSString *)username
                                  userAgent:(NSString *)userAgent
                                   userType:(TracksEventUserType)userType
@@ -41,7 +35,6 @@
     
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.uuid = [NSUUID UUID];
-    // TODO :: Abstract out the prevent of the event name somewhere
     tracksEvent.eventName = name;
     tracksEvent.user = username;
     tracksEvent.userAgent = userAgent;
@@ -63,6 +56,8 @@
     tracksEvent.user = username;
     tracksEvent.userType = TracksEventUserTypeWordPressCom;
     tracksEvent.date = [NSDate date];
+    
+    [self.persistenceService persistTracksEvent:tracksEvent];
     
     return tracksEvent;
 }
