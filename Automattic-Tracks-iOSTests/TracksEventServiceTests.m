@@ -25,16 +25,9 @@
 
 
 - (void)testTracksEventWithNilName {
-    TracksEvent *event = [self.subject createTracksEventWithName:nil];
+    TracksEvent *event = [self.subject createTracksEventWithName:nil username:@"someone" userAgent:nil userType:TracksEventUserTypeWordPressCom eventDate:[NSDate date]];
     
     XCTAssertNil(event);
-}
-
-- (void)testPerformanceExample {
-    // This is an example of a performance test case.
-    [self measureBlock:^{
-        // Put the code you want to measure the time of here.
-    }];
 }
 
 @end
