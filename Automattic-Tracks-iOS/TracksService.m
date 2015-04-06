@@ -89,9 +89,12 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 
 - (void)switchToAuthenticatedWithUsername:(NSString *)username
 {
+    NSString *previousUsername = self.username;
+    
     self.anonymous = NO;
     self.username = username;
     
+    [self.tracksEventService createTracksEventForAliasingWordPressComUser:username withAnonymousUsername:previousUsername];
 }
 
 
@@ -149,6 +152,11 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     NSString *deviceInfoManufacturer = [NSString stringWithFormat:@"%@manufacturer", DEVICE_INFO_PREFIX];
     NSString *deviceInfoModel = [NSString stringWithFormat:@"%@model", DEVICE_INFO_PREFIX];
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+    
+    // These properties change often and should be overridden in TracksEvents if they differ
+    NSString *deviceInfoNetworkOperator = [NSString stringWithFormat:@"%@current_network_operator", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoRadioType = [NSString stringWithFormat:@"%@phone_radio_type", DEVICE_INFO_PREFIX];
+    NSString *deviceInfoWiFiConnected = [NSString stringWithFormat:@"%@wifi_connected", DEVICE_INFO_PREFIX];
 
     return @{ REQUEST_TIMESTAMP_KEY : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
               deviceInfoAppBuild : deviceInformation.appBuild ?: @"Unknown",
@@ -162,6 +170,9 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
               DEVICE_HEIGHT_PIXELS_KEY : @(screenSize.height) ?: @0,
               DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width) ?: @0,
               DEVICE_LANG_KEY : deviceInformation.deviceLanguage ?: @"Unknown",
+              deviceInfoNetworkOperator : deviceInformation.currentNetworkOperator ?: @"Unknown",
+              deviceInfoRadioType : deviceInformation.currentNetworkRadioType ?: @"Unknown",
+              deviceInfoWiFiConnected : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
               };
 }
 
