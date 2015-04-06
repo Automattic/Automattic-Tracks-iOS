@@ -38,6 +38,9 @@
                                     <segment title="Anonymous"/>
                                     <segment title="WordPress.com"/>
                                 </segments>
+                                <connections>
+                                    <action selector="userTypeSegmentedControlChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="6dL-dh-pgn"/>
+                                </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LV-F0-8DU">
                                 <rect key="frame" x="239" y="140" width="122" height="30"/>

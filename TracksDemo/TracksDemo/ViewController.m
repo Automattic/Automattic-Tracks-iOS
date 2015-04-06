@@ -36,13 +36,10 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetTimer) name:TrackServiceWillSendQueuedEventsNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetTimer) name:TrackServiceDidSendQueuedEventsNotification object:nil];
+    
+    [self switchToAnonymousUser];
 }
 
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
 
 - (void)dealloc
 {
@@ -61,6 +58,16 @@
 - (IBAction)crashApplicationTapped:(id)sender
 {
     abort();
+}
+
+
+- (IBAction)userTypeSegmentedControlChanged:(UISegmentedControl *)sender
+{
+    if (sender.selectedSegmentIndex == 0) {
+        [self switchToAnonymousUser];
+    } else {
+        [self switchToWordPressComUser];
+    }
 }
 
 
@@ -105,5 +112,16 @@
     self.progressView.progress = progress;
 }
 
+
+- (void)switchToAnonymousUser
+{
+    [self.tracksService switchToAnonymousUser];
+}
+
+
+- (void)switchToWordPressComUser
+{
+    [self.tracksService switchToAuthenticatedWithUsername:@"astralbodies"];
+}
 
 @end
