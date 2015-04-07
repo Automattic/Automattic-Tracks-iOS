@@ -1,0 +1,6 @@
+osx_image: xcode61
+language: objective-c
+xcode_workspace: Automattic-Tracks-iOS.xcworkspace
+xcode_scheme: Automattic-Tracks-iOS
+xcode_sdk: iphonesimulator8.1
+
