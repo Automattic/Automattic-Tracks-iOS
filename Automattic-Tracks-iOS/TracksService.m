@@ -11,7 +11,7 @@
 
 @end
 
-static NSTimeInterval const EVENT_TIMER_FIVE_MINUTES = 5 * 60;
+static NSTimeInterval const EVENT_TIMER_DEFAULT = 5 * 60;
 NSString *const TrackServiceWillSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 
@@ -23,7 +23,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     if (self) {
         _eventNamePrefix = @"wpios_";
         _remote = [TracksServiceRemote new];
-        _queueSendInterval = EVENT_TIMER_FIVE_MINUTES;
+        _queueSendInterval = EVENT_TIMER_DEFAULT;
         _contextManager = [TracksContextManager new];
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:_contextManager];
         
@@ -65,15 +65,18 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
         [self resetTimer];
         return;
     }
+    
+    NSDictionary *commonProperties = [self generateCommonProperties];
 
     NSMutableArray *jsonEvents = [NSMutableArray arrayWithCapacity:events.count];
     for (TracksEvent *tracksEvent in events) {
-        [jsonEvents addObject:tracksEvent.dictionaryRepresentation];
+        NSDictionary *eventJSON = [tracksEvent dictionaryRepresentationWithParentCommonProperties:commonProperties];
+        [jsonEvents addObject:eventJSON];
     }
     
     NSLog(@"Sending queued events");
     [self.remote sendBatchOfEvents:jsonEvents
-              withSharedProperties:[self generateCommonProperties]
+              withSharedProperties:commonProperties
                  completionHandler:^{
                      // Delete the events since they sent or errored
                      [self.tracksEventService removeTracksEvents:events];

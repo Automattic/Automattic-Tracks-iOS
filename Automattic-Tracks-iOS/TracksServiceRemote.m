@@ -5,7 +5,7 @@
 
 - (void)sendSingleTracksEvent:(TracksEvent *)tracksEvent completionHandler:(void (^)(void))completion
 {
-    NSDictionary *dataToSend = @{@"events" : @[tracksEvent.dictionaryRepresentation],
+    NSDictionary *dataToSend = @{@"events" : @[[tracksEvent dictionaryRepresentationWithParentCommonProperties:nil]],
                                  @"commonProps" : @{}};
     NSError *error = nil;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://public-api.wordpress.com/rest/v1.1/tracks/record"]];

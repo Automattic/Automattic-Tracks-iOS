@@ -24,11 +24,10 @@ static NSString *const USER_ID_ANON = @"anonId";
     return self;
 }
 
-- (NSDictionary *)dictionaryRepresentation
+- (NSDictionary *)dictionaryRepresentationWithParentCommonProperties:(NSDictionary *)parentCommonProperties
 {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[TracksEventNameKey] = self.eventName;
-//    dict[USER_AGENT_NAME_KEY] = @"WPiOS";
     dict[TIMESTAMP_KEY] = @(lround(self.date.timeIntervalSince1970 * 1000));
 //    dict[USER_ID_ANON] = uuid;
     
@@ -39,10 +38,22 @@ static NSString *const USER_ID_ANON = @"anonId";
         dict[TracksUserTypeKey] = TracksUserTypeWPCOM;
         dict[TracksUserIDKey] = @""; // TODO
         dict[TracksUsernameKey] = self.user;
-        
     }
     
-    [dict addEntriesFromDictionary:self.customProperties];
+    
+
+    // Only add objects that don't exist in parent or are different than parent
+    for (id key in self.customProperties.keyEnumerator) {
+        if (parentCommonProperties[key] != nil && parentCommonProperties[key] == self.customProperties[key]) {
+            continue;
+        }
+        
+        dict[key] = self.customProperties[key];
+    }
+    
+    if (self.userAgent.length > 0 && ![parentCommonProperties[USER_AGENT_NAME_KEY] isEqualToString:self.userAgent]) {
+        dict[USER_AGENT_NAME_KEY] = self.userAgent;
+    }
     
     return dict;
 }

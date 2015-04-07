@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		7CF8858E7F085063E5FA37C3 /* libPods-Automattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FC310E80CC6BB7A70F0437 /* libPods-Automattic-Tracks-iOS.a */; };
 		931EE6B31ACEEA7C00E8711C /* Tracks.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
+		931EE6CC1AD404D000E8711C /* TracksEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CB1AD404D000E8711C /* TracksEventTests.m */; };
 		9333CA9E1ACB22D300ACE506 /* TracksEventCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */; };
 		937632841AC1F45600086BC6 /* TracksEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632831AC1F45600086BC6 /* TracksEventService.m */; };
 		937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */; };
@@ -53,6 +54,7 @@
 		148BAA4989EB1CFF84CBF8A4 /* libPods-Automattic-Tracks-iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		792B829D0A23395238AF6CAB /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7C14B632CA74A30467DE3176 /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		931EE6CB1AD404D000E8711C /* TracksEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventTests.m; sourceTree = "<group>"; };
 		9333CA9C1ACB22D300ACE506 /* TracksEventCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventCoreData.h; sourceTree = "<group>"; };
 		9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventCoreData.m; sourceTree = "<group>"; };
 		937632821AC1F45600086BC6 /* TracksEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventService.h; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */,
 				93F595521ABA01AE00280F9E /* TrackServiceTests.m */,
 				937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */,
+				931EE6CB1AD404D000E8711C /* TracksEventTests.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -403,6 +406,7 @@
 			files = (
 				93C0213D1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */,
+				931EE6CC1AD404D000E8711C /* TracksEventTests.m in Sources */,
 				93F595531ABA01AE00280F9E /* TrackServiceTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
