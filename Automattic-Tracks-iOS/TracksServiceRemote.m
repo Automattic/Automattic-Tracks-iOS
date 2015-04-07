@@ -35,7 +35,7 @@
 - (void)sendBatchOfEvents:(NSArray *)events withSharedProperties:(NSDictionary *)properties completionHandler:(void (^)(void))completion
 {
     NSDictionary *dataToSend = @{@"events" : events,
-                                 @"commonProps" : [self normalizeCommonProperties:properties]};
+                                 @"commonProps" : properties};
     NSLog(@"Data to send: \n%@", dataToSend);
     
     NSError *error = nil;
@@ -62,18 +62,6 @@
             }];
     
     [task resume];
-}
-
-
-- (NSDictionary *)normalizeCommonProperties:(NSDictionary *)commonProps
-{
-    NSString *USER_AGENT_NAME_KEY = @"_via_ua";
-    NSString *DEFAULT_USER_AGENT = @"Nosara Client for iOS 0.0.0";
-    NSMutableDictionary *normalizedProps = [NSMutableDictionary dictionaryWithDictionary:commonProps];
-    
-    normalizedProps[USER_AGENT_NAME_KEY] = DEFAULT_USER_AGENT;
-    
-    return normalizedProps;
 }
 
 @end

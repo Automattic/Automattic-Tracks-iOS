@@ -1,11 +1,11 @@
 #import "TracksEvent.h"
 
-static NSString *const TracksEventNameKey = @"_en";
-static NSString *const USER_AGENT_NAME_KEY = @"_via_ua";
-static NSString *const TIMESTAMP_KEY = @"_ts";
-static NSString *const TracksUserTypeKey = @"_ut";
-static NSString *const TracksUserIDKey = @"_ui";
-static NSString *const TracksUsernameKey = @"_ul";
+NSString *const TracksEventNameKey = @"_en";
+NSString *const TracksUserAgentKey = @"_via_ua";
+NSString *const TracksTimestampKey = @"_ts";
+NSString *const TracksUserTypeKey = @"_ut";
+NSString *const TracksUserIDKey = @"_ui";
+NSString *const TracksUsernameKey = @"_ul";
 
 static NSString *const TracksUserTypeAnonymous = @"anon";
 static NSString *const TracksUserTypeWPCOM = @"wpcom:user_id";
@@ -28,8 +28,7 @@ static NSString *const USER_ID_ANON = @"anonId";
 {
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[TracksEventNameKey] = self.eventName;
-    dict[TIMESTAMP_KEY] = @(lround(self.date.timeIntervalSince1970 * 1000));
-//    dict[USER_ID_ANON] = uuid;
+    dict[TracksTimestampKey] = @(lround(self.date.timeIntervalSince1970 * 1000));
     
     if (self.userType == TracksEventUserTypeAnonymous) {
         dict[TracksUserTypeKey] = TracksUserTypeAnonymous;
@@ -51,8 +50,8 @@ static NSString *const USER_ID_ANON = @"anonId";
         dict[key] = self.customProperties[key];
     }
     
-    if (self.userAgent.length > 0 && ![parentCommonProperties[USER_AGENT_NAME_KEY] isEqualToString:self.userAgent]) {
-        dict[USER_AGENT_NAME_KEY] = self.userAgent;
+    if (self.userAgent.length > 0 && ![parentCommonProperties[TracksUserAgentKey] isEqualToString:self.userAgent]) {
+        dict[TracksUserAgentKey] = self.userAgent;
     }
     
     return dict;

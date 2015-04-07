@@ -175,6 +175,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
               DEVICE_HEIGHT_PIXELS_KEY : @(screenSize.height) ?: @0,
               DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width) ?: @0,
               DEVICE_LANG_KEY : deviceInformation.deviceLanguage ?: @"Unknown",
+              TracksUserAgentKey : @"Nosara Client for iOS 0.0.0",
               deviceInfoNetworkOperator : deviceInformation.currentNetworkOperator ?: @"Unknown",
               deviceInfoRadioType : deviceInformation.currentNetworkRadioType ?: @"Unknown",
               deviceInfoWiFiConnected : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
