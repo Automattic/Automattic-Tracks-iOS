@@ -3,6 +3,7 @@
 
 @interface ViewController () <NSFetchedResultsControllerDelegate>
 
+@property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksService *tracksService;
 @property (nonatomic, strong) NSFetchedResultsController *fetchedResultsController;
 
@@ -18,7 +19,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tracksService = [[TracksService alloc] init];
+    self.contextManager = [TracksContextManager new];
+    self.tracksService = [[TracksService alloc] initWithContextManager:self.contextManager];
     self.tracksService.queueSendInterval = 10.0;
     [self resetTimer];
     
@@ -27,7 +29,7 @@
     NSSortDescriptor *sortDescriptor = [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:YES];
     fetchRequest.sortDescriptors = @[sortDescriptor];
     self.fetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest
-                                                                        managedObjectContext:self.tracksService.contextManager.managedObjectContext
+                                                                        managedObjectContext:self.contextManager.managedObjectContext
                                                                           sectionNameKeyPath:nil
                                                                                    cacheName:nil];
     self.fetchedResultsController.delegate = self;
