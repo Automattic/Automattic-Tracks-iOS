@@ -57,11 +57,11 @@
 
 - (TracksEvent *)createTracksEventForAliasingWordPressComUser:(NSString *)username
                                                        userID:(NSString *)userID
-                                        withAnonymousUsername:(NSString *)anonymousUsername
+                                          withAnonymousUserID:(NSString *)anonymousUserID
 {
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.eventName = @"_aliasUser";
-    tracksEvent.customProperties[@"anonId"] = anonymousUsername;
+    tracksEvent.customProperties[@"anonId"] = anonymousUserID;
     tracksEvent.username = username;
     tracksEvent.userID = userID;
     tracksEvent.userType = TracksEventUserTypeWordPressCom;

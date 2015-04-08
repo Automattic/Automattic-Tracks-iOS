@@ -18,7 +18,7 @@
 
 - (TracksEvent *)createTracksEventForAliasingWordPressComUser:(NSString *)username
                                                        userID:(NSString *)userID
-                                        withAnonymousUsername:(NSString *)anonymousUsername;
+                                          withAnonymousUserID:(NSString *)anonymousUserID;
 
 - (NSArray *)allTracksEvents;
 

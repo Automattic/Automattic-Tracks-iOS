@@ -108,14 +108,14 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
 {
-    NSString *previousUsername = self.username;
+    NSString *previousUserID = self.userID;
     
     self.anonymous = NO;
     self.username = username;
     self.userID = userID;
     
     if (skipEvent == NO) {
-        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUsername:previousUsername];
+        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUserID:previousUserID];
     }
 }
 
