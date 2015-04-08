@@ -8,7 +8,6 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
 @interface TracksService : NSObject
 
-@property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksEventService *tracksEventService;
 @property (nonatomic, strong) TracksServiceRemote *remote;
 

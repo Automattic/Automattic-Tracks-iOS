@@ -4,6 +4,7 @@
 @interface TracksService ()
 
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, strong) TracksContextManager *contextManager;
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
