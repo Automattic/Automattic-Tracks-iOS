@@ -20,6 +20,8 @@ static NSString *const USER_ID_ANON = @"anonId";
         _date = [NSDate date];
         _uuid = [NSUUID UUID];
         _customProperties = [NSMutableDictionary new];
+        _deviceProperties = [NSMutableDictionary new];
+        _userProperties = [NSMutableDictionary new];
     }
     return self;
 }

@@ -22,6 +22,8 @@ FOUNDATION_EXPORT NSString *const TracksUsernameKey;
 @property (nonatomic, copy) NSString *userAgent;
 @property (nonatomic, assign) TracksEventUserType userType;
 @property (nonatomic, readonly) NSMutableDictionary *customProperties;
+@property (nonatomic, readonly) NSMutableDictionary *deviceProperties;
+@property (nonatomic, readonly) NSMutableDictionary *userProperties;
 
 - (NSDictionary *)dictionaryRepresentationWithParentCommonProperties:(NSDictionary *)parentCommonProperties;
 
