@@ -95,10 +95,14 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     NSLog(@"Sending queued events");
     [self.remote sendBatchOfEvents:jsonEvents
               withSharedProperties:commonProperties
-                 completionHandler:^{
-                     // Delete the events since they sent or errored
-                     [self.tracksEventService removeTracksEvents:events];
-                     
+                 completionHandler:^(NSError *error) {
+                     if (error) {
+                         NSLog(@"Error while remote calling: %@", error);
+                     } else {
+                         // Delete the events since they sent or errored
+                         [self.tracksEventService removeTracksEvents:events];
+                     }
+                         
                      // Assume no errors for now
                      [self resetTimer];
                      

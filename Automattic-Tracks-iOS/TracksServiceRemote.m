@@ -32,7 +32,7 @@
 }
 
 
-- (void)sendBatchOfEvents:(NSArray *)events withSharedProperties:(NSDictionary *)properties completionHandler:(void (^)(void))completion
+- (void)sendBatchOfEvents:(NSArray *)events withSharedProperties:(NSDictionary *)properties completionHandler:(void (^)(NSError *error))completion
 {
     NSDictionary *dataToSend = @{@"events" : events,
                                  @"commonProps" : properties};
@@ -56,7 +56,7 @@
                 
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completion();
+                        completion(error);
                     });
                 }
             }];
