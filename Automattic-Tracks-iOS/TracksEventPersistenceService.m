@@ -111,6 +111,8 @@
     tracksEventCoreData.userID = tracksEvent.userID;
     tracksEventCoreData.userType = @(tracksEvent.userType);
     tracksEventCoreData.customProperties = tracksEvent.customProperties;
+    tracksEventCoreData.deviceInfo = tracksEvent.deviceProperties;
+    tracksEventCoreData.userProperties = tracksEvent.userProperties;
     
     return tracksEventCoreData;
 }
@@ -139,6 +141,8 @@
     tracksEvent.userAgent = tracksEventCoreData.userAgent;
     tracksEvent.userType = tracksEventCoreData.userType.unsignedIntegerValue;
     [tracksEvent.customProperties addEntriesFromDictionary:tracksEventCoreData.customProperties];
+    [tracksEvent.deviceProperties addEntriesFromDictionary:tracksEventCoreData.deviceInfo];
+    [tracksEvent.userProperties addEntriesFromDictionary:tracksEventCoreData.userProperties];
     
     return tracksEvent;
 }
