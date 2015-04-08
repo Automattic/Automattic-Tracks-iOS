@@ -17,6 +17,8 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
 @property (nonatomic, strong) NSDictionary *userProperties;
 
+- (instancetype)initWithContextManager:(TracksContextManager *)contextManager;
+
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent;
 
 - (void)switchToAnonymousUser;

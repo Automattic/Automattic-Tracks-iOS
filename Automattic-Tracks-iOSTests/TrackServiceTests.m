@@ -2,12 +2,14 @@
 #import <XCTest/XCTest.h>
 #import "TracksService.h"
 #import <OCMock/OCMock.h>
+#import "TestTracksContextManager.h"
 
 @interface TrackServiceTests : XCTestCase
 
 @property (nonatomic, strong) TracksService *subject;
 @property (nonatomic, strong) TracksServiceRemote *tracksServiceRemote;
 @property (nonatomic, strong) TracksEventService *tracksEventService;
+@property (nonatomic, strong) TestTracksContextManager *contextManager;
 
 @end
 
@@ -16,7 +18,9 @@
 - (void)setUp {
     [super setUp];
 
-    self.subject = [[TracksService alloc] init];
+    self.contextManager = [TestTracksContextManager new];
+    self.subject = [[TracksService alloc] initWithContextManager:self.contextManager];
+    
     self.tracksServiceRemote = OCMClassMock([TracksServiceRemote class]);
     self.tracksEventService = OCMClassMock([TracksEventService class]);
     
@@ -29,6 +33,9 @@
     [super tearDown];
     
     self.subject = nil;
+    self.contextManager = nil;
+    self.tracksEventService = nil;
+    self.tracksServiceRemote = nil;
 }
 
 

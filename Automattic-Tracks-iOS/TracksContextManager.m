@@ -2,9 +2,6 @@
 
 @interface TracksContextManager ()
 
-@property (strong, nonatomic) NSManagedObjectModel *managedObjectModel;
-@property (strong, nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-
 @end
 
 @implementation TracksContextManager

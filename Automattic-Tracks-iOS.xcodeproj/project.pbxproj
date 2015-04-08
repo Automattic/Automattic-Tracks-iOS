@@ -10,6 +10,7 @@
 		7CF8858E7F085063E5FA37C3 /* libPods-Automattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FC310E80CC6BB7A70F0437 /* libPods-Automattic-Tracks-iOS.a */; };
 		931EE6B31ACEEA7C00E8711C /* Tracks.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
 		931EE6CC1AD404D000E8711C /* TracksEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CB1AD404D000E8711C /* TracksEventTests.m */; };
+		931EE6D01AD5A58D00E8711C /* TestTracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */; };
 		9333CA9E1ACB22D300ACE506 /* TracksEventCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */; };
 		937632841AC1F45600086BC6 /* TracksEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632831AC1F45600086BC6 /* TracksEventService.m */; };
 		937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */; };
@@ -55,6 +56,8 @@
 		792B829D0A23395238AF6CAB /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		7C14B632CA74A30467DE3176 /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		931EE6CB1AD404D000E8711C /* TracksEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventTests.m; sourceTree = "<group>"; };
+		931EE6CE1AD5A58D00E8711C /* TestTracksContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTracksContextManager.h; sourceTree = "<group>"; };
+		931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTracksContextManager.m; sourceTree = "<group>"; };
 		9333CA9C1ACB22D300ACE506 /* TracksEventCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventCoreData.h; sourceTree = "<group>"; };
 		9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventCoreData.m; sourceTree = "<group>"; };
 		937632821AC1F45600086BC6 /* TracksEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventService.h; sourceTree = "<group>"; };
@@ -136,6 +139,15 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		931EE6CD1AD5A57000E8711C /* Test Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				931EE6CE1AD5A58D00E8711C /* TestTracksContextManager.h */,
+				931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */,
+			);
+			name = "Test Helpers";
+			sourceTree = "<group>";
+		};
 		93771E391ACC58B000B1E5FF /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -181,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				93C021291AB0A6330014096A /* Supporting Files */,
+				931EE6CD1AD5A57000E8711C /* Test Helpers */,
 				93C0213B1AB32BDE0014096A /* Tests */,
 			);
 			path = "Automattic-Tracks-iOSTests";
@@ -405,6 +418,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93C0213D1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m in Sources */,
+				931EE6D01AD5A58D00E8711C /* TestTracksContextManager.m in Sources */,
 				937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */,
 				931EE6CC1AD404D000E8711C /* TracksEventTests.m in Sources */,
 				93F595531ABA01AE00280F9E /* TrackServiceTests.m in Sources */,

@@ -18,21 +18,25 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 
 @implementation TracksService
 
-- (instancetype)init
+- (instancetype)initWithContextManager:(TracksContextManager *)contextManager
 {
     self = [super init];
     if (self) {
         _eventNamePrefix = @"wpios_";
         _remote = [TracksServiceRemote new];
         _queueSendInterval = EVENT_TIMER_DEFAULT;
-        _contextManager = [TracksContextManager new];
-        _tracksEventService = [[TracksEventService alloc] initWithContextManager:_contextManager];
+        _contextManager = contextManager;
+        _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         
         [self switchToAnonymousUser];
         [self resetTimer];
     }
-    
     return self;
+}
+
+- (instancetype)init
+{
+    return [self initWithContextManager:[TracksContextManager new]];
 }
 
 - (void)trackEventName:(NSString *)eventName
