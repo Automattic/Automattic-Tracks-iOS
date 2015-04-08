@@ -2,7 +2,11 @@
 #import "TracksEvent.h"
 #import "TracksContextManager.h"
 
+@class TracksEventPersistenceService;
+
 @interface TracksEventService : NSObject
+
+@property (nonatomic, strong) TracksEventPersistenceService *persistenceService;
 
 - (instancetype)initWithContextManager:(TracksContextManager *)contextManager;
 

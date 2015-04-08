@@ -4,7 +4,6 @@
 @interface TracksEventService ()
 
 @property (nonatomic, strong) TracksContextManager *contextManager;
-@property (nonatomic, strong) TracksEventPersistenceService *persistenceService;
 
 @end
 
