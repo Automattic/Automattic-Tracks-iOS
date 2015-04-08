@@ -194,6 +194,7 @@
 				TargetAttributes = {
 					9376328D1AC2026900086BC6 = {
 						CreatedOnToolsVersion = 6.2;
+						DevelopmentTeam = PZYM8XX95Q;
 					};
 					937632A61AC2026900086BC6 = {
 						CreatedOnToolsVersion = 6.2;
@@ -405,9 +406,12 @@
 			baseConfigurationReference = A00AA600D374237A250173BD /* Pods-TracksDemo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TracksDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -416,9 +420,12 @@
 			baseConfigurationReference = BE8A818C436955651627D306 /* Pods-TracksDemo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = TracksDemo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
