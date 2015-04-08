@@ -12,6 +12,8 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, strong) NSDate *startTime;
 
+@property (nonatomic, weak) IBOutlet UISwitch *remoteCallsSwitch;
+
 @end
 
 @implementation ViewController
@@ -69,6 +71,18 @@
         [self switchToAnonymousUser];
     } else {
         [self switchToWordPressComUser];
+    }
+}
+
+
+- (IBAction)remoteCallsSwitchTapped:(UISwitch *)sender
+{
+    self.tracksService.remoteCallsEnabled = sender.isOn;
+    
+    if (sender.isOn) {
+        [self resetTimer];
+    } else {
+        [self.timer invalidate];
     }
 }
 

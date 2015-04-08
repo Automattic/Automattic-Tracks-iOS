@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -26,12 +27,6 @@
                                     <action selector="sendTestEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Jw-gd-MCd"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jve-X8-UVU">
-                                <rect key="frame" x="208" y="102" width="184" height="30"/>
-                                <state key="normal" title="Regenerate Anonymous ID">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ork-Vm-gMc">
                                 <rect key="frame" x="191" y="28" width="219" height="29"/>
                                 <segments>
@@ -43,7 +38,7 @@
                                 </connections>
                             </segmentedControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LV-F0-8DU">
-                                <rect key="frame" x="239" y="140" width="122" height="30"/>
+                                <rect key="frame" x="239" y="102" width="122" height="30"/>
                                 <state key="normal" title="Crash Application">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -51,8 +46,11 @@
                                     <action selector="crashApplicationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oea-cX-vdJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of events queued: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usv-EB-VcP">
-                                <rect key="frame" x="191" y="178" width="219" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of events queued: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usv-EB-VcP">
+                                <rect key="frame" x="175" y="549" width="251" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="251" id="oav-5I-edC"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -60,29 +58,44 @@
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S78-AU-IJX">
                                 <rect key="frame" x="36" y="578" width="528" height="2"/>
                             </progressView>
+                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aDq-MO-fv4">
+                                <rect key="frame" x="377" y="510" width="51" height="31"/>
+                                <connections>
+                                    <action selector="remoteCallsSwitchTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Xk4-R7-g0h"/>
+                                </connections>
+                            </switch>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remote Calls" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cP7-n0-YmV">
+                                <rect key="frame" x="175" y="515" width="103" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="aDq-MO-fv4" firstAttribute="trailing" secondItem="Usv-EB-VcP" secondAttribute="trailing" id="6fj-WD-L7e"/>
                             <constraint firstAttribute="trailingMargin" secondItem="S78-AU-IJX" secondAttribute="trailing" constant="20" id="D1K-jO-Dhv"/>
-                            <constraint firstItem="Ork-Vm-gMc" firstAttribute="leading" secondItem="Usv-EB-VcP" secondAttribute="leading" id="Eij-Bq-mAy"/>
+                            <constraint firstItem="Ork-Vm-gMc" firstAttribute="leading" secondItem="Usv-EB-VcP" secondAttribute="leading" constant="16" id="Eij-Bq-mAy"/>
                             <constraint firstItem="p2M-wW-PMO" firstAttribute="top" secondItem="Ork-Vm-gMc" secondAttribute="bottom" constant="8" symbolic="YES" id="Erd-RF-Exv"/>
+                            <constraint firstItem="Usv-EB-VcP" firstAttribute="top" secondItem="aDq-MO-fv4" secondAttribute="bottom" constant="8" id="FCF-n2-XOn"/>
                             <constraint firstAttribute="centerX" secondItem="S78-AU-IJX" secondAttribute="centerX" id="JjN-48-fWs"/>
-                            <constraint firstItem="Usv-EB-VcP" firstAttribute="top" secondItem="5LV-F0-8DU" secondAttribute="bottom" constant="8" symbolic="YES" id="KUQ-GS-b4i"/>
                             <constraint firstItem="Ork-Vm-gMc" firstAttribute="centerX" secondItem="p2M-wW-PMO" secondAttribute="centerX" id="LTc-36-hDJ"/>
+                            <constraint firstItem="5LV-F0-8DU" firstAttribute="top" secondItem="p2M-wW-PMO" secondAttribute="bottom" constant="8" id="Mrh-H7-nue"/>
+                            <constraint firstItem="Usv-EB-VcP" firstAttribute="top" secondItem="cP7-n0-YmV" secondAttribute="bottom" constant="13" id="PH2-Gc-elp"/>
                             <constraint firstItem="p2M-wW-PMO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PVY-eN-c4R"/>
                             <constraint firstAttribute="centerX" secondItem="S78-AU-IJX" secondAttribute="centerX" id="QbN-qf-zAr"/>
+                            <constraint firstAttribute="centerX" secondItem="5LV-F0-8DU" secondAttribute="centerX" id="VHm-A5-UZg"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="S78-AU-IJX" secondAttribute="bottom" constant="20" id="WMB-hE-o9H"/>
-                            <constraint firstItem="jve-X8-UVU" firstAttribute="top" secondItem="p2M-wW-PMO" secondAttribute="bottom" constant="8" symbolic="YES" id="Yzx-Ef-do1"/>
                             <constraint firstItem="S78-AU-IJX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="caD-MN-yCR"/>
                             <constraint firstItem="Ork-Vm-gMc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="daW-V6-oQb"/>
-                            <constraint firstItem="Usv-EB-VcP" firstAttribute="centerX" secondItem="5LV-F0-8DU" secondAttribute="centerX" id="jrJ-W9-Zti"/>
-                            <constraint firstItem="5LV-F0-8DU" firstAttribute="top" secondItem="jve-X8-UVU" secondAttribute="bottom" constant="8" symbolic="YES" id="oGH-ky-mxv"/>
-                            <constraint firstItem="jve-X8-UVU" firstAttribute="centerX" secondItem="p2M-wW-PMO" secondAttribute="centerX" id="xUh-20-Uch"/>
+                            <constraint firstItem="S78-AU-IJX" firstAttribute="top" secondItem="Usv-EB-VcP" secondAttribute="bottom" constant="8" id="rXB-fG-3RV"/>
+                            <constraint firstItem="Usv-EB-VcP" firstAttribute="leading" secondItem="cP7-n0-YmV" secondAttribute="leading" id="vvd-rp-Gwm"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="objectCountLabel" destination="Usv-EB-VcP" id="NJv-0n-Tsg"/>
                         <outlet property="progressView" destination="S78-AU-IJX" id="ikn-4A-qT9"/>
+                        <outlet property="remoteCallsSwitch" destination="aDq-MO-fv4" id="m1j-0F-vBe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

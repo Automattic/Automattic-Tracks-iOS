@@ -13,6 +13,7 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
 @property (nonatomic, assign) NSTimeInterval queueSendInterval;
 @property (nonatomic, readonly) NSUInteger queuedEventCount;
+@property (nonatomic, assign) BOOL remoteCallsEnabled;
 
 @property (nonatomic, strong) NSDictionary *userProperties;
 

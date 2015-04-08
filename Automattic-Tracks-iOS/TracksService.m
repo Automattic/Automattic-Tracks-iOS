@@ -134,6 +134,17 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 }
 
 
+- (void)setRemoteCallsEnabled:(BOOL)remoteCallsEnabled
+{
+    _remoteCallsEnabled = NO;
+    
+    if (remoteCallsEnabled) {
+        [self resetTimer];
+    } else {
+        [self.timer invalidate];
+    }
+}
+
 #pragma mark - Private methods
 
 
