@@ -25,7 +25,7 @@
 
 
 - (void)testTracksEventWithNilName {
-    TracksEvent *event = [self.subject createTracksEventWithName:nil username:@"someone" userAgent:nil userType:TracksEventUserTypeWordPressCom eventDate:[NSDate date]];
+    TracksEvent *event = [self.subject createTracksEventWithName:nil username:@"someone" userID:@"MOOP" userAgent:nil userType:TracksEventUserTypeWordPressCom eventDate:[NSDate date]];
     
     XCTAssertNil(event);
 }

@@ -25,6 +25,7 @@
 
 - (TracksEvent *)createTracksEventWithName:(NSString *)name
                                   username:(NSString *)username
+                                    userID:(NSString *)userID
                                  userAgent:(NSString *)userAgent
                                   userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date
@@ -36,8 +37,9 @@
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.uuid = [NSUUID UUID];
     tracksEvent.eventName = name;
-    tracksEvent.user = username;
+    tracksEvent.username = username;
     tracksEvent.userAgent = userAgent;
+    tracksEvent.userID = userID;
     tracksEvent.userType = userType;
     tracksEvent.date = date;
     
@@ -48,12 +50,14 @@
 
 
 - (TracksEvent *)createTracksEventForAliasingWordPressComUser:(NSString *)username
+                                                       userID:(NSString *)userID
                                         withAnonymousUsername:(NSString *)anonymousUsername
 {
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.eventName = @"_aliasUser";
-    tracksEvent.customProperties[@"anonUser"] = anonymousUsername;
-    tracksEvent.user = username;
+    tracksEvent.customProperties[@"anonId"] = anonymousUsername;
+    tracksEvent.username = username;
+    tracksEvent.userID = userID;
     tracksEvent.userType = TracksEventUserTypeWordPressCom;
     tracksEvent.date = [NSDate date];
     

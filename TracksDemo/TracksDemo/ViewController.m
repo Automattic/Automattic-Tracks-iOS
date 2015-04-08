@@ -121,7 +121,7 @@
 
 - (void)switchToWordPressComUser
 {
-    [self.tracksService switchToAuthenticatedWithUsername:@"astralbodies" skipAliasEventCreation:NO];
+    [self.tracksService switchToAuthenticatedUserWithUsername:@"astralbodies" userID:@"67137" skipAliasEventCreation:NO];
 }
 
 @end

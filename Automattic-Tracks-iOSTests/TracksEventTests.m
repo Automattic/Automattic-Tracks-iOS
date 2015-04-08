@@ -16,6 +16,7 @@
     
     self.subject = [TracksEvent new];
     self.subject.eventName = @"test";
+    self.subject.userID = @"anonymous123";
 }
 
 - (void)tearDown

@@ -5,8 +5,9 @@
 
 @dynamic date;
 @dynamic eventName;
-@dynamic user;
+@dynamic username;
 @dynamic userAgent;
+@dynamic userID;
 @dynamic userType;
 @dynamic uuid;
 @dynamic retryCount;

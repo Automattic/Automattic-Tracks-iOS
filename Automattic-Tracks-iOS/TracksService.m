@@ -6,6 +6,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 
 @property (nonatomic, copy) NSString *username;
+@property (nonatomic, copy) NSString *userID;
 @property (nonatomic, copy) NSString *eventNamePrefix;
 @property (nonatomic, assign, getter=isAnonymous) BOOL anonymous;
 
@@ -27,6 +28,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
         _contextManager = [TracksContextManager new];
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:_contextManager];
         
+        [self switchToAnonymousUser];
         [self resetTimer];
     }
     
@@ -41,6 +43,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     
     [self.tracksEventService createTracksEventWithName:eventName
                                               username:self.username
+                                                userID:self.userID
                                              userAgent:nil
                                               userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeWordPressCom
                                              eventDate:[NSDate date]];
@@ -90,15 +93,16 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 }
 
 
-- (void)switchToAuthenticatedWithUsername:(NSString *)username skipAliasEventCreation:(BOOL)skipEvent
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
 {
     NSString *previousUsername = self.username;
     
     self.anonymous = NO;
     self.username = username;
+    self.userID = userID;
     
     if (skipEvent == NO) {
-        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username withAnonymousUsername:previousUsername];
+        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUsername:previousUsername];
     }
 }
 
@@ -106,7 +110,8 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 - (void)switchToAnonymousUser
 {
     self.anonymous = YES;
-    self.username = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    self.username = @"";
+    self.userID = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
 }
 
 

@@ -19,7 +19,7 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
 - (void)sendQueuedEvents;
 
-- (void)switchToAuthenticatedWithUsername:(NSString *)username skipAliasEventCreation:(BOOL)skipEvent;
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent;
 
 - (void)switchToAnonymousUser;
 

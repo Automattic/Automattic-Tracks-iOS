@@ -106,9 +106,11 @@
     tracksEventCoreData.uuid = tracksEvent.uuid.UUIDString;
     tracksEventCoreData.eventName = tracksEvent.eventName;
     tracksEventCoreData.date = tracksEvent.date;
-    tracksEventCoreData.user = tracksEvent.user;
+    tracksEventCoreData.username = tracksEvent.username;
     tracksEventCoreData.userAgent = tracksEvent.userAgent;
+    tracksEventCoreData.userID = tracksEvent.userID;
     tracksEventCoreData.userType = @(tracksEvent.userType);
+    tracksEventCoreData.customProperties = tracksEvent.customProperties;
     
     return tracksEventCoreData;
 }
@@ -132,9 +134,11 @@
     tracksEvent.uuid = [[NSUUID alloc] initWithUUIDString:tracksEventCoreData.uuid];
     tracksEvent.eventName = tracksEventCoreData.eventName;
     tracksEvent.date = tracksEventCoreData.date;
-    tracksEvent.user = tracksEventCoreData.user;
+    tracksEvent.username = tracksEventCoreData.username;
+    tracksEvent.userID = tracksEventCoreData.userID;
     tracksEvent.userAgent = tracksEventCoreData.userAgent;
     tracksEvent.userType = tracksEventCoreData.userType.unsignedIntegerValue;
+    [tracksEvent.customProperties addEntriesFromDictionary:tracksEventCoreData.customProperties];
     
     return tracksEvent;
 }

@@ -32,14 +32,12 @@ static NSString *const USER_ID_ANON = @"anonId";
     
     if (self.userType == TracksEventUserTypeAnonymous) {
         dict[TracksUserTypeKey] = TracksUserTypeAnonymous;
-        dict[TracksUserIDKey] = TracksUserTypeAnonymous;
+        dict[TracksUserIDKey] = self.userID;
     } else {
         dict[TracksUserTypeKey] = TracksUserTypeWPCOM;
-        dict[TracksUserIDKey] = @""; // TODO
-        dict[TracksUsernameKey] = self.user;
-    }
-    
-    
+        dict[TracksUserIDKey] = self.userID;
+        dict[TracksUsernameKey] = self.username;
+    }    
 
     // Only add objects that don't exist in parent or are different than parent
     for (id key in self.customProperties.keyEnumerator) {

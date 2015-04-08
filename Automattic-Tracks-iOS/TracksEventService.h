@@ -8,11 +8,13 @@
 
 - (TracksEvent *)createTracksEventWithName:(NSString *)name
                                   username:(NSString *)username
+                                    userID:(NSString *)userID
                                  userAgent:(NSString *)userAgent
                                   userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date;
 
 - (TracksEvent *)createTracksEventForAliasingWordPressComUser:(NSString *)username
+                                                       userID:(NSString *)userID
                                         withAnonymousUsername:(NSString *)anonymousUsername;
 
 - (NSArray *)allTracksEvents;
