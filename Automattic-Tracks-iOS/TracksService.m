@@ -59,7 +59,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
                                               userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeWordPressCom
                                              eventDate:[NSDate date]
                                       customProperties:customProperties
-                                      deviceProperties:[self generateCommonProperties] // FIXME - Only put on mutable device data onto events
+                                      deviceProperties:[self mutableDeviceProperties]
                                         userProperties:self.userProperties];
 }
 
@@ -82,7 +82,9 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
         return;
     }
     
-    NSDictionary *commonProperties = [self generateCommonProperties];
+    NSMutableDictionary *commonProperties = [NSMutableDictionary new];
+    [commonProperties addEntriesFromDictionary:[self immutableDeviceProperties]];
+    [commonProperties addEntriesFromDictionary:[self mutableDeviceProperties]];
 
     NSMutableArray *jsonEvents = [NSMutableArray arrayWithCapacity:events.count];
     for (TracksEvent *tracksEvent in events) {
@@ -157,7 +159,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     [self resetTimer];
 }
 
-- (NSDictionary *)generateCommonProperties
+- (NSDictionary *)immutableDeviceProperties
 {
     TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
     
@@ -176,11 +178,6 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     NSString *deviceInfoModel = [NSString stringWithFormat:@"%@model", DEVICE_INFO_PREFIX];
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     
-    // These properties change often and should be overridden in TracksEvents if they differ
-    NSString *deviceInfoNetworkOperator = [NSString stringWithFormat:@"%@current_network_operator", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoRadioType = [NSString stringWithFormat:@"%@phone_radio_type", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoWiFiConnected = [NSString stringWithFormat:@"%@wifi_connected", DEVICE_INFO_PREFIX];
-
     return @{ REQUEST_TIMESTAMP_KEY : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
               deviceInfoAppBuild : deviceInformation.appBuild ?: @"Unknown",
               deviceInfoAppName : deviceInformation.appName ?: @"Unknown",
@@ -194,10 +191,22 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
               DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width) ?: @0,
               DEVICE_LANG_KEY : deviceInformation.deviceLanguage ?: @"Unknown",
               TracksUserAgentKey : @"Nosara Client for iOS 0.0.0",
-              deviceInfoNetworkOperator : deviceInformation.currentNetworkOperator ?: @"Unknown",
-              deviceInfoRadioType : deviceInformation.currentNetworkRadioType ?: @"Unknown",
-              deviceInfoWiFiConnected : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
               };
+}
+
+- (NSDictionary *)mutableDeviceProperties
+{
+    TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
+
+    // These properties change often and should be overridden in TracksEvents if they differ
+    NSString *deviceInfoNetworkOperator = @"device_info_current_network_operator";
+    NSString *deviceInfoRadioType = @"device_info_phone_radio_type";
+    NSString *deviceInfoWiFiConnected = @"device_info_wifi_connected";
+    
+    return @{deviceInfoNetworkOperator : deviceInformation.currentNetworkOperator ?: @"Unknown",
+             deviceInfoRadioType : deviceInformation.currentNetworkRadioType ?: @"Unknown",
+             deviceInfoWiFiConnected : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
+             };
 }
 
 @end
