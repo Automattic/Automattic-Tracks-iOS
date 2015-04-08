@@ -39,6 +39,12 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     NSParameterAssert(eventName.length > 0);
     
+    [self trackEventName:eventName withCustomProperties:nil];
+}
+
+
+- (void)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties
+{
     eventName = [NSString stringWithFormat:@"%@%@", self.eventNamePrefix, eventName];
     
     [self.tracksEventService createTracksEventWithName:eventName
@@ -46,9 +52,11 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
                                                 userID:self.userID
                                              userAgent:nil
                                               userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeWordPressCom
-                                             eventDate:[NSDate date]];
+                                             eventDate:[NSDate date]
+                                      customProperties:customProperties
+                                      deviceProperties:[self generateCommonProperties] // FIXME - Only put on mutable device data onto events
+                                        userProperties:self.userProperties];
 }
-
 
 - (NSUInteger)queuedEventCount
 {

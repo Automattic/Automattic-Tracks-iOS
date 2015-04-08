@@ -43,8 +43,16 @@
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.eventName = @"Test";
     tracksEvent.userID = @"anonymous123";
-//    OCMExpect([self.tracksEventService createTracksEventWithName:@"wpios_Test"]).andReturn(tracksEvent);
-    OCMStub([self.tracksEventService createTracksEventWithName:@"wpios_Test" username:[OCMArg isNotNil] userID:[OCMArg isNotNil] userAgent:[OCMArg isNil] userType:TracksEventUserTypeAnonymous eventDate:[OCMArg isNotNil]]).andReturn(tracksEvent);
+    OCMStub([self.tracksEventService createTracksEventWithName:@"wpios_Test"
+                                                      username:[OCMArg isNotNil]
+                                                        userID:[OCMArg isNotNil]
+                                                     userAgent:[OCMArg isNil]
+                                                      userType:TracksEventUserTypeAnonymous
+                                                     eventDate:[OCMArg isNotNil]
+                                              customProperties:[OCMArg isNotNil]
+                                              deviceProperties:[OCMArg isNotNil]
+                                                userProperties:[OCMArg isNotNil]])
+    .andReturn(tracksEvent);
     
     [self.subject trackEventName:@"Test"];
     

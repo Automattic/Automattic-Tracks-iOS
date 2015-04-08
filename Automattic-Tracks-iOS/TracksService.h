@@ -15,12 +15,17 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 @property (nonatomic, assign) NSTimeInterval queueSendInterval;
 @property (nonatomic, readonly) NSUInteger queuedEventCount;
 
-- (void)trackEventName:(NSString *)eventName;
-
-- (void)sendQueuedEvents;
+@property (nonatomic, strong) NSDictionary *userProperties;
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent;
 
 - (void)switchToAnonymousUser;
+
+- (void)trackEventName:(NSString *)eventName;
+
+- (void)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties;
+
+- (void)sendQueuedEvents;
+
 
 @end

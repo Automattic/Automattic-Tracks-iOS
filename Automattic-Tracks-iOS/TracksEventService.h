@@ -11,7 +11,10 @@
                                     userID:(NSString *)userID
                                  userAgent:(NSString *)userAgent
                                   userType:(TracksEventUserType)userType
-                                 eventDate:(NSDate *)date;
+                                 eventDate:(NSDate *)date
+                          customProperties:(NSDictionary *)customProperties
+                          deviceProperties:(NSDictionary *)deviceProperties
+                            userProperties:(NSDictionary *)userProperties;
 
 - (TracksEvent *)createTracksEventForAliasingWordPressComUser:(NSString *)username
                                                        userID:(NSString *)userID

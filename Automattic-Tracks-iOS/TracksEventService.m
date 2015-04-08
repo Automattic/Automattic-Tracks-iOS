@@ -29,6 +29,9 @@
                                  userAgent:(NSString *)userAgent
                                   userType:(TracksEventUserType)userType
                                  eventDate:(NSDate *)date
+                          customProperties:(NSDictionary *)customProperties
+                          deviceProperties:(NSDictionary *)deviceProperties
+                            userProperties:(NSDictionary *)userProperties
 {
     if (name == nil) {
         return nil;
@@ -42,6 +45,9 @@
     tracksEvent.userID = userID;
     tracksEvent.userType = userType;
     tracksEvent.date = date;
+    [tracksEvent.customProperties addEntriesFromDictionary:customProperties];
+    [tracksEvent.deviceProperties addEntriesFromDictionary:deviceProperties];
+    [tracksEvent.userProperties addEntriesFromDictionary:userProperties];
     
     [self.persistenceService persistTracksEvent:tracksEvent];
     
