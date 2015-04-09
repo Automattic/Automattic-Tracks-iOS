@@ -82,7 +82,7 @@
     }]
                               withSharedProperties:[OCMArg isNotNil]
                                  completionHandler:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)()) {
-        passedBlock();
+        passedBlock(nil);
         
         return YES;
     }]]);
