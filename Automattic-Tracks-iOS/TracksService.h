@@ -21,7 +21,7 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent;
 
-- (void)switchToAnonymousUser;
+- (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID;
 
 - (void)trackEventName:(NSString *)eventName;
 

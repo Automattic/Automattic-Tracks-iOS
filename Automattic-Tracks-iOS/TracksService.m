@@ -29,7 +29,7 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         
-        [self switchToAnonymousUser];
+        [self switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
         [self resetTimer];
     }
     return self;
@@ -126,11 +126,11 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 }
 
 
-- (void)switchToAnonymousUser
+- (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID
 {
     self.anonymous = YES;
     self.username = @"";
-    self.userID = [[[NSUUID UUID] UUIDString] stringByReplacingOccurrencesOfString:@"-" withString:@""];
+    self.userID = anonymousID;
 }
 
 

@@ -131,7 +131,7 @@
 
 - (void)switchToAnonymousUser
 {
-    [self.tracksService switchToAnonymousUser];
+    [self.tracksService switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
 }
 
 
