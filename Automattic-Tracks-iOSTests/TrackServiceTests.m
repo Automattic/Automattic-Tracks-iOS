@@ -104,4 +104,83 @@
     OCMVerifyAll((id)self.subject.remote);
 }
 
+- (void)testCustomPropertiesDictionaryRepresentationNoMatch
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"test";
+    tracksEvent.userID = @"anonymous123";
+    tracksEvent.customProperties[@"Test"] = @"Value";
+    
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{}];
+    
+    XCTAssertNotNil(result);
+    XCTAssertTrue([[result objectForKey:@"Test"] isEqualToString:@"Value"]);
+}
+
+- (void)testCustomPropertiesDictionaryRepresentationExactMatch
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"test";
+    tracksEvent.userID = @"anonymous123";
+    tracksEvent.customProperties[@"Test"] = @"Value";
+    
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"Test" : @"Value"}];
+    
+    XCTAssertNotNil(result);
+    XCTAssertNil([result objectForKey:@"Test"]);
+}
+
+- (void)testCustomPropertiesDictionaryRepresentationEventOverrides
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"test";
+    tracksEvent.userID = @"anonymous123";
+    tracksEvent.customProperties[@"Test"] = @"Value2";
+    
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"Test" : @"Value"}];
+    
+    XCTAssertNotNil(result);
+    XCTAssertTrue([[result objectForKey:@"Test"] isEqualToString:@"Value2"]);
+}
+
+- (void)testUserAgentDictionaryRepresentationNoDefaultUA
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"test";
+    tracksEvent.userID = @"anonymous123";
+    tracksEvent.customProperties[@"Test"] = @"Value";
+    tracksEvent.userAgent = @"Meep Moop Beep Bloop";
+    
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{}];
+    
+    XCTAssertTrue([[result objectForKey:@"_via_ua"] isEqualToString:tracksEvent.userAgent]);
+}
+
+- (void)testUserAgentDictionaryRepresentationNoMatch
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"test";
+    tracksEvent.userID = @"anonymous123";
+    tracksEvent.customProperties[@"Test"] = @"Value";
+    tracksEvent.userAgent = @"Meep Moop Beep Bloop";
+    
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"_via_ua" : @"Test"}];
+    
+    XCTAssertTrue([[result objectForKey:@"_via_ua"] isEqualToString:tracksEvent.userAgent]);
+}
+
+- (void)testUserAgentDictionaryRepresentationExactMatch
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"test";
+    tracksEvent.userID = @"anonymous123";
+    tracksEvent.customProperties[@"Test"] = @"Value";
+    tracksEvent.userAgent = @"Meep Moop Beep Bloop";
+    
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"_via_ua" : tracksEvent.userAgent}];
+    
+    XCTAssertNil([result objectForKey:@"_via_ua"]);
+}
+
+
 @end

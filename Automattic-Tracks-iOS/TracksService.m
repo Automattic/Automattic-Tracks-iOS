@@ -33,6 +33,18 @@ NSString *const DeviceInfoNetworkOperatorKey = @"device_info_current_network_ope
 NSString *const DeviceInfoRadioTypeKey = @"device_info_phone_radio_type";
 NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
 
+NSString *const TracksEventNameKey = @"_en";
+NSString *const TracksUserAgentKey = @"_via_ua";
+NSString *const TracksTimestampKey = @"_ts";
+NSString *const TracksUserTypeKey = @"_ut";
+NSString *const TracksUserIDKey = @"_ui";
+NSString *const TracksUsernameKey = @"_ul";
+
+NSString *const TracksUserTypeAnonymous = @"anon";
+NSString *const TracksUserTypeWPCOM = @"wpcom:user_id";
+NSString *const USER_ID_ANON = @"anonId";
+
+
 @implementation TracksService
 
 - (instancetype)initWithContextManager:(TracksContextManager *)contextManager
@@ -103,7 +115,7 @@ NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
 
     NSMutableArray *jsonEvents = [NSMutableArray arrayWithCapacity:events.count];
     for (TracksEvent *tracksEvent in events) {
-        NSDictionary *eventJSON = [tracksEvent dictionaryRepresentationWithParentCommonProperties:commonProperties];
+        NSDictionary *eventJSON = [self dictionaryForTracksEvent:tracksEvent withParentCommonProperties:commonProperties];
         [jsonEvents addObject:eventJSON];
     }
     
@@ -219,6 +231,37 @@ NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
              DeviceInfoRadioTypeKey : deviceInformation.currentNetworkRadioType ?: @"Unknown",
              DeviceInfoWiFiConnectedKey : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
              };
+}
+
+- (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties
+{
+    NSMutableDictionary *dict = [NSMutableDictionary new];
+    dict[TracksEventNameKey] = tracksEvent.eventName;
+    dict[TracksTimestampKey] = @(lround(tracksEvent.date.timeIntervalSince1970 * 1000));
+    
+    if (tracksEvent.userType == TracksEventUserTypeAnonymous) {
+        dict[TracksUserTypeKey] = TracksUserTypeAnonymous;
+        dict[TracksUserIDKey] = tracksEvent.userID;
+    } else {
+        dict[TracksUserTypeKey] = TracksUserTypeWPCOM;
+        dict[TracksUserIDKey] = tracksEvent.userID;
+        dict[TracksUsernameKey] = tracksEvent.username;
+    }
+    
+    // Only add objects that don't exist in parent or are different than parent
+    for (id key in tracksEvent.customProperties.keyEnumerator) {
+        if (parentCommonProperties[key] != nil && parentCommonProperties[key] == tracksEvent.customProperties[key]) {
+            continue;
+        }
+        
+        dict[key] = tracksEvent.customProperties[key];
+    }
+    
+    if (tracksEvent.userAgent.length > 0 && ![parentCommonProperties[TracksUserAgentKey] isEqualToString:tracksEvent.userAgent]) {
+        dict[TracksUserAgentKey] = tracksEvent.userAgent;
+    }
+    
+    return dict;
 }
 
 @end
