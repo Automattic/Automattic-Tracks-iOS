@@ -13,9 +13,25 @@
 
 @end
 
-static NSTimeInterval const EVENT_TIMER_DEFAULT = 5 * 60;
+static NSTimeInterval const EVENT_TIMER_DEFAULT = 15; // seconds
 NSString *const TrackServiceWillSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
+
+NSString *const RequestTimestampKey = @"_rt";
+NSString *const DeviceHeightPixelsKey = @"_ht";
+NSString *const DeviceWidthPixelsKey = @"_wd";
+NSString *const DeviceLanguageKey = @"_lg";
+NSString *const DeviceInfoAppNameKey = @"device_info_app_name";
+NSString *const DeviceInfoAppVersionKey = @"device_info_app_version";
+NSString *const DeviceInfoAppBuildKey = @"device_info_app_version_code";
+NSString *const DeviceInfoOSKey = @"device_info_os";
+NSString *const DeviceInfoOSVersionKey = @"device_info_os_version";
+NSString *const DeviceInfoBrandKey = @"device_info_brand";
+NSString *const DeviceInfoManufacturerKey = @"device_info_manufacturer";
+NSString *const DeviceInfoModelKey = @"device_info_model";
+NSString *const DeviceInfoNetworkOperatorKey = @"device_info_current_network_operator";
+NSString *const DeviceInfoRadioTypeKey = @"device_info_phone_radio_type";
+NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
 
 @implementation TracksService
 
@@ -77,7 +93,6 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     NSArray *events = [self.tracksEventService allTracksEvents];
 
     if (events.count == 0) {
-        NSLog(@"No events to send.");
         [self resetTimer];
         return;
     }
@@ -92,12 +107,11 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
         [jsonEvents addObject:eventJSON];
     }
     
-    NSLog(@"Sending queued events");
     [self.remote sendBatchOfEvents:jsonEvents
               withSharedProperties:commonProperties
                  completionHandler:^(NSError *error) {
                      if (error) {
-                         NSLog(@"Error while remote calling: %@", error);
+                         NSLog(@"TracksService Error while remote calling: %@", error);
                      } else {
                          // Delete the events since they sent or errored
                          [self.tracksEventService removeTracksEvents:events];
@@ -178,33 +192,20 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
 {
     TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
     
-    NSString *REQUEST_TIMESTAMP_KEY = @"_rt";
-    NSString *DEVICE_HEIGHT_PIXELS_KEY = @"_ht";
-    NSString *DEVICE_WIDTH_PIXELS_KEY = @"_wd";
-    NSString *DEVICE_LANG_KEY = @"_lg";
-    NSString *DEVICE_INFO_PREFIX = @"device_info_";
-    NSString *deviceInfoAppName = [NSString stringWithFormat:@"%@app_name", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoAppVersion = [NSString stringWithFormat:@"%@app_version", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoAppBuild = [NSString stringWithFormat:@"%@app_version_code", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoOS = [NSString stringWithFormat:@"%@os", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoOSVersion = [NSString stringWithFormat:@"%@os_version", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoBrand = [NSString stringWithFormat:@"%@brand", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoManufacturer = [NSString stringWithFormat:@"%@manufacturer", DEVICE_INFO_PREFIX];
-    NSString *deviceInfoModel = [NSString stringWithFormat:@"%@model", DEVICE_INFO_PREFIX];
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     
-    return @{ REQUEST_TIMESTAMP_KEY : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
-              deviceInfoAppBuild : deviceInformation.appBuild ?: @"Unknown",
-              deviceInfoAppName : deviceInformation.appName ?: @"Unknown",
-              deviceInfoAppVersion : deviceInformation.appVersion ?: @"Unknown",
-              deviceInfoBrand : deviceInformation.brand ?: @"Unknown",
-              deviceInfoManufacturer : deviceInformation.manufacturer ?: @"Unknown",
-              deviceInfoModel : deviceInformation.model ?: @"Unknown",
-              deviceInfoOS : deviceInformation.os ?: @"Unknown",
-              deviceInfoOSVersion : deviceInformation.version ?: @"Unknown",
-              DEVICE_HEIGHT_PIXELS_KEY : @(screenSize.height) ?: @0,
-              DEVICE_WIDTH_PIXELS_KEY : @(screenSize.width) ?: @0,
-              DEVICE_LANG_KEY : deviceInformation.deviceLanguage ?: @"Unknown",
+    return @{ RequestTimestampKey : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
+              DeviceInfoAppBuildKey : deviceInformation.appBuild ?: @"Unknown",
+              DeviceInfoAppNameKey : deviceInformation.appName ?: @"Unknown",
+              DeviceInfoAppVersionKey : deviceInformation.appVersion ?: @"Unknown",
+              DeviceInfoBrandKey : deviceInformation.brand ?: @"Unknown",
+              DeviceInfoManufacturerKey : deviceInformation.manufacturer ?: @"Unknown",
+              DeviceInfoModelKey : deviceInformation.model ?: @"Unknown",
+              DeviceInfoOSKey : deviceInformation.os ?: @"Unknown",
+              DeviceInfoOSVersionKey : deviceInformation.version ?: @"Unknown",
+              DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
+              DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
+              DeviceLanguageKey : deviceInformation.deviceLanguage ?: @"Unknown",
               TracksUserAgentKey : @"Nosara Client for iOS 0.0.0",
               };
 }
@@ -214,13 +215,9 @@ NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidS
     TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
 
     // These properties change often and should be overridden in TracksEvents if they differ
-    NSString *deviceInfoNetworkOperator = @"device_info_current_network_operator";
-    NSString *deviceInfoRadioType = @"device_info_phone_radio_type";
-    NSString *deviceInfoWiFiConnected = @"device_info_wifi_connected";
-    
-    return @{deviceInfoNetworkOperator : deviceInformation.currentNetworkOperator ?: @"Unknown",
-             deviceInfoRadioType : deviceInformation.currentNetworkRadioType ?: @"Unknown",
-             deviceInfoWiFiConnected : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
+    return @{DeviceInfoNetworkOperatorKey : deviceInformation.currentNetworkOperator ?: @"Unknown",
+             DeviceInfoRadioTypeKey : deviceInformation.currentNetworkRadioType ?: @"Unknown",
+             DeviceInfoWiFiConnectedKey : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
              };
 }
 
