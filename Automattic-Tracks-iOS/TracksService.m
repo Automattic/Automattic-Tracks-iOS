@@ -4,6 +4,7 @@
 @interface TracksService ()
 
 @property (nonatomic, strong) NSTimer *timer;
+@property (nonatomic, assign) BOOL timerEnabled;
 @property (nonatomic, strong) TracksContextManager *contextManager;
 
 @property (nonatomic, copy) NSString *username;
@@ -56,9 +57,13 @@ NSString *const USER_ID_ANON = @"anonId";
         _queueSendInterval = EVENT_TIMER_DEFAULT;
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
+        _timerEnabled = YES;
         
         [self switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
         [self resetTimer];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
     }
     return self;
 }
@@ -99,6 +104,8 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (void)sendQueuedEvents
 {
+    NSLog(@"sendQueuedEvents Called...");
+    
     [self.timer invalidate];
     [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceWillSendQueuedEventsNotification object:nil];
     
@@ -109,6 +116,8 @@ NSString *const USER_ID_ANON = @"anonId";
         return;
     }
     
+    NSLog(@"Sending events...");
+
     NSMutableDictionary *commonProperties = [NSMutableDictionary new];
     [commonProperties addEntriesFromDictionary:[self immutableDeviceProperties]];
     [commonProperties addEntriesFromDictionary:[self mutableDeviceProperties]];
@@ -122,6 +131,8 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.remote sendBatchOfEvents:jsonEvents
               withSharedProperties:commonProperties
                  completionHandler:^(NSError *error) {
+                     NSLog(@"sendQueuedEvents completed...");
+
                      if (error) {
                          NSLog(@"TracksService Error while remote calling: %@", error);
                      } else {
@@ -173,12 +184,27 @@ NSString *const USER_ID_ANON = @"anonId";
 
 #pragma mark - Private methods
 
+- (void)didEnterBackground:(NSNotification *)notification
+{
+    self.timerEnabled = NO;
+    [self sendQueuedEvents];
+}
+
+
+- (void)didBecomeActive:(NSNotification *)notification
+{
+    self.timerEnabled = YES;
+    [self resetTimer];
+}
+
 
 - (void)resetTimer
 {
     [self.timer invalidate];
     
-    self.timer = [NSTimer scheduledTimerWithTimeInterval:self.queueSendInterval target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
+    if (self.timerEnabled) {
+        self.timer = [NSTimer scheduledTimerWithTimeInterval:self.queueSendInterval target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
+    }
 }
 
 
