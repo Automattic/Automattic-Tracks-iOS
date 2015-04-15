@@ -12,6 +12,7 @@
 		931EE6CC1AD404D000E8711C /* TracksEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CB1AD404D000E8711C /* TracksEventTests.m */; };
 		931EE6D01AD5A58D00E8711C /* TestTracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */; };
 		9333CA9E1ACB22D300ACE506 /* TracksEventCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */; };
+		9339E70C1ADE98B800AEAB68 /* TracksConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9339E70B1ADE98B800AEAB68 /* TracksConstants.m */; };
 		937632841AC1F45600086BC6 /* TracksEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632831AC1F45600086BC6 /* TracksEventService.m */; };
 		937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */; };
 		93771E381ACC58AC00B1E5FF /* TracksDeviceInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 93771E371ACC58AC00B1E5FF /* TracksDeviceInformation.m */; };
@@ -60,6 +61,8 @@
 		931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTracksContextManager.m; sourceTree = "<group>"; };
 		9333CA9C1ACB22D300ACE506 /* TracksEventCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventCoreData.h; sourceTree = "<group>"; };
 		9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventCoreData.m; sourceTree = "<group>"; };
+		9339E70A1ADE98B800AEAB68 /* TracksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksConstants.h; sourceTree = "<group>"; };
+		9339E70B1ADE98B800AEAB68 /* TracksConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksConstants.m; sourceTree = "<group>"; };
 		937632821AC1F45600086BC6 /* TracksEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventService.h; sourceTree = "<group>"; };
 		937632831AC1F45600086BC6 /* TracksEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventService.m; sourceTree = "<group>"; };
 		937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventServiceTests.m; sourceTree = "<group>"; };
@@ -185,6 +188,8 @@
 			children = (
 				93C021331AB0BAF50014096A /* Model */,
 				93C021371AB1BFA40014096A /* Services */,
+				9339E70A1ADE98B800AEAB68 /* TracksConstants.h */,
+				9339E70B1ADE98B800AEAB68 /* TracksConstants.m */,
 			);
 			path = "Automattic-Tracks-iOS";
 			sourceTree = "<group>";
@@ -402,6 +407,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93C021361AB0BB100014096A /* TracksEvent.m in Sources */,
+				9339E70C1ADE98B800AEAB68 /* TracksConstants.m in Sources */,
 				93C0213A1AB1BFF30014096A /* TracksServiceRemote.m in Sources */,
 				93AD39A41ACADA650069344D /* TracksEventPersistenceService.m in Sources */,
 				93AD39971AC713F20069344D /* Tracks.xcdatamodeld in Sources */,
