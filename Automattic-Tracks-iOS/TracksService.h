@@ -17,16 +17,15 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
 @property (nonatomic, strong) NSDictionary *userProperties;
 
-- (instancetype)initWithContextManager:(TracksContextManager *)contextManager;
+- (instancetype) init __attribute__((unavailable("init not available")));
+- (instancetype)initWithContextManager:(TracksContextManager *)contextManager NS_DESIGNATED_INITIALIZER;
 
 - (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties;
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent;
-
 - (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID;
 
 - (void)trackEventName:(NSString *)eventName;
-
 - (void)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties;
 
 - (void)sendQueuedEvents;

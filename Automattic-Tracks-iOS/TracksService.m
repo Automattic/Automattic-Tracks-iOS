@@ -68,11 +68,6 @@ NSString *const USER_ID_ANON = @"anonId";
     return self;
 }
 
-- (instancetype)init
-{
-    return [self initWithContextManager:[TracksContextManager new]];
-}
-
 - (void)trackEventName:(NSString *)eventName
 {
     NSParameterAssert(eventName.length > 0);

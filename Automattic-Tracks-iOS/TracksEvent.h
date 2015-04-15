@@ -19,4 +19,7 @@ typedef NS_ENUM(NSUInteger, TracksEventUserType) {
 @property (nonatomic, readonly) NSMutableDictionary *deviceProperties;
 @property (nonatomic, readonly) NSMutableDictionary *userProperties;
 
+
+- (BOOL)validateObject:(NSError **)error;
+
 @end

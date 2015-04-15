@@ -50,36 +50,42 @@
 - (void)testEventNameValidationNil
 {
     NSError *error;
+    self.subject.eventName = nil;
     BOOL valid = [self.subject validateValue:nil forKey:@"eventName" error:&error];
     
     XCTAssertFalse(valid);
     XCTAssertNotNil(error);
     XCTAssertEqual(error.domain, TracksErrorDomain);
     XCTAssertEqual(TracksErrorCodeValidationEventNameMissing, error.code);
+    XCTAssertFalse([self.subject validateObject:nil]);
 }
 
 - (void)testEventNameValidationWhitespace
 {
     NSError *error;
     NSString *eventName = @" eventWith Spaces";
+    self.subject.eventName = eventName;
     BOOL valid = [self.subject validateValue:&eventName forKey:@"eventName" error:&error];
     
     XCTAssertFalse(valid);
     XCTAssertNotNil(error);
     XCTAssertEqual(error.domain, TracksErrorDomain);
     XCTAssertEqual(TracksErrorCodeValidationEventNameWhitespace, error.code);
+    XCTAssertFalse([self.subject validateObject:nil]);
 }
 
 - (void)testEventNameValidationDashes
 {
     NSError *error;
     NSString *eventName = @"eventWith-Dashes";
+    self.subject.eventName = eventName;
     BOOL valid = [self.subject validateValue:&eventName forKey:@"eventName" error:&error];
     
     XCTAssertFalse(valid);
     XCTAssertNotNil(error);
     XCTAssertEqual(error.domain, TracksErrorDomain);
     XCTAssertEqual(TracksErrorCodeValidationEventNameDashes, error.code);
+    XCTAssertFalse([self.subject validateObject:nil]);
 }
 
 

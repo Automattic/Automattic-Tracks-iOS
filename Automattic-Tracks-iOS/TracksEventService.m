@@ -47,6 +47,13 @@
     [tracksEvent.customProperties addEntriesFromDictionary:customProperties];
     [tracksEvent.deviceProperties addEntriesFromDictionary:deviceProperties];
     [tracksEvent.userProperties addEntriesFromDictionary:userProperties];
+
+    NSError *error;
+    BOOL isValid = [tracksEvent validateObject:&error];
+    if (!isValid) {
+        NSLog(@"Error when validating TracksEvent: %@", error);
+        return nil;
+    }
     
     [self.persistenceService persistTracksEvent:tracksEvent];
     

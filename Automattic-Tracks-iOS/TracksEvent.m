@@ -17,6 +17,18 @@ NSString *const TracksEventNameRegExPattern = @"^[a-z_][a-z0-9_]*$";
     return self;
 }
 
+
+- (BOOL)validateObject:(NSError *__autoreleasing *)error
+{
+    NSString *eventName = self.eventName;
+    
+    BOOL nameValid = [self validateValue:&eventName forKey:@"eventName" error:error];
+    
+    return nameValid;
+}
+
+#pragma mark - NSKeyValueCoding methods
+
 - (BOOL)validateEventName:(id *)ioValue error:(NSError * __autoreleasing *)outError
 {
     if (ioValue == nil || ([(NSString *)*ioValue length] < 1)) {
