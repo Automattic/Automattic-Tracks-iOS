@@ -272,7 +272,7 @@ NSString *const USER_ID_ANON = @"anonId";
     
     // Only add objects that don't exist in parent or are different than parent
     for (id key in tracksEvent.customProperties.keyEnumerator) {
-        if (parentCommonProperties[key] != nil && parentCommonProperties[key] == tracksEvent.customProperties[key]) {
+        if (parentCommonProperties[key] != nil && [parentCommonProperties[key] isEqual:tracksEvent.customProperties[key]]) {
             continue;
         }
         
@@ -280,7 +280,7 @@ NSString *const USER_ID_ANON = @"anonId";
     }
     
     for (id key in tracksEvent.userProperties.keyEnumerator) {
-        if (parentCommonProperties[key] != nil && parentCommonProperties[key] == tracksEvent.userProperties[key]) {
+        if (parentCommonProperties[key] != nil && [parentCommonProperties[key] isEqual:tracksEvent.userProperties[key]]) {
             continue;
         }
         
@@ -288,7 +288,7 @@ NSString *const USER_ID_ANON = @"anonId";
     }
     
     for (id key in tracksEvent.deviceProperties.keyEnumerator) {
-        if (parentCommonProperties[key] != nil && parentCommonProperties[key] == tracksEvent.deviceProperties[key]) {
+        if (parentCommonProperties[key] != nil && [parentCommonProperties[key] isEqual:tracksEvent.deviceProperties[key]]) {
             continue;
         }
         
