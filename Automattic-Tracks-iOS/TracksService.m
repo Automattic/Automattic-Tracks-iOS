@@ -130,6 +130,7 @@ NSString *const USER_ID_ANON = @"anonId";
 
                      if (error) {
                          NSLog(@"TracksService Error while remote calling: %@", error);
+                         [self.tracksEventService incrementRetryCountForEvents:events];
                      } else {
                          // Delete the events since they sent or errored
                          [self.tracksEventService removeTracksEvents:events];

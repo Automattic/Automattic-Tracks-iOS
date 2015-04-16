@@ -97,4 +97,10 @@
 }
 
 
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents
+{
+    [self.persistenceService incrementRetryCountForEvents:tracksEvents];
+}
+
+
 @end

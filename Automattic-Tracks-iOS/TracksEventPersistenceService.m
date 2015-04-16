@@ -80,6 +80,20 @@
 }
 
 
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents
+{
+    [self.managedObjectContext performBlockAndWait:^{
+        for (TracksEvent *tracksEvent in tracksEvents) {
+            TracksEventCoreData *tracksEventCoreData = [self findTracksEventCoreDataWithUUID:tracksEvent.uuid];
+            
+            tracksEventCoreData.retryCount = @(tracksEventCoreData.retryCount.integerValue + 1);
+        }
+        
+        [self saveManagedObjectContext];
+    }];
+}
+
+
 #pragma mark - Private methods
 
 - (TracksEventCoreData *)findTracksEventCoreDataWithUUID:(NSUUID *)uuid

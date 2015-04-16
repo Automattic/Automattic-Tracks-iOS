@@ -14,4 +14,6 @@
 
 - (void)removeTracksEvents:(NSArray *)tracksEvents;
 
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents;
+
 @end
