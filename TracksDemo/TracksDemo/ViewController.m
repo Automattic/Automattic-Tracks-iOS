@@ -59,6 +59,12 @@
 }
 
 
+- (IBAction)sendTestEventWithProperties:(id)sender
+{
+    [self.tracksService trackEventName:@"test_event_with_properties" withCustomProperties:@{@"custom_prop_1" : @"valuetew"}];
+}
+
+
 - (IBAction)crashApplicationTapped:(id)sender
 {
     abort();

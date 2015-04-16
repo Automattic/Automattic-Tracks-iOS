@@ -278,6 +278,22 @@ NSString *const USER_ID_ANON = @"anonId";
         dict[key] = tracksEvent.customProperties[key];
     }
     
+    for (id key in tracksEvent.userProperties.keyEnumerator) {
+        if (parentCommonProperties[key] != nil && parentCommonProperties[key] == tracksEvent.userProperties[key]) {
+            continue;
+        }
+        
+        dict[key] = tracksEvent.userProperties[key];
+    }
+    
+    for (id key in tracksEvent.deviceProperties.keyEnumerator) {
+        if (parentCommonProperties[key] != nil && parentCommonProperties[key] == tracksEvent.deviceProperties[key]) {
+            continue;
+        }
+        
+        dict[key] = tracksEvent.deviceProperties[key];
+    }
+    
     if (tracksEvent.userAgent.length > 0 && ![parentCommonProperties[TracksUserAgentKey] isEqualToString:tracksEvent.userAgent]) {
         dict[TracksUserAgentKey] = tracksEvent.userAgent;
     }
