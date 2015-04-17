@@ -169,7 +169,7 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (void)setRemoteCallsEnabled:(BOOL)remoteCallsEnabled
 {
-    _remoteCallsEnabled = NO;
+    _remoteCallsEnabled = remoteCallsEnabled;
     
     if (remoteCallsEnabled) {
         [self resetTimer];
