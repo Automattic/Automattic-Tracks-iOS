@@ -2,7 +2,8 @@
 
 @implementation TracksEvent
 
-NSString *const TracksEventNameRegExPattern = @"^[a-z_][a-z0-9_]*$";
+NSString *const TracksEventNameRegExPattern = @"^(([a-z0-9]+)_){2}([a-z0-9_]+)$";
+NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
 - (instancetype)init
 {
@@ -21,10 +22,31 @@ NSString *const TracksEventNameRegExPattern = @"^[a-z_][a-z0-9_]*$";
 - (BOOL)validateObject:(NSError *__autoreleasing *)error
 {
     NSString *eventName = self.eventName;
+    NSDictionary *customProperties = self.customProperties;
+    NSDictionary *deviceProperties = self.deviceProperties;
+    NSDictionary *userProperties = self.userProperties;
     
     BOOL nameValid = [self validateValue:&eventName forKey:@"eventName" error:error];
+    if (!nameValid) {
+        return NO;
+    }
     
-    return nameValid;
+    BOOL customPropertiesValid = [self validateValue:&customProperties forKey:@"customProperties" error:error];
+    if (!customPropertiesValid) {
+        return NO;
+    }
+    
+    BOOL devicePropertiesValid = [self validateValue:&deviceProperties forKey:@"deviceProperties" error:error];
+    if (!devicePropertiesValid) {
+        return NO;
+    }
+    
+    BOOL userPropertiesValid = [self validateValue:&userProperties forKey:@"userProperties" error:error];
+    if (!userPropertiesValid) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - NSKeyValueCoding methods
@@ -102,6 +124,134 @@ NSString *const TracksEventNameRegExPattern = @"^[a-z_][a-z0-9_]*$";
     }
 
     return YES;
+}
+
+- (BOOL)validateCustomProperties:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    if (ioValue == nil || ([(NSDictionary *)*ioValue count] > 0)) {
+        NSDictionary *dict = (NSDictionary *)*ioValue;
+        
+        for (id key in dict.keyEnumerator) {
+            if ([key isKindOfClass:[NSString class]] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"Custom properties dictionary keys must be NSString instances.",
+                                                              @"validation: TracksEvent, key type customProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationCustomPropertiesKeyType
+                                                       userInfo:userInfoDict];
+                }
+                
+                return NO;
+            }
+            
+            if ([self validPropertyName:key] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"Custom properties dictionary keys must contain alpha characters and underscores only.",
+                                                              @"validation: TracksEvent, key format customProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationCustomPropertiesKeyFormat
+                                                       userInfo:userInfoDict];
+                }
+                
+                return NO;
+            }
+        }
+        
+        return YES;
+    }
+    
+    return YES;
+}
+
+- (BOOL)validateDeviceProperties:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    if (ioValue == nil || ([(NSDictionary *)*ioValue count] > 0)) {
+        NSDictionary *dict = (NSDictionary *)*ioValue;
+        
+        for (id key in dict.keyEnumerator) {
+            if ([key isKindOfClass:[NSString class]] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"Device properties dictionary keys must be NSString instances.",
+                                                              @"validation: TracksEvent, key type deviceProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationDevicePropertiesKeyType
+                                                       userInfo:userInfoDict];
+                }
+                
+                return NO;
+            }
+            
+            if ([self validPropertyName:key] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"Device properties dictionary keys must contain alpha characters and underscores only.",
+                                                              @"validation: TracksEvent, key format deviceProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationDevicePropertiesKeyFormat
+                                                       userInfo:userInfoDict];
+                }
+                
+                return NO;
+            }
+        }
+        
+        return YES;
+    }
+    
+    return YES;
+}
+
+- (BOOL)validateUserProperties:(id *)ioValue error:(NSError * __autoreleasing *)outError
+{
+    if (ioValue == nil || ([(NSDictionary *)*ioValue count] > 0)) {
+        NSDictionary *dict = (NSDictionary *)*ioValue;
+        
+        for (id key in dict.keyEnumerator) {
+            if ([key isKindOfClass:[NSString class]] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"User properties dictionary keys must be NSString instances.",
+                                                              @"validation: TracksEvent, key type userProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationUserPropertiesKeyType
+                                                       userInfo:userInfoDict];
+                }
+                
+                return NO;
+            }
+            
+            if ([self validPropertyName:key] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"User properties dictionary keys must contain alpha characters and underscores only.",
+                                                              @"validation: TracksEvent, key format userProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationUserPropertiesKeyFormat
+                                                       userInfo:userInfoDict];
+                }
+                
+                return NO;
+            }
+        }
+        
+        return YES;
+    }
+    
+    return YES;
+}
+
+#pragma mark - Private helper methods
+
+- (BOOL)validPropertyName:(NSString *)propertyName
+{
+    NSError *error;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:TracksPropertiesKeyRegExPattern options:0 error:&error];
+    NSArray *matches = [regex matchesInString:propertyName options:0 range:NSMakeRange(0, propertyName.length)];
+
+    return matches.count > 0;
 }
 
 //@property (nonatomic, copy) NSString *username;

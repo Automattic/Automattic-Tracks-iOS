@@ -153,7 +153,7 @@
     
     NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{}];
     
-    XCTAssertTrue([[result objectForKey:@"_via_ua"] isEqualToString:tracksEvent.userAgent]);
+    XCTAssertTrue([[result objectForKey:@"_via_ua"] isEqualToString:tracksEvent.userAgent.copy]);
 }
 
 - (void)testUserAgentDictionaryRepresentationNoMatch
@@ -166,7 +166,7 @@
     
     NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"_via_ua" : @"Test"}];
     
-    XCTAssertTrue([[result objectForKey:@"_via_ua"] isEqualToString:tracksEvent.userAgent]);
+    XCTAssertTrue([[result objectForKey:@"_via_ua"] isEqualToString:tracksEvent.userAgent.copy]);
 }
 
 - (void)testUserAgentDictionaryRepresentationExactMatch

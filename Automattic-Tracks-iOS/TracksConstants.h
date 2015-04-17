@@ -7,4 +7,10 @@ typedef NS_ENUM(NSInteger, TracksErrorCode) {
     TracksErrorCodeValidationEventNameDashes,
     TracksErrorCodeValidationEventNameWhitespace,
     TracksErrorCodeValidationEventNamePatternMismatch,
+    TracksErrorCodeValidationCustomPropertiesKeyType,
+    TracksErrorCodeValidationCustomPropertiesKeyFormat,
+    TracksErrorCodeValidationUserPropertiesKeyType,
+    TracksErrorCodeValidationUserPropertiesKeyFormat,
+    TracksErrorCodeValidationDevicePropertiesKeyType,
+    TracksErrorCodeValidationDevicePropertiesKeyFormat,
 };
