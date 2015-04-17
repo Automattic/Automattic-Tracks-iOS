@@ -177,7 +177,7 @@
     tracksEvent.customProperties[@"Test"] = @"Value";
     tracksEvent.userAgent = @"Meep Moop Beep Bloop";
     
-    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"_via_ua" : tracksEvent.userAgent}];
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"_via_ua" : tracksEvent.userAgent.copy}];
     
     XCTAssertNil([result objectForKey:@"_via_ua"]);
 }
