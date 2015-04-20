@@ -11,11 +11,13 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 @property (nonatomic, strong) TracksEventService *tracksEventService;
 @property (nonatomic, strong) TracksServiceRemote *remote;
 
+@property (nonatomic, copy) NSString *eventNamePrefix;
+
 @property (nonatomic, assign) NSTimeInterval queueSendInterval;
 @property (nonatomic, readonly) NSUInteger queuedEventCount;
 @property (nonatomic, assign) BOOL remoteCallsEnabled;
 
-@property (nonatomic, strong) NSDictionary *userProperties;
+@property (nonatomic, readonly) NSMutableDictionary *userProperties;
 
 - (instancetype) init __attribute__((unavailable("init not available")));
 - (instancetype)initWithContextManager:(TracksContextManager *)contextManager NS_DESIGNATED_INITIALIZER;

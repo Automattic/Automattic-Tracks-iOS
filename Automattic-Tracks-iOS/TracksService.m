@@ -9,7 +9,6 @@
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
-@property (nonatomic, copy) NSString *eventNamePrefix;
 @property (nonatomic, assign, getter=isAnonymous) BOOL anonymous;
 
 @end
@@ -52,12 +51,13 @@ NSString *const USER_ID_ANON = @"anonId";
 {
     self = [super init];
     if (self) {
-        _eventNamePrefix = @"wpios_";
+        _eventNamePrefix = @"wpios";
         _remote = [TracksServiceRemote new];
         _queueSendInterval = EVENT_TIMER_DEFAULT;
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         _timerEnabled = YES;
+        _userProperties = [NSMutableDictionary new];
         
         [self switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
         [self resetTimer];
@@ -78,7 +78,7 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (void)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties
 {
-    eventName = [NSString stringWithFormat:@"%@%@", self.eventNamePrefix, eventName];
+    eventName = [NSString stringWithFormat:@"%@_%@", self.eventNamePrefix, eventName];
     
     [self.tracksEventService createTracksEventWithName:eventName
                                               username:self.username

@@ -50,15 +50,15 @@
     TracksEvent *tracksEvent = [TracksEvent new];
     tracksEvent.eventName = @"Test";
     tracksEvent.userID = @"anonymous123";
-    OCMStub([self.tracksEventService createTracksEventWithName:@"wpios_Test"
-                                                      username:[OCMArg isNotNil]
-                                                        userID:[OCMArg isNotNil]
-                                                     userAgent:[OCMArg isNil]
-                                                      userType:TracksEventUserTypeAnonymous
-                                                     eventDate:[OCMArg isNotNil]
-                                              customProperties:[OCMArg isNotNil]
-                                              deviceProperties:[OCMArg isNotNil]
-                                                userProperties:[OCMArg isNotNil]])
+    OCMExpect([self.tracksEventService createTracksEventWithName:[OCMArg isEqual:@"wpios_Test"]
+                                                        username:[OCMArg any]
+                                                          userID:[OCMArg isNotNil]
+                                                       userAgent:[OCMArg any]
+                                                        userType:TracksEventUserTypeAnonymous
+                                                       eventDate:[OCMArg isNotNil]
+                                                customProperties:[OCMArg any]
+                                                deviceProperties:[OCMArg any]
+                                                  userProperties:[OCMArg any]])
     .andReturn(tracksEvent);
     
     [self.subject trackEventName:@"Test"];
@@ -66,6 +66,33 @@
     OCMVerifyAll((id)self.tracksEventService);
 }
 
+
+- (void)testTrackEventOverriddenSource
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.eventName = @"Test";
+    tracksEvent.userID = @"anonymous123";
+    OCMExpect([self.tracksEventService createTracksEventWithName:[OCMArg isEqual:@"wpios2_Test"]
+                                                        username:[OCMArg any]
+                                                          userID:[OCMArg isNotNil]
+                                                       userAgent:[OCMArg any]
+                                                        userType:TracksEventUserTypeAnonymous
+                                                       eventDate:[OCMArg isNotNil]
+                                                customProperties:[OCMArg any]
+                                                deviceProperties:[OCMArg any]
+                                                  userProperties:[OCMArg any]])
+    .andReturn(tracksEvent);
+    
+    self.subject.eventNamePrefix = @"wpios2";
+    [self.subject trackEventName:@"Test"];
+    
+    OCMVerifyAll((id)self.tracksEventService);
+}
+
+
+/*
+ * sendQueuedEvents methods
+ */
 
 - (void)testSendQueuedEventsOneEvent
 {
@@ -103,6 +130,11 @@
     
     OCMVerifyAll((id)self.subject.remote);
 }
+
+
+/*
+ * dictionaryForTracksEvent:withParentCommonProperties: methods
+ */
 
 - (void)testCustomPropertiesDictionaryRepresentationNoMatch
 {
@@ -181,6 +213,8 @@
     
     XCTAssertNil([result objectForKey:@"_via_ua"]);
 }
+
+//- (void)testDevicePropertiesDictionaryRepresentation
 
 
 @end
