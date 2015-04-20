@@ -4,7 +4,7 @@
 #import <OCMock/OCMock.h>
 #import "TestTracksContextManager.h"
 
-@interface TrackServiceTests : XCTestCase
+@interface TracksServiceTests : XCTestCase
 
 @property (nonatomic, strong) TracksService *subject;
 @property (nonatomic, strong) TracksServiceRemote *tracksServiceRemote;
@@ -13,7 +13,7 @@
 
 @end
 
-@implementation TrackServiceTests
+@implementation TracksServiceTests
 
 - (void)setUp {
     [super setUp];
