@@ -12,4 +12,5 @@ Pod::Spec.new do |spec|
   spec.framework    = 'CoreTelephony'
 
   spec.dependency 'UIDeviceIdentifier', '~> 0.4'
+  spec.dependency 'CocoaLumberjack', '~> 2.0'
 end

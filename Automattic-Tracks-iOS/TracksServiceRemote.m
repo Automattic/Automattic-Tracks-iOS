@@ -6,8 +6,6 @@
 {
     NSDictionary *dataToSend = @{@"events" : events,
                                  @"commonProps" : properties};
-    NSLog(@"Data to send: \n%@", dataToSend);
-    
     NSError *error = nil;
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"https://public-api.wordpress.com/rest/v1.1/tracks/record"]];
     request.HTTPMethod = @"POST";
@@ -21,9 +19,6 @@
     task = [sharedSession dataTaskWithRequest:request
                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
             {
-                NSString *dataString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                NSLog(@"Response: %@ \n\nData: %@:", response, dataString);
-                
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion(error);

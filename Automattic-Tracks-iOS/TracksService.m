@@ -1,5 +1,6 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 @interface TracksService ()
 
@@ -99,7 +100,7 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (void)sendQueuedEvents
 {
-    NSLog(@"sendQueuedEvents Called...");
+    DDLogVerbose(@"Tracks sendQueuedEvents Called...");
     
     [self.timer invalidate];
     [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceWillSendQueuedEventsNotification object:nil];
@@ -111,7 +112,7 @@ NSString *const USER_ID_ANON = @"anonId";
         return;
     }
     
-    NSLog(@"Sending events...");
+    DDLogVerbose(@"Track sending events...");
 
     NSMutableDictionary *commonProperties = [NSMutableDictionary new];
     [commonProperties addEntriesFromDictionary:[self immutableDeviceProperties]];
@@ -126,10 +127,10 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.remote sendBatchOfEvents:jsonEvents
               withSharedProperties:commonProperties
                  completionHandler:^(NSError *error) {
-                     NSLog(@"sendQueuedEvents completed...");
+                     DDLogVerbose(@"Tracks sendQueuedEvents completed...");
 
                      if (error) {
-                         NSLog(@"TracksService Error while remote calling: %@", error);
+                         DDLogError(@"TracksService Error while remote calling: %@", error);
                          [self.tracksEventService incrementRetryCountForEvents:events];
                      } else {
                          // Delete the events since they sent or errored
