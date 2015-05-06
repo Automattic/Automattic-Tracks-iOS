@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'Automattic-Tracks-iOS'
-  spec.version      = '0.0.1'
+  spec.version      = '0.0.2'
   spec.license      = { :type => 'GPLv2' }
   spec.homepage     = 'https://github.com/automattic/automattic-tracks-ios'
   spec.authors      = { 'Aaron Douglas' => 'aaron@automattic.com' }
