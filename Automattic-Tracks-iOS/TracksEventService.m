@@ -1,5 +1,6 @@
 #import "TracksEventService.h"
 #import "TracksEventPersistenceService.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 @interface TracksEventService ()
 
@@ -51,7 +52,7 @@
     NSError *error;
     BOOL isValid = [tracksEvent validateObject:&error];
     if (!isValid) {
-        NSLog(@"Error when validating TracksEvent: %@", error);
+        DDLogWarn(@"Error when validating TracksEvent: %@", error);
         return nil;
     }
     

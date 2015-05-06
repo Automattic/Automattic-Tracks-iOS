@@ -1,5 +1,6 @@
 #import "TracksEventPersistenceService.h"
 #import "TracksEventCoreData.h"
+#import <CocoaLumberjack/CocoaLumberjack.h>
 
 @interface TracksEventPersistenceService ()
 
@@ -37,7 +38,7 @@
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if (error) {
-        NSLog(@"Error while fetching all TracksEvent: %@", error);
+        DDLogError(@"Error while fetching all TracksEvent: %@", error);
         return nil;
     }
     
@@ -59,7 +60,7 @@
     NSUInteger count = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
     
     if (error) {
-        NSLog(@"Error while fetching count of TracksEvent: %@", error);
+        DDLogError(@"Error while fetching count of TracksEvent: %@", error);
     }
     
     return count;
@@ -107,7 +108,7 @@
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if (error) {
-        NSLog(@"Error while fetching TracksEvent by UUID: %@", error);
+        DDLogError(@"Error while fetching TracksEvent by UUID: %@", error);
         return nil;
     }
     
@@ -137,7 +138,7 @@
     BOOL result = [self.managedObjectContext save:&error];
     
     if (error) {
-        NSLog(@"Error while saving context: %@", error);
+        DDLogError(@"Error while saving context: %@", error);
     }
     
     return result;
