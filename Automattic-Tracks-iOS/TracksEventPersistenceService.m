@@ -75,7 +75,7 @@
             if (tracksEventCoreData) {
                 [self.managedObjectContext deleteObject:tracksEventCoreData];
             } else {
-                DDLogWarn(@"No TracksEventCoreData instance found with UUID: %@", tracksEvent.uuid);
+                NSLog(@"No TracksEventCoreData instance found with UUID: %@", tracksEvent.uuid);
             }
         }
         
