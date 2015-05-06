@@ -73,7 +73,11 @@
         for (TracksEvent *tracksEvent in tracksEvents) {
             TracksEventCoreData *tracksEventCoreData = [self findTracksEventCoreDataWithUUID:tracksEvent.uuid];
             
-            [self.managedObjectContext deleteObject:tracksEventCoreData];
+            if (tracksEventCoreData) {
+                [self.managedObjectContext deleteObject:tracksEventCoreData];
+            } else {
+                DDLogWarn(@"No TracksEventCoreData instance found with UUID: %@", tracksEvent.uuid);
+            }
         }
         
         [self saveManagedObjectContext];
