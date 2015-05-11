@@ -64,7 +64,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
         }
         
         return NO;
-    } else if ([(NSString *)*ioValue containsString:@"-"]) {
+    } else if ([(NSString *)*ioValue rangeOfString:@"-"].location != NSNotFound) {
         if (outError != NULL) {
             NSString *errorString = NSLocalizedString(@"An event name must not contain dashes.",
                                                       @"validation: TracksEvent, contains dashes eventName error");
