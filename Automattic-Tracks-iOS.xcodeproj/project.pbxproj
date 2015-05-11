@@ -520,6 +520,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 792B829D0A23395238AF6CAB /* Pods-Automattic-Tracks-iOS.debug.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -529,6 +530,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 7C14B632CA74A30467DE3176 /* Pods-Automattic-Tracks-iOS.release.xcconfig */;
 			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -547,6 +549,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -561,6 +564,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
