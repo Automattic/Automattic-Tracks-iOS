@@ -1,5 +1,5 @@
 PODS:
-  - Automattic-Tracks-iOS (0.0.1):
+  - Automattic-Tracks-iOS (0.0.3):
     - CocoaLumberjack (~> 2.0)
     - UIDeviceIdentifier (~> 0.4)
   - CocoaLumberjack (2.0.0):
@@ -20,8 +20,8 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: e4fe8dff4840d66338650a827e6669df152752b6
+  Automattic-Tracks-iOS: a19a0e9cf6c6b788d1c8ac89eda08855c4fd5ce9
   CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
   UIDeviceIdentifier: 2eb1070f189a069184611e21b5e8832443e6f8ec
 
-COCOAPODS: 0.35.0
+COCOAPODS: 0.37.1

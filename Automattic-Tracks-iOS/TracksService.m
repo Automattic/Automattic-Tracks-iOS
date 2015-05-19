@@ -148,20 +148,24 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
 {
+    NSParameterAssert(username.length != 0 || userID.length != 0);
+    
     NSString *previousUserID = self.userID;
     
     self.anonymous = NO;
     self.username = username;
     self.userID = userID;
     
-    if (skipEvent == NO) {
-        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUserID:previousUserID];
+    if (skipEvent == NO && previousUserID.length > 0) {
+       [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUserID:previousUserID];
     }
 }
 
 
 - (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID
 {
+    NSParameterAssert(anonymousID.length > 0);
+    
     self.anonymous = YES;
     self.username = @"";
     self.userID = anonymousID;
