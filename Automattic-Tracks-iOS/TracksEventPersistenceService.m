@@ -32,21 +32,25 @@
 
 - (NSArray *)fetchAllTracksEvents
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
+    __block NSMutableArray *transformedResults;
     
-    NSError *error;
-    NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-    
-    if (error) {
-        DDLogError(@"Error while fetching all TracksEvent: %@", error);
-        return nil;
-    }
-    
-    NSMutableArray *transformedResults = [[NSMutableArray alloc] initWithCapacity:results.count];
-    for (TracksEventCoreData *eventCoreData in results) {
-        TracksEvent *tracksEvent = [self mapToTracksEventWithTracksEventCoreData:eventCoreData];
-        [transformedResults addObject:tracksEvent];
-    }
+    [self.managedObjectContext performBlockAndWait:^{
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
+        
+        NSError *error;
+        NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+        
+        if (error) {
+            DDLogError(@"Error while fetching all TracksEvent: %@", error);
+            return;
+        }
+        
+        transformedResults = [[NSMutableArray alloc] initWithCapacity:results.count];
+        for (TracksEventCoreData *eventCoreData in results) {
+            TracksEvent *tracksEvent = [self mapToTracksEventWithTracksEventCoreData:eventCoreData];
+            [transformedResults addObject:tracksEvent];
+        }
+    }];
     
     return transformedResults;
 }
@@ -54,14 +58,18 @@
 
 - (NSUInteger)countAllTracksEvents
 {
-    NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
+    __block NSUInteger count = 0;
     
-    NSError *error;
-    NSUInteger count = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
-    
-    if (error) {
-        DDLogError(@"Error while fetching count of TracksEvent: %@", error);
-    }
+    [self.managedObjectContext performBlockAndWait:^{
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
+        
+        NSError *error;
+        count = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
+        
+        if (error) {
+            DDLogError(@"Error while fetching count of TracksEvent: %@", error);
+        }
+    }];
     
     return count;
 }
