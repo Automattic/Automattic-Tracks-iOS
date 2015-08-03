@@ -7,6 +7,7 @@
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL timerEnabled;
 @property (nonatomic, strong) TracksContextManager *contextManager;
+@property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
@@ -57,6 +58,7 @@ NSString *const USER_ID_ANON = @"anonId";
         _queueSendInterval = EVENT_TIMER_DEFAULT;
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
+        _deviceInformation = [TracksDeviceInformation new];
         _timerEnabled = YES;
         _userProperties = [NSMutableDictionary new];
         
@@ -229,22 +231,20 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)immutableDeviceProperties
 {
-    TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
-    
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     
     return @{ RequestTimestampKey : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
-              DeviceInfoAppBuildKey : deviceInformation.appBuild ?: @"Unknown",
-              DeviceInfoAppNameKey : deviceInformation.appName ?: @"Unknown",
-              DeviceInfoAppVersionKey : deviceInformation.appVersion ?: @"Unknown",
-              DeviceInfoBrandKey : deviceInformation.brand ?: @"Unknown",
-              DeviceInfoManufacturerKey : deviceInformation.manufacturer ?: @"Unknown",
-              DeviceInfoModelKey : deviceInformation.model ?: @"Unknown",
-              DeviceInfoOSKey : deviceInformation.os ?: @"Unknown",
-              DeviceInfoOSVersionKey : deviceInformation.version ?: @"Unknown",
+              DeviceInfoAppBuildKey : self.deviceInformation.appBuild ?: @"Unknown",
+              DeviceInfoAppNameKey : self.deviceInformation.appName ?: @"Unknown",
+              DeviceInfoAppVersionKey : self.deviceInformation.appVersion ?: @"Unknown",
+              DeviceInfoBrandKey : self.deviceInformation.brand ?: @"Unknown",
+              DeviceInfoManufacturerKey : self.deviceInformation.manufacturer ?: @"Unknown",
+              DeviceInfoModelKey : self.deviceInformation.model ?: @"Unknown",
+              DeviceInfoOSKey : self.deviceInformation.os ?: @"Unknown",
+              DeviceInfoOSVersionKey : self.deviceInformation.version ?: @"Unknown",
               DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
               DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
-              DeviceLanguageKey : deviceInformation.deviceLanguage ?: @"Unknown",
+              DeviceLanguageKey : self.deviceInformation.deviceLanguage ?: @"Unknown",
               TracksUserAgentKey : @"Nosara Client for iOS 0.0.0",
               };
 }
