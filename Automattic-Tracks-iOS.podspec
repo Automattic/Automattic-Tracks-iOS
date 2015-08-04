@@ -1,6 +1,6 @@
 Pod::Spec.new do |spec|
   spec.name         = 'Automattic-Tracks-iOS'
-  spec.version      = '0.0.5'
+  spec.version      = File.read("Automattic-Tracks-iOS/TracksConstants.m").split("const TracksLibraryVersion = @\"").last.split("\"").first
   spec.platform     = :ios, "7.0"
   spec.license      = { :type => 'GPLv2' }
   spec.homepage     = 'https://github.com/automattic/automattic-tracks-ios'
@@ -13,5 +13,5 @@ Pod::Spec.new do |spec|
   spec.framework    = 'CoreTelephony'
 
   spec.dependency 'UIDeviceIdentifier', '~> 0.4'
-  spec.dependency 'CocoaLumberjack', '~> 2.0'
+  spec.dependency 'CocoaLumberjack', '2.0.0'
 end
