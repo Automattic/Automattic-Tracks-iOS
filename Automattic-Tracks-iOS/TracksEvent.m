@@ -128,7 +128,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
 - (BOOL)validateCustomProperties:(id *)ioValue error:(NSError * __autoreleasing *)outError
 {
-    if (ioValue == nil || ([(NSDictionary *)*ioValue count] > 0)) {
+    if (([(NSDictionary *)*ioValue count] > 0)) {
         NSDictionary *dict = (NSDictionary *)*ioValue;
         
         for (id key in dict.keyEnumerator) {
@@ -167,7 +167,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
 - (BOOL)validateDeviceProperties:(id *)ioValue error:(NSError * __autoreleasing *)outError
 {
-    if (ioValue == nil || ([(NSDictionary *)*ioValue count] > 0)) {
+    if (([(NSDictionary *)*ioValue count] > 0)) {
         NSDictionary *dict = (NSDictionary *)*ioValue;
         
         for (id key in dict.keyEnumerator) {
@@ -206,7 +206,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
 - (BOOL)validateUserProperties:(id *)ioValue error:(NSError * __autoreleasing *)outError
 {
-    if (ioValue == nil || ([(NSDictionary *)*ioValue count] > 0)) {
+    if (([(NSDictionary *)*ioValue count] > 0)) {
         NSDictionary *dict = (NSDictionary *)*ioValue;
         
         for (id key in dict.keyEnumerator) {

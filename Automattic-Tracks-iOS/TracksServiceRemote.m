@@ -21,11 +21,11 @@
     
     NSURLSessionDataTask *task;
     task = [sharedSession dataTaskWithRequest:request
-                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *error)
+                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *completionError)
             {
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(error);
+                        completion(completionError);
                     });
                 }
             }];
