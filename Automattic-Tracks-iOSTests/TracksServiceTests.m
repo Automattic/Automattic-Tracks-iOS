@@ -185,10 +185,10 @@
     tracksEvent.deviceProperties[@"device_property1"] = @"test";
     tracksEvent.userProperties[@"user_property1"] = @"test";
 
-    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"Test" : @"Value"}];
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"user_property1" : @"Value"}];
     
     XCTAssertNotNil(result);
-    XCTAssertTrue([[result objectForKey:@"Test"] isEqualToString:@"Value"]);
+    XCTAssertTrue([[result objectForKey:@"user_property1"] isEqualToString:@"test"]);
 }
 
 - (void)testUserAgentDictionaryRepresentationNoDefaultUA
