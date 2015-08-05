@@ -1,13 +1,16 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
+#import <Reachability/Reachability.h>
 
 @interface TracksService ()
 
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL timerEnabled;
+@property (nonatomic, assign) BOOL isHostReachable;
 @property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
+@property (nonatomic, strong) Reachability *reachability;
 
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
@@ -59,17 +62,32 @@ NSString *const USER_ID_ANON = @"anonId";
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         _deviceInformation = [TracksDeviceInformation new];
+        _reachability = [Reachability reachabilityWithHostname:@"public-api.wordpress.com"];
+        [_reachability startNotifier];
+        _isHostReachable = YES;
         _timerEnabled = YES;
         _userProperties = [NSMutableDictionary new];
         
         [self switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
         [self resetTimer];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [defaultCenter addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        [defaultCenter addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     }
     return self;
 }
+
+
+- (void)dealloc
+{
+    [self.timer invalidate];
+    [self.reachability stopNotifier];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)trackEventName:(NSString *)eventName
 {
@@ -201,6 +219,26 @@ NSString *const USER_ID_ANON = @"anonId";
 }
 
 
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    Reachability *reachability = (Reachability *)notification.object;
+
+    self.deviceInformation.isWiFiConnected = reachability.isReachableViaWiFi;
+    
+    if (reachability.isReachable == YES && self.isHostReachable == NO) {
+        DDLogVerbose(@"Tracks host is available. Enabling timer.");
+        self.isHostReachable = YES;
+        self.timerEnabled = YES;
+        [self resetTimer];
+    } else if (reachability.isReachable == NO && self.isHostReachable == YES){
+        DDLogVerbose(@"Tracks host is unavailable. Disabling timer.");
+        self.isHostReachable = NO;
+        self.timerEnabled = NO;
+        [self resetTimer];
+    }
+}
+
+
 - (void)resetTimer
 {
     [self.timer invalidate];
@@ -214,12 +252,6 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)timerFireMethod:(NSTimer *)timer
 {
     [self sendQueuedEvents];
-}
-
-
-- (void)dealloc
-{
-    [self.timer invalidate];
 }
 
 
