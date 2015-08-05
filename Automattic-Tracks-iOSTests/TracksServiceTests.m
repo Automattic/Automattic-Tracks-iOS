@@ -230,7 +230,5 @@
     XCTAssertNil([result objectForKey:@"_via_ua"]);
 }
 
-//- (void)testDevicePropertiesDictionaryRepresentation
-
 
 @end
