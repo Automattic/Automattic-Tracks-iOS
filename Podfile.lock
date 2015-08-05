@@ -12,7 +12,7 @@ PODS:
   - UIDeviceIdentifier (0.4.4)
 
 DEPENDENCIES:
-  - CocoaLumberjack (~> 2.0)
+  - CocoaLumberjack (= 2.0.0)
   - OCMock
   - Reachability (~> 3.1)
   - UIDeviceIdentifier (~> 0.4)
