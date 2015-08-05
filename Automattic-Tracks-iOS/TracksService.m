@@ -282,7 +282,7 @@ NSString *const USER_ID_ANON = @"anonId";
               DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
               DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
               DeviceLanguageKey : self.deviceInformation.deviceLanguage ?: @"Unknown",
-              TracksUserAgentKey : @"Nosara Client for iOS 0.0.0",
+              TracksUserAgentKey : [NSString stringWithFormat:@"Nosara Client for iOS %@", TracksLibraryVersion],
               };
 }
 
