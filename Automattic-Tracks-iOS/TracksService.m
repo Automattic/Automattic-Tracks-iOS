@@ -288,12 +288,10 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)mutableDeviceProperties
 {
-    TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
-
     // These properties change often and should be overridden in TracksEvents if they differ
-    return @{DeviceInfoNetworkOperatorKey : deviceInformation.currentNetworkOperator ?: @"Unknown",
-             DeviceInfoRadioTypeKey : deviceInformation.currentNetworkRadioType ?: @"Unknown",
-             DeviceInfoWiFiConnectedKey : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
+    return @{DeviceInfoNetworkOperatorKey : self.deviceInformation.currentNetworkOperator ?: @"Unknown",
+             DeviceInfoRadioTypeKey : self.deviceInformation.currentNetworkRadioType ?: @"Unknown",
+             DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO"
              };
 }
 
