@@ -32,6 +32,7 @@ Check out the **TracksDemo** project for more information on how to track events
 ## Credits
 
 Original source: https://github.com/Automattic/Automattic-Tracks-iOS
+
 Created by initially: Aaron Douglas @astralbodies
 
 ## License
