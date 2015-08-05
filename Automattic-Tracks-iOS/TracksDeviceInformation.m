@@ -2,11 +2,9 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import <UIDeviceHardware.h>
-#import <Reachability/Reachability.h>
 
 @interface TracksDeviceInformation ()
 
-@property (nonatomic, strong) Reachability *reachability;
 @property (nonatomic, assign) BOOL isReachable;
 @property (nonatomic, assign) BOOL isReachableByWiFi;
 @property (nonatomic, assign) BOOL isReachableByWWAN;
@@ -19,15 +17,8 @@
 {
     self = [super init];
     if (self) {
-        [self setupReachability];
     }
     return self;
-}
-
-
-- (void)dealloc
-{
-    [self.reachability stopNotifier];
 }
 
 
@@ -60,12 +51,6 @@
     }
 
     return type;
-}
-
-
-- (BOOL)isWiFiConnected
-{
-    return self.isReachableByWiFi;
 }
 
 
@@ -116,27 +101,5 @@
 {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
-
-- (void)setupReachability
-{
-    __weak TracksDeviceInformation *weakSelf = self;
-    
-    _reachability = [Reachability reachabilityWithHostname:@"public-api.wordpress.com"];
-    _reachability.reachableBlock = ^(Reachability *reachability) {
-        weakSelf.isReachable = reachability.isReachable;
-        weakSelf.isReachableByWiFi = reachability.isReachableViaWiFi;
-        weakSelf.isReachableByWWAN = reachability.isReachableViaWWAN;
-    };
-    
-    _reachability.reachableBlock = ^(Reachability *reachability) {
-        weakSelf.isReachable = reachability.isReachable;
-        weakSelf.isReachableByWiFi = reachability.isReachableViaWiFi;
-        weakSelf.isReachableByWWAN = reachability.isReachableViaWWAN;
-    };
-    
-    [_reachability startNotifier];
-}
-
-
 
 @end
