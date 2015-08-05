@@ -222,6 +222,11 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)reachabilityChanged:(NSNotification *)notification
 {
     Reachability *reachability = (Reachability *)notification.object;
+    
+    // Because the containing app may already use Reachability, limit this to ours only.
+    if (reachability != self.reachability) {
+        return;
+    }
 
     self.deviceInformation.isWiFiConnected = reachability.isReachableViaWiFi;
     
