@@ -13,6 +13,10 @@
     [request addValue:@"application/json" forHTTPHeaderField:@"Content-Type"];
     [request addValue:@"application/json" forHTTPHeaderField:@"Accept"];
     
+    if (self.tracksUserAgent) {
+        [request setValue:self.tracksUserAgent forHTTPHeaderField:@"User-Agent"];
+    }
+    
     NSURLSession *sharedSession = [NSURLSession sharedSession];
     
     NSURLSessionDataTask *task;
