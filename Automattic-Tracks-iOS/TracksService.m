@@ -208,6 +208,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didEnterBackground:(NSNotification *)notification
 {
     self.timerEnabled = NO;
+    [self.reachability stopNotifier];
     [self sendQueuedEvents];
 }
 
@@ -215,6 +216,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didBecomeActive:(NSNotification *)notification
 {
     self.timerEnabled = YES;
+    [self.reachability startNotifier];
     [self resetTimer];
 }
 
