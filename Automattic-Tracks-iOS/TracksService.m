@@ -12,6 +12,7 @@
 @property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
 @property (nonatomic, strong) Reachability *reachability;
 
+@property (nonatomic, readonly) NSString *userAgent;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, assign, getter=isAnonymous) BOOL anonymous;
@@ -58,6 +59,7 @@ NSString *const USER_ID_ANON = @"anonId";
     if (self) {
         _eventNamePrefix = @"wpios";
         _remote = [TracksServiceRemote new];
+        _remote.tracksUserAgent = self.userAgent;
         _queueSendInterval = EVENT_TIMER_DEFAULT;
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
@@ -104,7 +106,7 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.tracksEventService createTracksEventWithName:eventName
                                               username:self.username
                                                 userID:self.userID
-                                             userAgent:nil
+                                             userAgent:self.userAgent
                                               userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeWordPressCom
                                              eventDate:[NSDate date]
                                       customProperties:customProperties
@@ -284,7 +286,7 @@ NSString *const USER_ID_ANON = @"anonId";
               DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
               DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
               DeviceLanguageKey : self.deviceInformation.deviceLanguage ?: @"Unknown",
-              TracksUserAgentKey : [NSString stringWithFormat:@"Nosara Client for iOS %@", TracksLibraryVersion],
+              TracksUserAgentKey : self.userAgent,
               };
 }
 
@@ -342,6 +344,11 @@ NSString *const USER_ID_ANON = @"anonId";
     }
     
     return dict;
+}
+
+- (NSString *)userAgent
+{
+    return [NSString stringWithFormat:@"Nosara Client for iOS %@", TracksLibraryVersion];
 }
 
 @end
