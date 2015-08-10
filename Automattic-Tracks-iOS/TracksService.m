@@ -234,8 +234,9 @@ NSString *const USER_ID_ANON = @"anonId";
     TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
     
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    
-    return @{ RequestTimestampKey : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
+    long long since1970millis = [NSDate date].timeIntervalSince1970 * 1000;
+
+    return @{ RequestTimestampKey : @(since1970millis),
               DeviceInfoAppBuildKey : deviceInformation.appBuild ?: @"Unknown",
               DeviceInfoAppNameKey : deviceInformation.appName ?: @"Unknown",
               DeviceInfoAppVersionKey : deviceInformation.appVersion ?: @"Unknown",
@@ -264,9 +265,12 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties
 {
+    NSTimeInterval since1970 = tracksEvent.date.timeIntervalSince1970;
+    long long since1970millis = since1970 * 1000;
+    
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[TracksEventNameKey] = tracksEvent.eventName;
-    dict[TracksTimestampKey] = @(lround(tracksEvent.date.timeIntervalSince1970 * 1000));
+    dict[TracksTimestampKey] = @(since1970millis);
     
     if (tracksEvent.userType == TracksEventUserTypeAnonymous) {
         dict[TracksUserTypeKey] = TracksUserTypeAnonymous;
