@@ -273,16 +273,17 @@ NSString *const USER_ID_ANON = @"anonId";
 - (NSDictionary *)immutableDeviceProperties
 {
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
-    
-    return @{ RequestTimestampKey : @(lround([NSDate date].timeIntervalSince1970 * 1000)),
-              DeviceInfoAppBuildKey : self.deviceInformation.appBuild ?: @"Unknown",
-              DeviceInfoAppNameKey : self.deviceInformation.appName ?: @"Unknown",
-              DeviceInfoAppVersionKey : self.deviceInformation.appVersion ?: @"Unknown",
-              DeviceInfoBrandKey : self.deviceInformation.brand ?: @"Unknown",
-              DeviceInfoManufacturerKey : self.deviceInformation.manufacturer ?: @"Unknown",
-              DeviceInfoModelKey : self.deviceInformation.model ?: @"Unknown",
-              DeviceInfoOSKey : self.deviceInformation.os ?: @"Unknown",
-              DeviceInfoOSVersionKey : self.deviceInformation.version ?: @"Unknown",
+    long long since1970millis = [NSDate date].timeIntervalSince1970 * 1000;
+
+    return @{ RequestTimestampKey : @(since1970millis),
+              DeviceInfoAppBuildKey : deviceInformation.appBuild ?: @"Unknown",
+              DeviceInfoAppNameKey : deviceInformation.appName ?: @"Unknown",
+              DeviceInfoAppVersionKey : deviceInformation.appVersion ?: @"Unknown",
+              DeviceInfoBrandKey : deviceInformation.brand ?: @"Unknown",
+              DeviceInfoManufacturerKey : deviceInformation.manufacturer ?: @"Unknown",
+              DeviceInfoModelKey : deviceInformation.model ?: @"Unknown",
+              DeviceInfoOSKey : deviceInformation.os ?: @"Unknown",
+              DeviceInfoOSVersionKey : deviceInformation.version ?: @"Unknown",
               DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
               DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
               DeviceLanguageKey : self.deviceInformation.deviceLanguage ?: @"Unknown",
@@ -301,9 +302,12 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties
 {
+    NSTimeInterval since1970 = tracksEvent.date.timeIntervalSince1970;
+    long long since1970millis = since1970 * 1000;
+    
     NSMutableDictionary *dict = [NSMutableDictionary new];
     dict[TracksEventNameKey] = tracksEvent.eventName;
-    dict[TracksTimestampKey] = @(lround(tracksEvent.date.timeIntervalSince1970 * 1000));
+    dict[TracksTimestampKey] = @(since1970millis);
     
     if (tracksEvent.userType == TracksEventUserTypeAnonymous) {
         dict[TracksUserTypeKey] = TracksUserTypeAnonymous;
