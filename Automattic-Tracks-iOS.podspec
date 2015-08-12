@@ -14,4 +14,5 @@ Pod::Spec.new do |spec|
 
   spec.dependency 'UIDeviceIdentifier', '~> 0.4'
   spec.dependency 'CocoaLumberjack', '2.0.0'
+  spec.dependency 'Reachability', '~>3.1'
 end

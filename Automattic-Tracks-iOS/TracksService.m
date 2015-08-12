@@ -1,12 +1,16 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
 #import <CocoaLumberjack/CocoaLumberjack.h>
+#import <Reachability/Reachability.h>
 
 @interface TracksService ()
 
 @property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, assign) BOOL timerEnabled;
+@property (nonatomic, assign) BOOL isHostReachable;
 @property (nonatomic, strong) TracksContextManager *contextManager;
+@property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
+@property (nonatomic, strong) Reachability *reachability;
 
 @property (nonatomic, readonly) NSString *userAgent;
 @property (nonatomic, copy) NSString *username;
@@ -59,17 +63,33 @@ NSString *const USER_ID_ANON = @"anonId";
         _queueSendInterval = EVENT_TIMER_DEFAULT;
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
+        _deviceInformation = [TracksDeviceInformation new];
+        _reachability = [Reachability reachabilityWithHostname:@"public-api.wordpress.com"];
+        [_reachability startNotifier];
+        _isHostReachable = YES;
         _timerEnabled = YES;
         _userProperties = [NSMutableDictionary new];
         
         [self switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
         [self resetTimer];
         
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
+        [defaultCenter addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
+        
+        [defaultCenter addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
     }
     return self;
 }
+
+
+- (void)dealloc
+{
+    [self.timer invalidate];
+    [self.reachability stopNotifier];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 
 - (void)trackEventName:(NSString *)eventName
 {
@@ -190,6 +210,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didEnterBackground:(NSNotification *)notification
 {
     self.timerEnabled = NO;
+    [self.reachability stopNotifier];
     [self sendQueuedEvents];
 }
 
@@ -197,7 +218,33 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didBecomeActive:(NSNotification *)notification
 {
     self.timerEnabled = YES;
+    [self.reachability startNotifier];
     [self resetTimer];
+}
+
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    Reachability *reachability = (Reachability *)notification.object;
+    
+    // Because the containing app may already use Reachability, limit this to ours only.
+    if (reachability != self.reachability) {
+        return;
+    }
+
+    self.deviceInformation.isWiFiConnected = reachability.isReachableViaWiFi;
+    
+    if (reachability.isReachable == YES && self.isHostReachable == NO) {
+        DDLogVerbose(@"Tracks host is available. Enabling timer.");
+        self.isHostReachable = YES;
+        self.timerEnabled = YES;
+        [self resetTimer];
+    } else if (reachability.isReachable == NO && self.isHostReachable == YES){
+        DDLogVerbose(@"Tracks host is unavailable. Disabling timer.");
+        self.isHostReachable = NO;
+        self.timerEnabled = NO;
+        [self resetTimer];
+    }
 }
 
 
@@ -217,12 +264,6 @@ NSString *const USER_ID_ANON = @"anonId";
 }
 
 
-- (void)dealloc
-{
-    [self.timer invalidate];
-}
-
-
 - (void)setQueueSendInterval:(NSTimeInterval)queueSendInterval
 {
     _queueSendInterval = queueSendInterval;
@@ -231,35 +272,31 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)immutableDeviceProperties
 {
-    TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
-    
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
     long long since1970millis = [NSDate date].timeIntervalSince1970 * 1000;
 
     return @{ RequestTimestampKey : @(since1970millis),
-              DeviceInfoAppBuildKey : deviceInformation.appBuild ?: @"Unknown",
-              DeviceInfoAppNameKey : deviceInformation.appName ?: @"Unknown",
-              DeviceInfoAppVersionKey : deviceInformation.appVersion ?: @"Unknown",
-              DeviceInfoBrandKey : deviceInformation.brand ?: @"Unknown",
-              DeviceInfoManufacturerKey : deviceInformation.manufacturer ?: @"Unknown",
-              DeviceInfoModelKey : deviceInformation.model ?: @"Unknown",
-              DeviceInfoOSKey : deviceInformation.os ?: @"Unknown",
-              DeviceInfoOSVersionKey : deviceInformation.version ?: @"Unknown",
+              DeviceInfoAppBuildKey : self.deviceInformation.appBuild ?: @"Unknown",
+              DeviceInfoAppNameKey : self.deviceInformation.appName ?: @"Unknown",
+              DeviceInfoAppVersionKey : self.deviceInformation.appVersion ?: @"Unknown",
+              DeviceInfoBrandKey : self.deviceInformation.brand ?: @"Unknown",
+              DeviceInfoManufacturerKey : self.deviceInformation.manufacturer ?: @"Unknown",
+              DeviceInfoModelKey : self.deviceInformation.model ?: @"Unknown",
+              DeviceInfoOSKey : self.deviceInformation.os ?: @"Unknown",
+              DeviceInfoOSVersionKey : self.deviceInformation.version ?: @"Unknown",
               DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
               DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
-              DeviceLanguageKey : deviceInformation.deviceLanguage ?: @"Unknown",
+              DeviceLanguageKey : self.deviceInformation.deviceLanguage ?: @"Unknown",
               TracksUserAgentKey : self.userAgent,
               };
 }
 
 - (NSDictionary *)mutableDeviceProperties
 {
-    TracksDeviceInformation *deviceInformation = [TracksDeviceInformation new];
-
     // These properties change often and should be overridden in TracksEvents if they differ
-    return @{DeviceInfoNetworkOperatorKey : deviceInformation.currentNetworkOperator ?: @"Unknown",
-             DeviceInfoRadioTypeKey : deviceInformation.currentNetworkRadioType ?: @"Unknown",
-             DeviceInfoWiFiConnectedKey : deviceInformation.isWiFiConnected ? @"YES" : @"NO"
+    return @{DeviceInfoNetworkOperatorKey : self.deviceInformation.currentNetworkOperator ?: @"Unknown",
+             DeviceInfoRadioTypeKey : self.deviceInformation.currentNetworkRadioType ?: @"Unknown",
+             DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO"
              };
 }
 

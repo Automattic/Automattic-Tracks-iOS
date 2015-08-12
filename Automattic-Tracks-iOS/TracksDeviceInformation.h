@@ -16,6 +16,6 @@
 @property (nonatomic, readonly) NSString *deviceLanguage;
 @property (nonatomic, readonly) NSString *currentNetworkOperator;
 @property (nonatomic, readonly) NSString *currentNetworkRadioType;
-@property (nonatomic, readonly) BOOL isWiFiConnected;
+@property (nonatomic, assign) BOOL isWiFiConnected;
 
 @end

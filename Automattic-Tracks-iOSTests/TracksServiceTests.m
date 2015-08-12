@@ -175,6 +175,22 @@
     XCTAssertTrue([[result objectForKey:@"Test"] isEqualToString:@"Value2"]);
 }
 
+- (void)testDictionaryForTracksEventMultipleProperties
+{
+    TracksEvent *tracksEvent = [TracksEvent new];
+    tracksEvent.userID = @"anonymous123";
+    tracksEvent.eventName = @"log_special_condition";
+    tracksEvent.customProperties[@"error_condition"] = @"WPStatsServiceRemote operationForVisitsForDate:andUnit:withCompletionHandler";
+    tracksEvent.customProperties[@"error_details"] = @"This is a test of the emergency broadcast system";
+    tracksEvent.deviceProperties[@"device_property1"] = @"test";
+    tracksEvent.userProperties[@"user_property1"] = @"test";
+
+    NSDictionary *result = [self.subject dictionaryForTracksEvent:tracksEvent withParentCommonProperties:@{@"user_property1" : @"Value"}];
+    
+    XCTAssertNotNil(result);
+    XCTAssertTrue([[result objectForKey:@"user_property1"] isEqualToString:@"test"]);
+}
+
 - (void)testUserAgentDictionaryRepresentationNoDefaultUA
 {
     TracksEvent *tracksEvent = [TracksEvent new];
@@ -213,8 +229,6 @@
     
     XCTAssertNil([result objectForKey:@"_via_ua"]);
 }
-
-//- (void)testDevicePropertiesDictionaryRepresentation
 
 
 @end

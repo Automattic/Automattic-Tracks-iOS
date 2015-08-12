@@ -3,7 +3,24 @@
 #import <CoreTelephony/CTCarrier.h>
 #import <UIDeviceHardware.h>
 
+@interface TracksDeviceInformation ()
+
+@property (nonatomic, assign) BOOL isReachable;
+@property (nonatomic, assign) BOOL isReachableByWiFi;
+@property (nonatomic, assign) BOOL isReachableByWWAN;
+
+@end
+
 @implementation TracksDeviceInformation
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+    }
+    return self;
+}
+
 
 - (NSString *)brand
 {
@@ -34,13 +51,6 @@
     }
 
     return type;
-}
-
-
-- (BOOL)isWiFiConnected
-{
-    // TODO - Implement this with Reachability
-    return NO;
 }
 
 
