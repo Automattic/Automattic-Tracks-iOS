@@ -4,5 +4,5 @@ osx_image: xcode64
 language: objective-c
 xcode_workspace: Automattic-Tracks-iOS.xcworkspace
 xcode_scheme: Automattic-Tracks-iOS
-xcode_sdk: iphonesimulator8.4
+xcode_sdk: iphonesimulator8.1
 
