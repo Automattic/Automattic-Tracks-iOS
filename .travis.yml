@@ -1,0 +1,8 @@
+install:
+- gem install cocoapods -v 0.37.2 && pod install
+osx_image: xcode6.4
+language: objective-c
+xcode_workspace: Automattic-Tracks-iOS.xcworkspace
+xcode_scheme: Automattic-Tracks-iOS
+xcode_sdk: iphonesimulator8.4
+
