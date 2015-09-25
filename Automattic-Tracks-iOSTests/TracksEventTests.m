@@ -57,19 +57,6 @@
     XCTAssertTrue([self.subject validateObject:nil]);
 }
 
-- (void)testEventNameValidationNil
-{
-    NSError *error;
-    self.subject.eventName = nil;
-    BOOL valid = [self.subject validateValue:nil forKey:@"eventName" error:&error];
-    
-    XCTAssertFalse(valid);
-    XCTAssertNotNil(error);
-    XCTAssertEqual(error.domain, TracksErrorDomain);
-    XCTAssertEqual(TracksErrorCodeValidationEventNameMissing, error.code);
-    XCTAssertFalse([self.subject validateObject:nil]);
-}
-
 - (void)testEventNameValidationWhitespace
 {
     NSError *error;
