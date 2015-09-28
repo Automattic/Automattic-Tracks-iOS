@@ -122,8 +122,6 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (void)sendQueuedEvents
 {
-    DDLogVerbose(@"Tracks sendQueuedEvents Called...");
-    
     [self.timer invalidate];
     [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceWillSendQueuedEventsNotification object:nil];
     
@@ -134,8 +132,6 @@ NSString *const USER_ID_ANON = @"anonId";
         return;
     }
     
-    DDLogVerbose(@"Track sending events...");
-
     NSMutableDictionary *commonProperties = [NSMutableDictionary new];
     [commonProperties addEntriesFromDictionary:[self immutableDeviceProperties]];
     [commonProperties addEntriesFromDictionary:[self mutableDeviceProperties]];
@@ -149,12 +145,11 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.remote sendBatchOfEvents:jsonEvents
               withSharedProperties:commonProperties
                  completionHandler:^(NSError *error) {
-                     DDLogVerbose(@"Tracks sendQueuedEvents completed...");
-
                      if (error) {
                          DDLogError(@"TracksService Error while remote calling: %@", error);
                          [self.tracksEventService incrementRetryCountForEvents:events];
                      } else {
+                         DDLogVerbose(@"TracksService sendQueuedEvents completed. Sent %@ events.", @(events.count));
                          // Delete the events since they sent or errored
                          [self.tracksEventService removeTracksEvents:events];
                      }
