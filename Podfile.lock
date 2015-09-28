@@ -7,9 +7,9 @@ PODS:
     - CocoaLumberjack/Core
   - CocoaLumberjack/Extensions (2.0.0):
     - CocoaLumberjack/Default
-  - OCMock (3.1.2)
+  - OCMock (3.1.5)
   - Reachability (3.2)
-  - UIDeviceIdentifier (0.4.4)
+  - UIDeviceIdentifier (0.4.5)
 
 DEPENDENCIES:
   - CocoaLumberjack (= 2.0.0)
@@ -19,8 +19,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   CocoaLumberjack: a6f77d987d65dc7ba86b0f84db7d0b9084f77bcb
-  OCMock: a10ea9f0a6e921651f96f78b6faee95ebc813b92
+  OCMock: 4c2925291f80407c3738dd1db14d21d0cc278864
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  UIDeviceIdentifier: 2eb1070f189a069184611e21b5e8832443e6f8ec
+  UIDeviceIdentifier: f7b32c087f4d4957badbb6181a4c78520c5806ae
 
-COCOAPODS: 0.37.2
+COCOAPODS: 0.38.2
