@@ -1,7 +1,13 @@
 #import "TracksDeviceInformation.h"
+#import <UIDeviceIdentifier/UIDeviceHardware.h>
+
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
-#import <UIDeviceHardware.h>
+#else
+#import <AppKit/AppKit.h>
+#endif
 
 @interface TracksDeviceInformation ()
 
@@ -27,6 +33,13 @@
     return @"Apple";
 }
 
+- (NSString *)manufacturer
+{
+    return @"Apple";
+}
+
+
+#if TARGET_OS_IPHONE
 
 - (NSString *)currentNetworkOperator
 {
@@ -59,13 +72,6 @@
     return [[NSLocale currentLocale] localeIdentifier];
 }
 
-
-- (NSString *)manufacturer
-{
-    return @"Apple";
-}
-
-
 - (NSString *)model
 {
     return [UIDeviceHardware platformString];
@@ -82,6 +88,45 @@
 {
     return [[UIDevice currentDevice] systemVersion];
 }
+
+#else
+
+- (NSString *)currentNetworkOperator
+{
+    return @"";
+}
+
+
+- (NSString *)currentNetworkRadioType
+{
+    return @"";
+}
+
+
+- (NSString *)deviceLanguage
+{
+    return [[NSLocale currentLocale] localeIdentifier];
+}
+
+- (NSString *)model
+{
+    return [UIDeviceHardware platform];
+}
+
+
+- (NSString *)os
+{
+    return @"OS X";
+}
+
+
+- (NSString *)version
+{
+    return [[NSProcessInfo processInfo] operatingSystemVersionString];
+}
+
+#endif
+
 
 
 #pragma mark - App Specific Information
