@@ -1,8 +1,8 @@
 #import "TracksDeviceInformation.h"
-#import <UIDeviceIdentifier/UIDeviceHardware.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
+#import <UIDeviceIdentifier/UIDeviceHardware.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #else
@@ -110,7 +110,7 @@
 
 - (NSString *)model
 {
-    return [UIDeviceHardware platform];
+    return @"";
 }
 
 
