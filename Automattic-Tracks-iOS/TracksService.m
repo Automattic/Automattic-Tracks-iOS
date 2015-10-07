@@ -3,6 +3,13 @@
 #import <CocoaLumberjack/CocoaLumberjack.h>
 #import <Reachability/Reachability.h>
 
+#if TARGET_OS_IPHONE
+#import <UIKit/UIKit.h>
+#else
+#import <AppKit/AppKit.h>
+#endif
+
+
 @interface TracksService ()
 
 @property (nonatomic, strong) NSTimer *timer;
@@ -74,10 +81,12 @@ NSString *const USER_ID_ANON = @"anonId";
         [self resetTimer];
         
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+        
+#if TARGET_OS_IPHONE
         [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [defaultCenter addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
-        
-        [defaultCenter addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
+#endif
     }
     return self;
 }
@@ -267,7 +276,12 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)immutableDeviceProperties
 {
+#if TARGET_OS_IPHONE
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
+#else
+    CGSize screenSize = [[NSScreen mainScreen] frame].size;
+#endif
+    
     long long since1970millis = [NSDate date].timeIntervalSince1970 * 1000;
 
     return @{ RequestTimestampKey : @(since1970millis),
