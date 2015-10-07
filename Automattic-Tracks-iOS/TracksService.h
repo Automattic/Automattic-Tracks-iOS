@@ -1,4 +1,4 @@
-#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
 #import "TracksEvent.h"
 #import "TracksEventService.h"
 #import "TracksServiceRemote.h"
