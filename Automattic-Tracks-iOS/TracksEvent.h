@@ -3,7 +3,7 @@
 
 typedef NS_ENUM(NSUInteger, TracksEventUserType) {
     TracksEventUserTypeAnonymous,
-    TracksEventUserTypeWordPressCom,
+    TracksEventUserTypeAuthenticated,
 };
 
 @interface TracksEvent : NSObject
