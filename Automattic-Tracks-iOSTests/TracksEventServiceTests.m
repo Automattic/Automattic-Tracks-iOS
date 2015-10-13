@@ -37,7 +37,7 @@
                                                         username:@"someone"
                                                           userID:@"MOOP"
                                                        userAgent:nil
-                                                        userType:TracksEventUserTypeWordPressCom
+                                                        userType:TracksEventUserTypeAuthenticated
                                                        eventDate:[NSDate date]
                                                 customProperties:nil
                                                 deviceProperties:nil
