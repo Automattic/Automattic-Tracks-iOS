@@ -12,8 +12,8 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 @property (nonatomic, strong) TracksServiceRemote *remote;
 
 @property (nonatomic, copy) NSString *eventNamePrefix;
-@property (nonatomic, copy) NSString *anonymousUserType;
-@property (nonatomic, copy) NSString *authenticatedUserType;
+@property (nonatomic, copy) NSString *anonymousUserTypeKey;
+@property (nonatomic, copy) NSString *authenticatedUserTypeKey;
 
 @property (nonatomic, assign) NSTimeInterval queueSendInterval;
 @property (nonatomic, readonly) NSUInteger queuedEventCount;

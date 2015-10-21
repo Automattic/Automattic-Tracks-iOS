@@ -65,8 +65,8 @@ NSString *const USER_ID_ANON = @"anonId";
     self = [super init];
     if (self) {
         _eventNamePrefix = @"wpios";
-        _anonymousUserType = TracksUserTypeAnonymous;
-        _authenticatedUserType = TracksUserTypeAuthenticated;
+        _anonymousUserTypeKey = TracksUserTypeAnonymous;
+        _authenticatedUserTypeKey = TracksUserTypeAuthenticated;
         _remote = [TracksServiceRemote new];
         _remote.tracksUserAgent = self.userAgent;
         _queueSendInterval = EVENT_TIMER_DEFAULT;
@@ -323,10 +323,10 @@ NSString *const USER_ID_ANON = @"anonId";
     dict[TracksTimestampKey] = @(since1970millis);
     
     if (tracksEvent.userType == TracksEventUserTypeAnonymous) {
-        dict[TracksUserTypeKey] = self.anonymousUserType;
+        dict[TracksUserTypeKey] = self.anonymousUserTypeKey;
         dict[TracksUserIDKey] = tracksEvent.userID;
     } else {
-        dict[TracksUserTypeKey] = self.authenticatedUserType;
+        dict[TracksUserTypeKey] = self.authenticatedUserTypeKey;
         dict[TracksUserIDKey] = tracksEvent.userID;
         dict[TracksUsernameKey] = tracksEvent.username;
     }
