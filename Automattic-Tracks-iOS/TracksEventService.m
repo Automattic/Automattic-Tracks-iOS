@@ -71,7 +71,7 @@
     tracksEvent.customProperties[@"anonId"] = anonymousUserID;
     tracksEvent.username = username;
     tracksEvent.userID = userID;
-    tracksEvent.userType = TracksEventUserTypeWordPressCom;
+    tracksEvent.userType = TracksEventUserTypeAuthenticated;
     tracksEvent.date = [NSDate date];
     
     [self.persistenceService persistTracksEvent:tracksEvent];
