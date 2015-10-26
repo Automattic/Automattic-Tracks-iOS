@@ -54,7 +54,7 @@ NSString *const TracksUserIDKey = @"_ui";
 NSString *const TracksUsernameKey = @"_ul";
 
 NSString *const TracksUserTypeAnonymous = @"anon";
-NSString *const TracksUserTypeWPCOM = @"wpcom:user_id";
+NSString *const TracksUserTypeAuthenticated = @"wpcom:user_id";
 NSString *const USER_ID_ANON = @"anonId";
 
 
@@ -65,6 +65,8 @@ NSString *const USER_ID_ANON = @"anonId";
     self = [super init];
     if (self) {
         _eventNamePrefix = @"wpios";
+        _anonymousUserTypeKey = TracksUserTypeAnonymous;
+        _authenticatedUserTypeKey = TracksUserTypeAuthenticated;
         _remote = [TracksServiceRemote new];
         _remote.tracksUserAgent = self.userAgent;
         _queueSendInterval = EVENT_TIMER_DEFAULT;
@@ -116,7 +118,7 @@ NSString *const USER_ID_ANON = @"anonId";
                                               username:self.username
                                                 userID:self.userID
                                              userAgent:self.userAgent
-                                              userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeWordPressCom
+                                              userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeAuthenticated
                                              eventDate:[NSDate date]
                                       customProperties:customProperties
                                       deviceProperties:[self mutableDeviceProperties]
@@ -311,6 +313,8 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties
 {
+    NSParameterAssert(tracksEvent);
+    
     NSTimeInterval since1970 = tracksEvent.date.timeIntervalSince1970;
     long long since1970millis = since1970 * 1000;
     
@@ -319,10 +323,10 @@ NSString *const USER_ID_ANON = @"anonId";
     dict[TracksTimestampKey] = @(since1970millis);
     
     if (tracksEvent.userType == TracksEventUserTypeAnonymous) {
-        dict[TracksUserTypeKey] = TracksUserTypeAnonymous;
+        dict[TracksUserTypeKey] = self.anonymousUserTypeKey;
         dict[TracksUserIDKey] = tracksEvent.userID;
     } else {
-        dict[TracksUserTypeKey] = TracksUserTypeWPCOM;
+        dict[TracksUserTypeKey] = self.authenticatedUserTypeKey;
         dict[TracksUserIDKey] = tracksEvent.userID;
         dict[TracksUsernameKey] = tracksEvent.username;
     }
