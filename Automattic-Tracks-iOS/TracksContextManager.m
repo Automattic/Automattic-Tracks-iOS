@@ -19,8 +19,14 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    
-    NSString *path = [[NSBundle mainBundle] pathForResource:@"DataModel" ofType:@"bundle"];
+
+    /*
+     tracksBundle is the "bundle" containing the DataModel.bundle:
+     - If frameworks are used, it's Automattic-Tracks-iOS.framework
+     - Otherwise, it's the main bundle
+     */
+    NSBundle *tracksBundle = [NSBundle bundleForClass:[self class]];
+    NSString *path = [tracksBundle pathForResource:@"DataModel" ofType:@"bundle"];
     NSBundle *bundle = path != nil ? [NSBundle bundleWithPath:path] : [NSBundle bundleForClass:[self class]];
     NSURL *modelURL = [bundle URLForResource:@"Tracks" withExtension:@"momd"];
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
