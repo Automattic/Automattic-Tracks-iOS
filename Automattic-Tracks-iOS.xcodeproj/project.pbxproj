@@ -91,6 +91,7 @@
 		AEBCF3262C67E03BDCA66153 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C2FC310E80CC6BB7A70F0437 /* libPods-Automattic-Tracks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E15E3CC272CAA5A286551AB0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1DBEA181C07071300FF2F73 /* TracksLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracksLogging.h; sourceTree = "<group>"; };
 		E6ED7D1786D23CF511D84A90 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -190,6 +191,7 @@
 				93C021371AB1BFA40014096A /* Services */,
 				9339E70A1ADE98B800AEAB68 /* TracksConstants.h */,
 				9339E70B1ADE98B800AEAB68 /* TracksConstants.m */,
+				E1DBEA181C07071300FF2F73 /* TracksLogging.h */,
 			);
 			path = "Automattic-Tracks-iOS";
 			sourceTree = "<group>";
@@ -281,6 +283,7 @@
 				93C021211AB0A6330014096A /* Frameworks */,
 				93C021221AB0A6330014096A /* Resources */,
 				3D3E7F416113192F886D8EBD /* Copy Pods Resources */,
+				AAF9578663D24F98C30D5D9E /* Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -367,6 +370,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AAF9578663D24F98C30D5D9E /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ADEE6380E7CC2049DCFF2336 /* Check Pods Manifest.lock */ = {
