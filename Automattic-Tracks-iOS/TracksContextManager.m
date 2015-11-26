@@ -1,5 +1,5 @@
 #import "TracksContextManager.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "TracksLogging.h"
 
 @interface TracksContextManager ()
 

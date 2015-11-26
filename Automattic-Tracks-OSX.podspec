@@ -11,6 +11,6 @@ Pod::Spec.new do |spec|
   spec.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
   spec.framework    = 'CoreData'
 
-  spec.dependency 'CocoaLumberjack', '2.0.0'
+  spec.dependency 'CocoaLumberjack', '~>2.2.0'
   spec.dependency 'Reachability', '~>3.1'
 end
