@@ -1,5 +1,5 @@
 #import "ViewController.h"
-#import <TracksService.h>
+@import AutomatticTracks;
 
 @interface ViewController () <NSFetchedResultsControllerDelegate>
 
