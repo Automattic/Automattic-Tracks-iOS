@@ -14,8 +14,8 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C021181AB0A6330014096A"
-               BuildableName = "libAutomattic-Tracks-iOS.a"
+               BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+               BuildableName = "AutomatticTracks.framework"
                BlueprintName = "Automattic-Tracks-iOS"
                ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
             </BuildableReference>
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C021231AB0A6330014096A"
+               BlueprintIdentifier = "93B5C7B31CE25D40002820B3"
                BuildableName = "Automattic-Tracks-iOSTests.xctest"
                BlueprintName = "Automattic-Tracks-iOSTests"
                ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C021231AB0A6330014096A"
+               BlueprintIdentifier = "93B5C7B31CE25D40002820B3"
                BuildableName = "Automattic-Tracks-iOSTests.xctest"
                BlueprintName = "Automattic-Tracks-iOSTests"
                ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
@@ -60,7 +60,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C021231AB0A6330014096A"
+               BlueprintIdentifier = "93B5C7B31CE25D40002820B3"
                BuildableName = "Automattic-Tracks-iOSTests.xctest"
                BlueprintName = "Automattic-Tracks-iOSTests"
                ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
@@ -70,7 +70,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93C021231AB0A6330014096A"
+               BlueprintIdentifier = "93B5C7B31CE25D40002820B3"
                BuildableName = "Automattic-Tracks-iOSTests.xctest"
                BlueprintName = "Automattic-Tracks-iOSTests"
                ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
@@ -80,8 +80,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93C021181AB0A6330014096A"
-            BuildableName = "libAutomattic-Tracks-iOS.a"
+            BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+            BuildableName = "AutomatticTracks.framework"
             BlueprintName = "Automattic-Tracks-iOS"
             ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
          </BuildableReference>
@@ -102,8 +102,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93C021181AB0A6330014096A"
-            BuildableName = "libAutomattic-Tracks-iOS.a"
+            BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+            BuildableName = "AutomatticTracks.framework"
             BlueprintName = "Automattic-Tracks-iOS"
             ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
          </BuildableReference>
@@ -120,8 +120,8 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93C021181AB0A6330014096A"
-            BuildableName = "libAutomattic-Tracks-iOS.a"
+            BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+            BuildableName = "AutomatticTracks.framework"
             BlueprintName = "Automattic-Tracks-iOS"
             ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
          </BuildableReference>

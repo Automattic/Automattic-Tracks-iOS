@@ -1,7 +1,7 @@
 Pod::Spec.new do |spec|
   spec.name         = 'Automattic-Tracks-iOS'
   spec.version      = File.read("Automattic-Tracks-iOS/TracksConstants.m").split("const TracksLibraryVersion = @\"").last.split("\"").first
-  spec.platform     = :ios, "7.0"
+  spec.platform     = :ios, "9.0"
   spec.license      = { :type => 'GPLv2' }
   spec.homepage     = 'https://github.com/automattic/automattic-tracks-ios'
   spec.authors      = { 'Aaron Douglas' => 'aaron@automattic.com' }
@@ -12,6 +12,9 @@ Pod::Spec.new do |spec|
   spec.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
   spec.framework    = 'CoreData'
   spec.framework    = 'CoreTelephony'
+
+  spec.header_dir = 'AutomatticTracks'
+  spec.module_name = 'AutomatticTracks'
 
   spec.dependency 'UIDeviceIdentifier', '~> 0.4'
   spec.dependency 'CocoaLumberjack', '~>2.2.0'
