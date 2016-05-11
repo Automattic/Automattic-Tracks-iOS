@@ -22,7 +22,7 @@ EXTERNAL SOURCES:
     :path: ../
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: 74247b53c0ae6d3c7e45860ede2e6cbcbdcdfeb6
+  Automattic-Tracks-iOS: 5b76290a74355cc8be18e5177b4af58774a63a46
   CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   UIDeviceIdentifier: a959a6d4f51036b4180dd31fb26483a820f1cc46
