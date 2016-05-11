@@ -1,6 +1,6 @@
 #import "TracksEventService.h"
 #import "TracksEventPersistenceService.h"
-#import "Logging.h"
+#import "TracksLoggingPrivate.h"
 
 @interface TracksEventService ()
 
