@@ -4,10 +4,20 @@
 @interface TracksServiceRemote()
 
 @property (nonatomic, strong) NSURLSession *session;
+@property (nonatomic, strong) NSIndexSet *acceptableStatusCodes;
 
 @end
 
 @implementation TracksServiceRemote
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        _acceptableStatusCodes = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(200, 100)];
+    }
+    return self;
+}
 
 - (NSURLSession *)session {
     if (_session == nil) {
@@ -39,23 +49,31 @@
     }
 
     NSURLSessionDataTask *task;
+
     task = [self.session dataTaskWithRequest:request
-                            completionHandler:^(NSData *data, NSURLResponse *response, NSError *completionError)
+                            completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
             {
                 BOOL validResponseData = YES;
+                NSHTTPURLResponse *httpResponse = [response isKindOfClass:[NSHTTPURLResponse class]] ? (NSHTTPURLResponse *)response : nil;
 
                 if (data != nil) {
                     NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
                     validResponseData = [responseData containsString:@"Accepted"];
                 }
 
-                if (completionError == nil && validResponseData == NO) {
-                    completionError = [NSError errorWithDomain:TracksErrorDomain code:TracksErrorRemoteResponseInvalid userInfo:@{NSLocalizedDescriptionKey: @"Invalid response received from host - expected \"Accepted\"."}];
+                if (error == nil && ![self.acceptableStatusCodes containsIndex:(NSUInteger)httpResponse.statusCode]) {
+                    error = [NSError errorWithDomain:TracksErrorDomain
+                                                code:TracksErrorRemoteResponseError
+                                            userInfo:@{NSLocalizedDescriptionKey: @"Invalid HTTP response received from host."}];
+                }
+
+                if (error == nil && validResponseData == NO) {
+                    error = [NSError errorWithDomain:TracksErrorDomain code:TracksErrorRemoteResponseInvalid userInfo:@{NSLocalizedDescriptionKey: @"Invalid response received from host - expected \"Accepted\"."}];
                 }
 
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        completion(completionError);
+                        completion(error);
                     });
                 }
             }];
