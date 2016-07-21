@@ -1,4 +1,5 @@
 #import "TracksServiceRemote.h"
+#import "TracksConstants.h"
 
 @interface TracksServiceRemote()
 
@@ -20,7 +21,9 @@
     return _session;
 }
 
-- (void)sendBatchOfEvents:(NSArray *)events withSharedProperties:(NSDictionary *)properties completionHandler:(void (^)(NSError *error))completion
+-(void)sendBatchOfEvents:(NSArray<TracksEvent *> *)events
+    withSharedProperties:(NSDictionary *)properties
+       completionHandler:(void (^)(NSError * _Nullable))completion
 {
     NSDictionary *dataToSend = @{@"events" : events,
                                  @"commonProps" : properties};
@@ -39,6 +42,17 @@
     task = [self.session dataTaskWithRequest:request
                             completionHandler:^(NSData *data, NSURLResponse *response, NSError *completionError)
             {
+                BOOL validResponseData = YES;
+
+                if (data != nil) {
+                    NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    validResponseData = [responseData containsString:@"Accepted"];
+                }
+
+                if (completionError == nil && validResponseData == NO) {
+                    completionError = [NSError errorWithDomain:TracksErrorDomain code:TracksErrorRemoteResponseInvalid userInfo:@{NSLocalizedDescriptionKey: @"Invalid response received from host - expected \"Accepted\"."}];
+                }
+
                 if (completion) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         completion(completionError);
