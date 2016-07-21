@@ -58,7 +58,7 @@
 
                 if (data != nil) {
                     NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    validResponseData = [responseData containsString:@"Accepted"];
+                    validResponseData = [responseData isEqualToString:@"\"Accepted\""];
                 }
 
                 if (error == nil && ![self.acceptableStatusCodes containsIndex:(NSUInteger)httpResponse.statusCode]) {
