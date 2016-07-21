@@ -8,7 +8,19 @@ PODS:
   - CocoaLumberjack/Extensions (2.2.0):
     - CocoaLumberjack/Default
   - OCMock (3.3.1)
+  - OHHTTPStubs (5.1.0):
+    - OHHTTPStubs/Default (= 5.1.0)
   - OHHTTPStubs/Core (5.1.0)
+  - OHHTTPStubs/Default (5.1.0):
+    - OHHTTPStubs/Core
+    - OHHTTPStubs/JSON
+    - OHHTTPStubs/NSURLSession
+    - OHHTTPStubs/OHPathHelpers
+  - OHHTTPStubs/JSON (5.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/NSURLSession (5.1.0):
+    - OHHTTPStubs/Core
+  - OHHTTPStubs/OHPathHelpers (5.1.0)
   - OHHTTPStubs/Swift (5.1.0):
     - OHHTTPStubs/Core
   - Reachability (3.2)
@@ -17,6 +29,7 @@ PODS:
 DEPENDENCIES:
   - CocoaLumberjack (~> 2.2.0)
   - OCMock (~> 3.3.1)
+  - OHHTTPStubs (~> 5.1.0)
   - OHHTTPStubs/Swift (~> 5.1.0)
   - Reachability (~> 3.1)
   - UIDeviceIdentifier (~> 0.4)
@@ -28,6 +41,6 @@ SPEC CHECKSUMS:
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   UIDeviceIdentifier: a959a6d4f51036b4180dd31fb26483a820f1cc46
 
-PODFILE CHECKSUM: 651b365accd795df961b796087a670cbfb1a3cc5
+PODFILE CHECKSUM: 721e218fcc82d6b386da175d96251413f5667f51
 
 COCOAPODS: 1.0.1

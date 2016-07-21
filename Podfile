@@ -11,6 +11,7 @@ target 'Automattic-Tracks-iOS' do
 
   target 'Automattic-Tracks-iOSTests' do
     pod 'OCMock', '~> 3.3.1'
+    pod 'OHHTTPStubs', '~> 5.1.0'
     pod 'OHHTTPStubs/Swift', '~> 5.1.0'
   end
 end
