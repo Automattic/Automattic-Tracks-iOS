@@ -53,22 +53,23 @@
     task = [self.session dataTaskWithRequest:request
                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
             {
-                BOOL validResponseData = YES;
                 NSHTTPURLResponse *httpResponse = [response isKindOfClass:[NSHTTPURLResponse class]] ? (NSHTTPURLResponse *)response : nil;
 
-                if (data != nil) {
-                    NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-                    validResponseData = [responseData isEqualToString:@"\"Accepted\""];
-                }
-
+                // Only allow HTTP 200-299 response codes
                 if (error == nil && ![self.acceptableStatusCodes containsIndex:(NSUInteger)httpResponse.statusCode]) {
                     error = [NSError errorWithDomain:TracksErrorDomain
                                                 code:TracksErrorRemoteResponseError
                                             userInfo:@{NSLocalizedDescriptionKey: @"Invalid HTTP response received from host."}];
                 }
 
-                if (error == nil && validResponseData == NO) {
-                    error = [NSError errorWithDomain:TracksErrorDomain code:TracksErrorRemoteResponseInvalid userInfo:@{NSLocalizedDescriptionKey: @"Invalid response received from host - expected \"Accepted\"."}];
+                // A successful request will have a response of "Accepted" in JSON foramt
+                if (error == nil && data != nil) {
+                    NSString *responseData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+                    BOOL validResponseData = [responseData isEqualToString:@"\"Accepted\""];
+
+                    if (!validResponseData) {
+                        error = [NSError errorWithDomain:TracksErrorDomain code:TracksErrorRemoteResponseInvalid userInfo:@{NSLocalizedDescriptionKey: @"Invalid response received from host - expected \"Accepted\"."}];
+                    }
                 }
 
                 if (completion) {
