@@ -7,10 +7,12 @@ use_frameworks!
 target 'Automattic-Tracks-iOS' do
   pod 'UIDeviceIdentifier', '~> 0.4'
   pod 'CocoaLumberjack', '~> 2.2.0'
-  pod 'Reachability', '~>3.1'
+  pod 'Reachability', '~> 3.1'
 
   target 'Automattic-Tracks-iOSTests' do
-    pod 'OCMock'
+    pod 'OCMock', '~> 3.3.1'
+    pod 'OHHTTPStubs', '~> 5.1.0'
+    pod 'OHHTTPStubs/Swift', '~> 5.1.0'
   end
 end
 

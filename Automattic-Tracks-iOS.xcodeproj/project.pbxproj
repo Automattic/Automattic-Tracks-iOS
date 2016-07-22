@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00EC19F5C9B3F78F5F50366F /* Pods_Automattic_Tracks_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBDB237A5CBEE0EE8433798 /* Pods_Automattic_Tracks_iOS.framework */; };
+		9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */; };
 		93B5C7AE1CE25D40002820B3 /* Automattic-Tracks-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93B5C7B51CE25D40002820B3 /* AutomatticTracks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */; };
 		93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */; };
@@ -61,6 +62,8 @@
 		9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventCoreData.m; sourceTree = "<group>"; };
 		9339E70A1ADE98B800AEAB68 /* TracksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksConstants.h; sourceTree = "<group>"; };
 		9339E70B1ADE98B800AEAB68 /* TracksConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksConstants.m; sourceTree = "<group>"; };
+		9349E9921D41148A00DDB5BB /* Automattic-Tracks-iOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Automattic-Tracks-iOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksServiceRemoteTests.swift; sourceTree = "<group>"; };
 		937632821AC1F45600086BC6 /* TracksEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventService.h; sourceTree = "<group>"; };
 		937632831AC1F45600086BC6 /* TracksEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventService.m; sourceTree = "<group>"; };
 		937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventServiceTests.m; sourceTree = "<group>"; };
@@ -222,6 +225,7 @@
 		93C021291AB0A6330014096A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				9349E9921D41148A00DDB5BB /* Automattic-Tracks-iOSTests-Bridging-Header.h */,
 				93B5C7BB1CE25D40002820B3 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -260,6 +264,7 @@
 				937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */,
 				931EE6CB1AD404D000E8711C /* TracksEventTests.m */,
 				93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */,
+				9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */,
 				93F595521ABA01AE00280F9E /* TracksServiceTests.m */,
 			);
 			name = Tests;
@@ -304,12 +309,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93B5C7BC1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */;
 			buildPhases = (
-				03285C5F6DE693B49C7B8A5C /* 📦 Check Pods Manifest.lock */,
+				03285C5F6DE693B49C7B8A5C /* [CP] Check Pods Manifest.lock */,
 				93B5C7A61CE25D40002820B3 /* Sources */,
 				93B5C7A71CE25D40002820B3 /* Frameworks */,
 				93B5C7A81CE25D40002820B3 /* Headers */,
 				93B5C7A91CE25D40002820B3 /* Resources */,
-				6BA4389C4A42A9E74BF1D871 /* 📦 Copy Pods Resources */,
+				6BA4389C4A42A9E74BF1D871 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -324,12 +329,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93B5C7BF1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */;
 			buildPhases = (
-				61BED20AB4A33F1EEE1C49A4 /* 📦 Check Pods Manifest.lock */,
+				61BED20AB4A33F1EEE1C49A4 /* [CP] Check Pods Manifest.lock */,
 				93B5C7B01CE25D40002820B3 /* Sources */,
 				93B5C7B11CE25D40002820B3 /* Frameworks */,
 				93B5C7B21CE25D40002820B3 /* Resources */,
-				B5AA90B9C0803BE39E1185A9 /* 📦 Embed Pods Frameworks */,
-				F129251F3ADFB63E03CDE9A2 /* 📦 Copy Pods Resources */,
+				B5AA90B9C0803BE39E1185A9 /* [CP] Embed Pods Frameworks */,
+				F129251F3ADFB63E03CDE9A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -395,14 +400,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		03285C5F6DE693B49C7B8A5C /* 📦 Check Pods Manifest.lock */ = {
+		03285C5F6DE693B49C7B8A5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,14 +415,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		61BED20AB4A33F1EEE1C49A4 /* 📦 Check Pods Manifest.lock */ = {
+		61BED20AB4A33F1EEE1C49A4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -425,14 +430,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		6BA4389C4A42A9E74BF1D871 /* 📦 Copy Pods Resources */ = {
+		6BA4389C4A42A9E74BF1D871 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -440,14 +445,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		B5AA90B9C0803BE39E1185A9 /* 📦 Embed Pods Frameworks */ = {
+		B5AA90B9C0803BE39E1185A9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -455,14 +460,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F129251F3ADFB63E03CDE9A2 /* 📦 Copy Pods Resources */ = {
+		F129251F3ADFB63E03CDE9A2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -500,6 +505,7 @@
 				93B5C7D91CE25D8E002820B3 /* TracksEventServiceTests.m in Sources */,
 				93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */,
 				93B5C7D81CE25D8E002820B3 /* TestTracksContextManager.m in Sources */,
+				9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */,
 				93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -575,6 +581,7 @@
 			baseConfigurationReference = F4CDF4E3ABD693CAED06290A /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -584,6 +591,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Automattic-Tracks-iOSTests/Automattic-Tracks-iOSTests-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -593,6 +601,7 @@
 			baseConfigurationReference = 9D68681CFE7A89CD717A87F8 /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
@@ -602,6 +611,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-iOSTests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Automattic-Tracks-iOSTests/Automattic-Tracks-iOSTests-Bridging-Header.h";
 			};
 			name = Release;
 		};
