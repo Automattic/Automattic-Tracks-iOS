@@ -1,6 +1,6 @@
 #import "TracksEventPersistenceService.h"
 #import "TracksEventCoreData.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "TracksLoggingPrivate.h"
 
 @interface TracksEventPersistenceService ()
 

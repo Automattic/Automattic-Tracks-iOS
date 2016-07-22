@@ -7,55 +7,54 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7CF8858E7F085063E5FA37C3 /* libPods-Automattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C2FC310E80CC6BB7A70F0437 /* libPods-Automattic-Tracks-iOS.a */; };
-		931EE6B31ACEEA7C00E8711C /* Tracks.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
-		931EE6CC1AD404D000E8711C /* TracksEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CB1AD404D000E8711C /* TracksEventTests.m */; };
-		931EE6D01AD5A58D00E8711C /* TestTracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */; };
-		9333CA9E1ACB22D300ACE506 /* TracksEventCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */; };
-		9339E70C1ADE98B800AEAB68 /* TracksConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9339E70B1ADE98B800AEAB68 /* TracksConstants.m */; };
-		937632841AC1F45600086BC6 /* TracksEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632831AC1F45600086BC6 /* TracksEventService.m */; };
-		937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */; };
-		93771E381ACC58AC00B1E5FF /* TracksDeviceInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 93771E371ACC58AC00B1E5FF /* TracksDeviceInformation.m */; };
-		93771E3B1ACC6FD700B1E5FF /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93771E3A1ACC6FD700B1E5FF /* CoreTelephony.framework */; };
-		93AD39931AC713110069344D /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93AD39921AC713110069344D /* CoreData.framework */; };
-		93AD39971AC713F20069344D /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
-		93AD399A1AC714A80069344D /* TracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39991AC714A80069344D /* TracksContextManager.m */; };
-		93AD399E1ACACC560069344D /* libAutomattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */; };
-		93AD39A41ACADA650069344D /* TracksEventPersistenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39A31ACADA650069344D /* TracksEventPersistenceService.m */; };
-		93C021361AB0BB100014096A /* TracksEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021351AB0BB100014096A /* TracksEvent.m */; };
-		93C0213A1AB1BFF30014096A /* TracksServiceRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021391AB1BFF30014096A /* TracksServiceRemote.m */; };
-		93C0213D1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
-		93F595511AB9B7A800280F9E /* TracksService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F595501AB9B7A800280F9E /* TracksService.m */; };
-		93F595531ABA01AE00280F9E /* TracksServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F595521ABA01AE00280F9E /* TracksServiceTests.m */; };
-		F051CD3C866E35262F42ACE8 /* libPods-Automattic-Tracks-iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 148BAA4989EB1CFF84CBF8A4 /* libPods-Automattic-Tracks-iOSTests.a */; };
+		00EC19F5C9B3F78F5F50366F /* Pods_Automattic_Tracks_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6EBDB237A5CBEE0EE8433798 /* Pods_Automattic_Tracks_iOS.framework */; };
+		9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */; };
+		93B5C7AE1CE25D40002820B3 /* Automattic-Tracks-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93B5C7B51CE25D40002820B3 /* AutomatticTracks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */; };
+		93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */; };
+		93B5C7C31CE25D66002820B3 /* TracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39991AC714A80069344D /* TracksContextManager.m */; };
+		93B5C7C41CE25D66002820B3 /* TracksEventCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */; };
+		93B5C7C51CE25D66002820B3 /* TracksEvent.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021351AB0BB100014096A /* TracksEvent.m */; };
+		93B5C7C61CE25D66002820B3 /* TracksDeviceInformation.m in Sources */ = {isa = PBXBuildFile; fileRef = 93771E371ACC58AC00B1E5FF /* TracksDeviceInformation.m */; };
+		93B5C7C71CE25D66002820B3 /* TracksEventPersistenceService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39A31ACADA650069344D /* TracksEventPersistenceService.m */; };
+		93B5C7C81CE25D66002820B3 /* TracksEventService.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632831AC1F45600086BC6 /* TracksEventService.m */; };
+		93B5C7C91CE25D66002820B3 /* TracksService.m in Sources */ = {isa = PBXBuildFile; fileRef = 93F595501AB9B7A800280F9E /* TracksService.m */; };
+		93B5C7CA1CE25D66002820B3 /* TracksServiceRemote.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C021391AB1BFF30014096A /* TracksServiceRemote.m */; };
+		93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9339E70B1ADE98B800AEAB68 /* TracksConstants.m */; };
+		93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7641CE2303D002820B3 /* TracksLogging.m */; };
+		93B5C7CD1CE25D7D002820B3 /* TracksLoggingPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7671CE230AD002820B3 /* TracksLoggingPrivate.h */; };
+		93B5C7CE1CE25D7D002820B3 /* TracksContextManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 93AD39981AC714A80069344D /* TracksContextManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		93B5C7CF1CE25D7D002820B3 /* TracksEventCoreData.h in Headers */ = {isa = PBXBuildFile; fileRef = 9333CA9C1ACB22D300ACE506 /* TracksEventCoreData.h */; };
+		93B5C7D01CE25D7D002820B3 /* TracksEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C021341AB0BB100014096A /* TracksEvent.h */; };
+		93B5C7D11CE25D7D002820B3 /* TracksDeviceInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = 93771E361ACC58AC00B1E5FF /* TracksDeviceInformation.h */; };
+		93B5C7D21CE25D7D002820B3 /* TracksEventPersistenceService.h in Headers */ = {isa = PBXBuildFile; fileRef = 93AD39A21ACADA650069344D /* TracksEventPersistenceService.h */; };
+		93B5C7D31CE25D7D002820B3 /* TracksEventService.h in Headers */ = {isa = PBXBuildFile; fileRef = 937632821AC1F45600086BC6 /* TracksEventService.h */; };
+		93B5C7D41CE25D7D002820B3 /* TracksService.h in Headers */ = {isa = PBXBuildFile; fileRef = 93F5954F1AB9B7A800280F9E /* TracksService.h */; };
+		93B5C7D51CE25D7D002820B3 /* TracksServiceRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = 93C021381AB1BFF30014096A /* TracksServiceRemote.h */; };
+		93B5C7D61CE25D7D002820B3 /* TracksConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9339E70A1ADE98B800AEAB68 /* TracksConstants.h */; };
+		93B5C7D71CE25D7D002820B3 /* TracksLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = E1DBEA181C07071300FF2F73 /* TracksLogging.h */; };
+		93B5C7D81CE25D8E002820B3 /* TestTracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */; };
+		93B5C7D91CE25D8E002820B3 /* TracksEventServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */; };
+		93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CB1AD404D000E8711C /* TracksEventTests.m */; };
+		93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
+		93D77A511CE2640C009EDB38 /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
+		93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D77A521CE26C43009EDB38 /* Tracks.swift */; };
+		991C666EE9B8040B88B209D8 /* Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A0FCA58B981387A89FC10B2E /* Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		93C021261AB0A6330014096A /* PBXContainerItemProxy */ = {
+		93B5C7B61CE25D40002820B3 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 93C021111AB0A6330014096A /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 93C021181AB0A6330014096A;
+			remoteGlobalIDString = 93B5C7AA1CE25D40002820B3;
 			remoteInfo = "Automattic-Tracks-iOS";
 		};
 /* End PBXContainerItemProxy section */
 
-/* Begin PBXCopyFilesBuildPhase section */
-		93C021171AB0A6330014096A /* CopyFiles */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "include/$(PRODUCT_NAME)";
-			dstSubfolderSpec = 16;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXCopyFilesBuildPhase section */
-
 /* Begin PBXFileReference section */
-		148BAA4989EB1CFF84CBF8A4 /* libPods-Automattic-Tracks-iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		792B829D0A23395238AF6CAB /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
-		7C14B632CA74A30467DE3176 /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		530BAF6F02DA9721EA743DCC /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		6EBDB237A5CBEE0EE8433798 /* Pods_Automattic_Tracks_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		931EE6CB1AD404D000E8711C /* TracksEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventTests.m; sourceTree = "<group>"; };
 		931EE6CE1AD5A58D00E8711C /* TestTracksContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTracksContextManager.h; sourceTree = "<group>"; };
 		931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTracksContextManager.m; sourceTree = "<group>"; };
@@ -63,6 +62,8 @@
 		9333CA9D1ACB22D300ACE506 /* TracksEventCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventCoreData.m; sourceTree = "<group>"; };
 		9339E70A1ADE98B800AEAB68 /* TracksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksConstants.h; sourceTree = "<group>"; };
 		9339E70B1ADE98B800AEAB68 /* TracksConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksConstants.m; sourceTree = "<group>"; };
+		9349E9921D41148A00DDB5BB /* Automattic-Tracks-iOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Automattic-Tracks-iOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksServiceRemoteTests.swift; sourceTree = "<group>"; };
 		937632821AC1F45600086BC6 /* TracksEventService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventService.h; sourceTree = "<group>"; };
 		937632831AC1F45600086BC6 /* TracksEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventService.m; sourceTree = "<group>"; };
 		937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventServiceTests.m; sourceTree = "<group>"; };
@@ -76,41 +77,46 @@
 		93AD39991AC714A80069344D /* TracksContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksContextManager.m; sourceTree = "<group>"; };
 		93AD39A21ACADA650069344D /* TracksEventPersistenceService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEventPersistenceService.h; sourceTree = "<group>"; };
 		93AD39A31ACADA650069344D /* TracksEventPersistenceService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventPersistenceService.m; sourceTree = "<group>"; };
-		93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libAutomattic-Tracks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		93C021241AB0A6330014096A /* Automattic-Tracks-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Automattic-Tracks-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		93C0212A1AB0A6330014096A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93B5C7641CE2303D002820B3 /* TracksLogging.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksLogging.m; sourceTree = "<group>"; };
+		93B5C7671CE230AD002820B3 /* TracksLoggingPrivate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksLoggingPrivate.h; sourceTree = "<group>"; };
+		93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksLoggingPrivate.m; sourceTree = "<group>"; };
+		93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutomatticTracks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Automattic-Tracks-iOS.h"; sourceTree = "<group>"; };
+		93B5C7AF1CE25D40002820B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		93B5C7B41CE25D40002820B3 /* Automattic-Tracks-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Automattic-Tracks-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		93B5C7BB1CE25D40002820B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C021341AB0BB100014096A /* TracksEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEvent.h; sourceTree = "<group>"; };
 		93C021351AB0BB100014096A /* TracksEvent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEvent.m; sourceTree = "<group>"; };
 		93C021381AB1BFF30014096A /* TracksServiceRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksServiceRemote.h; sourceTree = "<group>"; };
 		93C021391AB1BFF30014096A /* TracksServiceRemote.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceRemote.m; sourceTree = "<group>"; };
 		93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceRemoteIntegrationTests.m; sourceTree = "<group>"; };
 		93C0213E1AB75F770014096A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		93D77A521CE26C43009EDB38 /* Tracks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracks.swift; sourceTree = "<group>"; };
 		93F5954F1AB9B7A800280F9E /* TracksService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksService.h; sourceTree = "<group>"; };
 		93F595501AB9B7A800280F9E /* TracksService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksService.m; sourceTree = "<group>"; };
 		93F595521ABA01AE00280F9E /* TracksServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceTests.m; sourceTree = "<group>"; };
-		AEBCF3262C67E03BDCA66153 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		C2FC310E80CC6BB7A70F0437 /* libPods-Automattic-Tracks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E15E3CC272CAA5A286551AB0 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		E6ED7D1786D23CF511D84A90 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		9D68681CFE7A89CD717A87F8 /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		A0FCA58B981387A89FC10B2E /* Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E1DBEA181C07071300FF2F73 /* TracksLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracksLogging.h; sourceTree = "<group>"; };
+		F4CDF4E3ABD693CAED06290A /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F9DF6A99F99A34C92777F30D /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		93C021161AB0A6330014096A /* Frameworks */ = {
+		93B5C7A71CE25D40002820B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93771E3B1ACC6FD700B1E5FF /* CoreTelephony.framework in Frameworks */,
-				93AD39931AC713110069344D /* CoreData.framework in Frameworks */,
-				7CF8858E7F085063E5FA37C3 /* libPods-Automattic-Tracks-iOS.a in Frameworks */,
+				00EC19F5C9B3F78F5F50366F /* Pods_Automattic_Tracks_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93C021211AB0A6330014096A /* Frameworks */ = {
+		93B5C7B11CE25D40002820B3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93AD399E1ACACC560069344D /* libAutomattic-Tracks-iOS.a in Frameworks */,
-				F051CD3C866E35262F42ACE8 /* libPods-Automattic-Tracks-iOSTests.a in Frameworks */,
+				93B5C7B51CE25D40002820B3 /* AutomatticTracks.framework in Frameworks */,
+				991C666EE9B8040B88B209D8 /* Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -122,9 +128,8 @@
 			children = (
 				93771E3A1ACC6FD700B1E5FF /* CoreTelephony.framework */,
 				93AD39921AC713110069344D /* CoreData.framework */,
-				C2FC310E80CC6BB7A70F0437 /* libPods-Automattic-Tracks-iOS.a */,
-				148BAA4989EB1CFF84CBF8A4 /* libPods-Automattic-Tracks-iOSTests.a */,
-				E15E3CC272CAA5A286551AB0 /* libPods.a */,
+				6EBDB237A5CBEE0EE8433798 /* Pods_Automattic_Tracks_iOS.framework */,
+				A0FCA58B981387A89FC10B2E /* Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -134,10 +139,10 @@
 			children = (
 				93C0213E1AB75F770014096A /* Podfile */,
 				937632B91AC3141800086BC6 /* Automattic-Tracks-iOS.podspec */,
-				AEBCF3262C67E03BDCA66153 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */,
-				E6ED7D1786D23CF511D84A90 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */,
-				792B829D0A23395238AF6CAB /* Pods-Automattic-Tracks-iOS.debug.xcconfig */,
-				7C14B632CA74A30467DE3176 /* Pods-Automattic-Tracks-iOS.release.xcconfig */,
+				530BAF6F02DA9721EA743DCC /* Pods-Automattic-Tracks-iOS.debug.xcconfig */,
+				F9DF6A99F99A34C92777F30D /* Pods-Automattic-Tracks-iOS.release.xcconfig */,
+				F4CDF4E3ABD693CAED06290A /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig */,
+				9D68681CFE7A89CD717A87F8 /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -163,6 +168,15 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
+		93B5C7661CE2308D002820B3 /* Private */ = {
+			isa = PBXGroup;
+			children = (
+				93B5C7671CE230AD002820B3 /* TracksLoggingPrivate.h */,
+				93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */,
+			);
+			path = Private;
+			sourceTree = "<group>";
+		};
 		93C021101AB0A6330014096A = {
 			isa = PBXGroup;
 			children = (
@@ -177,8 +191,8 @@
 		93C0211A1AB0A6330014096A /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */,
-				93C021241AB0A6330014096A /* Automattic-Tracks-iOSTests.xctest */,
+				93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */,
+				93B5C7B41CE25D40002820B3 /* Automattic-Tracks-iOSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -186,10 +200,14 @@
 		93C0211B1AB0A6330014096A /* Automattic-Tracks-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				93B5C7661CE2308D002820B3 /* Private */,
 				93C021331AB0BAF50014096A /* Model */,
 				93C021371AB1BFA40014096A /* Services */,
+				93D77A541CE26C9C009EDB38 /* Supporting Files */,
 				9339E70A1ADE98B800AEAB68 /* TracksConstants.h */,
 				9339E70B1ADE98B800AEAB68 /* TracksConstants.m */,
+				E1DBEA181C07071300FF2F73 /* TracksLogging.h */,
+				93B5C7641CE2303D002820B3 /* TracksLogging.m */,
 			);
 			path = "Automattic-Tracks-iOS";
 			sourceTree = "<group>";
@@ -207,7 +225,8 @@
 		93C021291AB0A6330014096A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				93C0212A1AB0A6330014096A /* Info.plist */,
+				9349E9921D41148A00DDB5BB /* Automattic-Tracks-iOSTests-Bridging-Header.h */,
+				93B5C7BB1CE25D40002820B3 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -245,23 +264,57 @@
 				937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */,
 				931EE6CB1AD404D000E8711C /* TracksEventTests.m */,
 				93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */,
+				9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */,
 				93F595521ABA01AE00280F9E /* TracksServiceTests.m */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
 		};
+		93D77A541CE26C9C009EDB38 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */,
+				93B5C7AF1CE25D40002820B3 /* Info.plist */,
+				93D77A521CE26C43009EDB38 /* Tracks.swift */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		93B5C7A81CE25D40002820B3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				93B5C7AE1CE25D40002820B3 /* Automattic-Tracks-iOS.h in Headers */,
+				93B5C7CD1CE25D7D002820B3 /* TracksLoggingPrivate.h in Headers */,
+				93B5C7CE1CE25D7D002820B3 /* TracksContextManager.h in Headers */,
+				93B5C7CF1CE25D7D002820B3 /* TracksEventCoreData.h in Headers */,
+				93B5C7D01CE25D7D002820B3 /* TracksEvent.h in Headers */,
+				93B5C7D11CE25D7D002820B3 /* TracksDeviceInformation.h in Headers */,
+				93B5C7D21CE25D7D002820B3 /* TracksEventPersistenceService.h in Headers */,
+				93B5C7D31CE25D7D002820B3 /* TracksEventService.h in Headers */,
+				93B5C7D41CE25D7D002820B3 /* TracksService.h in Headers */,
+				93B5C7D51CE25D7D002820B3 /* TracksServiceRemote.h in Headers */,
+				93B5C7D61CE25D7D002820B3 /* TracksConstants.h in Headers */,
+				93B5C7D71CE25D7D002820B3 /* TracksLogging.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		93C021181AB0A6330014096A /* Automattic-Tracks-iOS */ = {
+		93B5C7AA1CE25D40002820B3 /* Automattic-Tracks-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93C0212D1AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */;
+			buildConfigurationList = 93B5C7BC1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */;
 			buildPhases = (
-				92795131D3590049CAA284E5 /* Check Pods Manifest.lock */,
-				93C021151AB0A6330014096A /* Sources */,
-				93C021161AB0A6330014096A /* Frameworks */,
-				93C021171AB0A6330014096A /* CopyFiles */,
-				D8922934E747D3825FE5E769 /* Copy Pods Resources */,
+				03285C5F6DE693B49C7B8A5C /* [CP] Check Pods Manifest.lock */,
+				93B5C7A61CE25D40002820B3 /* Sources */,
+				93B5C7A71CE25D40002820B3 /* Frameworks */,
+				93B5C7A81CE25D40002820B3 /* Headers */,
+				93B5C7A91CE25D40002820B3 /* Resources */,
+				6BA4389C4A42A9E74BF1D871 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -269,27 +322,28 @@
 			);
 			name = "Automattic-Tracks-iOS";
 			productName = "Automattic-Tracks-iOS";
-			productReference = 93C021191AB0A6330014096A /* libAutomattic-Tracks-iOS.a */;
-			productType = "com.apple.product-type.library.static";
+			productReference = 93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */;
+			productType = "com.apple.product-type.framework";
 		};
-		93C021231AB0A6330014096A /* Automattic-Tracks-iOSTests */ = {
+		93B5C7B31CE25D40002820B3 /* Automattic-Tracks-iOSTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 93C021301AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */;
+			buildConfigurationList = 93B5C7BF1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */;
 			buildPhases = (
-				ADEE6380E7CC2049DCFF2336 /* Check Pods Manifest.lock */,
-				93C021201AB0A6330014096A /* Sources */,
-				93C021211AB0A6330014096A /* Frameworks */,
-				93C021221AB0A6330014096A /* Resources */,
-				3D3E7F416113192F886D8EBD /* Copy Pods Resources */,
+				61BED20AB4A33F1EEE1C49A4 /* [CP] Check Pods Manifest.lock */,
+				93B5C7B01CE25D40002820B3 /* Sources */,
+				93B5C7B11CE25D40002820B3 /* Frameworks */,
+				93B5C7B21CE25D40002820B3 /* Resources */,
+				B5AA90B9C0803BE39E1185A9 /* [CP] Embed Pods Frameworks */,
+				F129251F3ADFB63E03CDE9A2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				93C021271AB0A6330014096A /* PBXTargetDependency */,
+				93B5C7B71CE25D40002820B3 /* PBXTargetDependency */,
 			);
 			name = "Automattic-Tracks-iOSTests";
 			productName = "Automattic-Tracks-iOSTests";
-			productReference = 93C021241AB0A6330014096A /* Automattic-Tracks-iOSTests.xctest */;
+			productReference = 93B5C7B41CE25D40002820B3 /* Automattic-Tracks-iOSTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -298,14 +352,15 @@
 		93C021111AB0A6330014096A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftUpdateCheck = 0730;
 				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "Automattic Inc.";
 				TargetAttributes = {
-					93C021181AB0A6330014096A = {
-						CreatedOnToolsVersion = 6.2;
+					93B5C7AA1CE25D40002820B3 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
-					93C021231AB0A6330014096A = {
-						CreatedOnToolsVersion = 6.2;
+					93B5C7B31CE25D40002820B3 = {
+						CreatedOnToolsVersion = 7.3.1;
 					};
 				};
 			};
@@ -321,47 +376,38 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				93C021181AB0A6330014096A /* Automattic-Tracks-iOS */,
-				93C021231AB0A6330014096A /* Automattic-Tracks-iOSTests */,
+				93B5C7AA1CE25D40002820B3 /* Automattic-Tracks-iOS */,
+				93B5C7B31CE25D40002820B3 /* Automattic-Tracks-iOSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		93C021221AB0A6330014096A /* Resources */ = {
+		93B5C7A91CE25D40002820B3 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				931EE6B31ACEEA7C00E8711C /* Tracks.xcdatamodeld in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		93B5C7B21CE25D40002820B3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		3D3E7F416113192F886D8EBD /* Copy Pods Resources */ = {
+		03285C5F6DE693B49C7B8A5C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		92795131D3590049CAA284E5 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -369,14 +415,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		ADEE6380E7CC2049DCFF2336 /* Check Pods Manifest.lock */ = {
+		61BED20AB4A33F1EEE1C49A4 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -384,14 +430,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		D8922934E747D3825FE5E769 /* Copy Pods Resources */ = {
+		6BA4389C4A42A9E74BF1D871 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,49 +445,176 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B5AA90B9C0803BE39E1185A9 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F129251F3ADFB63E03CDE9A2 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		93C021151AB0A6330014096A /* Sources */ = {
+		93B5C7A61CE25D40002820B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93C021361AB0BB100014096A /* TracksEvent.m in Sources */,
-				9339E70C1ADE98B800AEAB68 /* TracksConstants.m in Sources */,
-				93C0213A1AB1BFF30014096A /* TracksServiceRemote.m in Sources */,
-				93AD39A41ACADA650069344D /* TracksEventPersistenceService.m in Sources */,
-				93AD39971AC713F20069344D /* Tracks.xcdatamodeld in Sources */,
-				937632841AC1F45600086BC6 /* TracksEventService.m in Sources */,
-				93771E381ACC58AC00B1E5FF /* TracksDeviceInformation.m in Sources */,
-				9333CA9E1ACB22D300ACE506 /* TracksEventCoreData.m in Sources */,
-				93F595511AB9B7A800280F9E /* TracksService.m in Sources */,
-				93AD399A1AC714A80069344D /* TracksContextManager.m in Sources */,
+				93B5C7CA1CE25D66002820B3 /* TracksServiceRemote.m in Sources */,
+				93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */,
+				93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */,
+				93B5C7C31CE25D66002820B3 /* TracksContextManager.m in Sources */,
+				93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */,
+				93B5C7C71CE25D66002820B3 /* TracksEventPersistenceService.m in Sources */,
+				93B5C7C91CE25D66002820B3 /* TracksService.m in Sources */,
+				93B5C7C51CE25D66002820B3 /* TracksEvent.m in Sources */,
+				93B5C7C41CE25D66002820B3 /* TracksEventCoreData.m in Sources */,
+				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
+				93D77A511CE2640C009EDB38 /* Tracks.xcdatamodeld in Sources */,
+				93B5C7C81CE25D66002820B3 /* TracksEventService.m in Sources */,
+				93B5C7C61CE25D66002820B3 /* TracksDeviceInformation.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		93C021201AB0A6330014096A /* Sources */ = {
+		93B5C7B01CE25D40002820B3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				93C0213D1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m in Sources */,
-				931EE6D01AD5A58D00E8711C /* TestTracksContextManager.m in Sources */,
-				937632B81AC30F8700086BC6 /* TracksEventServiceTests.m in Sources */,
-				931EE6CC1AD404D000E8711C /* TracksEventTests.m in Sources */,
-				93F595531ABA01AE00280F9E /* TracksServiceTests.m in Sources */,
+				93B5C7D91CE25D8E002820B3 /* TracksEventServiceTests.m in Sources */,
+				93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */,
+				93B5C7D81CE25D8E002820B3 /* TestTracksContextManager.m in Sources */,
+				9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */,
+				93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		93C021271AB0A6330014096A /* PBXTargetDependency */ = {
+		93B5C7B71CE25D40002820B3 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 93C021181AB0A6330014096A /* Automattic-Tracks-iOS */;
-			targetProxy = 93C021261AB0A6330014096A /* PBXContainerItemProxy */;
+			target = 93B5C7AA1CE25D40002820B3 /* Automattic-Tracks-iOS */;
+			targetProxy = 93B5C7B61CE25D40002820B3 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		93B5C7BD1CE25D40002820B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 530BAF6F02DA9721EA743DCC /* Pods-Automattic-Tracks-iOS.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Automattic-Tracks-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-iOS";
+				PRODUCT_NAME = AutomatticTracks;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		93B5C7BE1CE25D40002820B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9DF6A99F99A34C92777F30D /* Pods-Automattic-Tracks-iOS.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Automattic-Tracks-iOS/Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-iOS";
+				PRODUCT_NAME = AutomatticTracks;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		93B5C7C01CE25D40002820B3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = F4CDF4E3ABD693CAED06290A /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Automattic-Tracks-iOSTests/Automattic-Tracks-iOSTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		93B5C7C11CE25D40002820B3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9D68681CFE7A89CD717A87F8 /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.release.xcconfig */;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
+				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-iOSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Automattic-Tracks-iOSTests/Automattic-Tracks-iOSTests-Bridging-Header.h";
+			};
+			name = Release;
+		};
 		93C0212B1AB0A6330014096A /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -476,7 +649,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -510,103 +683,39 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		93C0212E1AB0A6330014096A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 792B829D0A23395238AF6CAB /* Pods-Automattic-Tracks-iOS.debug.xcconfig */;
-			buildSettings = {
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = mh_dylib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		93C0212F1AB0A6330014096A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7C14B632CA74A30467DE3176 /* Pods-Automattic-Tracks-iOS.release.xcconfig */;
-			buildSettings = {
-				GCC_WARN_ABOUT_MISSING_FIELD_INITIALIZERS = YES;
-				GCC_WARN_ABOUT_MISSING_NEWLINE = YES;
-				GCC_WARN_INITIALIZER_NOT_FULLY_BRACKETED = YES;
-				GCC_WARN_SHADOW = YES;
-				GCC_WARN_SIGN_COMPARE = YES;
-				GCC_WARN_UNUSED_LABEL = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				MACH_O_TYPE = mh_dylib;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		93C021311AB0A6330014096A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AEBCF3262C67E03BDCA66153 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Debug;
-		};
-		93C021321AB0A6330014096A /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E6ED7D1786D23CF511D84A90 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */;
-			buildSettings = {
-				FRAMEWORK_SEARCH_PATHS = "$(inherited)";
-				INFOPLIST_FILE = "Automattic-Tracks-iOSTests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		93B5C7BC1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93B5C7BD1CE25D40002820B3 /* Debug */,
+				93B5C7BE1CE25D40002820B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		93B5C7BF1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				93B5C7C01CE25D40002820B3 /* Debug */,
+				93B5C7C11CE25D40002820B3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		93C021141AB0A6330014096A /* Build configuration list for PBXProject "Automattic-Tracks-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				93C0212B1AB0A6330014096A /* Debug */,
 				93C0212C1AB0A6330014096A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		93C0212D1AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				93C0212E1AB0A6330014096A /* Debug */,
-				93C0212F1AB0A6330014096A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		93C021301AB0A6330014096A /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				93C021311AB0A6330014096A /* Debug */,
-				93C021321AB0A6330014096A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -1,6 +1,6 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
-#import <CocoaLumberjack/CocoaLumberjack.h>
+#import "TracksLoggingPrivate.h"
 #import <Reachability/Reachability.h>
 
 #if TARGET_OS_IPHONE
