@@ -1,11 +1,9 @@
 PODS:
-  - CocoaLumberjack (2.2.0):
-    - CocoaLumberjack/Default (= 2.2.0)
-    - CocoaLumberjack/Extensions (= 2.2.0)
-  - CocoaLumberjack/Core (2.2.0)
-  - CocoaLumberjack/Default (2.2.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.2.0):
+  - CocoaLumberjack (3.2.0):
+    - CocoaLumberjack/Default (= 3.2.0)
+    - CocoaLumberjack/Extensions (= 3.2.0)
+  - CocoaLumberjack/Default (3.2.0)
+  - CocoaLumberjack/Extensions (3.2.0):
     - CocoaLumberjack/Default
   - OCMock (3.3.1)
   - OHHTTPStubs (5.2.2):
@@ -27,7 +25,7 @@ PODS:
   - UIDeviceIdentifier (0.5.0)
 
 DEPENDENCIES:
-  - CocoaLumberjack (~> 2.2.0)
+  - CocoaLumberjack (~> 3.2.0)
   - OCMock (~> 3.3.1)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
@@ -35,12 +33,12 @@ DEPENDENCIES:
   - UIDeviceIdentifier (~> 0.4)
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  CocoaLumberjack: 9b4aed7073d242f29cc2f62068d995faf67f703a
   OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
   OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   UIDeviceIdentifier: a959a6d4f51036b4180dd31fb26483a820f1cc46
 
-PODFILE CHECKSUM: ec703e5cf6b252833f86909e842005ea51a96d29
+PODFILE CHECKSUM: 6e5d5b968e3d3b3eb51a5548586d7d6cfe5efc1d
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1
