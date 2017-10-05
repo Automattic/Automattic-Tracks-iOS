@@ -1,7 +1,7 @@
 #import "TracksLogging.h"
 #import "TracksLoggingPrivate.h"
 
-int TracksGetLoggingLevel() {
+int TracksGetLoggingLevel(void) {
     return ddLogLevel;
 }
 
