@@ -1,2 +1,2 @@
-int TracksGetLoggingLevel();
+int TracksGetLoggingLevel(void);
 void TracksSetLoggingLevel(int level);

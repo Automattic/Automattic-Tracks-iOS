@@ -51,11 +51,12 @@ class TracksServiceRemoteTests: XCTestCase {
         subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
             error in
             expect.fulfill()
-
-            let error = error as? NSError
             XCTAssertNotNil(error)
-            XCTAssertEqual(TracksErrorDomain, error?.domain)
-            XCTAssertEqual(TracksErrorCode.remoteResponseInvalid.rawValue, error?.code)
+
+            if let error = error as NSError? {
+                XCTAssertEqual(TracksErrorDomain, error.domain)
+                XCTAssertEqual(TracksErrorCode.remoteResponseInvalid.rawValue, error.code)
+            }
         }
 
         waitForExpectations(timeout: 2.0, handler: nil)
@@ -74,11 +75,12 @@ class TracksServiceRemoteTests: XCTestCase {
         subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
             error in
             expect.fulfill()
-
-            let error = error as? NSError
             XCTAssertNotNil(error)
-            XCTAssertEqual(TracksErrorDomain, error?.domain)
-            XCTAssertEqual(TracksErrorCode.remoteResponseError.rawValue, error?.code)
+
+            if let error = error as NSError? {
+                XCTAssertEqual(TracksErrorDomain, error.domain)
+                XCTAssertEqual(TracksErrorCode.remoteResponseError.rawValue, error.code)
+            }
         }
 
         waitForExpectations(timeout: 2.0, handler: nil)
