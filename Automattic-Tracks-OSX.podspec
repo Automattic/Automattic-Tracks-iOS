@@ -15,6 +15,6 @@ Pod::Spec.new do |spec|
   spec.header_dir = 'AutomatticTracks'
   spec.module_name = 'AutomatticTracks'
 
-  spec.dependency 'CocoaLumberjack', '~>2.2.0'
+  spec.dependency 'CocoaLumberjack', '~> 3.4.1'
   spec.dependency 'Reachability', '~>3.1'
 end
