@@ -93,6 +93,11 @@
 }
 
 
+- (void)clearTracksEvents
+{
+    [self removeTracksEvents:[self fetchAllTracksEvents]];
+}
+
 - (void)incrementRetryCountForEvents:(NSArray *)tracksEvents
 {
     [self.managedObjectContext performBlockAndWait:^{

@@ -173,6 +173,10 @@ NSString *const USER_ID_ANON = @"anonId";
      ];
 }
 
+- (void)clearQueuedEvents
+{
+    [self.tracksEventService clearTracksEvents];
+}
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
 {
