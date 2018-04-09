@@ -152,27 +152,32 @@ NSString *const USER_ID_ANON = @"anonId";
         NSDictionary *eventJSON = [self dictionaryForTracksEvent:tracksEvent withParentCommonProperties:commonProperties];
         [jsonEvents addObject:eventJSON];
     }
-    
+
+    __weak __typeof(self) weakSelf = self;
     [self.remote sendBatchOfEvents:jsonEvents
               withSharedProperties:commonProperties
                  completionHandler:^(NSError *error) {
                      if (error) {
                          DDLogError(@"TracksService Error while remote calling: %@", error);
-                         [self.tracksEventService incrementRetryCountForEvents:events];
+                         [weakSelf.tracksEventService incrementRetryCountForEvents:events];
                      } else {
                          DDLogVerbose(@"TracksService sendQueuedEvents completed. Sent %@ events.", @(events.count));
                          // Delete the events since they sent or errored
-                         [self.tracksEventService removeTracksEvents:events];
+                         [weakSelf.tracksEventService removeTracksEvents:events];
                      }
                          
                      // Assume no errors for now
-                     [self resetTimer];
+                     [weakSelf resetTimer];
                      
                      [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceDidSendQueuedEventsNotification object:nil];
                  }
      ];
 }
 
+- (void)clearQueuedEvents
+{
+    [self.tracksEventService clearTracksEvents];
+}
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
 {

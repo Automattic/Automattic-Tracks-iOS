@@ -50,13 +50,14 @@
 
     NSURLSessionDataTask *task;
 
+    __weak __typeof(self) weakSelf = self;
     task = [self.session dataTaskWithRequest:request
                             completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error)
             {
                 NSHTTPURLResponse *httpResponse = [response isKindOfClass:[NSHTTPURLResponse class]] ? (NSHTTPURLResponse *)response : nil;
 
                 // Only allow HTTP 200-299 response codes
-                if (error == nil && ![self.acceptableStatusCodes containsIndex:(NSUInteger)httpResponse.statusCode]) {
+                if (error == nil && ![weakSelf.acceptableStatusCodes containsIndex:(NSUInteger)httpResponse.statusCode]) {
                     error = [NSError errorWithDomain:TracksErrorDomain
                                                 code:TracksErrorRemoteResponseError
                                             userInfo:@{NSLocalizedDescriptionKey: @"Invalid HTTP response received from host."}];

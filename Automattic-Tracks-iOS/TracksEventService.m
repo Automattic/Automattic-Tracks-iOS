@@ -98,6 +98,12 @@
 }
 
 
+- (void)clearTracksEvents
+{
+    [self.persistenceService clearTracksEvents];
+}
+
+
 - (void)incrementRetryCountForEvents:(NSArray *)tracksEvents
 {
     [self.persistenceService incrementRetryCountForEvents:tracksEvents];
