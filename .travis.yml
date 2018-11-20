@@ -1,5 +1,3 @@
-install:
-- gem install cocoapods -v 1.5.3 && pod install
 osx_image: xcode7.3
 language: objective-c
 xcode_workspace: Automattic-Tracks-iOS.xcworkspace
