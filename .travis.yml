@@ -1,5 +1,5 @@
 install:
-- pod repo update --silent
+- pod repo update --silent && pod install
 osx_image: xcode7.3
 language: objective-c
 xcode_workspace: Automattic-Tracks-iOS.xcworkspace
