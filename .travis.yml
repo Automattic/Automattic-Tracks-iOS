@@ -10,5 +10,5 @@ xcode_sdk: iphonesimulator
 before_install:
  - gem install cocoapods # Since Travis is not always on latest version
  - pod repo update --silent && pod install
-#script:
-#- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/${POD_NAME}.xcworkspace -scheme ${POD_NAME}-Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
+script:
+- xcodebuild clean build test -workspace Automattic-Tracks-iOS.xcworkspace -scheme Automattic-Tracks-iOS CODE_SIGNING_REQUIRED=NO EXPANDED_CODE_SIGN_IDENTITY="-" EXPANDED_CODE_SIGN_IDENTITY_NAME="-" EXPANDED_PROVISIONING_PROFILE=""
