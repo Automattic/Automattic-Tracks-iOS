@@ -6,12 +6,9 @@ language: objective-c
 xcode_workspace: Automattic-Tracks-iOS.xcworkspace
 xcode_scheme: Automattic-Tracks-iOS
 xcode_sdk: iphonesimulator
-cache:
-  - bundler
-  - cocoapods
 # podfile: Example/Podfile
 before_install:
  - gem install cocoapods # Since Travis is not always on latest version
- - pod repo update --silent && pod install
+ - bundle exec pod repo update --silent && bundle exec pod install
 #script:
 #- set -o pipefail && xcodebuild test -enableCodeCoverage YES -workspace Example/${POD_NAME}.xcworkspace -scheme ${POD_NAME}-Example -sdk iphonesimulator9.3 ONLY_ACTIVE_ARCH=NO | xcpretty
