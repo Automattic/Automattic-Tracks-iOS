@@ -1,8 +1,14 @@
-install:
-- gem install cocoapods -v 1.0.0 && pod install
-osx_image: xcode7.3
+# references:
+# https://github.com/CocoaPods/pod-template/blob/master/.travis.yml
+# https://github.com/wordpress-mobile/AztecEditor-iOS/blob/develop/.travis.yml
+
+osx_image: xcode9.4
 language: objective-c
 xcode_workspace: Automattic-Tracks-iOS.xcworkspace
 xcode_scheme: Automattic-Tracks-iOS
 xcode_sdk: iphonesimulator
-
+before_install:
+ - gem install cocoapods # Since Travis is not always on latest version
+ - pod repo update --silent && pod install
+script:
+- Scripts/build.sh
