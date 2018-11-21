@@ -6,7 +6,9 @@ language: objective-c
 xcode_workspace: Automattic-Tracks-iOS.xcworkspace
 xcode_scheme: Automattic-Tracks-iOS
 xcode_sdk: iphonesimulator
-# cache: cocoapods
+cache:
+  - bundler
+  - cocoapods
 # podfile: Example/Podfile
 before_install:
  - gem install cocoapods # Since Travis is not always on latest version
