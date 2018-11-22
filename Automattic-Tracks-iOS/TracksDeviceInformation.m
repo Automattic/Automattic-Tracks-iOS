@@ -5,6 +5,8 @@
 #import <UIDeviceIdentifier/UIDeviceHardware.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#import <WatchConnectivity/WatchConnectivity.h>
+#import "WatchSessionManager.h"
 #else
 #import <AppKit/AppKit.h>
 #endif
@@ -99,6 +101,10 @@
 
 -(BOOL)isVoiceOverEnabled{
     return UIAccessibilityIsVoiceOverRunning();
+}
+
+-(BOOL)isAppleWatchConnected{
+    return [[WatchSessionManager shared] hasBeenPreviouslyPaired];
 }
 
 -(CGFloat)statusBarHeight{

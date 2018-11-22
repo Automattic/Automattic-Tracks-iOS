@@ -46,6 +46,7 @@ NSString *const DeviceInfoNetworkOperatorKey = @"device_info_current_network_ope
 NSString *const DeviceInfoRadioTypeKey = @"device_info_phone_radio_type";
 NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
 NSString *const DeviceInfoVoiceOverEnabledKey = @"device_info_voiceover_enabled";
+NSString *const DeviceInfoAppleWatchConnectedKey = @"device_info_apple_watch_connected";
 NSString *const DeviceInfoStatusBarHeightKey = @"device_info_status_bar_height";
 
 NSString *const TracksEventNameKey = @"_en";
@@ -316,6 +317,7 @@ NSString *const USER_ID_ANON = @"anonId";
              DeviceInfoRadioTypeKey : self.deviceInformation.currentNetworkRadioType ?: @"Unknown",
              DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO",
              DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
+             DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
              DeviceInfoStatusBarHeightKey : [NSNumber numberWithFloat:self.deviceInformation.statusBarHeight] ,
              };
 }

@@ -19,6 +19,7 @@
 @property (nonatomic, readonly) NSString *currentNetworkRadioType;
 @property (nonatomic, assign) BOOL isWiFiConnected;
 @property (nonatomic, assign) BOOL isVoiceOverEnabled;
+@property (nonatomic, assign) BOOL isAppleWatchConnected;
 @property (nonatomic, assign) CGFloat statusBarHeight;
 
 @end
