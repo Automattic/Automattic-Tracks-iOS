@@ -49,6 +49,9 @@
 		F9FAD59D21A8A00B00B30491 /* AutomatticTracks.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F9FAD5A221A8A0DF00B30491 /* WatchSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F9FAD5A021A8A0DF00B30491 /* WatchSessionManager.h */; };
 		F9FAD5A321A8A0DF00B30491 /* WatchSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD5A121A8A0DF00B30491 /* WatchSessionManager.m */; };
+		F9FAD5AE21A8B64300B30491 /* NSArray+objectsAfterIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = F9FAD5AC21A8B64300B30491 /* NSArray+objectsAfterIndex.h */; };
+		F9FAD5AF21A8B64300B30491 /* NSArray+objectsAfterIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD5AD21A8B64300B30491 /* NSArray+objectsAfterIndex.m */; };
+		F9FAD5B121A8B88700B30491 /* NSArrayObjectsAfterIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD5B021A8B88700B30491 /* NSArrayObjectsAfterIndexTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,6 +145,9 @@
 		F9FAD59821A89C9600B30491 /* DeviceInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceInfoViewController.swift; sourceTree = "<group>"; };
 		F9FAD5A021A8A0DF00B30491 /* WatchSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = WatchSessionManager.h; sourceTree = "<group>"; };
 		F9FAD5A121A8A0DF00B30491 /* WatchSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = WatchSessionManager.m; sourceTree = "<group>"; };
+		F9FAD5AC21A8B64300B30491 /* NSArray+objectsAfterIndex.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSArray+objectsAfterIndex.h"; sourceTree = "<group>"; };
+		F9FAD5AD21A8B64300B30491 /* NSArray+objectsAfterIndex.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSArray+objectsAfterIndex.m"; sourceTree = "<group>"; };
+		F9FAD5B021A8B88700B30491 /* NSArrayObjectsAfterIndexTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSArrayObjectsAfterIndexTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -262,6 +268,7 @@
 				93B5C7661CE2308D002820B3 /* Private */,
 				93C021331AB0BAF50014096A /* Model */,
 				93C021371AB1BFA40014096A /* Services */,
+				F9FAD5AB21A8B61500B30491 /* Extensions */,
 				93D77A541CE26C9C009EDB38 /* Supporting Files */,
 				9339E70A1ADE98B800AEAB68 /* TracksConstants.h */,
 				9339E70B1ADE98B800AEAB68 /* TracksConstants.m */,
@@ -327,6 +334,7 @@
 				93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */,
 				9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */,
 				93F595521ABA01AE00280F9E /* TracksServiceTests.m */,
+				F9FAD5B021A8B88700B30491 /* NSArrayObjectsAfterIndexTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -353,6 +361,15 @@
 			path = "Automattic-Tracks-Testing";
 			sourceTree = "<group>";
 		};
+		F9FAD5AB21A8B61500B30491 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9FAD5AC21A8B64300B30491 /* NSArray+objectsAfterIndex.h */,
+				F9FAD5AD21A8B64300B30491 /* NSArray+objectsAfterIndex.m */,
+			);
+			name = Extensions;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -373,6 +390,7 @@
 				93B5C7D51CE25D7D002820B3 /* TracksServiceRemote.h in Headers */,
 				93B5C7D61CE25D7D002820B3 /* TracksConstants.h in Headers */,
 				93B5C7D71CE25D7D002820B3 /* TracksLogging.h in Headers */,
+				F9FAD5AE21A8B64300B30491 /* NSArray+objectsAfterIndex.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,6 +652,7 @@
 				93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */,
 				F9FAD5A321A8A0DF00B30491 /* WatchSessionManager.m in Sources */,
 				93B5C7C71CE25D66002820B3 /* TracksEventPersistenceService.m in Sources */,
+				F9FAD5AF21A8B64300B30491 /* NSArray+objectsAfterIndex.m in Sources */,
 				93B5C7C91CE25D66002820B3 /* TracksService.m in Sources */,
 				93B5C7C51CE25D66002820B3 /* TracksEvent.m in Sources */,
 				93B5C7C41CE25D66002820B3 /* TracksEventCoreData.m in Sources */,
@@ -651,6 +670,7 @@
 				93B5C7D91CE25D8E002820B3 /* TracksEventServiceTests.m in Sources */,
 				93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */,
 				93B5C7D81CE25D8E002820B3 /* TestTracksContextManager.m in Sources */,
+				F9FAD5B121A8B88700B30491 /* NSArrayObjectsAfterIndexTests.swift in Sources */,
 				9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */,
 				93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */,
 			);

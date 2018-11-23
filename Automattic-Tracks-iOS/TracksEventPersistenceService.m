@@ -1,6 +1,7 @@
 #import "TracksEventPersistenceService.h"
 #import "TracksEventCoreData.h"
 #import "TracksLoggingPrivate.h"
+#import "NSArray+objectsAfterIndex.h"
 
 @interface TracksEventPersistenceService ()
 
@@ -36,7 +37,11 @@
     
     [self.managedObjectContext performBlockAndWait:^{
         NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
-        
+
+        fetchRequest.sortDescriptors = @[
+            [NSSortDescriptor sortDescriptorWithKey:@"date" ascending:NO],
+        ];
+
         NSError *error;
         NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         
@@ -44,7 +49,9 @@
             DDLogError(@"Error while fetching all TracksEvent: %@", error);
             return;
         }
-        
+
+        results = [self pruneEventsIfNeeded:results];
+
         transformedResults = [[NSMutableArray alloc] initWithCapacity:results.count];
         for (TracksEventCoreData *eventCoreData in results) {
             TracksEvent *tracksEvent = [self mapToTracksEventWithTracksEventCoreData:eventCoreData];
@@ -55,6 +62,19 @@
     return transformedResults;
 }
 
+- (NSArray *)pruneEventsIfNeeded: (NSArray *)events{
+
+    if(events.count <= maximumQueuedEventCount){
+        return events;
+    }
+
+    NSArray *eventsToReturn = [events subarrayWithRange:NSMakeRange(0, maximumQueuedEventCount)];
+    NSArray *eventsToPrune = [events objectsAfterIndex:maximumQueuedEventCount - 1];
+
+    [self removeTracksEvents:eventsToPrune];
+
+    return eventsToReturn;
+}
 
 - (NSUInteger)countAllTracksEvents
 {
