@@ -3,10 +3,10 @@ import XCTest
 class NSArrayObjectsAfterIndexTests: XCTestCase {
 
     func testThatObjectsAfterIndexDoesntHaveOffByOneErrors() {
-        assert(NSArray.create(withElementCount: 100).objects(after: 101).count == 0)
-        assert(NSArray.create(withElementCount: 100).objects(after: 100).count == 0)
-        assert(NSArray.create(withElementCount: 100).objects(after: 99).count == 0)
-        assert(NSArray.create(withElementCount: 100).objects(after: 98).count == 1)
+        assert(NSArray.create(withElementCount: 100).objects(afterIndex: 101).count == 0)
+        assert(NSArray.create(withElementCount: 100).objects(afterIndex: 100).count == 0)
+        assert(NSArray.create(withElementCount: 100).objects(afterIndex: 99).count == 0)
+        assert(NSArray.create(withElementCount: 100).objects(afterIndex: 98).count == 1)
     }
 }
 
