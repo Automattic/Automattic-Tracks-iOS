@@ -16,3 +16,8 @@ target 'Automattic-Tracks-iOS' do
   end
 end
 
+target 'Automattic-Tracks-Testing' do
+    pod 'UIDeviceIdentifier', '~> 1.1.4'
+    pod 'CocoaLumberjack', '~> 3.4.1'
+    pod 'Reachability', '~> 3.1'
+end
