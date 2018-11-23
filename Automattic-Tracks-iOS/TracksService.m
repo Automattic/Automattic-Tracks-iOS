@@ -45,6 +45,7 @@ NSString *const DeviceInfoModelKey = @"device_info_model";
 NSString *const DeviceInfoNetworkOperatorKey = @"device_info_current_network_operator";
 NSString *const DeviceInfoRadioTypeKey = @"device_info_phone_radio_type";
 NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
+NSString *const DeviceInfoVoiceOverEnabledKey = @"device_info_voiceover_enabled";
 
 NSString *const TracksEventNameKey = @"_en";
 NSString *const TracksUserAgentKey = @"_via_ua";
@@ -312,7 +313,8 @@ NSString *const USER_ID_ANON = @"anonId";
     // These properties change often and should be overridden in TracksEvents if they differ
     return @{DeviceInfoNetworkOperatorKey : self.deviceInformation.currentNetworkOperator ?: @"Unknown",
              DeviceInfoRadioTypeKey : self.deviceInformation.currentNetworkRadioType ?: @"Unknown",
-             DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO"
+             DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO",
+             DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
              };
 }
 

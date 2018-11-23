@@ -89,6 +89,10 @@
     return [[UIDevice currentDevice] systemVersion];
 }
 
+-(BOOL)isVoiceOverEnabled{
+    return UIAccessibilityIsVoiceOverRunning();
+}
+
 #else
 
 - (NSString *)currentNetworkOperator
