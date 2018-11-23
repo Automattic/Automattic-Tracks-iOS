@@ -40,6 +40,9 @@
 		93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
 		93D77A511CE2640C009EDB38 /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
 		93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D77A521CE26C43009EDB38 /* Tracks.swift */; };
+		F9FAD5B521A8BE0500B30491 /* NSArray+objectsAfterIndex.h in Headers */ = {isa = PBXBuildFile; fileRef = F9FAD5B321A8BE0500B30491 /* NSArray+objectsAfterIndex.h */; };
+		F9FAD5B621A8BE0500B30491 /* NSArray+objectsAfterIndex.m in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD5B421A8BE0500B30491 /* NSArray+objectsAfterIndex.m */; };
+		F9FAD5B821A8BE1F00B30491 /* NSArrayObjectsAfterIndexTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9FAD5B721A8BE1F00B30491 /* NSArrayObjectsAfterIndexTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +103,9 @@
 		E3FE4C191B1B5ADE3C9B933E /* Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB5AC0B7675B5EDB5F365B42 /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		EE21B1D105D31CDEFAD993FC /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F9FAD5B321A8BE0500B30491 /* NSArray+objectsAfterIndex.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+objectsAfterIndex.h"; sourceTree = "<group>"; };
+		F9FAD5B421A8BE0500B30491 /* NSArray+objectsAfterIndex.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+objectsAfterIndex.m"; sourceTree = "<group>"; };
+		F9FAD5B721A8BE1F00B30491 /* NSArrayObjectsAfterIndexTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSArrayObjectsAfterIndexTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -204,6 +210,7 @@
 				93C021331AB0BAF50014096A /* Model */,
 				93C021371AB1BFA40014096A /* Services */,
 				93D77A541CE26C9C009EDB38 /* Supporting Files */,
+				F9FAD5B221A8BDFA00B30491 /* Extensions */,
 				9339E70A1ADE98B800AEAB68 /* TracksConstants.h */,
 				9339E70B1ADE98B800AEAB68 /* TracksConstants.m */,
 				E1DBEA181C07071300FF2F73 /* TracksLogging.h */,
@@ -266,6 +273,7 @@
 				93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */,
 				9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */,
 				93F595521ABA01AE00280F9E /* TracksServiceTests.m */,
+				F9FAD5B721A8BE1F00B30491 /* NSArrayObjectsAfterIndexTests.swift */,
 			);
 			name = Tests;
 			sourceTree = "<group>";
@@ -278,6 +286,15 @@
 				93D77A521CE26C43009EDB38 /* Tracks.swift */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F9FAD5B221A8BDFA00B30491 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F9FAD5B321A8BE0500B30491 /* NSArray+objectsAfterIndex.h */,
+				F9FAD5B421A8BE0500B30491 /* NSArray+objectsAfterIndex.m */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -293,6 +310,7 @@
 				93B5C7CF1CE25D7D002820B3 /* TracksEventCoreData.h in Headers */,
 				93B5C7D01CE25D7D002820B3 /* TracksEvent.h in Headers */,
 				93B5C7D11CE25D7D002820B3 /* TracksDeviceInformation.h in Headers */,
+				F9FAD5B521A8BE0500B30491 /* NSArray+objectsAfterIndex.h in Headers */,
 				93B5C7D21CE25D7D002820B3 /* TracksEventPersistenceService.h in Headers */,
 				93B5C7D31CE25D7D002820B3 /* TracksEventService.h in Headers */,
 				93B5C7D41CE25D7D002820B3 /* TracksService.h in Headers */,
@@ -512,6 +530,7 @@
 				93D77A511CE2640C009EDB38 /* Tracks.xcdatamodeld in Sources */,
 				93B5C7C81CE25D66002820B3 /* TracksEventService.m in Sources */,
 				93B5C7C61CE25D66002820B3 /* TracksDeviceInformation.m in Sources */,
+				F9FAD5B621A8BE0500B30491 /* NSArray+objectsAfterIndex.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -522,6 +541,7 @@
 				93B5C7D91CE25D8E002820B3 /* TracksEventServiceTests.m in Sources */,
 				93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */,
 				93B5C7D81CE25D8E002820B3 /* TestTracksContextManager.m in Sources */,
+				F9FAD5B821A8BE1F00B30491 /* NSArrayObjectsAfterIndexTests.swift in Sources */,
 				9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */,
 				93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */,
 			);
