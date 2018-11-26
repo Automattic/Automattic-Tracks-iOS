@@ -40,6 +40,8 @@
 		93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
 		93D77A511CE2640C009EDB38 /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
 		93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D77A521CE26C43009EDB38 /* Tracks.swift */; };
+		F978D1EE21AC972A00A2B169 /* WatchSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F978D1EC21AC972500A2B169 /* WatchSessionManager.h */; };
+		F978D1EF21AC972A00A2B169 /* WatchSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,6 +102,8 @@
 		E3FE4C191B1B5ADE3C9B933E /* Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_iOS_Automattic_Tracks_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EB5AC0B7675B5EDB5F365B42 /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		EE21B1D105D31CDEFAD993FC /* Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOS-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		F978D1EC21AC972500A2B169 /* WatchSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchSessionManager.h; sourceTree = "<group>"; };
+		F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchSessionManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -254,6 +258,8 @@
 				93F595501AB9B7A800280F9E /* TracksService.m */,
 				93C021381AB1BFF30014096A /* TracksServiceRemote.h */,
 				93C021391AB1BFF30014096A /* TracksServiceRemote.m */,
+				F978D1EC21AC972500A2B169 /* WatchSessionManager.h */,
+				F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */,
 			);
 			name = Services;
 			sourceTree = "<group>";
@@ -291,6 +297,7 @@
 				93B5C7CD1CE25D7D002820B3 /* TracksLoggingPrivate.h in Headers */,
 				93B5C7CE1CE25D7D002820B3 /* TracksContextManager.h in Headers */,
 				93B5C7CF1CE25D7D002820B3 /* TracksEventCoreData.h in Headers */,
+				F978D1EE21AC972A00A2B169 /* WatchSessionManager.h in Headers */,
 				93B5C7D01CE25D7D002820B3 /* TracksEvent.h in Headers */,
 				93B5C7D11CE25D7D002820B3 /* TracksDeviceInformation.h in Headers */,
 				93B5C7D21CE25D7D002820B3 /* TracksEventPersistenceService.h in Headers */,
@@ -499,6 +506,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F978D1EF21AC972A00A2B169 /* WatchSessionManager.m in Sources */,
 				93B5C7CA1CE25D66002820B3 /* TracksServiceRemote.m in Sources */,
 				93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */,
 				93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */,
