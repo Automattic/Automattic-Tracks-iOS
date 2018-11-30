@@ -1,46 +1,52 @@
 PODS:
-  - CocoaLumberjack (2.2.0):
-    - CocoaLumberjack/Default (= 2.2.0)
-    - CocoaLumberjack/Extensions (= 2.2.0)
-  - CocoaLumberjack/Core (2.2.0)
-  - CocoaLumberjack/Default (2.2.0):
-    - CocoaLumberjack/Core
-  - CocoaLumberjack/Extensions (2.2.0):
+  - CocoaLumberjack (3.4.1):
+    - CocoaLumberjack/Default (= 3.4.1)
+    - CocoaLumberjack/Extensions (= 3.4.1)
+  - CocoaLumberjack/Default (3.4.1)
+  - CocoaLumberjack/Extensions (3.4.1):
     - CocoaLumberjack/Default
   - OCMock (3.3.1)
-  - OHHTTPStubs (5.1.0):
-    - OHHTTPStubs/Default (= 5.1.0)
-  - OHHTTPStubs/Core (5.1.0)
-  - OHHTTPStubs/Default (5.1.0):
+  - OHHTTPStubs (5.2.2):
+    - OHHTTPStubs/Default (= 5.2.2)
+  - OHHTTPStubs/Core (5.2.2)
+  - OHHTTPStubs/Default (5.2.2):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (5.1.0):
+  - OHHTTPStubs/JSON (5.2.2):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (5.1.0):
+  - OHHTTPStubs/NSURLSession (5.2.2):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (5.1.0)
-  - OHHTTPStubs/Swift (5.1.0):
+  - OHHTTPStubs/OHPathHelpers (5.2.2)
+  - OHHTTPStubs/Swift (5.2.2):
     - OHHTTPStubs/Core
   - Reachability (3.2)
-  - UIDeviceIdentifier (0.5.0)
+  - UIDeviceIdentifier (1.1.4)
 
 DEPENDENCIES:
-  - CocoaLumberjack (~> 2.2.0)
+  - CocoaLumberjack (~> 3.4.1)
   - OCMock (~> 3.3.1)
-  - OHHTTPStubs (~> 5.1.0)
-  - OHHTTPStubs/Swift (~> 5.1.0)
+  - OHHTTPStubs
+  - OHHTTPStubs/Swift
   - Reachability (~> 3.1)
-  - UIDeviceIdentifier (~> 0.4)
+  - UIDeviceIdentifier (~> 1.1.4)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - CocoaLumberjack
+    - OCMock
+    - OHHTTPStubs
+    - Reachability
+    - UIDeviceIdentifier
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 17fe8581f84914d5d7e6360f7c70022b173c3ae0
+  CocoaLumberjack: 2e258a064cacc8eb9a2aca318e24d02a0a7fd56d
   OCMock: f3f61e6eaa16038c30caa5798c5e49d3307b6f22
-  OHHTTPStubs: 592f74439d2d72615115cf99a954237a3fbe26e5
+  OHHTTPStubs: 34d9d0994e64fcf8552dbfade5ce82ada913ee31
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  UIDeviceIdentifier: a959a6d4f51036b4180dd31fb26483a820f1cc46
+  UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
 
-PODFILE CHECKSUM: 721e218fcc82d6b386da175d96251413f5667f51
+PODFILE CHECKSUM: 89cc8ff17129c102dc0e320b7ab88f636e00c284
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.5.3

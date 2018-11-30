@@ -33,6 +33,6 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 - (void)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties;
 
 - (void)sendQueuedEvents;
-
+- (void)clearQueuedEvents;
 
 @end

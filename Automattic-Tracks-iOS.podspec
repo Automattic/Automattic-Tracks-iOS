@@ -4,7 +4,7 @@ Pod::Spec.new do |spec|
   spec.platform     = :ios, "9.0"
   spec.license      = { :type => 'GPLv2' }
   spec.homepage     = 'https://github.com/automattic/automattic-tracks-ios'
-  spec.authors      = { 'Aaron Douglas' => 'aaron@automattic.com' }
+  spec.authors      = { 'Automattic' => 'mobile@automattic.com' }
   spec.summary      = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
   spec.source       = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => spec.version.to_s }
   spec.source_files = 'Automattic-Tracks-iOS/**/*.{h,m}'
@@ -17,6 +17,6 @@ Pod::Spec.new do |spec|
   spec.module_name = 'AutomatticTracks'
 
   spec.dependency 'UIDeviceIdentifier', '~> 0.4'
-  spec.dependency 'CocoaLumberjack', '~>2.2.0'
+  spec.dependency 'CocoaLumberjack', '~> 3.4.1'
   spec.dependency 'Reachability', '~>3.1'
 end

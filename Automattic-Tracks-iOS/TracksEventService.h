@@ -28,6 +28,8 @@
 
 - (NSUInteger)numberOfTracksEvents;
 
+- (void)clearTracksEvents;
+
 - (void)removeTracksEvents:(NSArray *)tracksEvents;
 
 - (void)incrementRetryCountForEvents:(NSArray *)tracksEvents;

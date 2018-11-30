@@ -45,6 +45,7 @@ NSString *const DeviceInfoModelKey = @"device_info_model";
 NSString *const DeviceInfoNetworkOperatorKey = @"device_info_current_network_operator";
 NSString *const DeviceInfoRadioTypeKey = @"device_info_phone_radio_type";
 NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
+NSString *const DeviceInfoVoiceOverEnabledKey = @"device_info_voiceover_enabled";
 
 NSString *const TracksEventNameKey = @"_en";
 NSString *const TracksUserAgentKey = @"_via_ua";
@@ -152,27 +153,32 @@ NSString *const USER_ID_ANON = @"anonId";
         NSDictionary *eventJSON = [self dictionaryForTracksEvent:tracksEvent withParentCommonProperties:commonProperties];
         [jsonEvents addObject:eventJSON];
     }
-    
+
+    __weak __typeof(self) weakSelf = self;
     [self.remote sendBatchOfEvents:jsonEvents
               withSharedProperties:commonProperties
                  completionHandler:^(NSError *error) {
                      if (error) {
                          DDLogError(@"TracksService Error while remote calling: %@", error);
-                         [self.tracksEventService incrementRetryCountForEvents:events];
+                         [weakSelf.tracksEventService incrementRetryCountForEvents:events];
                      } else {
                          DDLogVerbose(@"TracksService sendQueuedEvents completed. Sent %@ events.", @(events.count));
                          // Delete the events since they sent or errored
-                         [self.tracksEventService removeTracksEvents:events];
+                         [weakSelf.tracksEventService removeTracksEvents:events];
                      }
                          
                      // Assume no errors for now
-                     [self resetTimer];
+                     [weakSelf resetTimer];
                      
                      [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceDidSendQueuedEventsNotification object:nil];
                  }
      ];
 }
 
+- (void)clearQueuedEvents
+{
+    [self.tracksEventService clearTracksEvents];
+}
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
 {
@@ -307,7 +313,8 @@ NSString *const USER_ID_ANON = @"anonId";
     // These properties change often and should be overridden in TracksEvents if they differ
     return @{DeviceInfoNetworkOperatorKey : self.deviceInformation.currentNetworkOperator ?: @"Unknown",
              DeviceInfoRadioTypeKey : self.deviceInformation.currentNetworkRadioType ?: @"Unknown",
-             DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO"
+             DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO",
+             DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
              };
 }
 

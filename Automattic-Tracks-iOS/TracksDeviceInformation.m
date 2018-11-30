@@ -43,6 +43,10 @@
 
 - (NSString *)currentNetworkOperator
 {
+    #if TARGET_OS_SIMULATOR
+        return @"Carrier (Simulator)";
+    #endif
+
     CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
     CTCarrier *carrier = [netInfo subscriberCellularProvider];
 
@@ -57,6 +61,10 @@
 
 - (NSString *)currentNetworkRadioType
 {
+    #if TARGET_OS_SIMULATOR
+        return @"None (Simulator)";
+    #endif
+
     CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
     NSString *type = nil;
     if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
@@ -87,6 +95,10 @@
 - (NSString *)version
 {
     return [[UIDevice currentDevice] systemVersion];
+}
+
+-(BOOL)isVoiceOverEnabled{
+    return UIAccessibilityIsVoiceOverRunning();
 }
 
 #else
