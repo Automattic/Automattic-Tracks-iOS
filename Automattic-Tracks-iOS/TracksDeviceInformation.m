@@ -45,17 +45,17 @@
 {
     #if TARGET_OS_SIMULATOR
         return @"Carrier (Simulator)";
+    #else
+        CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+        CTCarrier *carrier = [netInfo subscriberCellularProvider];
+
+        NSString *carrierName = nil;
+        if (carrier) {
+            carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
+        }
+
+        return carrierName;
     #endif
-
-    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-    CTCarrier *carrier = [netInfo subscriberCellularProvider];
-
-    NSString *carrierName = nil;
-    if (carrier) {
-        carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
-    }
-    
-    return carrierName;
 }
 
 
@@ -63,15 +63,15 @@
 {
     #if TARGET_OS_SIMULATOR
         return @"None (Simulator)";
+    #else
+        CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+        NSString *type = nil;
+        if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
+            type = [netInfo currentRadioAccessTechnology];
+        }
+
+        return type;
     #endif
-
-    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-    NSString *type = nil;
-    if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
-        type = [netInfo currentRadioAccessTechnology];
-    }
-
-    return type;
 }
 
 
