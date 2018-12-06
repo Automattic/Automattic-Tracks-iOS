@@ -14,6 +14,8 @@ class DeviceInfoViewController: UITableViewController {
 
     @IBOutlet weak var hasVoiceOverCell: UITableViewCell!
 
+    @IBOutlet weak var statusBarHeightCell: UITableViewCell!
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -21,6 +23,7 @@ class DeviceInfoViewController: UITableViewController {
         let info = TracksDeviceInformation()
         self.hasAppleWatchCell.detailTextLabel?.text = String(describing: info.isAppleWatchConnected)
         self.hasVoiceOverCell.detailTextLabel?.text = String(describing: info.isVoiceOverEnabled)
+        self.statusBarHeightCell.detailTextLabel?.text = String(describing: info.statusBarHeight)
     }
     
 
