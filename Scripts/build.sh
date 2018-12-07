@@ -12,7 +12,7 @@ xcodebuild build test \
 -destination "name=iPhone SE" \
 -configuration Debug | xcpretty -c
 
-pod spec lint
+pod spec lint --allow-warnings
 
 exit ${PIPESTATUS[0]}
 
