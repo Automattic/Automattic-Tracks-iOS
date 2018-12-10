@@ -101,6 +101,10 @@
     return UIAccessibilityIsVoiceOverRunning();
 }
 
+-(CGFloat)statusBarHeight{
+    return UIApplication.sharedApplication.statusBarFrame.size.height;
+}
+
 #else
 
 - (NSString *)currentNetworkOperator
