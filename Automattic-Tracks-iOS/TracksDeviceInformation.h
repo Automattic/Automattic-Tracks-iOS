@@ -1,4 +1,5 @@
 #import <Foundation/Foundation.h>
+#import <CoreGraphics/CoreGraphics.h>
 
 @interface TracksDeviceInformation : NSObject
 
@@ -18,5 +19,6 @@
 @property (nonatomic, readonly) NSString *currentNetworkRadioType;
 @property (nonatomic, assign) BOOL isWiFiConnected;
 @property (nonatomic, assign) BOOL isVoiceOverEnabled;
+@property (nonatomic, assign) CGFloat statusBarHeight;
 
 @end
