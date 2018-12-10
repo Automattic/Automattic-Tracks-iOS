@@ -25,3 +25,5 @@ DerivedData
 #
 # Pods/
 Pods
+
+\.DS_Store

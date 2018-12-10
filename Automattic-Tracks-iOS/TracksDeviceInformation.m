@@ -44,27 +44,35 @@
 
 - (NSString *)currentNetworkOperator
 {
-    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-    CTCarrier *carrier = [netInfo subscriberCellularProvider];
+    #if TARGET_OS_SIMULATOR
+        return @"Carrier (Simulator)";
+    #else
+        CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+        CTCarrier *carrier = [netInfo subscriberCellularProvider];
 
-    NSString *carrierName = nil;
-    if (carrier) {
-        carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
-    }
-    
-    return carrierName;
+        NSString *carrierName = nil;
+        if (carrier) {
+            carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
+        }
+
+        return carrierName;
+    #endif
 }
 
 
 - (NSString *)currentNetworkRadioType
 {
-    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-    NSString *type = nil;
-    if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
-        type = [netInfo currentRadioAccessTechnology];
-    }
+    #if TARGET_OS_SIMULATOR
+        return @"None (Simulator)";
+    #else
+        CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+        NSString *type = nil;
+        if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
+            type = [netInfo currentRadioAccessTechnology];
+        }
 
-    return type;
+        return type;
+    #endif
 }
 
 
@@ -96,6 +104,10 @@
 
 -(BOOL)isVoiceOverEnabled{
     return UIAccessibilityIsVoiceOverRunning();
+}
+
+-(CGFloat)statusBarHeight{
+    return UIApplication.sharedApplication.statusBarFrame.size.height;
 }
 
 #else
