@@ -10,4 +10,9 @@ xcodebuild build test \
 -scheme "$TRAVIS_XCODE_SCHEME" \
 -sdk "$TRAVIS_XCODE_SDK" \
 -destination "name=iPhone SE" \
--configuration Debug | xcpretty -c && exit ${PIPESTATUS[0]}
+-configuration Debug | xcpretty -c
+
+pod spec lint --allow-warnings
+
+exit ${PIPESTATUS[0]}
+
