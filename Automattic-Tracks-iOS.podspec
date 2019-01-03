@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   spec.header_dir = 'AutomatticTracks'
   spec.module_name = 'AutomatticTracks'
 
-  spec.dependency 'UIDeviceIdentifier', '~> 0.4'
+  spec.dependency 'UIDeviceIdentifier', '~> 1.1.4'
   spec.dependency 'CocoaLumberjack', '~> 3.4.1'
   spec.dependency 'Reachability', '~>3.1'
 end
