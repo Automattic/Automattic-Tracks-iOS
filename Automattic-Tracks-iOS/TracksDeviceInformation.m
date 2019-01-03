@@ -5,6 +5,7 @@
 #import <UIDeviceIdentifier/UIDeviceHardware.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#import "WatchSessionManager.h"
 #else
 #import <AppKit/AppKit.h>
 #endif
@@ -95,6 +96,10 @@
 - (NSString *)version
 {
     return [[UIDevice currentDevice] systemVersion];
+}
+
+-(BOOL)isAppleWatchConnected{
+    return [[WatchSessionManager shared] hasBeenPreviouslyPaired];
 }
 
 -(BOOL)isVoiceOverEnabled{
