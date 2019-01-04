@@ -1,4 +1,5 @@
 #import "WatchSessionManager.h"
+#if !TARGET_OS_MAC
 #import <WatchConnectivity/WatchConnectivity.h>
 
 @interface WatchSessionManager()<WCSessionDelegate>
@@ -62,3 +63,5 @@
 }
 
 @end
+
+#endif

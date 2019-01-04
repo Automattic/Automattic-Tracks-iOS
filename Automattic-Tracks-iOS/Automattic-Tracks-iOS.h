@@ -1,4 +1,8 @@
-#import <UIKit/UIKit.h>
+#if TARGET_OS_MAC
+    #import <Cocoa/Cocoa.h>
+#elif
+    #import <UIKit/UIKit.h>
+#endif
 
 //! Project version number for Automattic-Tracks-iOS.
 FOUNDATION_EXPORT double Automattic_Tracks_iOSVersionNumber;

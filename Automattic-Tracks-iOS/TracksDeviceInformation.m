@@ -7,7 +7,11 @@
 #import <CoreTelephony/CTCarrier.h>
 #import "WatchSessionManager.h"
 #else
+#import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#include <sys/types.h>
+#include <sys/sysctl.h>
 #endif
 
 @interface TracksDeviceInformation ()
@@ -114,13 +118,13 @@
 
 - (NSString *)currentNetworkOperator
 {
-    return @"";
+    return @"Not Applicable";
 }
 
 
 - (NSString *)currentNetworkRadioType
 {
-    return @"";
+    return @"Unknown";
 }
 
 
@@ -131,19 +135,36 @@
 
 - (NSString *)model
 {
-    return @"";
-}
+    size_t size;
+    sysctlbyname("hw.model", NULL, &size, NULL, 0);
+    char *model = malloc(size);
+    sysctlbyname("hw.model", model, &size, NULL, 0);
+    NSString *modelString = [NSString stringWithUTF8String:model];
+    free(model);
 
+    return modelString;
+}
 
 - (NSString *)os
 {
     return @"OS X";
 }
 
-
 - (NSString *)version
 {
     return [[NSProcessInfo processInfo] operatingSystemVersionString];
+}
+
+-(BOOL)isVoiceOverEnabled
+{
+    Boolean exists = false;
+    BOOL result = CFPreferencesGetAppBooleanValue(CFSTR("voiceOverOnOffKey"), CFSTR("com.apple.universalaccess"), &exists);
+
+    if(exists){
+        return result;
+    }
+
+    return NO;
 }
 
 #endif
