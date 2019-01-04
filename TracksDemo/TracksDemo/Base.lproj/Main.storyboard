@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6751" systemVersion="14D131" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6736"/>
-        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--View Controller-->
@@ -14,20 +18,20 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2M-wW-PMO">
-                                <rect key="frame" x="260" y="64" width="80" height="30"/>
+                                <rect key="frame" x="147" y="64" width="81" height="30"/>
                                 <state key="normal" title="Track Event">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sendTestEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Jw-gd-MCd"/>
                                 </connections>
                             </button>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ork-Vm-gMc">
-                                <rect key="frame" x="191" y="28" width="219" height="29"/>
+                                <rect key="frame" x="77" y="28" width="221" height="29"/>
                                 <segments>
                                     <segment title="Anonymous"/>
                                     <segment title="WordPress.com"/>
@@ -36,52 +40,50 @@
                                     <action selector="userTypeSegmentedControlChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="6dL-dh-pgn"/>
                                 </connections>
                             </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of events queued: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usv-EB-VcP">
-                                <rect key="frame" x="175" y="549" width="251" height="21"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="251" id="oav-5I-edC"/>
-                                </constraints>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of events queued: 0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usv-EB-VcP">
+                                <rect key="frame" x="61" y="616.5" width="251" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S78-AU-IJX">
-                                <rect key="frame" x="36" y="578" width="528" height="2"/>
+                                <rect key="frame" x="36" y="645" width="303" height="2"/>
                             </progressView>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aDq-MO-fv4">
-                                <rect key="frame" x="377" y="510" width="51" height="31"/>
+                                <rect key="frame" x="263" y="577.5" width="51" height="31"/>
                                 <connections>
                                     <action selector="remoteCallsSwitchTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Xk4-R7-g0h"/>
                                 </connections>
                             </switch>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remote Calls" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cP7-n0-YmV">
-                                <rect key="frame" x="175" y="515" width="103" height="21"/>
+                                <rect key="frame" x="61" y="582.5" width="100.5" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hT-3n-0Am">
-                                <rect key="frame" x="176" y="102" width="248" height="30"/>
+                                <rect key="frame" x="63.5" y="102" width="248" height="30"/>
                                 <state key="normal" title="Track Event With Custom Properties">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="sendTestEventWithProperties:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iTe-fg-P8G"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LV-F0-8DU">
-                                <rect key="frame" x="239" y="140" width="122" height="30"/>
+                                <rect key="frame" x="126.5" y="140" width="122" height="30"/>
                                 <state key="normal" title="Crash Application">
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="crashApplicationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oea-cX-vdJ"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="aDq-MO-fv4" firstAttribute="trailing" secondItem="Usv-EB-VcP" secondAttribute="trailing" id="6fj-WD-L7e"/>
+                            <constraint firstItem="aDq-MO-fv4" firstAttribute="leading" secondItem="cP7-n0-YmV" secondAttribute="trailing" constant="101.5" id="Bxt-Fc-OVu"/>
                             <constraint firstAttribute="trailingMargin" secondItem="S78-AU-IJX" secondAttribute="trailing" constant="20" id="D1K-jO-Dhv"/>
                             <constraint firstItem="Ork-Vm-gMc" firstAttribute="leading" secondItem="Usv-EB-VcP" secondAttribute="leading" constant="16" id="Eij-Bq-mAy"/>
                             <constraint firstItem="p2M-wW-PMO" firstAttribute="top" secondItem="Ork-Vm-gMc" secondAttribute="bottom" constant="8" symbolic="YES" id="Erd-RF-Exv"/>
