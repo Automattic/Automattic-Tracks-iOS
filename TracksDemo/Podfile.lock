@@ -3,9 +3,6 @@ PODS:
     - CocoaLumberjack (~> 3.4.1)
     - Reachability (~> 3.1)
     - UIDeviceIdentifier (~> 1.1.4)
-  - Automattic-Tracks-OSX (0.2.4-beta.1):
-    - CocoaLumberjack (~> 3.4.1)
-    - Reachability (~> 3.1)
   - CocoaLumberjack (3.4.2):
     - CocoaLumberjack/Default (= 3.4.2)
     - CocoaLumberjack/Extensions (= 3.4.2)
@@ -17,7 +14,6 @@ PODS:
 
 DEPENDENCIES:
   - Automattic-Tracks-iOS (from `../`)
-  - Automattic-Tracks-OSX (from `../`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -28,16 +24,13 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Automattic-Tracks-iOS:
     :path: "../"
-  Automattic-Tracks-OSX:
-    :path: "../"
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: e56c60c6338580fb4a03d0292c9a743553b1ee13
-  Automattic-Tracks-OSX: 646085f5d36f4c875d04c71c3a50521fc02af86a
+  Automattic-Tracks-iOS: 19e962dca68180683de741162c8d97571c9bd195
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
 
-PODFILE CHECKSUM: 8ba9d1b5c2247e445fb53d5485609ae41201a491
+PODFILE CHECKSUM: b7686207d81a993f2ba5ec680540128e9f9ea181
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.6.0.beta.2

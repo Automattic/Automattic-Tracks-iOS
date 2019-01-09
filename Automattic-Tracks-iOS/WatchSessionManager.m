@@ -1,10 +1,15 @@
 #import "WatchSessionManager.h"
-#if !TARGET_OS_MAC
+
+#if TARGET_OS_IPHONE
 #import <WatchConnectivity/WatchConnectivity.h>
 
 @interface WatchSessionManager()<WCSessionDelegate>
 
 @property(nonatomic, strong) WCSession *session;
+#else
+@interface WatchSessionManager()
+#endif
+
 @property(assign) BOOL hasBeenPaired;
 
 @end
@@ -29,6 +34,7 @@
             return self;
         }
 
+#if TARGET_OS_IPHONE
         if([WCSession isSupported]){
             self.session = [WCSession defaultSession];
             self.session.delegate = self;
@@ -36,6 +42,7 @@
 
             self.hasBeenPaired = false;
         }
+#endif
     }
 
     return self;
@@ -47,6 +54,8 @@
 }
 
 #pragma mark – WCSessionDelegate
+
+#if TARGET_OS_IPHONE
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
 
     if(session.paired){
@@ -61,7 +70,5 @@
 - (void)sessionDidDeactivate:(nonnull WCSession *)session {
 
 }
-
-@end
-
 #endif
+@end
