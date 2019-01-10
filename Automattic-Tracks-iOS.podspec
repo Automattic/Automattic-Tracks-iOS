@@ -21,7 +21,7 @@ Pod::Spec.new do |spec|
   spec.ios.framework    = 'CoreTelephony'
   spec.osx.framework    = 'AppKit'
 
-  spec.ios.deployment_target  = '9.0'
+  spec.ios.deployment_target  = '9.3'
   spec.osx.deployment_target  = '10.11'
 
   spec.header_dir = 'AutomatticTracks'
