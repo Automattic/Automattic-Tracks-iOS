@@ -23,4 +23,11 @@ target 'Automattic-Tracks-OSX' do
 
     pod 'CocoaLumberjack', '~> 3.4.1'
     pod 'Reachability', '~> 3.1'
+
+  target 'Automattic_Tracks_OSXTests' do
+    pod 'OCMock', '~> 3.3.1'
+    pod 'OHHTTPStubs'
+    pod 'OHHTTPStubs/Swift'
+  end
+
 end
