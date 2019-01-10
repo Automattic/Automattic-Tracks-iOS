@@ -378,7 +378,15 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSString *)userAgent
 {
-    return [NSString stringWithFormat:@"Nosara Client for iOS %@", TracksLibraryVersion];
+    #if TARGET_OS_IPHONE
+        return [NSString stringWithFormat:@"Nosara Client for iOS %@", TracksLibraryVersion];
+    #endif
+
+    #if TARGET_OS_MAC
+        return [NSString stringWithFormat:@"Nosara Client for macOS %@", TracksLibraryVersion];
+    #endif
+
+    return [NSString stringWithFormat:@"Nosara Client for Objective-C %@", TracksLibraryVersion];
 }
 
 @end
