@@ -304,7 +304,6 @@ NSString *const USER_ID_ANON = @"anonId";
               DeviceInfoModelKey : self.deviceInformation.model ?: @"Unknown",
               DeviceInfoOSKey : self.deviceInformation.os ?: @"Unknown",
               DeviceInfoOSVersionKey : self.deviceInformation.version ?: @"Unknown",
-              DeviceInfoOrientation : self.deviceInformation.orientation ?: @"Unknown",
               DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
               DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
               DeviceLanguageKey : self.deviceInformation.deviceLanguage ?: @"Unknown",
@@ -322,7 +321,8 @@ NSString *const USER_ID_ANON = @"anonId";
              DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
              DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
              DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
-             DeviceInfoStatusBarHeightKey : [NSNumber numberWithFloat:self.deviceInformation.statusBarHeight] ,
+             DeviceInfoStatusBarHeightKey : [NSNumber numberWithFloat:self.deviceInformation.statusBarHeight],
+             DeviceInfoOrientation : self.deviceInformation.orientation ?: @"Unknown",
       };
 }
 

@@ -17,10 +17,10 @@
 @property (nonatomic, readonly) NSString *deviceLanguage;
 @property (nonatomic, readonly) NSString *currentNetworkOperator;
 @property (nonatomic, readonly) NSString *currentNetworkRadioType;
-@property (nonatomic, readonly) NSString *orientation;
 @property (nonatomic, assign) BOOL isWiFiConnected;
 @property (nonatomic, assign) BOOL isAppleWatchConnected;
 @property (nonatomic, assign) BOOL isVoiceOverEnabled;
 @property (nonatomic, assign) CGFloat statusBarHeight;
+@property (nonatomic, readonly) NSString *orientation;
 
 @end
