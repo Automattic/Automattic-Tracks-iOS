@@ -144,6 +144,21 @@
 #endif
 }
 
+-(NSString *)orientation{
+#if TARGET_OS_IPHONE
+    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+    if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
+        return @"Portrait";
+    } else if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+        return @"Landscape";
+    } else {
+        return @"Unknown";
+    }
+#else   // Mac
+    return @"Unknown";
+#endif
+}
+
 #pragma mark - App Specific Information
 
 - (NSString *)appName
