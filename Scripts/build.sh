@@ -1,18 +1,16 @@
-if [ ! $TRAVIS ]; then
-TRAVIS_XCODE_WORKSPACE=Automattic-Tracks-iOS.xcworkspace
-TRAVIS_XCODE_PROJECT=Automattic-Tracks-iOS.xcodeproj
-TRAVIS_XCODE_SCHEME=Automattic-Tracks-iOS
-TRAVIS_XCODE_SDK=iphonesimulator
-fi
+XCODE_WORKSPACE=Automattic-Tracks-iOS.xcworkspace
+XCODE_PROJECT=Automattic-Tracks-iOS.xcodeproj
+XCODE_SCHEME=Automattic-Tracks-iOS
+XCODE_SDK=iphonesimulator
 
 xcodebuild build test \
--workspace "$TRAVIS_XCODE_WORKSPACE" \
--scheme "$TRAVIS_XCODE_SCHEME" \
--sdk "$TRAVIS_XCODE_SDK" \
+-workspace "$XCODE_WORKSPACE" \
+-scheme "$XCODE_SCHEME" \
+-sdk "$XCODE_SDK" \
 -destination "name=iPhone SE" \
--configuration Debug | xcpretty -c
+-configuration Debug | bundle exec xcpretty -c
 
-pod lib lint
+bundle exec pod lib lint
 
 exit ${PIPESTATUS[0]}
 
