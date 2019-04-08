@@ -236,28 +236,10 @@ NSString *const USER_ID_ANON = @"anonId";
     self.deviceInformation.isOnline = self.reachability.isReachable;
 }
 
-#pragma mark - Private methods
-
-- (void)didEnterBackground:(NSNotification *)notification
-{
-    self.timerEnabled = NO;
-    [self.reachability stopNotifier];
-    [self sendQueuedEvents];
-}
-
-
-- (void)didBecomeActive:(NSNotification *)notification
-{
-    self.timerEnabled = YES;
-    [self.reachability startNotifier];
-    [self resetTimer];
-}
-
-
 - (void)reachabilityChanged:(NSNotification *)notification
 {
     Reachability *reachability = (Reachability *)notification.object;
-    
+
     // Because the containing app may already use Reachability, limit this to ours only.
     if (reachability != self.reachability) {
         return;
@@ -278,6 +260,22 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 }
 
+#pragma mark - Private methods
+
+- (void)didEnterBackground:(NSNotification *)notification
+{
+    self.timerEnabled = NO;
+    [self.reachability stopNotifier];
+    [self sendQueuedEvents];
+}
+
+
+- (void)didBecomeActive:(NSNotification *)notification
+{
+    self.timerEnabled = YES;
+    [self.reachability startNotifier];
+    [self resetTimer];
+}
 
 - (void)resetTimer
 {
