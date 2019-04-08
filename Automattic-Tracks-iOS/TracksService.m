@@ -78,8 +78,12 @@ NSString *const USER_ID_ANON = @"anonId";
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         _deviceInformation = [TracksDeviceInformation new];
+
         _reachability = [Reachability reachabilityWithHostname:@"public-api.wordpress.com"];
         [_reachability startNotifier];
+
+        [self updateDeviceInformationFromReachability];
+
         _isHostReachable = YES;
         _timerEnabled = YES;
         _userProperties = [NSMutableDictionary new];
@@ -221,6 +225,17 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 }
 
+#pragma mark - Reachability
+
+/**
+ * Update `self.deviceInformation` properties that rely on `self.reachability`.
+ */
+- (void)updateDeviceInformationFromReachability
+{
+    self.deviceInformation.isWiFiConnected = self.reachability.isReachableViaWiFi;
+    self.deviceInformation.isOnline = self.reachability.isReachable;
+}
+
 #pragma mark - Private methods
 
 - (void)didEnterBackground:(NSNotification *)notification
@@ -248,8 +263,7 @@ NSString *const USER_ID_ANON = @"anonId";
         return;
     }
 
-    self.deviceInformation.isWiFiConnected = reachability.isReachableViaWiFi;
-    self.deviceInformation.isOnline = reachability.isReachable;
+    [self updateDeviceInformationFromReachability];
 
     if (reachability.isReachable == YES && self.isHostReachable == NO) {
         DDLogVerbose(@"Tracks host is available. Enabling timer.");
