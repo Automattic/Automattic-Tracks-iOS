@@ -45,8 +45,11 @@ NSString *const DeviceInfoModelKey = @"device_info_model";
 NSString *const DeviceInfoNetworkOperatorKey = @"device_info_current_network_operator";
 NSString *const DeviceInfoRadioTypeKey = @"device_info_phone_radio_type";
 NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
+NSString *const DeviceInfoIsOnlineKey = @"device_info_is_online";
+NSString *const DeviceInfoAppleWatchConnectedKey = @"device_info_apple_watch_connected";
 NSString *const DeviceInfoVoiceOverEnabledKey = @"device_info_voiceover_enabled";
 NSString *const DeviceInfoStatusBarHeightKey = @"device_info_status_bar_height";
+NSString *const DeviceInfoOrientation = @"device_info_orientation";
 
 NSString *const TracksEventNameKey = @"_en";
 NSString *const TracksUserAgentKey = @"_via_ua";
@@ -246,7 +249,8 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 
     self.deviceInformation.isWiFiConnected = reachability.isReachableViaWiFi;
-    
+    self.deviceInformation.isOnline = reachability.isReachable;
+
     if (reachability.isReachable == YES && self.isHostReachable == NO) {
         DDLogVerbose(@"Tracks host is available. Enabling timer.");
         self.isHostReachable = YES;
@@ -315,9 +319,14 @@ NSString *const USER_ID_ANON = @"anonId";
     return @{DeviceInfoNetworkOperatorKey : self.deviceInformation.currentNetworkOperator ?: @"Unknown",
              DeviceInfoRadioTypeKey : self.deviceInformation.currentNetworkRadioType ?: @"Unknown",
              DeviceInfoWiFiConnectedKey : self.deviceInformation.isWiFiConnected ? @"YES" : @"NO",
+             DeviceInfoIsOnlineKey : self.deviceInformation.isOnline ? @"YES" : @"NO",
              DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
-             DeviceInfoStatusBarHeightKey : [NSNumber numberWithFloat:self.deviceInformation.statusBarHeight] ,
-             };
+             DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
+             DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
+             DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
+             DeviceInfoStatusBarHeightKey : [NSNumber numberWithFloat:self.deviceInformation.statusBarHeight],
+             DeviceInfoOrientation : self.deviceInformation.orientation ?: @"Unknown",
+      };
 }
 
 - (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties
@@ -374,7 +383,15 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSString *)userAgent
 {
-    return [NSString stringWithFormat:@"Nosara Client for iOS %@", TracksLibraryVersion];
+    #if TARGET_OS_IPHONE
+        return [NSString stringWithFormat:@"Nosara Client for iOS %@", TracksLibraryVersion];
+    #endif
+
+    #if TARGET_OS_MAC
+        return [NSString stringWithFormat:@"Nosara Client for macOS %@", TracksLibraryVersion];
+    #endif
+
+    return [NSString stringWithFormat:@"Nosara Client for Objective-C %@", TracksLibraryVersion];
 }
 
 @end

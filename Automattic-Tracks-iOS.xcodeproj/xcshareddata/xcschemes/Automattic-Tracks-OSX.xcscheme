@@ -14,37 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+               BlueprintIdentifier = "F9A117B021E69B41002A5CD8"
                BuildableName = "AutomatticTracks.framework"
-               BlueprintName = "Automattic-Tracks-iOS"
-               ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93B5C7B31CE25D40002820B3"
-               BuildableName = "Automattic-Tracks-iOSTests.xctest"
-               BlueprintName = "Automattic-Tracks-iOSTests"
-               ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93B5C7B31CE25D40002820B3"
-               BuildableName = "Automattic-Tracks-iOSTests.xctest"
-               BlueprintName = "Automattic-Tracks-iOSTests"
+               BlueprintName = "Automattic-Tracks-OSX"
                ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -54,15 +26,16 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      codeCoverageEnabled = "YES"
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
          <TestableReference
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "93B5C7B31CE25D40002820B3"
-               BuildableName = "Automattic-Tracks-iOSTests.xctest"
-               BlueprintName = "Automattic-Tracks-iOSTests"
+               BlueprintIdentifier = "F970F41A21E7BBD8000664D2"
+               BuildableName = "Automattic_Tracks_OSXTests.xctest"
+               BlueprintName = "Automattic_Tracks_OSXTests"
                ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -70,9 +43,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+            BlueprintIdentifier = "F9A117B021E69B41002A5CD8"
             BuildableName = "AutomatticTracks.framework"
-            BlueprintName = "Automattic-Tracks-iOS"
+            BlueprintName = "Automattic-Tracks-OSX"
             ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -92,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+            BlueprintIdentifier = "F9A117B021E69B41002A5CD8"
             BuildableName = "AutomatticTracks.framework"
-            BlueprintName = "Automattic-Tracks-iOS"
+            BlueprintName = "Automattic-Tracks-OSX"
             ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -110,9 +83,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "93B5C7AA1CE25D40002820B3"
+            BlueprintIdentifier = "F9A117B021E69B41002A5CD8"
             BuildableName = "AutomatticTracks.framework"
-            BlueprintName = "Automattic-Tracks-iOS"
+            BlueprintName = "Automattic-Tracks-OSX"
             ReferencedContainer = "container:Automattic-Tracks-iOS.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

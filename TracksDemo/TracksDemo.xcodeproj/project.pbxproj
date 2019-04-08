@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E14A4ED368731BE67503900 /* Pods_TracksDemo_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD8E50F4D371F7414BDB49 /* Pods_TracksDemo_Mac.framework */; };
 		2A08DDA7B91008898D9BAB2D /* Pods_TracksDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7EF11BEA90E0B1F6C177A90 /* Pods_TracksDemo.framework */; };
 		73B375EEF4DC862A1B72B4CD /* Pods_TracksDemo_TracksDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1126A32F54624C019349ED29 /* Pods_TracksDemo_TracksDemoTests.framework */; };
 		937632941AC2026900086BC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632931AC2026900086BC6 /* main.m */; };
@@ -16,6 +17,10 @@
 		9376329F1AC2026900086BC6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9376329E1AC2026900086BC6 /* Images.xcassets */; };
 		937632A21AC2026900086BC6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 937632A01AC2026900086BC6 /* LaunchScreen.xib */; };
 		937632AE1AC2026900086BC6 /* TracksDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632AD1AC2026900086BC6 /* TracksDemoTests.m */; };
+		F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93676FA21DFFDC700323458 /* AppDelegate.swift */; };
+		F93676FD21DFFDC700323458 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93676FC21DFFDC700323458 /* ViewController.swift */; };
+		F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F93676FE21DFFDC800323458 /* Assets.xcassets */; };
+		F936770221DFFDC800323458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F936770021DFFDC800323458 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,6 +37,7 @@
 		0262514F2B990CA2F3D99C07 /* Pods-TracksDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo/Pods-TracksDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		1126A32F54624C019349ED29 /* Pods_TracksDemo_TracksDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TracksDemo_TracksDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		50A6BC1AA2276022D74E2BB5 /* Pods-TracksDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo/Pods-TracksDemo.release.xcconfig"; sourceTree = "<group>"; };
+		79BD8E50F4D371F7414BDB49 /* Pods_TracksDemo_Mac.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TracksDemo_Mac.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		80A599E585751B1C650C4175 /* Pods-TracksDemo-TracksDemoTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo-TracksDemoTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8E4806E14AA54D2BD5A3D16F /* Pods-TracksDemo-TracksDemoTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo-TracksDemoTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests.release.xcconfig"; sourceTree = "<group>"; };
 		937539871AFA8A9000B94B2A /* TracksDemo_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracksDemo_Prefix.pch; sourceTree = "<group>"; };
@@ -49,6 +55,15 @@
 		937632AC1AC2026900086BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		937632AD1AC2026900086BC6 /* TracksDemoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TracksDemoTests.m; sourceTree = "<group>"; };
 		B7EF11BEA90E0B1F6C177A90 /* Pods_TracksDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TracksDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BB5A6387367FC4DAB79A8971 /* Pods-TracksDemo Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo Mac/Pods-TracksDemo Mac.release.xcconfig"; sourceTree = "<group>"; };
+		F93676F821DFFDC700323458 /* TracksDemo Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TracksDemo Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		F93676FA21DFFDC700323458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		F93676FC21DFFDC700323458 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		F93676FE21DFFDC800323458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		F936770121DFFDC800323458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		F936770321DFFDC800323458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F936770421DFFDC800323458 /* TracksDemo_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TracksDemo_Mac.entitlements; sourceTree = "<group>"; };
+		FE72AF9FDCD4C4D9236C2E7B /* Pods-TracksDemo Mac.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo Mac.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo Mac/Pods-TracksDemo Mac.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +83,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F93676F521DFFDC700323458 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0E14A4ED368731BE67503900 /* Pods_TracksDemo_Mac.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -78,6 +101,8 @@
 				50A6BC1AA2276022D74E2BB5 /* Pods-TracksDemo.release.xcconfig */,
 				80A599E585751B1C650C4175 /* Pods-TracksDemo-TracksDemoTests.debug.xcconfig */,
 				8E4806E14AA54D2BD5A3D16F /* Pods-TracksDemo-TracksDemoTests.release.xcconfig */,
+				FE72AF9FDCD4C4D9236C2E7B /* Pods-TracksDemo Mac.debug.xcconfig */,
+				BB5A6387367FC4DAB79A8971 /* Pods-TracksDemo Mac.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -86,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				937632901AC2026900086BC6 /* TracksDemo */,
+				F93676F921DFFDC700323458 /* TracksDemo Mac */,
 				937632AA1AC2026900086BC6 /* TracksDemoTests */,
 				9376328F1AC2026900086BC6 /* Products */,
 				03716F091836D00095657F36 /* Pods */,
@@ -98,6 +124,7 @@
 			children = (
 				9376328E1AC2026900086BC6 /* TracksDemo.app */,
 				937632A71AC2026900086BC6 /* TracksDemoTests.xctest */,
+				F93676F821DFFDC700323458 /* TracksDemo Mac.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -149,8 +176,22 @@
 			children = (
 				B7EF11BEA90E0B1F6C177A90 /* Pods_TracksDemo.framework */,
 				1126A32F54624C019349ED29 /* Pods_TracksDemo_TracksDemoTests.framework */,
+				79BD8E50F4D371F7414BDB49 /* Pods_TracksDemo_Mac.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		F93676F921DFFDC700323458 /* TracksDemo Mac */ = {
+			isa = PBXGroup;
+			children = (
+				F93676FA21DFFDC700323458 /* AppDelegate.swift */,
+				F93676FC21DFFDC700323458 /* ViewController.swift */,
+				F93676FE21DFFDC800323458 /* Assets.xcassets */,
+				F936770021DFFDC800323458 /* Main.storyboard */,
+				F936770321DFFDC800323458 /* Info.plist */,
+				F936770421DFFDC800323458 /* TracksDemo_Mac.entitlements */,
+			);
+			path = "TracksDemo Mac";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -166,9 +207,7 @@
 				9376328B1AC2026900086BC6 /* Frameworks */,
 				9376328C1AC2026900086BC6 /* Resources */,
 				766D4FA30E63788E6D96C065 /* [CP] Embed Pods Frameworks */,
-				6E98841391E1717BD3DD5FCC /* [CP] Copy Pods Resources */,
 				EC8A6B7DD60EB9FB1F4189AF /* 📦 Embed Pods Frameworks */,
-				0C7B0A5279EC3F29F57C20A5 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -189,9 +228,7 @@
 				937632A41AC2026900086BC6 /* Frameworks */,
 				937632A51AC2026900086BC6 /* Resources */,
 				396CB34000D4F015041219BA /* [CP] Embed Pods Frameworks */,
-				05431C7752B413E46ABA5A31 /* [CP] Copy Pods Resources */,
 				705CBF13CA108A172C1EE715 /* 📦 Embed Pods Frameworks */,
-				3A9D2087D3547AE036F6FCB7 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -203,13 +240,33 @@
 			productReference = 937632A71AC2026900086BC6 /* TracksDemoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		F93676F721DFFDC700323458 /* TracksDemo Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F936770521DFFDC800323458 /* Build configuration list for PBXNativeTarget "TracksDemo Mac" */;
+			buildPhases = (
+				33225043F7781421502233E7 /* [CP] Check Pods Manifest.lock */,
+				F93676F421DFFDC700323458 /* Sources */,
+				F93676F521DFFDC700323458 /* Frameworks */,
+				F93676F621DFFDC700323458 /* Resources */,
+				3D0F9B05881228C105F4AADB /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "TracksDemo Mac";
+			productName = "TracksDemo Mac";
+			productReference = F93676F821DFFDC700323458 /* TracksDemo Mac.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		937632861AC2026900086BC6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0730;
+				LastSwiftUpdateCheck = 1010;
+				LastUpgradeCheck = 1010;
 				ORGANIZATIONNAME = "Automattic Inc.";
 				TargetAttributes = {
 					9376328D1AC2026900086BC6 = {
@@ -219,6 +276,11 @@
 					937632A61AC2026900086BC6 = {
 						CreatedOnToolsVersion = 6.2;
 						TestTargetID = 9376328D1AC2026900086BC6;
+					};
+					F93676F721DFFDC700323458 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = PZYM8XX95Q;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
@@ -237,6 +299,7 @@
 			targets = (
 				9376328D1AC2026900086BC6 /* TracksDemo */,
 				937632A61AC2026900086BC6 /* TracksDemoTests */,
+				F93676F721DFFDC700323458 /* TracksDemo Mac */,
 			);
 		};
 /* End PBXProject section */
@@ -259,37 +322,38 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F93676F621DFFDC700323458 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */,
+				F936770221DFFDC800323458 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		05431C7752B413E46ABA5A31 /* [CP] Copy Pods Resources */ = {
+		33225043F7781421502233E7 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "[CP] Copy Pods Resources";
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-TracksDemo Mac-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		0C7B0A5279EC3F29F57C20A5 /* 📦 Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo/Pods-TracksDemo-resources.sh\"\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		396CB34000D4F015041219BA /* [CP] Embed Pods Frameworks */ = {
@@ -298,10 +362,10 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Automattic-Tracks-iOS/AutomatticTracks.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Automattic-Tracks-iOS-iOS/AutomatticTracks.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability-iOS/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -313,22 +377,33 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		3A9D2087D3547AE036F6FCB7 /* 📦 Copy Pods Resources */ = {
+		3D0F9B05881228C105F4AADB /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
+			inputFileListPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-TracksDemo Mac/Pods-TracksDemo Mac-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Automattic-Tracks-iOS-macOS/AutomatticTracks.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-macOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability-macOS/Reachability.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AutomatticTracks.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo-TracksDemoTests/Pods-TracksDemo-TracksDemoTests-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TracksDemo Mac/Pods-TracksDemo Mac-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		49351A1B96052BD7A6CB3C55 /* [CP] Check Pods Manifest.lock */ = {
@@ -344,21 +419,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		6E98841391E1717BD3DD5FCC /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo/Pods-TracksDemo-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		705CBF13CA108A172C1EE715 /* 📦 Embed Pods Frameworks */ = {
@@ -382,10 +442,10 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo/Pods-TracksDemo-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Automattic-Tracks-iOS/AutomatticTracks.framework",
-				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Reachability/Reachability.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-TracksDemo/Pods-TracksDemo-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Automattic-Tracks-iOS-iOS/AutomatticTracks.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability-iOS/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -397,7 +457,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-TracksDemo/Pods-TracksDemo-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-TracksDemo/Pods-TracksDemo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		7F5B746292B27D2B541DF92D /* [CP] Check Pods Manifest.lock */ = {
@@ -487,6 +547,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F93676F421DFFDC700323458 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F93676FD21DFFDC700323458 /* ViewController.swift in Sources */,
+				F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -514,6 +583,14 @@
 			name = LaunchScreen.xib;
 			sourceTree = "<group>";
 		};
+		F936770021DFFDC800323458 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F936770121DFFDC800323458 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -525,13 +602,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -540,6 +627,7 @@
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -568,13 +656,23 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -582,6 +680,7 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
@@ -604,7 +703,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = TracksDemo/TracksDemo_Prefix.pch;
 				INFOPLIST_FILE = TracksDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -620,7 +719,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = TracksDemo/TracksDemo_Prefix.pch;
 				INFOPLIST_FILE = TracksDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -666,6 +765,66 @@
 			};
 			name = Release;
 		};
+		F936770621DFFDC800323458 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FE72AF9FDCD4C4D9236C2E7B /* Pods-TracksDemo Mac.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "TracksDemo Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.TracksDemo-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Debug;
+		};
+		F936770721DFFDC800323458 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = BB5A6387367FC4DAB79A8971 /* Pods-TracksDemo Mac.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = PZYM8XX95Q;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "TracksDemo Mac/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.TracksDemo-Mac";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.2;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -692,6 +851,15 @@
 			buildConfigurations = (
 				937632B51AC2026900086BC6 /* Debug */,
 				937632B61AC2026900086BC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F936770521DFFDC800323458 /* Build configuration list for PBXNativeTarget "TracksDemo Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F936770621DFFDC800323458 /* Debug */,
+				F936770721DFFDC800323458 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

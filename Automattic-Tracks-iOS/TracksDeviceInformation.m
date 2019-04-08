@@ -1,4 +1,5 @@
 #import "TracksDeviceInformation.h"
+#import "WatchSessionManager.h"
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -6,7 +7,11 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #else
+#import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
+#import <SystemConfiguration/SystemConfiguration.h>
+#include <sys/types.h>
+#include <sys/sysctl.h>
 #endif
 
 @interface TracksDeviceInformation ()
@@ -19,15 +24,6 @@
 
 @implementation TracksDeviceInformation
 
-- (instancetype)init
-{
-    self = [super init];
-    if (self) {
-    }
-    return self;
-}
-
-
 - (NSString *)brand
 {
     return @"Apple";
@@ -38,40 +34,41 @@
     return @"Apple";
 }
 
-
-#if TARGET_OS_IPHONE
-
 - (NSString *)currentNetworkOperator
 {
-    #if TARGET_OS_SIMULATOR
-        return @"Carrier (Simulator)";
-    #else
-        CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-        CTCarrier *carrier = [netInfo subscriberCellularProvider];
+#if TARGET_OS_SIMULATOR
+    return @"Carrier (Simulator)";
+#elif TARGET_OS_IPHONE
+    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+    CTCarrier *carrier = [netInfo subscriberCellularProvider];
 
-        NSString *carrierName = nil;
-        if (carrier) {
-            carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
-        }
+    NSString *carrierName = nil;
+    if (carrier) {
+        carrierName = [NSString stringWithFormat:@"%@ [%@/%@/%@]", carrier.carrierName, [carrier.isoCountryCode uppercaseString], carrier.mobileCountryCode, carrier.mobileNetworkCode];
+    }
 
-        return carrierName;
-    #endif
+    return carrierName;
+#else
+    return @"Not Applicable";
+#endif
 }
 
 
 - (NSString *)currentNetworkRadioType
 {
-    #if TARGET_OS_SIMULATOR
-        return @"None (Simulator)";
-    #else
-        CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
-        NSString *type = nil;
-        if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
-            type = [netInfo currentRadioAccessTechnology];
-        }
+#if TARGET_OS_SIMULATOR
+    return @"None (Simulator)";
+#elif TARGET_OS_IPHONE
+    CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
+    NSString *type = nil;
+    if ([netInfo respondsToSelector:@selector(currentRadioAccessTechnology)]) {
+        type = [netInfo currentRadioAccessTechnology];
+    }
 
-        return type;
-    #endif
+    return type;
+#else   // Mac
+    return @"Unknown";
+#endif
 }
 
 
@@ -82,71 +79,87 @@
 
 - (NSString *)model
 {
+#if TARGET_OS_IPHONE
     return [UIDeviceHardware platformString];
+#else   // Mac
+    size_t size;
+    sysctlbyname("hw.model", NULL, &size, NULL, 0);
+    char *model = malloc(size);
+    sysctlbyname("hw.model", model, &size, NULL, 0);
+    NSString *modelString = [NSString stringWithUTF8String:model];
+    free(model);
+
+    return modelString;
+#endif
 }
 
 
 - (NSString *)os
 {
+#if TARGET_OS_IPHONE
     return [[UIDevice currentDevice] systemName];
+#else   // Mac
+    return @"OS X";
+#endif
 }
-
 
 - (NSString *)version
 {
+#if TARGET_OS_IPHONE
     return [[UIDevice currentDevice] systemVersion];
+#else   // Mac
+    return [[NSProcessInfo processInfo] operatingSystemVersionString];
+#endif
+}
+
+-(BOOL)isAppleWatchConnected{
+#if TARGET_OS_IPHONE
+    return [[WatchSessionManager shared] hasBeenPreviouslyPaired];
+#else   // Mac
+    return NO;
+#endif
 }
 
 -(BOOL)isVoiceOverEnabled{
+
+#if TARGET_OS_IPHONE
     return UIAccessibilityIsVoiceOverRunning();
+#else   // Mac
+    Boolean exists = false;
+    BOOL result = CFPreferencesGetAppBooleanValue(CFSTR("voiceOverOnOffKey"), CFSTR("com.apple.universalaccess"), &exists);
+
+    if(exists){
+        return result;
+    }
+
+    return NO;
+#endif
 }
 
 -(CGFloat)statusBarHeight{
+#if TARGET_OS_IPHONE
     return UIApplication.sharedApplication.statusBarFrame.size.height;
-}
-
-#else
-
-- (NSString *)currentNetworkOperator
-{
-    return @"";
-}
-
-
-- (NSString *)currentNetworkRadioType
-{
-    return @"";
-}
-
-
-- (NSString *)deviceLanguage
-{
-    return [[NSLocale currentLocale] localeIdentifier];
-}
-
-- (NSString *)model
-{
-    return @"";
-}
-
-
-- (NSString *)os
-{
-    return @"OS X";
-}
-
-
-- (NSString *)version
-{
-    return [[NSProcessInfo processInfo] operatingSystemVersionString];
-}
-
+#else   // Mac
+    return 0;
 #endif
+}
 
-
+-(NSString *)orientation{
+#if TARGET_OS_IPHONE
+    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+    if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
+        return @"Portrait";
+    } else if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+        return @"Landscape";
+    } else {
+        return @"Unknown";
+    }
+#else   // Mac
+    return @"Unknown";
+#endif
+}
 
 #pragma mark - App Specific Information
-
 
 - (NSString *)appName
 {

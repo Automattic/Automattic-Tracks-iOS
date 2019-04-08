@@ -1,13 +1,19 @@
 # Uncomment this line to define a global platform for your project
-platform :ios, '9.0'
-
 use_frameworks!
 
 target 'TracksDemo' do
+  platform :ios, '10.0'
+
   pod 'Automattic-Tracks-iOS', :path => '../'
 
   target 'TracksDemoTests' do
 
   end
+end
+
+target 'TracksDemo Mac' do
+    platform :osx, '10.11'
+
+    pod 'Automattic-Tracks-iOS',:path => '../'
 end
 

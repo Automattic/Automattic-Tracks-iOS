@@ -18,7 +18,13 @@
 @property (nonatomic, readonly) NSString *currentNetworkOperator;
 @property (nonatomic, readonly) NSString *currentNetworkRadioType;
 @property (nonatomic, assign) BOOL isWiFiConnected;
+/**
+ * Indicates whether the device has an Internet connection.
+ */
+@property (nonatomic, assign) BOOL isOnline;
+@property (nonatomic, assign) BOOL isAppleWatchConnected;
 @property (nonatomic, assign) BOOL isVoiceOverEnabled;
 @property (nonatomic, assign) CGFloat statusBarHeight;
+@property (nonatomic, readonly) NSString *orientation;
 
 @end
