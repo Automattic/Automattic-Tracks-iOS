@@ -12,7 +12,7 @@ target 'Automattic-Tracks-iOS' do
   pod 'Reachability', '~> 3.1'
 
   target 'Automattic-Tracks-iOSTests' do
-    pod 'OCMock', '~> 3.3.1'
+    pod 'OCMock', '~> 3.4.3'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
   end
@@ -25,7 +25,7 @@ target 'Automattic-Tracks-OSX' do
     pod 'Reachability', '~> 3.1'
 
   target 'Automattic_Tracks_OSXTests' do
-    pod 'OCMock', '~> 3.3.1'
+    pod 'OCMock', '~> 3.4.3'
     pod 'OHHTTPStubs'
     pod 'OHHTTPStubs/Swift'
   end
