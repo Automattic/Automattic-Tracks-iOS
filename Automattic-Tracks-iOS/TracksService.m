@@ -78,8 +78,12 @@ NSString *const USER_ID_ANON = @"anonId";
         _contextManager = contextManager;
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         _deviceInformation = [TracksDeviceInformation new];
+
         _reachability = [Reachability reachabilityWithHostname:@"public-api.wordpress.com"];
         [_reachability startNotifier];
+
+        [self updateDeviceInformationFromReachability];
+
         _isHostReachable = YES;
         _timerEnabled = YES;
         _userProperties = [NSMutableDictionary new];
@@ -221,6 +225,41 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 }
 
+#pragma mark - Reachability
+
+/**
+ * Update `self.deviceInformation` properties that rely on `self.reachability`.
+ */
+- (void)updateDeviceInformationFromReachability
+{
+    self.deviceInformation.isWiFiConnected = self.reachability.isReachableViaWiFi;
+    self.deviceInformation.isOnline = self.reachability.isReachable;
+}
+
+- (void)reachabilityChanged:(NSNotification *)notification
+{
+    Reachability *reachability = (Reachability *)notification.object;
+
+    // Because the containing app may already use Reachability, limit this to ours only.
+    if (reachability != self.reachability) {
+        return;
+    }
+
+    [self updateDeviceInformationFromReachability];
+
+    if (reachability.isReachable == YES && self.isHostReachable == NO) {
+        DDLogVerbose(@"Tracks host is available. Enabling timer.");
+        self.isHostReachable = YES;
+        self.timerEnabled = YES;
+        [self resetTimer];
+    } else if (reachability.isReachable == NO && self.isHostReachable == YES){
+        DDLogVerbose(@"Tracks host is unavailable. Disabling timer.");
+        self.isHostReachable = NO;
+        self.timerEnabled = NO;
+        [self resetTimer];
+    }
+}
+
 #pragma mark - Private methods
 
 - (void)didEnterBackground:(NSNotification *)notification
@@ -237,33 +276,6 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.reachability startNotifier];
     [self resetTimer];
 }
-
-
-- (void)reachabilityChanged:(NSNotification *)notification
-{
-    Reachability *reachability = (Reachability *)notification.object;
-    
-    // Because the containing app may already use Reachability, limit this to ours only.
-    if (reachability != self.reachability) {
-        return;
-    }
-
-    self.deviceInformation.isWiFiConnected = reachability.isReachableViaWiFi;
-    self.deviceInformation.isOnline = reachability.isReachable;
-
-    if (reachability.isReachable == YES && self.isHostReachable == NO) {
-        DDLogVerbose(@"Tracks host is available. Enabling timer.");
-        self.isHostReachable = YES;
-        self.timerEnabled = YES;
-        [self resetTimer];
-    } else if (reachability.isReachable == NO && self.isHostReachable == YES){
-        DDLogVerbose(@"Tracks host is unavailable. Disabling timer.");
-        self.isHostReachable = NO;
-        self.timerEnabled = NO;
-        [self resetTimer];
-    }
-}
-
 
 - (void)resetTimer
 {
