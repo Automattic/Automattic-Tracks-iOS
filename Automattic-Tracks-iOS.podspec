@@ -6,11 +6,12 @@ Pod::Spec.new do |spec|
   spec.authors      = { 'Automattic' => 'mobile@automattic.com' }
   spec.summary      = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
   spec.source       = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => spec.version.to_s }
+  spec.swift_version = '5.0'
 
-  spec.ios.source_files = 'Automattic-Tracks-iOS/**/*.{h,m}'
+  spec.ios.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
   spec.ios.exclude_files = 'Automattic-Tracks-OSX/Automattic_Tracks_OSX.h'
 
-  spec.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m}'
+  spec.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
   spec.osx.exclude_files = 'Automattic-Tracks-iOS/Automattic-Tracks-iOS.h'
 
   spec.private_header_files = 'Automattic-Tracks-iOS/Private/*.h'
@@ -30,4 +31,5 @@ Pod::Spec.new do |spec|
   spec.ios.dependency 'UIDeviceIdentifier', '~> 1.1.4'
   spec.dependency 'CocoaLumberjack', '~> 3.5.2'
   spec.dependency 'Reachability', '~>3.1'
+  spec.dependency 'Sentry', '~>4'
 end
