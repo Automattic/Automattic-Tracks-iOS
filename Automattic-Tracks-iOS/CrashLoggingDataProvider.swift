@@ -5,10 +5,10 @@ public protocol CrashLoggingDataProvider {
     var userHasOptedOut: Bool { get }
     var buildType: String { get }
     var releaseName: String { get }
-    var currentUser: CrashLoggingUser? { get }
+    var currentUser: TracksUser? { get }
     var additionalUserData: [String : Any] { get }
 }
-
+   
 /// Default implementations of common protocol properties
 public extension CrashLoggingDataProvider {
 

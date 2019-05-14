@@ -1,7 +1,7 @@
 import Foundation
 import Sentry
 
-public struct CrashLoggingUser {
+public struct TracksUser {
     let userID: String?
     let email: String?
     let username: String?
@@ -17,7 +17,7 @@ public struct CrashLoggingUser {
 
 extension Sentry.User {
 
-    convenience init(user: CrashLoggingUser?, additionalUserData: [String : Any]) {
+    convenience init(user: TracksUser?, additionalUserData: [String : Any]) {
 
         let userID = user?.userID ?? "0"
         let username = user?.username ?? "anonymous"
