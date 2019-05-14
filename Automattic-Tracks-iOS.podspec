@@ -6,7 +6,7 @@ Pod::Spec.new do |spec|
   spec.authors      = { 'Automattic' => 'mobile@automattic.com' }
   spec.summary      = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
   spec.source       = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => spec.version.to_s }
-  spec.swift_version = '5.0'
+  spec.swift_version = '4.2'
 
   spec.ios.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
   spec.ios.exclude_files = 'Automattic-Tracks-OSX/Automattic_Tracks_OSX.h'
