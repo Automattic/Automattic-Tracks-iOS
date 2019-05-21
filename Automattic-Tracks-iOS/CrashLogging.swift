@@ -100,6 +100,7 @@ public extension CrashLogging {
         let event = Event(level: .error)
         event.message = error.localizedDescription
         event.extra = userInfo
+        event.user = sharedInstance.currentUser
 
         Client.shared?.appendStacktrace(to: event)
         Client.shared?.send(event: event)
@@ -116,6 +117,7 @@ public extension CrashLogging {
         let event = Event(level: level)
         event.message = message
         event.extra = userInfo
+        event.user = sharedInstance.currentUser
 
         Client.shared?.appendStacktrace(to: event)
         Client.shared?.send(event: event)
@@ -136,13 +138,20 @@ extension CrashLogging {
     }
 
     func enableUserTracking() {
-        /// Don't continue unless `start` has been called on the crash logger
-        guard self.dataProvider != nil else { return }
-
-        Client.shared?.user = Sentry.User(user: dataProvider.currentUser, additionalUserData: dataProvider.additionalUserData)
+        Client.shared?.user = currentUser
     }
 
     func disableUserTracking() {
         Client.shared?.clearContext()
+    }
+
+    fileprivate var currentUser: Sentry.User? {
+        /// Don't continue unless `start` has been called on the crash logger
+        guard self.dataProvider != nil else { return nil }
+
+        let currentUser = self.dataProvider.currentUser
+        let userData = self.dataProvider.additionalUserData
+
+        return Sentry.User(user: currentUser, additionalUserData: userData)
     }
 }
