@@ -94,10 +94,12 @@ public extension CrashLogging {
      - Parameters:
      - error: The error object
      - level: The level of severity to report in Sentry (`.error` by default)
+     - userInfo: A dictionary containing additional data about this error
     */
-    static func logError(_ error: Error, level: SentrySeverity = .error) {
+    static func logError(_ error: Error, userInfo: [String : Any]? = nil, level: SentrySeverity = .error) {
         let event = Event(level: .error)
         event.message = error.localizedDescription
+        event.extra = userInfo
 
         Client.shared?.appendStacktrace(to: event)
         Client.shared?.send(event: event)
@@ -108,10 +110,12 @@ public extension CrashLogging {
      - Parameters:
      - message: The message
      - level: The level of severity to report in Sentry (`.error` by default)
+     - userInfo: A dictionary containing additional data about this error
     */
-    static func logMessage(_ message: String, level: SentrySeverity = .info) {
+    static func logMessage(_ message: String, userInfo: [String : Any]? = nil, level: SentrySeverity = .info) {
         let event = Event(level: level)
         event.message = message
+        event.extra = userInfo
 
         Client.shared?.appendStacktrace(to: event)
         Client.shared?.send(event: event)
