@@ -89,15 +89,29 @@ public class CrashLogging {
 public extension CrashLogging {
 
     /**
-     Writes the error to the Crash Logging system. If a crash happens in the future, this entry
-     will be displayed in the history leading up to the crash.
+     Writes the error to the Crash Logging system, and includes a stack trace.
 
      - Parameters:
      - error: The error object
+     - level: The level of severity to report in Sentry (`.error` by default)
     */
-    static func logError(_ error: Error) {
+    static func logError(_ error: Error, level: SentrySeverity = .error) {
         let event = Event(level: .error)
         event.message = error.localizedDescription
+
+        Client.shared?.appendStacktrace(to: event)
+        Client.shared?.send(event: event)
+    }
+
+    /**
+     Writes a message to the Crash Logging system, and includes a stack trace.
+     - Parameters:
+     - message: The message
+     - level: The level of severity to report in Sentry (`.error` by default)
+    */
+    static func logMessage(_ message: String, level: SentrySeverity = .info) {
+        let event = Event(level: level)
+        event.message = message
 
         Client.shared?.appendStacktrace(to: event)
         Client.shared?.send(event: event)
