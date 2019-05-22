@@ -110,13 +110,13 @@ public extension CrashLogging {
      Writes a message to the Crash Logging system, and includes a stack trace.
      - Parameters:
      - message: The message
+     - properties: A dictionary containing additional information about this error
      - level: The level of severity to report in Sentry (`.error` by default)
-     - userInfo: A dictionary containing additional data about this error
     */
-    static func logMessage(_ message: String, userInfo: [String : Any]? = nil, level: SentrySeverity = .info) {
+    static func logMessage(_ message: String, properties: [String : Any]? = nil, level: SentrySeverity = .info) {
         let event = Event(level: level)
         event.message = message
-        event.extra = userInfo
+        event.extra = properties
         event.user = sharedInstance.currentUser
 
         Client.shared?.appendStacktrace(to: event)
