@@ -93,13 +93,13 @@ public extension CrashLogging {
 
      - Parameters:
      - error: The error object
+     - userInfo: A dictionary containing additional data about this error.
      - level: The level of severity to report in Sentry (`.error` by default)
-     - userInfo: A dictionary containing additional data about this error
     */
     static func logError(_ error: Error, userInfo: [String : Any]? = nil, level: SentrySeverity = .error) {
         let event = Event(level: .error)
         event.message = error.localizedDescription
-        event.extra = userInfo
+        event.extra = userInfo ?? (error as NSError).userInfo
         event.user = sharedInstance.currentUser
 
         Client.shared?.appendStacktrace(to: event)
