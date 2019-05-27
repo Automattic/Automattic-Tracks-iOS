@@ -5,30 +5,44 @@ public struct TracksUser {
     let userID: String?
     let email: String?
     let username: String?
-    let isLoggedIn: Bool
 
-    public init(userID: String?, email: String?, username: String?, isLoggedIn: Bool = false) {
+    public init(userID: String?, email: String?, username: String?) {
         self.userID = userID
         self.email = email
         self.username = username
-        self.isLoggedIn = isLoggedIn
+    }
+
+    public init(email: String) {
+        self.userID = nil
+        self.email = email
+        self.username = nil
     }
 }
 
-extension Sentry.User {
+internal extension TracksUser {
 
-    convenience init(user: TracksUser?, additionalUserData: [String : Any]) {
+    var sentryUser: Sentry.User {
 
-        let userID = user?.userID ?? "0"
-        let username = user?.username ?? "anonymous"
+        let user = Sentry.User()
 
-        self.init(userId: username)
-        email = user?.email
+        if let userID = self.userID {
+            user.userId = userID
+        }
 
-        /// Merge provided user data with some defaults, overwriting those defaults
-        /// in favour of values provided by the application.
-        extra = additionalUserData.merging([
-            "user_id": userID,
-        ]) { (application_value, library_value) in application_value }
+        if let email = self.email {
+            user.email = email
+        }
+
+        if let username = user.username {
+            user.username = username
+        }
+
+        return user
+    }
+
+    func sentryUser(withData additionalUserData: [String : Any]) -> Sentry.User {
+        let user = self.sentryUser
+        user.extra = additionalUserData
+        return user
     }
 }
