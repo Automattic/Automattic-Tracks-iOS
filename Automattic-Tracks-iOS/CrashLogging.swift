@@ -5,14 +5,9 @@ import Sentry
 public class CrashLogging {
 
     /// A singleton is maintained, but the host application needn't be aware of its existence.
-    private static let sharedInstance = CrashLogging()
-
-    fileprivate var dataProvider: CrashLoggingDataProvider! {
-        didSet{
-            applyUserTrackingPreferences()
-        }
-    }
-
+    internal static let sharedInstance = CrashLogging()
+    fileprivate var dataProvider: CrashLoggingDataProvider!
+    
     /**
      Initializes the crash logging system.
 
@@ -22,9 +17,14 @@ public class CrashLogging {
      - SeeAlso: CrashLoggingDataProvider
      */
     public static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
+
+        // Store the data provider for future use
+        sharedInstance.dataProvider = dataProvider
+
         // Create a Sentry client and start crash handler
         do {
             Client.shared = try Client(dsn: dataProvider.sentryDSN)
+            try Client.shared?.startCrashHandler()
 
             // Store lots of breadcrumbs to trace errors
             Client.shared?.breadcrumbs.maxBreadcrumbs = 500
@@ -35,18 +35,14 @@ public class CrashLogging {
             // Automatically track low-memory events
             Client.shared?.trackMemoryPressureAsEvent()
 
-            try Client.shared?.startCrashHandler()
-
             // Override event serialization to append the logs, if needed
             Client.shared?.beforeSerializeEvent = sharedInstance.beforeSerializeEvent
             Client.shared?.shouldSendEvent = sharedInstance.shouldSendEvent
 
-            // Apply Sentry Tags
+            // Add additional data
             Client.shared?.releaseName = dataProvider.releaseName
             Client.shared?.environment = dataProvider.buildType
-
-            // Store the data provider for future use
-            sharedInstance.dataProvider = dataProvider
+            updateCurrentUser()
 
         } catch let error {
             logError(error)
@@ -60,23 +56,23 @@ public class CrashLogging {
 
     /// A Sentry hook that controls whether or not the event should be sent.
     private func shouldSendEvent(_ event: Event?) -> Bool {
+
         #if DEBUG
-        return false
+        let result = false
         #else
-        return !CrashLogging.userHasOptedOut
+        let result = !CrashLogging.userHasOptedOut
         #endif
+
+        shouldSendEventCallback?(result)
+
+        return result
     }
 
     /// The current state of the user's choice to opt out of data collection. Provided by the data source.
     public static var userHasOptedOut: Bool {
-        get {
-            /// If we can't say for sure, assume the user has opted out
-            guard sharedInstance.dataProvider != nil else { return true }
-            return sharedInstance.dataProvider.userHasOptedOut
-        }
-        set {
-            sharedInstance.applyUserTrackingPreferences()
-        }
+        /// If we can't say for sure, assume the user has opted out
+        guard sharedInstance.dataProvider != nil else { return true }
+        return sharedInstance.dataProvider.userHasOptedOut
     }
 
     /// Immediately crashes the application and generates a crash report.
@@ -100,10 +96,13 @@ public extension CrashLogging {
         let event = Event(level: .error)
         event.message = error.localizedDescription
         event.extra = userInfo ?? (error as NSError).userInfo
-        event.user = sharedInstance.currentUser
 
-        Client.shared?.appendStacktrace(to: event)
+        Client.shared?.snapshotStacktrace {
+            Client.shared?.appendStacktrace(to: event)
+        }
+
         Client.shared?.send(event: event)
+        sharedInstance.dataProvider.didLogErrorCallback?(event)
     }
 
     /**
@@ -114,44 +113,44 @@ public extension CrashLogging {
      - level: The level of severity to report in Sentry (`.error` by default)
     */
     static func logMessage(_ message: String, properties: [String : Any]? = nil, level: SentrySeverity = .info) {
+
         let event = Event(level: level)
         event.message = message
         event.extra = properties
-        event.user = sharedInstance.currentUser
 
-        Client.shared?.appendStacktrace(to: event)
+        Client.shared?.snapshotStacktrace {
+            Client.shared?.appendStacktrace(to: event)
+        }
+
         Client.shared?.send(event: event)
+        sharedInstance.dataProvider.didLogMessageCallback?(event)
     }
 }
 
 // User Tracking
 extension CrashLogging {
 
-    func applyUserTrackingPreferences() {
+    internal var currentUser: Sentry.User {
 
-        if !CrashLogging.userHasOptedOut {
-            enableUserTracking()
-        }
-        else {
-            disableUserTracking()
-        }
-    }
+        let anonymousUser = TracksUser(userID: nil, email: nil, username: nil).sentryUser
 
-    func enableUserTracking() {
-        Client.shared?.user = currentUser
-    }
-
-    func disableUserTracking() {
-        Client.shared?.clearContext()
-    }
-
-    fileprivate var currentUser: Sentry.User? {
         /// Don't continue unless `start` has been called on the crash logger
-        guard self.dataProvider != nil else { return nil }
+        guard self.dataProvider != nil else { return anonymousUser }
 
-        let currentUser = self.dataProvider.currentUser
-        let userData = self.dataProvider.additionalUserData
+        /// Don't continue if the data source doesn't yet have a user
+        guard let user = self.dataProvider.currentUser else { return anonymousUser }
+        let data = self.dataProvider.additionalUserData
 
-        return Sentry.User(user: currentUser, additionalUserData: userData)
+        return user.sentryUser(withData: data)
+    }
+
+    /// Causes the Crash Logging System to refresh its knowledge about the current user.
+    ///
+    /// This is required in situations like login / logout, when the system otherwise might not
+    /// know a change has occured.
+    ///
+    /// Calling this method in these situations prevents
+    public static func updateCurrentUser() {
+        Client.shared?.user = sharedInstance.currentUser
     }
 }
