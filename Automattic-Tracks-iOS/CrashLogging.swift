@@ -6,7 +6,7 @@ public class CrashLogging {
 
     /// A singleton is maintained, but the host application needn't be aware of its existence.
     internal static let sharedInstance = CrashLogging()
-    fileprivate var dataProvider: CrashLoggingDataProvider!
+    fileprivate var dataProvider: CrashLoggingDataProvider?
     
     /**
      Initializes the crash logging system.
@@ -71,8 +71,8 @@ public class CrashLogging {
     /// The current state of the user's choice to opt out of data collection. Provided by the data source.
     public static var userHasOptedOut: Bool {
         /// If we can't say for sure, assume the user has opted out
-        guard sharedInstance.dataProvider != nil else { return true }
-        return sharedInstance.dataProvider.userHasOptedOut
+        guard let dataProvider = sharedInstance.dataProvider else { return true }
+        return dataProvider.userHasOptedOut
     }
 
     /// Immediately crashes the application and generates a crash report.
@@ -102,7 +102,7 @@ public extension CrashLogging {
         }
 
         Client.shared?.send(event: event)
-        sharedInstance.dataProvider.didLogErrorCallback?(event)
+        sharedInstance.dataProvider?.didLogErrorCallback?(event)
     }
 
     /**
@@ -123,7 +123,7 @@ public extension CrashLogging {
         }
 
         Client.shared?.send(event: event)
-        sharedInstance.dataProvider.didLogMessageCallback?(event)
+        sharedInstance.dataProvider?.didLogMessageCallback?(event)
     }
 }
 
@@ -135,11 +135,11 @@ extension CrashLogging {
         let anonymousUser = TracksUser(userID: nil, email: nil, username: nil).sentryUser
 
         /// Don't continue unless `start` has been called on the crash logger
-        guard self.dataProvider != nil else { return anonymousUser }
+        guard let dataProvider = self.dataProvider else { return anonymousUser }
 
         /// Don't continue if the data source doesn't yet have a user
-        guard let user = self.dataProvider.currentUser else { return anonymousUser }
-        let data = self.dataProvider.additionalUserData
+        guard let user = dataProvider.currentUser else { return anonymousUser }
+        let data = dataProvider.additionalUserData
 
         return user.sentryUser(withData: data)
     }
