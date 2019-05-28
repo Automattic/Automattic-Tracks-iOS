@@ -115,17 +115,16 @@ class CrashLoggingTests: XCTestCase {
 /// Allow throwing Strings as error
 extension String: Error {}
 
-extension CrashLoggingTests {
-    fileprivate var validDSN: String { return "https://0000000000000000000000000000000@sentry.io/0000000" }
-    fileprivate var invalidDSN: String { return "foo" }
-    fileprivate var testUser: TracksUser { return TracksUser(userID: "foo", email: "bar", username: "baz") }
+private extension CrashLoggingTests {
+    var validDSN: String { return "https://0000000000000000000000000000000@sentry.io/0000000" }
+    var invalidDSN: String { return "foo" }
+    var testUser: TracksUser { return TracksUser(userID: "foo", email: "bar", username: "baz") }
 }
 
-struct MockCrashLoggingDataProvider : CrashLoggingDataProvider {
+private struct MockCrashLoggingDataProvider : CrashLoggingDataProvider {
     var sentryDSN: String = ""
     var userHasOptedOut: Bool = false
     var buildType: String = "test"
-
     var _currentUser: TracksUser? = nil
 
     var currentUser: TracksUser? {
@@ -136,6 +135,6 @@ struct MockCrashLoggingDataProvider : CrashLoggingDataProvider {
         sentryDSN = ""
         userHasOptedOut = false
         buildType = "test"
-        _currentUser = nil
+        currentUser = nil
     }
 }
