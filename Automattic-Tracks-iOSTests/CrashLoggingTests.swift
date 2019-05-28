@@ -43,7 +43,7 @@ class CrashLoggingTests: XCTestCase {
     }
 
     func testThatUserDataIsBeingStoredForUseInCrashLogs() {
-        mockDataProvider._currentUser = testUser
+        mockDataProvider.currentUser = testUser
         CrashLogging.start(withDataProvider: mockDataProvider)
 
         XCTAssert(CrashLogging.sharedInstance.currentUser.email == testUser.email)
@@ -67,7 +67,7 @@ class CrashLoggingTests: XCTestCase {
     }
 
     func testThatEventsAreSentWhenUserOptsIn() {
-        mockDataProvider._currentUser = testUser
+        mockDataProvider.currentUser = testUser
 
         let expectation = XCTestExpectation(description: "Events be sent if user has opted in")
 
@@ -125,11 +125,7 @@ private struct MockCrashLoggingDataProvider : CrashLoggingDataProvider {
     var sentryDSN: String = ""
     var userHasOptedOut: Bool = false
     var buildType: String = "test"
-    var _currentUser: TracksUser? = nil
-
-    var currentUser: TracksUser? {
-        return _currentUser
-    }
+    var currentUser: TracksUser? = nil
 
     mutating func reset() {
         sentryDSN = ""
