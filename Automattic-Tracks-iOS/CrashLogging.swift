@@ -69,7 +69,7 @@ public class CrashLogging {
     }
 
     /// The current state of the user's choice to opt out of data collection. Provided by the data source.
-    public static var userHasOptedOut: Bool {
+    private static var userHasOptedOut: Bool {
         /// If we can't say for sure, assume the user has opted out
         guard let dataProvider = sharedInstance.dataProvider else { return true }
         return dataProvider.userHasOptedOut
