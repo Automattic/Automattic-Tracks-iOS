@@ -3,7 +3,6 @@ import XCTest
 
 class CrashLoggingTests: XCTestCase {
 
-    private let crashLogging = CrashLogging()
     private var mockDataProvider = MockCrashLoggingDataProvider()
 
     override func setUp() {
