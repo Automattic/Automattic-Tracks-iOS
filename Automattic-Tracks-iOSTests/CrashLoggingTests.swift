@@ -81,6 +81,11 @@ class CrashLoggingTests: XCTestCase {
         wait(for: [expectation], timeout: 1)
     }
 
+///
+///  These are currently disabled, but are being left here, because I'm hoping to get
+///  back to this and sort out how to send stack traces for these events.
+///
+
 //    func testThatLoggedErrorsContainAStackTrace() {
 //        let expectation = XCTestExpectation(description: "Event should contain a Stack Trace")
 //
