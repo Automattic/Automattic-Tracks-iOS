@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   # This uses the iOS Orb located at https://github.com/wordpress-mobile/circleci-orbs
-  ios: wordpress-mobile/ios@0.0.22
+  ios: wordpress-mobile/ios@0.0.25
 
 workflows:
   test_and_validate:
@@ -10,9 +10,10 @@ workflows:
       - ios/test:
           name: Test
           workspace: Automattic-Tracks-iOS.xcworkspace
+          xcode-version: "10.2.0"
           scheme: Automattic-Tracks-iOS
           device: iPhone XS
-          ios-version: "12.1"
+          ios-version: "12.2"
       - ios/validate-podspec:
           name: Validate Podspec
           podspec-path: Automattic-Tracks-iOS.podspec
