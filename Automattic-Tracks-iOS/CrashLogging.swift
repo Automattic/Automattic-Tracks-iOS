@@ -7,7 +7,19 @@ public class CrashLogging {
     /// A singleton is maintained, but the host application needn't be aware of its existence.
     internal static let sharedInstance = CrashLogging()
     fileprivate var dataProvider: CrashLoggingDataProvider?
-    
+
+    /// Thread-safe single initialization
+    fileprivate static let threadSafeDispatchQueue = DispatchQueue(label: Bundle.main.bundleIdentifier ?? "tracks" + "-crash-logging-queue")
+    fileprivate static var _isStarted = false
+    internal static var isStarted: Bool {
+        get {
+            return threadSafeDispatchQueue.sync { _isStarted }
+        }
+        set{
+            threadSafeDispatchQueue.sync { _isStarted = newValue }
+        }
+    }
+
     /**
      Initializes the crash logging system.
 
@@ -17,6 +29,10 @@ public class CrashLogging {
      - SeeAlso: CrashLoggingDataProvider
      */
     public static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
+
+        // Only allow initializing this system once
+        guard !isStarted else { return }
+        isStarted = true
 
         // Store the data provider for future use
         sharedInstance.dataProvider = dataProvider
