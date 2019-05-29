@@ -58,7 +58,9 @@ public class CrashLogging {
             // Add additional data
             Client.shared?.releaseName = dataProvider.releaseName
             Client.shared?.environment = dataProvider.buildType
-            updateCurrentUser()
+
+            // Refresh data from the data provider
+            setNeedsDataRefresh()
 
         } catch let error {
             logError(error)
@@ -160,13 +162,13 @@ extension CrashLogging {
         return user.sentryUser(withData: data)
     }
 
-    /// Causes the Crash Logging System to refresh its knowledge about the current user.
+    /// Causes the Crash Logging System to refresh its knowledge about the current state of the system.
     ///
     /// This is required in situations like login / logout, when the system otherwise might not
     /// know a change has occured.
     ///
     /// Calling this method in these situations prevents
-    public static func updateCurrentUser() {
+    public static func setNeedsDataRefresh() {
         Client.shared?.user = sharedInstance.currentUser
     }
 }
