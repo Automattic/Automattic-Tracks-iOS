@@ -5,6 +5,7 @@ project 'Automattic-Tracks-iOS.xcodeproj'
 abstract_target 'Automattic-Tracks' do
   pod 'CocoaLumberjack', '~> 3.5.2'
   pod 'Reachability', '~> 3.1'
+  pod 'Sentry', '~> 4'
 
   target 'Automattic-Tracks-iOS' do
     platform :ios, '9.0'
