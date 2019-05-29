@@ -3,11 +3,11 @@ import ObjectiveC
 import Sentry
 
 typealias EventLoggingCallback = (Event) -> ()
-typealias DecisionCallback = (Bool) -> ()
+typealias EventDecisionCallback = (Event?, Bool) -> ()
 
 private var errorLoggingCallback: EventLoggingCallback? = nil
 private var messageLoggingCallback: EventLoggingCallback? = nil
-private var eventSendCallback: DecisionCallback? = nil
+private var eventSendCallback: EventDecisionCallback? = nil
 
 internal extension CrashLoggingDataProvider {
 
@@ -47,7 +47,7 @@ internal extension CrashLogging {
         return Client.shared?.lastContext
     }
 
-    var shouldSendEventCallback: DecisionCallback? {
+    var shouldSendEventCallback: EventDecisionCallback? {
         get { return eventSendCallback }
         set { eventSendCallback = newValue }
     }

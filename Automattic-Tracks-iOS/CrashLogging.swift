@@ -81,7 +81,7 @@ public class CrashLogging {
         let result = !CrashLogging.userHasOptedOut
         #endif
 
-        shouldSendEventCallback?(result)
+        shouldSendEventCallback?(event, result)
 
         return result
     }

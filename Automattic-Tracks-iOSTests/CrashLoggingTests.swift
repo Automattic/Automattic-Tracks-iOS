@@ -7,6 +7,7 @@ class CrashLoggingTests: XCTestCase {
 
     override func setUp() {
         mockDataProvider.sentryDSN = validDSN
+        CrashLogging.isStarted = false  // Reset the Crash Logging system
     }
 
     override func tearDown() {
@@ -54,8 +55,8 @@ class CrashLoggingTests: XCTestCase {
 
         let expectation = XCTestExpectation(description: "Events should not be sent if user has opted out")
 
-        CrashLogging.sharedInstance.shouldSendEventCallback = { shouldSendEvent in
-            expectation.isInverted = shouldSendEvent   // fail if `shouldSendEvent` is true
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, shouldSendEvent in
+            guard !shouldSendEvent else { return }
             expectation.fulfill()
         }
 
@@ -70,8 +71,8 @@ class CrashLoggingTests: XCTestCase {
 
         let expectation = XCTestExpectation(description: "Events be sent if user has opted in")
 
-        CrashLogging.sharedInstance.shouldSendEventCallback = { shouldSendEvent in
-            expectation.isInverted = !shouldSendEvent   // succeed if `shouldSendEvent` is true
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, shouldSendEvent in
+            guard shouldSendEvent else { return }
             expectation.fulfill()
         }
 
@@ -79,6 +80,51 @@ class CrashLoggingTests: XCTestCase {
         CrashLogging.logMessage("This is a test")
 
         wait(for: [expectation], timeout: 1)
+    }
+
+    func testThatDataChangeEventsProperlyRefreshData() {
+
+        CrashLogging.start(withDataProvider: mockDataProvider)
+
+        let first_expectation = XCTestExpectation(description: "Current user should be nil")
+        first_expectation.isInverted = true
+
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, shouldSendEvent in
+            guard event?.user == nil else { return }
+            first_expectation.fulfill()
+        }
+
+        mockDataProvider.currentUser = nil
+        CrashLogging.logMessage("This is a test")
+        wait(for: [first_expectation], timeout: 1)
+
+        /// ============================
+
+        let second_expectation = XCTestExpectation(description: "Current user should still be nil until we update the Crash Logging system")
+        second_expectation.isInverted = true
+
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, shouldSendEvent in
+            guard event?.user == nil else { return }
+            second_expectation.fulfill()
+        }
+
+        mockDataProvider.currentUser = testUser
+        CrashLogging.logMessage("This is a test")
+        wait(for: [second_expectation], timeout: 1)
+
+        /// ============================
+
+        let third_expectation = XCTestExpectation(description: "Current user should not be nil once we update the Crash Logging system")
+
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, shouldSendEvent in
+            guard event?.user != nil else { return }
+            third_expectation.fulfill()
+        }
+
+        mockDataProvider.currentUser = testUser
+        CrashLogging.setNeedsDataRefresh()
+        CrashLogging.logMessage("This is a test")
+        wait(for: [third_expectation], timeout: 1)
     }
 
 ///
@@ -125,13 +171,13 @@ private extension CrashLoggingTests {
     var testUser: TracksUser { return TracksUser(userID: "foo", email: "bar", username: "baz") }
 }
 
-private struct MockCrashLoggingDataProvider : CrashLoggingDataProvider {
+private class MockCrashLoggingDataProvider : CrashLoggingDataProvider {
     var sentryDSN: String = ""
     var userHasOptedOut: Bool = false
     var buildType: String = "test"
     var currentUser: TracksUser? = nil
 
-    mutating func reset() {
+    func reset() {
         sentryDSN = ""
         userHasOptedOut = false
         buildType = "test"
