@@ -138,7 +138,11 @@
 
 -(CGFloat)statusBarHeight{
 #if TARGET_OS_IPHONE
-    return UIApplication.sharedApplication.statusBarFrame.size.height;
+    if ([NSThread isMainThread]) {
+         return UIApplication.sharedApplication.statusBarFrame.size.height;
+    } else {
+        return 0;
+    }
 #else   // Mac
     return 0;
 #endif
@@ -146,14 +150,18 @@
 
 -(NSString *)orientation{
 #if TARGET_OS_IPHONE
-    UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
-    if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
-        return @"Portrait";
-    } else if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
-        return @"Landscape";
-    } else {
-        return @"Unknown";
-    }
+     if ([NSThread isMainThread]) {
+         UIInterfaceOrientation orientation = UIApplication.sharedApplication.statusBarOrientation;
+         if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
+             return @"Portrait";
+         } else if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
+             return @"Landscape";
+         } else {
+             return @"Unknown";
+         }
+     } else {
+         return @"Unknown";
+     }
 #else   // Mac
     return @"Unknown";
 #endif
