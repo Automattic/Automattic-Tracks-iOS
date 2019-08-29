@@ -48,9 +48,6 @@ public class CrashLogging {
             // Automatically track screen transitions
             Client.shared?.enableAutomaticBreadcrumbTracking()
 
-            // Automatically track low-memory events
-            Client.shared?.trackMemoryPressureAsEvent()
-
             // Override event serialization to append the logs, if needed
             Client.shared?.beforeSerializeEvent = sharedInstance.beforeSerializeEvent
             Client.shared?.shouldSendEvent = sharedInstance.shouldSendEvent
