@@ -1,3 +1,5 @@
+source 'https://cdn.cocoapods.org/'
+
 inhibit_all_warnings!
 use_modular_headers!
 project 'Automattic-Tracks-iOS.xcodeproj'
