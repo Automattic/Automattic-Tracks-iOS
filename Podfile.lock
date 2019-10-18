@@ -34,7 +34,7 @@ DEPENDENCIES:
   - UIDeviceIdentifier (~> 1.1.4)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - CocoaLumberjack
     - OCMock
     - OHHTTPStubs
@@ -50,6 +50,6 @@ SPEC CHECKSUMS:
   Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
 
-PODFILE CHECKSUM: 83bc940e47195dca2fa3b71d2a8323930bb109e3
+PODFILE CHECKSUM: e03672e969dfa73e4f3de54010d610e1bf587a5e
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
