@@ -46,11 +46,11 @@ public class CrashLogging {
             Client.shared = try Client(dsn: dataProvider.sentryDSN)
             try Client.shared?.startCrashHandler()
 
-            // Store lots of breadcrumbs to trace errors
-            Client.shared?.breadcrumbs.maxBreadcrumbs = 500
-
             // Automatically track screen transitions
-            Client.shared?.enableAutomaticBreadcrumbTracking()
+            if dataProvider.shouldEnableAutomaticBreadcrumbTracking {
+                Client.shared?.breadcrumbs.maxBreadcrumbs = 500 // Store lots of breadcrumbs to trace errors
+                Client.shared?.enableAutomaticBreadcrumbTracking()
+            }
 
             // Override event serialization to append the logs, if needed
             Client.shared?.beforeSerializeEvent = sharedInstance.beforeSerializeEvent
