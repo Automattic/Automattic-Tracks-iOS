@@ -1,7 +1,7 @@
 PODS:
-  - CocoaLumberjack (3.5.2):
-    - CocoaLumberjack/Core (= 3.5.2)
-  - CocoaLumberjack/Core (3.5.2)
+  - CocoaLumberjack (3.5.3):
+    - CocoaLumberjack/Core (= 3.5.3)
+  - CocoaLumberjack/Core (3.5.3)
   - OCMock (3.4.3)
   - OHHTTPStubs (8.0.0):
     - OHHTTPStubs/Default (= 8.0.0)
@@ -19,10 +19,10 @@ PODS:
   - OHHTTPStubs/Swift (8.0.0):
     - OHHTTPStubs/Default
   - Reachability (3.2)
-  - Sentry (4.3.4):
-    - Sentry/Core (= 4.3.4)
-  - Sentry/Core (4.3.4)
-  - UIDeviceIdentifier (1.1.4)
+  - Sentry (4.4.2):
+    - Sentry/Core (= 4.4.2)
+  - Sentry/Core (4.4.2)
+  - UIDeviceIdentifier (1.4.0)
 
 DEPENDENCIES:
   - CocoaLumberjack (~> 3.5.2)
@@ -31,7 +31,7 @@ DEPENDENCIES:
   - OHHTTPStubs/Swift
   - Reachability (~> 3.1)
   - Sentry (~> 4)
-  - UIDeviceIdentifier (~> 1.1.4)
+  - UIDeviceIdentifier (~> 1)
 
 SPEC REPOS:
   trunk:
@@ -43,13 +43,13 @@ SPEC REPOS:
     - UIDeviceIdentifier
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
+  CocoaLumberjack: 2f44e60eb91c176d471fdba43b9e3eae6a721947
   OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
   OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
-  UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
+  Sentry: bba998b0fb157fdd6596aa73290a9d67ae47be79
+  UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
 
-PODFILE CHECKSUM: e03672e969dfa73e4f3de54010d610e1bf587a5e
+PODFILE CHECKSUM: d59f204fe9cd6d04bab3143cb435eccc76d7bbd0
 
 COCOAPODS: 1.8.4
