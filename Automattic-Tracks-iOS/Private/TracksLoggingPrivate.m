@@ -1,2 +1,2 @@
 #import "TracksLoggingPrivate.h"
-int ddLogLevel = DDLogLevelWarning;
+DDLogLevel ddLogLevel = DDLogLevelWarning;

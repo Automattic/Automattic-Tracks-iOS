@@ -1,10 +1,10 @@
 #import "TracksLogging.h"
 #import "TracksLoggingPrivate.h"
 
-int TracksGetLoggingLevel(void) {
+DDLogLevel TracksGetLoggingLevel(void) {
     return ddLogLevel;
 }
 
-void TracksSetLoggingLevel(int level) {
+void TracksSetLoggingLevel(DDLogLevel level) {
     ddLogLevel = level;
 }
