@@ -18,6 +18,7 @@ workflows:
           pod-install: true
       - ios/validate-podspec:
           name: Validate Podspec
+          xcode-version: "11.2.1"
           podspec-path: Automattic-Tracks-iOS.podspec
           bundle-install: true
       - ios/publish-podspec:
