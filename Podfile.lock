@@ -25,11 +25,11 @@ PODS:
   - UIDeviceIdentifier (1.4.0)
 
 DEPENDENCIES:
-  - CocoaLumberjack (~> 3.5.2)
-  - OCMock (~> 3.4.3)
+  - CocoaLumberjack (~> 3)
+  - OCMock (~> 3)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - Reachability (~> 3.1)
+  - Reachability (~> 3)
   - Sentry (~> 4)
   - UIDeviceIdentifier (~> 1)
 
@@ -50,6 +50,6 @@ SPEC CHECKSUMS:
   Sentry: bba998b0fb157fdd6596aa73290a9d67ae47be79
   UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
 
-PODFILE CHECKSUM: d59f204fe9cd6d04bab3143cb435eccc76d7bbd0
+PODFILE CHECKSUM: c3e39b99c53b05238f435773f204a74d20bd5ec6
 
 COCOAPODS: 1.8.4

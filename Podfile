@@ -5,8 +5,8 @@ use_modular_headers!
 project 'Automattic-Tracks-iOS.xcodeproj'
 
 abstract_target 'Automattic-Tracks' do
-  pod 'CocoaLumberjack', '~> 3.5.2'
-  pod 'Reachability', '~> 3.1'
+  pod 'CocoaLumberjack', '~> 3'
+  pod 'Reachability', '~> 3'
   pod 'Sentry', '~> 4'
 
   target 'Automattic-Tracks-iOS' do
@@ -20,7 +20,7 @@ abstract_target 'Automattic-Tracks' do
 end
 
 abstract_target 'Automattic-Tracks-Tests' do
-  pod 'OCMock', '~> 3.4.3'
+  pod 'OCMock', '~> 3'
   pod 'OHHTTPStubs'
   pod 'OHHTTPStubs/Swift'
 
