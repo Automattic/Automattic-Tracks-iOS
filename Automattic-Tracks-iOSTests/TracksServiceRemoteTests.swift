@@ -15,7 +15,7 @@ class TracksServiceRemoteTests: XCTestCase {
         super.tearDown()
 
         subject = nil
-        OHHTTPStubs.removeAllStubs()
+        HTTPStubs.removeAllStubs()
     }
 
     func testSendBatchOfEventsAcceptedResponse() {
@@ -25,7 +25,7 @@ class TracksServiceRemoteTests: XCTestCase {
 
         stub(condition: isHost("public-api.wordpress.com")) { _ in
             let stubData = "\"Accepted\"".data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data: stubData!, statusCode: 200, headers: ["Content-Type": "application/json"])
+            return HTTPStubsResponse(data: stubData!, statusCode: 200, headers: ["Content-Type": "application/json"])
         }
 
         subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
@@ -45,7 +45,7 @@ class TracksServiceRemoteTests: XCTestCase {
 
         stub(condition: isHost("public-api.wordpress.com")) { _ in
             let stubData = "".data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data: stubData!, statusCode: 200, headers: ["Content-Type": "application/json"])
+            return HTTPStubsResponse(data: stubData!, statusCode: 200, headers: ["Content-Type": "application/json"])
         }
 
         subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
@@ -69,7 +69,7 @@ class TracksServiceRemoteTests: XCTestCase {
 
         stub(condition: isHost("public-api.wordpress.com")) { _ in
             let stubData = "".data(using: String.Encoding.utf8)
-            return OHHTTPStubsResponse(data: stubData!, statusCode: 500, headers: ["Content-Type": "application/json"])
+            return HTTPStubsResponse(data: stubData!, statusCode: 500, headers: ["Content-Type": "application/json"])
         }
 
         subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
