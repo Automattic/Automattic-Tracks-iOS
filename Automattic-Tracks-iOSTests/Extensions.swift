@@ -14,7 +14,7 @@ extension String {
 
 extension Data {
     var bytes: Bytes {
-        return [UInt8](self)
+        return Bytes(self)
     }
 }
 
