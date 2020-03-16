@@ -6,10 +6,12 @@ class LogEncryptionTests: XCTestCase {
 
     private var keyPair: Box.KeyPair!
     private var log: String!
+    private var sodium: Sodium!
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
-        self.keyPair = Sodium().box.keyPair()!
+        self.sodium = Sodium()
+        self.keyPair = sodium.box.keyPair()!
 
         let logLength = Int.random(in: 0...Int(Int16.max))
         self.log = String.randomString(length: logLength)
@@ -20,7 +22,7 @@ class LogEncryptionTests: XCTestCase {
         let encryptedSecret = try! LogEncryptor(withPublicKey: keyPair.publicKey)
             .encryptSecretWithSodium(secret: secret)
 
-        let decryptedSecret = Sodium().box.open(anonymousCipherText: encryptedSecret, recipientPublicKey: keyPair.publicKey, recipientSecretKey: keyPair.secretKey)
+        let decryptedSecret = sodium.box.open(anonymousCipherText: encryptedSecret, recipientPublicKey: keyPair.publicKey, recipientSecretKey: keyPair.secretKey)
 
         XCTAssertEqual(secret, decryptedSecret)
     }
@@ -49,6 +51,7 @@ class LogEncryptionTests: XCTestCase {
 private class LogDecryptor {
 
     private let keyPair: Box.KeyPair
+    private let sodium = Sodium()
 
     init(withKeyPair keyPair: Box.KeyPair) {
         self.keyPair = keyPair
@@ -59,7 +62,7 @@ private class LogDecryptor {
         let encryptedMessage = try EncryptedMessage.fromURL(file)
         let decryptedKey = decryptMessageKey(encryptedMessage.encryptedKey.base64Decoded)
         let header = encryptedMessage.header.base64Decoded
-        let stream = Sodium().secretStream.xchacha20poly1305.initPull(secretKey: decryptedKey, header: header)!
+        let stream = sodium.secretStream.xchacha20poly1305.initPull(secretKey: decryptedKey, header: header)!
 
         let newTempFile = FileManager.default.createTempFile(named: "decrypted-file-" + UUID().uuidString, containing: "")
         let fileHandle = try FileHandle(forWritingTo: newTempFile)
@@ -79,7 +82,7 @@ private class LogDecryptor {
     }
 
     private func decryptMessageKey(_ secret: Bytes) -> Bytes {
-        return Sodium().box.open(anonymousCipherText: secret,
+        return sodium.box.open(anonymousCipherText: secret,
                                  recipientPublicKey: keyPair.publicKey,
                                  recipientSecretKey: keyPair.secretKey)!
     }

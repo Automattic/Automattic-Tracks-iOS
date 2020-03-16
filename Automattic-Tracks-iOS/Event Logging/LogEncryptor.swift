@@ -4,6 +4,7 @@ import Sodium
 class LogEncryptor {
 
     private let publicKey: Bytes
+    private let sodium = Sodium()
 
     enum LogEncryptorError: Error {
         case unableToReadFile
@@ -24,7 +25,6 @@ class LogEncryptor {
         assert(outputURL.path != log.url.path, "The output file path must be unique")
 
         /// Do the encrypted stream setup
-        let sodium = Sodium()
         let secretkey = sodium.secretStream.xchacha20poly1305.key()
         let encryptedKey = try encryptSecretWithSodium(secret: secretkey)
         let stream_enc = sodium.secretStream.xchacha20poly1305.initPush(secretKey: secretkey)!
@@ -73,7 +73,7 @@ class LogEncryptor {
     }
 
     internal func encryptSecretWithSodium(secret: Bytes) throws -> Bytes {
-        return Sodium().box.seal(message: secret, recipientPublicKey: publicKey)!
+        return sodium.box.seal(message: secret, recipientPublicKey: publicKey)!
     }
 
     private func initializeOutputFile(at outputURL: URL) throws {
