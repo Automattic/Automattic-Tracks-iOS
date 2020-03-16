@@ -3,7 +3,6 @@ import Sodium
 
 class LogEncryptor {
 
-    private let chunkSize = 4096
     private let publicKey: Bytes
 
     enum LogEncryptorError: Error {
@@ -51,18 +50,14 @@ class LogEncryptor {
             "messages": [\n
         """.data(using: .utf8)!)
 
-        /// Write the encrypted file in chunks as JSON
-        var shouldContinue = true
-        repeat {
-
-            let data = inputFileHandle.readData(ofLength: chunkSize)                   // read the data
-            guard let message = stream_enc.push(message: [UInt8](data)) else {         // encrypt the data
+        /// Use the `next:` label because of https://bugs.swift.org/browse/SR-1582
+        try inputFileHandle.readChunkedDataToEndOfFile(next: { (data) in
+            guard let message = stream_enc.push(message: Bytes(data)) else {           // encrypt the data
                 throw LogEncryptorError.unableToEncryptFile
             }
-            try writeTo(outputFileHandle, message: message)                            // write the data
 
-            shouldContinue = data.count == chunkSize
-        } while shouldContinue
+            try writeTo(outputFileHandle, message: message)                            // write the data
+        })
 
         /// Write the end of the encryption stream
         let final = stream_enc.push(message: "".bytes, tag: .FINAL)!                    // This should never fail
