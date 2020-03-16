@@ -65,17 +65,16 @@ private class LogDecryptor {
 
         let newTempFile = FileManager.default.createTempFile(named: "decrypted-file-" + UUID().uuidString, containing: "")
         let fileHandle = try FileHandle(forWritingTo: newTempFile)
-        var string = ""
+        defer {
+            fileHandle.closeFile()
+        }
 
         encryptedMessage.messages.forEach {
             let messageBytes = $0.base64Decoded
             let (message, _) = stream.pull(cipherText: messageBytes)!
 
             fileHandle.write(Data(message))
-            string.append(String(bytes: message, encoding: .utf8)!)
         }
-
-        fileHandle.closeFile()
 
         return newTempFile
     }
