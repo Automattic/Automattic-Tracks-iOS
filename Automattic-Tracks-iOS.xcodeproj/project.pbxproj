@@ -70,6 +70,7 @@
 		F978D1EE21AC972A00A2B169 /* WatchSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F978D1EC21AC972500A2B169 /* WatchSessionManager.h */; };
 		F978D1EF21AC972A00A2B169 /* WatchSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */; };
 		F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
+		F9A0D6DB24202E3700D27C01 /* LogFile+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6DA24202E3700D27C01 /* LogFile+TestHelpers.swift */; };
 		F9A117B521E69B42002A5CD8 /* Automattic_Tracks_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9A117B921E69B57002A5CD8 /* TracksLoggingPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7671CE230AD002820B3 /* TracksLoggingPrivate.h */; };
 		F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */; };
@@ -187,6 +188,7 @@
 		F978D1EC21AC972500A2B169 /* WatchSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchSessionManager.h; sourceTree = "<group>"; };
 		F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchSessionManager.m; sourceTree = "<group>"; };
 		F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileHandle+Extensions.swift"; sourceTree = "<group>"; };
+		F9A0D6DA24202E3700D27C01 /* LogFile+TestHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LogFile+TestHelpers.swift"; sourceTree = "<group>"; };
 		F9A117B121E69B41002A5CD8 /* AutomatticTracks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutomatticTracks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Automattic_Tracks_OSX.h; sourceTree = "<group>"; };
 		F9A117B421E69B42002A5CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -268,6 +270,7 @@
 				F956BBCB24195F160037816E /* EncryptedLog.swift */,
 				F956BBCD2419604E0037816E /* Mocks.swift */,
 				F956BBCF241962030037816E /* Extensions.swift */,
+				F9A0D6DA24202E3700D27C01 /* LogFile+TestHelpers.swift */,
 			);
 			name = "Test Helpers";
 			sourceTree = "<group>";
@@ -785,6 +788,7 @@
 			files = (
 				93B5C7D91CE25D8E002820B3 /* TracksEventServiceTests.m in Sources */,
 				93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */,
+				F9A0D6DB24202E3700D27C01 /* LogFile+TestHelpers.swift in Sources */,
 				F956BBCC24195F160037816E /* EncryptedLog.swift in Sources */,
 				93B5C7D81CE25D8E002820B3 /* TestTracksContextManager.m in Sources */,
 				9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */,

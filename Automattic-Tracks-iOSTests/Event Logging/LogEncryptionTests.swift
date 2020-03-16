@@ -5,16 +5,12 @@ import Sodium
 class LogEncryptionTests: XCTestCase {
 
     private var keyPair: Box.KeyPair!
-    private var log: String!
     private var sodium: Sodium!
 
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         self.sodium = Sodium()
         self.keyPair = sodium.box.keyPair()!
-
-        let logLength = Int.random(in: 0...Int(Int16.max))
-        self.log = String.randomString(length: logLength)
     }
 
     func testSecretEncryptor() {
@@ -28,8 +24,11 @@ class LogEncryptionTests: XCTestCase {
     }
 
     func testEndToEndEncryption() {
+        let logLength = Int.random(in: 0...Int(Int16.max))
+        let log = String.randomString(length: logLength)
+
         let encryptor = LogEncryptor(withPublicKey: keyPair.publicKey)
-        let encryptedLogURL = try! encryptor.encryptLog(MockLogFile(string: self.log))
+        let encryptedLogURL = try! encryptor.encryptLog(LogFile(containing: log))
         let decryptedLogURL = try! LogDecryptor(withKeyPair: keyPair).decrypt(file: encryptedLogURL)
 
         XCTAssertEqual(try! String(contentsOf: decryptedLogURL), log)
@@ -37,7 +36,7 @@ class LogEncryptionTests: XCTestCase {
 
     func testLogFormatMatchesV1() throws {
         let encryptor = LogEncryptor(withPublicKey: keyPair.publicKey)
-        let encryptedLogURL = try encryptor.encryptLog(MockLogFile(string: self.log))
+        let encryptedLogURL = try encryptor.encryptLog(LogFile.containingRandomString())
         let encryptedMessage = try EncryptedMessage.fromURL(encryptedLogURL)
 
         XCTAssertEqual(encryptedMessage.keyedWith, "v1", "`keyedWith` must ALWAYS be v1 in this version of the file format")
