@@ -40,7 +40,8 @@ class LogEncryptor {
             outputFileHandle.closeFile()
         }
 
-        /// Write JSON Preamble
+        /// Write JSON Preamble – the `v1` is hard-coded rather than using a constant because it should never change.
+        /// If we ever want to implement a `v2` of this file format, it should be implemented in a separate method or class.
         outputFileHandle.write("""
         {
             "keyedWith": "v1",

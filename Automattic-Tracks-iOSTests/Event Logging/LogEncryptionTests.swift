@@ -40,7 +40,7 @@ class LogEncryptionTests: XCTestCase {
         let encryptedLogURL = try encryptor.encryptLog(MockLogFile(string: self.log))
         let encryptedMessage = try EncryptedMessage.fromURL(encryptedLogURL)
 
-        XCTAssertEqual(encryptedMessage.keyedWith, "v1")
+        XCTAssertEqual(encryptedMessage.keyedWith, "v1", "`keyedWith` must ALWAYS be v1 in this version of the file format")
         XCTAssertNotNil(UUID(uuidString: encryptedMessage.uuid), "The UUID must be valid")
         XCTAssertEqual(encryptedMessage.header.count, 32, "The header should be 32 bytes long")
         XCTAssertEqual(encryptedMessage.encryptedKey.count, 108, "The encrypted key should be 108 bytes long")
