@@ -8,9 +8,16 @@ class LogEncryptionTests: XCTestCase {
     private var sodium: Sodium!
 
     override func setUp() {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        super.setUp()
         self.sodium = Sodium()
         self.keyPair = sodium.box.keyPair()!
+    }
+
+    override func tearDown() {
+        keyPair = nil
+        sodium = nil
+
+        super.tearDown()
     }
 
     func testSecretEncryptor() {
