@@ -50,10 +50,6 @@
 		F956BBCE2419604E0037816E /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956BBCD2419604E0037816E /* Mocks.swift */; };
 		F956BBD0241962030037816E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956BBCF241962030037816E /* Extensions.swift */; };
 		F96732CF24180B880064CC83 /* LogEncryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96732CE24180B880064CC83 /* LogEncryptionTests.swift */; };
-		F96732DF2418471D0064CC83 /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96732DE2418471D0064CC83 /* FileManager+extensions.swift */; };
-		F96732E024184ACA0064CC83 /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96732DE2418471D0064CC83 /* FileManager+extensions.swift */; };
-		F96732E124184ACA0064CC83 /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96732DE2418471D0064CC83 /* FileManager+extensions.swift */; };
-		F96732E224184ACB0064CC83 /* FileManager+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96732DE2418471D0064CC83 /* FileManager+extensions.swift */; };
 		F970F41E21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F970F41D21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m */; };
 		F970F42021E7BBD8000664D2 /* AutomatticTracks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A117B121E69B41002A5CD8 /* AutomatticTracks.framework */; };
 		F970F42621E7BC82000664D2 /* TestTracksContextManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */; };
@@ -180,7 +176,6 @@
 		F956BBCD2419604E0037816E /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		F956BBCF241962030037816E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F96732CE24180B880064CC83 /* LogEncryptionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogEncryptionTests.swift; sourceTree = "<group>"; };
-		F96732DE2418471D0064CC83 /* FileManager+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+extensions.swift"; sourceTree = "<group>"; };
 		F970F41B21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Automattic_Tracks_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F970F41D21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Automattic_Tracks_OSXTests.m; sourceTree = "<group>"; };
 		F970F41F21E7BBD8000664D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -436,7 +431,6 @@
 			isa = PBXGroup;
 			children = (
 				F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */,
-				F96732DE2418471D0064CC83 /* FileManager+extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -775,7 +769,6 @@
 				93B5C7C91CE25D66002820B3 /* TracksService.m in Sources */,
 				93B5C7C51CE25D66002820B3 /* TracksEvent.m in Sources */,
 				F9405F1B2418701700C4EB35 /* LogFile.swift in Sources */,
-				F96732DF2418471D0064CC83 /* FileManager+extensions.swift in Sources */,
 				93B5C7C41CE25D66002820B3 /* TracksEventCoreData.m in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
@@ -794,7 +787,6 @@
 				93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */,
 				F956BBCC24195F160037816E /* EncryptedLog.swift in Sources */,
 				93B5C7D81CE25D8E002820B3 /* TestTracksContextManager.m in Sources */,
-				F96732E024184ACA0064CC83 /* FileManager+extensions.swift in Sources */,
 				9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */,
 				F96732CF24180B880064CC83 /* LogEncryptionTests.swift in Sources */,
 				93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */,
@@ -813,7 +805,6 @@
 				F970F42721E7BC8A000664D2 /* TracksEventServiceTests.m in Sources */,
 				F970F42821E7BC91000664D2 /* TracksEventTests.m in Sources */,
 				F970F42621E7BC82000664D2 /* TestTracksContextManager.m in Sources */,
-				F96732E224184ACB0064CC83 /* FileManager+extensions.swift in Sources */,
 				F970F42921E7BC94000664D2 /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F972770D229EDC5B009EDEE0 /* CrashLoggingTests.swift in Sources */,
 			);
@@ -841,7 +832,6 @@
 				F9405F1C2418701700C4EB35 /* LogFile.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
 				F9A117C321E69B6A002A5CD8 /* Tracks.xcdatamodeld in Sources */,
-				F96732E124184ACA0064CC83 /* FileManager+extensions.swift in Sources */,
 				F9A117CF21E69B80002A5CD8 /* TracksConstants.m in Sources */,
 				F972770A229EDC49009EDEE0 /* TestHelpers.swift in Sources */,
 			);
