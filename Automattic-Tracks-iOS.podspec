@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
   spec.ios.framework    = 'CoreTelephony'
   spec.osx.framework    = 'AppKit'
 
-  spec.ios.deployment_target  = '9.3'
+  spec.ios.deployment_target  = '10.0'
   spec.osx.deployment_target  = '10.11'
 
   spec.header_dir = 'AutomatticTracks'
@@ -32,4 +32,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'CocoaLumberjack', '~> 3'
   spec.dependency 'Reachability', '~> 3'
   spec.dependency 'Sentry', '~>4'
+  spec.dependency 'Sodium', '~>0.8.0'
 end

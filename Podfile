@@ -12,6 +12,7 @@ abstract_target 'Automattic-Tracks' do
   target 'Automattic-Tracks-iOS' do
     platform :ios, '9.0'
     pod 'UIDeviceIdentifier', '~> 1'
+    pod 'Sodium', '~> 0.8.0'
   end
 
   target 'Automattic-Tracks-OSX' do
