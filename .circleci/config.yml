@@ -4,11 +4,34 @@ orbs:
   # Using 1.0 of our Orbs means it will use the latest 1.0.x version from https://github.com/wordpress-mobile/circleci-orbs
   ios: wordpress-mobile/ios@1.0
 
+jobs:
+  TestMacOS:
+    executor:
+      name: ios/default
+      xcode-version: "11.2.1"
+    steps:
+      - checkout
+      - ios/install-dependencies:
+          bundle-install: true
+          pod-install: true
+      - run:
+          name: Build and Test
+          command: |
+            # Create the log directory
+            mkdir -p logs
+
+            # Build without code signing to avoid missing cert errors
+            xcodebuild COMPILER_INDEX_STORE_ENABLE=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+                       -workspace 'Automattic-Tracks-iOS.xcworkspace' \
+                       -scheme 'Automattic-Tracks-OSX' \
+                       -destination 'platform=OS X,arch=x86_64' \
+                       test  | tee logs/build-and-test.log | xcpretty -r junit
+
 workflows:
   test_and_validate:
     jobs:
       - ios/test:
-          name: Test
+          name: Test iOS
           workspace: Automattic-Tracks-iOS.xcworkspace
           xcode-version: "11.2.1"
           scheme: Automattic-Tracks-iOS
@@ -32,3 +55,5 @@ workflows:
               only: /.*/
             branches:
               ignore: /.*/
+      - TestMacOS:
+          name: "Test macOS"
