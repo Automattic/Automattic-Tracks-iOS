@@ -313,8 +313,7 @@
 		93C0211B1AB0A6330014096A /* Automattic-Tracks-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */,
-				F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */,
+				F9788DEB2421B55A000A9BB5 /* Crash Logging */,
 				F911718B240F20B1009A1EC0 /* Event Logging */,
 				F9788D8024219D66000A9BB5 /* Model */,
 				93B5C7661CE2308D002820B3 /* Internal Logging */,
@@ -443,6 +442,15 @@
 				F9788DD52421B4EF000A9BB5 /* WatchSessionManager.m */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		F9788DEB2421B55A000A9BB5 /* Crash Logging */ = {
+			isa = PBXGroup;
+			children = (
+				F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */,
+				F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */,
+			);
+			path = "Crash Logging";
 			sourceTree = "<group>";
 		};
 		F9A117B221E69B42002A5CD8 /* Automattic-Tracks-OSX */ = {
