@@ -45,10 +45,6 @@
 		F970F42821E7BC91000664D2 /* TracksEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CB1AD404D000E8711C /* TracksEventTests.m */; };
 		F970F42921E7BC94000664D2 /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
 		F970F42C21E7BDBC000664D2 /* TracksServiceRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */; };
-		F9727701229EDC25009EDEE0 /* CrashLoggingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97276FF229EDC25009EDEE0 /* CrashLoggingDataProvider.swift */; };
-		F9727702229EDC25009EDEE0 /* CrashLoggingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97276FF229EDC25009EDEE0 /* CrashLoggingDataProvider.swift */; };
-		F9727703229EDC25009EDEE0 /* CrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9727700229EDC25009EDEE0 /* CrashLogging.swift */; };
-		F9727704229EDC25009EDEE0 /* CrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9727700229EDC25009EDEE0 /* CrashLogging.swift */; };
 		F9727709229EDC49009EDEE0 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9727708229EDC49009EDEE0 /* TestHelpers.swift */; };
 		F972770A229EDC49009EDEE0 /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9727708229EDC49009EDEE0 /* TestHelpers.swift */; };
 		F972770C229EDC5B009EDEE0 /* CrashLoggingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F972770B229EDC5B009EDEE0 /* CrashLoggingTests.swift */; };
@@ -75,6 +71,10 @@
 		F9788DA124219D66000A9BB5 /* TracksEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = F9788D8C24219D66000A9BB5 /* TracksEvent.h */; };
 		F9788DA224219D66000A9BB5 /* TracksDeviceInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = F9788D8D24219D66000A9BB5 /* TracksDeviceInformation.h */; };
 		F9788DA324219D66000A9BB5 /* TracksDeviceInformation.h in Headers */ = {isa = PBXBuildFile; fileRef = F9788D8D24219D66000A9BB5 /* TracksDeviceInformation.h */; };
+		F9788DA72421A2BF000A9BB5 /* CrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */; };
+		F9788DA82421A2BF000A9BB5 /* CrashLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */; };
+		F9788DA92421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */; };
+		F9788DAA2421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */; };
 		F978D1EE21AC972A00A2B169 /* WatchSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = F978D1EC21AC972500A2B169 /* WatchSessionManager.h */; };
 		F978D1EF21AC972A00A2B169 /* WatchSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */; };
 		F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
@@ -173,8 +173,6 @@
 		F970F41B21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Automattic_Tracks_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F970F41D21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Automattic_Tracks_OSXTests.m; sourceTree = "<group>"; };
 		F970F41F21E7BBD8000664D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F97276FF229EDC25009EDEE0 /* CrashLoggingDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLoggingDataProvider.swift; sourceTree = "<group>"; };
-		F9727700229EDC25009EDEE0 /* CrashLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLogging.swift; sourceTree = "<group>"; };
 		F9727708229EDC49009EDEE0 /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F972770B229EDC5B009EDEE0 /* CrashLoggingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLoggingTests.swift; sourceTree = "<group>"; };
 		F9788D8124219D66000A9BB5 /* LogFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogFile.swift; sourceTree = "<group>"; };
@@ -188,6 +186,8 @@
 		F9788D8B24219D66000A9BB5 /* TracksUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksUser.swift; sourceTree = "<group>"; };
 		F9788D8C24219D66000A9BB5 /* TracksEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksEvent.h; sourceTree = "<group>"; };
 		F9788D8D24219D66000A9BB5 /* TracksDeviceInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksDeviceInformation.h; sourceTree = "<group>"; };
+		F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLogging.swift; sourceTree = "<group>"; };
+		F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLoggingDataProvider.swift; sourceTree = "<group>"; };
 		F978D1EC21AC972500A2B169 /* WatchSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WatchSessionManager.h; sourceTree = "<group>"; };
 		F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchSessionManager.m; sourceTree = "<group>"; };
 		F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileHandle+Extensions.swift"; sourceTree = "<group>"; };
@@ -278,13 +278,15 @@
 			name = "Test Helpers";
 			sourceTree = "<group>";
 		};
-		93B5C7661CE2308D002820B3 /* Private */ = {
+		93B5C7661CE2308D002820B3 /* Internal Logging */ = {
 			isa = PBXGroup;
 			children = (
+				E1DBEA181C07071300FF2F73 /* TracksLogging.h */,
+				93B5C7641CE2303D002820B3 /* TracksLogging.m */,
 				93B5C7671CE230AD002820B3 /* TracksLoggingPrivate.h */,
 				93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */,
 			);
-			path = Private;
+			path = "Internal Logging";
 			sourceTree = "<group>";
 		};
 		93C021101AB0A6330014096A = {
@@ -314,18 +316,16 @@
 		93C0211B1AB0A6330014096A /* Automattic-Tracks-iOS */ = {
 			isa = PBXGroup;
 			children = (
-				F9727700229EDC25009EDEE0 /* CrashLogging.swift */,
-				F97276FF229EDC25009EDEE0 /* CrashLoggingDataProvider.swift */,
+				F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */,
+				F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */,
 				F911718B240F20B1009A1EC0 /* Event Logging */,
 				F9788D8024219D66000A9BB5 /* Model */,
-				93B5C7661CE2308D002820B3 /* Private */,
+				93B5C7661CE2308D002820B3 /* Internal Logging */,
 				93C021371AB1BFA40014096A /* Services */,
 				F96732DD2418470A0064CC83 /* Extensions */,
 				93D77A541CE26C9C009EDB38 /* Supporting Files */,
 				9339E70A1ADE98B800AEAB68 /* TracksConstants.h */,
 				9339E70B1ADE98B800AEAB68 /* TracksConstants.m */,
-				E1DBEA181C07071300FF2F73 /* TracksLogging.h */,
-				93B5C7641CE2303D002820B3 /* TracksLogging.m */,
 			);
 			path = "Automattic-Tracks-iOS";
 			sourceTree = "<group>";
@@ -827,10 +827,9 @@
 				F9788D9C24219D66000A9BB5 /* TracksContextManager.m in Sources */,
 				F9788D9824219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
 				93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */,
+				F9788DA92421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */,
-				F9727703229EDC25009EDEE0 /* CrashLogging.swift in Sources */,
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
-				F9727701229EDC25009EDEE0 /* CrashLoggingDataProvider.swift in Sources */,
 				93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */,
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				93B5C7C71CE25D66002820B3 /* TracksEventPersistenceService.m in Sources */,
@@ -838,6 +837,7 @@
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
 				93B5C7C81CE25D66002820B3 /* TracksEventService.m in Sources */,
+				F9788DA72421A2BF000A9BB5 /* CrashLogging.swift in Sources */,
 				F9727709229EDC49009EDEE0 /* TestHelpers.swift in Sources */,
 				F9788D9A24219D66000A9BB5 /* Tracks.xcdatamodeld in Sources */,
 			);
@@ -889,11 +889,10 @@
 				F9A117CE21E69B77002A5CD8 /* Tracks.swift in Sources */,
 				F9788D9B24219D66000A9BB5 /* Tracks.xcdatamodeld in Sources */,
 				F9A117C721E69B70002A5CD8 /* TracksEventService.m in Sources */,
-				F9727704229EDC25009EDEE0 /* CrashLogging.swift in Sources */,
-				F9727702229EDC25009EDEE0 /* CrashLoggingDataProvider.swift in Sources */,
 				F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */,
 				F9788D9D24219D66000A9BB5 /* TracksContextManager.m in Sources */,
 				F9A117CD21E69B70002A5CD8 /* WatchSessionManager.m in Sources */,
+				F9788DAA2421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				F9A117CB21E69B70002A5CD8 /* TracksServiceRemote.m in Sources */,
 				F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
@@ -902,6 +901,7 @@
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
 				F9788D9924219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
 				F9A117CF21E69B80002A5CD8 /* TracksConstants.m in Sources */,
+				F9788DA82421A2BF000A9BB5 /* CrashLogging.swift in Sources */,
 				F972770A229EDC49009EDEE0 /* TestHelpers.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
