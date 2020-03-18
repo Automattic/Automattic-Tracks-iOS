@@ -90,9 +90,11 @@
 		F99D033F2422D9F30091C33E /* TracksServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F99D03322422D9F30091C33E /* TracksServiceTests.m */; };
 		F99D03402422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D03332422D9F30091C33E /* TracksServiceRemoteTests.swift */; };
 		F99D03412422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D03332422D9F30091C33E /* TracksServiceRemoteTests.swift */; };
-		F99D03422422DA5C0091C33E /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D031E2422D9B70091C33E /* TestHelpers.swift */; };
-		F99D03432422DA5C0091C33E /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D031E2422D9B70091C33E /* TestHelpers.swift */; };
 		F99D03462422DB700091C33E /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9788D8824219D66000A9BB5 /* Tracks.xcdatamodeld */; };
+		F99D03472422DB800091C33E /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9788D8824219D66000A9BB5 /* Tracks.xcdatamodeld */; };
+		F99D03482422DB800091C33E /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9788D8824219D66000A9BB5 /* Tracks.xcdatamodeld */; };
+		F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D03492422DD100091C33E /* TestHelpers.swift */; };
+		F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D03492422DD100091C33E /* TestHelpers.swift */; };
 		F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
 		F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
 		F9A117B521E69B42002A5CD8 /* Automattic_Tracks_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -180,7 +182,6 @@
 		F99D031B2422D9B70091C33E /* TestTracksContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTracksContextManager.h; sourceTree = "<group>"; };
 		F99D031C2422D9B70091C33E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F99D031D2422D9B70091C33E /* LogFile+TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LogFile+TestHelpers.swift"; sourceTree = "<group>"; };
-		F99D031E2422D9B70091C33E /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TestHelpers.swift; path = "../../Automattic-Tracks-iOSTests/Test Helpers/TestHelpers.swift"; sourceTree = "<group>"; };
 		F99D031F2422D9B70091C33E /* EncryptedLog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EncryptedLog.swift; sourceTree = "<group>"; };
 		F99D03202422D9B70091C33E /* TestTracksContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTracksContextManager.m; sourceTree = "<group>"; };
 		F99D032C2422D9F30091C33E /* CrashLoggingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLoggingTests.swift; sourceTree = "<group>"; };
@@ -190,6 +191,7 @@
 		F99D03312422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceRemoteIntegrationTests.m; sourceTree = "<group>"; };
 		F99D03322422D9F30091C33E /* TracksServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceTests.m; sourceTree = "<group>"; };
 		F99D03332422D9F30091C33E /* TracksServiceRemoteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksServiceRemoteTests.swift; sourceTree = "<group>"; };
+		F99D03492422DD100091C33E /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileHandle+Extensions.swift"; sourceTree = "<group>"; };
 		F9A117B121E69B41002A5CD8 /* AutomatticTracks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutomatticTracks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Automattic_Tracks_OSX.h; sourceTree = "<group>"; };
@@ -416,7 +418,7 @@
 			children = (
 				F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */,
 				F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */,
-				F99D031E2422D9B70091C33E /* TestHelpers.swift */,
+				F99D03492422DD100091C33E /* TestHelpers.swift */,
 			);
 			path = "Crash Logging";
 			sourceTree = "<group>";
@@ -836,7 +838,7 @@
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
-				F99D03422422DA5C0091C33E /* TestHelpers.swift in Sources */,
+				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
 				F9788DE72421B4EF000A9BB5 /* WatchSessionManager.m in Sources */,
@@ -900,7 +902,7 @@
 				F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F9788D9F24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DDA2421B4EF000A9BB5 /* TracksService.m in Sources */,
-				F99D03432422DA5C0091C33E /* TestHelpers.swift in Sources */,
+				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
 				F9788D9924219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
 				F9788DE82421B4EF000A9BB5 /* WatchSessionManager.m in Sources */,
