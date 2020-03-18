@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		016C57685EE5800C2A87ADD6 /* libPods-Automattic-Tracks-Automattic-Tracks-iOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66E7C26D07CC91E17E98DFC8 /* libPods-Automattic-Tracks-Automattic-Tracks-iOS.a */; };
-		6F9DBA527B4D60DA13E7852A /* libPods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53BA84C767D0BF2C6D65A996 /* libPods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.a */; };
+		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
+		66B4025E8CC43C3928D21D6A /* Pods_Automattic_Tracks_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA23FA76778DD4D62989FD4 /* Pods_Automattic_Tracks_iOSTests.framework */; };
+		89284FEF37B307C0A99A81E5 /* Pods_Automattic_Tracks_OSXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 519B82281CDF10E002CD67A7 /* Pods_Automattic_Tracks_OSXTests.framework */; };
 		9349E9941D41148A00DDB5BB /* TracksServiceRemoteTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9349E9931D41148A00DDB5BB /* TracksServiceRemoteTests.swift */; };
 		93B5C7AE1CE25D40002820B3 /* Automattic-Tracks-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93B5C7B51CE25D40002820B3 /* AutomatticTracks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */; };
@@ -40,8 +41,7 @@
 		93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
 		93D77A511CE2640C009EDB38 /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 93AD39951AC713F20069344D /* Tracks.xcdatamodeld */; };
 		93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D77A521CE26C43009EDB38 /* Tracks.swift */; };
-		A4A8E368EE316D1DBFDD1F97 /* libPods-Automattic-Tracks-Automattic-Tracks-OSX.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 83F331B7FAA8625C95F8937E /* libPods-Automattic-Tracks-Automattic-Tracks-OSX.a */; };
-		E8D7E45BDA19FEEE7E89DAF1 /* libPods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF45AA0E3F327DEBC8F91686 /* libPods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.a */; };
+		F65C4895BA44D4556D4A3693 /* Pods_Automattic_Tracks_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F12BA01F12FA7A9559D69764 /* Pods_Automattic_Tracks_iOS.framework */; };
 		F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9117198240F20F0009A1EC0 /* LogEncryptor.swift */; };
 		F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9117198240F20F0009A1EC0 /* LogEncryptor.swift */; };
 		F9405F1B2418701700C4EB35 /* LogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9405F1A2418701700C4EB35 /* LogFile.swift */; };
@@ -70,6 +70,11 @@
 		F978D1EF21AC972A00A2B169 /* WatchSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F978D1ED21AC972A00A2B169 /* WatchSessionManager.m */; };
 		F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
 		F9A0D6DB24202E3700D27C01 /* LogFile+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6DA24202E3700D27C01 /* LogFile+TestHelpers.swift */; };
+		F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
+		F9A0D70324216FF200D27C01 /* LogEncryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F96732CE24180B880064CC83 /* LogEncryptionTests.swift */; };
+		F9A0D7042421704400D27C01 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956BBCF241962030037816E /* Extensions.swift */; };
+		F9A0D7052421705900D27C01 /* LogFile+TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6DA24202E3700D27C01 /* LogFile+TestHelpers.swift */; };
+		F9A0D7062421706700D27C01 /* EncryptedLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = F956BBCB24195F160037816E /* EncryptedLog.swift */; };
 		F9A117B521E69B42002A5CD8 /* Automattic_Tracks_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9A117B921E69B57002A5CD8 /* TracksLoggingPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7671CE230AD002820B3 /* TracksLoggingPrivate.h */; };
 		F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */; };
@@ -117,13 +122,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		01D2E218E009AF562070CB46 /* Pods-Automattic-Tracks-Automattic-Tracks-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Automattic-Tracks-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Automattic-Tracks-OSX/Pods-Automattic-Tracks-Automattic-Tracks-OSX.debug.xcconfig"; sourceTree = "<group>"; };
-		32DB1BC83409DAAD2B01CBC2 /* Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests/Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
-		53BA84C767D0BF2C6D65A996 /* libPods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		66E7C26D07CC91E17E98DFC8 /* libPods-Automattic-Tracks-Automattic-Tracks-iOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-Automattic-Tracks-iOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		835C0A3D03A5D5C6BD3BF9FD /* Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		83F331B7FAA8625C95F8937E /* libPods-Automattic-Tracks-Automattic-Tracks-OSX.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-Automattic-Tracks-OSX.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		8915A3CA0DEEDEC77652FE10 /* Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
+		371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
+		4D23D263D998EA01CCB752C4 /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		519B82281CDF10E002CD67A7 /* Pods_Automattic_Tracks_OSXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_OSXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		652046E1289B7D1235BB7FD4 /* Pods-Automattic-Tracks-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-OSX/Pods-Automattic-Tracks-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		6CAA4DA76E13B617281D5E5C /* Pods-Automattic-Tracks-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-OSX/Pods-Automattic-Tracks-OSX.debug.xcconfig"; sourceTree = "<group>"; };
+		6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8809A9D0B8C988BC31A6E219 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		931EE6CB1AD404D000E8711C /* TracksEventTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventTests.m; sourceTree = "<group>"; };
 		931EE6CE1AD5A58D00E8711C /* TestTracksContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTracksContextManager.h; sourceTree = "<group>"; };
 		931EE6CF1AD5A58D00E8711C /* TestTracksContextManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestTracksContextManager.m; sourceTree = "<group>"; };
@@ -164,12 +171,10 @@
 		93F5954F1AB9B7A800280F9E /* TracksService.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksService.h; sourceTree = "<group>"; };
 		93F595501AB9B7A800280F9E /* TracksService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksService.m; sourceTree = "<group>"; };
 		93F595521ABA01AE00280F9E /* TracksServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceTests.m; sourceTree = "<group>"; };
-		D405F70526D8E18E60E5173C /* Pods-Automattic-Tracks-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Automattic-Tracks-iOS/Pods-Automattic-Tracks-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
-		DF45AA0E3F327DEBC8F91686 /* libPods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		E14C66C9F09E47D147A0A3FB /* Pods-Automattic-Tracks-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Automattic-Tracks-iOS/Pods-Automattic-Tracks-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
+		A8DA9D04296686A3FB3E4BF9 /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
+		DCA23FA76778DD4D62989FD4 /* Pods_Automattic_Tracks_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1DBEA181C07071300FF2F73 /* TracksLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracksLogging.h; sourceTree = "<group>"; };
-		E89F8EE904F5DA72BA4C0942 /* Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests/Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
-		F35447CD60189802607B2956 /* Pods-Automattic-Tracks-Automattic-Tracks-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-Automattic-Tracks-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-Automattic-Tracks-OSX/Pods-Automattic-Tracks-Automattic-Tracks-OSX.release.xcconfig"; sourceTree = "<group>"; };
+		F12BA01F12FA7A9559D69764 /* Pods_Automattic_Tracks_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9117198240F20F0009A1EC0 /* LogEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEncryptor.swift; sourceTree = "<group>"; };
 		F9405F1A2418701700C4EB35 /* LogFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFile.swift; sourceTree = "<group>"; };
 		F956BBCB24195F160037816E /* EncryptedLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EncryptedLog.swift; sourceTree = "<group>"; };
@@ -197,7 +202,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016C57685EE5800C2A87ADD6 /* libPods-Automattic-Tracks-Automattic-Tracks-iOS.a in Frameworks */,
+				F65C4895BA44D4556D4A3693 /* Pods_Automattic_Tracks_iOS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -206,7 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				93B5C7B51CE25D40002820B3 /* AutomatticTracks.framework in Frameworks */,
-				6F9DBA527B4D60DA13E7852A /* libPods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.a in Frameworks */,
+				66B4025E8CC43C3928D21D6A /* Pods_Automattic_Tracks_iOSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -215,7 +220,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F970F42021E7BBD8000664D2 /* AutomatticTracks.framework in Frameworks */,
-				E8D7E45BDA19FEEE7E89DAF1 /* libPods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.a in Frameworks */,
+				89284FEF37B307C0A99A81E5 /* Pods_Automattic_Tracks_OSXTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -223,7 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A4A8E368EE316D1DBFDD1F97 /* libPods-Automattic-Tracks-Automattic-Tracks-OSX.a in Frameworks */,
+				4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,10 +240,10 @@
 			children = (
 				93771E3A1ACC6FD700B1E5FF /* CoreTelephony.framework */,
 				93AD39921AC713110069344D /* CoreData.framework */,
-				83F331B7FAA8625C95F8937E /* libPods-Automattic-Tracks-Automattic-Tracks-OSX.a */,
-				66E7C26D07CC91E17E98DFC8 /* libPods-Automattic-Tracks-Automattic-Tracks-iOS.a */,
-				53BA84C767D0BF2C6D65A996 /* libPods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.a */,
-				DF45AA0E3F327DEBC8F91686 /* libPods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.a */,
+				6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */,
+				F12BA01F12FA7A9559D69764 /* Pods_Automattic_Tracks_iOS.framework */,
+				DCA23FA76778DD4D62989FD4 /* Pods_Automattic_Tracks_iOSTests.framework */,
+				519B82281CDF10E002CD67A7 /* Pods_Automattic_Tracks_OSXTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -248,14 +253,14 @@
 			children = (
 				93C0213E1AB75F770014096A /* Podfile */,
 				937632B91AC3141800086BC6 /* Automattic-Tracks-iOS.podspec */,
-				01D2E218E009AF562070CB46 /* Pods-Automattic-Tracks-Automattic-Tracks-OSX.debug.xcconfig */,
-				F35447CD60189802607B2956 /* Pods-Automattic-Tracks-Automattic-Tracks-OSX.release.xcconfig */,
-				E14C66C9F09E47D147A0A3FB /* Pods-Automattic-Tracks-Automattic-Tracks-iOS.debug.xcconfig */,
-				D405F70526D8E18E60E5173C /* Pods-Automattic-Tracks-Automattic-Tracks-iOS.release.xcconfig */,
-				835C0A3D03A5D5C6BD3BF9FD /* Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.debug.xcconfig */,
-				8915A3CA0DEEDEC77652FE10 /* Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.release.xcconfig */,
-				E89F8EE904F5DA72BA4C0942 /* Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.debug.xcconfig */,
-				32DB1BC83409DAAD2B01CBC2 /* Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.release.xcconfig */,
+				6CAA4DA76E13B617281D5E5C /* Pods-Automattic-Tracks-OSX.debug.xcconfig */,
+				652046E1289B7D1235BB7FD4 /* Pods-Automattic-Tracks-OSX.release.xcconfig */,
+				4D23D263D998EA01CCB752C4 /* Pods-Automattic-Tracks-iOS.debug.xcconfig */,
+				A8DA9D04296686A3FB3E4BF9 /* Pods-Automattic-Tracks-iOS.release.xcconfig */,
+				8809A9D0B8C988BC31A6E219 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */,
+				371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */,
+				3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */,
+				3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -503,7 +508,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93B5C7BC1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOS" */;
 			buildPhases = (
-				F7A20526463B0EED510D9A9F /* [CP] Check Pods Manifest.lock */,
+				80D38423AB7F6004EFEAD773 /* [CP] Check Pods Manifest.lock */,
 				93B5C7A61CE25D40002820B3 /* Sources */,
 				93B5C7A71CE25D40002820B3 /* Frameworks */,
 				93B5C7A81CE25D40002820B3 /* Headers */,
@@ -522,10 +527,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 93B5C7BF1CE25D40002820B3 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-iOSTests" */;
 			buildPhases = (
-				8EAD8C586AA1C7950F258D9A /* [CP] Check Pods Manifest.lock */,
+				EE2C6CD7063BF45EE9D00D71 /* [CP] Check Pods Manifest.lock */,
 				93B5C7B01CE25D40002820B3 /* Sources */,
 				93B5C7B11CE25D40002820B3 /* Frameworks */,
 				93B5C7B21CE25D40002820B3 /* Resources */,
+				BAED7E4E9F4E1EB7508D4638 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -541,10 +547,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F970F42521E7BBD8000664D2 /* Build configuration list for PBXNativeTarget "Automattic_Tracks_OSXTests" */;
 			buildPhases = (
-				DA5C9E9490BA8E8E9A6C3353 /* [CP] Check Pods Manifest.lock */,
+				ADB5D1AEC01FB2EBB10AD785 /* [CP] Check Pods Manifest.lock */,
 				F970F41721E7BBD8000664D2 /* Sources */,
 				F970F41821E7BBD8000664D2 /* Frameworks */,
 				F970F41921E7BBD8000664D2 /* Resources */,
+				EF5820B9C733BE8250B40AD4 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -560,7 +567,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F9A117B821E69B42002A5CD8 /* Build configuration list for PBXNativeTarget "Automattic-Tracks-OSX" */;
 			buildPhases = (
-				EBB1DE6BE5C20B395D915E13 /* [CP] Check Pods Manifest.lock */,
+				48DCBE37BA85E37E9F8BE641 /* [CP] Check Pods Manifest.lock */,
 				F9A117AC21E69B41002A5CD8 /* Headers */,
 				F9A117AD21E69B41002A5CD8 /* Sources */,
 				F9A117AE21E69B41002A5CD8 /* Frameworks */,
@@ -660,7 +667,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		8EAD8C586AA1C7950F258D9A /* [CP] Check Pods Manifest.lock */ = {
+		48DCBE37BA85E37E9F8BE641 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -675,14 +682,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Automattic-Tracks-OSX-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		DA5C9E9490BA8E8E9A6C3353 /* [CP] Check Pods Manifest.lock */ = {
+		80D38423AB7F6004EFEAD773 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -697,14 +704,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Automattic-Tracks-iOS-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		EBB1DE6BE5C20B395D915E13 /* [CP] Check Pods Manifest.lock */ = {
+		ADB5D1AEC01FB2EBB10AD785 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -719,14 +726,44 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Automattic-Tracks-Automattic-Tracks-OSX-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Automattic_Tracks_OSXTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F7A20526463B0EED510D9A9F /* [CP] Check Pods Manifest.lock */ = {
+		BAED7E4E9F4E1EB7508D4638 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OCMock-iOS/OCMock.framework",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs-iOS/OHHTTPStubs.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability-iOS/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/Sentry-iOS/Sentry.framework",
+				"${BUILT_PRODUCTS_DIR}/Sodium-iOS/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EE2C6CD7063BF45EE9D00D71 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -741,11 +778,39 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Automattic-Tracks-Automattic-Tracks-iOS-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Automattic-Tracks-iOSTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EF5820B9C733BE8250B40AD4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/OCMock-macOS/OCMock.framework",
+				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs-macOS/OHHTTPStubs.framework",
+				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-macOS/CocoaLumberjack.framework",
+				"${BUILT_PRODUCTS_DIR}/Reachability-macOS/Reachability.framework",
+				"${BUILT_PRODUCTS_DIR}/Sentry-macOS/Sentry.framework",
+				"${BUILT_PRODUCTS_DIR}/Sodium-macOS/Sodium.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -801,12 +866,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F970F41E21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m in Sources */,
+				F9A0D7042421704400D27C01 /* Extensions.swift in Sources */,
 				F970F42C21E7BDBC000664D2 /* TracksServiceRemoteTests.swift in Sources */,
 				F970F42721E7BC8A000664D2 /* TracksEventServiceTests.m in Sources */,
+				F9A0D70324216FF200D27C01 /* LogEncryptionTests.swift in Sources */,
 				F970F42821E7BC91000664D2 /* TracksEventTests.m in Sources */,
+				F9A0D7052421705900D27C01 /* LogFile+TestHelpers.swift in Sources */,
 				F970F42621E7BC82000664D2 /* TestTracksContextManager.m in Sources */,
 				F970F42921E7BC94000664D2 /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F972770D229EDC5B009EDEE0 /* CrashLoggingTests.swift in Sources */,
+				F9A0D7062421706700D27C01 /* EncryptedLog.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -827,6 +896,7 @@
 				F9A117CD21E69B70002A5CD8 /* WatchSessionManager.m in Sources */,
 				F9A117BE21E69B62002A5CD8 /* TracksDeviceInformation.m in Sources */,
 				F9A117CB21E69B70002A5CD8 /* TracksServiceRemote.m in Sources */,
+				F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F9A117C521E69B70002A5CD8 /* TracksEventPersistenceService.m in Sources */,
 				F9405F1C2418701700C4EB35 /* LogFile.swift in Sources */,
@@ -855,7 +925,7 @@
 /* Begin XCBuildConfiguration section */
 		93B5C7BD1CE25D40002820B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E14C66C9F09E47D147A0A3FB /* Pods-Automattic-Tracks-Automattic-Tracks-iOS.debug.xcconfig */;
+			baseConfigurationReference = 4D23D263D998EA01CCB752C4 /* Pods-Automattic-Tracks-iOS.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -886,7 +956,7 @@
 		};
 		93B5C7BE1CE25D40002820B3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D405F70526D8E18E60E5173C /* Pods-Automattic-Tracks-Automattic-Tracks-iOS.release.xcconfig */;
+			baseConfigurationReference = A8DA9D04296686A3FB3E4BF9 /* Pods-Automattic-Tracks-iOS.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -916,7 +986,7 @@
 		};
 		93B5C7C01CE25D40002820B3 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 835C0A3D03A5D5C6BD3BF9FD /* Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.debug.xcconfig */;
+			baseConfigurationReference = 8809A9D0B8C988BC31A6E219 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -937,7 +1007,7 @@
 		};
 		93B5C7C11CE25D40002820B3 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8915A3CA0DEEDEC77652FE10 /* Pods-Automattic-Tracks-Tests-Automattic-Tracks-iOSTests.release.xcconfig */;
+			baseConfigurationReference = 371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */;
 			buildSettings = {
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ENABLE_MODULES = YES;
@@ -1057,7 +1127,7 @@
 		};
 		F970F42321E7BBD8000664D2 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E89F8EE904F5DA72BA4C0942 /* Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.debug.xcconfig */;
+			baseConfigurationReference = 3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1090,7 +1160,7 @@
 		};
 		F970F42421E7BBD8000664D2 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 32DB1BC83409DAAD2B01CBC2 /* Pods-Automattic-Tracks-Tests-Automattic_Tracks_OSXTests.release.xcconfig */;
+			baseConfigurationReference = 3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = "$(inherited)";
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1122,7 +1192,7 @@
 		};
 		F9A117B621E69B42002A5CD8 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 01D2E218E009AF562070CB46 /* Pods-Automattic-Tracks-Automattic-Tracks-OSX.debug.xcconfig */;
+			baseConfigurationReference = 6CAA4DA76E13B617281D5E5C /* Pods-Automattic-Tracks-OSX.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1149,7 +1219,7 @@
 				INFOPLIST_FILE = "Automattic-Tracks-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-OSX";
@@ -1165,7 +1235,7 @@
 		};
 		F9A117B721E69B42002A5CD8 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F35447CD60189802607B2956 /* Pods-Automattic-Tracks-Automattic-Tracks-OSX.release.xcconfig */;
+			baseConfigurationReference = 652046E1289B7D1235BB7FD4 /* Pods-Automattic-Tracks-OSX.release.xcconfig */;
 			buildSettings = {
 				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -1192,7 +1262,7 @@
 				INFOPLIST_FILE = "Automattic-Tracks-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-OSX";
 				PRODUCT_NAME = AutomatticTracks;
