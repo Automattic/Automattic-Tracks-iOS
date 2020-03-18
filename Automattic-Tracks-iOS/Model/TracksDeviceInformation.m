@@ -1,11 +1,11 @@
 #import "TracksDeviceInformation.h"
-#import "WatchSessionManager.h"
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #import <UIDeviceIdentifier/UIDeviceHardware.h>
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
+#import "WatchSessionManager.h"
 #else
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
