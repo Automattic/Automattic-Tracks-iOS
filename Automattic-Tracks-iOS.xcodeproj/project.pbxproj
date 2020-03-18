@@ -865,6 +865,7 @@
 				F99D03212422D9B70091C33E /* Extensions.swift in Sources */,
 				F99D033A2422D9F30091C33E /* TracksEventTests.m in Sources */,
 				F99D03342422D9F30091C33E /* CrashLoggingTests.swift in Sources */,
+				F99D03472422DB800091C33E /* Tracks.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -882,6 +883,7 @@
 				F99D033F2422D9F30091C33E /* TracksServiceTests.m in Sources */,
 				F99D032A2422D9B70091C33E /* TestTracksContextManager.m in Sources */,
 				F99D03222422D9B70091C33E /* Extensions.swift in Sources */,
+				F99D03482422DB800091C33E /* Tracks.xcdatamodeld in Sources */,
 				F99D03282422D9B70091C33E /* EncryptedLog.swift in Sources */,
 				F99D03352422D9F30091C33E /* CrashLoggingTests.swift in Sources */,
 			);
