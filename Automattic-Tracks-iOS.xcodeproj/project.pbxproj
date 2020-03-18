@@ -23,7 +23,6 @@
 		93B5C7D91CE25D8E002820B3 /* TracksEventServiceTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632B71AC30F8700086BC6 /* TracksEventServiceTests.m */; };
 		93B5C7DA1CE25D8E002820B3 /* TracksEventTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 931EE6CB1AD404D000E8711C /* TracksEventTests.m */; };
 		93B5C7DB1CE25D8E002820B3 /* TracksServiceRemoteIntegrationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */; };
-		93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D77A521CE26C43009EDB38 /* Tracks.swift */; };
 		F65C4895BA44D4556D4A3693 /* Pods_Automattic_Tracks_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F12BA01F12FA7A9559D69764 /* Pods_Automattic_Tracks_iOS.framework */; };
 		F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9117198240F20F0009A1EC0 /* LogEncryptor.swift */; };
 		F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9117198240F20F0009A1EC0 /* LogEncryptor.swift */; };
@@ -97,7 +96,6 @@
 		F9A117B521E69B42002A5CD8 /* Automattic_Tracks_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		F9A117B921E69B57002A5CD8 /* TracksLoggingPrivate.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7671CE230AD002820B3 /* TracksLoggingPrivate.h */; };
 		F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */; };
-		F9A117CE21E69B77002A5CD8 /* Tracks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 93D77A521CE26C43009EDB38 /* Tracks.swift */; };
 		F9A117CF21E69B80002A5CD8 /* TracksConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 9339E70B1ADE98B800AEAB68 /* TracksConstants.m */; };
 		F9A117D021E69B84002A5CD8 /* TracksConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9339E70A1ADE98B800AEAB68 /* TracksConstants.h */; };
 		F9A117D121E69B84002A5CD8 /* TracksLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = E1DBEA181C07071300FF2F73 /* TracksLogging.h */; };
@@ -152,7 +150,6 @@
 		93B5C7BB1CE25D40002820B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C0213C1AB32BFA0014096A /* TracksServiceRemoteIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceRemoteIntegrationTests.m; sourceTree = "<group>"; };
 		93C0213E1AB75F770014096A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		93D77A521CE26C43009EDB38 /* Tracks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tracks.swift; sourceTree = "<group>"; };
 		93F595521ABA01AE00280F9E /* TracksServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceTests.m; sourceTree = "<group>"; };
 		A8DA9D04296686A3FB3E4BF9 /* Pods-Automattic-Tracks-iOS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.release.xcconfig"; sourceTree = "<group>"; };
 		DCA23FA76778DD4D62989FD4 /* Pods_Automattic_Tracks_iOSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_iOSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -368,7 +365,6 @@
 			children = (
 				93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */,
 				93B5C7AF1CE25D40002820B3 /* Info.plist */,
-				93D77A521CE26C43009EDB38 /* Tracks.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -828,7 +824,6 @@
 				F9788DA92421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */,
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
-				93D77A531CE26C43009EDB38 /* Tracks.swift in Sources */,
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
@@ -885,7 +880,6 @@
 				F9788D8F24219D66000A9BB5 /* LogFile.swift in Sources */,
 				F9788D9324219D66000A9BB5 /* TracksDeviceInformation.m in Sources */,
 				F9788D9124219D66000A9BB5 /* TracksEvent.m in Sources */,
-				F9A117CE21E69B77002A5CD8 /* Tracks.swift in Sources */,
 				F9788D9B24219D66000A9BB5 /* Tracks.xcdatamodeld in Sources */,
 				F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */,
 				F9788D9D24219D66000A9BB5 /* TracksContextManager.m in Sources */,
