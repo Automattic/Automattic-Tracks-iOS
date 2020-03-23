@@ -14,7 +14,7 @@ Pod::Spec.new do |spec|
   spec.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
   spec.osx.exclude_files = 'Automattic-Tracks-iOS/Automattic-Tracks-iOS.h'
 
-  spec.private_header_files = 'Automattic-Tracks-iOS/Private/*.h'
+  spec.private_header_files = 'Automattic-Tracks-iOS/Internal Logging/TracksLoggingPrivate.h'
   spec.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
 
   spec.framework        = 'CoreData'
@@ -22,14 +22,15 @@ Pod::Spec.new do |spec|
   spec.ios.framework    = 'CoreTelephony'
   spec.osx.framework    = 'AppKit'
 
-  spec.ios.deployment_target  = '9.3'
+  spec.ios.deployment_target  = '10.0'
   spec.osx.deployment_target  = '10.11'
 
   spec.header_dir = 'AutomatticTracks'
   spec.module_name = 'AutomatticTracks'
 
-  spec.ios.dependency 'UIDeviceIdentifier', '~> 1.1.4'
-  spec.dependency 'CocoaLumberjack', '~> 3.5.2'
-  spec.dependency 'Reachability', '~>3.1'
+  spec.ios.dependency 'UIDeviceIdentifier', '~> 1'
+  spec.dependency 'CocoaLumberjack', '~> 3'
+  spec.dependency 'Reachability', '~> 3'
   spec.dependency 'Sentry', '~>4'
+  spec.dependency 'Sodium', '~>0.8.0'
 end

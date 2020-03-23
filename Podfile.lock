@@ -1,55 +1,59 @@
 PODS:
-  - CocoaLumberjack (3.5.2):
-    - CocoaLumberjack/Core (= 3.5.2)
-  - CocoaLumberjack/Core (3.5.2)
-  - OCMock (3.4.3)
-  - OHHTTPStubs (8.0.0):
-    - OHHTTPStubs/Default (= 8.0.0)
-  - OHHTTPStubs/Core (8.0.0)
-  - OHHTTPStubs/Default (8.0.0):
+  - CocoaLumberjack (3.6.1):
+    - CocoaLumberjack/Core (= 3.6.1)
+  - CocoaLumberjack/Core (3.6.1)
+  - OCMock (3.6)
+  - OHHTTPStubs (9.0.0):
+    - OHHTTPStubs/Default (= 9.0.0)
+  - OHHTTPStubs/Core (9.0.0)
+  - OHHTTPStubs/Default (9.0.0):
     - OHHTTPStubs/Core
     - OHHTTPStubs/JSON
     - OHHTTPStubs/NSURLSession
     - OHHTTPStubs/OHPathHelpers
-  - OHHTTPStubs/JSON (8.0.0):
+  - OHHTTPStubs/JSON (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/NSURLSession (8.0.0):
+  - OHHTTPStubs/NSURLSession (9.0.0):
     - OHHTTPStubs/Core
-  - OHHTTPStubs/OHPathHelpers (8.0.0)
-  - OHHTTPStubs/Swift (8.0.0):
+  - OHHTTPStubs/OHPathHelpers (9.0.0)
+  - OHHTTPStubs/Swift (9.0.0):
     - OHHTTPStubs/Default
   - Reachability (3.2)
-  - Sentry (4.3.4):
-    - Sentry/Core (= 4.3.4)
-  - Sentry/Core (4.3.4)
-  - UIDeviceIdentifier (1.1.4)
+  - Sentry (4.5.0):
+    - Sentry/Core (= 4.5.0)
+  - Sentry/Core (4.5.0)
+  - Sodium (0.8.0)
+  - UIDeviceIdentifier (1.4.0)
 
 DEPENDENCIES:
-  - CocoaLumberjack (~> 3.5.2)
-  - OCMock (~> 3.4.3)
+  - CocoaLumberjack (~> 3)
+  - OCMock (~> 3)
   - OHHTTPStubs
   - OHHTTPStubs/Swift
-  - Reachability (~> 3.1)
+  - Reachability (~> 3)
   - Sentry (~> 4)
-  - UIDeviceIdentifier (~> 1.1.4)
+  - Sodium (~> 0.8.0)
+  - UIDeviceIdentifier (~> 1)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - CocoaLumberjack
     - OCMock
     - OHHTTPStubs
     - Reachability
     - Sentry
+    - Sodium
     - UIDeviceIdentifier
 
 SPEC CHECKSUMS:
-  CocoaLumberjack: 118bf4a820efc641f79fa487b75ed928dccfae23
-  OCMock: 43565190abc78977ad44a61c0d20d7f0784d35ab
-  OHHTTPStubs: 9cbce6364bec557cc3439aa6bb7514670d780881
+  CocoaLumberjack: b17ae15142558d08bbacf69775fa10c4abbebcc9
+  OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
+  OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Sentry: 26f0e6492b103e87434d1a5eea2d241a36f2c2a2
-  UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
+  Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
+  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
+  UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
 
-PODFILE CHECKSUM: 83bc940e47195dca2fa3b71d2a8323930bb109e3
+PODFILE CHECKSUM: 27db9cdc43d40c734625b3dc415935e9e6f5d0a1
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
