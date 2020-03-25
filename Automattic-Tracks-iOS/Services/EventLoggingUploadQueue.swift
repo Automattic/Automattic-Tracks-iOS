@@ -21,14 +21,14 @@ open class EventLoggingUploadQueue {
     }
 
     func add(_ log: LogFile) throws {
-        try ensureStorageDirectoryExists()
+        try createStorageDirectoryIfNeeded()
         try fileManager.copyItem(at: log.url, to: storageURL(forLog: log))
     }
 
     func remove(_ log: LogFile) throws {
         let url = storageURL(forLog: log)
         if fileManager.fileExistsAtURL(url) {
-            try fileManager.removeItem(at: storageURL(forLog: log))
+            try fileManager.removeItem(at: url)
         }
     }
 
@@ -36,7 +36,7 @@ open class EventLoggingUploadQueue {
         return storageDirectory.appendingPathComponent(log.uuid)
     }
 
-    func ensureStorageDirectoryExists() throws {
+    func createStorageDirectoryIfNeeded() throws {
         if !fileManager.directoryExistsAtURL(storageDirectory) {
             try fileManager.createDirectory(at: storageDirectory, withIntermediateDirectories: true, attributes: nil)
         }
