@@ -2,11 +2,17 @@ import Foundation
 
 open class EventLoggingUploadQueue {
 
-    private let fileManager = FileManager.default
+    private let fileManager: FileManager
+    var storageDirectory: URL
+
+    init(storageDirectory: URL? = nil, fileManager: FileManager = FileManager.default) {
+        let defaultStorageDirectory = fileManager.documentsDirectory.appendingPathComponent("log-upload-queue")
+        self.storageDirectory = storageDirectory ?? defaultStorageDirectory
+        self.fileManager = fileManager
+    }
 
     /// The log file on top of the queue
     var first: LogFile? {
-
         guard let url = try? fileManager.contentsOfDirectory(at: storageDirectory).first else {
             return nil
         }
@@ -26,13 +32,8 @@ open class EventLoggingUploadQueue {
         }
     }
 
-    var storageDirectory: URL {
-        return fileManager.documentsDirectory.appendingPathComponent("log-upload-queue")
-    }
-
     func storageURL(forLog log: LogFile) -> URL {
-        let newURL = storageDirectory.appendingPathComponent(log.uuid)
-        return newURL
+        return storageDirectory.appendingPathComponent(log.uuid)
     }
 
     func ensureStorageDirectoryExists() throws {

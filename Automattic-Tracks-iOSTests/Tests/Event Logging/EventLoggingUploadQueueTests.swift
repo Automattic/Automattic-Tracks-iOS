@@ -57,4 +57,14 @@ class EventLoggingUploadQueueTests: XCTestCase {
         try! uploadQueue.remove(log)
         XCTAssertEqual(try! FileManager.default.contentsOfDirectory(at: uploadQueue.storageDirectory).count, 0)
     }
+
+    func testThatCustomFileUploadQueueLocationCreatesStorageDirectory() {
+        let log = LogFile.containingRandomString()
+
+        let customLocation = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(UUID().uuidString)
+        let customQueue = EventLoggingUploadQueue(storageDirectory: customLocation)
+        try! customQueue.add(log)
+
+        XCTAssert(FileManager.default.fileExistsAtURL(log.url))
+    }
 }
