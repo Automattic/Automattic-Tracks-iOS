@@ -24,7 +24,7 @@ open class EventLoggingNetworkService {
             /// Generate a reasonable error message based on the HTTP status
             if !(200 ... 299).contains(statusCode) {
                 let errorMessage = HTTPURLResponse.localizedString(forStatusCode: statusCode)
-                completion(.failure(UploadError.httpError(errorMessage)))
+                completion(.failure(EventLoggingFileUploadError.httpError(errorMessage)))
                 return
             }
 

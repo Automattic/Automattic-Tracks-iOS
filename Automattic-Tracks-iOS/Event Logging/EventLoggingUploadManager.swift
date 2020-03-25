@@ -27,7 +27,7 @@ class EventLoggingUploadManager {
         }
 
         guard let fileContents = FileManager.default.contents(atUrl: log.url) else {
-            delegate.uploadFailed(withError: UploadError.fileMissing, forLog: log)
+            delegate.uploadFailed(withError: EventLoggingFileUploadError.fileMissing, forLog: log)
             return
         }
 

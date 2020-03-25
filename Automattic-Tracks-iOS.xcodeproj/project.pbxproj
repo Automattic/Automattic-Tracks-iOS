@@ -33,8 +33,8 @@
 		F94456472429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94456442429660E009A36B3 /* EventLoggingUploadQueue.swift */; };
 		F94456482429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94456452429660E009A36B3 /* EventLoggingNetworkService.swift */; };
 		F94456492429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94456452429660E009A36B3 /* EventLoggingNetworkService.swift */; };
-		F944564B24296625009A36B3 /* UploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944564A24296625009A36B3 /* UploadError.swift */; };
-		F944564C24296625009A36B3 /* UploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944564A24296625009A36B3 /* UploadError.swift */; };
+		F944564B24296625009A36B3 /* EventLoggingFileUploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944564A24296625009A36B3 /* EventLoggingFileUploadError.swift */; };
+		F944564C24296625009A36B3 /* EventLoggingFileUploadError.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944564A24296625009A36B3 /* EventLoggingFileUploadError.swift */; };
 		F94456522429666B009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944564E2429666B009A36B3 /* EventLoggingUploadManagerTests.swift */; };
 		F94456552429666B009A36B3 /* EventLoggingUploadQueueTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94456512429666B009A36B3 /* EventLoggingUploadQueueTests.swift */; };
 		F944565724296684009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944564E2429666B009A36B3 /* EventLoggingUploadManagerTests.swift */; };
@@ -179,7 +179,7 @@
 		F9445641242965F6009A36B3 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		F94456442429660E009A36B3 /* EventLoggingUploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingUploadQueue.swift; sourceTree = "<group>"; };
 		F94456452429660E009A36B3 /* EventLoggingNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingNetworkService.swift; sourceTree = "<group>"; };
-		F944564A24296625009A36B3 /* UploadError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadError.swift; sourceTree = "<group>"; };
+		F944564A24296625009A36B3 /* EventLoggingFileUploadError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingFileUploadError.swift; sourceTree = "<group>"; };
 		F944564E2429666B009A36B3 /* EventLoggingUploadManagerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingUploadManagerTests.swift; sourceTree = "<group>"; };
 		F94456512429666B009A36B3 /* EventLoggingUploadQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingUploadQueueTests.swift; sourceTree = "<group>"; };
 		F944565A24296698009A36B3 /* Mocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
@@ -414,7 +414,7 @@
 				F9788D8D24219D66000A9BB5 /* TracksDeviceInformation.h */,
 				F9788D8324219D66000A9BB5 /* TracksDeviceInformation.m */,
 				F9788D8124219D66000A9BB5 /* LogFile.swift */,
-				F944564A24296625009A36B3 /* UploadError.swift */,
+				F944564A24296625009A36B3 /* EventLoggingFileUploadError.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -873,7 +873,7 @@
 				F9788D9C24219D66000A9BB5 /* TracksContextManager.m in Sources */,
 				F9445639242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */,
 				F9788D9824219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
-				F944564B24296625009A36B3 /* UploadError.swift in Sources */,
+				F944564B24296625009A36B3 /* EventLoggingFileUploadError.swift in Sources */,
 				93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */,
 				F944563B242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */,
 				F94456462429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */,
@@ -952,7 +952,7 @@
 				F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */,
 				F944563A242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */,
 				F9788D9D24219D66000A9BB5 /* TracksContextManager.m in Sources */,
-				F944564C24296625009A36B3 /* UploadError.swift in Sources */,
+				F944564C24296625009A36B3 /* EventLoggingFileUploadError.swift in Sources */,
 				F9788DAA2421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				F944563C242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */,
 				F94456472429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */,

@@ -1,6 +1,6 @@
 import Foundation
 
-public enum UploadError: Error, LocalizedError {
+public enum EventLoggingFileUploadError: Error, LocalizedError {
     case httpError(String)
     case fileMissing
 
