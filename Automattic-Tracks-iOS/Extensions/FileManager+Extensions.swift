@@ -8,7 +8,7 @@ extension FileManager {
     }
 
     func contentsOfDirectory(at url: URL) throws -> [URL] {
-        return try FileManager.default.contentsOfDirectory(atPath: url.path).map { url.appendingPathComponent($0) }
+        return try self.contentsOfDirectory(atPath: url.path).map { url.appendingPathComponent($0) }
     }
 
     func contents(atUrl url: URL) -> Data? {
@@ -16,12 +16,12 @@ extension FileManager {
     }
 
     func fileExistsAtURL(_ url: URL) -> Bool {
-        return FileManager.default.fileExists(atPath: url.path)
+        return self.fileExists(atPath: url.path)
     }
 
     func directoryExistsAtURL(_ url: URL) -> Bool {
         var isDir: ObjCBool = false
-        let exists = FileManager.default.fileExists(atPath: url.path, isDirectory: &isDir)
+        let exists = self.fileExists(atPath: url.path, isDirectory: &isDir)
         return exists && isDir.boolValue
     }
 }
