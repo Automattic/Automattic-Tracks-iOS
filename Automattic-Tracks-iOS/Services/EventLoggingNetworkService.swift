@@ -13,11 +13,8 @@ open class EventLoggingNetworkService {
                 return
             }
 
-            /// The `response` should *always* be an HTTPURLResponse, but we'll be defensive anyway
-            guard let statusCode = (response as? HTTPURLResponse)?.statusCode else {
-                completion(.success(data))
-                return
-            }
+            /// The `response` should *always* be an HTTPURLResponse. Crash if notl
+            let statusCode = (response as! HTTPURLResponse).statusCode
 
             /// Generate a reasonable error message based on the HTTP status
             if !(200 ... 299).contains(statusCode) {
