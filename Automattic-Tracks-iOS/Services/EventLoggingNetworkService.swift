@@ -1,9 +1,8 @@
 import Foundation
 
-typealias NetworkResultCallback = (Result<Data?, Error>) -> Void
-
 open class EventLoggingNetworkService {
 
+    typealias ResultCallback = (Result<Data?, Error>) -> Void
 
     private let urlSession: URLSession
 
@@ -11,7 +10,7 @@ open class EventLoggingNetworkService {
         self.urlSession = urlSession
     }
 
-    func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping NetworkResultCallback) {
+    func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping ResultCallback) {
         urlSession.uploadTask(with: request, fromFile: fileURL, completionHandler: { data, response, error in
 
             if let error = error {

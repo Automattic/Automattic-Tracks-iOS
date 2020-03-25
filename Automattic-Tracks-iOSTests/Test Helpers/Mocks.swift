@@ -78,7 +78,7 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
 class MockEventLoggingNetworkService: EventLoggingNetworkService {
     var shouldSucceed = true
 
-    override func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping NetworkResultCallback) {
+    override func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping EventLoggingNetworkService.ResultCallback) {
         shouldSucceed ? completion(.success(Data())) : completion(.failure(MockError.generic))
     }
 }
