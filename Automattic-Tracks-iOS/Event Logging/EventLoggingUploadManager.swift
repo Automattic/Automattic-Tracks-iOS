@@ -46,7 +46,7 @@ class EventLoggingUploadManager {
         delegate.didStartUploadingLog(log)
 
         networkService.uploadFile(request: request, fileURL: log.url) { result in
-            switch(result) {
+            switch result {
                 case .success:
                     self.delegate.didFinishUploadingLog(log)
                     callback(.success(()))
