@@ -4,7 +4,7 @@ import Sodium
 
 class EventLoggingUploadManager {
 
-    private struct Constants {
+    private enum Constants {
         static let uuidHeaderKey = "log-uuid"
         static let uploadHttpMethod = "POST"
     }
