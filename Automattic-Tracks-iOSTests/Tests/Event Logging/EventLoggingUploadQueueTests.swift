@@ -3,20 +3,24 @@ import XCTest
 
 class EventLoggingUploadQueueTests: XCTestCase {
 
-    var uploadQueue = EventLoggingUploadQueue()
+    var uploadQueue: EventLoggingUploadQueue!
 
     override func setUp() {
+        super.setUp()
         uploadQueue = EventLoggingUploadQueue()
     }
 
     override func tearDown() {
-        super.tearDown()
         let directory = uploadQueue.storageDirectory
         if FileManager.default.directoryExistsAtURL(directory) {
             try! FileManager.default.removeItem(at: directory)
         }
 
         XCTAssertTrue(!FileManager.default.directoryExistsAtURL(directory))
+
+        uploadQueue = nil
+
+        super.tearDown()
     }
 
     func testThatEmptyStorageDirectoryReturnsNilForFirstFile() {

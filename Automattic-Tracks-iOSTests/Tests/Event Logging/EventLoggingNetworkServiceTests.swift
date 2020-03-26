@@ -15,6 +15,8 @@ class EventLoggingNetworkServiceTests: XCTestCase {
     override func tearDown() {
         self.service = nil
         HTTPStubs.removeAllStubs()
+
+        super.tearDown()
     }
 
     func testThatInvalidURLsFail() {

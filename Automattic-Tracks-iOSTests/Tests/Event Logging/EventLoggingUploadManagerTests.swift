@@ -3,17 +3,28 @@ import XCTest
 
 class EventLoggingUploadManagerTests: XCTestCase {
     var uploadManager: EventLoggingUploadManager!
-    var networkService = MockEventLoggingNetworkService()
+    var networkService: MockEventLoggingNetworkService!
     var delegate: MockEventLoggingDelegate!
     var dataSource: MockEventLoggingDataSource!
 
     override func setUp() {
+        super.setUp()
+
         delegate = MockEventLoggingDelegate()
         dataSource = MockEventLoggingDataSource()
         networkService = MockEventLoggingNetworkService()
 
         uploadManager = EventLoggingUploadManager(dataSource: dataSource, delegate: delegate)
         uploadManager.networkService = networkService
+    }
+
+    override func tearDown() {
+        uploadManager = nil
+        networkService = nil
+        delegate = nil
+        dataSource = nil
+
+        super.tearDown()
     }
 
     func testThatDelegateIsNotifiedOfNetworkStartAndCompletionForSuccess() {
