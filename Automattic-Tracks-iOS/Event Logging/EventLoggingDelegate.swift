@@ -12,9 +12,11 @@ public protocol EventLoggingDelegate {
     func uploadCancelledByDelegate(_ log: LogFile)
 
     /// The event logging system will call this delegate method if a log file fails to upload.
+    /// It may be called prior to upload starting if the file is missing, and is called prior to the `upload` callback.
     func uploadFailed(withError: Error, forLog: LogFile)
 
     /// The event logging system will call this delegate method each time a log file finishes uploading.
+    /// It is called prior to the `upload` callback.
     func didFinishUploadingLog(_ log: LogFile)
 }
 
