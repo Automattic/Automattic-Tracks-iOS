@@ -17,23 +17,19 @@ open class EventLoggingUploadQueue {
             return nil
         }
 
-        return LogFile(url: url, uuid: url.lastPathComponent)
+        return LogFile.fromExistingFile(at: url)
     }
 
     func add(_ log: LogFile) throws {
         try createStorageDirectoryIfNeeded()
-        try fileManager.copyItem(at: log.url, to: storageURL(forLog: log))
+        try fileManager.copyItem(at: log.url, to: storageDirectory.appendingPathComponent(log.fileName))
     }
 
     func remove(_ log: LogFile) throws {
-        let url = storageURL(forLog: log)
+        let url = storageDirectory.appendingPathComponent(log.fileName)
         if fileManager.fileExistsAtURL(url) {
             try fileManager.removeItem(at: url)
         }
-    }
-
-    func storageURL(forLog log: LogFile) -> URL {
-        return storageDirectory.appendingPathComponent(log.uuid)
     }
 
     func createStorageDirectoryIfNeeded() throws {

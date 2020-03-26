@@ -43,6 +43,8 @@
 		F944565C24296698009A36B3 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = F944565A24296698009A36B3 /* Mocks.swift */; };
 		F949B1E82429681A0069FF76 /* LogEncryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F949B1E72429681A0069FF76 /* LogEncryptionTests.swift */; };
 		F949B1E92429681A0069FF76 /* LogEncryptionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F949B1E72429681A0069FF76 /* LogEncryptionTests.swift */; };
+		F94EE62C242C4C280015C18E /* LogFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EE62B242C4C280015C18E /* LogFileTests.swift */; };
+		F94EE62D242C4C280015C18E /* LogFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94EE62B242C4C280015C18E /* LogFileTests.swift */; };
 		F970F41E21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F970F41D21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m */; };
 		F970F42021E7BBD8000664D2 /* AutomatticTracks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9A117B121E69B41002A5CD8 /* AutomatticTracks.framework */; };
 		F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9788D8124219D66000A9BB5 /* LogFile.swift */; };
@@ -184,6 +186,7 @@
 		F94456512429666B009A36B3 /* EventLoggingUploadQueueTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingUploadQueueTests.swift; sourceTree = "<group>"; };
 		F944565A24296698009A36B3 /* Mocks.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		F949B1E72429681A0069FF76 /* LogEncryptionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEncryptionTests.swift; sourceTree = "<group>"; };
+		F94EE62B242C4C280015C18E /* LogFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogFileTests.swift; sourceTree = "<group>"; };
 		F970F41B21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Automattic_Tracks_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		F970F41D21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Automattic_Tracks_OSXTests.m; sourceTree = "<group>"; };
 		F970F41F21E7BBD8000664D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -493,6 +496,7 @@
 				F949B1E72429681A0069FF76 /* LogEncryptionTests.swift */,
 				F944564E2429666B009A36B3 /* EventLoggingUploadManagerTests.swift */,
 				F94456512429666B009A36B3 /* EventLoggingUploadQueueTests.swift */,
+				F94EE62B242C4C280015C18E /* LogFileTests.swift */,
 			);
 			path = "Event Logging";
 			sourceTree = "<group>";
@@ -911,6 +915,7 @@
 				F99D033C2422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F99D03292422D9B70091C33E /* TestTracksContextManager.m in Sources */,
 				F99D03212422D9B70091C33E /* Extensions.swift in Sources */,
+				F94EE62C242C4C280015C18E /* LogFileTests.swift in Sources */,
 				F99D033A2422D9F30091C33E /* TracksEventTests.m in Sources */,
 				F944565B24296698009A36B3 /* Mocks.swift in Sources */,
 				F99D03342422D9F30091C33E /* CrashLoggingTests.swift in Sources */,
@@ -934,6 +939,7 @@
 				F944565724296684009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */,
 				F99D033F2422D9F30091C33E /* TracksServiceTests.m in Sources */,
 				F99D032A2422D9B70091C33E /* TestTracksContextManager.m in Sources */,
+				F94EE62D242C4C280015C18E /* LogFileTests.swift in Sources */,
 				F99D03222422D9B70091C33E /* Extensions.swift in Sources */,
 				F99D03482422DB800091C33E /* Tracks.xcdatamodeld in Sources */,
 				F99D03282422D9B70091C33E /* EncryptedLog.swift in Sources */,
