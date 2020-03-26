@@ -1,6 +1,6 @@
 import Foundation
 
-open class EventLoggingNetworkService {
+class EventLoggingNetworkService {
 
     typealias ResultCallback = (Result<Data?, Error>) -> Void
 

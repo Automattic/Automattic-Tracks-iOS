@@ -1,6 +1,6 @@
 import Foundation
 
-open class EventLoggingUploadQueue {
+class EventLoggingUploadQueue {
 
     private let fileManager: FileManager
     var storageDirectory: URL
