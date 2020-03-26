@@ -9,24 +9,25 @@ class EventLoggingUploadManager {
         static let uploadHttpMethod = "POST"
     }
 
-    internal var networkService = EventLoggingNetworkService()
-
-    internal var dataSource: EventLoggingDataSource!
-    internal var delegate: EventLoggingDelegate!
+    var dataSource: EventLoggingDataSource
+    var delegate: EventLoggingDelegate
+    var networkService: EventLoggingNetworkService = EventLoggingNetworkService()
+    var fileManager: FileManager = FileManager.default
 
     typealias LogUploadCallback = (Result<Void, Error>) -> Void
 
+    init(dataSource: EventLoggingDataSource, delegate: EventLoggingDelegate) {
+        self.dataSource = dataSource
+        self.delegate = delegate
+    }
+
     func upload(_ log: LogFile, then callback: @escaping LogUploadCallback) {
-
-        precondition(delegate != nil , "You must set the Event Logging Delegate prior to attempting an upload")
-        precondition(dataSource != nil , "You must set the Event Logging Data Source prior to attempting an upload")
-
         guard delegate.shouldUploadLogFiles else {
-            delegate?.uploadCancelledByDelegate(log)
+            delegate.uploadCancelledByDelegate(log)
             return
         }
 
-        guard let fileContents = FileManager.default.contents(atUrl: log.url) else {
+        guard let fileContents = fileManager.contents(atUrl: log.url) else {
             delegate.uploadFailed(withError: EventLoggingFileUploadError.fileMissing, forLog: log)
             return
         }

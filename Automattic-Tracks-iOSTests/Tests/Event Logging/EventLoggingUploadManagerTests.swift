@@ -2,17 +2,18 @@ import XCTest
 @testable import AutomatticTracks
 
 class EventLoggingUploadManagerTests: XCTestCase {
-    var uploadManager = EventLoggingUploadManager()
+    var uploadManager: EventLoggingUploadManager!
     var networkService = MockEventLoggingNetworkService()
     var delegate: MockEventLoggingDelegate!
+    var dataSource: MockEventLoggingDataSource!
 
     override func setUp() {
         delegate = MockEventLoggingDelegate()
+        dataSource = MockEventLoggingDataSource()
         networkService = MockEventLoggingNetworkService()
 
+        uploadManager = EventLoggingUploadManager(dataSource: dataSource, delegate: delegate)
         uploadManager.networkService = networkService
-        uploadManager.dataSource = MockEventLoggingDataSource()
-        uploadManager.delegate = delegate
     }
 
     func testThatDelegateIsNotifiedOfNetworkStartAndCompletionForSuccess() {
