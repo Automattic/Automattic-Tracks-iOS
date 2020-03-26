@@ -33,7 +33,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
     func testThatDelegateIsNotifiedOfNetworkStartAndCompletionForSuccess() {
 
         waitForExpectation(timeout: 1.0) { exp in
-            uploadManager.upload(LogFile.containingRandomString(), then:  { _ in exp.fulfill() })
+            uploadManager.upload(LogFile.containingRandomString(), then: { _ in exp.fulfill() })
         }
 
         XCTAssertTrue(delegate.didStartUploadingTriggered)
@@ -45,7 +45,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
 
         waitForExpectation(timeout: 1.0) { exp in
             networkService.shouldSucceed = false
-            uploadManager.upload(LogFile.containingRandomString(), then:  { _ in exp.fulfill() })
+            uploadManager.upload(LogFile.containingRandomString(), then: { _ in exp.fulfill() })
         }
 
         XCTAssertTrue(delegate.didStartUploadingTriggered)
@@ -58,7 +58,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
         waitForExpectation(timeout: 1.0) { exp in
             delegate.setShouldUploadLogFiles(false)
             delegate.uploadCancelledByDelegateCallback = { _ in exp.fulfill() }
-            uploadManager.upload(LogFile.containingRandomString(), then:  { _ in XCTFail("Callback should not be called") })
+            uploadManager.upload(LogFile.containingRandomString(), then: { _ in XCTFail("Callback should not be called") })
         }
 
         XCTAssertFalse(delegate.didStartUploadingTriggered)
@@ -70,7 +70,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
         waitForExpectation(timeout: 1.0) { exp in
             delegate.setShouldUploadLogFiles(true)
             delegate.uploadFailedCallback = { error, _ in exp.fulfill() }
-            uploadManager.upload(LogFile.withInvalidPath(), then:  { _ in XCTFail("Callback should not be called") })
+            uploadManager.upload(LogFile.withInvalidPath(), then: { _ in XCTFail("Callback should not be called") })
         }
     }
 }

@@ -51,7 +51,7 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
 
     var uploadCancelledByDelegateTriggered = false
     var uploadCancelledByDelegateCallback: LogFileCallback?
-    
+
     func uploadCancelledByDelegate(_ log: LogFile) {
         uploadCancelledByDelegateTriggered = true
         uploadCancelledByDelegateCallback?(log)

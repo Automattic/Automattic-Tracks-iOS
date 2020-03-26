@@ -26,7 +26,7 @@ class EventLoggingNetworkServiceTests: XCTestCase {
         waitForExpectation(timeout: 1.0) { exp in
             service.uploadFile(request: req, fileURL: logFile.url) { result in
                 switch result {
-                    case .success(_): XCTFail("This request should not be successful – the url is invalid")
+                    case .success: XCTFail("This request should not be successful – the url is invalid")
                     case .failure(let error): XCTAssertNotNil(error)
                 }
 
@@ -44,7 +44,7 @@ class EventLoggingNetworkServiceTests: XCTestCase {
         waitForExpectation(timeout: 1.0) { exp in
             service.uploadFile(request: req, fileURL: logFile.url) { result in
                 switch result {
-                    case .success(_): XCTFail("This request is not successful – the server is returning an error code")
+                    case .success: XCTFail("This request is not successful – the server is returning an error code")
                     case .failure(let error): XCTAssertNotNil(error)
                 }
 
@@ -59,14 +59,14 @@ class EventLoggingNetworkServiceTests: XCTestCase {
 
         let logFile = LogFile.containingRandomString()
         let req = URLRequest(url: testURL())
-        
+
         waitForExpectation(timeout: 1.0) { exp in
             service.uploadFile(request: req, fileURL: logFile.url) { result in
                 switch result {
                     case .success(let response):
                         let responseString = String(data: response!, encoding: .utf8)!
                         XCTAssertEqual(responseString, responseString)
-                    case .failure(_): XCTFail("This request should not fail")
+                    case .failure: XCTFail("This request should not fail")
                 }
 
                 exp.fulfill()
@@ -78,4 +78,3 @@ class EventLoggingNetworkServiceTests: XCTestCase {
         return URL(string: "http://\(testDomain)/\(path)")!
     }
 }
-
