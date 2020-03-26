@@ -10,7 +10,7 @@ class TracksServiceRemoteTests: XCTestCase {
 
         subject = TracksServiceRemote()
     }
-    
+
     override func tearDown() {
         super.tearDown()
 
@@ -28,7 +28,7 @@ class TracksServiceRemoteTests: XCTestCase {
             return HTTPStubsResponse(data: stubData!, statusCode: 200, headers: ["Content-Type": "application/json"])
         }
 
-        subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
+        subject.sendBatch(of: events, withSharedProperties: [NSObject: AnyObject]()) {
             error in
             expect.fulfill()
 
@@ -48,7 +48,7 @@ class TracksServiceRemoteTests: XCTestCase {
             return HTTPStubsResponse(data: stubData!, statusCode: 200, headers: ["Content-Type": "application/json"])
         }
 
-        subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
+        subject.sendBatch(of: events, withSharedProperties: [NSObject: AnyObject]()) {
             error in
             expect.fulfill()
             XCTAssertNotNil(error)
@@ -72,7 +72,7 @@ class TracksServiceRemoteTests: XCTestCase {
             return HTTPStubsResponse(data: stubData!, statusCode: 500, headers: ["Content-Type": "application/json"])
         }
 
-        subject.sendBatch(of: events, withSharedProperties: [NSObject : AnyObject]()) {
+        subject.sendBatch(of: events, withSharedProperties: [NSObject: AnyObject]()) {
             error in
             expect.fulfill()
             XCTAssertNotNil(error)
