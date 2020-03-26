@@ -9,16 +9,22 @@ class EventLoggingUploadManager {
         static let uploadHttpMethod = "POST"
     }
 
-    var dataSource: EventLoggingDataSource
-    var delegate: EventLoggingDelegate
-    var networkService: EventLoggingNetworkService = EventLoggingNetworkService()
-    var fileManager: FileManager = FileManager.default
+    private let dataSource: EventLoggingDataSource
+    private let delegate: EventLoggingDelegate
+    private let networkService: EventLoggingNetworkService
+    private let fileManager: FileManager
 
     typealias LogUploadCallback = (Result<Void, Error>) -> Void
 
-    init(dataSource: EventLoggingDataSource, delegate: EventLoggingDelegate) {
+    init(dataSource: EventLoggingDataSource,
+         delegate: EventLoggingDelegate,
+         networkService: EventLoggingNetworkService = EventLoggingNetworkService(),
+         fileManager: FileManager = FileManager.default
+    ) {
         self.dataSource = dataSource
         self.delegate = delegate
+        self.networkService = networkService
+        self.fileManager = fileManager
     }
 
     func upload(_ log: LogFile, then callback: @escaping LogUploadCallback) {
