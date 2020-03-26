@@ -23,7 +23,7 @@ class EventLoggingNetworkServiceTests: XCTestCase {
         let logFile = LogFile.containingRandomString()
         let req = URLRequest(url: URL(string: "invalid://location")!)
 
-        async_test(timeout: 1.0) { exp in
+        waitForExpectation(timeout: 1.0) { exp in
             service.uploadFile(request: req, fileURL: logFile.url) { result in
                 switch result {
                     case .success(_): XCTFail("This request should not be successful – the url is invalid")
@@ -41,7 +41,7 @@ class EventLoggingNetworkServiceTests: XCTestCase {
         let logFile = LogFile.containingRandomString()
         let req = URLRequest(url: testURL())
 
-        async_test(timeout: 1.0) { exp in
+        waitForExpectation(timeout: 1.0) { exp in
             service.uploadFile(request: req, fileURL: logFile.url) { result in
                 switch result {
                     case .success(_): XCTFail("This request is not successful – the server is returning an error code")
@@ -59,8 +59,8 @@ class EventLoggingNetworkServiceTests: XCTestCase {
 
         let logFile = LogFile.containingRandomString()
         let req = URLRequest(url: testURL())
-
-        async_test(timeout: 1.0) { exp in
+        
+        waitForExpectation(timeout: 1.0) { exp in
             service.uploadFile(request: req, fileURL: logFile.url) { result in
                 switch result {
                     case .success(let response):

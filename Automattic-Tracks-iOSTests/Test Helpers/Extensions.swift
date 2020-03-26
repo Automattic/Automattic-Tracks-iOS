@@ -29,7 +29,7 @@ extension FileManager {
 }
 
 extension XCTestCase {
-    func async_test(timeout: TimeInterval, _ block: (XCTestExpectation) -> ()) {
+    func waitForExpectation(timeout: TimeInterval, _ block: (XCTestExpectation) -> ()) {
         let exp = XCTestExpectation()
         block(exp)
         wait(for: [exp], timeout: timeout)
