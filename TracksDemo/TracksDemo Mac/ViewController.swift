@@ -9,9 +9,9 @@ class ViewController: NSViewController {
 
     @IBOutlet var progressView: NSProgressIndicator!
     @IBOutlet weak var queuedEventsLabel: NSTextField!
-    
+
     var sendInterval: TimeInterval {
-        get{ return tracksService?.queueSendInterval ?? 10 }
+        get { return tracksService?.queueSendInterval ?? 10 }
         set { tracksService?.queueSendInterval = newValue}
     }
 
@@ -32,7 +32,7 @@ class ViewController: NSViewController {
         NotificationCenter.default.removeObserver(self)
     }
 
-    //MARK: - IB Action Methods
+    // MARK: - IB Action Methods
     @IBAction func didClickTrackEvent(_ sender: NSButton) {
         tracksService?.trackEventName("test_event")
     }
@@ -62,13 +62,13 @@ class ViewController: NSViewController {
         if sender.state == .on {
             resetTimer()
         }
-        else{
+        else {
             timer.invalidate()
         }
     }
 
-    //MARK: – Fetched Results Controller
-    private func setupFetchedResultsController(){
+    // MARK: – Fetched Results Controller
+    private func setupFetchedResultsController() {
         let fetchRequest = NSFetchRequest<TracksEventCoreData>(entityName: "TracksEvent")
         fetchRequest.sortDescriptors = [ NSSortDescriptor(key: "date", ascending: true) ]
 
@@ -80,7 +80,7 @@ class ViewController: NSViewController {
 
         self.fetchedResultsController.delegate = self
 
-        do{
+        do {
             try self.fetchedResultsController.performFetch()
         }
         catch let err {
@@ -88,7 +88,7 @@ class ViewController: NSViewController {
         }
     }
 
-    //MARK: - Timer
+    // MARK: - Timer
     private lazy var timer = Timer()
     private var startTime: Date!
 
@@ -114,7 +114,7 @@ class ViewController: NSViewController {
         progressView.doubleValue = progress * 100
     }
 
-    //MARK: - Helpers
+    // MARK: - Helpers
     private func updateObjectCountLabel() {
         let count = fetchedResultsController.fetchedObjects?.count ?? 0
         queuedEventsLabel.stringValue = "Number of events queued: \(count)"

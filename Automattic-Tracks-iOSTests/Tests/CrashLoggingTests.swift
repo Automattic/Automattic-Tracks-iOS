@@ -171,7 +171,7 @@ private extension CrashLoggingTests {
     var testUser: TracksUser { return TracksUser(userID: "foo", email: "bar", username: "baz") }
 }
 
-private class MockCrashLoggingDataProvider : CrashLoggingDataProvider {
+private class MockCrashLoggingDataProvider: CrashLoggingDataProvider {
     var sentryDSN: String = ""
     var userHasOptedOut: Bool = false
     var buildType: String = "test"

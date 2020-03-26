@@ -6,9 +6,9 @@ public protocol CrashLoggingDataProvider {
     var buildType: String { get }
     var releaseName: String { get }
     var currentUser: TracksUser? { get }
-    var additionalUserData: [String : Any] { get }
+    var additionalUserData: [String: Any] { get }
 }
-   
+
 /// Default implementations of common protocol properties
 public extension CrashLoggingDataProvider {
 
@@ -16,7 +16,7 @@ public extension CrashLoggingDataProvider {
         return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
     }
 
-    var additionalUserData: [String : Any] {
+    var additionalUserData: [String: Any] {
         return [ : ]
     }
 }
