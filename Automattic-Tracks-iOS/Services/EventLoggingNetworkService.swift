@@ -18,7 +18,8 @@ class EventLoggingNetworkService {
                 return
             }
 
-            /// The `response` should *always* be an HTTPURLResponse. Crash if notl
+            /// The `response` should *always* be an HTTPURLResponse.
+            /// Fail fast by force-unwrapping – this will cause a crash and will bring the issue to our attention if something has changed.
             let statusCode = (response as! HTTPURLResponse).statusCode
 
             /// Generate a reasonable error message based on the HTTP status
