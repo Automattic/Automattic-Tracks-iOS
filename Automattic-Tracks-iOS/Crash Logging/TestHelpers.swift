@@ -31,7 +31,7 @@ internal extension CrashLogging {
     var cachedUser: TracksUser? {
         guard
             let context = currentContext,
-            let userData = context["user"] as? [String : Any]
+            let userData = context["user"] as? [String: Any]
         else { return nil }
 
         let userID = userData["id"] as? String
@@ -42,7 +42,7 @@ internal extension CrashLogging {
     }
 
     /// Refresh the context from disk, then return it
-    var currentContext: [String : Any]? {
+    var currentContext: [String: Any]? {
         Client.shared?.perform(Selector(("restoreContextBeforeCrash")))
         return Client.shared?.lastContext
     }
