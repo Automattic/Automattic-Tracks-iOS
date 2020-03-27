@@ -39,8 +39,15 @@ class MockEventLoggingDataSource: EventLoggingDataSource {
 }
 
 class MockEventLoggingDelegate: EventLoggingDelegate {
+    init (shouldUploadLogFiles: Bool = true) {
+        _shouldUploadLogFiles = shouldUploadLogFiles
+    }
 
-    var shouldUploadLogFiles: Bool = true
+    private var _shouldUploadLogFiles: Bool
+
+    var shouldUploadLogFiles: Bool {
+        return _shouldUploadLogFiles
+    }
 
     private var _didStartUploadingTriggered = false
     private var _didFinishUploadingTriggered = false
@@ -91,7 +98,11 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
 }
 
 class MockEventLoggingNetworkService: EventLoggingNetworkService {
-    var shouldSucceed = true
+    private let shouldSucceed: Bool
+
+    init(shouldSucceed: Bool = true) {
+        self.shouldSucceed = shouldSucceed
+    }
 
     override func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping EventLoggingNetworkService.ResultCallback) {
         shouldSucceed ? completion(.success(Data())) : completion(.failure(MockError.generic))
