@@ -10,24 +10,31 @@ enum MockError: Error {
 }
 
 class MockEventLoggingDataSource: EventLoggingDataSource {
-
-    var loggingEncryptionKey: String = "foo"
-    var previousSessionLogPath: URL? = nil
-
-    /// Overrides for logUploadURL
-    var _logUploadURL: URL = URL(string: "example.com")!
+    
+    private let _loggingEncryptionKey: String
+    private let _logUploadURL: URL
+    
+    required init (loggingEncryptionKey: String, logUploadURL: URL) {
+        _loggingEncryptionKey = loggingEncryptionKey
+        _logUploadURL = logUploadURL
+    }
+    
+    var loggingEncryptionKey: String {
+        return _loggingEncryptionKey
+    }
+    
     var logUploadURL: URL {
         return _logUploadURL
     }
 
-    func setLogUploadUrl(_ url: URL) {
-        self._logUploadURL = url
+    var previousSessionLogPath: URL? {
+        return nil
     }
 
-    func withEncryptionKeys() -> Self {
+    static func withEncryptionKeys() -> Self {
         let keyPair = Sodium().box.keyPair()!
-        loggingEncryptionKey = Data(keyPair.publicKey).base64EncodedString()
-        return self
+        let encryptionKey = Data(keyPair.publicKey).base64EncodedString()
+        return Self(loggingEncryptionKey: encryptionKey, logUploadURL: URL(string: "example.com")!)
     }
 }
 

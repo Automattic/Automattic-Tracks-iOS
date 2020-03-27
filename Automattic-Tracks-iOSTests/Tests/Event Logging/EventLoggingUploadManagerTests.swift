@@ -11,7 +11,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
         super.setUp()
 
         delegate = MockEventLoggingDelegate()
-        dataSource = MockEventLoggingDataSource()
+        dataSource = MockEventLoggingDataSource.withEncryptionKeys()
         networkService = MockEventLoggingNetworkService()
 
         uploadManager = EventLoggingUploadManager(
