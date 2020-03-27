@@ -10,19 +10,19 @@ enum MockError: Error {
 }
 
 class MockEventLoggingDataSource: EventLoggingDataSource {
-    
+
     private let _loggingEncryptionKey: String
     private let _logUploadURL: URL
-    
+
     required init (loggingEncryptionKey: String, logUploadURL: URL) {
         _loggingEncryptionKey = loggingEncryptionKey
         _logUploadURL = logUploadURL
     }
-    
+
     var loggingEncryptionKey: String {
         return _loggingEncryptionKey
     }
-    
+
     var logUploadURL: URL {
         return _logUploadURL
     }
@@ -40,45 +40,53 @@ class MockEventLoggingDataSource: EventLoggingDataSource {
 
 class MockEventLoggingDelegate: EventLoggingDelegate {
 
-    var didStartUploadingTriggered = false
+    var shouldUploadLogFiles: Bool = true
+
+    private var _didStartUploadingTriggered = false
+    private var _didFinishUploadingTriggered = false
+    private var _uploadFailedTriggered = false
+    private var _uploadCancelledByDelegateTriggered = false
+
+    var didStartUploadingTriggered: Bool {
+        return _didStartUploadingTriggered
+    }
+
+    var didFinishUploadingTriggered: Bool {
+        return _didFinishUploadingTriggered
+    }
+
+    var uploadFailedTriggered: Bool {
+        return _uploadFailedTriggered
+    }
+
+    var uploadCancelledByDelegateTriggered: Bool {
+        return _uploadCancelledByDelegateTriggered
+    }
+
     var didStartUploadingCallback: LogFileCallback?
+    var didFinishUploadingCallback: LogFileCallback?
+    var uploadCancelledByDelegateCallback: LogFileCallback?
+    var uploadFailedCallback: ErrorWithLogFileCallback?
 
     func didStartUploadingLog(_ log: LogFile) {
-        didStartUploadingTriggered = true
+        _didStartUploadingTriggered = true
         didStartUploadingCallback?(log)
     }
 
-    var didFinishUploadingTriggered = false
-    var didFinishUploadingCallback: LogFileCallback?
 
     func didFinishUploadingLog(_ log: LogFile) {
-        didFinishUploadingTriggered = true
+        _didFinishUploadingTriggered = true
         didFinishUploadingCallback?(log)
     }
 
-    var uploadCancelledByDelegateTriggered = false
-    var uploadCancelledByDelegateCallback: LogFileCallback?
-
     func uploadCancelledByDelegate(_ log: LogFile) {
-        uploadCancelledByDelegateTriggered = true
+        _uploadCancelledByDelegateTriggered = true
         uploadCancelledByDelegateCallback?(log)
     }
 
-    var uploadFailedTriggered = false
-    var uploadFailedCallback: ErrorWithLogFileCallback?
-
     func uploadFailed(withError error: Error, forLog log: LogFile) {
-        uploadFailedTriggered = true
+        _uploadFailedTriggered = true
         uploadFailedCallback?(error, log)
-    }
-
-    func setShouldUploadLogFiles(_ newValue: Bool) {
-        _shouldUploadLogFiles = newValue
-    }
-
-    private var _shouldUploadLogFiles: Bool = true
-    var shouldUploadLogFiles: Bool {
-        return _shouldUploadLogFiles
     }
 }
 
