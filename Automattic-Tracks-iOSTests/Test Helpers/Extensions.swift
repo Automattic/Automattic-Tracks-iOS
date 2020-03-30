@@ -1,5 +1,6 @@
 import Foundation
 import Sodium
+import XCTest
 
 extension String {
     static func randomString(length: Int) -> String {
@@ -24,5 +25,13 @@ extension FileManager {
         let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
         self.createFile(atPath: fileURL.path, contents: contents?.data(using: .utf8), attributes: nil)
         return fileURL
+    }
+}
+
+extension XCTestCase {
+    func waitForExpectation(timeout: TimeInterval, _ block: (XCTestExpectation) -> ()) {
+        let exp = XCTestExpectation()
+        block(exp)
+        wait(for: [exp], timeout: timeout)
     }
 }
