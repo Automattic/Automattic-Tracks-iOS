@@ -132,6 +132,8 @@
 		F9A117D021E69B84002A5CD8 /* TracksConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9339E70A1ADE98B800AEAB68 /* TracksConstants.h */; };
 		F9A117D121E69B84002A5CD8 /* TracksLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = E1DBEA181C07071300FF2F73 /* TracksLogging.h */; };
 		F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7641CE2303D002820B3 /* TracksLogging.m */; };
+		F9D8BF612432FF82007E2C87 /* EventLoggingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D8BF602432FF82007E2C87 /* EventLoggingTests.swift */; };
+		F9D8BF622432FF82007E2C87 /* EventLoggingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D8BF602432FF82007E2C87 /* EventLoggingTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -238,6 +240,7 @@
 		F9A117B121E69B41002A5CD8 /* AutomatticTracks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutomatticTracks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Automattic_Tracks_OSX.h; sourceTree = "<group>"; };
 		F9A117B421E69B42002A5CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9D8BF602432FF82007E2C87 /* EventLoggingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -504,6 +507,7 @@
 		F99D032E2422D9F30091C33E /* Event Logging */ = {
 			isa = PBXGroup;
 			children = (
+				F9D8BF602432FF82007E2C87 /* EventLoggingTests.swift */,
 				F949B1E72429681A0069FF76 /* LogEncryptionTests.swift */,
 				F944564E2429666B009A36B3 /* EventLoggingUploadManagerTests.swift */,
 				F94456512429666B009A36B3 /* EventLoggingUploadQueueTests.swift */,
@@ -926,6 +930,7 @@
 				F99D03272422D9B70091C33E /* EncryptedLog.swift in Sources */,
 				F94EE635242D017D0015C18E /* NetworkRequestMocks.swift in Sources */,
 				F99D03362422D9F30091C33E /* TracksEventServiceTests.m in Sources */,
+				F9D8BF612432FF82007E2C87 /* EventLoggingTests.swift in Sources */,
 				F99D03232422D9B70091C33E /* LogFile+TestHelpers.swift in Sources */,
 				F99D033C2422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F99D03292422D9B70091C33E /* TestTracksContextManager.m in Sources */,
@@ -945,6 +950,7 @@
 			files = (
 				F99D033B2422D9F30091C33E /* TracksEventTests.m in Sources */,
 				F99D03412422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */,
+				F9D8BF622432FF82007E2C87 /* EventLoggingTests.swift in Sources */,
 				F99D03242422D9B70091C33E /* LogFile+TestHelpers.swift in Sources */,
 				F99D033D2422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F944565C24296698009A36B3 /* Mocks.swift in Sources */,
