@@ -14,11 +14,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
         dataSource = MockEventLoggingDataSource()
         networkService = MockEventLoggingNetworkService()
 
-        uploadManager = EventLoggingUploadManager(
-            dataSource: dataSource,
-            delegate: delegate,
-            networkService: networkService
-        )
+        uploadManager = EventLoggingUploadManager(dataSource: dataSource, delegate: delegate, networkService: networkService)
     }
 
     override func tearDown() {
