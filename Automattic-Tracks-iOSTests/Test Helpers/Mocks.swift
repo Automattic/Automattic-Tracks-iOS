@@ -29,6 +29,10 @@ class MockEventLoggingDataSource: EventLoggingDataSource {
         loggingEncryptionKey = Data(keyPair.publicKey).base64EncodedString()
         return self
     }
+
+    var logUploadQueueStorageURL: URL {
+        return FileManager.default.documentsDirectory.appendingPathComponent(UUID().uuidString)
+    }
 }
 
 class MockEventLoggingDelegate: EventLoggingDelegate {
@@ -80,28 +84,5 @@ class MockEventLoggingNetworkService: EventLoggingNetworkService {
 
     override func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping EventLoggingNetworkService.ResultCallback) {
         shouldSucceed ? completion(.success(Data())) : completion(.failure(MockError.generic))
-    }
-}
-
-class MockEventLoggingUploadQueue: EventLoggingUploadQueue {
-
-    typealias LogFileCallback = (LogFile) -> ()
-
-    var queue = [LogFile]()
-
-    var addCallback: LogFileCallback?
-    override func add(_ log: LogFile) {
-        self.addCallback?(log)
-        self.queue.append(log)
-    }
-
-    var removeCallback: LogFileCallback?
-    override func remove(_ log: LogFile) {
-        self.removeCallback?(log)
-        self.queue.removeAll(where: { $0.uuid == log.uuid })
-    }
-
-    override var first: LogFile? {
-        return self.queue.first
     }
 }

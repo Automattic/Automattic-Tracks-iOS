@@ -6,7 +6,9 @@ public class CrashLogging {
 
     /// A singleton is maintained, but the host application needn't be aware of its existence.
     internal static let sharedInstance = CrashLogging()
-    fileprivate var dataProvider: CrashLoggingDataProvider?
+
+    private var dataProvider: CrashLoggingDataProvider?
+    private var eventLogging: EventLogging?
 
     /// Thread-safe single initialization
     fileprivate static let threadSafeDispatchQueue = DispatchQueue(label: Bundle.main.bundleIdentifier ?? "tracks" + "-crash-logging-queue")
@@ -64,6 +66,20 @@ public class CrashLogging {
         }
     }
 
+    /**
+        Initializes the crash logging system.
+
+        - Parameters:
+            - dataProvider: An object that will provide any required data to the crash logging system.
+            - eventLogging: An object that will coordinate event logging
+
+        - SeeAlso: CrashLoggingDataProvider
+        */
+    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging) {
+        start(withDataProvider: dataProvider)
+        sharedInstance.eventLogging = eventLogging
+    }
+
     /// A Sentry hook used to attach any additional data to the event.
     private func beforeSerializeEvent(_ event: Event) {
         event.tags?["locale"] = NSLocale.current.languageCode
@@ -73,14 +89,26 @@ public class CrashLogging {
     private func shouldSendEvent(_ event: Event?) -> Bool {
 
         #if DEBUG
-        let result = false
+        let shouldSendEvent = false
         #else
-        let result = !CrashLogging.userHasOptedOut
+        let shouldSendEvent = !CrashLogging.userHasOptedOut
         #endif
 
-        shouldSendEventCallback?(event, result)
+        shouldSendEventCallback?(event, shouldSendEvent)
 
-        return result
+        /// Schedule the crash log for upload, if possible
+        if shouldSendEvent, let eventLogging = self.eventLogging, let logFilePath = eventLogging.dataSource.previousSessionLogPath {
+            do {
+                let logFile = LogFile(url: logFilePath)
+                try eventLogging.enqueueLogForUpload(log: logFile)
+                event?.logID = logFile.uuid
+            }
+            catch let err {
+                CrashLogging.logError(err)
+            }
+        }
+
+        return shouldSendEvent
     }
 
     /// The current state of the user's choice to opt out of data collection. Provided by the data source.
@@ -167,5 +195,20 @@ extension CrashLogging {
     /// Calling this method in these situations prevents
     public static func setNeedsDataRefresh() {
         Client.shared?.user = sharedInstance.currentUser
+    }
+}
+
+// Event Logging
+extension Event {
+
+    private static let logIDKey = "logID"
+
+    var logID: String? {
+        get {
+            return self.extra?[Event.logIDKey] as? String
+        }
+        set {
+            self.extra?[Event.logIDKey] = newValue
+        }
     }
 }
