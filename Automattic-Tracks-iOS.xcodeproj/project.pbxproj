@@ -132,6 +132,10 @@
 		F9A117D021E69B84002A5CD8 /* TracksConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9339E70A1ADE98B800AEAB68 /* TracksConstants.h */; };
 		F9A117D121E69B84002A5CD8 /* TracksLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = E1DBEA181C07071300FF2F73 /* TracksLogging.h */; };
 		F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7641CE2303D002820B3 /* TracksLogging.m */; };
+		F9BB412F2435AE9900533BCD /* ExponentialBackoffTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB412E2435AE9900533BCD /* ExponentialBackoffTimer.swift */; };
+		F9BB41312435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB41302435B1C600533BCD /* TestExponentialBackoffTimer.swift */; };
+		F9BB41322435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB41302435B1C600533BCD /* TestExponentialBackoffTimer.swift */; };
+		F9BB41332435C58C00533BCD /* ExponentialBackoffTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB412E2435AE9900533BCD /* ExponentialBackoffTimer.swift */; };
 		F9D8BF612432FF82007E2C87 /* EventLoggingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D8BF602432FF82007E2C87 /* EventLoggingTests.swift */; };
 		F9D8BF622432FF82007E2C87 /* EventLoggingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9D8BF602432FF82007E2C87 /* EventLoggingTests.swift */; };
 /* End PBXBuildFile section */
@@ -240,6 +244,8 @@
 		F9A117B121E69B41002A5CD8 /* AutomatticTracks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutomatticTracks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Automattic_Tracks_OSX.h; sourceTree = "<group>"; };
 		F9A117B421E69B42002A5CD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F9BB412E2435AE9900533BCD /* ExponentialBackoffTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExponentialBackoffTimer.swift; sourceTree = "<group>"; };
+		F9BB41302435B1C600533BCD /* TestExponentialBackoffTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestExponentialBackoffTimer.swift; sourceTree = "<group>"; };
 		F9D8BF602432FF82007E2C87 /* EventLoggingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -431,6 +437,7 @@
 				F9788D8324219D66000A9BB5 /* TracksDeviceInformation.m */,
 				F9788D8124219D66000A9BB5 /* LogFile.swift */,
 				F944564A24296625009A36B3 /* EventLoggingFileUploadError.swift */,
+				F9BB412E2435AE9900533BCD /* ExponentialBackoffTimer.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -500,6 +507,7 @@
 				F99D03312422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m */,
 				F99D03332422D9F30091C33E /* TracksServiceRemoteTests.swift */,
 				F99D03322422D9F30091C33E /* TracksServiceTests.m */,
+				F9BB41302435B1C600533BCD /* TestExponentialBackoffTimer.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -900,6 +908,7 @@
 				F9838978243286EA00BB2F1F /* EventLogging.swift in Sources */,
 				F9788DA92421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */,
+				F9BB412F2435AE9900533BCD /* ExponentialBackoffTimer.swift in Sources */,
 				F94456482429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */,
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
@@ -926,6 +935,7 @@
 				F94EE632242D000E0015C18E /* EventLoggingNetworkServiceTests.swift in Sources */,
 				F99D03402422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */,
 				F94456522429666B009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */,
+				F9BB41312435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */,
 				F949B1E82429681A0069FF76 /* LogEncryptionTests.swift in Sources */,
 				F99D03272422D9B70091C33E /* EncryptedLog.swift in Sources */,
 				F94EE635242D017D0015C18E /* NetworkRequestMocks.swift in Sources */,
@@ -955,6 +965,7 @@
 				F99D033D2422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F944565C24296698009A36B3 /* Mocks.swift in Sources */,
 				F949B1E92429681A0069FF76 /* LogEncryptionTests.swift in Sources */,
+				F9BB41322435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */,
 				F99D03372422D9F30091C33E /* TracksEventServiceTests.m in Sources */,
 				F970F41E21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m in Sources */,
 				F944565724296684009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */,
@@ -988,6 +999,7 @@
 				F9838979243286EA00BB2F1F /* EventLogging.swift in Sources */,
 				F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F99D03462422DB700091C33E /* Tracks.xcdatamodeld in Sources */,
+				F9BB41332435C58C00533BCD /* ExponentialBackoffTimer.swift in Sources */,
 				F94456492429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */,
 				F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F9788D9F24219D66000A9BB5 /* TracksUser.swift in Sources */,
@@ -1257,7 +1269,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Automattic-Tracks-iOSTests/Automattic-Tracks-iOSTests-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -1290,7 +1302,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SWIFT_OBJC_BRIDGING_HEADER = "Automattic-Tracks-iOSTests/Automattic-Tracks-iOSTests-Bridging-Header.h";
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -1332,7 +1343,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
@@ -1375,7 +1386,6 @@
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
-				SWIFT_SWIFT3_OBJC_INFERENCE = Off;
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";

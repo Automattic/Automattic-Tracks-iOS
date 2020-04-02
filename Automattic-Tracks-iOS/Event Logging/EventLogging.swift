@@ -38,7 +38,6 @@ public class EventLogging {
             fileManager: fileManager
         )
 
-
         /// Start taking items off the queue and uploading them if needed
         resumeAutomaticUpload()
     }
@@ -56,6 +55,18 @@ public class EventLogging {
     public func resumeAutomaticUpload() {
         isPaused = false
         encryptAndUploadLogsIfNeeded()
+    }
+
+    /// Support adding additional time between requests if they are failing – reset after an hour to match the server
+    private var exponentialBackoffTimer = ExponentialBackoffTimer(minimumDelay: 2, maximumDelay: 3600)
+
+    /// The date that uploads will automatically resume after being paused due to failure
+    public var uploadsPausedUntil: Date? {
+        guard exponentialBackoffTimer.delay != 0 else {
+            return nil
+        }
+
+        return exponentialBackoffTimer.nextDate
     }
 }
 
@@ -78,6 +89,13 @@ extension EventLogging {
             return
         }
 
+        /// If the delegate is reporting that we shouldn't upload log files, pause upload
+        /// This prevents an infinite set of attempts to upload
+        guard delegate.shouldUploadLogFiles else {
+            self.pauseAutomaticUpload()
+            return
+        }
+
         /// Lock the dispatch queue until this upload is complete – only one at a time
         let group = DispatchGroup()
         group.enter()
@@ -91,10 +109,14 @@ extension EventLogging {
                 self.uploadManager.upload(encryptedLog) { result in
                     if case .success = result {
                         try? self.uploadQueue.remove(log)
-                    }
 
-                    // Release the lock if we've finished the request
-                    group.leave()
+                        /// Reset the timer if requests are succeeding
+                        self.exponentialBackoffTimer.reset()
+                    }
+                    else {
+                        /// Wait longer between requests if they are failing
+                        self.exponentialBackoffTimer.increment()
+                    }
                 }
             }
             catch let err {
@@ -108,8 +130,8 @@ extension EventLogging {
             /// Wait until the lock is released
             group.wait()
 
-            /// Kick off another round of uploads on any queue but this one
-            DispatchQueue.global(qos: .background).async {
+            /// Kick off another round of uploads on any queue but this one (respecting incremental backoff)
+            DispatchQueue.global(qos: .background).asyncAfter(deadline: self.exponentialBackoffTimer.next) {
                 self.encryptAndUploadLogsIfNeeded()
             }
         }
