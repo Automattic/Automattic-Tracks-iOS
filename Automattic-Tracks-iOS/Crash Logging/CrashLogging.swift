@@ -89,7 +89,7 @@ public class CrashLogging {
     private func shouldSendEvent(_ event: Event?) -> Bool {
 
         #if DEBUG
-        let shouldSendEvent = false
+        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") ?? false
         #else
         let shouldSendEvent = !CrashLogging.userHasOptedOut
         #endif
