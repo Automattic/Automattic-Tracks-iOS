@@ -12,6 +12,7 @@ enum MockError: Error {
 struct MockEventLoggingDataSource: EventLoggingDataSource {
     let loggingEncryptionKey: String
     let previousSessionLogPath: URL?
+    var currentSessionLogPath: URL?
     let logUploadURL: URL
     let logUploadQueueStorageURL: URL
 
