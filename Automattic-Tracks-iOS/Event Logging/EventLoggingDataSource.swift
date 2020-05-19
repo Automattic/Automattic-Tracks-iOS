@@ -10,6 +10,9 @@ public protocol EventLoggingDataSource {
     /// The path to the log file for the most recent session.
     var previousSessionLogPath: URL? { get }
 
+    /// The path to the log file for the current session.
+    var currentSessionLogPath: URL? { get }
+
     /// The path to log upload queue storage
     var logUploadQueueStorageURL: URL { get }
 }

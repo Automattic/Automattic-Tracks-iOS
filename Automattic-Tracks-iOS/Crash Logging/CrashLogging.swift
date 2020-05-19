@@ -101,17 +101,15 @@ public class CrashLogging {
 
         shouldSendEventCallback?(event, shouldSendEvent)
 
-        /// Schedule the crash log for upload, if possible
-        if shouldSendEvent, let eventLogging = self.eventLogging, let logFilePath = eventLogging.dataSource.previousSessionLogPath {
-            do {
-                let logFile = LogFile(url: logFilePath)
-                try eventLogging.enqueueLogForUpload(log: logFile)
-                event?.logID = logFile.uuid
-            }
-            catch let err {
-                CrashLogging.logError(err)
-            }
+        guard
+            let eventLogging = self.eventLogging,   /// If the event logging system isn't initialized, we can't continue
+            let event = event,                      /// If the event isn't populated, we can't continue
+            shouldSendEvent                         /// If we're not sending the event, we shouldn't enqueue the upload
+        else {
+            return shouldSendEvent
         }
+
+        eventLogging.attachLogToEventIfNeeded(event: event)
 
         return shouldSendEvent
     }

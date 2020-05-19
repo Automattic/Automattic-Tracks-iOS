@@ -5,6 +5,9 @@ public protocol EventLoggingDelegate {
     /// whether or not the upload should proceed. If this is not overridden, the default is `false`.
     var shouldUploadLogFiles: Bool { get }
 
+    /// Should the event logging system upload log files for non-fatal events (such as an `NSError` after upload)
+    var shouldUploadLogFilesForNonFatalEvents: Bool { get }
+
     /// The event logging system will call this delegate method each time a log file starts uploading.
     func didStartUploadingLog(_ log: LogFile)
 
@@ -25,6 +28,10 @@ public extension EventLoggingDelegate {
 
     var shouldUploadLogFiles: Bool {
         return false // Use a privacy-preserving default
+    }
+
+    var shouldUploadLogFilesForNonFatalEvents: Bool {
+        return false // By default, keep the traffic level down
     }
 
     // Empty default implementations allow the developer to only implement these if they need them

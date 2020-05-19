@@ -98,6 +98,7 @@
 		F9788DE82421B4EF000A9BB5 /* WatchSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = F9788DD52421B4EF000A9BB5 /* WatchSessionManager.m */; };
 		F9788DE92421B4EF000A9BB5 /* TracksServiceRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = F9788DD62421B4EF000A9BB5 /* TracksServiceRemote.h */; };
 		F9788DEA2421B4EF000A9BB5 /* TracksServiceRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = F9788DD62421B4EF000A9BB5 /* TracksServiceRemote.h */; };
+		F97C6B0E24758AFF006089D7 /* EventLogging+Sentry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */; };
 		F9838978243286EA00BB2F1F /* EventLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9838977243286EA00BB2F1F /* EventLogging.swift */; };
 		F9838979243286EA00BB2F1F /* EventLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9838977243286EA00BB2F1F /* EventLogging.swift */; };
 		F99D03212422D9B70091C33E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D031C2422D9B70091C33E /* Extensions.swift */; };
@@ -134,6 +135,7 @@
 		F9A117D021E69B84002A5CD8 /* TracksConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 9339E70A1ADE98B800AEAB68 /* TracksConstants.h */; };
 		F9A117D121E69B84002A5CD8 /* TracksLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = E1DBEA181C07071300FF2F73 /* TracksLogging.h */; };
 		F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7641CE2303D002820B3 /* TracksLogging.m */; };
+		F9B862C32476D004008B093C /* EventLogging+Sentry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */; };
 		F9BB412F2435AE9900533BCD /* ExponentialBackoffTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB412E2435AE9900533BCD /* ExponentialBackoffTimer.swift */; };
 		F9BB41312435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB41302435B1C600533BCD /* TestExponentialBackoffTimer.swift */; };
 		F9BB41322435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BB41302435B1C600533BCD /* TestExponentialBackoffTimer.swift */; };
@@ -230,6 +232,7 @@
 		F9788DD42421B4EF000A9BB5 /* TracksEventService.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksEventService.m; sourceTree = "<group>"; };
 		F9788DD52421B4EF000A9BB5 /* WatchSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchSessionManager.m; sourceTree = "<group>"; };
 		F9788DD62421B4EF000A9BB5 /* TracksServiceRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksServiceRemote.h; sourceTree = "<group>"; };
+		F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventLogging+Sentry.swift"; sourceTree = "<group>"; };
 		F9838977243286EA00BB2F1F /* EventLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogging.swift; sourceTree = "<group>"; };
 		F99D031B2422D9B70091C33E /* TestTracksContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTracksContextManager.h; sourceTree = "<group>"; };
 		F99D031C2422D9B70091C33E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -407,6 +410,7 @@
 				F9445636242965E7009A36B3 /* EventLoggingDelegate.swift */,
 				F9445637242965E7009A36B3 /* EventLoggingUploadManager.swift */,
 				F9117198240F20F0009A1EC0 /* LogEncryptor.swift */,
+				F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */,
 			);
 			path = "Event Logging";
 			sourceTree = "<group>";
@@ -921,6 +925,7 @@
 				F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
+				F97C6B0E24758AFF006089D7 /* EventLogging+Sentry.swift in Sources */,
 				F9445642242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
 				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
 				F9788DE72421B4EF000A9BB5 /* WatchSessionManager.m in Sources */,
@@ -1013,6 +1018,7 @@
 				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
+				F9B862C32476D004008B093C /* EventLogging+Sentry.swift in Sources */,
 				F9445643242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
 				F9788D9924219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
 				F9788DE82421B4EF000A9BB5 /* WatchSessionManager.m in Sources */,
