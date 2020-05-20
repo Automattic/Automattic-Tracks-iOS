@@ -108,7 +108,7 @@
         return ([obj count] == 1);
     }]
                               withSharedProperties:[OCMArg isNotNil]
-                                 completionHandler:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)()) {
+                                 completionHandler:[OCMArg checkWithBlock:^BOOL(void (^passedBlock)(NSError*)) {
         passedBlock(nil);
         
         return YES;
