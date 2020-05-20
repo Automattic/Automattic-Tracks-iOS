@@ -6,7 +6,7 @@ public class CrashLogging {
 
     /// A singleton is maintained, but the host application needn't be aware of its existence.
     internal static let sharedInstance = CrashLogging()
-    fileprivate var dataProvider: CrashLoggingDataProvider?
+    var dataProvider: CrashLoggingDataProvider?
 
     /// Thread-safe single initialization
     fileprivate static let threadSafeDispatchQueue = DispatchQueue(label: Bundle.main.bundleIdentifier ?? "tracks" + "-crash-logging-queue")
@@ -20,6 +20,13 @@ public class CrashLogging {
         }
     }
 
+    /// Internal Hooks (useful for tests and debugging)
+    typealias CrashLoggingStartupCallback = (Bool) -> ()
+    typealias BeforeSendCallback = (Event?, Bool) -> ()
+
+    var crashLoggingStartupCallback: CrashLoggingStartupCallback?
+    var beforeSendCallback: BeforeSendCallback?
+
     /**
      Initializes the crash logging system.
 
@@ -31,68 +38,87 @@ public class CrashLogging {
     public static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
 
         // Only allow initializing this system once
-        guard !isStarted else { return }
+        guard !isStarted else {
+            return
+        }
+
         isStarted = true
 
         // Store the data provider for future use
         sharedInstance.dataProvider = dataProvider
 
         // Create a Sentry client and start crash handler
-        do {
-            Client.shared = try Client(dsn: dataProvider.sentryDSN)
-            try Client.shared?.startCrashHandler()
+        SentrySDK.start(options: [
+            "dsn": dataProvider.sentryDSN,
+            "debug": isDebugBuild,
 
-            // Store lots of breadcrumbs to trace errors
-            Client.shared?.breadcrumbs.maxBreadcrumbs = 500
+            "maxBreadcrumbs": 500,
 
-            // Automatically track screen transitions
-            Client.shared?.enableAutomaticBreadcrumbTracking()
-
-            // Override event serialization to append the logs, if needed
-            Client.shared?.beforeSerializeEvent = sharedInstance.beforeSerializeEvent
-            Client.shared?.shouldSendEvent = sharedInstance.shouldSendEvent
+            "enableAutoSessionTracking": true,
 
             // Add additional data
-            Client.shared?.releaseName = dataProvider.releaseName
-            Client.shared?.environment = dataProvider.buildType
+            "release": dataProvider.releaseName,
+            "environment": dataProvider.buildType,
 
-            // Refresh data from the data provider
-            setNeedsDataRefresh()
+            "integrations": enabledIntegrations
+        ])
 
-        } catch let error {
-            logError(error)
+        SentrySDK.configureScope { scope in
+            scope.setEnvironment(dataProvider.buildType)
         }
+
+        /// Ugly hack to get this working – it can't be passed in `options` above
+        SentrySDK.currentHub().getClient()?.options.beforeSend = sharedInstance.beforeSend
+
+
+        // Refresh data from the data provider
+        setNeedsDataRefresh()
+
+        sharedInstance.crashLoggingStartupCallback?(SentrySDK.currentHub().getClient()!.options.enabled.boolValue)
     }
 
-    /// A Sentry hook used to attach any additional data to the event.
-    private func beforeSerializeEvent(_ event: Event) {
+    func beforeSend(event: Event) -> Event? {
+        /// Add the locale tag to allow grouping crashes by locale
         event.tags?["locale"] = NSLocale.current.languageCode
-    }
-
-    /// A Sentry hook that controls whether or not the event should be sent.
-    private func shouldSendEvent(_ event: Event?) -> Bool {
 
         #if DEBUG
-        let result = false
+        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") ?? false
         #else
-        let result = !CrashLogging.userHasOptedOut
+        let shouldSendEvent = !CrashLogging.userHasOptedOut
         #endif
 
-        shouldSendEventCallback?(event, result)
+        beforeSendCallback?(event, shouldSendEvent)
 
-        return result
+        return shouldSendEvent ? event : nil
     }
 
     /// The current state of the user's choice to opt out of data collection. Provided by the data source.
-    private static var userHasOptedOut: Bool {
-        /// If we can't say for sure, assume the user has opted out
-        guard let dataProvider = sharedInstance.dataProvider else { return true }
+    static var userHasOptedOut: Bool {
+        guard let dataProvider = sharedInstance.dataProvider else {
+            return true /// If we can't say for sure, assume the user has opted out
+        }
+
         return dataProvider.userHasOptedOut
+    }
+
+    private static var isDebugBuild: Bool {
+        #if DEBUG
+        return true
+        #else
+        return false
+        #endif
+    }
+
+    private static var enabledIntegrations: [String] {
+        return Sentry.Options.defaultIntegrations().filter {
+            /// Disable Memory Warning Events – there are *lots* of them, and they're not particularly actionable
+            $0 != "SentryUIKitMemoryWarningIntegration"
+        }
     }
 
     /// Immediately crashes the application and generates a crash report.
     public static func crash() {
-        Client.shared?.crash()
+        SentrySDK.crash()
     }
 }
 
@@ -107,17 +133,11 @@ public extension CrashLogging {
      - userInfo: A dictionary containing additional data about this error.
      - level: The level of severity to report in Sentry (`.error` by default)
     */
-    static func logError(_ error: Error, userInfo: [String: Any]? = nil, level: SentrySeverity = .error) {
-        let event = Event(level: .error)
-        event.message = error.localizedDescription
-        event.extra = userInfo ?? (error as NSError).userInfo
-
-        Client.shared?.snapshotStacktrace {
-            Client.shared?.appendStacktrace(to: event)
+    static func logError(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) {
+        SentrySDK.capture(error: error) { scope in
+            scope.setLevel(level)
+            scope.setExtras(userInfo ?? (error as NSError).userInfo)
         }
-
-        Client.shared?.send(event: event)
-        sharedInstance.dataProvider?.didLogErrorCallback?(event)
     }
 
     /**
@@ -125,35 +145,33 @@ public extension CrashLogging {
      - Parameters:
      - message: The message
      - properties: A dictionary containing additional information about this error
-     - level: The level of severity to report in Sentry (`.error` by default)
+     - level: The level of severity to report in Sentry (`.info` by default)
     */
-    static func logMessage(_ message: String, properties: [String: Any]? = nil, level: SentrySeverity = .info) {
-
-        let event = Event(level: level)
-        event.message = message
-        event.extra = properties
-
-        Client.shared?.snapshotStacktrace {
-            Client.shared?.appendStacktrace(to: event)
+    static func logMessage(_ message: String, properties: [String: Any]? = nil, level: SentryLevel = .info) {
+        SentrySDK.capture(message: message) { scope in
+            scope.setLevel(level)
+            scope.setExtras(properties)
         }
-
-        Client.shared?.send(event: event)
-        sharedInstance.dataProvider?.didLogMessageCallback?(event)
     }
 }
 
 // User Tracking
 extension CrashLogging {
 
-    internal var currentUser: Sentry.User {
+    var currentUser: Sentry.User {
 
         let anonymousUser = TracksUser(userID: nil, email: nil, username: nil).sentryUser
 
         /// Don't continue unless `start` has been called on the crash logger
-        guard let dataProvider = self.dataProvider else { return anonymousUser }
+        guard let dataProvider = self.dataProvider else {
+            return anonymousUser
+        }
 
         /// Don't continue if the data source doesn't yet have a user
-        guard let user = dataProvider.currentUser else { return anonymousUser }
+        guard let user = dataProvider.currentUser else {
+            return anonymousUser
+        }
+
         let data = dataProvider.additionalUserData
 
         return user.sentryUser(withData: data)
@@ -166,6 +184,6 @@ extension CrashLogging {
     ///
     /// Calling this method in these situations prevents
     public static func setNeedsDataRefresh() {
-        Client.shared?.user = sharedInstance.currentUser
+        SentrySDK.setUser(sharedInstance.currentUser)
     }
 }

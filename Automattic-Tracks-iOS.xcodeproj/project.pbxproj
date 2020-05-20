@@ -119,8 +119,6 @@
 		F99D03462422DB700091C33E /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9788D8824219D66000A9BB5 /* Tracks.xcdatamodeld */; };
 		F99D03472422DB800091C33E /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9788D8824219D66000A9BB5 /* Tracks.xcdatamodeld */; };
 		F99D03482422DB800091C33E /* Tracks.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = F9788D8824219D66000A9BB5 /* Tracks.xcdatamodeld */; };
-		F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D03492422DD100091C33E /* TestHelpers.swift */; };
-		F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D03492422DD100091C33E /* TestHelpers.swift */; };
 		F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
 		F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */; };
 		F9A117B521E69B42002A5CD8 /* Automattic_Tracks_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -230,7 +228,6 @@
 		F99D03312422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceRemoteIntegrationTests.m; sourceTree = "<group>"; };
 		F99D03322422D9F30091C33E /* TracksServiceTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksServiceTests.m; sourceTree = "<group>"; };
 		F99D03332422D9F30091C33E /* TracksServiceRemoteTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksServiceRemoteTests.swift; sourceTree = "<group>"; };
-		F99D03492422DD100091C33E /* TestHelpers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestHelpers.swift; sourceTree = "<group>"; };
 		F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileHandle+Extensions.swift"; sourceTree = "<group>"; };
 		F9A117B121E69B41002A5CD8 /* AutomatticTracks.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = AutomatticTracks.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Automattic_Tracks_OSX.h; sourceTree = "<group>"; };
@@ -464,7 +461,6 @@
 			children = (
 				F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */,
 				F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */,
-				F99D03492422DD100091C33E /* TestHelpers.swift */,
 			);
 			path = "Crash Logging";
 			sourceTree = "<group>";
@@ -896,7 +892,6 @@
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
-				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F9445642242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
 				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
@@ -981,7 +976,6 @@
 				F9788D9F24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DDA2421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F944563E242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
-				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
 				F9445643242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
 				F9788D9924219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
