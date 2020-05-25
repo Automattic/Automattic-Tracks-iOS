@@ -105,12 +105,6 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
     }
 }
 
-extension EventLogging {
-    func withDelegate(_ delegate: EventLoggingDelegate) -> EventLogging {
-        return EventLogging(dataSource: self.dataSource, delegate: delegate)
-    }
-}
-
 class MockEventLoggingNetworkService: EventLoggingNetworkService {
     private(set) var shouldSucceed: Bool
 

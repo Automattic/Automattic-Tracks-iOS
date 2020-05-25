@@ -36,7 +36,7 @@ extension XCTestCase {
     ///     - timeout: How long to wait for the expectation to be fulfilled.
     ///     - block: A developer-provided unit of computation that receives the expectation and returns a value that will become the return value of this method.
     ///     - expectation: An unfulfilled XCTestExpectation.
-    func waitForExpectation(timeout: TimeInterval, block: (_ expectation: XCTestExpectation) -> ()) {
+    func waitForExpectation(timeout: TimeInterval = 60.0, block: (_ expectation: XCTestExpectation) -> ()) {
         let exp = XCTestExpectation()
         block(exp)
         wait(for: [exp], timeout: timeout)
@@ -50,7 +50,7 @@ extension XCTestCase {
     ///     - block: A developer-provided unit of computation that receives the expectation and returns a value that will become the return value of this method.
     ///     - expectation: An unfulfilled XCTestExpectation.
     /// - Returns: The value provided by `block`, which can specify its own return type
-    func waitForExpectation<T>(timeout: TimeInterval, block: (_ expectation: XCTestExpectation) -> (T)) -> T {
+    func waitForExpectation<T>(timeout: TimeInterval = 60.0, block: (_ expectation: XCTestExpectation) -> (T)) -> T {
         let exp = XCTestExpectation()
         let result = block(exp)
         wait(for: [exp], timeout: timeout)
@@ -65,7 +65,7 @@ extension XCTestCase {
     ///     - timeout: How long to wait for the expectation to be fulfilled.
     ///     - block: A developer-provided unit of computation that receives the expectation and performs a throwing operation.
     ///     - expectation: An unfulfilled XCTestExpectation.
-    func waitForExpectation(timeout: TimeInterval, block: (_ expectation: XCTestExpectation) throws -> ()) rethrows {
+    func waitForExpectation(timeout: TimeInterval = 60.0, block: (_ expectation: XCTestExpectation) throws -> ()) rethrows {
         let exp = XCTestExpectation()
         try block(exp)
         wait(for: [exp], timeout: timeout)

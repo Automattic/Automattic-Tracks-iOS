@@ -3,48 +3,70 @@ import OHHTTPStubs
 @testable import AutomatticTracks
 
 class EventLoggingTests: XCTestCase {
-
     private let domain = "event-logging-tests.example"
+    lazy var url = URL(string: "http://\(domain)")!
 
-    func testThatEventsAreUploaded() throws {
+    func testThatOnlyOneFileIsUploadedSimultaneously() {
+        stubResponse(domain: domain, status: "ok")
 
-        stubResponse(status: "ok")
+        let uploadCount = Int.random(in: 3...10)
+        var isUploading = false
 
-        try waitForExpectation(timeout: 1.0) { exp in
+        waitForExpectation() { (exp) in
+            exp.expectedFulfillmentCount = uploadCount
 
-            let eventLogging = self.eventLogging()
-                .withDelegate(MockEventLoggingDelegate()
-                    .withUploadFailedCallback { _, _ in
-                        XCTFail("The request must succeed")
+            let eventLogging = self.eventLogging(delegate: MockEventLoggingDelegate()
+                    .withDidStartUploadingCallback { log in
+                        XCTAssertFalse(isUploading, "Only one upload should be running at the same time")
+                        isUploading = true
                     }
-                    .withDidFinishUploadingCallback { _ in
+                    .withDidFinishUploadingCallback { log in
+                        XCTAssertTrue(isUploading, "Only one upload should be running at the same time")
+                        isUploading = false
                         exp.fulfill()
                     }
             )
 
-            try eventLogging.enqueueLogForUpload(log: LogFile.containingRandomString())
+            DispatchQueue.concurrentPerform(iterations: uploadCount) { _ in
+                try! eventLogging.enqueueLogForUpload(log: LogFile.containingRandomString())
+            }
         }
     }
 
-    private func stubResponse(status: String, statusCode: Int32 = 200) {
-        stub(condition: isHost(domain)) { _ in
-            let stubData = "{status: \"\(status)\"}".data(using: .utf8)!
-            return HTTPStubsResponse(data: stubData, statusCode: statusCode, headers: nil)
+    func testThatAllFilesAreEventuallyUploaded() throws {
+        stubResponse(domain: domain, status: "ok")
+
+        let uploadCount = Int.random(in: 3...10)
+        let logs = (0...uploadCount).map { _ in LogFile.containingRandomString() }
+
+        try waitForExpectation() { (exp) in
+            exp.expectedFulfillmentCount = logs.count
+
+            let delegate = MockEventLoggingDelegate()
+                .withDidFinishUploadingCallback { _ in
+                    exp.fulfill()
+                }
+
+            let eventLogging = self.eventLogging(delegate: delegate)
+
+            /// Adding logs one at at time means the queue will probably drain as fast (if not faster) than we can add them.
+            /// This tests the do-the-next-one logic
+            try logs.forEach {
+                try eventLogging.enqueueLogForUpload(log: $0)
+            }
         }
     }
 }
 
 extension EventLoggingTests {
-    func eventLogging() -> EventLogging {
-        return eventLogging(withUrl: URL(string: "http://\(domain)/test-endpoint")!)
+
+    func eventLogging(delegate: EventLoggingDelegate) -> EventLogging {
+        return EventLogging(dataSource: dataSource(), delegate: delegate)
     }
 
-    func eventLogging(withUrl url: URL) -> EventLogging {
-        return EventLogging(
-            dataSource: MockEventLoggingDataSource()
-                .withEncryptionKey()
-                .withLogUploadUrl(url),
-            delegate: MockEventLoggingDelegate()
-        )
+    func dataSource() -> MockEventLoggingDataSource {
+        MockEventLoggingDataSource()
+            .withEncryptionKey()
+            .withLogUploadUrl(url)
     }
 }
