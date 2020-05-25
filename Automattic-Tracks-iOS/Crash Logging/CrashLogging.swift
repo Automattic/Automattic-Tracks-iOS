@@ -30,7 +30,7 @@ public class CrashLogging {
 
      - SeeAlso: CrashLoggingDataProvider
      */
-    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
+    private static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
 
         // Only allow initializing this system once
         guard !isStarted else { return }
@@ -75,7 +75,7 @@ public class CrashLogging {
 
         - SeeAlso: CrashLoggingDataProvider
         */
-    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging) {
+    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
         start(withDataProvider: dataProvider)
         sharedInstance.eventLogging = eventLogging
     }
@@ -119,6 +119,10 @@ public class CrashLogging {
     /// Immediately crashes the application and generates a crash report.
     public static func crash() {
         Client.shared?.crash()
+    }
+
+    public static var eventLogging: EventLogging? {
+        return sharedInstance.eventLogging
     }
 }
 
