@@ -9,8 +9,11 @@ public class EventLogging {
     public func enqueueLogForUpload(log: LogFile) throws {
         try uploadQueue.add(log)
 
+        /// Notify observers of a new log in the queue
+        delegate.didQueueLogForUpload(log)
+
         /// Restart the automatic upload queue when log files are added
-        self.resumeAutomaticUpload()
+        resumeAutomaticUpload()
     }
 
     /// Maintains a list of events that need to be uploaded
@@ -55,6 +58,11 @@ public class EventLogging {
     public func resumeAutomaticUpload() {
         isPaused = false
         encryptAndUploadLogsIfNeeded()
+    }
+
+    /// Current enqueued log files
+    public var queuedLogFiles: [LogFile] {
+        return uploadQueue.items
     }
 
     /// Support adding additional time between requests if they are failing – reset after an hour to match the server
