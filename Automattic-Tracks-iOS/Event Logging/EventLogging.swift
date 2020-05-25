@@ -13,11 +13,15 @@ public class EventLogging {
         delegate.didQueueLogForUpload(log)
 
         /// Restart the automatic upload queue when log files are added
-        resumeAutomaticUpload()
+        uploadNextLogFileIfNeeded()
     }
 
     /// Maintains a list of events that need to be uploaded
     private let uploadQueue: EventLoggingUploadQueue
+
+    /// Coordinates one-at-a-time file log dequeuing and upload
+    private let lock = NSLock()
+    private let processingQueue = DispatchQueue(label: "event-logging-upload")
 
     /// Uploads Events
     private let uploadManager: EventLoggingUploadManager
@@ -36,28 +40,19 @@ public class EventLogging {
         self.delegate = delegate
 
         self.uploadManager = EventLoggingUploadManager(dataSource: dataSource, delegate: delegate)
+
         self.uploadQueue = EventLoggingUploadQueue(
             storageDirectory: dataSource.logUploadQueueStorageURL,
             fileManager: fileManager
         )
 
         /// Start taking items off the queue and uploading them if needed
-        resumeAutomaticUpload()
+        uploadNextLogFileIfNeeded()
     }
 
-    /// Automated Event Upload
-    private let dispatchQueue = DispatchQueue(label: "event-logging")
-
-    /// Pause uploading available log files
-    public private(set) var isPaused = true
-    public func pauseAutomaticUpload() {
-        isPaused = true
-    }
-
-    /// Resume uploading available log files
-    public func resumeAutomaticUpload() {
-        isPaused = false
-        encryptAndUploadLogsIfNeeded()
+    /// Schedule encryption and upload for the next log file in the queue
+    public func uploadNextLogFileIfNeeded() {
+        DispatchQueue.global(qos: .background).async(execute: runUploadLogs)
     }
 
     /// Current enqueued log files
@@ -80,38 +75,43 @@ public class EventLogging {
 
 extension EventLogging {
 
-    /// Encrypt and upload any log files in the queue
-    private func encryptAndUploadLogsIfNeeded() {
-
-        /// Don't start uploading anything if the queue is paused
-        guard !isPaused else {
+    /// Start uploading the next log if the queue, if possible.
+    /// This method shouldn't be called directly – it should be dispatched via `uploadNextLogFileIfNeeded`
+    private func runUploadLogs() {
+        /// Ensure that only one instance of this method is running at the same time
+        guard lock.try() else {
             return
         }
-
-        let encryptionKey = Data(base64Encoded: dataSource.loggingEncryptionKey)
-        precondition(encryptionKey != nil, "The encryption key is not a valid base64 encoded string")
 
         /// If the queue is empty, pause upload
-        guard let log = self.uploadQueue.first else {
-            self.pauseAutomaticUpload()
+        guard let log = uploadQueue.first else {
+            retryUploadsAt(.distantFuture)
+            lock.unlock()
             return
         }
 
-        /// If the delegate is reporting that we shouldn't upload log files, pause upload
-        /// This prevents an infinite set of attempts to upload
+        /// If the backoff timer is blocking execution, reschedule the next run
+        guard exponentialBackoffTimer.next < .now() else {
+            retryUploadsAt(exponentialBackoffTimer.next)
+            lock.unlock()
+            return
+        }
+
+        /// If the delegate is reporting that we shouldn't upload log files, pause upload to prevent an endless loop
         guard delegate.shouldUploadLogFiles else {
-            self.pauseAutomaticUpload()
+            retryUploadsAt(.distantFuture)
+            lock.unlock()
             return
         }
 
-        /// Lock the dispatch queue until this upload is complete – only one at a time
-        let group = DispatchGroup()
-        group.enter()
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
 
-        dispatchQueue.async {
+        processingQueue.async {
+            dispatchGroup.enter()
+
             do {
-                /// Encrypt the log
-                let encryptedLog = try self.encryptLog(log, withKey: Bytes(encryptionKey!))
+                let encryptedLog = try self.encryptLog(log)
 
                 /// Upload the log
                 self.uploadManager.upload(encryptedLog) { result in
@@ -124,28 +124,51 @@ extension EventLogging {
                     else {
                         /// Wait longer between requests if they are failing
                         self.exponentialBackoffTimer.increment()
+                        self.retryUploadsAt(self.exponentialBackoffTimer.next)
                     }
+
+                    dispatchGroup.leave()
                 }
             }
             catch let err {
-                 /// This is almost certainly a file error – encryption errors would assert and crash the app
-                 CrashLogging.logError(err)
-
-                 /// Release the lock if there was an error encrypting the log
-                 group.leave()
-             }
-
-            /// Wait until the lock is released
-            group.wait()
-
-            /// Kick off another round of uploads on any queue but this one (respecting incremental backoff)
-            DispatchQueue.global(qos: .background).asyncAfter(deadline: self.exponentialBackoffTimer.next) {
-                self.encryptAndUploadLogsIfNeeded()
+                /// This is almost certainly a file error – encryption errors would assert and crash the app. This includes situations like:
+                /// - the device is out of storage space
+                /// - the file was deleted while we were reading it
+                /// - the file (or device storage system) is corrupt
+                /// Because this should be extremely rare (and is difficult to reproduce), we'll track it but it's not covered by a test case
+                CrashLogging.logError(err, userInfo: [
+                    "errorFile": #file,
+                    "errorLine": #line,
+                    "logFileUUID": log.uuid
+                ])
             }
+
+            dispatchGroup.leave()
+        }
+
+        dispatchGroup.wait()
+
+        /// When we're done, attempt to upload the next log file
+        DispatchQueue.global(qos: .background).async {
+            /// Manually release the lock before trying again – this prevents a race condition where
+            /// the next thread could start reading too early if `defer` was used.
+            self.lock.unlock()
+
+            self.uploadNextLogFileIfNeeded()
         }
     }
 
-    internal func encryptLog(_ log: LogFile, withKey key: Bytes) throws -> LogFile {
+    // Provides an easier-to-understand way to call `uploadNextLogFileIfNeeded` at the designated time
+    private func retryUploadsAt(_ time: DispatchTime) {
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: time, execute: uploadNextLogFileIfNeeded)
+    }
+
+    // Extracted for readability
+    private func encryptLog(_ log: LogFile) throws -> LogFile {
+        let encryptionKey = Data(base64Encoded: dataSource.loggingEncryptionKey)
+        precondition(encryptionKey != nil, "The encryption key is not a valid base64 encoded string")
+        let key = Bytes(encryptionKey!)
+
         let encryptedURL = try LogEncryptor(withPublicKey: key).encryptLog(log)
         return LogFile(url: encryptedURL, uuid: log.uuid)
     }
