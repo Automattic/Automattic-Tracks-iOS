@@ -1,4 +1,6 @@
 import XCTest
+import Sentry
+
 @testable import AutomatticTracks
 
 class CrashLoggingTests: XCTestCase {
@@ -126,6 +128,31 @@ class CrashLoggingTests: XCTestCase {
         CrashLogging.logMessage("This is a test")
         wait(for: [third_expectation], timeout: 1)
     }
+
+    #if os(iOS)
+    func testWhenRunningOniOSThenEventsAreSentWithApplicationState() throws {
+        // Given
+        CrashLogging.start(withDataProvider: mockDataProvider)
+
+        let exp = expectation(description: "wait for submittedEvent")
+
+        var submittedEvent: Event?
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, _ in
+            submittedEvent = event
+            exp.fulfill()
+        }
+
+        // When
+        CrashLogging.logMessage("This is a test")
+
+        wait(for: [exp], timeout: 1.0)
+
+        // Then
+        let event = try XCTUnwrap(submittedEvent)
+        XCTAssertNotNil(event.tags?["app.state"])
+        XCTAssertEqual(event.tags?["app.state"], "active")
+    }
+    #endif
 
 ///
 ///  These are currently disabled, but are being left here, because I'm hoping to get
