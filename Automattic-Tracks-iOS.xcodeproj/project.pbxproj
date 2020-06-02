@@ -8,7 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
-		57E7A6A024859519008DC733 /* UIApplicationState+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57E7A69F24859519008DC733 /* UIApplicationState+Extensions.swift */; };
+		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
+		57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
 		66B4025E8CC43C3928D21D6A /* Pods_Automattic_Tracks_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA23FA76778DD4D62989FD4 /* Pods_Automattic_Tracks_iOSTests.framework */; };
 		89284FEF37B307C0A99A81E5 /* Pods_Automattic_Tracks_OSXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 519B82281CDF10E002CD67A7 /* Pods_Automattic_Tracks_OSXTests.framework */; };
 		93B5C7AE1CE25D40002820B3 /* Automattic-Tracks-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -156,7 +157,7 @@
 		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
 		4D23D263D998EA01CCB752C4 /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		519B82281CDF10E002CD67A7 /* Pods_Automattic_Tracks_OSXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_OSXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		57E7A69F24859519008DC733 /* UIApplicationState+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplicationState+Extensions.swift"; sourceTree = "<group>"; };
+		57AB7ED02486C50900187234 /* ApplicationFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationFacade.swift; sourceTree = "<group>"; };
 		652046E1289B7D1235BB7FD4 /* Pods-Automattic-Tracks-OSX.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-OSX.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-OSX/Pods-Automattic-Tracks-OSX.release.xcconfig"; sourceTree = "<group>"; };
 		6CAA4DA76E13B617281D5E5C /* Pods-Automattic-Tracks-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-OSX/Pods-Automattic-Tracks-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -467,7 +468,7 @@
 				F9788DA52421A2BF000A9BB5 /* CrashLogging.swift */,
 				F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */,
 				F99D03492422DD100091C33E /* TestHelpers.swift */,
-				57E7A69F24859519008DC733 /* UIApplicationState+Extensions.swift */,
+				57AB7ED02486C50900187234 /* ApplicationFacade.swift */,
 			);
 			path = "Crash Logging";
 			sourceTree = "<group>";
@@ -887,6 +888,7 @@
 				F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F9788D9C24219D66000A9BB5 /* TracksContextManager.m in Sources */,
 				F9445639242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */,
+				57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */,
 				F9788D9824219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
 				F944564B24296625009A36B3 /* EventLoggingFileUploadError.swift in Sources */,
 				93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */,
@@ -906,7 +908,6 @@
 				F9788DE72421B4EF000A9BB5 /* WatchSessionManager.m in Sources */,
 				F9788DA72421A2BF000A9BB5 /* CrashLogging.swift in Sources */,
 				F9788D9A24219D66000A9BB5 /* Tracks.xcdatamodeld in Sources */,
-				57E7A6A024859519008DC733 /* UIApplicationState+Extensions.swift in Sources */,
 				F9788DD72421B4EF000A9BB5 /* TracksEventPersistenceService.m in Sources */,
 				F9788DE52421B4EF000A9BB5 /* TracksEventService.m in Sources */,
 				F9788DDB2421B4EF000A9BB5 /* TracksServiceRemote.m in Sources */,
@@ -986,6 +987,7 @@
 				F9788DDA2421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F944563E242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
+				57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
 				F9445643242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
 				F9788D9924219D66000A9BB5 /* TracksEventCoreData.m in Sources */,

@@ -69,9 +69,9 @@ public class CrashLogging {
         // event.tags is always not null so we don't care that much about it here.
         event.tags?["locale"] = NSLocale.current.languageCode
 
-        #if os(iOS)
-        event.tags?["app.state"] = UIApplication.shared.applicationState.descriptionForEventTag
-        #endif
+        if let appState = ApplicationFacade().applicationState {
+            event.tags?["app.state"] = appState
+        }
     }
 
     /// A Sentry hook that controls whether or not the event should be sent.
