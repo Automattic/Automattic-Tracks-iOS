@@ -10,7 +10,12 @@ import UIKit
 /// Though in reality, this is only currently useful for iOS. XD
 ///
 final class ApplicationFacade {
-
+    /// The current state of the application (e.g. background, active, or inactive). This is
+    /// generally used only for `Event` tags.
+    ///
+    /// - Returns: The string-representation of the state or `nil` if the current platform is
+    ///            not supported.
+    ///
     var applicationState: String? {
         #if os(iOS)
         guard Thread.isMainThread else {
