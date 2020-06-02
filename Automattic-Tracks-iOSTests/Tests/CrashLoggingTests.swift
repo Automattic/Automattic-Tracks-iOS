@@ -154,6 +154,30 @@ class CrashLoggingTests: XCTestCase {
     }
     #endif
 
+    #if os(macOS)
+    func testWhenRunningOnMacOSThenEventsDoNotHaveAnApplicationStateTag() throws {
+        // Given
+        CrashLogging.start(withDataProvider: mockDataProvider)
+
+        let exp = expectation(description: "wait for submittedEvent")
+
+        var submittedEvent: Event?
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, _ in
+            submittedEvent = event
+            exp.fulfill()
+        }
+
+        // When
+        CrashLogging.logMessage("This is a test")
+
+        wait(for: [exp], timeout: 1.0)
+
+        // Then
+        let tags = try XCTUnwrap(submittedEvent?.tags)
+        XCTAssertFalse(tags.keys.contains("app.state"))
+    }
+    #endif
+
 ///
 ///  These are currently disabled, but are being left here, because I'm hoping to get
 ///  back to this and sort out how to send stack traces for these events.
