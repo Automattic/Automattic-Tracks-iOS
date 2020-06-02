@@ -37,7 +37,7 @@ final class ApplicationFacade {
 
 #if os(iOS)
 
-extension UIApplication.State {
+private extension UIApplication.State {
 
     /// A string representation of `UIApplication.State` to be used as a value for `Event.tags`.
     ///
