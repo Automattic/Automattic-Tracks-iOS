@@ -13,6 +13,11 @@ class CrashLoggingTests: XCTestCase {
     }
 
     override func tearDown() {
+        // A few of the test cases below use shouldSentEventCallback with an XCTestExpectation.
+        // Because they're using a singleton, we have to make sure to clear those to avoid
+        // dangling state and cross-pollination.
+        CrashLogging.sharedInstance.shouldSendEventCallback = nil
+
         mockDataProvider.reset()
     }
 
