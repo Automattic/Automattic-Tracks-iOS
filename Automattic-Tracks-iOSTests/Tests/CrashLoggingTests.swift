@@ -153,9 +153,8 @@ class CrashLoggingTests: XCTestCase {
         wait(for: [exp], timeout: 1.0)
 
         // Then
-        let event = try XCTUnwrap(submittedEvent)
-        XCTAssertNotNil(event.tags?["app.state"])
-        XCTAssertEqual(event.tags?["app.state"], "active")
+        let tags = try XCTUnwrap(submittedEvent?.tags)
+        XCTAssertEqual(tags["app.state"], "active")
     }
     #endif
 
