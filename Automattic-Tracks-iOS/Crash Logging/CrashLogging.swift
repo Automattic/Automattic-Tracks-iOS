@@ -66,7 +66,12 @@ public class CrashLogging {
 
     /// A Sentry hook used to attach any additional data to the event.
     private func beforeSerializeEvent(_ event: Event) {
+        // event.tags is always not null so we don't care that much about it here.
         event.tags?["locale"] = NSLocale.current.languageCode
+
+        if let appState = ApplicationFacade().applicationState {
+            event.tags?["app.state"] = appState
+        }
     }
 
     /// A Sentry hook that controls whether or not the event should be sent.
