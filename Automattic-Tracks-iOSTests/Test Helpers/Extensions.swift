@@ -42,7 +42,7 @@ extension XCTestCase {
         wait(for: [exp], timeout: timeout)
     }
 
-    /// Wait the specificed time for an expectation to be fulfilled. Takes a block that receives the expecatation and returns a specified type
+    /// Wait the specified time for an expectation to be fulfilled. Takes a block that receives the expectation and returns a specified type
     /// so this is useful for testing async code when you need to examine a result following the expectation being
     ///
     /// - Parameters:
