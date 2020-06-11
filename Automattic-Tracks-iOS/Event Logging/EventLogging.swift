@@ -108,8 +108,6 @@ extension EventLogging {
         dispatchGroup.enter()
 
         processingQueue.async {
-            dispatchGroup.enter()
-
             do {
                 let encryptedLog = try self.encryptLog(log)
 
@@ -141,9 +139,9 @@ extension EventLogging {
                     "errorLine": #line,
                     "logFileUUID": log.uuid
                 ])
-            }
 
-            dispatchGroup.leave()
+                dispatchGroup.leave()
+            }
         }
 
         dispatchGroup.wait()
