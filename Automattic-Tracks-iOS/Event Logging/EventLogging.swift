@@ -65,7 +65,7 @@ public class EventLogging {
 
     /// The date that uploads will automatically resume after being paused due to failure
     public var uploadsPausedUntil: Date? {
-        guard exponentialBackoffTimer.delay != 0 else {
+        guard exponentialBackoffTimer.nextDate < Date() else {
             return nil
         }
 
