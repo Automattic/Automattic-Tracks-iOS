@@ -56,6 +56,41 @@ class EventLoggingTests: XCTestCase {
             }
         }
     }
+
+    func testThatDelegateCancellationPausesLogUpload() {
+        stubResponse(domain: domain, status: "ok")
+
+        let uploadCount = Int.random(in: 3...10)
+
+        waitForExpectation() { (exp) in
+            exp.expectedFulfillmentCount = 1
+            exp.assertForOverFulfill = true
+
+            let delegate = MockEventLoggingDelegate()
+                .withShouldUploadLogFilesValue(false)
+                .withUploadCancelledCallback { _ in
+                    exp.fulfill() // we should only ever get one of these, because afterward
+                }
+                .withDidStartUploadingCallback({ _ in
+                    XCTFail("Files should not start uploading")
+                })
+
+            let eventLogging = self.eventLogging(delegate: delegate)
+
+            DispatchQueue.concurrentPerform(iterations: uploadCount) { _ in
+                try! eventLogging.enqueueLogForUpload(log: LogFile.containingRandomString())
+            }
+        }
+    }
+
+    func testThatRunningOutOfLogFilesDoesNotPauseLogUpload() {
+        let delegate = MockEventLoggingDelegate()
+        let eventLogging = self.eventLogging(delegate: delegate)
+        XCTAssertNil(eventLogging.uploadsPausedUntil)
+        eventLogging.uploadNextLogFileIfNeeded()
+        Thread.sleep(forTimeInterval: 1.0)
+        XCTAssertNil(eventLogging.uploadsPausedUntil)
+    }
 }
 
 extension EventLoggingTests {
