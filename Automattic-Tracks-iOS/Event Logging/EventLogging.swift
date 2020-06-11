@@ -65,7 +65,7 @@ public class EventLogging {
 
     /// The date that uploads will automatically resume after being paused due to failure
     public var uploadsPausedUntil: Date? {
-        guard exponentialBackoffTimer.nextDate < Date() else {
+        guard exponentialBackoffTimer.nextDate.compare(Date()) == .orderedDescending else {
             return nil
         }
 
@@ -83,9 +83,8 @@ extension EventLogging {
             return
         }
 
-        /// If the queue is empty, pause upload
+        /// If the queue is empty, just bail without rescheduling – the next item added to the queue will start the process up again
         guard let log = uploadQueue.first else {
-            retryUploadsAt(.distantFuture)
             lock.unlock()
             return
         }
@@ -99,6 +98,7 @@ extension EventLogging {
 
         /// If the delegate is reporting that we shouldn't upload log files, pause upload to prevent an endless loop
         guard delegate.shouldUploadLogFiles else {
+            delegate.uploadCancelledByDelegate(log)
             retryUploadsAt(.distantFuture)
             lock.unlock()
             return
