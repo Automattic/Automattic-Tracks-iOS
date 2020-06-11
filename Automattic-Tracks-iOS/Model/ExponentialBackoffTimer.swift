@@ -48,6 +48,8 @@ struct ExponentialBackoffTimer {
     /// Reset the delay to zero
     mutating func reset() {
         delay = initialDelay
+        self.next = .now()
+        self.nextDate = Date()
     }
 
     /// A `DispatchTime` compatible with `DispatchQueue.asyncAfter` that represents the next time the timer should fire.
