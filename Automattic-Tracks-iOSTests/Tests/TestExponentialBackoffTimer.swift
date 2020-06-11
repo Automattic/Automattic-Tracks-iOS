@@ -35,6 +35,10 @@ class TestExponentialBackoffTimer: XCTestCase {
 
         var timer = ExponentialBackoffTimer(minimumDelay: minimumDelay)
         XCTAssertEqual(timer.delay, 0, "Initial delay should be equal to zero")
+        XCTAssertLessThan(timer.nextDate.timeIntervalSince(Date()), 0.5)
+        // we can't do fine-grained DispatchTime comparison, but if it's less than `.now`, that's
+        // the same as "immediately"
+        XCTAssertLessThan(timer.next, DispatchTime.now())
 
         timer.increment()
         XCTAssertEqual(minimumDelay, timer.delay, "Incremented next value should be equal to the initial delay")
