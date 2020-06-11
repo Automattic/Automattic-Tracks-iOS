@@ -12,10 +12,10 @@ struct ExponentialBackoffTimer {
     private let initialDelay: Int = 0
 
     /// The minimum allowed delay
-    let minimumDelay: Int
+    private let minimumDelay: Int
 
     /// The maximum allowed delay
-    let maximumDelay: Int
+    private let maximumDelay: Int
 
     /// Create a backoff timer with an optional initial duration.
     ///
@@ -51,8 +51,8 @@ struct ExponentialBackoffTimer {
     }
 
     /// A `DispatchTime` compatible with `DispatchQueue.asyncAfter` that represents the next time the timer should fire.
-    var next: DispatchTime = .now()
+    private(set) internal var next: DispatchTime = .now()
 
     /// A `Date` representation of `next`.
-    var nextDate: Date = Date()
+    private(set) var nextDate: Date = Date()
 }
