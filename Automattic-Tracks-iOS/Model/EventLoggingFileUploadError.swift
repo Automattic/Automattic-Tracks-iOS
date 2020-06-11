@@ -22,10 +22,16 @@ public enum EventLoggingFileUploadError: Error, LocalizedError {
 }
 
 extension EventLoggingFileUploadError: CustomNSError {
+
+    public static var errorDomain: String {
+        return TracksErrorDomain
+    }
+
     public var errorCode: Int {
         switch self {
             case .httpError(_, _, let statusCode): return statusCode
-            default: return 0
+            case .fileMissing: return TracksErrorCode.fileMissing.rawValue
+            case .cancelledByDelegate: return TracksErrorCode.operationCancelled.rawValue
         }
     }
 
