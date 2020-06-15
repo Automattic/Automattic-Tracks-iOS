@@ -1,4 +1,6 @@
 import XCTest
+import Sentry
+
 @testable import AutomatticTracks
 
 class CrashLoggingTests: XCTestCase {
@@ -11,6 +13,11 @@ class CrashLoggingTests: XCTestCase {
     }
 
     override func tearDown() {
+        // A few of the test cases below use shouldSentEventCallback with an XCTestExpectation.
+        // Because they're using a singleton, we have to make sure to clear those to avoid
+        // dangling state and cross-pollination.
+        CrashLogging.sharedInstance.shouldSendEventCallback = nil
+
         mockDataProvider.reset()
     }
 
@@ -127,6 +134,54 @@ class CrashLoggingTests: XCTestCase {
         wait(for: [third_expectation], timeout: 1)
     }
 
+    #if os(iOS)
+    func testWhenRunningOniOSThenEventsAreSentWithApplicationState() throws {
+        // Given
+        CrashLogging.start(withDataProvider: mockDataProvider)
+
+        let exp = expectation(description: "wait for submittedEvent")
+
+        var submittedEvent: Event?
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, _ in
+            submittedEvent = event
+            exp.fulfill()
+        }
+
+        // When
+        CrashLogging.logMessage("This is a test")
+
+        wait(for: [exp], timeout: 1.0)
+
+        // Then
+        let tags = try XCTUnwrap(submittedEvent?.tags)
+        XCTAssertEqual(tags["app.state"], "active")
+    }
+    #endif
+
+    #if os(macOS)
+    func testWhenRunningOnMacOSThenEventsDoNotHaveAnApplicationStateTag() throws {
+        // Given
+        CrashLogging.start(withDataProvider: mockDataProvider)
+
+        let exp = expectation(description: "wait for submittedEvent")
+
+        var submittedEvent: Event?
+        CrashLogging.sharedInstance.shouldSendEventCallback = { event, _ in
+            submittedEvent = event
+            exp.fulfill()
+        }
+
+        // When
+        CrashLogging.logMessage("This is a test")
+
+        wait(for: [exp], timeout: 1.0)
+
+        // Then
+        let tags = try XCTUnwrap(submittedEvent?.tags)
+        XCTAssertFalse(tags.keys.contains("app.state"))
+    }
+    #endif
+
 ///
 ///  These are currently disabled, but are being left here, because I'm hoping to get
 ///  back to this and sort out how to send stack traces for these events.
@@ -171,7 +226,7 @@ private extension CrashLoggingTests {
     var testUser: TracksUser { return TracksUser(userID: "foo", email: "bar", username: "baz") }
 }
 
-private class MockCrashLoggingDataProvider : CrashLoggingDataProvider {
+private class MockCrashLoggingDataProvider: CrashLoggingDataProvider {
     var sentryDSN: String = ""
     var userHasOptedOut: Bool = false
     var buildType: String = "test"

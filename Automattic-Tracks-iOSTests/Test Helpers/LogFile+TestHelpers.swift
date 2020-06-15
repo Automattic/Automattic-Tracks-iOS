@@ -13,4 +13,8 @@ extension LogFile {
     static func containingRandomString(length: Int = 128) -> LogFile {
         return LogFile(containing: String.randomString(length: length))
     }
+
+    static func withInvalidPath() -> LogFile {
+        return LogFile(url: URL(fileURLWithPath: "invalid"))
+    }
 }

@@ -15,7 +15,7 @@ public class CrashLogging {
         get {
             return threadSafeDispatchQueue.sync { _isStarted }
         }
-        set{
+        set {
             threadSafeDispatchQueue.sync { _isStarted = newValue }
         }
     }
@@ -66,7 +66,12 @@ public class CrashLogging {
 
     /// A Sentry hook used to attach any additional data to the event.
     private func beforeSerializeEvent(_ event: Event) {
+        // event.tags is always not null so we don't care that much about it here.
         event.tags?["locale"] = NSLocale.current.languageCode
+
+        if let appState = ApplicationFacade().applicationState {
+            event.tags?["app.state"] = appState
+        }
     }
 
     /// A Sentry hook that controls whether or not the event should be sent.
@@ -107,7 +112,7 @@ public extension CrashLogging {
      - userInfo: A dictionary containing additional data about this error.
      - level: The level of severity to report in Sentry (`.error` by default)
     */
-    static func logError(_ error: Error, userInfo: [String : Any]? = nil, level: SentrySeverity = .error) {
+    static func logError(_ error: Error, userInfo: [String: Any]? = nil, level: SentrySeverity = .error) {
         let event = Event(level: .error)
         event.message = error.localizedDescription
         event.extra = userInfo ?? (error as NSError).userInfo
@@ -127,7 +132,7 @@ public extension CrashLogging {
      - properties: A dictionary containing additional information about this error
      - level: The level of severity to report in Sentry (`.error` by default)
     */
-    static func logMessage(_ message: String, properties: [String : Any]? = nil, level: SentrySeverity = .info) {
+    static func logMessage(_ message: String, properties: [String: Any]? = nil, level: SentrySeverity = .info) {
 
         let event = Event(level: level)
         event.message = message
