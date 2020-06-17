@@ -15,6 +15,9 @@ public protocol EventLoggingDataSource {
 
     /// The path to log upload queue storage
     var logUploadQueueStorageURL: URL { get }
+
+    /// The authentication token used for encrypted log upload
+    var loggingAuthenticationToken: String { get }
 }
 
 public extension EventLoggingDataSource {
