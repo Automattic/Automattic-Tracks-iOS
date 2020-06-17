@@ -9,12 +9,13 @@ enum MockError: Error {
     case generic
 }
 
-struct MockEventLoggingDataSource: EventLoggingDataSource {
-    let loggingEncryptionKey: String
-    let previousSessionLogPath: URL?
-    var currentSessionLogPath: URL?
-    let logUploadURL: URL
-    let logUploadQueueStorageURL: URL
+class MockEventLoggingDataSource: EventLoggingDataSource {
+    private(set) var loggingEncryptionKey: String
+    private(set) var previousSessionLogPath: URL?
+    private(set) var currentSessionLogPath: URL?
+    private(set) var logUploadURL: URL
+    private(set) var logUploadQueueStorageURL: URL
+    private(set) var loggingAuthenticationToken: String = ""
 
     init(
         encryptionKey: String = "foo",
@@ -28,23 +29,19 @@ struct MockEventLoggingDataSource: EventLoggingDataSource {
     }
 
     func withLogUploadUrl(_ url: URL) -> Self {
-        return MockEventLoggingDataSource(
-            encryptionKey: self.loggingEncryptionKey,
-            sessionLogPath: self.previousSessionLogPath,
-            logUploadUrl: url,
-            queueUrl: self.logUploadQueueStorageURL
-        )
+        self.logUploadURL = url
+        return self
     }
 
     func withEncryptionKey() -> Self {
         let keyPair = Sodium().box.keyPair()!
+        self.loggingEncryptionKey = Data(keyPair.publicKey).base64EncodedString()
+        return self
+    }
 
-        return MockEventLoggingDataSource(
-            encryptionKey: Data(keyPair.publicKey).base64EncodedString(),
-            sessionLogPath: self.previousSessionLogPath,
-            logUploadUrl: self.logUploadURL,
-            queueUrl: self.logUploadQueueStorageURL
-        )
+    func withAuthenticationToken(_ token: String) -> Self {
+        self.loggingAuthenticationToken = token
+        return self
     }
 }
 
