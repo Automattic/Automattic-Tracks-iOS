@@ -15,5 +15,8 @@ typedef NS_ENUM(NSInteger, TracksErrorCode) {
     TracksErrorCodeValidationDevicePropertiesKeyType,
     TracksErrorCodeValidationDevicePropertiesKeyFormat,
     TracksErrorRemoteResponseInvalid,
-    TracksErrorRemoteResponseError
+    TracksErrorRemoteResponseError,
+
+    TracksErrorFileMissing,
+    TracksErrorOperationCancelled
 };

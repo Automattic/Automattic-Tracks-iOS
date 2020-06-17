@@ -1,5 +1,13 @@
 import Foundation
 
+typealias FileAttributes = [FileAttributeKey: Any]
+
+extension FileAttributes {
+    var fileCreationDate: Date? {
+        return self[FileAttributeKey.creationDate] as? Date
+    }
+}
+
 extension FileManager {
 
     var documentsDirectory: URL {
@@ -23,5 +31,13 @@ extension FileManager {
         var isDir: ObjCBool = false
         let exists = self.fileExists(atPath: url.path, isDirectory: &isDir)
         return exists && isDir.boolValue
+    }
+
+    func attributesOfItem(at url: URL) throws -> FileAttributes {
+        return try self.attributesOfItem(atPath: url.path)
+    }
+
+    func setAttributesOfItem(attributes: FileAttributes, at url: URL) throws {
+        return try self.setAttributes(attributes, ofItemAtPath: url.path)
     }
 }

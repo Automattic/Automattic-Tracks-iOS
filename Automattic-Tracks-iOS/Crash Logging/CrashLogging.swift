@@ -6,7 +6,9 @@ public class CrashLogging {
 
     /// A singleton is maintained, but the host application needn't be aware of its existence.
     internal static let sharedInstance = CrashLogging()
-    fileprivate var dataProvider: CrashLoggingDataProvider?
+
+    private var dataProvider: CrashLoggingDataProvider?
+    private var eventLogging: EventLogging?
 
     /// Thread-safe single initialization
     fileprivate static let threadSafeDispatchQueue = DispatchQueue(label: Bundle.main.bundleIdentifier ?? "tracks" + "-crash-logging-queue")
@@ -28,7 +30,7 @@ public class CrashLogging {
 
      - SeeAlso: CrashLoggingDataProvider
      */
-    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
+    private static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
 
         // Only allow initializing this system once
         guard !isStarted else { return }
@@ -64,6 +66,20 @@ public class CrashLogging {
         }
     }
 
+    /**
+        Initializes the crash logging system.
+
+        - Parameters:
+            - dataProvider: An object that will provide any required data to the crash logging system.
+            - eventLogging: An object that will coordinate event logging
+
+        - SeeAlso: CrashLoggingDataProvider
+        */
+    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
+        start(withDataProvider: dataProvider)
+        sharedInstance.eventLogging = eventLogging
+    }
+
     /// A Sentry hook used to attach any additional data to the event.
     private func beforeSerializeEvent(_ event: Event) {
         // event.tags is always not null so we don't care that much about it here.
@@ -78,14 +94,24 @@ public class CrashLogging {
     private func shouldSendEvent(_ event: Event?) -> Bool {
 
         #if DEBUG
-        let result = false
+        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") ?? false
         #else
-        let result = !CrashLogging.userHasOptedOut
+        let shouldSendEvent = !CrashLogging.userHasOptedOut
         #endif
 
-        shouldSendEventCallback?(event, result)
+        shouldSendEventCallback?(event, shouldSendEvent)
 
-        return result
+        guard
+            let eventLogging = self.eventLogging,   /// If the event logging system isn't initialized, we can't continue
+            let event = event,                      /// If the event isn't populated, we can't continue
+            shouldSendEvent                         /// If we're not sending the event, we shouldn't enqueue the upload
+        else {
+            return shouldSendEvent
+        }
+
+        eventLogging.attachLogToEventIfNeeded(event: event)
+
+        return shouldSendEvent
     }
 
     /// The current state of the user's choice to opt out of data collection. Provided by the data source.
@@ -98,6 +124,10 @@ public class CrashLogging {
     /// Immediately crashes the application and generates a crash report.
     public static func crash() {
         Client.shared?.crash()
+    }
+
+    public static var eventLogging: EventLogging? {
+        return sharedInstance.eventLogging
     }
 }
 
@@ -172,5 +202,20 @@ extension CrashLogging {
     /// Calling this method in these situations prevents
     public static func setNeedsDataRefresh() {
         Client.shared?.user = sharedInstance.currentUser
+    }
+}
+
+// Event Logging
+extension Event {
+
+    private static let logIDKey = "logID"
+
+    var logID: String? {
+        get {
+            return self.extra?[Event.logIDKey] as? String
+        }
+        set {
+            self.extra?[Event.logIDKey] = newValue
+        }
     }
 }
