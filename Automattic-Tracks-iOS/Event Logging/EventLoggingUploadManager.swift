@@ -4,11 +4,6 @@ import Sodium
 
 class EventLoggingUploadManager {
 
-    private enum Constants {
-        static let uuidHeaderKey = "log-uuid"
-        static let uploadHttpMethod = "POST"
-    }
-
     private let dataSource: EventLoggingDataSource
     private let delegate: EventLoggingDelegate
     private let networkService: EventLoggingNetworkService
@@ -34,17 +29,18 @@ class EventLoggingUploadManager {
             return
         }
 
-        guard let fileContents = fileManager.contents(atUrl: log.url) else {
+        guard fileManager.fileExistsAtURL(log.url) else {
             let error = EventLoggingFileUploadError.fileMissing
             delegate.uploadFailed(withError: error, forLog: log)
             callback(.failure(error))
             return
         }
 
-        var request = URLRequest(url: dataSource.logUploadURL)
-        request.addValue(log.uuid, forHTTPHeaderField: Constants.uuidHeaderKey)
-        request.httpMethod = Constants.uploadHttpMethod
-        request.httpBody = fileContents
+        let request = createRequest(
+            url: dataSource.logUploadURL,
+            uuid: log.uuid, authenticationToken:
+            dataSource.loggingAuthenticationToken
+        )
 
         delegate.didStartUploadingLog(log)
 
@@ -60,5 +56,14 @@ class EventLoggingUploadManager {
                     self.delegate.uploadFailed(withError: error, forLog: log)
             }
         }
+    }
+
+    func createRequest(url: URL, uuid: String, authenticationToken: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.addValue(uuid, forHTTPHeaderField: "log-uuid")
+        request.addValue(authenticationToken, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+
+        return request
     }
 }

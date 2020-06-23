@@ -84,6 +84,32 @@ class EventLoggingUploadManagerTests: XCTestCase {
             })
         }
     }
+
+    func testThatRequestContainsCorrectUUID() {
+        let log = LogFile.containingRandomString()
+        let dataSource = MockEventLoggingDataSource()
+        let manager = uploadManager(dataSource: dataSource)
+
+        let request = manager.createRequest(url: dataSource.logUploadURL, uuid: log.uuid, authenticationToken: "")
+        XCTAssertEqual(log.uuid, request.allHTTPHeaderFields!["log-uuid"])
+    }
+
+    func testThatRequestContainsCorrectAuthenticationToken() {
+        let token = String.randomString(length: 64)
+        let dataSource = MockEventLoggingDataSource().withAuthenticationToken(token)
+        let manager = uploadManager(dataSource: dataSource)
+
+        let request = manager.createRequest(url: dataSource.logUploadURL, uuid: "", authenticationToken: token)
+        XCTAssertEqual(token, request.allHTTPHeaderFields!["Authorization"])
+    }
+
+    func testThatRequestUsesPostMethod() {
+        let dataSource = MockEventLoggingDataSource()
+        let manager = uploadManager(dataSource: dataSource)
+
+        let request = manager.createRequest(url: dataSource.logUploadURL, uuid: "", authenticationToken: "")
+        XCTAssertEqual("POST", request.httpMethod)
+    }
 }
 
 extension EventLoggingUploadManagerTests {
@@ -93,5 +119,13 @@ extension EventLoggingUploadManagerTests {
         dataSource: EventLoggingDataSource = MockEventLoggingDataSource()
     ) -> EventLoggingUploadManager {
         return EventLoggingUploadManager(dataSource: dataSource, delegate: delegate, networkService: networkService)
+    }
+
+    func uploadManager(dataSource: EventLoggingDataSource) -> EventLoggingUploadManager {
+        return uploadManager(
+            delegate: MockEventLoggingDelegate(),
+            networkService: MockEventLoggingNetworkService(),
+            dataSource: dataSource
+        )
     }
 }
