@@ -38,10 +38,13 @@ extension EventLogging {
 
 extension Event {
     var errorType: EventLoggingErrorType {
-        if self.level == .fatal {
+        switch self.level {
+        case .fatal:
             return .fatal
+        case .error, .warning, .info, .debug:
+            return .debug
+        @unknown default:
+            return .debug
         }
-
-        return .debug
     }
 }
