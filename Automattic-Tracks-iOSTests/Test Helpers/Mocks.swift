@@ -11,21 +11,24 @@ enum MockError: Error {
 
 class MockEventLoggingDataSource: EventLoggingDataSource {
     private(set) var loggingEncryptionKey: String
-    private(set) var previousSessionLogPath: URL?
-    private(set) var currentSessionLogPath: URL?
     private(set) var logUploadURL: URL
     private(set) var logUploadQueueStorageURL: URL
     private(set) var loggingAuthenticationToken: String = ""
+    private let sessionLogPath: URL?
 
     init(
         encryptionKey: String = "foo",
         sessionLogPath: URL? = nil,
         logUploadUrl: URL = URL(string: "example.com")!,
         queueUrl: URL = FileManager.default.documentsDirectory.appendingPathComponent(UUID().uuidString)) {
-        loggingEncryptionKey = encryptionKey
-        previousSessionLogPath = sessionLogPath
-        logUploadURL = logUploadUrl
-        logUploadQueueStorageURL = queueUrl
+        self.loggingEncryptionKey = encryptionKey
+        self.logUploadURL = logUploadUrl
+        self.logUploadQueueStorageURL = queueUrl
+        self.sessionLogPath = sessionLogPath
+    }
+
+    func logFilePath(forErrorLevel: EventLoggingErrorType, at date: Date) -> URL? {
+        return sessionLogPath
     }
 
     func withLogUploadUrl(_ url: URL) -> Self {

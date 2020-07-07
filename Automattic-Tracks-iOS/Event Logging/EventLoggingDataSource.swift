@@ -7,17 +7,14 @@ public protocol EventLoggingDataSource {
     /// The URL to the upload endpoint for encrypted logs.
     var logUploadURL: URL { get }
 
-    /// The path to the log file for the most recent session.
-    var previousSessionLogPath: URL? { get }
-
-    /// The path to the log file for the current session.
-    var currentSessionLogPath: URL? { get }
-
     /// The path to log upload queue storage
     var logUploadQueueStorageURL: URL { get }
 
     /// The authentication token used for encrypted log upload
     var loggingAuthenticationToken: String { get }
+
+    /// Provides the log file corresponding to a given error type (if it exists)
+    func logFilePath(forErrorLevel: EventLoggingErrorType, at date: Date) -> URL?
 }
 
 public extension EventLoggingDataSource {
