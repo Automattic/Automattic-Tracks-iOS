@@ -1,6 +1,11 @@
 import Foundation
 import Sentry
 
+public enum EventLoggingErrorType {
+    case fatal
+    case debug
+}
+
 extension EventLogging {
     func attachLogToEventIfNeeded(event: Event) {
 
@@ -9,24 +14,37 @@ extension EventLogging {
             return
         }
 
-        /// We use the previous session's log for fatal errors because that session has presumably ended with the app crashing. If that's not the case,
-        /// the hosting app can handle that situation.
-        let logFilePath: URL?
-        switch event.level {
-            case .fatal: logFilePath = dataSource.previousSessionLogPath
-            default: logFilePath = dataSource.currentSessionLogPath
+        /// Allow the hosting app to determine the most appropriate log file to send for the error type. For example, in an application using
+        /// session-based file logging, the newest log file would be the current session, which is appropriate for debugging logs. However,
+        /// the previous session's log file is the correct one for a crash, because when the crash is sent there will already be a new log
+        /// file for the current session. Other apps may use time-based logs, in which case the same log would be the correct one.
+        ///
+        /// We also pass the timestamp for the event, as that can be useful for determining the correct log file.
+        guard let logFilePath = dataSource.logFilePath(forErrorLevel: event.errorType, at: event.timestamp) else {
+            return
         }
 
         /// Schedule the log file for upload, if available
-        if let logFilePath = logFilePath {
-            do {
-                let logFile = LogFile(url: logFilePath)
-                try enqueueLogForUpload(log: logFile)
-                event.logID = logFile.uuid
-            }
-            catch let err {
-                CrashLogging.logError(err)
-            }
+        do {
+            let logFile = LogFile(url: logFilePath)
+            try enqueueLogForUpload(log: logFile)
+            event.logID = logFile.uuid
+        }
+        catch let err {
+            CrashLogging.logError(err)
+        }
+    }
+}
+
+extension Event {
+    var errorType: EventLoggingErrorType {
+        switch self.level {
+        case .fatal:
+            return .fatal
+        case .error, .warning, .info, .debug:
+            return .debug
+        @unknown default:
+            return .debug
         }
     }
 }
