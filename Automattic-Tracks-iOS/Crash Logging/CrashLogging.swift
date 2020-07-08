@@ -1,5 +1,6 @@
 import Foundation
 import Sentry
+import CocoaLumberjack
 
 /// A class that provides support for logging crashes. Not compatible with Objective-C.
 public class CrashLogging {
@@ -93,7 +94,10 @@ public class CrashLogging {
     /// A Sentry hook that controls whether or not the event should be sent.
     private func shouldSendEvent(_ event: Event?) -> Bool {
 
+        DDLogDebug("📜 Firing `shouldSendEvent`")
+
         #if DEBUG
+        DDLogDebug("📜 This is a debug build")
         let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") ?? false
         #else
         let shouldSendEvent = !CrashLogging.userHasOptedOut
@@ -101,11 +105,18 @@ public class CrashLogging {
 
         shouldSendEventCallback?(event, shouldSendEvent)
 
-        guard
-            let eventLogging = self.eventLogging,   /// If the event logging system isn't initialized, we can't continue
-            let event = event,                      /// If the event isn't populated, we can't continue
-            shouldSendEvent                         /// If we're not sending the event, we shouldn't enqueue the upload
-        else {
+        guard let eventLogging = self.eventLogging else {
+            DDLogDebug("📜 Cancelling log file attachment – Event Logging is not initialized")
+            return shouldSendEvent
+        }
+
+        guard let event = event else {
+            DDLogDebug("📜 Cancelling log file attachment – event is nil")
+            return shouldSendEvent
+        }
+
+        guard shouldSendEvent else {
+            DDLogDebug("📜 Cancelling log file attachment – should not send event")
             return shouldSendEvent
         }
 
