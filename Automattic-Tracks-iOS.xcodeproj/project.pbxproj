@@ -99,6 +99,8 @@
 		F9788DE92421B4EF000A9BB5 /* TracksServiceRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = F9788DD62421B4EF000A9BB5 /* TracksServiceRemote.h */; };
 		F9788DEA2421B4EF000A9BB5 /* TracksServiceRemote.h in Headers */ = {isa = PBXBuildFile; fileRef = F9788DD62421B4EF000A9BB5 /* TracksServiceRemote.h */; };
 		F97C6B0E24758AFF006089D7 /* EventLogging+Sentry.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */; };
+		F97CBE6024B64BE200A845D7 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97CBE5F24B64BE200A845D7 /* CocoaLumberjack.swift */; };
+		F97CBE6124B64BE200A845D7 /* CocoaLumberjack.swift in Sources */ = {isa = PBXBuildFile; fileRef = F97CBE5F24B64BE200A845D7 /* CocoaLumberjack.swift */; };
 		F9838978243286EA00BB2F1F /* EventLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9838977243286EA00BB2F1F /* EventLogging.swift */; };
 		F9838979243286EA00BB2F1F /* EventLogging.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9838977243286EA00BB2F1F /* EventLogging.swift */; };
 		F99D03212422D9B70091C33E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F99D031C2422D9B70091C33E /* Extensions.swift */; };
@@ -234,6 +236,7 @@
 		F9788DD52421B4EF000A9BB5 /* WatchSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WatchSessionManager.m; sourceTree = "<group>"; };
 		F9788DD62421B4EF000A9BB5 /* TracksServiceRemote.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksServiceRemote.h; sourceTree = "<group>"; };
 		F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EventLogging+Sentry.swift"; sourceTree = "<group>"; };
+		F97CBE5F24B64BE200A845D7 /* CocoaLumberjack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocoaLumberjack.swift; sourceTree = "<group>"; };
 		F9838977243286EA00BB2F1F /* EventLogging.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLogging.swift; sourceTree = "<group>"; };
 		F99D031B2422D9B70091C33E /* TestTracksContextManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestTracksContextManager.h; sourceTree = "<group>"; };
 		F99D031C2422D9B70091C33E /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -422,6 +425,7 @@
 			children = (
 				F9A0D6D82420294B00D27C01 /* FileHandle+Extensions.swift */,
 				F9445641242965F6009A36B3 /* FileManager+Extensions.swift */,
+				F97CBE5F24B64BE200A845D7 /* CocoaLumberjack.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -926,6 +930,7 @@
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
+				F97CBE6024B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F97C6B0E24758AFF006089D7 /* EventLogging+Sentry.swift in Sources */,
 				F9445642242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
@@ -1019,6 +1024,7 @@
 				F944563E242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */,
+				F97CBE6124B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
 				F9B862C32476D004008B093C /* EventLogging+Sentry.swift in Sources */,
 				F9445643242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
