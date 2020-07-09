@@ -31,14 +31,15 @@ public class CrashLogging {
 
      - SeeAlso: CrashLoggingDataProvider
      */
-    private static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
+    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
 
         // Only allow initializing this system once
         guard !isStarted else { return }
         isStarted = true
 
-        // Store the data provider for future use
+        // Store the data provider and event logging subsystem for future use
         sharedInstance.dataProvider = dataProvider
+        sharedInstance.eventLogging = eventLogging
 
         // Create a Sentry client and start crash handler
         do {
@@ -65,20 +66,6 @@ public class CrashLogging {
         } catch let error {
             logError(error)
         }
-    }
-
-    /**
-        Initializes the crash logging system.
-
-        - Parameters:
-            - dataProvider: An object that will provide any required data to the crash logging system.
-            - eventLogging: An object that will coordinate event logging
-
-        - SeeAlso: CrashLoggingDataProvider
-        */
-    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
-        start(withDataProvider: dataProvider)
-        sharedInstance.eventLogging = eventLogging
     }
 
     /// A Sentry hook used to attach any additional data to the event.
