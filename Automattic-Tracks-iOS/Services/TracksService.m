@@ -31,8 +31,6 @@ NSString *const TrackServiceWillSendQueuedEventsNotification = @"TrackServiceDid
 NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 
 NSString *const RequestTimestampKey = @"_rt";
-NSString *const DeviceHeightPixelsKey = @"_ht";
-NSString *const DeviceWidthPixelsKey = @"_wd";
 NSString *const DeviceLanguageKey = @"_lg";
 NSString *const DeviceInfoAppNameKey = @"device_info_app_name";
 NSString *const DeviceInfoAppVersionKey = @"device_info_app_version";
@@ -42,6 +40,8 @@ NSString *const DeviceInfoOSVersionKey = @"device_info_os_version";
 NSString *const DeviceInfoBrandKey = @"device_info_brand";
 NSString *const DeviceInfoManufacturerKey = @"device_info_manufacturer";
 NSString *const DeviceInfoModelKey = @"device_info_model";
+NSString *const DeviceInfoHeightPixelsKey = @"device_info_display_height";
+NSString *const DeviceInfoWidthPixelsKey = @"device_info_display_width";
 NSString *const DeviceInfoNetworkOperatorKey = @"device_info_current_network_operator";
 NSString *const DeviceInfoRadioTypeKey = @"device_info_phone_radio_type";
 NSString *const DeviceInfoWiFiConnectedKey = @"device_info_wifi_connected";
@@ -318,8 +318,8 @@ NSString *const USER_ID_ANON = @"anonId";
               DeviceInfoModelKey : self.deviceInformation.model ?: @"Unknown",
               DeviceInfoOSKey : self.deviceInformation.os ?: @"Unknown",
               DeviceInfoOSVersionKey : self.deviceInformation.version ?: @"Unknown",
-              DeviceHeightPixelsKey : @(screenSize.height) ?: @0,
-              DeviceWidthPixelsKey : @(screenSize.width) ?: @0,
+              DeviceInfoHeightPixelsKey : @(screenSize.height) ?: @0,
+              DeviceInfoWidthPixelsKey : @(screenSize.width) ?: @0,
               DeviceLanguageKey : self.deviceInformation.deviceLanguage ?: @"Unknown",
               TracksUserAgentKey : self.userAgent,
               };
