@@ -2,35 +2,11 @@ import XCTest
 @testable import AutomatticTracks
 
 class EventLoggingUploadManagerTests: XCTestCase {
-    var uploadManager: EventLoggingUploadManager!
-    var networkService: MockEventLoggingNetworkService!
-    var delegate: MockEventLoggingDelegate!
-    var dataSource: MockEventLoggingDataSource!
-
-    override func setUp() {
-        super.setUp()
-
-        delegate = MockEventLoggingDelegate()
-        dataSource = MockEventLoggingDataSource()
-        networkService = MockEventLoggingNetworkService()
-
-        uploadManager = EventLoggingUploadManager(
-            dataSource: dataSource,
-            delegate: delegate,
-            networkService: networkService
-        )
-    }
-
-    override func tearDown() {
-        uploadManager = nil
-        networkService = nil
-        delegate = nil
-        dataSource = nil
-
-        super.tearDown()
-    }
 
     func testThatDelegateIsNotifiedOfNetworkStartAndCompletionForSuccess() {
+
+        let delegate = MockEventLoggingDelegate()
+        let uploadManager = self.uploadManager(delegate: delegate)
 
         waitForExpectation(timeout: 1.0) { exp in
             uploadManager.upload(LogFile.containingRandomString(), then: { _ in exp.fulfill() })
@@ -43,8 +19,14 @@ class EventLoggingUploadManagerTests: XCTestCase {
 
     func testThatDelegateIsNotifiedOfNetworkStartForFailure() {
 
+        let delegate = MockEventLoggingDelegate()
+
+        let uploadManager = self.uploadManager(
+            delegate: delegate,
+            networkService: MockEventLoggingNetworkService(shouldSucceed: false)
+        )
+
         waitForExpectation(timeout: 1.0) { exp in
-            networkService.shouldSucceed = false
             uploadManager.upload(LogFile.containingRandomString(), then: { _ in exp.fulfill() })
         }
 
@@ -53,12 +35,29 @@ class EventLoggingUploadManagerTests: XCTestCase {
         XCTAssertFalse(delegate.uploadCancelledByDelegateTriggered)
     }
 
+    typealias ExternalExpectationCallback = (XCTestExpectation) -> Void
+
     func testThatNetworkStartDoesNotFireWhenDelegateCancelsUpload() {
 
-        waitForExpectation(timeout: 1.0) { exp in
-            delegate.setShouldUploadLogFiles(false)
-            delegate.uploadCancelledByDelegateCallback = { _ in exp.fulfill() }
-            uploadManager.upload(LogFile.containingRandomString(), then: { _ in XCTFail("Callback should not be called") })
+        let delegate = waitForExpectation(timeout: 1.0) { exp -> MockEventLoggingDelegate in
+            exp.expectedFulfillmentCount = 2
+
+            let delegate = MockEventLoggingDelegate()
+                .withShouldUploadLogFilesValue(false)
+                .withUploadCancelledCallback { logFile in
+                    exp.fulfill()
+                }
+
+            self.uploadManager(delegate: delegate).upload(LogFile.containingRandomString(), then: { result in
+                if case .success = result {
+                    XCTFail("Request should not use success callback")
+                }
+                else {
+                    exp.fulfill()
+                }
+            })
+
+            return delegate
         }
 
         XCTAssertFalse(delegate.didStartUploadingTriggered)
@@ -68,9 +67,65 @@ class EventLoggingUploadManagerTests: XCTestCase {
 
     func testThatDelegateIsNotifiedOfMissingFiles() {
         waitForExpectation(timeout: 1.0) { exp in
-            delegate.setShouldUploadLogFiles(true)
-            delegate.uploadFailedCallback = { error, _ in exp.fulfill() }
-            uploadManager.upload(LogFile.withInvalidPath(), then: { _ in XCTFail("Callback should not be called") })
+            exp.expectedFulfillmentCount = 2
+
+            let delegate = MockEventLoggingDelegate()
+                .withUploadFailedCallback { error, _ in
+                    exp.fulfill()
+                }
+
+            self.uploadManager(delegate: delegate).upload(LogFile.withInvalidPath(), then: { result in
+                if case .success = result {
+                    XCTFail("Request should not use success callback")
+                }
+                else {
+                    exp.fulfill()
+                }
+            })
         }
+    }
+
+    func testThatRequestContainsCorrectUUID() {
+        let log = LogFile.containingRandomString()
+        let dataSource = MockEventLoggingDataSource()
+        let manager = uploadManager(dataSource: dataSource)
+
+        let request = manager.createRequest(url: dataSource.logUploadURL, uuid: log.uuid, authenticationToken: "")
+        XCTAssertEqual(log.uuid, request.allHTTPHeaderFields!["log-uuid"])
+    }
+
+    func testThatRequestContainsCorrectAuthenticationToken() {
+        let token = String.randomString(length: 64)
+        let dataSource = MockEventLoggingDataSource().withAuthenticationToken(token)
+        let manager = uploadManager(dataSource: dataSource)
+
+        let request = manager.createRequest(url: dataSource.logUploadURL, uuid: "", authenticationToken: token)
+        XCTAssertEqual(token, request.allHTTPHeaderFields!["Authorization"])
+    }
+
+    func testThatRequestUsesPostMethod() {
+        let dataSource = MockEventLoggingDataSource()
+        let manager = uploadManager(dataSource: dataSource)
+
+        let request = manager.createRequest(url: dataSource.logUploadURL, uuid: "", authenticationToken: "")
+        XCTAssertEqual("POST", request.httpMethod)
+    }
+}
+
+extension EventLoggingUploadManagerTests {
+    func uploadManager(
+        delegate: EventLoggingDelegate = MockEventLoggingDelegate(),
+        networkService: EventLoggingNetworkService = MockEventLoggingNetworkService(),
+        dataSource: EventLoggingDataSource = MockEventLoggingDataSource()
+    ) -> EventLoggingUploadManager {
+        return EventLoggingUploadManager(dataSource: dataSource, delegate: delegate, networkService: networkService)
+    }
+
+    func uploadManager(dataSource: EventLoggingDataSource) -> EventLoggingUploadManager {
+        return uploadManager(
+            delegate: MockEventLoggingDelegate(),
+            networkService: MockEventLoggingNetworkService(),
+            dataSource: dataSource
+        )
     }
 }

@@ -1,12 +1,15 @@
 import Foundation
 import Sentry
+import CocoaLumberjack
 
 /// A class that provides support for logging crashes. Not compatible with Objective-C.
 public class CrashLogging {
 
     /// A singleton is maintained, but the host application needn't be aware of its existence.
     internal static let sharedInstance = CrashLogging()
-    fileprivate var dataProvider: CrashLoggingDataProvider?
+
+    private var dataProvider: CrashLoggingDataProvider?
+    private var eventLogging: EventLogging?
 
     /// Thread-safe single initialization
     fileprivate static let threadSafeDispatchQueue = DispatchQueue(label: Bundle.main.bundleIdentifier ?? "tracks" + "-crash-logging-queue")
@@ -28,14 +31,15 @@ public class CrashLogging {
 
      - SeeAlso: CrashLoggingDataProvider
      */
-    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider) {
+    public static func start(withDataProvider dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
 
         // Only allow initializing this system once
         guard !isStarted else { return }
         isStarted = true
 
-        // Store the data provider for future use
+        // Store the data provider and event logging subsystem for future use
         sharedInstance.dataProvider = dataProvider
+        sharedInstance.eventLogging = eventLogging
 
         // Create a Sentry client and start crash handler
         do {
@@ -77,15 +81,35 @@ public class CrashLogging {
     /// A Sentry hook that controls whether or not the event should be sent.
     private func shouldSendEvent(_ event: Event?) -> Bool {
 
+        DDLogDebug("📜 Firing `shouldSendEvent`")
+
         #if DEBUG
-        let result = false
+        DDLogDebug("📜 This is a debug build")
+        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") ?? false
         #else
-        let result = !CrashLogging.userHasOptedOut
+        let shouldSendEvent = !CrashLogging.userHasOptedOut
         #endif
 
-        shouldSendEventCallback?(event, result)
+        shouldSendEventCallback?(event, shouldSendEvent)
 
-        return result
+        guard let eventLogging = self.eventLogging else {
+            DDLogDebug("📜 Cancelling log file attachment – Event Logging is not initialized")
+            return shouldSendEvent
+        }
+
+        guard let event = event else {
+            DDLogDebug("📜 Cancelling log file attachment – event is nil")
+            return shouldSendEvent
+        }
+
+        guard shouldSendEvent else {
+            DDLogDebug("📜 Cancelling log file attachment – should not send event")
+            return shouldSendEvent
+        }
+
+        eventLogging.attachLogToEventIfNeeded(event: event)
+
+        return shouldSendEvent
     }
 
     /// The current state of the user's choice to opt out of data collection. Provided by the data source.
@@ -98,6 +122,10 @@ public class CrashLogging {
     /// Immediately crashes the application and generates a crash report.
     public static func crash() {
         Client.shared?.crash()
+    }
+
+    public static var eventLogging: EventLogging? {
+        return sharedInstance.eventLogging
     }
 }
 
@@ -172,5 +200,20 @@ extension CrashLogging {
     /// Calling this method in these situations prevents
     public static func setNeedsDataRefresh() {
         Client.shared?.user = sharedInstance.currentUser
+    }
+}
+
+// Event Logging
+extension Event {
+
+    private static let logIDKey = "logID"
+
+    var logID: String? {
+        get {
+            return self.extra?[Event.logIDKey] as? String
+        }
+        set {
+            self.extra?[Event.logIDKey] = newValue
+        }
     }
 }

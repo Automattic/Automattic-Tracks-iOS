@@ -7,7 +7,8 @@ class EventLoggingUploadQueueTests: XCTestCase {
 
     override func setUp() {
         super.setUp()
-        uploadQueue = EventLoggingUploadQueue()
+
+        uploadQueue = EventLoggingUploadQueue(storageDirectory: MockEventLoggingDataSource().logUploadQueueStorageURL)
     }
 
     override func tearDown() {
@@ -70,5 +71,28 @@ class EventLoggingUploadQueueTests: XCTestCase {
         try! customQueue.add(log)
 
         XCTAssert(FileManager.default.fileExistsAtURL(log.url))
+    }
+
+    func testThatUploadQueueRetainsCorrectNumberOfLogFiles() {
+
+        let directory = FileManager.default.documentsDirectory.appendingPathComponent(UUID().uuidString)
+        let queue = EventLoggingUploadQueue(storageDirectory: directory)
+
+        (0..<90).forEach { _ in
+            try! queue.add(LogFile.containingRandomString())
+        }
+
+        XCTAssertEqual(queue.items.count, 90)
+
+        queue.items.enumerated().forEach {
+            try! FileManager.default.setAttributesOfItem(attributes: [
+                FileAttributeKey.creationDate: Calendar.current.date(byAdding: .day, value: $0.offset * -1, to: Date())!
+            ], at: $0.element.url)
+        }
+
+        let retain = Int.random(in: 1..<89)
+        try! queue.clean(retentionDays: retain)
+
+        XCTAssertEqual(queue.items.count, retain)
     }
 }

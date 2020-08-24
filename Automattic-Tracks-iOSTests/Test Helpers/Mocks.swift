@@ -10,98 +10,109 @@ enum MockError: Error {
 }
 
 class MockEventLoggingDataSource: EventLoggingDataSource {
+    private(set) var loggingEncryptionKey: String
+    private(set) var logUploadURL: URL
+    private(set) var logUploadQueueStorageURL: URL
+    private(set) var loggingAuthenticationToken: String = ""
+    private let sessionLogPath: URL?
 
-    var loggingEncryptionKey: String = "foo"
-    var previousSessionLogPath: URL? = nil
-
-    /// Overrides for logUploadURL
-    var _logUploadURL: URL = URL(string: "example.com")!
-    var logUploadURL: URL {
-        return _logUploadURL
+    init(
+        encryptionKey: String = "foo",
+        sessionLogPath: URL? = nil,
+        logUploadUrl: URL = URL(string: "example.com")!,
+        queueUrl: URL = FileManager.default.documentsDirectory.appendingPathComponent(UUID().uuidString)) {
+        self.loggingEncryptionKey = encryptionKey
+        self.logUploadURL = logUploadUrl
+        self.logUploadQueueStorageURL = queueUrl
+        self.sessionLogPath = sessionLogPath
     }
 
-    func setLogUploadUrl(_ url: URL) {
-        self._logUploadURL = url
+    func logFilePath(forErrorLevel: EventLoggingErrorType, at date: Date) -> URL? {
+        return sessionLogPath
     }
 
-    func withEncryptionKeys() -> Self {
+    func withLogUploadUrl(_ url: URL) -> Self {
+        self.logUploadURL = url
+        return self
+    }
+
+    func withEncryptionKey() -> Self {
         let keyPair = Sodium().box.keyPair()!
-        loggingEncryptionKey = Data(keyPair.publicKey).base64EncodedString()
+        self.loggingEncryptionKey = Data(keyPair.publicKey).base64EncodedString()
+        return self
+    }
+
+    func withAuthenticationToken(_ token: String) -> Self {
+        self.loggingAuthenticationToken = token
         return self
     }
 }
 
 class MockEventLoggingDelegate: EventLoggingDelegate {
 
-    var didStartUploadingTriggered = false
-    var didStartUploadingCallback: LogFileCallback?
+    private(set) var didStartUploadingTriggered = false
+    private(set) var didStartUploadingCallback: LogFileCallback?
+    func withDidStartUploadingCallback(_ callback: LogFileCallback?) -> Self {
+        self.didStartUploadingCallback = callback
+        return self
+    }
 
     func didStartUploadingLog(_ log: LogFile) {
         didStartUploadingTriggered = true
         didStartUploadingCallback?(log)
     }
 
-    var didFinishUploadingTriggered = false
-    var didFinishUploadingCallback: LogFileCallback?
+    private(set) var didFinishUploadingTriggered = false
+    private(set) var didFinishUploadingCallback: LogFileCallback?
+    func withDidFinishUploadingCallback(_ callback: @escaping LogFileCallback) -> Self {
+        self.didFinishUploadingCallback = callback
+        return self
+    }
 
     func didFinishUploadingLog(_ log: LogFile) {
         didFinishUploadingTriggered = true
         didFinishUploadingCallback?(log)
     }
 
-    var uploadCancelledByDelegateTriggered = false
-    var uploadCancelledByDelegateCallback: LogFileCallback?
+    private(set) var uploadCancelledByDelegateTriggered = false
+    private(set) var uploadCancelledByDelegateCallback: LogFileCallback?
+    func withUploadCancelledCallback(_ callback: @escaping LogFileCallback) -> Self {
+        self.uploadCancelledByDelegateCallback = callback
+        return self
+    }
 
     func uploadCancelledByDelegate(_ log: LogFile) {
         uploadCancelledByDelegateTriggered = true
         uploadCancelledByDelegateCallback?(log)
     }
 
-    var uploadFailedTriggered = false
-    var uploadFailedCallback: ErrorWithLogFileCallback?
+    private(set) var uploadFailedTriggered = false
+    private(set) var uploadFailedCallback: ErrorWithLogFileCallback?
+    func withUploadFailedCallback(_ callback: @escaping ErrorWithLogFileCallback) -> Self {
+        self.uploadFailedCallback = callback
+        return self
+    }
 
     func uploadFailed(withError error: Error, forLog log: LogFile) {
         uploadFailedTriggered = true
         uploadFailedCallback?(error, log)
     }
 
-    func setShouldUploadLogFiles(_ newValue: Bool) {
-        _shouldUploadLogFiles = newValue
-    }
-
-    private var _shouldUploadLogFiles: Bool = true
-    var shouldUploadLogFiles: Bool {
-        return _shouldUploadLogFiles
+    private(set) var shouldUploadLogFiles: Bool = true
+    func withShouldUploadLogFilesValue(_ newValue: Bool) -> Self {
+        self.shouldUploadLogFiles = newValue
+        return self
     }
 }
 
 class MockEventLoggingNetworkService: EventLoggingNetworkService {
-    var shouldSucceed = true
+    private(set) var shouldSucceed: Bool
+
+    init(shouldSucceed: Bool = true) {
+        self.shouldSucceed = shouldSucceed
+    }
 
     override func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping EventLoggingNetworkService.ResultCallback) {
         shouldSucceed ? completion(.success(Data())) : completion(.failure(MockError.generic))
-    }
-}
-
-class MockEventLoggingUploadQueue: EventLoggingUploadQueue {
-
-    typealias LogFileCallback = (LogFile) -> ()
-
-    var queue = [LogFile]()
-
-    var addCallback: LogFileCallback?
-    override func add(_ log: LogFile) {
-        self.addCallback?(log)
-        self.queue.append(log)
-    }
-
-    var removeCallback: LogFileCallback?
-    override func remove(_ log: LogFile) {
-        self.removeCallback?(log)
-        self.queue.removeAll(where: { $0.uuid == log.uuid })
-    }
-
-    override var first: LogFile? {
-        return self.queue.first
     }
 }

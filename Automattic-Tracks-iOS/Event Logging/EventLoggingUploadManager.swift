@@ -4,11 +4,6 @@ import Sodium
 
 class EventLoggingUploadManager {
 
-    private enum Constants {
-        static let uuidHeaderKey = "log-uuid"
-        static let uploadHttpMethod = "POST"
-    }
-
     private let dataSource: EventLoggingDataSource
     private let delegate: EventLoggingDelegate
     private let networkService: EventLoggingNetworkService
@@ -30,30 +25,45 @@ class EventLoggingUploadManager {
     func upload(_ log: LogFile, then callback: @escaping LogUploadCallback) {
         guard delegate.shouldUploadLogFiles else {
             delegate.uploadCancelledByDelegate(log)
+            callback(.failure(EventLoggingFileUploadError.cancelledByDelegate))
             return
         }
 
-        guard let fileContents = fileManager.contents(atUrl: log.url) else {
-            delegate.uploadFailed(withError: EventLoggingFileUploadError.fileMissing, forLog: log)
+        guard fileManager.fileExistsAtURL(log.url) else {
+            let error = EventLoggingFileUploadError.fileMissing
+            delegate.uploadFailed(withError: error, forLog: log)
+            callback(.failure(error))
             return
         }
 
-        var request = URLRequest(url: dataSource.logUploadURL)
-        request.addValue(log.uuid, forHTTPHeaderField: Constants.uuidHeaderKey)
-        request.httpMethod = Constants.uploadHttpMethod
-        request.httpBody = fileContents
+        let request = createRequest(
+            url: dataSource.logUploadURL,
+            uuid: log.uuid, authenticationToken:
+            dataSource.loggingAuthenticationToken
+        )
 
         delegate.didStartUploadingLog(log)
 
         networkService.uploadFile(request: request, fileURL: log.url) { result in
             switch result {
                 case .success:
-                    self.delegate.didFinishUploadingLog(log)
                     callback(.success(()))
+                    /// fire after the callback so the hosting app can act on the result of the callback (such as removing the log from the queue)
+                    self.delegate.didFinishUploadingLog(log)
                 case .failure(let error):
-                    self.delegate.uploadFailed(withError: error, forLog: log)
                     callback(.failure(error))
+                    /// fire after the callback so the hosting app can act on any state changes caused by the callback
+                    self.delegate.uploadFailed(withError: error, forLog: log)
             }
         }
+    }
+
+    func createRequest(url: URL, uuid: String, authenticationToken: String) -> URLRequest {
+        var request = URLRequest(url: url)
+        request.addValue(uuid, forHTTPHeaderField: "log-uuid")
+        request.addValue(authenticationToken, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+
+        return request
     }
 }
