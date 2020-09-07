@@ -85,7 +85,7 @@ public class CrashLogging {
 
         #if DEBUG
         DDLogDebug("📜 This is a debug build")
-        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") ?? false
+        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging")
         #else
         let shouldSendEvent = !CrashLogging.userHasOptedOut
         #endif
