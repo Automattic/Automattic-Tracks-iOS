@@ -7,6 +7,7 @@ public protocol CrashLoggingDataProvider {
     var releaseName: String { get }
     var currentUser: TracksUser? { get }
     var additionalUserData: [String: Any] { get }
+    var shouldEnableAutomaticBreadcrumbTracking: Bool { get }
 }
 
 /// Default implementations of common protocol properties
@@ -18,5 +19,9 @@ public extension CrashLoggingDataProvider {
 
     var additionalUserData: [String: Any] {
         return [ : ]
+    }
+
+    var shouldEnableAutomaticBreadcrumbTracking: Bool {
+        return false
     }
 }
