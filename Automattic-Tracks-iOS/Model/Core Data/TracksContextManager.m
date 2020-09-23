@@ -59,6 +59,52 @@
     return _persistentStoreCoordinator;
 }
 
+- (NSURL *)applicationSupportURLForContainerApp {
+    // The container app is the one owning the main bundle
+    return [self applicationSupportURLForAppWithBundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
+}
+
+- (NSURL *)applicationSupportURLForAppWithBundleIdentifier:(NSString *)bundleIdentifier {
+    NSURL *folder = [[self applicationSupportURL] URLByAppendingPathComponent:bundleIdentifier];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtURL:folder
+                             withIntermediateDirectories:true
+                                              attributes:nil
+                                                   error:&error];
+
+    // It seems safe not to handle this error because Application Support should always be
+    // available and one should always be able to create a folder in it
+    if (error != nil) {
+        DDLogError(@"Failed to create folder for %@ in Application Support: %@, %@", bundleIdentifier, error, [error userInfo]);
+        abort();
+    }
+
+    return folder;
+}
+
+// Application Support contains "the files that your app creates and manages on behalf of the user
+// and can include files that contain user data".
+//
+// See:
+// https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1
+- (NSURL *)applicationSupportURL {
+    NSError *error = nil;
+    NSFileManager *manager = [NSFileManager defaultManager];
+    NSURL *applicationSupportURL = [manager URLForDirectory:NSApplicationSupportDirectory
+                                                inDomain:NSUserDomainMask
+                                       appropriateForURL:nil
+                                                  create:false
+                                                   error:&error];
+
+    // It seems safe not to handle this error because Application Support should always be
+    // available.
+    if (error != nil) {
+        DDLogError(@"Failed to get path to Application Support folder: %@, %@", error, [error userInfo]);
+        abort();
+    }
+
+    return applicationSupportURL;
+}
 
 - (NSManagedObjectContext *)managedObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)
