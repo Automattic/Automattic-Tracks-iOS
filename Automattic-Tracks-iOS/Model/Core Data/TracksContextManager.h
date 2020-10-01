@@ -3,8 +3,8 @@
 
 @interface TracksContextManager : NSObject
 
-@property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) NSManagedObjectModel *managedObjectModel;
-@property (nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
+@property (nonnull, nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonnull, nonatomic, strong) NSManagedObjectModel *managedObjectModel;
+@property (nonnull, nonatomic, strong) NSPersistentStoreCoordinator *persistentStoreCoordinator;
 
 @end
