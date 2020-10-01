@@ -42,7 +42,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationSupportURLForContainerApp] URLByAppendingPathComponent:@"Tracks.sqlite"];
+    NSURL *storeURL = [self storeURL];
     NSError *error = nil;
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         
@@ -57,6 +57,11 @@
     }
     
     return _persistentStoreCoordinator;
+}
+
+- (NSURL *)storeURL {
+    NSURL *containerDirectoryURL = [self applicationSupportURLForContainerApp];
+    return [containerDirectoryURL URLByAppendingPathComponent:@"Tracks.sqlite"];
 }
 
 - (NSURL *)applicationSupportURLForContainerApp {
