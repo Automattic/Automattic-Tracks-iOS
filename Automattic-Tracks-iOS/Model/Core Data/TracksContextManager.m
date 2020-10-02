@@ -115,22 +115,9 @@
 // See:
 // https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1
 - (NSURL *)applicationSupportURL {
-    NSError *error = nil;
-    NSFileManager *manager = [NSFileManager defaultManager];
-    NSURL *applicationSupportURL = [manager URLForDirectory:NSApplicationSupportDirectory
-                                                inDomain:NSUserDomainMask
-                                       appropriateForURL:nil
-                                                  create:false
-                                                   error:&error];
-
-    // It seems safe not to handle this error because Application Support should always be
-    // available.
-    if (error != nil) {
-        DDLogError(@"Failed to get path to Application Support folder: %@, %@", error, [error userInfo]);
-        abort();
-    }
-
-    return applicationSupportURL;
+    // Application Support should always be available, so no checking whether the array is empty
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
