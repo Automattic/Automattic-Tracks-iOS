@@ -10,7 +10,7 @@
 @implementation TracksContextManager
 
 - (instancetype)init {
-    return [[TracksContextManager alloc] initWithSandboxedMode:true];
+    return [self initWithSandboxedMode:true];
 }
 
 - (instancetype)initWithSandboxedMode:(BOOL)sandboxed {
