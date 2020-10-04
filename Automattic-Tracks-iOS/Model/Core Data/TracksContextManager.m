@@ -10,7 +10,7 @@
 @implementation TracksContextManager
 
 - (instancetype)init {
-    return [self initWithSandboxedMode:true];
+    return [self initWithSandboxedMode:YES];
 }
 
 - (instancetype)initWithSandboxedMode:(BOOL)sandboxed {
@@ -80,9 +80,9 @@
 
 - (NSURL *)storeContainerDirectoryURL {
     if (self.sandboxed == YES) {
-        return [self applicationSupportURLForContainerApp];
-    } else {
         return [self applicationDocumentsDirectory];
+    } else {
+        return [self applicationSupportURLForContainerApp];
     }
 }
 

@@ -6,17 +6,17 @@ class TracksContextManagerTests: XCTestCase {
     func testStoreIsInDocumentsDirectoryByDefault() throws {
         let contextManager = TracksContextManager()
         let storeURL = try getStoreURLFrom(contextManager)
-        XCTAssertTrue(storeURL.pathComponents.contains("Application Support"))
+        XCTAssertTrue(storeURL.pathComponents.contains("Documents"))
     }
 
-    func testStoreIsInApplicationSupportDirectoryWhenSandboxed() throws {
-        let contextManager = TracksContextManager(sandboxedMode: true)
+    func testStoreIsInApplicationSupportDirectoryWhenNotSandboxed() throws {
+        let contextManager = TracksContextManager(sandboxedMode: false)
         let storeURL = try getStoreURLFrom(contextManager)
         XCTAssertTrue(storeURL.pathComponents.contains("Application Support"))
     }
 
-    func testStoreIsInDocumentsDirectoryWhenNotSandboxed() throws {
-        let contextManager = TracksContextManager(sandboxedMode: false)
+    func testStoreIsInDocumentsDirectoryWhenSandboxed() throws {
+        let contextManager = TracksContextManager(sandboxedMode: true)
         let storeURL = try getStoreURLFrom(contextManager)
         XCTAssertTrue(storeURL.pathComponents.contains("Documents"))
     }
