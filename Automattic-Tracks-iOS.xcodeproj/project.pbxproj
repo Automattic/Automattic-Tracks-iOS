@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
+		3FEC52D1252AD1BB00F53EAB /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
 		57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -999,6 +1000,7 @@
 				F99D03482422DB800091C33E /* Tracks.xcdatamodeld in Sources */,
 				F99D03282422D9B70091C33E /* EncryptedLog.swift in Sources */,
 				F99D03352422D9F30091C33E /* CrashLoggingTests.swift in Sources */,
+				3FEC52D1252AD1BB00F53EAB /* TracksContexManagerTests.swift in Sources */,
 				F944565824296684009A36B3 /* EventLoggingUploadQueueTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
