@@ -53,11 +53,12 @@ workflows:
     jobs:
       - TestIOS:
           name: Test iOS
-      - ios/validate-podspec:
-          name: Validate Podspec
-          xcode-version: "12.0.0"
-          podspec-path: Automattic-Tracks-iOS.podspec
-          bundle-install: true
+      # Disabled due to issues on Xcode 12
+      # - ios/validate-podspec:
+      #     name: Validate Podspec
+      #     xcode-version: "12.0.0"
+      #     podspec-path: Automattic-Tracks-iOS.podspec
+      #     bundle-install: true
       - ios/publish-podspec:
           name: Publish pod to Trunk
           xcode-version: "12.0.0"
