@@ -32,5 +32,24 @@ Pod::Spec.new do |spec|
   spec.dependency 'CocoaLumberjack', '~> 3'
   spec.dependency 'Reachability', '~> 3'
   spec.dependency 'Sentry', '~>4'
-  spec.dependency 'Sodium', '~>0.8.0'
+  # This is a fork of Sodium that incorporates a fix to make it validate with
+  # the Xcode 12.0 toolchain and CocoaPods 1.9.3
+  spec.dependency 'Sodium-Fork', '0.8.2'
+
+  # Xcode 12 changed the way apps are built because of the upcoming support for
+  # Apple Silicon. We need explicitly exclude the arm64 architecture.
+  # More info at
+  # https://stackoverflow.com/questions/63607158/xcode-12-building-for-ios-simulator-but-linking-in-object-file-built-for-ios
+  spec.pod_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+  }
+
+  # Notice that a CocoaPods contributor discourages the use of
+  # `user_target_xcconfig`, but in this case also agrees that there might not be
+  # a better approach.
+  # See
+  # https://github.com/CocoaPods/CocoaPods/issues/10065#issuecomment-701055569
+  spec.user_target_xcconfig = {
+    'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64',
+  }
 end

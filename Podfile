@@ -8,7 +8,7 @@ def shared
   pod 'CocoaLumberjack', '~> 3'
   pod 'Reachability', '~> 3'
   pod 'Sentry', '~> 4'
-  pod 'Sodium', '~> 0.8.0'
+  pod 'Sodium-Fork', '~> 0.8.2'
 end
 
 target 'Automattic-Tracks-iOS' do
