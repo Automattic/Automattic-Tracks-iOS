@@ -58,6 +58,7 @@ workflows:
           xcode-version: "12.0.0"
           podspec-path: Automattic-Tracks-iOS.podspec
           bundle-install: true
+          update-specs-repo: true
       - ios/publish-podspec:
           name: Publish pod to Trunk
           xcode-version: "12.0.0"
