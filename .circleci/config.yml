@@ -44,6 +44,18 @@ workflows:
           xcode-version: "12.0.0"
           podspec-path: Automattic-Tracks-iOS.podspec
           bundle-install: true
+          update-specs-repo: true
+          # Event though `update-specs-repo` is true, the command looks like
+          # it's not running propertly in CI as it takes only one 1s and the
+          # Sodium-Fork spec is not found.
+          #
+          # See:
+          # - https://app.circleci.com/pipelines/github/Automattic/Automattic-Tracks-iOS/383/workflows/4989ecc1-ed24-4b74-8574-cf68524613ac/jobs/947
+          # - https://app.circleci.com/pipelines/github/Automattic/Automattic-Tracks-iOS/382/workflows/4fab7fd2-6cbd-4bc0-b7d1-052cde1d5698/jobs/944
+          #
+          # To work around that issue, look for Sodium-Fork in a secondary
+          # source.
+          sources: "https://cdn.cocoapods.org/,https://github.com/mokagio/private-cocoapods-specs.git"
       - ios/publish-podspec:
           name: Publish pod to Trunk
           xcode-version: "12.0.0"
