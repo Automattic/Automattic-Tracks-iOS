@@ -34,5 +34,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'Sentry', '~>4'
   # This is a fork of Sodium that incorporates a fix to # make it validate with
   # the Xcode 12.0 toolchain and CocoaPods 1.9.3
-  spec.dependency 'Sodium-Fork', '0.8.1'
+  spec.dependency 'Sodium-Fork', '0.8.2'
 end
