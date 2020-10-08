@@ -32,5 +32,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'CocoaLumberjack', '~> 3'
   spec.dependency 'Reachability', '~> 3'
   spec.dependency 'Sentry', '~>4'
-  spec.dependency 'Sodium', '~>0.8.0'
+  # This is a fork of Sodium that incorporates a fix to # make it validate with
+  # the Xcode 12.0 toolchain and CocoaPods 1.9.3
+  spec.dependency 'Sodium-Fork', '0.8.1'
 end
