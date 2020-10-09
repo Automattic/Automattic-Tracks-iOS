@@ -3,9 +3,24 @@
 
 @interface TracksContextManager ()
 
+@property (nonatomic, assign) BOOL sandboxed;
+
 @end
 
 @implementation TracksContextManager
+
+- (instancetype)init {
+    return [self initWithSandboxedMode:YES];
+}
+
+- (instancetype)initWithSandboxedMode:(BOOL)sandboxed {
+    self = [super init];
+    if (!self) { return nil; }
+
+    self.sandboxed = sandboxed;
+
+    return self;
+}
 
 #pragma mark - Core Data stack
 
@@ -42,7 +57,7 @@
     // Create the coordinator and store
     
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
-    NSURL *storeURL = [[self applicationDocumentsDirectory] URLByAppendingPathComponent:@"Tracks.sqlite"];
+    NSURL *storeURL = [self storeURL];
     NSError *error = nil;
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         
@@ -59,6 +74,51 @@
     return _persistentStoreCoordinator;
 }
 
+- (NSURL *)storeURL {
+    return [[self storeContainerDirectoryURL] URLByAppendingPathComponent:@"Tracks.sqlite"];
+}
+
+- (NSURL *)storeContainerDirectoryURL {
+    if (self.sandboxed == YES) {
+        return [self applicationDocumentsDirectory];
+    } else {
+        return [self applicationSupportURLForContainerApp];
+    }
+}
+
+- (NSURL *)applicationSupportURLForContainerApp {
+    // The container app is the one owning the main bundle
+    return [self applicationSupportURLForAppWithBundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
+}
+
+- (NSURL *)applicationSupportURLForAppWithBundleIdentifier:(NSString *)bundleIdentifier {
+    NSURL *folder = [[self applicationSupportURL] URLByAppendingPathComponent:bundleIdentifier];
+    NSError *error = nil;
+    [[NSFileManager defaultManager] createDirectoryAtURL:folder
+                             withIntermediateDirectories:true
+                                              attributes:nil
+                                                   error:&error];
+
+    // It seems safe not to handle this error because Application Support should always be
+    // available and one should always be able to create a folder in it
+    if (error != nil) {
+        DDLogError(@"Failed to create folder for %@ in Application Support: %@, %@", bundleIdentifier, error, [error userInfo]);
+        abort();
+    }
+
+    return folder;
+}
+
+// Application Support contains "the files that your app creates and manages on behalf of the user
+// and can include files that contain user data".
+//
+// See:
+// https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1
+- (NSURL *)applicationSupportURL {
+    // Application Support should always be available, so no checking whether the array is empty
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
+}
 
 - (NSManagedObjectContext *)managedObjectContext {
     // Returns the managed object context for the application (which is already bound to the persistent store coordinator for the application.)

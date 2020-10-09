@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
 		57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -167,6 +168,7 @@
 		3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
+		3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksContexManagerTests.swift; sourceTree = "<group>"; };
 		4D23D263D998EA01CCB752C4 /* Pods-Automattic-Tracks-iOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOS/Pods-Automattic-Tracks-iOS.debug.xcconfig"; sourceTree = "<group>"; };
 		519B82281CDF10E002CD67A7 /* Pods_Automattic_Tracks_OSXTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_OSXTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		57AB7ED02486C50900187234 /* ApplicationFacade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApplicationFacade.swift; sourceTree = "<group>"; };
@@ -516,6 +518,7 @@
 			children = (
 				F99D032E2422D9F30091C33E /* Event Logging */,
 				F99D032C2422D9F30091C33E /* CrashLoggingTests.swift */,
+				3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */,
 				F99D032D2422D9F30091C33E /* TracksEventServiceTests.m */,
 				F99D03302422D9F30091C33E /* TracksEventTests.m */,
 				F99D03312422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m */,
@@ -962,6 +965,7 @@
 				F99D033C2422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F99D03292422D9B70091C33E /* TestTracksContextManager.m in Sources */,
 				F99D03212422D9B70091C33E /* Extensions.swift in Sources */,
+				3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */,
 				F94EE62C242C4C280015C18E /* LogFileTests.swift in Sources */,
 				F99D033A2422D9F30091C33E /* TracksEventTests.m in Sources */,
 				F944565B24296698009A36B3 /* Mocks.swift in Sources */,
