@@ -18,7 +18,7 @@
 /// This designated initializer allows consumers to tell `TracksContextManager` the mode in which
 /// the app is running and where to save the store.
 ///
-/// The `super` `init` method defaults to `false` for backward compatibility.
+/// The `super` `init` method defaults to `true` for backward compatibility.
 - (nonnull instancetype)initWithSandboxedMode:(BOOL)sandboxed NS_DESIGNATED_INITIALIZER;
 
 @end
