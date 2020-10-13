@@ -144,6 +144,7 @@ public extension CrashLogging {
         let event = Event(level: .error)
         event.message = error.localizedDescription
         event.extra = userInfo ?? (error as NSError).userInfo
+        event.timestamp = Date()
 
         Client.shared?.snapshotStacktrace {
             Client.shared?.appendStacktrace(to: event)
@@ -165,6 +166,7 @@ public extension CrashLogging {
         let event = Event(level: level)
         event.message = message
         event.extra = properties
+        event.timestamp = Date()
 
         Client.shared?.snapshotStacktrace {
             Client.shared?.appendStacktrace(to: event)
