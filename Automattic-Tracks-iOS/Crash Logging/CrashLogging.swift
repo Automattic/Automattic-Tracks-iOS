@@ -46,11 +46,11 @@ public class CrashLogging {
             Client.shared = try Client(dsn: dataProvider.sentryDSN)
             try Client.shared?.startCrashHandler()
 
-            // Store lots of breadcrumbs to trace errors
-            Client.shared?.breadcrumbs.maxBreadcrumbs = 500
-
             // Automatically track screen transitions
-            Client.shared?.enableAutomaticBreadcrumbTracking()
+            if dataProvider.shouldEnableAutomaticBreadcrumbTracking {
+                Client.shared?.breadcrumbs.maxBreadcrumbs = 500 // Store lots of breadcrumbs to trace errors
+                Client.shared?.enableAutomaticBreadcrumbTracking()
+            }
 
             // Override event serialization to append the logs, if needed
             Client.shared?.beforeSerializeEvent = sharedInstance.beforeSerializeEvent
@@ -85,7 +85,7 @@ public class CrashLogging {
 
         #if DEBUG
         DDLogDebug("📜 This is a debug build")
-        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") ?? false
+        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging")
         #else
         let shouldSendEvent = !CrashLogging.userHasOptedOut
         #endif
@@ -144,6 +144,7 @@ public extension CrashLogging {
         let event = Event(level: .error)
         event.message = error.localizedDescription
         event.extra = userInfo ?? (error as NSError).userInfo
+        event.timestamp = Date()
 
         Client.shared?.snapshotStacktrace {
             Client.shared?.appendStacktrace(to: event)
@@ -165,6 +166,7 @@ public extension CrashLogging {
         let event = Event(level: level)
         event.message = message
         event.extra = properties
+        event.timestamp = Date()
 
         Client.shared?.snapshotStacktrace {
             Client.shared?.appendStacktrace(to: event)

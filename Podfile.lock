@@ -22,7 +22,7 @@ PODS:
   - Sentry (4.5.0):
     - Sentry/Core (= 4.5.0)
   - Sentry/Core (4.5.0)
-  - Sodium (0.8.0)
+  - Sodium-Fork (0.8.2)
   - UIDeviceIdentifier (1.4.0)
 
 DEPENDENCIES:
@@ -32,7 +32,7 @@ DEPENDENCIES:
   - OHHTTPStubs/Swift
   - Reachability (~> 3)
   - Sentry (~> 4)
-  - Sodium (~> 0.8.0)
+  - Sodium-Fork (~> 0.8.2)
   - UIDeviceIdentifier (~> 1)
 
 SPEC REPOS:
@@ -42,7 +42,7 @@ SPEC REPOS:
     - OHHTTPStubs
     - Reachability
     - Sentry
-    - Sodium
+    - Sodium-Fork
     - UIDeviceIdentifier
 
 SPEC CHECKSUMS:
@@ -51,9 +51,9 @@ SPEC CHECKSUMS:
   OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
-  Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
+  Sodium-Fork: 45fe3a7c675898ca0635af4eadcb34985477e868
   UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
 
-PODFILE CHECKSUM: 27db9cdc43d40c734625b3dc415935e9e6f5d0a1
+PODFILE CHECKSUM: 3e482900ab8d9a834701b62bc4ce2a3e517ead42
 
 COCOAPODS: 1.8.4
