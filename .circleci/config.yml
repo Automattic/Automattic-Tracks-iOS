@@ -55,7 +55,7 @@ workflows:
           #
           # To work around that issue, look for Sodium-Fork in a secondary
           # source.
-          sources: "https://cdn.cocoapods.org/,https://github.com/mokagio/private-cocoapods-specs.git"
+          sources: "https://cdn.cocoapods.org/"
       - ios/publish-podspec:
           name: Publish pod to Trunk
           xcode-version: "12.0.0"
