@@ -14,7 +14,7 @@ pod 'Automattic-Tracks-iOS', :git => 'git@github.com:Automattic/Automattic-Track
 ```
 
 1. Create an instance of `TracksService`.
-2. Set an appropriate event name prefix using the propert `eventNamePrefix`. As an Automattician you will know how to get a prefix whitelisted.
+2. Set an appropriate event name prefix using the propert `eventNamePrefix`. As an Automattician you will know how to get a prefix allowed.
 3. Keep this instance in a stable place and only instantiate one for your application.
 
 ## Usage
