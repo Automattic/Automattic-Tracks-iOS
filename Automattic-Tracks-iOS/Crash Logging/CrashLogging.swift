@@ -60,7 +60,7 @@ public class CrashLogging {
 
             // Add additional data
             options.releaseName = dataProvider.releaseName
-            Client.shared?.environment = dataProvider.buildType
+            options.environment = dataProvider.buildType
 
             SentrySDK.start(options: options)
 
