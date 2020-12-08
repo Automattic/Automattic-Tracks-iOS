@@ -32,9 +32,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'CocoaLumberjack', '~> 3'
   spec.dependency 'Reachability', '~> 3'
   spec.dependency 'Sentry', '~> 5'
-  # This is a fork of Sodium that incorporates a fix to make it validate with
-  # the Xcode 12.0 toolchain and CocoaPods 1.9.3
-  spec.dependency 'Sodium-Fork', '0.8.2'
+  spec.dependency 'Sodium', '~> 0.9'
 
   # Xcode 12 changed the way apps are built because of the upcoming support for
   # Apple Silicon. We need explicitly exclude the arm64 architecture.
