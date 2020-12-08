@@ -158,7 +158,8 @@ public extension CrashLogging {
             Client.shared?.appendStacktrace(to: event)
         }
 
-        Client.shared?.send(event: event)
+        SentrySDK.capture(event: event)
+
         sharedInstance.dataProvider?.didLogErrorCallback?(event)
     }
 
@@ -180,7 +181,7 @@ public extension CrashLogging {
             Client.shared?.appendStacktrace(to: event)
         }
 
-        Client.shared?.send(event: event)
+        SentrySDK.capture(event: event)
         sharedInstance.dataProvider?.didLogMessageCallback?(event)
     }
 }
