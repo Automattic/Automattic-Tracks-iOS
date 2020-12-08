@@ -129,7 +129,7 @@ public class CrashLogging {
 
     /// Immediately crashes the application and generates a crash report.
     public static func crash() {
-        Client.shared?.crash()
+        SentrySDK.crash()
     }
 
     public static var eventLogging: EventLogging? {
