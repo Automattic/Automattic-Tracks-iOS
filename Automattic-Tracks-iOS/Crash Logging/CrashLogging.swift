@@ -149,6 +149,7 @@ public extension CrashLogging {
      - level: The level of severity to report in Sentry (`.error` by default)
     */
     static func logError(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) {
+        // TODO: Notice that the `level` parameter is ignored. Should we remove it from the function signature or actually read it?
         let event = Event(level: .error)
         event.message = error.localizedDescription
         event.extra = userInfo ?? (error as NSError).userInfo
