@@ -43,8 +43,7 @@ public class CrashLogging {
 
         // Create a Sentry client and start crash handler
         do {
-            Client.shared = try Client(dsn: dataProvider.sentryDSN)
-            try Client.shared?.startCrashHandler()
+            let options = try Options(dict: ["dsn": dataProvider.sentryDSN])
 
             // Automatically track screen transitions
             if dataProvider.shouldEnableAutomaticBreadcrumbTracking {
@@ -59,6 +58,8 @@ public class CrashLogging {
             // Add additional data
             Client.shared?.releaseName = dataProvider.releaseName
             Client.shared?.environment = dataProvider.buildType
+
+            SentrySDK.start(options: options)
 
             // Refresh data from the data provider
             setNeedsDataRefresh()
