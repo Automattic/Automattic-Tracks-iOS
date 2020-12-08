@@ -59,7 +59,7 @@ public class CrashLogging {
             Client.shared?.shouldSendEvent = sharedInstance.shouldSendEvent
 
             // Add additional data
-            Client.shared?.releaseName = dataProvider.releaseName
+            options.releaseName = dataProvider.releaseName
             Client.shared?.environment = dataProvider.buildType
 
             SentrySDK.start(options: options)
