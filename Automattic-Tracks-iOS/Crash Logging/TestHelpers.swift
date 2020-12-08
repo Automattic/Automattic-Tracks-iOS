@@ -25,22 +25,13 @@ internal extension CrashLoggingDataProvider {
 internal extension CrashLogging {
 
     var cachedUser: TracksUser? {
-        guard
-            let context = currentContext,
-            let userData = context["user"] as? [String: Any]
-        else { return nil }
+        guard let userData = SentrySDK.currentHub().getScope().serialize()["user"] as? [String: Any] else { return nil }
 
         let userID = userData["id"] as? String
         let email = userData["email"] as? String
         let username = userData["username"] as? String
 
         return TracksUser(userID: userID, email: email, username: username)
-    }
-
-    /// Refresh the context from disk, then return it
-    var currentContext: [String: Any]? {
-        Client.shared?.perform(Selector(("restoreContextBeforeCrash")))
-        return Client.shared?.lastContext
     }
 
     var shouldSendEventCallback: ShouldSendEventCallback? {
