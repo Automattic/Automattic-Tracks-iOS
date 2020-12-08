@@ -24,10 +24,6 @@ internal extension CrashLoggingDataProvider {
 
 internal extension CrashLogging {
 
-    var environment: String? {
-        return Client.shared?.environment
-    }
-
     var cachedUser: TracksUser? {
         guard
             let context = currentContext,
