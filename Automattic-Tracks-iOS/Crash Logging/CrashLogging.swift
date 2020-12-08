@@ -47,8 +47,11 @@ public class CrashLogging {
 
             // Automatically track screen transitions
             if dataProvider.shouldEnableAutomaticBreadcrumbTracking {
-                Client.shared?.breadcrumbs.maxBreadcrumbs = 500 // Store lots of breadcrumbs to trace errors
-                Client.shared?.enableAutomaticBreadcrumbTracking()
+                options.maxBreadcrumbs = 500
+                // Tracking breadcrumbs is done via a Sentry "integration". To disable it, we need
+                // to disable the integration itself. See:
+                // https://docs.sentry.io/platforms/apple/usage/#integrations
+                options.integrations = options.integrations?.filter { $0 != "SentryAutoBreadcrumbTrackingIntegration" }
             }
 
             // Override event serialization to append the logs, if needed
