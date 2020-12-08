@@ -61,6 +61,8 @@ public class CrashLogging {
             options.releaseName = dataProvider.releaseName
             options.environment = dataProvider.buildType
 
+            options.attachStacktrace = true
+
             SentrySDK.start(options: options)
 
             // Refresh data from the data provider
@@ -155,9 +157,6 @@ public extension CrashLogging {
         event.extra = userInfo ?? (error as NSError).userInfo
         event.timestamp = Date()
 
-        Client.shared?.snapshotStacktrace {
-            Client.shared?.appendStacktrace(to: event)
-        }
 
         SentrySDK.capture(event: event)
 
@@ -178,9 +177,6 @@ public extension CrashLogging {
         event.extra = properties
         event.timestamp = Date()
 
-        Client.shared?.snapshotStacktrace {
-            Client.shared?.appendStacktrace(to: event)
-        }
 
         SentrySDK.capture(event: event)
         sharedInstance.dataProvider?.didLogMessageCallback?(event)
