@@ -209,7 +209,7 @@ extension CrashLogging {
     ///
     /// Calling this method in these situations prevents
     public static func setNeedsDataRefresh() {
-        Client.shared?.user = sharedInstance.currentUser
+        SentrySDK.setUser(sharedInstance.currentUser)
     }
 }
 
