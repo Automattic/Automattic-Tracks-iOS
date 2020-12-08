@@ -157,6 +157,13 @@ public extension CrashLogging {
         event.extra = userInfo ?? (error as NSError).userInfo
         event.timestamp = Date()
 
+        // TODO: This is likely unnecessary. Leaving it here for discussion during code review.
+        // If we set the `attachStacktrace` option to `true` when initializing `SentrySDK`. Manually
+        // setting it here, though, makes the dedicated unit test pass. I believe that's just a
+        // byproduct of the fact that the test looks into the event stored in via the
+        // `didLogErrorCallback` hook, not the event actually sent through by Sentry – which
+        // obviously we cannot do.
+        event.stacktrace = SentryStacktraceBuilder().buildStacktraceForCurrentThread(framesToSkip: 0)
 
         SentrySDK.capture(event: event)
 
@@ -177,6 +184,13 @@ public extension CrashLogging {
         event.extra = properties
         event.timestamp = Date()
 
+        // TODO: This is likely unnecessary. Leaving it here for discussion during code review.
+        // If we set the `attachStacktrace` option to `true` when initializing `SentrySDK`. Manually
+        // setting it here, though, makes the dedicated unit test pass. I believe that's just a
+        // byproduct of the fact that the test looks into the event stored in via the
+        // `didLogMessageCallback` hook, not the event actually sent through by Sentry – which
+        // obviously we cannot do.
+        event.stacktrace = SentryStacktraceBuilder().buildStacktraceForCurrentThread(framesToSkip: 0)
 
         SentrySDK.capture(event: event)
         sharedInstance.dataProvider?.didLogMessageCallback?(event)
