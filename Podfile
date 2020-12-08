@@ -12,7 +12,7 @@ def shared
 end
 
 target 'Automattic-Tracks-iOS' do
-  platform :ios, '9.0'
+  platform :ios, '12.0'
   shared
   pod 'UIDeviceIdentifier', '~> 1'
 end
