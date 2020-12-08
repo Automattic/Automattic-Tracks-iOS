@@ -54,9 +54,8 @@ public class CrashLogging {
                 options.integrations = options.integrations?.filter { $0 != "SentryAutoBreadcrumbTrackingIntegration" }
             }
 
-            // Override event serialization to append the logs, if needed
-            Client.shared?.beforeSerializeEvent = sharedInstance.beforeSerializeEvent
-            Client.shared?.shouldSendEvent = sharedInstance.shouldSendEvent
+            // Runs before sending the event to append the logs, if needed, or drop the it.
+            options.beforeSend = sharedInstance.beforeSerializeEvent
 
             // Add additional data
             options.releaseName = dataProvider.releaseName
@@ -72,14 +71,19 @@ public class CrashLogging {
         }
     }
 
-    /// A Sentry hook used to attach any additional data to the event.
-    private func beforeSerializeEvent(_ event: Event) {
+    /// A Sentry hook used to attach any additional data to the event or discard it by returning
+    /// nil.
+    private func beforeSerializeEvent(_ event: Event?) -> Event? {
+        guard let event = event, shouldSendEvent(event) else { return .none }
+
         // event.tags is always not null so we don't care that much about it here.
         event.tags?["locale"] = NSLocale.current.languageCode
 
         if let appState = ApplicationFacade().applicationState {
             event.tags?["app.state"] = appState
         }
+
+        return event
     }
 
     /// A Sentry hook that controls whether or not the event should be sent.
