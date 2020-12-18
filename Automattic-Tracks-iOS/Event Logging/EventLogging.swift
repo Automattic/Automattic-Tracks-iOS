@@ -5,6 +5,9 @@ import Sodium
 
 public class EventLogging {
 
+    @available(iOS 13.0, OSX 10.15, *)
+    public lazy private(set) var publisher = EventLoggingPublisher()
+
     /// Add a Log File to the list of events that need to be uploaded
     public func enqueueLogForUpload(log: LogFile) throws {
         try uploadQueue.add(log)
@@ -14,6 +17,8 @@ public class EventLogging {
 
         /// Restart the automatic upload queue when log files are added
         uploadNextLogFileIfNeeded()
+
+        refreshPublisher()
     }
 
     /// Maintains a list of events that need to be uploaded
@@ -51,6 +56,9 @@ public class EventLogging {
 
         /// Start taking items off the queue and uploading them if needed
         uploadNextLogFileIfNeeded()
+
+        /// Start publishing the log queue
+        refreshPublisher()
     }
 
     /// Schedule encryption and upload for the next log file in the queue
@@ -89,18 +97,22 @@ extension EventLogging {
         /// If the queue is empty, just bail without rescheduling – the next item added to the queue will start the process up again
         guard let log = uploadQueue.first else {
             lock.unlock()
+            refreshPublisher()
             return
         }
 
         /// If the backoff timer is blocking execution, reschedule the next run
         guard exponentialBackoffTimer.next < .now() else {
             retryUploadsAt(exponentialBackoffTimer.next)
+            refreshPublisher()
             lock.unlock()
             return
         }
 
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
+
+        refreshPublisher()
 
         processingQueue.async {
             do {
@@ -112,6 +124,7 @@ extension EventLogging {
                     switch result {
                         case .success:
                             try? self.uploadQueue.remove(log)
+                            self.refreshPublisher()
 
                             /// Reset the timer if requests are succeeding
                             self.exponentialBackoffTimer.reset()
@@ -165,6 +178,24 @@ extension EventLogging {
 
         let encryptedURL = try LogEncryptor(withPublicKey: key).encryptLog(log)
         return LogFile(url: encryptedURL, uuid: log.uuid)
+    }
+
+    private func refreshPublisher() {
+        if #available(iOS 13.0, OSX 10.15, *) {
+            publisher.set(logFiles: uploadQueue.items)
+
+            if uploadQueue.items.count == 0 {
+                publisher.set(state: .done)
+            }
+
+            if uploadQueue.items.count > 0 && uploadsPausedUntil == nil {
+                publisher.set(state: .uploading)
+            }
+
+            if uploadQueue.items.count > 0, let date = uploadsPausedUntil {
+                publisher.set(state: .paused(until: date))
+            }
+        }
     }
 }
 
