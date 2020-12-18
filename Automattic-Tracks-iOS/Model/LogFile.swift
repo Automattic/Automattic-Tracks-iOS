@@ -3,10 +3,12 @@ import Foundation
 public struct LogFile {
     public let uuid: String
     public let url: URL
+    public let date: Date?
 
     public init(url: URL, uuid: String = UUID().uuidString) {
         self.url = url
         self.uuid = uuid
+        self.date = try? FileManager.default.attributesOfItem(at: url).fileCreationDate
     }
 
     var fileName: String {
@@ -28,5 +30,12 @@ extension LogFile: Comparable {
         }
 
         return lhsDate < rhsDate
+    }
+}
+
+extension LogFile: Identifiable {
+    public typealias ID = String
+    public var id: String {
+        return uuid
     }
 }
