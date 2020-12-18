@@ -19,9 +19,9 @@ PODS:
   - OHHTTPStubs/Swift (9.0.0):
     - OHHTTPStubs/Default
   - Reachability (3.2)
-  - Sentry (4.5.0):
-    - Sentry/Core (= 4.5.0)
-  - Sentry/Core (4.5.0)
+  - Sentry (6.1.0):
+    - Sentry/Core (= 6.1.0)
+  - Sentry/Core (6.1.0)
   - Sodium (0.9.1)
   - UIDeviceIdentifier (1.4.0)
 
@@ -31,7 +31,7 @@ DEPENDENCIES:
   - OHHTTPStubs
   - OHHTTPStubs/Swift
   - Reachability (~> 3)
-  - Sentry (~> 4)
+  - Sentry (~> 6)
   - Sodium (>= 0.9.1)
   - UIDeviceIdentifier (~> 1)
 
@@ -50,10 +50,10 @@ SPEC CHECKSUMS:
   OCMock: 5ea90566be239f179ba766fd9fbae5885040b992
   OHHTTPStubs: cb29d2a9d09a828ecb93349a2b0c64f99e0db89f
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
-  Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
+  Sentry: 367db11b23fc30944358dbd198fa35a96ad7f2a5
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
 
-PODFILE CHECKSUM: d45b3937453a4490522d7f6983957566f9741123
+PODFILE CHECKSUM: a525801c0c27c1f58d4d62ebbf30b47a422185fa
 
 COCOAPODS: 1.10.1
