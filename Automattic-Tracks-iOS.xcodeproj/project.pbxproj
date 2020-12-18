@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24744A49258BCD2A006FF781 /* SentryTestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24744A48258BCD2A006FF781 /* SentryTestError.swift */; };
+		2474541E258C8BBC006FF781 /* SentryClient+Shim.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474541C258C8BBC006FF781 /* SentryClient+Shim.m */; };
+		2474541F258C8BBC006FF781 /* SentryClient+Shim.m in Sources */ = {isa = PBXBuildFile; fileRef = 2474541C258C8BBC006FF781 /* SentryClient+Shim.m */; };
+		24745420258C8BBC006FF781 /* SentryClient+Shim.h in Headers */ = {isa = PBXBuildFile; fileRef = 2474541D258C8BBC006FF781 /* SentryClient+Shim.h */; };
+		24745421258C8BBC006FF781 /* SentryClient+Shim.h in Headers */ = {isa = PBXBuildFile; fileRef = 2474541D258C8BBC006FF781 /* SentryClient+Shim.h */; };
+		24745427258C8BCB006FF781 /* SentryEventSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745426258C8BCB006FF781 /* SentryEventSerializerTests.swift */; };
+		24745428258C8BCB006FF781 /* SentryEventSerializerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745426258C8BCB006FF781 /* SentryEventSerializerTests.swift */; };
+		24745432258C8BDA006FF781 /* SentryEventSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745431258C8BDA006FF781 /* SentryEventSerializer.swift */; };
+		24745433258C8BDA006FF781 /* SentryEventSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745431258C8BDA006FF781 /* SentryEventSerializer.swift */; };
 		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -163,6 +172,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		24744A48258BCD2A006FF781 /* SentryTestError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryTestError.swift; sourceTree = "<group>"; };
+		2474541C258C8BBC006FF781 /* SentryClient+Shim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SentryClient+Shim.m"; sourceTree = "<group>"; };
+		2474541D258C8BBC006FF781 /* SentryClient+Shim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SentryClient+Shim.h"; sourceTree = "<group>"; };
+		24745426258C8BCB006FF781 /* SentryEventSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SentryEventSerializerTests.swift; path = "Automattic-Tracks-iOSTests/Tests/SentryEventSerializerTests.swift"; sourceTree = SOURCE_ROOT; };
+		24745431258C8BDA006FF781 /* SentryEventSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentryEventSerializer.swift; sourceTree = "<group>"; };
 		3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -491,6 +505,10 @@
 				F9788DA62421A2BF000A9BB5 /* CrashLoggingDataProvider.swift */,
 				F99D03492422DD100091C33E /* TestHelpers.swift */,
 				57AB7ED02486C50900187234 /* ApplicationFacade.swift */,
+				24745431258C8BDA006FF781 /* SentryEventSerializer.swift */,
+				24744A48258BCD2A006FF781 /* SentryTestError.swift */,
+				2474541D258C8BBC006FF781 /* SentryClient+Shim.h */,
+				2474541C258C8BBC006FF781 /* SentryClient+Shim.m */,
 			);
 			path = "Crash Logging";
 			sourceTree = "<group>";
@@ -534,6 +552,7 @@
 				F94456512429666B009A36B3 /* EventLoggingUploadQueueTests.swift */,
 				F94EE62B242C4C280015C18E /* LogFileTests.swift */,
 				F94EE631242D000E0015C18E /* EventLoggingNetworkServiceTests.swift */,
+				24745426258C8BCB006FF781 /* SentryEventSerializerTests.swift */,
 			);
 			path = "Event Logging";
 			sourceTree = "<group>";
@@ -561,6 +580,7 @@
 				F9788DA224219D66000A9BB5 /* TracksDeviceInformation.h in Headers */,
 				F9788DDF2421B4EF000A9BB5 /* TracksEventService.h in Headers */,
 				F9788D9624219D66000A9BB5 /* TracksContextManager.h in Headers */,
+				24745420258C8BBC006FF781 /* SentryClient+Shim.h in Headers */,
 				F9788DA024219D66000A9BB5 /* TracksEvent.h in Headers */,
 				F9788DDD2421B4EF000A9BB5 /* WatchSessionManager.h in Headers */,
 				F9788DE12421B4EF000A9BB5 /* TracksEventPersistenceService.h in Headers */,
@@ -581,6 +601,7 @@
 				F9788DA324219D66000A9BB5 /* TracksDeviceInformation.h in Headers */,
 				F9788DE02421B4EF000A9BB5 /* TracksEventService.h in Headers */,
 				F9788D9724219D66000A9BB5 /* TracksContextManager.h in Headers */,
+				24745421258C8BBC006FF781 /* SentryClient+Shim.h in Headers */,
 				F9788DA124219D66000A9BB5 /* TracksEvent.h in Headers */,
 				F9788DDE2421B4EF000A9BB5 /* WatchSessionManager.h in Headers */,
 				F9788DE22421B4EF000A9BB5 /* TracksEventPersistenceService.h in Headers */,
@@ -919,6 +940,8 @@
 				93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */,
 				F944563B242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */,
 				F94456462429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */,
+				24744A49258BCD2A006FF781 /* SentryTestError.swift in Sources */,
+				2474541E258C8BBC006FF781 /* SentryClient+Shim.m in Sources */,
 				F9838978243286EA00BB2F1F /* EventLogging.swift in Sources */,
 				F9788DA92421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */,
@@ -929,6 +952,7 @@
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F97CBE6024B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
+				24745432258C8BDA006FF781 /* SentryEventSerializer.swift in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F97C6B0E24758AFF006089D7 /* EventLogging+Sentry.swift in Sources */,
 				F9445642242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
@@ -950,6 +974,7 @@
 				F94EE632242D000E0015C18E /* EventLoggingNetworkServiceTests.swift in Sources */,
 				F99D03402422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */,
 				F94456522429666B009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */,
+				24745427258C8BCB006FF781 /* SentryEventSerializerTests.swift in Sources */,
 				F9BB41312435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */,
 				F949B1E82429681A0069FF76 /* LogEncryptionTests.swift in Sources */,
 				F99D03272422D9B70091C33E /* EncryptedLog.swift in Sources */,
@@ -978,6 +1003,7 @@
 				F99D03412422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */,
 				F9D8BF622432FF82007E2C87 /* EventLoggingTests.swift in Sources */,
 				F99D03242422D9B70091C33E /* LogFile+TestHelpers.swift in Sources */,
+				24745428258C8BCB006FF781 /* SentryEventSerializerTests.swift in Sources */,
 				F99D033D2422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F944565C24296698009A36B3 /* Mocks.swift in Sources */,
 				F949B1E92429681A0069FF76 /* LogEncryptionTests.swift in Sources */,
@@ -1005,6 +1031,7 @@
 				F9788D8F24219D66000A9BB5 /* LogFile.swift in Sources */,
 				F9788D9324219D66000A9BB5 /* TracksDeviceInformation.m in Sources */,
 				F9788D9124219D66000A9BB5 /* TracksEvent.m in Sources */,
+				24745433258C8BDA006FF781 /* SentryEventSerializer.swift in Sources */,
 				F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */,
 				F944563A242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */,
 				F9788D9D24219D66000A9BB5 /* TracksContextManager.m in Sources */,
@@ -1016,6 +1043,7 @@
 				F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F99D03462422DB700091C33E /* Tracks.xcdatamodeld in Sources */,
 				F9BB41332435C58C00533BCD /* ExponentialBackoffTimer.swift in Sources */,
+				2474541F258C8BBC006FF781 /* SentryClient+Shim.m in Sources */,
 				F94456492429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */,
 				F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F9788D9F24219D66000A9BB5 /* TracksUser.swift in Sources */,
