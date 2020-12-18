@@ -57,7 +57,7 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
         return self
     }
 
-    func didStartUploadingLog(_ log: LogFile) {
+    func didStartUploadingLog(eventLogging: EventLogging, log: LogFile) {
         didStartUploadingTriggered = true
         didStartUploadingCallback?(log)
     }
@@ -69,7 +69,7 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
         return self
     }
 
-    func didFinishUploadingLog(_ log: LogFile) {
+    func didFinishUploadingLog(eventLogging: EventLogging, log: LogFile) {
         didFinishUploadingTriggered = true
         didFinishUploadingCallback?(log)
     }
@@ -81,7 +81,7 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
         return self
     }
 
-    func uploadCancelledByDelegate(_ log: LogFile) {
+    func uploadCancelledByDelegate(eventLogging: EventLogging, log: LogFile) {
         uploadCancelledByDelegateTriggered = true
         uploadCancelledByDelegateCallback?(log)
     }
@@ -93,9 +93,9 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
         return self
     }
 
-    func uploadFailed(withError error: Error, forLog log: LogFile) {
+    func uploadFailed(eventLogging: EventLogging, withError error: Error, forLog log: LogFile) {
         uploadFailedTriggered = true
-        uploadFailedCallback?(error, log)
+        self.uploadFailedCallback?(error, log)
     }
 
     private(set) var shouldUploadLogFiles: Bool = true
@@ -103,6 +103,14 @@ class MockEventLoggingDelegate: EventLoggingDelegate {
         self.shouldUploadLogFiles = newValue
         return self
     }
+
+    private(set) var didQueueLogForUploadTriggered = false
+    private(set) var didQueueLogForUploadCallback: LogFileCallback?
+    func didQueueLogForUpload(eventLogging: EventLogging, log: LogFile) {
+        didQueueLogForUploadTriggered = true
+        didQueueLogForUploadCallback?(log)
+    }
+
 }
 
 class MockEventLoggingNetworkService: EventLoggingNetworkService {
@@ -113,6 +121,6 @@ class MockEventLoggingNetworkService: EventLoggingNetworkService {
     }
 
     override func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping EventLoggingNetworkService.ResultCallback) {
-        shouldSucceed ? completion(.success(Data())) : completion(.failure(MockError.generic))
+        shouldSucceed ? completion(.success(())) : completion(.failure(MockError.generic))
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 
 class EventLoggingNetworkService {
 
-    typealias ResultCallback = (Result<Data?, Error>) -> Void
+    typealias ResultCallback = (Result<Void, Error>) -> Void
 
     private let urlSession: URLSession
 
@@ -37,7 +37,7 @@ class EventLoggingNetworkService {
                 return
             }
 
-            completion(.success(data))
+            completion(.success(()))
         }).resume()
     }
 

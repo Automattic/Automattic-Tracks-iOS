@@ -10,7 +10,7 @@ public class EventLogging {
         try uploadQueue.add(log)
 
         /// Notify observers of a new log in the queue
-        delegate.didQueueLogForUpload(log)
+        delegate.didQueueLogForUpload(eventLogging: self, log: log)
 
         /// Restart the automatic upload queue when log files are added
         uploadNextLogFileIfNeeded()
@@ -23,8 +23,9 @@ public class EventLogging {
     private let lock = NSLock()
     private let processingQueue = DispatchQueue(label: "event-logging-upload")
 
-    /// Uploads Events
-    private let uploadManager: EventLoggingUploadManager
+    /// Handles Network IO
+    /// Can be modified internally for mocking purposes
+    var networkService = EventLoggingNetworkService()
 
     /// Data Source
     let dataSource: EventLoggingDataSource
@@ -32,14 +33,16 @@ public class EventLogging {
     /// Delegate
     let delegate: EventLoggingDelegate
 
+    /// Internal File Manager
+    let fileManager: FileManager
+
     public init(dataSource: EventLoggingDataSource,
          delegate: EventLoggingDelegate,
          fileManager: FileManager = FileManager.default
     ) {
         self.dataSource = dataSource
         self.delegate = delegate
-
-        self.uploadManager = EventLoggingUploadManager(dataSource: dataSource, delegate: delegate)
+        self.fileManager = fileManager
 
         self.uploadQueue = EventLoggingUploadQueue(
             storageDirectory: dataSource.logUploadQueueStorageURL,
@@ -96,14 +99,6 @@ extension EventLogging {
             return
         }
 
-        /// If the delegate is reporting that we shouldn't upload log files, pause upload to prevent an endless loop
-        guard delegate.shouldUploadLogFiles else {
-            delegate.uploadCancelledByDelegate(log)
-            retryUploadsAt(.distantFuture)
-            lock.unlock()
-            return
-        }
-
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
 
@@ -112,17 +107,18 @@ extension EventLogging {
                 let encryptedLog = try self.encryptLog(log)
 
                 /// Upload the log
-                self.uploadManager.upload(encryptedLog) { result in
-                    if case .success = result {
-                        try? self.uploadQueue.remove(log)
+                self.upload(log: encryptedLog) { result in
 
-                        /// Reset the timer if requests are succeeding
-                        self.exponentialBackoffTimer.reset()
-                    }
-                    else {
-                        /// Wait longer between requests if they are failing
-                        self.exponentialBackoffTimer.increment()
-                        self.retryUploadsAt(self.exponentialBackoffTimer.next)
+                    switch result {
+                        case .success:
+                            try? self.uploadQueue.remove(log)
+
+                            /// Reset the timer if requests are succeeding
+                            self.exponentialBackoffTimer.reset()
+                        case .failure:
+                            /// Wait longer between requests if they are failing
+                            self.exponentialBackoffTimer.increment()
+                            self.retryUploadsAt(self.exponentialBackoffTimer.next)
                     }
 
                     dispatchGroup.leave()
@@ -169,5 +165,49 @@ extension EventLogging {
 
         let encryptedURL = try LogEncryptor(withPublicKey: key).encryptLog(log)
         return LogFile(url: encryptedURL, uuid: log.uuid)
+    }
+}
+
+// MARK: HTTP Request Layer
+extension EventLogging {
+    func createRequest(for log: LogFile) -> URLRequest {
+        var request = URLRequest(url: self.dataSource.logUploadURL)
+        request.addValue(log.uuid, forHTTPHeaderField: "log-uuid")
+        request.addValue(self.dataSource.loggingAuthenticationToken, forHTTPHeaderField: "Authorization")
+        request.httpMethod = "POST"
+
+        return request
+    }
+
+    func upload(log: LogFile, completion: @escaping EventLoggingNetworkService.ResultCallback) {
+
+        /// If the delegate is reporting that we shouldn't upload log files, pause upload to prevent an endless loop
+        guard delegate.shouldUploadLogFiles else {
+            delegate.uploadCancelledByDelegate(eventLogging: self, log: log)
+            retryUploadsAt(.distantFuture)
+            lock.unlock()
+            return
+        }
+
+        guard fileManager.fileExistsAtURL(log.url) else {
+            let error = EventLoggingFileUploadError.fileMissing
+            delegate.uploadFailed(eventLogging: self, withError: error, forLog: log)
+            return
+        }
+
+        /// Notify listeners that we're about to start the upload
+        delegate.didStartUploadingLog(eventLogging: self, log: log)
+
+        networkService.uploadFile(request: createRequest(for: log), fileURL: log.url) { result in
+            /// Intercept the result to inform our delegate the result of the request
+            switch result {
+                case .success:
+                    self.delegate.didFinishUploadingLog(eventLogging: self, log: log)
+                case .failure(let error):
+                    self.delegate.uploadFailed(eventLogging: self, withError: error, forLog: log)
+            }
+
+            completion(result)
+        }
     }
 }

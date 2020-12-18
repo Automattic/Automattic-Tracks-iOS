@@ -53,7 +53,7 @@ class EventLoggingNetworkServiceTests: XCTestCase {
         }
     }
 
-    func testThatHTTPSuccessCodesReturnMessageBody() {
+    func testThatHTTPSuccessCodesReturnVoid() {
         let responseString = String.randomString(length: 255)
         stubResponse(domain: testDomain, status: responseString)
 
@@ -63,13 +63,9 @@ class EventLoggingNetworkServiceTests: XCTestCase {
         waitForExpectation(timeout: 1.0) { exp in
             service.uploadFile(request: req, fileURL: logFile.url) { result in
                 switch result {
-                    case .success(let response):
-                        let responseString = String(data: response!, encoding: .utf8)!
-                        XCTAssertEqual(responseString, responseString)
+                    case .success: exp.fulfill()
                     case .failure: XCTFail("This request should not fail")
                 }
-
-                exp.fulfill()
             }
         }
     }
