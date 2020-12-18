@@ -134,7 +134,7 @@ extension EventLogging {
                 /// - the file was deleted while we were reading it
                 /// - the file (or device storage system) is corrupt
                 /// Because this should be extremely rare (and is difficult to reproduce), we'll track it but it's not covered by a test case
-                CrashLogging.logError(err, userInfo: [
+                CrashLoggingInternals.crashLogging?.logError(err, userInfo: [
                     "errorFile": #file,
                     "errorLine": #line,
                     "logFileUUID": log.uuid

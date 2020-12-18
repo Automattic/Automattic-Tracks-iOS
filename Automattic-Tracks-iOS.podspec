@@ -31,7 +31,7 @@ Pod::Spec.new do |spec|
   spec.ios.dependency 'UIDeviceIdentifier', '~> 1'
   spec.dependency 'CocoaLumberjack', '~> 3'
   spec.dependency 'Reachability', '~> 3'
-  spec.dependency 'Sentry', '~>4'
+  spec.dependency 'Sentry', '~>6'
   # This is a fork of Sodium that incorporates a fix to make it validate with
   # the Xcode 12.0 toolchain and CocoaPods 1.9.3
   spec.dependency 'Sodium-Fork', '0.8.2'

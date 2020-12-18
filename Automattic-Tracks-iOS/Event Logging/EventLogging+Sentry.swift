@@ -33,7 +33,7 @@ extension EventLogging {
             event.logID = logFile.uuid
         }
         catch let err {
-            CrashLogging.logError(err)
+            CrashLoggingInternals.crashLogging?.logError(err)
         }
     }
 }
@@ -43,7 +43,7 @@ extension Event {
         switch self.level {
         case .fatal:
             return .fatal
-        case .error, .warning, .info, .debug:
+        case .error, .warning, .info, .debug, .none:
             return .debug
         @unknown default:
             return .debug
