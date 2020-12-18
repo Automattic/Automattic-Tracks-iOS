@@ -18,6 +18,8 @@
 		24745433258C8BDA006FF781 /* SentryEventSerializer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745431258C8BDA006FF781 /* SentryEventSerializer.swift */; };
 		24745452258C8C02006FF781 /* EventLoggingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745451258C8C01006FF781 /* EventLoggingPublisher.swift */; };
 		24745453258C8C02006FF781 /* EventLoggingPublisher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745451258C8C01006FF781 /* EventLoggingPublisher.swift */; };
+		24745565258C9080006FF781 /* ReachabilityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745564258C9080006FF781 /* ReachabilityMonitor.swift */; };
+		24745566258C9080006FF781 /* ReachabilityMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24745564258C9080006FF781 /* ReachabilityMonitor.swift */; };
 		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -180,6 +182,7 @@
 		24745426258C8BCB006FF781 /* SentryEventSerializerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SentryEventSerializerTests.swift; path = "Automattic-Tracks-iOSTests/Tests/SentryEventSerializerTests.swift"; sourceTree = SOURCE_ROOT; };
 		24745431258C8BDA006FF781 /* SentryEventSerializer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentryEventSerializer.swift; sourceTree = "<group>"; };
 		24745451258C8C01006FF781 /* EventLoggingPublisher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingPublisher.swift; sourceTree = "<group>"; };
+		24745564258C9080006FF781 /* ReachabilityMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityMonitor.swift; sourceTree = "<group>"; };
 		3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -498,6 +501,7 @@
 				F9788DD52421B4EF000A9BB5 /* WatchSessionManager.m */,
 				F94456452429660E009A36B3 /* EventLoggingNetworkService.swift */,
 				F94456442429660E009A36B3 /* EventLoggingUploadQueue.swift */,
+				24745564258C9080006FF781 /* ReachabilityMonitor.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -856,7 +860,6 @@
 				"${BUILT_PRODUCTS_DIR}/OCMock-iOS/OCMock.framework",
 				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs-iOS/OHHTTPStubs.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Reachability-iOS/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Sentry-iOS/Sentry.framework",
 				"${BUILT_PRODUCTS_DIR}/Sodium-iOS/Sodium.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
@@ -866,7 +869,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/UIDeviceIdentifier.framework",
@@ -908,7 +910,6 @@
 				"${BUILT_PRODUCTS_DIR}/OCMock-macOS/OCMock.framework",
 				"${BUILT_PRODUCTS_DIR}/OHHTTPStubs-macOS/OHHTTPStubs.framework",
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-macOS/CocoaLumberjack.framework",
-				"${BUILT_PRODUCTS_DIR}/Reachability-macOS/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Sentry-macOS/Sentry.framework",
 				"${BUILT_PRODUCTS_DIR}/Sodium-macOS/Sodium.framework",
 			);
@@ -917,7 +918,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OCMock.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/OHHTTPStubs.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CocoaLumberjack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sentry.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
 			);
@@ -950,6 +950,7 @@
 				F9788DA92421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */,
 				F9BB412F2435AE9900533BCD /* ExponentialBackoffTimer.swift in Sources */,
+				24745565258C9080006FF781 /* ReachabilityMonitor.swift in Sources */,
 				F94456482429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */,
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
 				24745452258C8C02006FF781 /* EventLoggingPublisher.swift in Sources */,
@@ -1062,6 +1063,7 @@
 				F9788D9924219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
 				24745453258C8C02006FF781 /* EventLoggingPublisher.swift in Sources */,
 				F9788DE82421B4EF000A9BB5 /* WatchSessionManager.m in Sources */,
+				24745566258C9080006FF781 /* ReachabilityMonitor.swift in Sources */,
 				F9A117CF21E69B80002A5CD8 /* TracksConstants.m in Sources */,
 				F9788DA82421A2BF000A9BB5 /* CrashLogging.swift in Sources */,
 				F9788DD82421B4EF000A9BB5 /* TracksEventPersistenceService.m in Sources */,
@@ -1391,7 +1393,7 @@
 				INFOPLIST_FILE = "Automattic-Tracks-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-OSX";
@@ -1436,7 +1438,7 @@
 				INFOPLIST_FILE = "Automattic-Tracks-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-OSX";
 				PRODUCT_NAME = AutomatticTracks;

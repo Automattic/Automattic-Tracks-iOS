@@ -1,7 +1,8 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
 #import "TracksLoggingPrivate.h"
-#import <Reachability/Reachability.h>
+#import <Network/Network.h>
+#import <AutomatticTracks/AutomatticTracks-Swift.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -17,12 +18,13 @@
 @property (nonatomic, assign) BOOL isHostReachable;
 @property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
-@property (nonatomic, strong) Reachability *reachability;
 
 @property (nonatomic, readonly) NSString *userAgent;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
 @property (nonatomic, assign, getter=isAnonymous) BOOL anonymous;
+
+@property (nonatomic, strong) ReachabilityMonitor *reachability;
 
 @end
 
@@ -79,8 +81,12 @@ NSString *const USER_ID_ANON = @"anonId";
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         _deviceInformation = [TracksDeviceInformation new];
 
-        _reachability = [Reachability reachabilityWithHostname:@"public-api.wordpress.com"];
-        [_reachability startNotifier];
+        __weak typeof(self) weakSelf = self;
+
+        _reachability = [ReachabilityMonitor new];
+        [_reachability addListener:^(ReachabilityMonitor *monitor) {
+            [weakSelf reachabilityDidChange:monitor];
+        }];
 
         [self updateDeviceInformationFromReachability];
 
@@ -90,10 +96,7 @@ NSString *const USER_ID_ANON = @"anonId";
         
         [self switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
         [self resetTimer];
-        
-        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-        [defaultCenter addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
-        
+
 #if TARGET_OS_IPHONE
         [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [defaultCenter addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -106,7 +109,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)dealloc
 {
     [self.timer invalidate];
-    [self.reachability stopNotifier];
+    [self.reachability stopMonitoring];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -232,32 +235,23 @@ NSString *const USER_ID_ANON = @"anonId";
  */
 - (void)updateDeviceInformationFromReachability
 {
-    self.deviceInformation.isWiFiConnected = self.reachability.isReachableViaWiFi;
+    self.deviceInformation.isWiFiConnected = self.reachability.isConnectedViaWifi;
     self.deviceInformation.isOnline = self.reachability.isReachable;
 }
 
-- (void)reachabilityChanged:(NSNotification *)notification
+- (void) reachabilityDidChange:(ReachabilityMonitor *)monitor
 {
-    Reachability *reachability = (Reachability *)notification.object;
-
-    // Because the containing app may already use Reachability, limit this to ours only.
-    if (reachability != self.reachability) {
-        return;
-    }
-
     [self updateDeviceInformationFromReachability];
 
-    if (reachability.isReachable == YES && self.isHostReachable == NO) {
+    if(monitor.isReachable) {
         DDLogVerbose(@"Tracks host is available. Enabling timer.");
-        self.isHostReachable = YES;
-        self.timerEnabled = YES;
-        [self resetTimer];
-    } else if (reachability.isReachable == NO && self.isHostReachable == YES){
+    } else {
         DDLogVerbose(@"Tracks host is unavailable. Disabling timer.");
-        self.isHostReachable = NO;
-        self.timerEnabled = NO;
-        [self resetTimer];
     }
+
+    self.isHostReachable = monitor.isReachable;
+    self.timerEnabled = monitor.isReachable;
+    [self resetTimer];
 }
 
 #pragma mark - Private methods
@@ -265,7 +259,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didEnterBackground:(NSNotification *)notification
 {
     self.timerEnabled = NO;
-    [self.reachability stopNotifier];
+    [self.reachability stopMonitoring];
     [self sendQueuedEvents];
 }
 
@@ -273,7 +267,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didBecomeActive:(NSNotification *)notification
 {
     self.timerEnabled = YES;
-    [self.reachability startNotifier];
+    [self.reachability startMonitoring];
     [self resetTimer];
 }
 
