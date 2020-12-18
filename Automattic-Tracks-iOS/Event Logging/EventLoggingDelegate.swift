@@ -9,21 +9,21 @@ public protocol EventLoggingDelegate {
     var shouldUploadLogFilesForNonFatalEvents: Bool { get }
 
     /// The event logging system will call this delegate method each time a log file is added to the queue..
-    func didQueueLogForUpload(_ log: LogFile)
+    func didQueueLogForUpload(eventLogging: EventLogging, log: LogFile)
 
     /// The event logging system will call this delegate method each time a log file starts uploading.
-    func didStartUploadingLog(_ log: LogFile)
+    func didStartUploadingLog(eventLogging: EventLogging, log: LogFile)
 
     /// The event logging system will call this delegate method if a log file upload is cancelled by the delegate.
-    func uploadCancelledByDelegate(_ log: LogFile)
+    func uploadCancelledByDelegate(eventLogging: EventLogging, log: LogFile)
 
     /// The event logging system will call this delegate method if a log file fails to upload.
     /// It may be called prior to upload starting if the file is missing, and is called after to the `upload` callback.
-    func uploadFailed(withError: Error, forLog: LogFile)
+    func uploadFailed(eventLogging: EventLogging, withError: Error, forLog: LogFile)
 
     /// The event logging system will call this delegate method each time a log file finishes uploading.
     /// It is called after to the `upload` callback.
-    func didFinishUploadingLog(_ log: LogFile)
+    func didFinishUploadingLog(eventLogging: EventLogging, log: LogFile)
 }
 
 /// Default implementations for EventLoggingDelegate
@@ -38,9 +38,9 @@ public extension EventLoggingDelegate {
     }
 
     // Empty default implementations allow the developer to only implement these if they need them
-    func didQueueLogForUpload(_ log: LogFile) {}
-    func didStartUploadingLog(_ log: LogFile) {}
-    func uploadCancelledByDelegate(_ log: LogFile) {}
-    func uploadFailed(withError error: Error, forLog log: LogFile) {}
-    func didFinishUploadingLog(_ log: LogFile) {}
+    func didQueueLogForUpload(eventLogging: EventLogging, log: LogFile) {}
+    func didStartUploadingLog(eventLogging: EventLogging, log: LogFile) {}
+    func uploadCancelledByDelegate(eventLogging: EventLogging, log: LogFile) {}
+    func uploadFailed(eventLogging: EventLogging, withError: Error, forLog: LogFile) {}
+    func didFinishUploadingLog(eventLogging: EventLogging, log: LogFile) {}
 }

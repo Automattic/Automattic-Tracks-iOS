@@ -28,8 +28,6 @@
 		F944563A242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445635242965E7009A36B3 /* EventLoggingDataSource.swift */; };
 		F944563B242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445636242965E7009A36B3 /* EventLoggingDelegate.swift */; };
 		F944563C242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445636242965E7009A36B3 /* EventLoggingDelegate.swift */; };
-		F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445637242965E7009A36B3 /* EventLoggingUploadManager.swift */; };
-		F944563E242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445637242965E7009A36B3 /* EventLoggingUploadManager.swift */; };
 		F9445642242965F6009A36B3 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445641242965F6009A36B3 /* FileManager+Extensions.swift */; };
 		F9445643242965F6009A36B3 /* FileManager+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445641242965F6009A36B3 /* FileManager+Extensions.swift */; };
 		F94456462429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = F94456442429660E009A36B3 /* EventLoggingUploadQueue.swift */; };
@@ -199,7 +197,6 @@
 		F93FEEE72492E15A00127B55 /* Automattic-Tracks-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Automattic-Tracks-Bridging-Header.h"; sourceTree = "<group>"; };
 		F9445635242965E7009A36B3 /* EventLoggingDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingDataSource.swift; sourceTree = "<group>"; };
 		F9445636242965E7009A36B3 /* EventLoggingDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingDelegate.swift; sourceTree = "<group>"; };
-		F9445637242965E7009A36B3 /* EventLoggingUploadManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingUploadManager.swift; sourceTree = "<group>"; };
 		F9445641242965F6009A36B3 /* FileManager+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "FileManager+Extensions.swift"; sourceTree = "<group>"; };
 		F94456442429660E009A36B3 /* EventLoggingUploadQueue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingUploadQueue.swift; sourceTree = "<group>"; };
 		F94456452429660E009A36B3 /* EventLoggingNetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingNetworkService.swift; sourceTree = "<group>"; };
@@ -415,7 +412,6 @@
 				F9838977243286EA00BB2F1F /* EventLogging.swift */,
 				F9445635242965E7009A36B3 /* EventLoggingDataSource.swift */,
 				F9445636242965E7009A36B3 /* EventLoggingDelegate.swift */,
-				F9445637242965E7009A36B3 /* EventLoggingUploadManager.swift */,
 				F9117198240F20F0009A1EC0 /* LogEncryptor.swift */,
 				F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */,
 			);
@@ -931,7 +927,6 @@
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
-				F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F97CBE6024B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
@@ -1025,7 +1020,6 @@
 				F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F9788D9F24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DDA2421B4EF000A9BB5 /* TracksService.m in Sources */,
-				F944563E242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */,
 				F97CBE6124B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,

@@ -10,9 +10,9 @@ struct CrashLoggingInternals {
 public class CrashLogging {
 
     private let dataProvider: CrashLoggingDataProvider
-    private let eventLogging: EventLogging?
+    public let eventLogging: EventLogging?
 
-    init(dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
+    public init(dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
         self.dataProvider = dataProvider
         self.eventLogging = eventLogging
     }
@@ -115,47 +115,6 @@ public extension CrashLogging {
 
         SentrySDK.capture(event: event)
         dataProvider.didLogMessageCallback?(event)
-    }
-
-    /// Sends an `Event` to Sentry and triggers a callback on completion
-    func logErrorImmediately(_ error: Error, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
-        try logErrorsImmediately([error], level: level, callback: callback)
-    }
-
-    func logErrorsImmediately(_ errors: [Error], level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
-
-        var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
-
-        errors.forEach {
-            let event = Event(level: level)
-            event.message = SentryMessage(formatted: $0.localizedDescription)
-            event.timestamp = Date()
-            serializer.add(event: event)
-        }
-
-
-        guard let requestBody = try? serializer.serialize() else {
-            DDLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
-            errors.forEach {
-                SentrySDK.capture(error: $0)
-            }
-            return
-        }
-
-        let endpoint = try SentryDsn(string: dataProvider.sentryDSN).getEnvelopeEndpoint()
-        var request = URLRequest(url: endpoint)
-        request.httpMethod = "POST"
-        request.httpBody = requestBody
-
-        URLSession.shared.dataTask(with: request) { (responseData, urlResponse, error) in
-            if let error = error {
-                callback(.failure(error))
-                return
-            }
-
-            let didSucceed = 200...299 ~= (urlResponse as! HTTPURLResponse).statusCode
-            callback(.success(didSucceed))
-        }.resume()
     }
 }
 
