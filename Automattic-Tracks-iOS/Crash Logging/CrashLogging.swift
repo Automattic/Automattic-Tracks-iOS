@@ -50,6 +50,9 @@ public class CrashLogging {
         let shouldSendEvent = !dataProvider.userHasOptedOut
         #endif
 
+        /// Read the current user from the Data Provider (though the Data Provider can decide not to provide it for functional or privacy reasons)
+        event.user = dataProvider.currentUser?.sentryUser
+
         /// If we shouldn't send the event we have nothing else to do here
         guard shouldSendEvent else {
             return nil
@@ -69,6 +72,10 @@ public class CrashLogging {
     /// Immediately crashes the application and generates a crash report.
     public static func crash() {
         SentrySDK.crash()
+    }
+
+    enum Errors: LocalizedError {
+        case unableToConstructAuthStringError
     }
 }
 
@@ -115,6 +122,82 @@ public extension CrashLogging {
 
         SentrySDK.capture(event: event)
         dataProvider.didLogMessageCallback?(event)
+    }
+
+    /// Sends an `Event` to Sentry and triggers a callback on completion
+    func logErrorImmediately(_ error: Error, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
+        try logErrorsImmediately([error], level: level, callback: callback)
+    }
+
+    func logErrorsImmediately(_ errors: [Error], level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
+
+        var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
+
+        errors.forEach {
+            let event = Event(level: level)
+            event.message = SentryMessage(formatted: $0.localizedDescription)
+            event.timestamp = Date()
+            serializer.add(event: tryAddingStackTrace(to: event))
+        }
+
+        guard let requestBody = try? serializer.serialize() else {
+            DDLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
+            errors.forEach {
+                SentrySDK.capture(error: $0)
+            }
+            return
+        }
+
+        let dsn = try SentryDsn(string: dataProvider.sentryDSN)
+        guard let authString = dsn.getAuthString() else {
+            throw Errors.unableToConstructAuthStringError
+        }
+
+        var request = URLRequest(url: dsn.getEnvelopeEndpoint())
+        request.httpMethod = "POST"
+        request.httpBody = requestBody
+        request.addValue(authString, forHTTPHeaderField: "X-Sentry-Auth")
+
+        URLSession.shared.dataTask(with: request) { (responseData, urlResponse, error) in
+            if let error = error {
+                callback(.failure(error))
+                return
+            }
+
+            let didSucceed = 200...299 ~= (urlResponse as! HTTPURLResponse).statusCode
+            callback(.success(didSucceed))
+        }.resume()
+    }
+
+    /// A wrapper around the `SentryClient` shim – keeps each layer clean by avoiding optionality
+    private func tryAddingStackTrace(to event: Event) -> Event {
+        guard let client = SentrySDK.currentHub().getClient() else {
+            return event
+        }
+
+        return client.tryAddingStackTrace(to: event, for: client)
+    }
+}
+
+extension SentryDsn {
+    func getAuthString() -> String? {
+
+        guard let user = url.user else {
+            return nil
+        }
+
+        var data = [
+            "sentry_version=7",
+            "sentry_client=tracks-manual-upload/\(TracksLibraryVersion)",
+            "sentry_timesetamp=\(Date().timeIntervalSince1970)",
+            "sentry_key=\(user)",
+        ]
+
+        if let password = url.password {
+            data.append("sentry_secret=\(password)")
+        }
+
+        return "Sentry " + data.joined(separator: ",")
     }
 }
 
