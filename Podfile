@@ -18,7 +18,7 @@ target 'Automattic-Tracks-iOS' do
 end
 
 target 'Automattic-Tracks-OSX' do
-  platform :osx, '10.11'
+  platform :osx, '10.12'
   shared
 end
 
@@ -34,6 +34,6 @@ target 'Automattic-Tracks-iOSTests' do
 end
 
 target 'Automattic_Tracks_OSXTests' do
-  platform :osx, '10.11'
+  platform :osx, '10.12'
   test_shared
 end
