@@ -1,10 +1,10 @@
 import Foundation
 
-public protocol ExPlatConfiguration {
-    var platform: String { get }
-    var oAuthToken: String? { get }
-    var userAgent: String? { get }
-    var anonId: String? { get }
+public struct ExPlatConfiguration {
+    var platform: String
+    var oAuthToken: String?
+    var userAgent: String?
+    var anonId: String?
 }
 
 public class ExPlatService {

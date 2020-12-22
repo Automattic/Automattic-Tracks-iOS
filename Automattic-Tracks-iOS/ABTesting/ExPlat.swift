@@ -1,7 +1,7 @@
 import Foundation
 import UIKit
 
-public class ExPlat: ABTesting {
+@objc public class ExPlat: NSObject, ABTesting {
     public static var shared: ExPlat!
 
     private let service: ExPlatService
@@ -22,8 +22,19 @@ public class ExPlat: ABTesting {
     public init(configuration: ExPlatConfiguration,
          service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
+        super.init()
         subscribeToNotifications()
         ExPlat.shared = self
+    }
+
+    @objc public static func configure(platform: String,
+                      oAuthToken: String?,
+                      userAgent: String?,
+                      anonId: String?) {
+        _ = ExPlat(configuration: ExPlatConfiguration(platform: platform,
+                                                       oAuthToken: oAuthToken,
+                                                       userAgent: userAgent,
+                                                       anonId: anonId))
     }
 
     deinit {

@@ -3,11 +3,18 @@ import XCTest
 @testable import AutomatticTracks
 
 class ExPlatTests: XCTestCase {
+    var exPlatTestConfiguration = ExPlatConfiguration(
+        platform: "wpios_test",
+        oAuthToken: nil,
+        userAgent: nil,
+        anonId: nil
+    )
+
     // Save the returned experiments variation
     //
     func testRefresh() {
         let expectation = XCTestExpectation(description: "Save experiments")
-        let abTesting = ExPlat(configuration: ExPlatTestConfiguration(), service: ExPlatServiceMock())
+        let abTesting = ExPlat(configuration: exPlatTestConfiguration, service: ExPlatServiceMock())
 
         abTesting.refresh {
             XCTAssertEqual(abTesting.experiment("experiment"), .control)
@@ -23,7 +30,7 @@ class ExPlatTests: XCTestCase {
     func testError() {
         let expectation = XCTestExpectation(description: "Keep experiments")
         let serviceMock = ExPlatServiceMock()
-        let abTesting = ExPlat(configuration: ExPlatTestConfiguration(), service: serviceMock)
+        let abTesting = ExPlat(configuration: exPlatTestConfiguration, service: serviceMock)
         abTesting.refresh {
 
             serviceMock.returnAssignments = false
@@ -43,7 +50,7 @@ class ExPlatTests: XCTestCase {
     func testScheduleRefresh() {
         let expectation = XCTestExpectation(description: "Automatically refresh")
         let serviceMock = ExPlatServiceMock()
-        let abTesting = ExPlat(configuration: ExPlatTestConfiguration(), service: serviceMock)
+        let abTesting = ExPlat(configuration: exPlatTestConfiguration, service: serviceMock)
         abTesting.refresh {
 
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -62,7 +69,12 @@ private class ExPlatServiceMock: ExPlatService {
     var returnAssignments = true
 
     init() {
-        super.init(configuration: ExPlatTestConfiguration())
+        super.init(configuration: ExPlatConfiguration(
+            platform: "wpios_test",
+            oAuthToken: nil,
+            userAgent: nil,
+            anonId: nil
+        ))
     }
 
     override func getAssignments(completion: @escaping (Assignments?) -> Void) {

@@ -2,6 +2,7 @@
 #import "TracksDeviceInformation.h"
 #import "TracksLoggingPrivate.h"
 #import <Reachability/Reachability.h>
+#import <AutomatticTracks/AutomatticTracks-Swift.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -22,6 +23,7 @@
 @property (nonatomic, readonly) NSString *userAgent;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
+@property (nonatomic, copy) NSString *token;
 @property (nonatomic, assign, getter=isAnonymous) BOOL anonymous;
 
 @end
@@ -188,7 +190,7 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.tracksEventService clearTracksEvents];
 }
 
-- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID token:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
 {
     NSParameterAssert(username.length != 0 || userID.length != 0);
     
@@ -197,6 +199,9 @@ NSString *const USER_ID_ANON = @"anonId";
     self.anonymous = NO;
     self.username = username;
     self.userID = userID;
+    self.token = token;
+
+    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
     
     if (skipEvent == NO && previousUserID.length > 0) {
        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUserID:previousUserID];
@@ -211,6 +216,9 @@ NSString *const USER_ID_ANON = @"anonId";
     self.anonymous = YES;
     self.username = @"";
     self.userID = anonymousID;
+    self.token = nil;
+
+    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
 }
 
 
