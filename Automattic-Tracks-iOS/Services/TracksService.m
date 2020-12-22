@@ -201,7 +201,9 @@ NSString *const USER_ID_ANON = @"anonId";
     self.userID = userID;
     self.token = token;
 
+    #if TARGET_OS_IPHONE
     [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
+    #endif
     
     if (skipEvent == NO && previousUserID.length > 0) {
        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUserID:previousUserID];
@@ -218,7 +220,9 @@ NSString *const USER_ID_ANON = @"anonId";
     self.userID = anonymousID;
     self.token = nil;
 
+    #if TARGET_OS_IPHONE
     [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
+    #endif
 }
 
 
