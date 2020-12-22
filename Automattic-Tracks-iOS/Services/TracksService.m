@@ -190,7 +190,7 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.tracksEventService clearTracksEvents];
 }
 
-- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID token:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
 {
     NSParameterAssert(username.length != 0 || userID.length != 0);
     
@@ -199,17 +199,22 @@ NSString *const USER_ID_ANON = @"anonId";
     self.anonymous = NO;
     self.username = username;
     self.userID = userID;
-    self.token = token;
-
-    #if TARGET_OS_IPHONE
-    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
-    #endif
     
     if (skipEvent == NO && previousUserID.length > 0) {
        [self.tracksEventService createTracksEventForAliasingWordPressComUser:username userID:userID withAnonymousUserID:previousUserID];
     }
 }
 
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID token:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
+{
+    [self switchToAuthenticatedUserWithUsername:username userID:userID skipAliasEventCreation:skipEvent];
+
+    self.token = token;
+
+    #if TARGET_OS_IPHONE
+    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
+    #endif
+}
 
 - (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID
 {
