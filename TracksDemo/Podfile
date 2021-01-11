@@ -2,7 +2,7 @@
 use_frameworks!
 
 target 'TracksDemo' do
-  platform :ios, '10.0'
+  platform :ios, '12.0'
 
   pod 'Automattic-Tracks-iOS', :path => '../'
 

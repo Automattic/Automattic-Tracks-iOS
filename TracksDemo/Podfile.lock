@@ -1,8 +1,10 @@
 PODS:
-  - Automattic-Tracks-iOS (0.2.4-beta.1):
-    - CocoaLumberjack (~> 3.4.1)
-    - Reachability (~> 3.1)
-    - UIDeviceIdentifier (~> 1.1.4)
+  - Automattic-Tracks-iOS (0.6.0):
+    - CocoaLumberjack (~> 3)
+    - Reachability (~> 3)
+    - Sentry (~> 4)
+    - Sodium (= 0.9.1)
+    - UIDeviceIdentifier (~> 1)
   - CocoaLumberjack (3.4.2):
     - CocoaLumberjack/Default (= 3.4.2)
     - CocoaLumberjack/Extensions (= 3.4.2)
@@ -10,15 +12,21 @@ PODS:
   - CocoaLumberjack/Extensions (3.4.2):
     - CocoaLumberjack/Default
   - Reachability (3.2)
+  - Sentry (4.5.0):
+    - Sentry/Core (= 4.5.0)
+  - Sentry/Core (4.5.0)
+  - Sodium (0.9.1)
   - UIDeviceIdentifier (1.1.4)
 
 DEPENDENCIES:
   - Automattic-Tracks-iOS (from `../`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - CocoaLumberjack
     - Reachability
+    - Sentry
+    - Sodium
     - UIDeviceIdentifier
 
 EXTERNAL SOURCES:
@@ -26,11 +34,13 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: 233c60a2a33d68a468f3462c1bd811273592ede3
+  Automattic-Tracks-iOS: d10028c9067a8ba5dd91b01e0ea2896cf5f175f3
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
+  Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
+  Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   UIDeviceIdentifier: 8f8a24b257a4d978c8d40ad1e7355b944ffbfa8c
 
-PODFILE CHECKSUM: 22a2f46ffaf4e360a8e62941930ef711f43c32a5
+PODFILE CHECKSUM: 950aeda6680b1590a9415584aef55244d6b250f5
 
-COCOAPODS: 1.6.0.beta.2
+COCOAPODS: 1.10.0
