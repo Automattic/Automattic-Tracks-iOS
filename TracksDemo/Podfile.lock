@@ -34,7 +34,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: d10028c9067a8ba5dd91b01e0ea2896cf5f175f3
+  Automattic-Tracks-iOS: 9bb00c8a596769f2d4e719d9c8f5010a28295218
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b
