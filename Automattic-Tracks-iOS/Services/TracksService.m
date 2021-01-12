@@ -2,6 +2,7 @@
 #import "TracksDeviceInformation.h"
 #import "TracksLoggingPrivate.h"
 #import <Reachability/Reachability.h>
+#import <AutomatticTracks/AutomatticTracks-Swift.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -22,6 +23,7 @@
 @property (nonatomic, readonly) NSString *userAgent;
 @property (nonatomic, copy) NSString *username;
 @property (nonatomic, copy) NSString *userID;
+@property (nonatomic, copy) NSString *token;
 @property (nonatomic, assign, getter=isAnonymous) BOOL anonymous;
 
 @end
@@ -203,6 +205,16 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 }
 
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID wpComToken:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
+{
+    [self switchToAuthenticatedUserWithUsername:username userID:userID skipAliasEventCreation:skipEvent];
+
+    self.token = token;
+
+    #if TARGET_OS_IPHONE
+    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
+    #endif
+}
 
 - (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID
 {
@@ -211,6 +223,11 @@ NSString *const USER_ID_ANON = @"anonId";
     self.anonymous = YES;
     self.username = @"";
     self.userID = anonymousID;
+    self.token = nil;
+
+    #if TARGET_OS_IPHONE
+    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
+    #endif
 }
 
 

@@ -13,6 +13,14 @@
 		57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
 		66B4025E8CC43C3928D21D6A /* Pods_Automattic_Tracks_iOSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DCA23FA76778DD4D62989FD4 /* Pods_Automattic_Tracks_iOSTests.framework */; };
 		89284FEF37B307C0A99A81E5 /* Pods_Automattic_Tracks_OSXTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 519B82281CDF10E002CD67A7 /* Pods_Automattic_Tracks_OSXTests.framework */; };
+		8BC5869E25557C1C0058D0F8 /* ExPlatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5869C25557C1C0058D0F8 /* ExPlatTests.swift */; };
+		8BC5869F25557C1C0058D0F8 /* ExPlatServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5869D25557C1C0058D0F8 /* ExPlatServiceTests.swift */; };
+		8BC586AB25557C650058D0F8 /* explat-assignments.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BC586A925557C650058D0F8 /* explat-assignments.json */; };
+		8BC586AC25557C650058D0F8 /* explat-malformed-assignments.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BC586AA25557C650058D0F8 /* explat-malformed-assignments.json */; };
+		8BC586B925557C740058D0F8 /* ABTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B525557C740058D0F8 /* ABTesting.swift */; };
+		8BC586BA25557C740058D0F8 /* Assignments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B625557C740058D0F8 /* Assignments.swift */; };
+		8BC586BB25557C740058D0F8 /* ExPlat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B725557C740058D0F8 /* ExPlat.swift */; };
+		8BC586BC25557C740058D0F8 /* ExPlatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B825557C740058D0F8 /* ExPlatService.swift */; };
 		93B5C7AE1CE25D40002820B3 /* Automattic-Tracks-iOS.h in Headers */ = {isa = PBXBuildFile; fileRef = 93B5C7AD1CE25D40002820B3 /* Automattic-Tracks-iOS.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		93B5C7B51CE25D40002820B3 /* AutomatticTracks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 93B5C7AB1CE25D40002820B3 /* AutomatticTracks.framework */; };
 		93B5C7C21CE25D66002820B3 /* TracksLoggingPrivate.m in Sources */ = {isa = PBXBuildFile; fileRef = 93B5C7681CE230AD002820B3 /* TracksLoggingPrivate.m */; };
@@ -176,6 +184,14 @@
 		6CAA4DA76E13B617281D5E5C /* Pods-Automattic-Tracks-OSX.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-OSX.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-OSX/Pods-Automattic-Tracks-OSX.debug.xcconfig"; sourceTree = "<group>"; };
 		6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Automattic_Tracks_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8809A9D0B8C988BC31A6E219 /* Pods-Automattic-Tracks-iOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.debug.xcconfig"; sourceTree = "<group>"; };
+		8BC5869C25557C1C0058D0F8 /* ExPlatTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExPlatTests.swift; sourceTree = "<group>"; };
+		8BC5869D25557C1C0058D0F8 /* ExPlatServiceTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExPlatServiceTests.swift; sourceTree = "<group>"; };
+		8BC586A925557C650058D0F8 /* explat-assignments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "explat-assignments.json"; sourceTree = "<group>"; };
+		8BC586AA25557C650058D0F8 /* explat-malformed-assignments.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "explat-malformed-assignments.json"; sourceTree = "<group>"; };
+		8BC586B525557C740058D0F8 /* ABTesting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ABTesting.swift; sourceTree = "<group>"; };
+		8BC586B625557C740058D0F8 /* Assignments.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Assignments.swift; sourceTree = "<group>"; };
+		8BC586B725557C740058D0F8 /* ExPlat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExPlat.swift; sourceTree = "<group>"; };
+		8BC586B825557C740058D0F8 /* ExPlatService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExPlatService.swift; sourceTree = "<group>"; };
 		9339E70A1ADE98B800AEAB68 /* TracksConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TracksConstants.h; sourceTree = "<group>"; };
 		9339E70B1ADE98B800AEAB68 /* TracksConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TracksConstants.m; sourceTree = "<group>"; };
 		9349E9921D41148A00DDB5BB /* Automattic-Tracks-iOSTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Automattic-Tracks-iOSTests-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -329,6 +345,35 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		8BC5869A25557B240058D0F8 /* ABTesting */ = {
+			isa = PBXGroup;
+			children = (
+				8BC586B525557C740058D0F8 /* ABTesting.swift */,
+				8BC586B625557C740058D0F8 /* Assignments.swift */,
+				8BC586B725557C740058D0F8 /* ExPlat.swift */,
+				8BC586B825557C740058D0F8 /* ExPlatService.swift */,
+			);
+			path = ABTesting;
+			sourceTree = "<group>";
+		};
+		8BC5869B25557B7B0058D0F8 /* ABTesting */ = {
+			isa = PBXGroup;
+			children = (
+				8BC5869D25557C1C0058D0F8 /* ExPlatServiceTests.swift */,
+				8BC5869C25557C1C0058D0F8 /* ExPlatTests.swift */,
+			);
+			path = ABTesting;
+			sourceTree = "<group>";
+		};
+		8BC586A825557C4F0058D0F8 /* Mock Data */ = {
+			isa = PBXGroup;
+			children = (
+				8BC586A925557C650058D0F8 /* explat-assignments.json */,
+				8BC586AA25557C650058D0F8 /* explat-malformed-assignments.json */,
+			);
+			path = "Mock Data";
+			sourceTree = "<group>";
+		};
 		93B5C7661CE2308D002820B3 /* Internal Logging */ = {
 			isa = PBXGroup;
 			children = (
@@ -367,6 +412,7 @@
 		93C0211B1AB0A6330014096A /* Automattic-Tracks-iOS */ = {
 			isa = PBXGroup;
 			children = (
+				8BC5869A25557B240058D0F8 /* ABTesting */,
 				F9788DEB2421B55A000A9BB5 /* Crash Logging */,
 				F911718B240F20B1009A1EC0 /* Event Logging */,
 				F9788D8024219D66000A9BB5 /* Model */,
@@ -385,6 +431,7 @@
 			children = (
 				93C021291AB0A6330014096A /* Supporting Files */,
 				F99D031A2422D9B70091C33E /* Test Helpers */,
+				8BC586A825557C4F0058D0F8 /* Mock Data */,
 				F99D032B2422D9F30091C33E /* Tests */,
 			);
 			path = "Automattic-Tracks-iOSTests";
@@ -516,6 +563,7 @@
 		F99D032B2422D9F30091C33E /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				8BC5869B25557B7B0058D0F8 /* ABTesting */,
 				F99D032E2422D9F30091C33E /* Event Logging */,
 				F99D032C2422D9F30091C33E /* CrashLoggingTests.swift */,
 				3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */,
@@ -739,6 +787,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC586AC25557C650058D0F8 /* explat-malformed-assignments.json in Resources */,
+				8BC586AB25557C650058D0F8 /* explat-assignments.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -912,7 +962,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8BC586BA25557C740058D0F8 /* Assignments.swift in Sources */,
 				F9788D9224219D66000A9BB5 /* TracksDeviceInformation.m in Sources */,
+				8BC586B925557C740058D0F8 /* ABTesting.swift in Sources */,
 				F9788D9024219D66000A9BB5 /* TracksEvent.m in Sources */,
 				F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F9788D9C24219D66000A9BB5 /* TracksContextManager.m in Sources */,
@@ -931,6 +983,7 @@
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
+				8BC586BC25557C740058D0F8 /* ExPlatService.swift in Sources */,
 				F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F97CBE6024B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
@@ -940,6 +993,7 @@
 				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
 				F9788DE72421B4EF000A9BB5 /* WatchSessionManager.m in Sources */,
 				F9788DA72421A2BF000A9BB5 /* CrashLogging.swift in Sources */,
+				8BC586BB25557C740058D0F8 /* ExPlat.swift in Sources */,
 				F9788D9A24219D66000A9BB5 /* Tracks.xcdatamodeld in Sources */,
 				F9788DD72421B4EF000A9BB5 /* TracksEventPersistenceService.m in Sources */,
 				F9788DE52421B4EF000A9BB5 /* TracksEventService.m in Sources */,
@@ -952,6 +1006,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F99D033E2422D9F30091C33E /* TracksServiceTests.m in Sources */,
+				8BC5869E25557C1C0058D0F8 /* ExPlatTests.swift in Sources */,
 				F94EE632242D000E0015C18E /* EventLoggingNetworkServiceTests.swift in Sources */,
 				F99D03402422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */,
 				F94456522429666B009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */,
@@ -964,6 +1019,7 @@
 				F99D03232422D9B70091C33E /* LogFile+TestHelpers.swift in Sources */,
 				F99D033C2422D9F30091C33E /* TracksServiceRemoteIntegrationTests.m in Sources */,
 				F99D03292422D9B70091C33E /* TestTracksContextManager.m in Sources */,
+				8BC5869F25557C1C0058D0F8 /* ExPlatServiceTests.swift in Sources */,
 				F99D03212422D9B70091C33E /* Extensions.swift in Sources */,
 				3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */,
 				F94EE62C242C4C280015C18E /* LogFileTests.swift in Sources */,
