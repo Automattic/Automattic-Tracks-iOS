@@ -27,7 +27,7 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 - (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties;
 
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent;
-- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID token:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent;
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID wpComToken:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent;
 - (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID;
 
 - (void)trackEventName:(NSString *)eventName;

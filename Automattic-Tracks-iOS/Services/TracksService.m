@@ -205,7 +205,7 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 }
 
-- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID token:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID wpComToken:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
 {
     [self switchToAuthenticatedUserWithUsername:username userID:userID skipAliasEventCreation:skipEvent];
 
