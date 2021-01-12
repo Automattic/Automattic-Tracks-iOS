@@ -8,17 +8,17 @@ def shared
   pod 'CocoaLumberjack', '~> 3'
   pod 'Reachability', '~> 3'
   pod 'Sentry', '~> 4'
-  pod 'Sodium-Fork', '~> 0.8.2'
+  pod 'Sodium', '~> 0.9'
 end
 
 target 'Automattic-Tracks-iOS' do
-  platform :ios, '9.0'
+  platform :ios, '12.0'
   shared
   pod 'UIDeviceIdentifier', '~> 1'
 end
 
 target 'Automattic-Tracks-OSX' do
-  platform :osx, '10.11'
+  platform :osx, '10.12'
   shared
 end
 
@@ -29,11 +29,11 @@ def test_shared
 end
 
 target 'Automattic-Tracks-iOSTests' do
-  platform :ios, '9.0'
+  platform :ios, '12.0'
   test_shared
 end
 
 target 'Automattic_Tracks_OSXTests' do
-  platform :osx, '10.11'
+  platform :osx, '10.12'
   test_shared
 end
