@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2421B2E625AEB493008776A6 /* ABTesting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B525557C740058D0F8 /* ABTesting.swift */; };
+		2421B2E725AEB493008776A6 /* Assignments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B625557C740058D0F8 /* Assignments.swift */; };
+		2421B2E825AEB493008776A6 /* ExPlatService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B825557C740058D0F8 /* ExPlatService.swift */; };
+		2421B2E925AEB493008776A6 /* ExPlat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC586B725557C740058D0F8 /* ExPlat.swift */; };
+		2421B30325AEB4F1008776A6 /* ExPlatServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5869D25557C1C0058D0F8 /* ExPlatServiceTests.swift */; };
+		2421B30825AEB4F3008776A6 /* ExPlatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8BC5869C25557C1C0058D0F8 /* ExPlatTests.swift */; };
+		2421B31125AEB592008776A6 /* explat-assignments.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BC586A925557C650058D0F8 /* explat-assignments.json */; };
+		2421B31225AEB592008776A6 /* explat-malformed-assignments.json in Resources */ = {isa = PBXBuildFile; fileRef = 8BC586AA25557C650058D0F8 /* explat-malformed-assignments.json */; };
 		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -796,6 +804,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2421B31225AEB592008776A6 /* explat-malformed-assignments.json in Resources */,
+				2421B31125AEB592008776A6 /* explat-assignments.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,6 +1053,7 @@
 				F944565C24296698009A36B3 /* Mocks.swift in Sources */,
 				F949B1E92429681A0069FF76 /* LogEncryptionTests.swift in Sources */,
 				F9BB41322435B1C600533BCD /* TestExponentialBackoffTimer.swift in Sources */,
+				2421B30825AEB4F3008776A6 /* ExPlatTests.swift in Sources */,
 				F99D03372422D9F30091C33E /* TracksEventServiceTests.m in Sources */,
 				F970F41E21E7BBD8000664D2 /* Automattic_Tracks_OSXTests.m in Sources */,
 				F944565724296684009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */,
@@ -1056,6 +1067,7 @@
 				F99D03282422D9B70091C33E /* EncryptedLog.swift in Sources */,
 				F99D03352422D9F30091C33E /* CrashLoggingTests.swift in Sources */,
 				F944565824296684009A36B3 /* EventLoggingUploadQueueTests.swift in Sources */,
+				2421B30325AEB4F1008776A6 /* ExPlatServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1063,7 +1075,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2421B2E725AEB493008776A6 /* Assignments.swift in Sources */,
 				F9788D8F24219D66000A9BB5 /* LogFile.swift in Sources */,
+				2421B2E625AEB493008776A6 /* ABTesting.swift in Sources */,
 				F9788D9324219D66000A9BB5 /* TracksDeviceInformation.m in Sources */,
 				F9788D9124219D66000A9BB5 /* TracksEvent.m in Sources */,
 				F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */,
@@ -1074,6 +1088,7 @@
 				F944563C242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */,
 				F94456472429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */,
 				F9838979243286EA00BB2F1F /* EventLogging.swift in Sources */,
+				2421B2E825AEB493008776A6 /* ExPlatService.swift in Sources */,
 				F9A0D70224216F8D00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F99D03462422DB700091C33E /* Tracks.xcdatamodeld in Sources */,
 				F9BB41332435C58C00533BCD /* ExponentialBackoffTimer.swift in Sources */,
@@ -1085,6 +1100,7 @@
 				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */,
 				F97CBE6124B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
+				2421B2E925AEB493008776A6 /* ExPlat.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
 				F9B862C32476D004008B093C /* EventLogging+Sentry.swift in Sources */,
 				F9445643242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
@@ -1419,7 +1435,7 @@
 				INFOPLIST_FILE = "Automattic-Tracks-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-OSX";
@@ -1464,7 +1480,7 @@
 				INFOPLIST_FILE = "Automattic-Tracks-OSX/Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.Automattic-Tracks-OSX";
 				PRODUCT_NAME = AutomatticTracks;
