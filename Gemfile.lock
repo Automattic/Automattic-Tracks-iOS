@@ -88,10 +88,11 @@ GEM
 
 PLATFORMS
   ruby
+  x86_64-darwin-20
 
 DEPENDENCIES
-  cocoapods (~> 1.10.0)
+  cocoapods (~> 1.10)
   xcpretty
 
 BUNDLED WITH
-   2.1.4
+   2.2.0
