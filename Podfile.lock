@@ -32,7 +32,7 @@ DEPENDENCIES:
   - OHHTTPStubs/Swift
   - Reachability (~> 3)
   - Sentry (~> 4)
-  - Sodium (~> 0.9.1)
+  - Sodium (>= 0.9.1)
   - UIDeviceIdentifier (~> 1)
 
 SPEC REPOS:
@@ -54,6 +54,6 @@ SPEC CHECKSUMS:
   Sodium: 23d11554ecd556196d313cf6130d406dfe7ac6da
   UIDeviceIdentifier: 44f805037d21b94394821828f4fcaba34b38c2d0
 
-PODFILE CHECKSUM: 3a5ff8a37c537edc41b69e2fb996dfac3ea72147
+PODFILE CHECKSUM: d45b3937453a4490522d7f6983957566f9741123
 
 COCOAPODS: 1.10.1

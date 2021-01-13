@@ -3,7 +3,7 @@ PODS:
     - CocoaLumberjack (~> 3)
     - Reachability (~> 3)
     - Sentry (~> 4)
-    - Sodium (= 0.9.1)
+    - Sodium (>= 0.9.1)
     - UIDeviceIdentifier (~> 1)
   - CocoaLumberjack (3.4.2):
     - CocoaLumberjack/Default (= 3.4.2)
@@ -34,7 +34,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: 9bb00c8a596769f2d4e719d9c8f5010a28295218
+  Automattic-Tracks-iOS: 3eff7eca4bf5f9882c3867947dfb1742e935fc08
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Sentry: ab6c209f23700d1460691dbc90e19ed0a05d496b

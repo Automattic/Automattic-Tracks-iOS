@@ -32,5 +32,5 @@ Pod::Spec.new do |spec|
   spec.dependency 'CocoaLumberjack', '~> 3'
   spec.dependency 'Reachability', '~> 3'
   spec.dependency 'Sentry', '~>4'
-  spec.dependency 'Sodium', '0.9.1'
+  spec.dependency 'Sodium', '>= 0.9.1'
 end
