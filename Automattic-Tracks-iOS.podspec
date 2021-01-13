@@ -12,7 +12,7 @@ Pod::Spec.new do |spec|
   spec.ios.exclude_files = 'Automattic-Tracks-OSX/Automattic_Tracks_OSX.h'
 
   spec.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
-  spec.osx.exclude_files = 'Automattic-Tracks-iOS/Automattic-Tracks-iOS.h'
+  spec.osx.exclude_files = ['Automattic-Tracks-iOS/Automattic-Tracks-iOS.h', 'Automattic-Tracks-iOS/ABTesting/*']
 
   spec.private_header_files = 'Automattic-Tracks-iOS/Internal Logging/TracksLoggingPrivate.h'
   spec.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
