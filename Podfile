@@ -18,7 +18,7 @@ target 'Automattic-Tracks-iOS' do
 end
 
 target 'Automattic-Tracks-OSX' do
-  platform :osx, '10.11'
+  platform :osx, '10.12'
   shared
 end
 
