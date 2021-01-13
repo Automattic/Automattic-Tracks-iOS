@@ -887,7 +887,7 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-iOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability-iOS/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Sentry-iOS/Sentry.framework",
-				"${BUILT_PRODUCTS_DIR}/Sodium-Fork-iOS/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/Sodium-iOS/Sodium.framework",
 				"${BUILT_PRODUCTS_DIR}/UIDeviceIdentifier/UIDeviceIdentifier.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -939,7 +939,7 @@
 				"${BUILT_PRODUCTS_DIR}/CocoaLumberjack-macOS/CocoaLumberjack.framework",
 				"${BUILT_PRODUCTS_DIR}/Reachability-macOS/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/Sentry-macOS/Sentry.framework",
-				"${BUILT_PRODUCTS_DIR}/Sodium-Fork-macOS/Sodium.framework",
+				"${BUILT_PRODUCTS_DIR}/Sodium-macOS/Sodium.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
