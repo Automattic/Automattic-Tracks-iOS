@@ -1,5 +1,9 @@
 import Foundation
+#if os(iOS) || os(watchOS) || os(tvOS)
 import UIKit
+#elseif os(macOS)
+import Cocoa
+#endif
 
 @objc public class ExPlat: NSObject, ABTesting {
     public static var shared: ExPlat!
@@ -38,8 +42,7 @@ import UIKit
     }
 
     deinit {
-        NotificationCenter.default.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        unsubscribeFromNotifications()
     }
 
     /// Only refresh if the TTL has expired
@@ -121,8 +124,26 @@ import UIKit
     ///
     private func subscribeToNotifications() {
         let notificationCenter = NotificationCenter.default
+
+        #if os(iOS) || os(watchOS) || os(tvOS)
         notificationCenter.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(macOS)
+        notificationCenter.addObserver(self, selector: #selector(applicationDidEnterBackground), name: NSApplication.didResignActiveNotification, object: nil)
+        notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
+        #endif
+    }
+
+    private func unsubscribeFromNotifications() {
+        let notificationCenter = NotificationCenter.default
+
+        #if os(iOS) || os(watchOS) || os(tvOS)
+        notificationCenter.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
+        notificationCenter.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(macOS)
+        notificationCenter.removeObserver(self, name: NSApplication.didResignActiveNotification, object: nil)
+        notificationCenter.removeObserver(self, name: NSApplication.willBecomeActiveNotification, object: nil)
+        #endif
     }
 
     /// When the app goes to background stop the timer
