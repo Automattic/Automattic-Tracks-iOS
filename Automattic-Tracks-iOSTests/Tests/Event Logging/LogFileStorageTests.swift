@@ -4,9 +4,12 @@ import Combine
 
 @available(iOS 13.0, *)
 class MockDirectoryMonitor: DirectoryMonitorProtocol {
+    var contents: [URL] = []
+
     var files = PassthroughSubject<[URL], Never>()
 
     func send(urls: [URL]) {
+        contents = urls
         files.send(urls)
     }
 }
@@ -25,7 +28,7 @@ class LogFileStorageTests: XCTestCase {
         let uuid = UUID().uuidString
         let url = sampleUrl(withUuid: uuid)
         let monitor = MockDirectoryMonitor()
-        let storage = LogFileStorage(url: url, monitor: monitor)
+        let storage = LogFileStorage(url: url, eventLogging: EventLogging(dataSource: MockEventLoggingDataSource(), delegate: MockEventLoggingDelegate()), monitor: monitor)
 
         waitForExpectation { exp in
             cancellable = storage.$logFiles.sink { logFiles in

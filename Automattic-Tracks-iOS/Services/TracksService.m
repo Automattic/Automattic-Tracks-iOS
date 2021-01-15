@@ -29,7 +29,7 @@
 @end
 
 static NSTimeInterval const EVENT_TIMER_DEFAULT = 15; // seconds
-NSString *const TrackServiceWillSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
+NSString *const TrackServiceWillSendQueuedEventsNotification = @"TrackServiceWillSendQueuedEventsNotification";
 NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 
 NSString *const RequestTimestampKey = @"_rt";

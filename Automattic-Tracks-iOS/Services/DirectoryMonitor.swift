@@ -3,6 +3,7 @@ import Combine
 @available(iOS 13.0, OSX 10.15, *)
 protocol DirectoryMonitorProtocol {
     var files: PassthroughSubject<[URL], Never> { get }
+    var contents: [URL] { get }
 }
 
 @available(iOS 13.0, OSX 10.15, *)
@@ -20,6 +21,8 @@ public class DirectoryMonitor: ObservableObject, DirectoryMonitorProtocol {
     init(url: URL) {
         self.url = url
 
+        precondition(FileManager.default.fileExistsAtURL(url), "Directory does not exist at \(url.path)")
+
         fileDescriptor = open(url.path, O_EVTONLY)
 
         directoryMonitorSource = DispatchSource.makeFileSystemObjectSource(fileDescriptor: fileDescriptor, eventMask: [.write, .delete], queue: internalQueue)
@@ -32,9 +35,15 @@ public class DirectoryMonitor: ObservableObject, DirectoryMonitorProtocol {
         directoryMonitorSource.cancel()
     }
 
+    var contents: [URL] {
+        FileManager.default.subpaths(atPath: url.path)?
+            .compactMap {
+                self.url.appendingPathComponent($0)
+            } ?? []
+    }
+
     private func directoryDidChange() {
-        let files = FileManager.default.subpaths(atPath: url.path)?.compactMap { URL(fileURLWithPath: $0) } ?? []
-        self.files.send(files)
+        self.files.send(contents)
     }
 
     private func cancelDirectoryMonitor() {

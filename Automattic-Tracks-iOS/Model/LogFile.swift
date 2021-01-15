@@ -30,3 +30,9 @@ extension LogFile: Comparable {
         return lhsDate < rhsDate
     }
 }
+
+extension LogFile: Identifiable {
+    public var id: String {
+        return uuid
+    }
+}

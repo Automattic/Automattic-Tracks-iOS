@@ -1,4 +1,5 @@
 #import "AppDelegate.h"
+#import "TracksDemo-Swift.h"
 
 @interface AppDelegate ()
 
@@ -12,7 +13,9 @@ int ddLogLevel = DDLogLevelVerbose;
     // Override point for customization after application launch.
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
+
+    [CrashLoggingInitializer start];
+
     return YES;
 }
 
