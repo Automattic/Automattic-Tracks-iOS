@@ -33,6 +33,24 @@
 		24AE6DA225C0CE3E00F8D6BC /* ImmutableTracksEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DA025C0CE3E00F8D6BC /* ImmutableTracksEvent.swift */; };
 		24AE6DA825C0CE4B00F8D6BC /* KeyValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DA725C0CE4A00F8D6BC /* KeyValueType.swift */; };
 		24AE6DA925C0CE4B00F8D6BC /* KeyValueType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DA725C0CE4A00F8D6BC /* KeyValueType.swift */; };
+		24AE6DF025C0CF4C00F8D6BC /* CrashLoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DEF25C0CF4C00F8D6BC /* CrashLoggingView.swift */; };
+		24AE6DF125C0CF4C00F8D6BC /* CrashLoggingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DEF25C0CF4C00F8D6BC /* CrashLoggingView.swift */; };
+		24AE6DF725C0CF5100F8D6BC /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DF625C0CF5100F8D6BC /* EmptyView.swift */; };
+		24AE6DF825C0CF5100F8D6BC /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DF625C0CF5100F8D6BC /* EmptyView.swift */; };
+		24AE6DFF25C0CF5A00F8D6BC /* LogListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DFD25C0CF5A00F8D6BC /* LogListView.swift */; };
+		24AE6E0025C0CF5A00F8D6BC /* LogListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DFD25C0CF5A00F8D6BC /* LogListView.swift */; };
+		24AE6E0125C0CF5A00F8D6BC /* LogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DFE25C0CF5A00F8D6BC /* LogDetailView.swift */; };
+		24AE6E0225C0CF5A00F8D6BC /* LogDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6DFE25C0CF5A00F8D6BC /* LogDetailView.swift */; };
+		24AE6E0A25C0CF5F00F8D6BC /* TracksEventCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E0725C0CF5F00F8D6BC /* TracksEventCreationView.swift */; };
+		24AE6E0B25C0CF5F00F8D6BC /* TracksEventCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E0725C0CF5F00F8D6BC /* TracksEventCreationView.swift */; };
+		24AE6E0C25C0CF5F00F8D6BC /* TracksEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E0825C0CF5F00F8D6BC /* TracksEventDetailView.swift */; };
+		24AE6E0D25C0CF5F00F8D6BC /* TracksEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E0825C0CF5F00F8D6BC /* TracksEventDetailView.swift */; };
+		24AE6E0E25C0CF5F00F8D6BC /* TracksEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E0925C0CF5F00F8D6BC /* TracksEventListView.swift */; };
+		24AE6E0F25C0CF5F00F8D6BC /* TracksEventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E0925C0CF5F00F8D6BC /* TracksEventListView.swift */; };
+		24AE6E1525C0CF7200F8D6BC /* TracksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E1425C0CF7200F8D6BC /* TracksManager.swift */; };
+		24AE6E1625C0CF7200F8D6BC /* TracksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E1425C0CF7200F8D6BC /* TracksManager.swift */; };
+		24AE6E1C25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E1B25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift */; };
+		24AE6E1D25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E1B25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift */; };
 		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -208,6 +226,15 @@
 		24AE6D9725C0CE1500F8D6BC /* TracksEventStorage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksEventStorage.swift; sourceTree = "<group>"; };
 		24AE6DA025C0CE3E00F8D6BC /* ImmutableTracksEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImmutableTracksEvent.swift; sourceTree = "<group>"; };
 		24AE6DA725C0CE4A00F8D6BC /* KeyValueType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyValueType.swift; sourceTree = "<group>"; };
+		24AE6DEF25C0CF4C00F8D6BC /* CrashLoggingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CrashLoggingView.swift; sourceTree = "<group>"; };
+		24AE6DF625C0CF5100F8D6BC /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		24AE6DFD25C0CF5A00F8D6BC /* LogListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogListView.swift; sourceTree = "<group>"; };
+		24AE6DFE25C0CF5A00F8D6BC /* LogDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogDetailView.swift; sourceTree = "<group>"; };
+		24AE6E0725C0CF5F00F8D6BC /* TracksEventCreationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksEventCreationView.swift; sourceTree = "<group>"; };
+		24AE6E0825C0CF5F00F8D6BC /* TracksEventDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksEventDetailView.swift; sourceTree = "<group>"; };
+		24AE6E0925C0CF5F00F8D6BC /* TracksEventListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksEventListView.swift; sourceTree = "<group>"; };
+		24AE6E1425C0CF7200F8D6BC /* TracksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksManager.swift; sourceTree = "<group>"; };
+		24AE6E1B25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TracksEventUserType+Extensions.swift"; sourceTree = "<group>"; };
 		3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -372,6 +399,44 @@
 			path = Storage;
 			sourceTree = "<group>";
 		};
+		24AE6DC225C0CEF700F8D6BC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6DF625C0CF5100F8D6BC /* EmptyView.swift */,
+				24AE6DE125C0CF2600F8D6BC /* Tracks Events */,
+				24AE6DD625C0CF1900F8D6BC /* Logs View */,
+				24AE6DCE25C0CF0C00F8D6BC /* Crash Logging */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		24AE6DCE25C0CF0C00F8D6BC /* Crash Logging */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6DEF25C0CF4C00F8D6BC /* CrashLoggingView.swift */,
+			);
+			path = "Crash Logging";
+			sourceTree = "<group>";
+		};
+		24AE6DD625C0CF1900F8D6BC /* Logs View */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6DFE25C0CF5A00F8D6BC /* LogDetailView.swift */,
+				24AE6DFD25C0CF5A00F8D6BC /* LogListView.swift */,
+			);
+			path = "Logs View";
+			sourceTree = "<group>";
+		};
+		24AE6DE125C0CF2600F8D6BC /* Tracks Events */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6E0725C0CF5F00F8D6BC /* TracksEventCreationView.swift */,
+				24AE6E0825C0CF5F00F8D6BC /* TracksEventDetailView.swift */,
+				24AE6E0925C0CF5F00F8D6BC /* TracksEventListView.swift */,
+			);
+			path = "Tracks Events";
+			sourceTree = "<group>";
+		};
 		82FC4D3949CC9BCE8A13AD36 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -462,6 +527,7 @@
 				F9788D8024219D66000A9BB5 /* Model */,
 				93B5C7661CE2308D002820B3 /* Internal Logging */,
 				F9788DCC2421B4EF000A9BB5 /* Services */,
+				24AE6DC225C0CEF700F8D6BC /* UI */,
 				F96732DD2418470A0064CC83 /* Extensions */,
 				93D77A541CE26C9C009EDB38 /* Supporting Files */,
 				9339E70A1ADE98B800AEAB68 /* TracksConstants.h */,
@@ -536,6 +602,7 @@
 			isa = PBXGroup;
 			children = (
 				F9788D8B24219D66000A9BB5 /* TracksUser.swift */,
+				24AE6E1B25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift */,
 				F9788D8424219D66000A9BB5 /* Core Data */,
 				F9788D8C24219D66000A9BB5 /* TracksEvent.h */,
 				F9788D8224219D66000A9BB5 /* TracksEvent.m */,
@@ -571,6 +638,7 @@
 				F9788DCD2421B4EF000A9BB5 /* TracksEventPersistenceService.m */,
 				F9788DD12421B4EF000A9BB5 /* TracksEventService.h */,
 				F9788DD42421B4EF000A9BB5 /* TracksEventService.m */,
+				24AE6E1425C0CF7200F8D6BC /* TracksManager.swift */,
 				F9788DD32421B4EF000A9BB5 /* TracksService.h */,
 				F9788DCE2421B4EF000A9BB5 /* TracksService.m */,
 				F9788DD62421B4EF000A9BB5 /* TracksServiceRemote.h */,
@@ -1022,16 +1090,20 @@
 				F9788D9224219D66000A9BB5 /* TracksDeviceInformation.m in Sources */,
 				8BC586B925557C740058D0F8 /* ABTesting.swift in Sources */,
 				F9788D9024219D66000A9BB5 /* TracksEvent.m in Sources */,
+				24AE6DF725C0CF5100F8D6BC /* EmptyView.swift in Sources */,
 				F9A0D6D92420294B00D27C01 /* FileHandle+Extensions.swift in Sources */,
 				F9788D9C24219D66000A9BB5 /* TracksContextManager.m in Sources */,
 				F9445639242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */,
+				24AE6E0C25C0CF5F00F8D6BC /* TracksEventDetailView.swift in Sources */,
 				57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */,
 				24464FB125B60E0000A34B78 /* SentryEventSerializer.swift in Sources */,
+				24AE6E0A25C0CF5F00F8D6BC /* TracksEventCreationView.swift in Sources */,
 				F9788D9824219D66000A9BB5 /* TracksEventCoreData.m in Sources */,
 				F944564B24296625009A36B3 /* EventLoggingFileUploadError.swift in Sources */,
 				93B5C7CB1CE25D66002820B3 /* TracksConstants.m in Sources */,
 				F944563B242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */,
 				24AE6D9825C0CE1500F8D6BC /* LogFileStorage.swift in Sources */,
+				24AE6E0E25C0CF5F00F8D6BC /* TracksEventListView.swift in Sources */,
 				24AE6D9A25C0CE1500F8D6BC /* TracksEventStorage.swift in Sources */,
 				F94456462429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */,
 				24464FB325B60E0000A34B78 /* SentryClient+Shim.m in Sources */,
@@ -1042,16 +1114,21 @@
 				24AE6DA825C0CE4B00F8D6BC /* KeyValueType.swift in Sources */,
 				F94456482429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */,
 				F9788D8E24219D66000A9BB5 /* LogFile.swift in Sources */,
+				24AE6DF025C0CF4C00F8D6BC /* CrashLoggingView.swift in Sources */,
+				24AE6E1C25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift in Sources */,
+				24AE6E1525C0CF7200F8D6BC /* TracksManager.swift in Sources */,
 				F9788D9E24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
 				8BC586BC25557C740058D0F8 /* ExPlatService.swift in Sources */,
 				24464FB525B60E0000A34B78 /* SentryTestError.swift in Sources */,
+				24AE6E0125C0CF5A00F8D6BC /* LogDetailView.swift in Sources */,
 				24AE6DA125C0CE3E00F8D6BC /* ImmutableTracksEvent.swift in Sources */,
 				F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F97CBE6024B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
 				F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
 				F97C6B0E24758AFF006089D7 /* EventLogging+Sentry.swift in Sources */,
+				24AE6DFF25C0CF5A00F8D6BC /* LogListView.swift in Sources */,
 				24AE6D8425C0C96800F8D6BC /* DirectoryMonitor.swift in Sources */,
 				F9445642242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,
 				93B5C7CC1CE25D66002820B3 /* TracksLogging.m in Sources */,
@@ -1133,16 +1210,20 @@
 				F9788D8F24219D66000A9BB5 /* LogFile.swift in Sources */,
 				2421B2E625AEB493008776A6 /* ABTesting.swift in Sources */,
 				F9788D9324219D66000A9BB5 /* TracksDeviceInformation.m in Sources */,
+				24AE6DF825C0CF5100F8D6BC /* EmptyView.swift in Sources */,
 				F9788D9124219D66000A9BB5 /* TracksEvent.m in Sources */,
 				F9A117BA21E69B5B002A5CD8 /* TracksLoggingPrivate.m in Sources */,
 				F944563A242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */,
+				24AE6E0D25C0CF5F00F8D6BC /* TracksEventDetailView.swift in Sources */,
 				F9788D9D24219D66000A9BB5 /* TracksContextManager.m in Sources */,
 				24464FB225B60E0000A34B78 /* SentryEventSerializer.swift in Sources */,
+				24AE6E0B25C0CF5F00F8D6BC /* TracksEventCreationView.swift in Sources */,
 				F944564C24296625009A36B3 /* EventLoggingFileUploadError.swift in Sources */,
 				F9788DAA2421A2BF000A9BB5 /* CrashLoggingDataProvider.swift in Sources */,
 				F944563C242965E7009A36B3 /* EventLoggingDelegate.swift in Sources */,
 				F94456472429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */,
 				24AE6D9925C0CE1500F8D6BC /* LogFileStorage.swift in Sources */,
+				24AE6E0F25C0CF5F00F8D6BC /* TracksEventListView.swift in Sources */,
 				24AE6D9B25C0CE1500F8D6BC /* TracksEventStorage.swift in Sources */,
 				F9838979243286EA00BB2F1F /* EventLogging.swift in Sources */,
 				24464FB425B60E0000A34B78 /* SentryClient+Shim.m in Sources */,
@@ -1153,16 +1234,21 @@
 				24AE6DA925C0CE4B00F8D6BC /* KeyValueType.swift in Sources */,
 				F94456492429660F009A36B3 /* EventLoggingNetworkService.swift in Sources */,
 				F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */,
+				24AE6DF125C0CF4C00F8D6BC /* CrashLoggingView.swift in Sources */,
+				24AE6E1D25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift in Sources */,
+				24AE6E1625C0CF7200F8D6BC /* TracksManager.swift in Sources */,
 				F9788D9F24219D66000A9BB5 /* TracksUser.swift in Sources */,
 				F9788DDA2421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F944563E242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				24464FB625B60E0000A34B78 /* SentryTestError.swift in Sources */,
+				24AE6E0225C0CF5A00F8D6BC /* LogDetailView.swift in Sources */,
 				24AE6DA225C0CE3E00F8D6BC /* ImmutableTracksEvent.swift in Sources */,
 				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */,
 				F97CBE6124B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
 				2421B2E925AEB493008776A6 /* ExPlat.swift in Sources */,
 				F9A117D221E69B84002A5CD8 /* TracksLogging.m in Sources */,
+				24AE6E0025C0CF5A00F8D6BC /* LogListView.swift in Sources */,
 				24AE6D8525C0C96800F8D6BC /* DirectoryMonitor.swift in Sources */,
 				F9B862C32476D004008B093C /* EventLogging+Sentry.swift in Sources */,
 				F9445643242965F6009A36B3 /* FileManager+Extensions.swift in Sources */,

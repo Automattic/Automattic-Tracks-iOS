@@ -1,6 +1,6 @@
 import Foundation
-import Combine
 
+/// A property wrapper for UserDefaults access
 @propertyWrapper
 struct UserDefault<T> {
     let key: String

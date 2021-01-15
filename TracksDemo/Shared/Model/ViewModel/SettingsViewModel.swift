@@ -1,24 +1,4 @@
 import Foundation
-import Combine
-import AutomatticTracks
-
-struct Settings {
-    @UserDefault("wpcom-username", defaultValue: "")
-    var username: String
-
-    @UserDefault("wpcom-userid", defaultValue: "")
-    var userId: String
-
-    @UserDefault("wpcom-email-address", defaultValue: "")
-    var email: String
-}
-
-extension Settings: TracksUserProvider {
-
-    var tracksUser: TracksUser {
-        TracksUser(userID: userId, email: email, username: username)
-    }
-}
 
 class SettingsViewModel: ObservableObject {
     @Published

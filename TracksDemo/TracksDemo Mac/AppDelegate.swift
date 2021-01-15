@@ -5,7 +5,9 @@ import AutomatticTracks
 class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
+        DDLog.add(DDASLLogger())
+        DDLog.add(DDTTYLogger())
+
         CrashLoggingInitializer.start()
     }
 
