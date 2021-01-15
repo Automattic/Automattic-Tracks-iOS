@@ -2,7 +2,7 @@
 #import "TracksDemo-Swift.h"
 
 @interface AppDelegate ()
-
+    @property(nonatomic, strong) CrashLogging *crashLogging;
 @end
 
 int ddLogLevel = DDLogLevelVerbose;
@@ -14,7 +14,7 @@ int ddLogLevel = DDLogLevelVerbose;
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
 
-    [CrashLoggingInitializer start];
+    [[self crashLogging] startAndReturnError:nil];
 
     return YES;
 }

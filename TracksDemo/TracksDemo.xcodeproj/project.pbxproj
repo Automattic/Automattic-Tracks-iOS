@@ -8,6 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		0E14A4ED368731BE67503900 /* Pods_TracksDemo_Mac.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 79BD8E50F4D371F7414BDB49 /* Pods_TracksDemo_Mac.framework */; };
+		24AE6E2925C0CFFB00F8D6BC /* EventLoggingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E2825C0CFFB00F8D6BC /* EventLoggingDataProvider.swift */; };
+		24AE6E2A25C0CFFB00F8D6BC /* EventLoggingDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E2825C0CFFB00F8D6BC /* EventLoggingDataProvider.swift */; };
+		24AE6E4025C0D04600F8D6BC /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E3F25C0D04600F8D6BC /* Settings.swift */; };
+		24AE6E4125C0D04600F8D6BC /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E3F25C0D04600F8D6BC /* Settings.swift */; };
+		24AE6E4625C0D07C00F8D6BC /* TracksSampleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E4525C0D07C00F8D6BC /* TracksSampleContent.swift */; };
+		24AE6E4725C0D07C00F8D6BC /* TracksSampleContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E4525C0D07C00F8D6BC /* TracksSampleContent.swift */; };
+		24AE6E5F25C0D0B100F8D6BC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E5E25C0D0B100F8D6BC /* SettingsViewModel.swift */; };
+		24AE6E6025C0D0B100F8D6BC /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E5E25C0D0B100F8D6BC /* SettingsViewModel.swift */; };
+		24AE6E6525C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E6425C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift */; };
+		24AE6E6625C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E6425C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift */; };
+		24AE6E8225C0D2C100F8D6BC /* Alice in Wonderland.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E7D25C0D2C100F8D6BC /* Alice in Wonderland.txt */; };
+		24AE6E8325C0D2C100F8D6BC /* Alice in Wonderland.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E7D25C0D2C100F8D6BC /* Alice in Wonderland.txt */; };
+		24AE6E8425C0D2C100F8D6BC /* Frankenstein.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E7E25C0D2C100F8D6BC /* Frankenstein.txt */; };
+		24AE6E8525C0D2C100F8D6BC /* Frankenstein.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E7E25C0D2C100F8D6BC /* Frankenstein.txt */; };
+		24AE6E8625C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E7F25C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt */; };
+		24AE6E8725C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E7F25C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt */; };
+		24AE6E8825C0D2C100F8D6BC /* The Scarlet Letter.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E8025C0D2C100F8D6BC /* The Scarlet Letter.txt */; };
+		24AE6E8925C0D2C100F8D6BC /* The Scarlet Letter.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E8025C0D2C100F8D6BC /* The Scarlet Letter.txt */; };
+		24AE6E8A25C0D2C100F8D6BC /* Pride and Prejudice.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E8125C0D2C100F8D6BC /* Pride and Prejudice.txt */; };
+		24AE6E8B25C0D2C100F8D6BC /* Pride and Prejudice.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E8125C0D2C100F8D6BC /* Pride and Prejudice.txt */; };
 		24FB4D1B25B2AE2C006E4031 /* CrashLoggingRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D1A25B2AE2C006E4031 /* CrashLoggingRootViewController.swift */; };
 		24FB4D3D25B2AF02006E4031 /* CrashLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */; };
 		24FB4D4225B2AF0C006E4031 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* Secrets.swift */; };
@@ -18,13 +38,11 @@
 		73B375EEF4DC862A1B72B4CD /* Pods_TracksDemo_TracksDemoTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1126A32F54624C019349ED29 /* Pods_TracksDemo_TracksDemoTests.framework */; };
 		937632941AC2026900086BC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632931AC2026900086BC6 /* main.m */; };
 		937632971AC2026900086BC6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632961AC2026900086BC6 /* AppDelegate.m */; };
-		9376329A1AC2026900086BC6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632991AC2026900086BC6 /* ViewController.m */; };
 		9376329D1AC2026900086BC6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9376329B1AC2026900086BC6 /* Main.storyboard */; };
 		9376329F1AC2026900086BC6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9376329E1AC2026900086BC6 /* Images.xcassets */; };
 		937632A21AC2026900086BC6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 937632A01AC2026900086BC6 /* LaunchScreen.xib */; };
 		937632AE1AC2026900086BC6 /* TracksDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632AD1AC2026900086BC6 /* TracksDemoTests.m */; };
 		F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93676FA21DFFDC700323458 /* AppDelegate.swift */; };
-		F93676FD21DFFDC700323458 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93676FC21DFFDC700323458 /* ViewController.swift */; };
 		F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F93676FE21DFFDC800323458 /* Assets.xcassets */; };
 		F936770221DFFDC800323458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F936770021DFFDC800323458 /* Main.storyboard */; };
 /* End PBXBuildFile section */
@@ -42,6 +60,16 @@
 /* Begin PBXFileReference section */
 		0262514F2B990CA2F3D99C07 /* Pods-TracksDemo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo/Pods-TracksDemo.debug.xcconfig"; sourceTree = "<group>"; };
 		1126A32F54624C019349ED29 /* Pods_TracksDemo_TracksDemoTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TracksDemo_TracksDemoTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		24AE6E2825C0CFFB00F8D6BC /* EventLoggingDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingDataProvider.swift; sourceTree = "<group>"; };
+		24AE6E3F25C0D04600F8D6BC /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		24AE6E4525C0D07C00F8D6BC /* TracksSampleContent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TracksSampleContent.swift; sourceTree = "<group>"; };
+		24AE6E5E25C0D0B100F8D6BC /* SettingsViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		24AE6E6425C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsPropertyWrapper.swift; sourceTree = "<group>"; };
+		24AE6E7D25C0D2C100F8D6BC /* Alice in Wonderland.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Alice in Wonderland.txt"; sourceTree = "<group>"; };
+		24AE6E7E25C0D2C100F8D6BC /* Frankenstein.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Frankenstein.txt; sourceTree = "<group>"; };
+		24AE6E7F25C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Strange Case of Dr. Jekyll and Mr. Hyde.txt"; sourceTree = "<group>"; };
+		24AE6E8025C0D2C100F8D6BC /* The Scarlet Letter.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Scarlet Letter.txt"; sourceTree = "<group>"; };
+		24AE6E8125C0D2C100F8D6BC /* Pride and Prejudice.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Pride and Prejudice.txt"; sourceTree = "<group>"; };
 		24FB4D1925B2AE2B006E4031 /* TracksDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TracksDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		24FB4D1A25B2AE2C006E4031 /* CrashLoggingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingRootViewController.swift; sourceTree = "<group>"; };
 		24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingDataSource.swift; sourceTree = "<group>"; };
@@ -57,8 +85,6 @@
 		937632931AC2026900086BC6 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		937632951AC2026900086BC6 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		937632961AC2026900086BC6 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		937632981AC2026900086BC6 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		937632991AC2026900086BC6 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		9376329C1AC2026900086BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9376329E1AC2026900086BC6 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		937632A11AC2026900086BC6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -69,7 +95,6 @@
 		BB5A6387367FC4DAB79A8971 /* Pods-TracksDemo Mac.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TracksDemo Mac.release.xcconfig"; path = "Pods/Target Support Files/Pods-TracksDemo Mac/Pods-TracksDemo Mac.release.xcconfig"; sourceTree = "<group>"; };
 		F93676F821DFFDC700323458 /* TracksDemo Mac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TracksDemo Mac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		F93676FA21DFFDC700323458 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		F93676FC21DFFDC700323458 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		F93676FE21DFFDC800323458 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F936770121DFFDC800323458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F936770321DFFDC800323458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -118,11 +143,45 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		24AE6E2E25C0CFFF00F8D6BC /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6E3F25C0D04600F8D6BC /* Settings.swift */,
+				24AE6E3825C0D01900F8D6BC /* ViewModel */,
+				24AE6E4525C0D07C00F8D6BC /* TracksSampleContent.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		24AE6E3825C0D01900F8D6BC /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6E5E25C0D0B100F8D6BC /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		24AE6E4B25C0D08700F8D6BC /* Sample Content */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6E7D25C0D2C100F8D6BC /* Alice in Wonderland.txt */,
+				24AE6E7E25C0D2C100F8D6BC /* Frankenstein.txt */,
+				24AE6E8125C0D2C100F8D6BC /* Pride and Prejudice.txt */,
+				24AE6E8025C0D2C100F8D6BC /* The Scarlet Letter.txt */,
+				24AE6E7F25C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt */,
+			);
+			path = "Sample Content";
+			sourceTree = "<group>";
+		};
 		24FB4D3B25B2AEEA006E4031 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				24AE6E4B25C0D08700F8D6BC /* Sample Content */,
+				24AE6E2E25C0CFFF00F8D6BC /* Model */,
 				24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */,
+				24AE6E2825C0CFFB00F8D6BC /* EventLoggingDataProvider.swift */,
 				24FB4D4125B2AF0C006E4031 /* Secrets.swift */,
+				24AE6E6425C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -155,8 +214,6 @@
 			children = (
 				937632951AC2026900086BC6 /* AppDelegate.h */,
 				937632961AC2026900086BC6 /* AppDelegate.m */,
-				937632981AC2026900086BC6 /* ViewController.h */,
-				937632991AC2026900086BC6 /* ViewController.m */,
 				9376329B1AC2026900086BC6 /* Main.storyboard */,
 				9376329E1AC2026900086BC6 /* Images.xcassets */,
 				937632A01AC2026900086BC6 /* LaunchScreen.xib */,
@@ -208,7 +265,6 @@
 			isa = PBXGroup;
 			children = (
 				F93676FA21DFFDC700323458 /* AppDelegate.swift */,
-				F93676FC21DFFDC700323458 /* ViewController.swift */,
 				24FB4D8325B2B304006E4031 /* CrashLoggingRootViewController.swift */,
 				F93676FE21DFFDC800323458 /* Assets.xcassets */,
 				F936770021DFFDC800323458 /* Main.storyboard */,
@@ -340,9 +396,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24AE6E8425C0D2C100F8D6BC /* Frankenstein.txt in Resources */,
+				24AE6E8225C0D2C100F8D6BC /* Alice in Wonderland.txt in Resources */,
+				24AE6E8825C0D2C100F8D6BC /* The Scarlet Letter.txt in Resources */,
 				9376329D1AC2026900086BC6 /* Main.storyboard in Resources */,
 				937632A21AC2026900086BC6 /* LaunchScreen.xib in Resources */,
+				24AE6E8625C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt in Resources */,
 				9376329F1AC2026900086BC6 /* Images.xcassets in Resources */,
+				24AE6E8A25C0D2C100F8D6BC /* Pride and Prejudice.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -357,8 +418,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24AE6E8725C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt in Resources */,
 				F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */,
+				24AE6E8325C0D2C100F8D6BC /* Alice in Wonderland.txt in Resources */,
+				24AE6E8525C0D2C100F8D6BC /* Frankenstein.txt in Resources */,
+				24AE6E8B25C0D2C100F8D6BC /* Pride and Prejudice.txt in Resources */,
 				F936770221DFFDC800323458 /* Main.storyboard in Resources */,
+				24AE6E8925C0D2C100F8D6BC /* The Scarlet Letter.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -593,11 +659,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				24FB4D3D25B2AF02006E4031 /* CrashLoggingDataSource.swift in Sources */,
+				24AE6E2925C0CFFB00F8D6BC /* EventLoggingDataProvider.swift in Sources */,
 				24FB4D4225B2AF0C006E4031 /* Secrets.swift in Sources */,
-				9376329A1AC2026900086BC6 /* ViewController.m in Sources */,
+				24AE6E6525C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift in Sources */,
+				24AE6E4025C0D04600F8D6BC /* Settings.swift in Sources */,
 				24FB4D1B25B2AE2C006E4031 /* CrashLoggingRootViewController.swift in Sources */,
 				937632971AC2026900086BC6 /* AppDelegate.m in Sources */,
+				24AE6E4625C0D07C00F8D6BC /* TracksSampleContent.swift in Sources */,
 				937632941AC2026900086BC6 /* main.m in Sources */,
+				24AE6E5F25C0D0B100F8D6BC /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -613,11 +683,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				24AE6E2A25C0CFFB00F8D6BC /* EventLoggingDataProvider.swift in Sources */,
+				24AE6E4725C0D07C00F8D6BC /* TracksSampleContent.swift in Sources */,
 				24FB4D8425B2B304006E4031 /* CrashLoggingRootViewController.swift in Sources */,
 				24FB4D8F25B2B332006E4031 /* Secrets.swift in Sources */,
-				F93676FD21DFFDC700323458 /* ViewController.swift in Sources */,
 				24FB4D8E25B2B332006E4031 /* CrashLoggingDataSource.swift in Sources */,
+				24AE6E6625C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift in Sources */,
+				24AE6E4125C0D04600F8D6BC /* Settings.swift in Sources */,
 				F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */,
+				24AE6E6025C0D0B100F8D6BC /* SettingsViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

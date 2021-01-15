@@ -1,6 +1,10 @@
 import Foundation
 import SwiftUI
 
+public protocol LogSampleContentProvider {
+    var sampleContent: [URL] { get }
+}
+
 @available(iOS 14.0, OSX 11.0, *)
 public struct LogListView: View {
 
@@ -10,13 +14,17 @@ public struct LogListView: View {
 
     @ObservedObject
     var logFileStorage: LogFileStorage
+
+    let sampleContentProvider: LogSampleContentProvider
+
 //    let crashLogging: CrashLogging
 
     /// We can't observe an environment object, so instead we'll listen for the publisher to update values and copy them to the local state
 //    @State var uploadState: EventLoggingPublisher.UploadState = .done
 
-    public init(logFileStorage: LogFileStorage) {
+    public init(logFileStorage: LogFileStorage, sampleContentProvider: LogSampleContentProvider) {
         self.logFileStorage = logFileStorage
+        self.sampleContentProvider = sampleContentProvider
     }
 
     public var body: some View {
@@ -26,10 +34,6 @@ public struct LogListView: View {
             VStack {
                 self.content
             }
-            .navigationBarTitle("Log Upload Queue")
-            .navigationBarItems(trailing: Button(action: addTestLogToQueue) {
-                Image(systemName: "plus.circle")
-            })
             .toolbar {
                 ToolbarItem(placement: .bottomBar) {
 //                    switch uploadState {
@@ -53,10 +57,6 @@ public struct LogListView: View {
             }
             #elseif os(macOS)
             VStack {
-                Button(action: addTestLogToQueue, label: {
-                    Image(systemName: "plus.circle")
-                    Text("Create new Log File")
-                }).padding()
 
                 self.content
 
@@ -75,6 +75,11 @@ public struct LogListView: View {
     var content: some View {
         Group {
 
+            Button(action: addTestLogToQueue, label: {
+                Image(systemName: "plus.circle")
+                Text("Create a sample Log File")
+            }).padding()
+
             if logFileStorage.logFiles.isEmpty {
                 EmptyView(text: "Log Upload Queue is Empty")
             } else {
@@ -90,13 +95,15 @@ public struct LogListView: View {
 
     private func addTestLogToQueue() {
         do {
-            /// For now, just enqueue any data
-            let data = UUID().uuidString.data(using: .utf8)!
 
-            let url = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(UUID().uuidString)
-            try data.write(to: url)
+            guard let contentUrl = sampleContentProvider.sampleContent.randomElement() else {
+                alertTitle = "Unable to create log"
+                alertMessage = "No sample content provided"
+                isShowingAlert = true
+                return
+            }
 
-            try logFileStorage.enqueueLogFileForUpload(LogFile(url: url))
+            try logFileStorage.enqueueLogFileForUpload(LogFile(url: contentUrl))
         }
         catch let err {
             alertTitle = "Unable to create log"

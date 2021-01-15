@@ -21,9 +21,12 @@ struct LogDetailView: View {
     }
 
     var body: some View {
+        #if os(macOS)
+        LogView(text: logFileContents).padding()
+        #else
         LogView(text: logFileContents)
-            .padding()
             .navigationTitle("Log View")
+        #endif
     }
 }
 
@@ -59,20 +62,27 @@ struct LogView: UIViewRepresentable {
 struct LogView: NSViewRepresentable {
     private let text: String
 
+    private let scrollView = NSTextView.scrollableTextView()
+
     init(text: String) {
         self.text = text
     }
 
     func makeNSView(context: Context) -> some NSView {
-        let view = NSTextView()
-        view.isSelectable = true
-        view.isEditable = false
-        view.string = text
-        return view
+
+        if let textView = scrollView.documentView as? NSTextView {
+            textView.isSelectable = true
+            textView.isEditable = false
+            textView.string = text
+
+            textView.textContainer?.widthTracksTextView = true
+        }
+
+        return scrollView
     }
 
     func updateNSView(_ nsView: NSViewType, context: Context) {
-        /// Nothing needs to be done here
+
     }
 }
 #endif

@@ -12,6 +12,11 @@ public class LogFileStorage: ObservableObject {
 
     private var cancellable: AnyCancellable?
 
+    public convenience init(url: URL, dataProvider: EventLoggingDataSource & EventLoggingDelegate) {
+        let eventLogging = EventLogging(dataSource: dataProvider, delegate: dataProvider)
+        self.init(url: url, eventLogging: eventLogging)
+    }
+
     public convenience init(url: URL, dataSource: EventLoggingDataSource, delegate: EventLoggingDelegate) {
         let eventLogging = EventLogging(dataSource: dataSource, delegate: delegate)
         self.init(url: url, eventLogging: eventLogging)

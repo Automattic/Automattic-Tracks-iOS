@@ -3,13 +3,13 @@ import AutomatticTracks
 
 class RootViewController: NSHostingController<RootUIView> {
 
-    private let eventLoggingDataProvider = EventLoggingDataProvider()
+    private let settings = Settings()
 
     init() {
+
         let logFileStorage = LogFileStorage(
             url: EventLoggingDefaults.defaultQueueStoragePath,
-            dataSource: eventLoggingDataProvider,
-            delegate: eventLoggingDataProvider
+            dataProvider: EventLoggingDataProvider(settings: settings)
         )
 
         let tracksManager = try! TracksManager(userDataSource: Settings())
@@ -23,10 +23,10 @@ class RootViewController: NSHostingController<RootUIView> {
     }
 
     @objc required dynamic init?(coder aDecoder: NSCoder) {
+
         let logFileStorage = LogFileStorage(
             url: EventLoggingDefaults.defaultQueueStoragePath,
-            dataSource: eventLoggingDataProvider,
-            delegate: eventLoggingDataProvider
+            dataProvider: EventLoggingDataProvider(settings: settings)
         )
 
         let tracksManager = try! TracksManager(userDataSource: Settings())

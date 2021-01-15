@@ -7,6 +7,13 @@ public class EventLogging {
 
     /// Add a Log File to the list of events that need to be uploaded
     public func enqueueLogForUpload(log: LogFile) throws {
+
+        /// Check whether the user's privacy settings allow this
+        guard delegate.shouldEnqueueLogFiles else {
+            DDLogDebug("📜 Not enqueuing log file for upload – blocked by delegate")
+            return
+        }
+
         try uploadQueue.add(log)
 
         /// Notify observers of a new log in the queue

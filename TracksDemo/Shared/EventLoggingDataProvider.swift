@@ -1,6 +1,8 @@
 import AutomatticTracks
 
-struct EventLoggingDataProvider { }
+struct EventLoggingDataProvider {
+    let settings: Settings
+}
 
 extension EventLoggingDataProvider: EventLoggingDataSource {
     var loggingEncryptionKey: String {
@@ -18,6 +20,11 @@ extension EventLoggingDataProvider: EventLoggingDataSource {
 }
 
 extension EventLoggingDataProvider: EventLoggingDelegate {
+
+    /// Always opt-in to enqueuing log files
+    var shouldEnqueueLogFiles: Bool {
+        return true
+    }
 
     /// Always opt-in to uploading log files
     var shouldUploadLogFiles: Bool {

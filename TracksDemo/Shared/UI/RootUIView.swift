@@ -5,6 +5,7 @@ struct RootUIView: View {
 
     let tracksManager: TracksManager
     let logFileStorage: LogFileStorage
+    let sampleContent = TracksSampleContent()
 
     init(tracksManager: TracksManager, logFileStorage: LogFileStorage) {
         self.tracksManager = tracksManager
@@ -46,8 +47,11 @@ struct RootUIView: View {
 
             /// Encrypted Logs
             NavigationView {
-                LogListView(logFileStorage: logFileStorage)
-                    .navigationTitle("Encrypted Logs")
+                LogListView(
+                    logFileStorage: logFileStorage,
+                    sampleContentProvider: sampleContent
+                )
+                .navigationTitle("Encrypted Logs")
             }
             .tabItem {
                 Image(systemName: "scroll")
