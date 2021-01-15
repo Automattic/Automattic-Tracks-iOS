@@ -12,7 +12,19 @@ struct RootUIView: View {
     }
 
     var body: some View {
+        #if os(iOS)
         TabView {
+            content
+        }
+        #elseif os(macOS)
+        TabView {
+            content
+        }.padding() /// The TabView on macOS needs padding or it looks all wrong
+        #endif
+    }
+
+    var content: some View {
+        Group {
             /// Tracks Events
             NavigationView {
                 #if os(iOS)

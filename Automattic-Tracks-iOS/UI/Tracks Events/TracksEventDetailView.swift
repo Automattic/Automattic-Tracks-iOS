@@ -14,7 +14,19 @@ struct TracksEventDetailView: View {
     }
 
     var body: some View {
+        #if os(macOS)
+        List {
+            content
+        }
+        #else
         Form {
+            content
+        }.navigationTitle("Event Details")
+        #endif
+    }
+
+    var content: some View {
+        Group {
             Section(header: Text("User Data")) {
                 EventDetailRow(key: "Username", value: event.username)
                 EventDetailRow(key: "User ID", value: event.userID)
@@ -57,7 +69,7 @@ struct TracksEventDetailView: View {
                     }
                 }
             }
-        }.navigationTitle("Event Details")
+        }
     }
 }
 
@@ -77,9 +89,17 @@ struct EventDetailRow: View {
     }
 
     var body: some View {
+        #if os(macOS)
+        HStack(alignment: .top) {
+            Text(key).fontWeight(.bold)
+            Text(value)
+            Spacer()
+        }
+        #else
         VStack(alignment: .leading) {
             Text(key).font(.caption)
             Text(value)
         }
+        #endif
     }
 }

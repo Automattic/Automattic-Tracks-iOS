@@ -59,7 +59,12 @@ public struct TracksEventCreationView: View {
 
                     Button(action: self.sendAllQueuedEvents) {
                         HStack {
+                            #if os(macOS)
                             Text("Upload \(tracksEventStorage.allEventsCount) Queued Events")
+                            #else
+                            Text("Upload Queued Events")
+                            #endif
+
                             Spacer()
 
                             if isSendingEvents {
