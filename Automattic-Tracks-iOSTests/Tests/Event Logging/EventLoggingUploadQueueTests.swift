@@ -73,7 +73,7 @@ class EventLoggingUploadQueueTests: XCTestCase {
         XCTAssert(FileManager.default.fileExistsAtURL(log.url))
     }
 
-    func testThatUploadQueueRetainsCorrectNumberOfLogFiles() {
+    func testThatUploadQueueRetainsCorrectNumberOfLogFiles() throws {
 
         let directory = FileManager.default.documentsDirectory.appendingPathComponent(UUID().uuidString)
         let queue = EventLoggingUploadQueue(storageDirectory: directory)
@@ -84,10 +84,8 @@ class EventLoggingUploadQueueTests: XCTestCase {
 
         XCTAssertEqual(queue.items.count, 90)
 
-        queue.items.enumerated().forEach {
-            try! FileManager.default.setAttributesOfItem(attributes: [
-                FileAttributeKey.creationDate: Calendar.current.date(byAdding: .day, value: $0.offset * -1, to: Date())!
-            ], at: $0.element.url)
+        try queue.items.enumerated().forEach {
+            try FileManager.default.setCreationDate(forItemAt: $0.element.url, to: Calendar.current.date(byAdding: .day, value: $0.offset * -1, to: Date())!)
         }
 
         let retain = Int.random(in: 1..<89)

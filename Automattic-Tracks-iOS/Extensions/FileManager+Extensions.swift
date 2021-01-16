@@ -59,7 +59,7 @@ extension FileManager {
         var attributes = try self.attributesOfItem(at: url)
 
         /// The modification date can't be before the creation date, so update both in this case
-        if attributes.modificationDate != nil && attributes.modificationDate! < date {
+        if attributes.modificationDate != nil || attributes.modificationDate! < date {
             attributes.modificationDate = date
         }
 
