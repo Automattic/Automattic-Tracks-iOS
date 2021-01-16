@@ -35,7 +35,7 @@ struct TracksEventDetailView: View {
             }
 
             Section(header: Text("User Properties")) {
-                if event.userProperties.isEmpty{
+                if event.userProperties.isEmpty {
                     Text("No User Properties Available")
                 } else {
                     ForEach(event.userProperties) {

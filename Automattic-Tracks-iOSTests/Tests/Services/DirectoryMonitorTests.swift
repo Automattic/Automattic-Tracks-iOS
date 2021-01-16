@@ -58,7 +58,7 @@ class DirectoryMonitorTests: XCTestCase {
 
     /// Test Helpers
     @discardableResult
-    private func createFileInTempDirectory() throws -> URL  {
+    private func createFileInTempDirectory() throws -> URL {
         let uuid = UUID().uuidString
         let fileUrl = currentTempDirectory!.appendingPathComponent(uuid)
         try uuid.write(to: fileUrl, atomically: true, encoding: .utf8)
@@ -66,7 +66,7 @@ class DirectoryMonitorTests: XCTestCase {
         return fileUrl
     }
 
-    private func removeFile(at url: URL) throws  {
+    private func removeFile(at url: URL) throws {
         try FileManager.default.removeItem(at: url)
     }
 }
