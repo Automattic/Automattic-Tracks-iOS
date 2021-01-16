@@ -16,18 +16,22 @@ public struct LogFile {
     static func fromExistingFile(at url: URL) -> LogFile {
         return LogFile(url: url, uuid: url.lastPathComponent)
     }
+
+    var creationDate: Date? {
+        try? FileManager.default.attributesOfItem(at: url).creationDate
+    }
 }
 
 extension LogFile: Comparable {
     public static func < (lhs: LogFile, rhs: LogFile) -> Bool {
         guard
-            let lhsDate = try? FileManager.default.attributesOfItem(at: lhs.url).fileCreationDate,
-            let rhsDate = try? FileManager.default.attributesOfItem(at: rhs.url).fileCreationDate
+            let lhsDate = lhs.creationDate,
+            let rhsDate = rhs.creationDate
         else {
                 return false
         }
 
-        return lhsDate < rhsDate
+        return lhsDate > rhsDate
     }
 }
 

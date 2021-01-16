@@ -51,7 +51,6 @@ struct RootUIView: View {
                     logFileStorage: logFileStorage,
                     sampleContentProvider: sampleContent
                 )
-                .navigationTitle("Encrypted Logs")
             }
             .tabItem {
                 Image(systemName: "scroll")

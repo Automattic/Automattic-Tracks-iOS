@@ -3,8 +3,22 @@ import Foundation
 typealias FileAttributes = [FileAttributeKey: Any]
 
 extension FileAttributes {
-    var fileCreationDate: Date? {
-        return self[FileAttributeKey.creationDate] as? Date
+    var creationDate: Date? {
+        get {
+            return self[FileAttributeKey.creationDate] as? Date
+        }
+        set {
+            self[FileAttributeKey.creationDate] = newValue
+        }
+    }
+
+    var modificationDate: Date? {
+        get {
+            return self[FileAttributeKey.modificationDate] as? Date
+        }
+        set {
+            self[FileAttributeKey.modificationDate] = newValue
+        }
     }
 }
 
@@ -39,5 +53,18 @@ extension FileManager {
 
     func setAttributesOfItem(attributes: FileAttributes, at url: URL) throws {
         return try self.setAttributes(attributes, ofItemAtPath: url.path)
+    }
+
+    func setCreationDate(forItemAt url: URL, to date: Date = Date()) throws {
+        var attributes = try self.attributesOfItem(at: url)
+
+        /// The modification date can't be before the creation date, so update both in this case
+        if attributes.modificationDate != nil && attributes.modificationDate! < date {
+            attributes.modificationDate = date
+        }
+
+        attributes.creationDate = date
+
+        try setAttributesOfItem(attributes: attributes, at: url)
     }
 }

@@ -15,6 +15,9 @@ public struct LogListView: View {
     @ObservedObject
     var logFileStorage: LogFileStorage
 
+    @ObservedObject
+    var eventLoggingEmitter = EventLoggingEmitter()
+
     let sampleContentProvider: LogSampleContentProvider
 
 //    let crashLogging: CrashLogging
@@ -28,58 +31,57 @@ public struct LogListView: View {
     }
 
     public var body: some View {
-
         Group {
-            #if os(iOS)
+            #if os(macOS)
             VStack {
-                self.content
-            }
-            .toolbar {
-                ToolbarItem(placement: .bottomBar) {
-//                    switch uploadState {
-//                        case .uploading:
-//                            Text("Uploading")
-//                                .font(.caption)
-//                        case .paused(let date):
-//                            let dateString = DateFormatter.localizedString(
-//                                from: date,
-//                                dateStyle: .short,
-//                                timeStyle: .medium
-//                            )
-//
-//                            Text("Paused until \(dateString)")
-//                                .font(.caption)
-//                        case .done:
-                            Text("Done")
-                                .font(.caption)
-//                    }
+                logFileList
+                HStack {
+                    uploadLogsButton
+                    Spacer()
+                    addTestLogToQueueButton
                 }
+                .padding()
             }
-            #elseif os(macOS)
-            VStack {
-
-                self.content
-
-                Button(action: {}, label: {
-                    Image(systemName: "square.and.arrow.up")
-                    Text("Upload Log Files")
-                }).padding()
-            }
+            #else
+            logFileList.navigationBarItems(
+                leading: uploadLogsButton,
+                trailing: addTestLogToQueueButton
+            ).navigationBarTitle("Encrypted Logs", displayMode: .inline)
             #endif
+        }.alert(isPresented: $isShowingAlert) {
+            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Ok")))
         }
-//        .onReceive(eventLoggingPublisher.$uploadState) {
-//            self.uploadState = $0
-//        }
     }
 
-    var content: some View {
+    var uploadLogsButton: some View {
         Group {
+            switch eventLoggingEmitter.uploadState {
+                case .paused(let date):
+                    if date == nil {
+                        Button(action: uploadLogFiles) {
+                            Image(systemName: "square.and.arrow.up")
+                        }
+                    }
+                case .cancelled:
+                    Image(systemName: "xmark.octagon")
+                case .done:
+                    Button(action: uploadLogFiles) {
+                        Image(systemName: "square.and.arrow.up")
+                    }
+                case .uploading:
+                    ProgressView()
+            }
+        }
+    }
 
-            Button(action: addTestLogToQueue, label: {
-                Image(systemName: "plus.circle")
-                Text("Create a sample Log File")
-            }).padding()
+    var addTestLogToQueueButton: some View {
+        Button(action: addTestLogToQueue) {
+            Image(systemName: "plus.circle")
+        }
+    }
 
+    var logFileList: some View {
+        Group {
             if logFileStorage.logFiles.isEmpty {
                 EmptyView(text: "Log Upload Queue is Empty")
             } else {
@@ -88,14 +90,15 @@ public struct LogListView: View {
                 }
             }
         }
-        .alert(isPresented: $isShowingAlert) {
-            Alert(title: Text(alertTitle), message: Text(alertMessage), dismissButton: .default(Text("Ok")))
-        }
     }
 
+}
+
+// MARK: – Actions
+@available(iOS 14.0, OSX 11.0, *)
+extension LogListView {
     private func addTestLogToQueue() {
         do {
-
             guard let contentUrl = sampleContentProvider.sampleContent.randomElement() else {
                 alertTitle = "Unable to create log"
                 alertMessage = "No sample content provided"
@@ -111,6 +114,10 @@ public struct LogListView: View {
             isShowingAlert = true
         }
     }
+
+    private func uploadLogFiles() {
+        logFileStorage.uploadQueuedLogFiles()
+    }
 }
 
 @available(iOS 14.0, OSX 11.0, *)
@@ -121,15 +128,38 @@ struct EncryptedLogFileCell: View {
         NavigationLink(
             destination: LogDetailView(logFilePath: logFile.url),
             label: {
+
                 VStack(alignment: .leading) {
-                    Text(logFile.uuid)
+                    Text(DateFormatter.localizedString(from: logFile.displayCreationDate, dateStyle: .short, timeStyle: .short))
                         .font(.body)
 
-//                    if let date = logFile.date {
-//                        Text(DateFormatter.localizedString(from: date, dateStyle: .short, timeStyle: .short))
-//                            .font(.caption)
-//                    }
+                    Text(logFile.displayText)
+                        .font(.caption)
+                        .lineLimit(1)
                 }
             })
+    }
+}
+
+@available(iOS 13.0, OSX 10.15, *)
+extension LogFile {
+    var displayCreationDate: Date {
+        return creationDate ?? Date()
+    }
+
+    var displayText: String {
+        let fileHandle = FileHandle(forReadingAtPath: url.path)
+        defer {
+            try? fileHandle?.close()
+        }
+
+        guard
+            let data = fileHandle?.readData(ofLength: 512),
+            let text = String(data: data, encoding: .utf8)?.trimmingCharacters(in: .whitespacesAndNewlines)
+        else {
+            return "Unable to read file"
+        }
+
+        return text
     }
 }

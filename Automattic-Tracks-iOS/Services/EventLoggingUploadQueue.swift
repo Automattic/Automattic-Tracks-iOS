@@ -28,7 +28,12 @@ class EventLoggingUploadQueue {
 
     func add(_ log: LogFile) throws {
         try createStorageDirectoryIfNeeded()
-        try fileManager.copyItem(at: log.url, to: storageDirectory.appendingPathComponent(log.fileName))
+        let destination = storageDirectory.appendingPathComponent(log.fileName)
+
+        try fileManager.copyItem(at: log.url, to: destination)
+
+        /// The copied file receives the old file's creation date, so it's possible that a log file could be cleaned before it can be uploaded (if the user were to upload a very old log file)
+        try fileManager.setCreationDate(forItemAt: destination, to: Date())
     }
 
     func remove(_ log: LogFile) throws {
@@ -52,7 +57,7 @@ class EventLoggingUploadQueue {
 
         try fileManager.contentsOfDirectory(at: storageDirectory)
             .filter {
-                guard let fileCreationDate = try fileManager.attributesOfItem(at: $0).fileCreationDate else {
+                guard let fileCreationDate = try fileManager.attributesOfItem(at: $0).modificationDate else {
                     return true // to be safe, remove any file that has inaccessible file attributes
                 }
 

@@ -5,6 +5,13 @@ import Sodium
 
 public class EventLogging {
 
+    public struct Notifications {
+        static let didStartUploadNotification = NSNotification.Name("com.automattic.tracks.eventlogging.didStartUpload")
+        static let didCancelUploadNotification = NSNotification.Name("com.automattic.tracks.eventlogging.didCancelUpload")
+        static let didFinishUploadNotification = NSNotification.Name("com.automattic.tracks.eventlogging.didFinishUpload")
+        static let didPauseUploadNotification = NSNotification.Name("com.automattic.tracks.eventlogging.didPauseUpload")
+    }
+
     /// Add a Log File to the list of events that need to be uploaded
     public func enqueueLogForUpload(log: LogFile) throws {
 
@@ -38,6 +45,15 @@ public class EventLogging {
 
     /// Delegate
     let delegate: EventLoggingDelegate
+
+    /// Allow pausing uploads
+    var shouldAutomaticallyUploadLogFiles: Bool = false {
+        didSet {
+            if shouldAutomaticallyUploadLogFiles {
+                uploadNextLogFileIfNeeded()
+            }
+        }
+    }
 
     public init(dataSource: EventLoggingDataSource,
          delegate: EventLoggingDelegate,
@@ -85,6 +101,12 @@ extension EventLogging {
     /// Start uploading the next log if the queue, if possible.
     /// This method shouldn't be called directly – it should be dispatched via `uploadNextLogFileIfNeeded`
     private func runUploadLogs() {
+
+        /// If the global pause is turned on, we shouldn't do anything
+        guard shouldAutomaticallyUploadLogFiles else {
+            return
+        }
+
         /// Ensure that only one instance of this method is running at the same time
         guard lock.try() else {
             return
@@ -93,6 +115,10 @@ extension EventLogging {
         /// If the queue is empty, just bail without rescheduling – the next item added to the queue will start the process up again
         guard let log = uploadQueue.first else {
             lock.unlock()
+
+            /// Notify any interested parties that all notifications have been uploaded
+            NotificationCenter.default.post(name: Notifications.didFinishUploadNotification, object: nil)
+
             return
         }
 
@@ -100,6 +126,10 @@ extension EventLogging {
         guard exponentialBackoffTimer.next < .now() else {
             retryUploadsAt(exponentialBackoffTimer.next)
             lock.unlock()
+
+            /// Notify observers that notification upload has been paused
+            NotificationCenter.default.post(name: Notifications.didPauseUploadNotification, object: exponentialBackoffTimer.nextDate)
+
             return
         }
 
@@ -108,11 +138,17 @@ extension EventLogging {
             delegate.uploadCancelledByDelegate(log)
             retryUploadsAt(.distantFuture)
             lock.unlock()
+
+            NotificationCenter.default.post(name: Notifications.didCancelUploadNotification, object: nil)
+
             return
         }
 
         let dispatchGroup = DispatchGroup()
         dispatchGroup.enter()
+
+        /// Notify observers that upload is in progress
+        NotificationCenter.default.post(name: Notifications.didStartUploadNotification, object: nil)
 
         processingQueue.async {
             do {

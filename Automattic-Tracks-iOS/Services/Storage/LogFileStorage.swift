@@ -12,6 +12,8 @@ public class LogFileStorage: ObservableObject {
 
     private var cancellable: AnyCancellable?
 
+    private let logFileEmitter = EventLoggingEmitter()
+
     public convenience init(url: URL, dataProvider: EventLoggingDataSource & EventLoggingDelegate) {
         let eventLogging = EventLogging(dataSource: dataProvider, delegate: dataProvider)
         self.init(url: url, eventLogging: eventLogging)
@@ -33,7 +35,7 @@ public class LogFileStorage: ObservableObject {
 
         self.eventLogging = eventLogging
         self.monitor = monitor
-        self.logFiles = monitor.contents.map { LogFile(url: $0, uuid: $0.lastPathComponent) }
+        self.logFiles = monitor.contents.map { LogFile(url: $0, uuid: $0.lastPathComponent) }.sorted()
         self.cancellable = self.monitor.files.eraseToAnyPublisher()
             .map(self.transform)
             .receive(on: DispatchQueue.main)
@@ -45,9 +47,13 @@ public class LogFileStorage: ObservableObject {
     }
 
     private func transform(_ urls: [URL]) -> [LogFile] {
-        urls.map { LogFile(url: $0, uuid: $0.lastPathComponent) }
+        return urls
+            .map { LogFile(url: $0, uuid: $0.lastPathComponent) }
+            .sorted()
     }
 
+    /// These methods aren't storage related – once we can make `EventLogging` an `ObservableObject`,
+    /// it should be injected into the relevant places and these should be removed
     private func updateLogFilePublisher(_ logFiles: [LogFile]) {
         self.objectWillChange.send()
         self.logFiles = logFiles
@@ -55,5 +61,17 @@ public class LogFileStorage: ObservableObject {
 
     public func enqueueLogFileForUpload(_ logFile: LogFile) throws {
         try eventLogging.enqueueLogForUpload(log: logFile)
+    }
+
+    private var isDoneCancellable: AnyCancellable?
+
+    public func uploadQueuedLogFiles() {
+        eventLogging.shouldAutomaticallyUploadLogFiles = true
+        eventLogging.uploadNextLogFileIfNeeded()
+
+        /// Automatically pause the queue when upload is complete
+        isDoneCancellable = logFileEmitter.isDonePublisher.sink { _ in
+            self.eventLogging.shouldAutomaticallyUploadLogFiles = false
+        }
     }
 }

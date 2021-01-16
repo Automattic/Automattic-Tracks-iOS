@@ -20,13 +20,58 @@ struct LogDetailView: View {
         }
     }
 
+    @State
+    var didCopy: Bool = false
+
     var body: some View {
         #if os(macOS)
-        LogView(text: logFileContents).padding()
+        VStack {
+            fileHeader
+            LogView(text: logFileContents).padding()
+        }
+
         #else
-        LogView(text: logFileContents)
-            .navigationTitle("Log View")
+        VStack {
+            fileHeader
+            Divider()
+            LogView(text: logFileContents)
+        }
+        .navigationTitle("Log View")
         #endif
+    }
+
+    var fileHeader: some View {
+        HStack {
+            VStack(alignment: .leading) {
+                Text("Log File ID:").font(.caption)
+                Text(logFilePath.lastPathComponent)
+                    .lineLimit(1)
+            }
+            Spacer()
+
+            Group {
+                if didCopy {
+                    Image(systemName: "checkmark.circle")
+                        .foregroundColor(.green)
+                } else {
+                    Button(action: didTapCopyButton) {
+                        Image(systemName: "doc.on.doc")
+                    }
+                }
+            }
+        }.padding()
+    }
+
+    private func didTapCopyButton() {
+        #if os(macOS)
+        let pasteboard = NSPasteboard.general
+        pasteboard.declareTypes([.string], owner: nil)
+        pasteboard.setString(logFilePath.lastPathComponent, forType: .string)
+        #else
+        UIPasteboard.general.string = logFilePath.lastPathComponent
+        #endif
+
+        didCopy = true
     }
 }
 

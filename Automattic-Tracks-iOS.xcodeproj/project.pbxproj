@@ -51,6 +51,8 @@
 		24AE6E1625C0CF7200F8D6BC /* TracksManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E1425C0CF7200F8D6BC /* TracksManager.swift */; };
 		24AE6E1C25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E1B25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift */; };
 		24AE6E1D25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E1B25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift */; };
+		24AE6E9425C0D2FD00F8D6BC /* EventLoggingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E9325C0D2FD00F8D6BC /* EventLoggingEmitter.swift */; };
+		24AE6E9525C0D2FD00F8D6BC /* EventLoggingEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6E9325C0D2FD00F8D6BC /* EventLoggingEmitter.swift */; };
 		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -235,6 +237,7 @@
 		24AE6E0925C0CF5F00F8D6BC /* TracksEventListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksEventListView.swift; sourceTree = "<group>"; };
 		24AE6E1425C0CF7200F8D6BC /* TracksManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TracksManager.swift; sourceTree = "<group>"; };
 		24AE6E1B25C0CF9A00F8D6BC /* TracksEventUserType+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TracksEventUserType+Extensions.swift"; sourceTree = "<group>"; };
+		24AE6E9325C0D2FD00F8D6BC /* EventLoggingEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventLoggingEmitter.swift; sourceTree = "<group>"; };
 		3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -572,6 +575,7 @@
 				F9838977243286EA00BB2F1F /* EventLogging.swift */,
 				F9445635242965E7009A36B3 /* EventLoggingDataSource.swift */,
 				F9445636242965E7009A36B3 /* EventLoggingDelegate.swift */,
+				24AE6E9325C0D2FD00F8D6BC /* EventLoggingEmitter.swift */,
 				F9445637242965E7009A36B3 /* EventLoggingUploadManager.swift */,
 				F9117198240F20F0009A1EC0 /* LogEncryptor.swift */,
 				F97C6B0D24758AFF006089D7 /* EventLogging+Sentry.swift */,
@@ -1105,6 +1109,7 @@
 				24AE6D9825C0CE1500F8D6BC /* LogFileStorage.swift in Sources */,
 				24AE6E0E25C0CF5F00F8D6BC /* TracksEventListView.swift in Sources */,
 				24AE6D9A25C0CE1500F8D6BC /* TracksEventStorage.swift in Sources */,
+				24AE6E9425C0D2FD00F8D6BC /* EventLoggingEmitter.swift in Sources */,
 				F94456462429660F009A36B3 /* EventLoggingUploadQueue.swift in Sources */,
 				24464FB325B60E0000A34B78 /* SentryClient+Shim.m in Sources */,
 				F9838978243286EA00BB2F1F /* EventLogging.swift in Sources */,
@@ -1225,6 +1230,7 @@
 				24AE6D9925C0CE1500F8D6BC /* LogFileStorage.swift in Sources */,
 				24AE6E0F25C0CF5F00F8D6BC /* TracksEventListView.swift in Sources */,
 				24AE6D9B25C0CE1500F8D6BC /* TracksEventStorage.swift in Sources */,
+				24AE6E9525C0D2FD00F8D6BC /* EventLoggingEmitter.swift in Sources */,
 				F9838979243286EA00BB2F1F /* EventLogging.swift in Sources */,
 				24464FB425B60E0000A34B78 /* SentryClient+Shim.m in Sources */,
 				2421B2E825AEB493008776A6 /* ExPlatService.swift in Sources */,
