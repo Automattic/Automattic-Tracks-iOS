@@ -23,7 +23,7 @@ Pod::Spec.new do |spec|
   spec.osx.framework    = 'AppKit'
 
   spec.ios.deployment_target  = '12.0'
-  spec.osx.deployment_target  = '10.11'
+  spec.osx.deployment_target  = '10.12'
 
   spec.header_dir = 'AutomatticTracks'
   spec.module_name = 'AutomatticTracks'
