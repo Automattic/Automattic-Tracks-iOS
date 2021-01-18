@@ -21,34 +21,3 @@ internal extension CrashLoggingDataProvider {
         set { messageLoggingCallback = newValue }
     }
 }
-
-internal extension CrashLogging {
-
-    var environment: String? {
-        return Client.shared?.environment
-    }
-
-    var cachedUser: TracksUser? {
-        guard
-            let context = currentContext,
-            let userData = context["user"] as? [String: Any]
-        else { return nil }
-
-        let userID = userData["id"] as? String
-        let email = userData["email"] as? String
-        let username = userData["username"] as? String
-
-        return TracksUser(userID: userID, email: email, username: username)
-    }
-
-    /// Refresh the context from disk, then return it
-    var currentContext: [String: Any]? {
-        Client.shared?.perform(Selector(("restoreContextBeforeCrash")))
-        return Client.shared?.lastContext
-    }
-
-    var shouldSendEventCallback: ShouldSendEventCallback? {
-        get { return eventSendCallback }
-        set { eventSendCallback = newValue }
-    }
-}
