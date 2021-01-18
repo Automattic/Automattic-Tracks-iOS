@@ -87,6 +87,10 @@ public class CrashLogging {
     public static func crash() {
         SentrySDK.crash()
     }
+
+    enum Errors: LocalizedError {
+        case unableToConstructAuthStringError
+    }
 }
 
 // Manual Error Logging
@@ -132,6 +136,117 @@ public extension CrashLogging {
 
         SentrySDK.capture(event: event)
         dataProvider.didLogMessageCallback?(event)
+    }
+
+    /// Sends an `Event` to Sentry and triggers a callback on completion
+    func logErrorImmediately(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
+        try logErrorsImmediately([error], userInfo: userInfo, level: level, callback: callback)
+    }
+
+    func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
+
+        var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
+
+        errors.forEach {
+            let event = Event(level: level)
+            event.message = SentryMessage(formatted: $0.localizedDescription)
+            event.timestamp = Date()
+            event.extra = userInfo ?? ($0 as NSError).userInfo
+            event.user = dataProvider.currentUser?.sentryUser
+
+            serializer.add(event: tryAddingStackTrace(to: event))
+        }
+
+        guard let requestBody = try? serializer.serialize() else {
+            DDLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
+            errors.forEach {
+                SentrySDK.capture(error: $0)
+            }
+            return
+        }
+
+        let dsn = try SentryDsn(string: dataProvider.sentryDSN)
+        guard let authString = dsn.getAuthString() else {
+            throw Errors.unableToConstructAuthStringError
+        }
+
+        var request = URLRequest(url: dsn.getEnvelopeEndpoint())
+        request.httpMethod = "POST"
+        request.httpBody = requestBody
+        request.addValue(authString, forHTTPHeaderField: "X-Sentry-Auth")
+
+        URLSession.shared.dataTask(with: request) { (responseData, urlResponse, error) in
+            if let error = error {
+                callback(.failure(error))
+                return
+            }
+
+            let didSucceed = 200...299 ~= (urlResponse as! HTTPURLResponse).statusCode
+            callback(.success(didSucceed))
+        }.resume()
+    }
+
+    /**
+     Writes the error to the Crash Logging system, and includes a stack trace. This method will block the thread until the event is fired.
+
+     - Parameters:
+     - error: The error object
+     - userInfo: A dictionary containing additional data about this error.
+     - level: The level of severity to report in Sentry (`.error` by default)
+    */
+    func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) throws {
+        let semaphore = DispatchSemaphore(value: 0)
+
+        var networkError: Error?
+
+        try logErrorImmediately(error, userInfo: userInfo, level: level) { result in
+
+            switch result {
+                case .success:
+                    DDLogDebug("💥 Successfully transmitted crash data")
+                case .failure(let err):
+                    networkError = err
+            }
+
+            semaphore.signal()
+        }
+
+        semaphore.wait()
+
+        if let networkError = networkError {
+            throw networkError
+        }
+    }
+
+    /// A wrapper around the `SentryClient` shim – keeps each layer clean by avoiding optionality
+    private func tryAddingStackTrace(to event: Event) -> Event {
+        guard let client = SentrySDK.currentHub().getClient() else {
+            return event
+        }
+
+        return client.tryAddingStackTrace(to: event, for: client)
+    }
+}
+
+extension SentryDsn {
+    func getAuthString() -> String? {
+
+        guard let user = url.user else {
+            return nil
+        }
+
+        var data = [
+            "sentry_version=7",
+            "sentry_client=tracks-manual-upload/\(TracksLibraryVersion)",
+            "sentry_timesetamp=\(Date().timeIntervalSince1970)",
+            "sentry_key=\(user)",
+        ]
+
+        if let password = url.password {
+            data.append("sentry_secret=\(password)")
+        }
+
+        return "Sentry " + data.joined(separator: ",")
     }
 }
 
