@@ -84,7 +84,7 @@ public class CrashLogging {
     }
 
     /// Immediately crashes the application and generates a crash report.
-    public static func crash() {
+    public func crash() {
         SentrySDK.crash()
     }
 
