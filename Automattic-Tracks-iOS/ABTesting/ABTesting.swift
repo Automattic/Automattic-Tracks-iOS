@@ -4,7 +4,6 @@ public enum Variation: Equatable {
     case control
     case treatment
     case other(String)
-    case unknown
 }
 
 /// A protocol that defines a A/B Testing provider

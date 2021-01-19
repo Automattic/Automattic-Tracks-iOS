@@ -1,6 +1,6 @@
 {
     "variations": {
-        "experiment": "control"
+        "experiment": null
     },
     "ttl": 60
 }
