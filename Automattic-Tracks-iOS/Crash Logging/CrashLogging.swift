@@ -94,7 +94,7 @@ public class CrashLogging {
     }
 }
 
-//MARK: - Manual Error Logging
+// MARK: - Manual Error Logging
 public extension CrashLogging {
 
     ///
