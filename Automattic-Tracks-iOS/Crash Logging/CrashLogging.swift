@@ -94,7 +94,7 @@ public class CrashLogging {
     }
 }
 
-// Manual Error Logging
+//MARK: - Manual Error Logging
 public extension CrashLogging {
 
     ///
@@ -251,7 +251,7 @@ extension SentryDsn {
     }
 }
 
-// User Tracking
+// MARK: - User Tracking
 extension CrashLogging {
 
     internal var currentUser: Sentry.User {
@@ -276,7 +276,7 @@ extension CrashLogging {
     }
 }
 
-// Event Logging
+// MARK: - Event Logging
 extension Event {
 
     private static let logIDKey = "logID"
