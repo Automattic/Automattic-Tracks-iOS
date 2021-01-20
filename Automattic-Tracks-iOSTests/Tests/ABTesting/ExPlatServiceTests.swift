@@ -26,7 +26,7 @@ class ExPlatServiceTests: XCTestCase {
 
         service.getAssignments { assignments in
             XCTAssertEqual(assignments?.ttl, 60)
-            XCTAssertEqual(assignments?.variations, ["experiment": "control"])
+            XCTAssertEqual(assignments?.variations, ["experiment": nil])
             expectation.fulfill()
         }
 
