@@ -55,7 +55,7 @@ public class CrashLogging {
 
         event.tags?["locale"] = NSLocale.current.languageCode
 
-        /// Always provide a value in order to determine how often we're unable to retrieve the value
+        /// Always provide a value in order to determine how often we're unable to retrieve application state
         event.tags?["app.state"] = ApplicationFacade().applicationState ?? "unknown"
 
         #if DEBUG
