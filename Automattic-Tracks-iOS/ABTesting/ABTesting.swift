@@ -2,8 +2,7 @@ import Foundation
 
 public enum Variation: Equatable {
     case control
-    case treatment
-    case other(String)
+    case treatment(String?)
 }
 
 /// A protocol that defines a A/B Testing provider

@@ -18,7 +18,8 @@ class ExPlatTests: XCTestCase {
 
         abTesting.refresh {
             XCTAssertEqual(abTesting.experiment("experiment"), .control)
-            XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment)
+            XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment(nil))
+            XCTAssertEqual(abTesting.experiment("experiment_multiple_variation"), .treatment("another_treatment"))
             expectation.fulfill()
         }
 
@@ -36,7 +37,8 @@ class ExPlatTests: XCTestCase {
             serviceMock.returnAssignments = false
             abTesting.refresh {
                 XCTAssertEqual(abTesting.experiment("experiment"), .control)
-                XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment)
+                XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment(nil))
+                XCTAssertEqual(abTesting.experiment("experiment_multiple_variation"), .treatment("another_treatment"))
                 expectation.fulfill()
             }
 
@@ -88,7 +90,8 @@ private class ExPlatServiceMock: ExPlatService {
                 ttl: 60,
                 variations: [
                     "experiment": nil,
-                    "another_experiment": "treatment"
+                    "another_experiment": "treatment",
+                    "experiment_multiple_variation": "another_treatment"
                 ]
             )
         )

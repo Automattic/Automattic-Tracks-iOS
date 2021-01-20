@@ -89,9 +89,9 @@ import Cocoa
         case "control":
             return .control
         case "treatment":
-            return .treatment
+            return .treatment(nil)
         default:
-            return .other(variation)
+            return .treatment(variation)
         }
     }
 
