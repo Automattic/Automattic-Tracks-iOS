@@ -3,7 +3,7 @@ import AutomatticTracks
 
 class CrashLoggingRootViewController: NSHostingController<CrashLoggingView> {
 
-    let crashLogging = CrashLogging(dataProvider: CrashLoggingDataSource())
+    let crashLogging = try! CrashLogging(dataProvider: CrashLoggingDataSource()).start()
 
     init() {
         let rootView = CrashLoggingView(crashLogging: crashLogging)

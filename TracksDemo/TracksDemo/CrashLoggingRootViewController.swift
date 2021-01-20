@@ -3,18 +3,14 @@ import AutomatticTracks
 
 class CrashLoggingRootViewController: UIHostingController<CrashLoggingView> {
 
-    let crashLogging = CrashLogging(dataProvider: CrashLoggingDataSource())
+    let crashLogging = try! CrashLogging(dataProvider: CrashLoggingDataSource()).start()
 
     init() {
-        crashLogging.start()
-
         let rootView = CrashLoggingView(crashLogging: crashLogging)
         super.init(rootView: rootView)
     }
 
     @objc required dynamic init?(coder aDecoder: NSCoder) {
-        crashLogging.start()
-
         let rootView = CrashLoggingView(crashLogging: crashLogging)
         super.init(coder: aDecoder, rootView: rootView)
     }
