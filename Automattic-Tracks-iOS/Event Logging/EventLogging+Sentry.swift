@@ -33,7 +33,7 @@ extension EventLogging {
             event.logID = logFile.uuid
         }
         catch let err {
-            CrashLoggingInternals.crashLogging?.logError(err)
+            CrashLogging.Internals.crashLogging?.logError(err)
         }
     }
 }

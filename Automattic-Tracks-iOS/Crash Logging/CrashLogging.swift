@@ -2,12 +2,13 @@ import Foundation
 import Sentry
 import CocoaLumberjack
 
-struct CrashLoggingInternals {
-    static var crashLogging: CrashLogging?
-}
-
 /// A class that provides support for logging crashes. Not compatible with Objective-C.
 public class CrashLogging {
+
+    /// We haven't fully evicted global state from all of Tracks yet, so we keep a global reference around for now
+    struct Internals {
+        static var crashLogging: CrashLogging?
+    }
 
     private let dataProvider: CrashLoggingDataProvider
     private let eventLogging: EventLogging?
@@ -36,7 +37,7 @@ public class CrashLogging {
             options.attachStacktrace = true
         }
 
-        CrashLoggingInternals.crashLogging = self
+        Internals.crashLogging = self
 
         return self
     }
