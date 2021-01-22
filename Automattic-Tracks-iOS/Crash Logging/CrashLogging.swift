@@ -99,6 +99,7 @@ public extension CrashLogging {
 
     ///
     /// Writes the error to the Crash Logging system, and includes a stack trace.
+    ///
     /// - Parameters:
     ///   - error: The error object
     ///   - userInfo: A dictionary containing additional data about this error.
