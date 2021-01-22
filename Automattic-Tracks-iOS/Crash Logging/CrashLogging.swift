@@ -146,11 +146,11 @@ public extension CrashLogging {
 
         var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
 
-        errors.forEach {
+        errors.forEach { error in
             let event = Event(level: level)
-            event.message = SentryMessage(formatted: $0.localizedDescription)
+            event.message = SentryMessage(formatted: error.localizedDescription)
             event.timestamp = Date()
-            event.extra = userInfo ?? ($0 as NSError).userInfo
+            event.extra = userInfo ?? (error as NSError).userInfo
             event.user = dataProvider.currentUser?.sentryUser
 
             serializer.add(event: tryAddingStackTrace(to: event))
