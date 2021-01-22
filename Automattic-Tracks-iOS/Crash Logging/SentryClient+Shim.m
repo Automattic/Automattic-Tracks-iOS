@@ -14,6 +14,7 @@
  * the worst that should happen is that the stack trace is no longer available on events sent manually using this method.
  *
  * We can remove this once the Sentry SDK allows for capturing events and being notified once they're delivered.
+ * ref: https://github.com/getsentry/sentry-cocoa/issues/660
  */
 -(SentryEvent *) addStackTraceToEvent:(SentryEvent *) event forClient:(SentryClient *) client {
 
