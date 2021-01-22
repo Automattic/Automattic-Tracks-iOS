@@ -8,4 +8,9 @@ public struct SentryTestError: LocalizedError {
         self.title = title
         self.code = code
     }
+
+    /// Provide a more obvious error description in Sentry than "The operation couldn't be completed."
+    public var errorDescription: String? {
+        "\(title) (code \(code))"
+    }
 }
