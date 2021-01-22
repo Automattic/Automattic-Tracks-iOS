@@ -82,16 +82,16 @@ import Cocoa
     public func experiment(_ name: String) -> Variation {
         guard let assignments = UserDefaults.standard.object(forKey: assignmentsKey) as? [String: String?],
               case let variation?? = assignments[name] else {
-            return .unknown
+            return .control
         }
 
         switch variation {
         case "control":
             return .control
         case "treatment":
-            return .treatment
+            return .treatment(nil)
         default:
-            return .other(variation)
+            return .treatment(variation)
         }
     }
 
