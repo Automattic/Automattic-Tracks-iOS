@@ -33,7 +33,7 @@ public class CrashLogging {
 
         SentrySDK.start { options in
             options.dsn = self.dataProvider.sentryDSN
-            options.debug = true // Helpful to see what's going on
+            options.debug = true
 
             options.environment = self.dataProvider.buildType
             options.releaseName = self.dataProvider.releaseName
