@@ -4,7 +4,7 @@
 NS_ASSUME_NONNULL_BEGIN
 
 @interface SentryClient(Shim)
--(SentryEvent *) tryAddingStackTraceToEvent:(SentryEvent *) event forClient:(SentryClient *) client;
+-(SentryEvent *) addStackTraceToEvent:(SentryEvent *) event forClient:(SentryClient *) client;
 @end
 
 NS_ASSUME_NONNULL_END

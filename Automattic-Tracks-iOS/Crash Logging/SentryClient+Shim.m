@@ -15,7 +15,7 @@
  *
  * We can remove this once the Sentry SDK allows for capturing events and being notified once they're delivered.
  */
--(SentryEvent *) tryAddingStackTraceToEvent:(SentryEvent *) event forClient:(SentryClient *) client {
+-(SentryEvent *) addStackTraceToEvent:(SentryEvent *) event forClient:(SentryClient *) client {
 
     SEL selector = @selector(prepareEvent:withScope:alwaysAttachStacktrace:isCrashEvent:);
 

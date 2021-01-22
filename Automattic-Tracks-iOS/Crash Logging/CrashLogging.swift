@@ -153,7 +153,7 @@ public extension CrashLogging {
             event.extra = userInfo ?? (error as NSError).userInfo
             event.user = dataProvider.currentUser?.sentryUser
 
-            serializer.add(event: tryAddingStackTrace(to: event))
+            serializer.add(event: addStackTrace(to: event))
         }
 
         guard let requestBody = try? serializer.serialize() else {
@@ -218,12 +218,12 @@ public extension CrashLogging {
     }
 
     /// A wrapper around the `SentryClient` shim – keeps each layer clean by avoiding optionality
-    private func tryAddingStackTrace(to event: Event) -> Event {
+    private func addStackTrace(to event: Event) -> Event {
         guard let client = SentrySDK.currentHub().getClient() else {
             return event
         }
 
-        return client.tryAddingStackTrace(to: event, for: client)
+        return client.addStackTrace(to: event, for: client)
     }
 }
 
