@@ -43,20 +43,8 @@ public class CrashLogging {
     }
 
     func beforeSend(event: Sentry.Event?) -> Sentry.Event? {
-        guard let event = event else {
-            return nil
-        }
 
         DDLogDebug("📜 Firing `beforeSend`")
-
-        if event.tags == nil {
-            event.tags = [String: String]()
-        }
-
-        event.tags?["locale"] = NSLocale.current.languageCode
-
-        /// Always provide a value in order to determine how often we're unable to retrieve application state
-        event.tags?["app.state"] = ApplicationFacade().applicationState ?? "unknown"
 
         #if DEBUG
         DDLogDebug("📜 This is a debug build")
@@ -66,9 +54,18 @@ public class CrashLogging {
         #endif
 
         /// If we shouldn't send the event we have nothing else to do here
-        guard shouldSendEvent else {
+        guard let event = event, shouldSendEvent else {
             return nil
         }
+
+        if event.tags == nil {
+            event.tags = [String: String]()
+        }
+
+        event.tags?["locale"] = NSLocale.current.languageCode
+
+        /// Always provide a value in order to determine how often we're unable to retrieve application state
+        event.tags?["app.state"] = ApplicationFacade().applicationState ?? "unknown"
 
         /// Read the current user from the Data Provider (though the Data Provider can decide not to provide it for functional or privacy reasons)
         event.user = dataProvider.currentUser?.sentryUser
