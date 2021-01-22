@@ -13,11 +13,19 @@ public class CrashLogging {
     private let dataProvider: CrashLoggingDataProvider
     private let eventLogging: EventLogging?
 
+    /// Initializes the crash logging system
+    ///
+    /// - Parameters:
+    ///   - dataProvider: An object that provides any configuration to the crash logging system
+    ///   - eventLogging: An associated `EventLogging` object that provides integration between the Crash Logging and Event Logging subsystems
     public init(dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
         self.dataProvider = dataProvider
         self.eventLogging = eventLogging
     }
 
+    /// Starts the CrashLogging subsystem by initializing Sentry.
+    ///
+    /// Should be called as early as possible in the application lifecycle
     public func start() throws -> CrashLogging {
 
         /// Validate the DSN ourselves before initializing, because the SentrySDK silently prints the error to the log instead of telling us if the DSN is valid
