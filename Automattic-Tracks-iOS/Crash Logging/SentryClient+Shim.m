@@ -20,7 +20,7 @@
 
     SEL selector = @selector(prepareEvent:withScope:alwaysAttachStacktrace:isCrashEvent:);
 
-    if(![client respondsToSelector:selector]) {
+    if (![client respondsToSelector:selector]) {
         return event;
     }
 
