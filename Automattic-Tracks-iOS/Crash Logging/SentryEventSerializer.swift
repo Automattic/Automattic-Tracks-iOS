@@ -20,7 +20,7 @@ struct SentryEventSerializer {
 
     func serialize(eventId: UUID = UUID()) throws -> Data {
         /// Turn the UUID into a `SentryId` temporarily, just in case they ever change the API on us – that way it won't fail
-        let header = SentryHeader(event_id: SentryId.init(uuid: eventId).sentryIdString, dsn: dsn)
+        let header = SentryHeader(event_id: SentryId(uuid: eventId).sentryIdString, dsn: dsn)
 
         var entries = [
             try encode(header),
