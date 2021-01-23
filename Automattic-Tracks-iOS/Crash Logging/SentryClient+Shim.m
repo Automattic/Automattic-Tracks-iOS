@@ -31,7 +31,7 @@
         return event;
     }
 
-    if(eventWithStackTrace.threads.firstObject.stacktrace != nil) {
+    if (eventWithStackTrace.threads.firstObject.stacktrace != nil) {
         eventWithStackTrace.stacktrace = eventWithStackTrace.threads.firstObject.stacktrace;
     }
 
