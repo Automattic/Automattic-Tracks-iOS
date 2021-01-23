@@ -27,7 +27,7 @@
     SentryScope *scope = [[SentrySDK currentHub] getScope];
     SentryEvent *eventWithStackTrace = [self prepareEvent:event withScope:scope alwaysAttachStacktrace:YES isCrashEvent:NO];
 
-    if(eventWithStackTrace == nil) {
+    if (eventWithStackTrace == nil) {
         return event;
     }
 
