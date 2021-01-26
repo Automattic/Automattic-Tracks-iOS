@@ -23,7 +23,7 @@ Pod::Spec.new do |spec|
   spec.osx.framework    = 'AppKit'
 
   spec.ios.deployment_target  = '12.0'
-  spec.osx.deployment_target  = '10.11'
+  spec.osx.deployment_target  = '10.12'
 
   spec.header_dir = 'AutomatticTracks'
   spec.module_name = 'AutomatticTracks'
@@ -31,6 +31,6 @@ Pod::Spec.new do |spec|
   spec.ios.dependency 'UIDeviceIdentifier', '~> 1'
   spec.dependency 'CocoaLumberjack', '~> 3'
   spec.dependency 'Reachability', '~> 3'
-  spec.dependency 'Sentry', '~>4'
+  spec.dependency 'Sentry', '~> 6'
   spec.dependency 'Sodium', '>= 0.9.1'
 end
