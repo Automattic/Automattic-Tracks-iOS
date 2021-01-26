@@ -1,6 +1,6 @@
 import Foundation
 
-@available(iOS 14.0, OSX 11.0, *)
+@available(iOS 13.0, OSX 11.0, *)
 public class TracksManager {
 
     public let tracksService: TracksService

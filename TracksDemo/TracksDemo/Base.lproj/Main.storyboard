@@ -1,168 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vaq-sM-Dw9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="CWM-6o-niO">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Events-->
-        <scene sceneID="tne-QT-ifu">
+        <!--Crash Logging Root View Controller-->
+        <scene sceneID="bIA-39-A8U">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
-                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="p2M-wW-PMO">
-                                <rect key="frame" x="147" y="47" width="81" height="30"/>
-                                <state key="normal" title="Track Event">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendTestEvent:" destination="BYZ-38-t0r" eventType="touchUpInside" id="4Jw-gd-MCd"/>
-                                </connections>
-                            </button>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="Ork-Vm-gMc">
-                                <rect key="frame" x="71" y="8" width="233" height="32"/>
-                                <segments>
-                                    <segment title="Anonymous"/>
-                                    <segment title="WordPress.com"/>
-                                </segments>
-                                <connections>
-                                    <action selector="userTypeSegmentedControlChanged:" destination="BYZ-38-t0r" eventType="valueChanged" id="6dL-dh-pgn"/>
-                                </connections>
-                            </segmentedControl>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Number of events queued: 0" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Usv-EB-VcP">
-                                <rect key="frame" x="55" y="565.5" width="250.5" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="S78-AU-IJX">
-                                <rect key="frame" x="36" y="594" width="303" height="4"/>
-                            </progressView>
-                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aDq-MO-fv4">
-                                <rect key="frame" x="256.5" y="526.5" width="51" height="31"/>
-                                <connections>
-                                    <action selector="remoteCallsSwitchTapped:" destination="BYZ-38-t0r" eventType="valueChanged" id="Xk4-R7-g0h"/>
-                                </connections>
-                            </switch>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Remote Calls" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cP7-n0-YmV">
-                                <rect key="frame" x="55" y="531.5" width="100" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5hT-3n-0Am">
-                                <rect key="frame" x="63.5" y="85" width="248" height="30"/>
-                                <state key="normal" title="Track Event With Custom Properties">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendTestEventWithProperties:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iTe-fg-P8G"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5LV-F0-8DU">
-                                <rect key="frame" x="127" y="123" width="121" height="30"/>
-                                <state key="normal" title="Crash Application">
-                                    <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="crashApplicationTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Oea-cX-vdJ"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        <constraints>
-                            <constraint firstItem="aDq-MO-fv4" firstAttribute="trailing" secondItem="Usv-EB-VcP" secondAttribute="trailing" id="6fj-WD-L7e"/>
-                            <constraint firstItem="aDq-MO-fv4" firstAttribute="leading" secondItem="cP7-n0-YmV" secondAttribute="trailing" constant="101.5" id="Bxt-Fc-OVu"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="S78-AU-IJX" secondAttribute="trailing" constant="20" id="D1K-jO-Dhv"/>
-                            <constraint firstItem="Ork-Vm-gMc" firstAttribute="leading" secondItem="Usv-EB-VcP" secondAttribute="leading" constant="16" id="Eij-Bq-mAy"/>
-                            <constraint firstItem="p2M-wW-PMO" firstAttribute="top" secondItem="Ork-Vm-gMc" secondAttribute="bottom" constant="8" symbolic="YES" id="Erd-RF-Exv"/>
-                            <constraint firstItem="Usv-EB-VcP" firstAttribute="top" secondItem="aDq-MO-fv4" secondAttribute="bottom" constant="8" id="FCF-n2-XOn"/>
-                            <constraint firstAttribute="centerX" secondItem="S78-AU-IJX" secondAttribute="centerX" id="JjN-48-fWs"/>
-                            <constraint firstItem="5hT-3n-0Am" firstAttribute="top" secondItem="p2M-wW-PMO" secondAttribute="bottom" constant="8" id="KqG-za-JZp"/>
-                            <constraint firstItem="Ork-Vm-gMc" firstAttribute="centerX" secondItem="p2M-wW-PMO" secondAttribute="centerX" id="LTc-36-hDJ"/>
-                            <constraint firstItem="Usv-EB-VcP" firstAttribute="top" secondItem="cP7-n0-YmV" secondAttribute="bottom" constant="13" id="PH2-Gc-elp"/>
-                            <constraint firstItem="p2M-wW-PMO" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="PVY-eN-c4R"/>
-                            <constraint firstAttribute="centerX" secondItem="S78-AU-IJX" secondAttribute="centerX" id="QbN-qf-zAr"/>
-                            <constraint firstAttribute="centerX" secondItem="5LV-F0-8DU" secondAttribute="centerX" id="VHm-A5-UZg"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="S78-AU-IJX" secondAttribute="bottom" constant="20" id="WMB-hE-o9H"/>
-                            <constraint firstItem="S78-AU-IJX" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="caD-MN-yCR"/>
-                            <constraint firstItem="Ork-Vm-gMc" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="8" symbolic="YES" id="daW-V6-oQb"/>
-                            <constraint firstItem="5LV-F0-8DU" firstAttribute="top" secondItem="5hT-3n-0Am" secondAttribute="bottom" constant="8" id="ggP-Qq-ULR"/>
-                            <constraint firstAttribute="centerX" secondItem="5hT-3n-0Am" secondAttribute="centerX" id="htr-X1-gTw"/>
-                            <constraint firstItem="S78-AU-IJX" firstAttribute="top" secondItem="Usv-EB-VcP" secondAttribute="bottom" constant="8" id="rXB-fG-3RV"/>
-                            <constraint firstItem="Usv-EB-VcP" firstAttribute="leading" secondItem="cP7-n0-YmV" secondAttribute="leading" id="vvd-rp-Gwm"/>
-                        </constraints>
-                    </view>
-                    <tabBarItem key="tabBarItem" title="Events" image="list.dash" catalog="system" id="A0R-5H-soP"/>
-                    <connections>
-                        <outlet property="objectCountLabel" destination="Usv-EB-VcP" id="NJv-0n-Tsg"/>
-                        <outlet property="progressView" destination="S78-AU-IJX" id="ikn-4A-qT9"/>
-                        <outlet property="remoteCallsSwitch" destination="aDq-MO-fv4" id="m1j-0F-vBe"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+                <hostingController id="CWM-6o-niO" customClass="CrashLoggingRootViewController" customModule="TracksDemo" customModuleProvider="target" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZZk-QP-WJV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="591" y="-236"/>
-        </scene>
-        <!--Tab Bar Controller-->
-        <scene sceneID="7kR-gL-asH">
-            <objects>
-                <tabBarController id="vaq-sM-Dw9" sceneMemberID="viewController">
-                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="yRi-Lb-qyO">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </tabBar>
-                    <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="aIS-pt-qXa"/>
-                        <segue destination="Sd8-Tx-eg2" kind="relationship" relationship="viewControllers" id="smt-zg-ZtI"/>
-                    </connections>
-                </tabBarController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NWM-RA-rfi" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-250" y="-236"/>
-        </scene>
-        <!--Item-->
-        <scene sceneID="ec1-uF-Cql">
-            <objects>
-                <navigationController id="Sd8-Tx-eg2" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="KfR-3C-yoq"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="XhH-S5-9ov">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="p68-yf-6Sq" kind="relationship" relationship="rootViewController" id="psk-50-naF"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fKi-7v-Flz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="590" y="536"/>
-        </scene>
-        <!--Crash Logging-->
-        <scene sceneID="faV-av-2u5">
-            <objects>
-                <hostingController id="p68-yf-6Sq" customClass="CrashLoggingRootViewController" customModule="TracksDemo" customModuleProvider="target" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Crashes" image="xmark.octagon" catalog="system" id="UDf-C6-l36"/>
-                    <navigationItem key="navigationItem" title="Crash Logging" id="lYo-Fh-iEg"/>
-                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
-                </hostingController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="9Nc-de-9Uu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1303" y="536"/>
+            <point key="canvasLocation" x="193" y="-413"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="list.dash" catalog="system" width="128" height="85"/>
-        <image name="xmark.octagon" catalog="system" width="128" height="112"/>
-    </resources>
 </document>

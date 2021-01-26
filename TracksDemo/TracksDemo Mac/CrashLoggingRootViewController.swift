@@ -3,15 +3,43 @@ import AutomatticTracks
 
 class CrashLoggingRootViewController: NSHostingController<CrashLoggingView> {
 
-    let crashLogging = try! CrashLogging(dataProvider: CrashLoggingDataSource()).start()
+    private let eventLoggingDataProvider = EventLoggingDataProvider(settings: Settings())
+
+    private let crashLogging = try! CrashLogging(dataProvider: CrashLoggingDataSource()).start()
+
+    private let tracksManager = try! TracksManager(userDataSource: Settings())
 
     init() {
-        let rootView = CrashLoggingView(crashLogging: crashLogging)
+
+        let logFileStorage = LogFileStorage(
+            url: EventLoggingDefaults.defaultQueueStoragePath,
+            dataSource: eventLoggingDataProvider,
+            delegate: eventLoggingDataProvider
+        )
+
+        let rootView = RootUIView(
+            tracksManager: tracksManager,
+            crashLogging: crashLogging,
+            logFileStorage: logFileStorage
+        )
+
         super.init(rootView: rootView)
     }
 
     @objc required dynamic init?(coder aDecoder: NSCoder) {
-        let rootView = CrashLoggingView(crashLogging: crashLogging)
+
+        let logFileStorage = LogFileStorage(
+            url: EventLoggingDefaults.defaultQueueStoragePath,
+            dataSource: eventLoggingDataProvider,
+            delegate: eventLoggingDataProvider
+        )
+
+        let rootView = RootUIView(
+            tracksManager: tracksManager,
+            crashLogging: crashLogging,
+            logFileStorage: logFileStorage
+        )
+
         super.init(coder: aDecoder, rootView: rootView)
     }
 }

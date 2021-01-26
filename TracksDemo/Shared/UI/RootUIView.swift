@@ -6,8 +6,9 @@ struct RootUIView: View {
     let tracksManager: TracksManager
     let logFileStorage: LogFileStorage
     let sampleContent = TracksSampleContent()
+    let crashLogging = CrashLogging(dataProvider: CrashLoggingDataSource())
 
-    init(tracksManager: TracksManager, logFileStorage: LogFileStorage) {
+    init(tracksManager: TracksManager, crashLogging: CrashLogging, logFileStorage: LogFileStorage) {
         self.tracksManager = tracksManager
         self.logFileStorage = logFileStorage
     }
@@ -60,7 +61,7 @@ struct RootUIView: View {
             /// Crash Logs (Sentry)
             #if os(iOS)
             NavigationView {
-                CrashLoggingView()
+                CrashLoggingView(crashLogging: self.crashLogging)
                     .navigationTitle("Crash Logging")
 
             }

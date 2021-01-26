@@ -28,6 +28,10 @@
 		24AE6E8925C0D2C100F8D6BC /* The Scarlet Letter.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E8025C0D2C100F8D6BC /* The Scarlet Letter.txt */; };
 		24AE6E8A25C0D2C100F8D6BC /* Pride and Prejudice.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E8125C0D2C100F8D6BC /* Pride and Prejudice.txt */; };
 		24AE6E8B25C0D2C100F8D6BC /* Pride and Prejudice.txt in Resources */ = {isa = PBXBuildFile; fileRef = 24AE6E8125C0D2C100F8D6BC /* Pride and Prejudice.txt */; };
+		24AE6EB025C0D3E800F8D6BC /* RootUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6EAE25C0D3E800F8D6BC /* RootUIView.swift */; };
+		24AE6EB125C0D3E800F8D6BC /* RootUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6EAE25C0D3E800F8D6BC /* RootUIView.swift */; };
+		24AE6EB225C0D3E800F8D6BC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6EAF25C0D3E800F8D6BC /* SettingsView.swift */; };
+		24AE6EB325C0D3E800F8D6BC /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24AE6EAF25C0D3E800F8D6BC /* SettingsView.swift */; };
 		24FB4D1B25B2AE2C006E4031 /* CrashLoggingRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D1A25B2AE2C006E4031 /* CrashLoggingRootViewController.swift */; };
 		24FB4D3D25B2AF02006E4031 /* CrashLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */; };
 		24FB4D4225B2AF0C006E4031 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* Secrets.swift */; };
@@ -70,6 +74,8 @@
 		24AE6E7F25C0D2C100F8D6BC /* The Strange Case of Dr. Jekyll and Mr. Hyde.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Strange Case of Dr. Jekyll and Mr. Hyde.txt"; sourceTree = "<group>"; };
 		24AE6E8025C0D2C100F8D6BC /* The Scarlet Letter.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "The Scarlet Letter.txt"; sourceTree = "<group>"; };
 		24AE6E8125C0D2C100F8D6BC /* Pride and Prejudice.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Pride and Prejudice.txt"; sourceTree = "<group>"; };
+		24AE6EAE25C0D3E800F8D6BC /* RootUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootUIView.swift; sourceTree = "<group>"; };
+		24AE6EAF25C0D3E800F8D6BC /* SettingsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		24FB4D1925B2AE2B006E4031 /* TracksDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TracksDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		24FB4D1A25B2AE2C006E4031 /* CrashLoggingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingRootViewController.swift; sourceTree = "<group>"; };
 		24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingDataSource.swift; sourceTree = "<group>"; };
@@ -173,9 +179,19 @@
 			path = "Sample Content";
 			sourceTree = "<group>";
 		};
+		24AE6EAD25C0D3CA00F8D6BC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				24AE6EAE25C0D3E800F8D6BC /* RootUIView.swift */,
+				24AE6EAF25C0D3E800F8D6BC /* SettingsView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		24FB4D3B25B2AEEA006E4031 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				24AE6EAD25C0D3CA00F8D6BC /* UI */,
 				24AE6E4B25C0D08700F8D6BC /* Sample Content */,
 				24AE6E2E25C0CFFF00F8D6BC /* Model */,
 				24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */,
@@ -662,10 +678,12 @@
 				24AE6E2925C0CFFB00F8D6BC /* EventLoggingDataProvider.swift in Sources */,
 				24FB4D4225B2AF0C006E4031 /* Secrets.swift in Sources */,
 				24AE6E6525C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift in Sources */,
+				24AE6EB025C0D3E800F8D6BC /* RootUIView.swift in Sources */,
 				24AE6E4025C0D04600F8D6BC /* Settings.swift in Sources */,
 				24FB4D1B25B2AE2C006E4031 /* CrashLoggingRootViewController.swift in Sources */,
 				937632971AC2026900086BC6 /* AppDelegate.m in Sources */,
 				24AE6E4625C0D07C00F8D6BC /* TracksSampleContent.swift in Sources */,
+				24AE6EB225C0D3E800F8D6BC /* SettingsView.swift in Sources */,
 				937632941AC2026900086BC6 /* main.m in Sources */,
 				24AE6E5F25C0D0B100F8D6BC /* SettingsViewModel.swift in Sources */,
 			);
@@ -691,7 +709,9 @@
 				24AE6E6625C0D0D400F8D6BC /* UserDefaultsPropertyWrapper.swift in Sources */,
 				24AE6E4125C0D04600F8D6BC /* Settings.swift in Sources */,
 				F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */,
+				24AE6EB125C0D3E800F8D6BC /* RootUIView.swift in Sources */,
 				24AE6E6025C0D0B100F8D6BC /* SettingsViewModel.swift in Sources */,
+				24AE6EB325C0D3E800F8D6BC /* SettingsView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -843,7 +863,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = TracksDemo/TracksDemo_Prefix.pch;
 				INFOPLIST_FILE = TracksDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -863,7 +883,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				GCC_PREFIX_HEADER = TracksDemo/TracksDemo_Prefix.pch;
 				INFOPLIST_FILE = TracksDemo/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -932,7 +952,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TracksDemo Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.TracksDemo-Mac";
@@ -963,7 +983,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				INFOPLIST_FILE = "TracksDemo Mac/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 10.15;
+				MACOSX_DEPLOYMENT_TARGET = 11.0;
 				MTL_FAST_MATH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.automattic.TracksDemo-Mac";
 				PRODUCT_NAME = "$(TARGET_NAME)";
