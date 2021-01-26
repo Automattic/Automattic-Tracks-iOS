@@ -42,7 +42,7 @@ internal extension TracksUser {
 
     func sentryUser(withData additionalUserData: [String: Any]) -> Sentry.User {
         let user = self.sentryUser
-        user.extra = additionalUserData
+        user.data = additionalUserData
         return user
     }
 }

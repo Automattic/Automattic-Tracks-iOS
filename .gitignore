@@ -29,3 +29,6 @@ Pods
 
 \.DS_Store
 /vendor
+
+# Configuration Secrets
+Secrets.swift
