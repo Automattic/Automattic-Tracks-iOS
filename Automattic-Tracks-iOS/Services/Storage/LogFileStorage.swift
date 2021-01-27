@@ -27,8 +27,8 @@ public class LogFileStorage: ObservableObject {
     init(url: URL, eventLogging: EventLogging, monitor: DirectoryMonitorProtocol? = nil) {
 
         /// If the specified URL doesn't exist – create it
-        if !FileManager.default.directoryExistsAtURL(url.deletingLastPathComponent()) {
-            try! FileManager.default.createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true, attributes: nil)
+        if !FileManager.default.directoryExistsAtURL(url) {
+            try! FileManager.default.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
         }
 
         let monitor = monitor ?? DirectoryMonitor(url: url)

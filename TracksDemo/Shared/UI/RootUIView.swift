@@ -70,7 +70,7 @@ struct RootUIView: View {
                 Text("Crashes")
             }
             #elseif os(macOS)
-            CrashLoggingView()
+            CrashLoggingView(crashLogging: self.crashLogging)
             .padding()
             .tabItem {
                 Image(systemName: "xmark.octagon")

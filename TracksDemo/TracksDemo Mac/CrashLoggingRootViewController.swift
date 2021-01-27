@@ -1,7 +1,7 @@
 import SwiftUI
 import AutomatticTracks
 
-class CrashLoggingRootViewController: NSHostingController<CrashLoggingView> {
+class CrashLoggingRootViewController: NSHostingController<RootUIView> {
 
     private let eventLoggingDataProvider = EventLoggingDataProvider(settings: Settings())
 
