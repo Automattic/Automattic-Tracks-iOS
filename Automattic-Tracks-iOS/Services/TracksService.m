@@ -212,7 +212,8 @@ NSString *const USER_ID_ANON = @"anonId";
     self.token = token;
 
     #if TARGET_OS_IPHONE
-    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
+    // Temporarily uses wpcom while we test that the implementation is not biased
+    [ExPlat configureWithPlatform:@"wpcom" oAuthToken:token userAgent:self.userAgent anonId:nil];
     #endif
 }
 
@@ -226,7 +227,8 @@ NSString *const USER_ID_ANON = @"anonId";
     self.token = nil;
 
     #if TARGET_OS_IPHONE
-    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
+    // Temporarily uses wpcom while we test that the implementation is not biased
+    [ExPlat configureWithPlatform:@"wpcom" oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
     #endif
 }
 
