@@ -12,6 +12,7 @@
 @property (nonatomic, readonly) NSString *appName;
 @property (nonatomic, readonly) NSString *appVersion;
 @property (nonatomic, readonly) NSString *appBuild;
+@property (nonatomic, readonly) NSString *bundleIdentifier;
 
 // This information has the tendency to change
 @property (nonatomic, readonly) NSString *deviceLanguage;

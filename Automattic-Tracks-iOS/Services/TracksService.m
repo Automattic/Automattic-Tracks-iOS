@@ -37,6 +37,7 @@ NSString *const DeviceLanguageKey = @"_lg";
 NSString *const DeviceInfoAppNameKey = @"device_info_app_name";
 NSString *const DeviceInfoAppVersionKey = @"device_info_app_version";
 NSString *const DeviceInfoAppBuildKey = @"device_info_app_version_code";
+NSString *const DeviceInfoBundleIdentifier = @"device_info_app_bundle_identifier";
 NSString *const DeviceInfoOSKey = @"device_info_os";
 NSString *const DeviceInfoOSVersionKey = @"device_info_os_version";
 NSString *const DeviceInfoBrandKey = @"device_info_brand";
@@ -332,6 +333,7 @@ NSString *const USER_ID_ANON = @"anonId";
               DeviceInfoAppBuildKey : self.deviceInformation.appBuild ?: @"Unknown",
               DeviceInfoAppNameKey : self.deviceInformation.appName ?: @"Unknown",
               DeviceInfoAppVersionKey : self.deviceInformation.appVersion ?: @"Unknown",
+              DeviceInfoBundleIdentifier : self.deviceInformation.bundleIdentifier ?: @"Unknown",
               DeviceInfoBrandKey : self.deviceInformation.brand ?: @"Unknown",
               DeviceInfoManufacturerKey : self.deviceInformation.manufacturer ?: @"Unknown",
               DeviceInfoModelKey : self.deviceInformation.model ?: @"Unknown",
