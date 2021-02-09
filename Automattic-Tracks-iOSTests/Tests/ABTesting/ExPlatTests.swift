@@ -46,25 +46,6 @@ class ExPlatTests: XCTestCase {
 
         wait(for: [expectation], timeout: 2.0)
     }
-
-    // Schedule a timer to automatically refresh
-    //
-    func testScheduleRefresh() {
-        let expectation = XCTestExpectation(description: "Automatically refresh")
-        let serviceMock = ExPlatServiceMock()
-        let abTesting = ExPlat(configuration: exPlatTestConfiguration, service: serviceMock)
-        abTesting.refresh {
-
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                XCTAssertTrue(abTesting.scheduledTimer!.isValid)
-                XCTAssertEqual(round(abTesting.scheduledTimer!.timeInterval), 60)
-                expectation.fulfill()
-            }
-
-        }
-
-        wait(for: [expectation], timeout: 2.0)
-    }
 }
 
 private class ExPlatServiceMock: ExPlatService {
