@@ -114,7 +114,7 @@ public extension CrashLogging {
         let event = Event(level: level)
 
         /// Use the unlocalized error message for better grouping
-        event.message = SentryMessage(formatted: (error as NSError).description)
+        event.message = SentryMessage(formatted: (error as NSError).debugDescription)
 
         /// If the developer provides their own userInfo, use that – otherwise read it from the Error
         event.extra = userInfo ?? (error as NSError).userInfo
@@ -156,7 +156,7 @@ public extension CrashLogging {
 
         errors.forEach { error in
             let event = Event(level: level)
-            event.message = SentryMessage(formatted: error.localizedDescription)
+            event.message = SentryMessage(formatted: (error as NSError).debugDescription)
             event.timestamp = Date()
             event.extra = userInfo ?? (error as NSError).userInfo
             event.user = dataProvider.currentUser?.sentryUser
