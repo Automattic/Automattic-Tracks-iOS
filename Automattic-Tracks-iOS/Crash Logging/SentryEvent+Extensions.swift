@@ -26,7 +26,7 @@ extension Event {
         }
 
         event.timestamp = timestamp
-        event.extra = [String:Any](uniqueKeysWithValues: mutableExtra.sorted { $0.key > $1.key })
+        event.extra = [String: Any](uniqueKeysWithValues: mutableExtra.sorted { $0.key > $1.key })
         event.user = user
         return event
     }
