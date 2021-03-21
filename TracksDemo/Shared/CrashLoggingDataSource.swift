@@ -8,8 +8,21 @@ struct CrashLoggingDataSource: CrashLoggingDataProvider {
     var buildType: String = "test"
 
     var currentUser: TracksUser? {
-        Secrets.tracksUser
+        Settings().tracksUser
     }
 
     var shouldEnableAutomaticSessionTracking = true
+}
+
+@objc(CrashLogging)
+/// A shim for intializing `CrashLogging` from Objective-C
+public class CrashLoggingInitializer: NSObject {
+
+    private let crashLogging = try! CrashLogging(dataProvider: CrashLoggingDataSource()).start()
+
+    @objc
+    func start() throws {
+        UserDefaults.standard.setValue(true, forKey: "force-crash-logging")
+        crashLogging.setNeedsDataRefresh()
+    }
 }

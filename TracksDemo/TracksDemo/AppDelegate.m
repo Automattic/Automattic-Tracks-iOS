@@ -1,7 +1,8 @@
 #import "AppDelegate.h"
+#import "TracksDemo-Swift.h"
 
 @interface AppDelegate ()
-
+    @property(nonatomic, strong) CrashLogging *crashLogging;
 @end
 
 int ddLogLevel = DDLogLevelVerbose;
@@ -12,7 +13,9 @@ int ddLogLevel = DDLogLevelVerbose;
     // Override point for customization after application launch.
     [DDLog addLogger:[DDASLLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    
+
+    [[self crashLogging] startAndReturnError:nil];
+
     return YES;
 }
 

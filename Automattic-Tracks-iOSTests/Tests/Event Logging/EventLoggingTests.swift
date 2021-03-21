@@ -27,6 +27,8 @@ class EventLoggingTests: XCTestCase {
                     }
             )
 
+            eventLogging.shouldAutomaticallyUploadLogFiles = true
+
             DispatchQueue.concurrentPerform(iterations: uploadCount) { _ in
                 try! eventLogging.enqueueLogForUpload(log: LogFile.containingRandomString())
             }
@@ -48,6 +50,7 @@ class EventLoggingTests: XCTestCase {
                 }
 
             let eventLogging = self.eventLogging(delegate: delegate)
+            eventLogging.shouldAutomaticallyUploadLogFiles = true
 
             /// Adding logs one at at time means the queue will probably drain as fast (if not faster) than we can add them.
             /// This tests the do-the-next-one logic
@@ -76,6 +79,7 @@ class EventLoggingTests: XCTestCase {
                 })
 
             let eventLogging = self.eventLogging(delegate: delegate)
+            eventLogging.shouldAutomaticallyUploadLogFiles = true
 
             DispatchQueue.concurrentPerform(iterations: uploadCount) { _ in
                 try! eventLogging.enqueueLogForUpload(log: LogFile.containingRandomString())

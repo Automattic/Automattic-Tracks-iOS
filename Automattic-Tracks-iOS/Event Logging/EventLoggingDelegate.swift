@@ -1,6 +1,11 @@
 import Foundation
 
 public protocol EventLoggingDelegate {
+
+    /// The event logging system will call this delegate property prior to attempting to schedule a log file for upload.
+    /// This is a good opportunity to check if the user has opted out or not.
+    var shouldEnqueueLogFiles: Bool { get }
+
     /// The event logging system will call this delegate property prior to attempting to upload, giving the application a chance to determine
     /// whether or not the upload should proceed. If this is not overridden, the default is `false`.
     var shouldUploadLogFiles: Bool { get }
@@ -29,8 +34,12 @@ public protocol EventLoggingDelegate {
 /// Default implementations for EventLoggingDelegate
 public extension EventLoggingDelegate {
 
-    var shouldUploadLogFiles: Bool {
+    var shouldEnqueueLogFiles: Bool {
         return false // Use a privacy-preserving default
+    }
+
+    var shouldUploadLogFiles: Bool {
+        return false // Don't do anything by default – apps should opt-in to this
     }
 
     var shouldUploadLogFilesForNonFatalEvents: Bool {

@@ -50,6 +50,9 @@ class MockEventLoggingDataSource: EventLoggingDataSource {
 
 class MockEventLoggingDelegate: EventLoggingDelegate {
 
+    var shouldEnqueueLogFiles: Bool = true
+    var shouldUploadLogFilesForNonFatalEvents: Bool = true
+
     private(set) var didStartUploadingTriggered = false
     private(set) var didStartUploadingCallback: LogFileCallback?
     func withDidStartUploadingCallback(_ callback: LogFileCallback?) -> Self {

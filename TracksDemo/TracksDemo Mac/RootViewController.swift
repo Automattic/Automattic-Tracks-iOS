@@ -1,25 +1,21 @@
 import SwiftUI
 import AutomatticTracks
 
-class CrashLoggingRootViewController: UIHostingController<RootUIView> {
+class RootViewController: NSHostingController<RootUIView> {
 
-    private let eventLoggingDataProvider = EventLoggingDataProvider(settings: Settings())
-
-    private let crashLogging = try! CrashLogging(dataProvider: CrashLoggingDataSource()).start()
-
-    private let tracksManager = try! TracksManager(userDataSource: Settings())
+    private let settings = Settings()
 
     init() {
 
         let logFileStorage = LogFileStorage(
             url: EventLoggingDefaults.defaultQueueStoragePath,
-            dataSource: eventLoggingDataProvider,
-            delegate: eventLoggingDataProvider
+            dataProvider: EventLoggingDataProvider(settings: settings)
         )
+
+        let tracksManager = try! TracksManager(userDataSource: Settings())
 
         let rootView = RootUIView(
             tracksManager: tracksManager,
-            crashLogging: crashLogging,
             logFileStorage: logFileStorage
         )
 
@@ -30,13 +26,13 @@ class CrashLoggingRootViewController: UIHostingController<RootUIView> {
 
         let logFileStorage = LogFileStorage(
             url: EventLoggingDefaults.defaultQueueStoragePath,
-            dataSource: eventLoggingDataProvider,
-            delegate: eventLoggingDataProvider
+            dataProvider: EventLoggingDataProvider(settings: settings)
         )
+
+        let tracksManager = try! TracksManager(userDataSource: Settings())
 
         let rootView = RootUIView(
             tracksManager: tracksManager,
-            crashLogging: crashLogging,
             logFileStorage: logFileStorage
         )
 

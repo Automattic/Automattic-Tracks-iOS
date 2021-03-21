@@ -1,6 +1,10 @@
 import Foundation
 import Sentry
 
+public protocol TracksUserProvider {
+    var tracksUser: TracksUser { get }
+}
+
 public struct TracksUser {
     let userID: String?
     let email: String?
