@@ -10,11 +10,8 @@ extension Event {
     ) -> Event {
         let event = Event(level: level)
 
-        if let underlyingError = error.userInfo[NSUnderlyingErrorKey] as? NSError {
-            event.message = SentryMessage(formatted: underlyingError.debugDescription)
-        } else {
-            event.message = SentryMessage(formatted: error.debugDescription)
-        }
+        let baseError: NSError = (error.userInfo[NSUnderlyingErrorKey] as? NSError) ?? error
+        event.message = SentryMessage(formatted: baseError.debugDescription)
 
         /// The error code/domain can be used to reproduce the original error
         var mutableExtra = extra
