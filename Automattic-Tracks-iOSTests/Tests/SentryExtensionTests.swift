@@ -12,6 +12,8 @@ class SentryExtensionTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
+    // Note: for this test to be useful, it needs to be run as part of a Test Plan which runs the test suite
+    // in languages other than English. See TestPlan.xctestplan
     func testThatEventInitializationReturnsEnglishErrorDescription() {
         do {
             _ = try FileManager.default.attributesOfItem(at: URL(fileURLWithPath: "/not-a-real-path"))
