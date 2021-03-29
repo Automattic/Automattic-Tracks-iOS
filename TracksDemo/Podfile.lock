@@ -1,5 +1,5 @@
 PODS:
-  - Automattic-Tracks-iOS (0.8.2):
+  - Automattic-Tracks-iOS (0.8.3):
     - CocoaLumberjack (~> 3)
     - Reachability (~> 3)
     - Sentry (~> 6)
@@ -34,7 +34,7 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  Automattic-Tracks-iOS: f706ecd3fe22f6cfc6904bf65c5675874c1bceff
+  Automattic-Tracks-iOS: d2b08d823912bfd8be65b5b8f932f023d0478c64
   CocoaLumberjack: db7cc9e464771f12054c22ff6947c5a58d43a0fd
   Reachability: 33e18b67625424e47b6cde6d202dce689ad7af96
   Sentry: 3a6c3aeb258b297a4be08d8960955ecc722331f3

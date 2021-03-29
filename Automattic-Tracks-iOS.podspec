@@ -1,36 +1,42 @@
-Pod::Spec.new do |spec|
-  spec.name         = 'Automattic-Tracks-iOS'
-  spec.version      = File.read("Automattic-Tracks-iOS/TracksConstants.m").split("const TracksLibraryVersion = @\"").last.split("\"").first
-  spec.license      = { :type => 'GPLv2' }
-  spec.homepage     = 'https://github.com/automattic/automattic-tracks-ios'
-  spec.authors      = { 'Automattic' => 'mobile@automattic.com' }
-  spec.summary      = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
-  spec.source       = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => spec.version.to_s }
-  spec.swift_version = '5.0'
+Pod::Spec.new do |s|
+  s.name          = 'Automattic-Tracks-iOS'
+  s.version       = '0.8.3'
 
-  spec.ios.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
-  spec.ios.exclude_files = 'Automattic-Tracks-OSX/Automattic_Tracks_OSX.h'
+  s.summary       = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
+  s.description   = <<-DESC
+                    This framework provides an abstract layer on our Automattic Tracks internal analytics service,
+                    and allows to easily send events to Tracks to monitor our app's activity and flows.
+                  DESC
 
-  spec.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
-  spec.osx.exclude_files = ['Automattic-Tracks-iOS/Automattic-Tracks-iOS.h', 'Automattic-Tracks-iOS/ABTesting/*']
+  s.homepage      = 'https://github.com/Automattic/Automattic-Tracks-iOS'
+  s.license       = { :type => 'GPLv2', :file => 'LICENSE' }
+  s.author        = { 'Automattic' => 'mobile@automattic.com' }
+  s.social_media_url = 'https://twitter.com/automattic'
 
-  spec.private_header_files = 'Automattic-Tracks-iOS/Internal Logging/TracksLoggingPrivate.h'
-  spec.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
+  s.ios.deployment_target = '12.0'
+  s.osx.deployment_target = '10.12'
+  s.swift_version = '5.0'
 
-  spec.framework        = 'CoreData'
-  spec.ios.framework    = 'UIKit'
-  spec.ios.framework    = 'CoreTelephony'
-  spec.osx.framework    = 'AppKit'
+  s.source        = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => s.version.to_s }
+  s.ios.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
+  s.ios.exclude_files = 'Automattic-Tracks-OSX/Automattic_Tracks_OSX.h'
+  s.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
+  s.osx.exclude_files = ['Automattic-Tracks-iOS/Automattic-Tracks-iOS.h', 'Automattic-Tracks-iOS/ABTesting/*']
 
-  spec.ios.deployment_target  = '12.0'
-  spec.osx.deployment_target  = '10.12'
+  s.private_header_files = 'Automattic-Tracks-iOS/Internal Logging/TracksLoggingPrivate.h'
+  s.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
 
-  spec.header_dir = 'AutomatticTracks'
-  spec.module_name = 'AutomatticTracks'
+  s.framework        = 'CoreData'
+  s.ios.framework    = 'UIKit'
+  s.ios.framework    = 'CoreTelephony'
+  s.osx.framework    = 'AppKit'
 
-  spec.ios.dependency 'UIDeviceIdentifier', '~> 1'
-  spec.dependency 'CocoaLumberjack', '~> 3'
-  spec.dependency 'Reachability', '~> 3'
-  spec.dependency 'Sentry', '~> 6'
-  spec.dependency 'Sodium', '>= 0.9.1'
+  s.header_dir = 'AutomatticTracks'
+  s.module_name = 'AutomatticTracks'
+
+  s.ios.dependency 'UIDeviceIdentifier', '~> 1'
+  s.dependency 'CocoaLumberjack', '~> 3'
+  s.dependency 'Reachability', '~> 3'
+  s.dependency 'Sentry', '~> 6'
+  s.dependency 'Sodium', '>= 0.9.1'
 end
