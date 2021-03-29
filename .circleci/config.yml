@@ -26,7 +26,28 @@ jobs:
                        -scheme 'Automattic-Tracks-OSX' \
                        -destination 'platform=OS X,arch=x86_64' \
                        test  | tee logs/build-and-test.log | xcpretty -r junit
+  CheckVersionConsistency:
+    docker:
+      - image: cimg/base:2020.01
+    steps:
+      - checkout
+      - run:
+          name: Check pod version consistency
+          command: |
+            SRC_FILE=Automattic-Tracks-iOS/TracksConstants.m
+            PODSPEC_FILE=Automattic-Tracks-iOS.podspec
 
+            SOURCE_VERS=$(sed -n s/'^.* TracksLibraryVersion = @"\(.*\)";.*$'/'\1'/p $SRC_FILE)
+            POD_VERS=$(sed -n s/'^ *s.version *= \([^ ]*\).*$'/'\1'/p $PODSPEC_FILE | tr -d \'\")
+            
+            echo Version found in $SRC_FILE: $SOURCE_VERS
+            echo Version found in $PODSPEC_FILE: $POD_VERS
+            if [ "$SOURCE_VERS" = "$POD_VERS" ]; then
+              echo "Version values match :)"
+            else
+              echo "Version values differ! Please fix by making sure the 2 files have matching values for the version."
+              exit 1
+            fi
 workflows:
   test_and_validate:
     jobs:
@@ -67,5 +88,7 @@ workflows:
               only: /.*/
             branches:
               ignore: /.*/
+      - CheckVersionConsistency:
+          name: "Validate Version Values Consistency"
       - TestMacOS:
           name: "Test macOS"
