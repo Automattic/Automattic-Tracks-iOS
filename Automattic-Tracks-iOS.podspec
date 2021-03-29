@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name          = 'Automattic-Tracks-iOS'
-  s.version       = File.read("Automattic-Tracks-iOS/TracksConstants.m").split("const TracksLibraryVersion = @\"").last.split("\"").first
+  s.version       = '0.8.3'
 
   s.summary       = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
   s.description   = <<-DESC
