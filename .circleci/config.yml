@@ -48,6 +48,7 @@ jobs:
               echo "Version values differ! Please fix by making sure the 2 files have matching values for the version."
               exit 1
             fi
+
 workflows:
   test_and_validate:
     jobs:
