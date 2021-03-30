@@ -41,7 +41,7 @@ import Cocoa
     /// Only refresh if the TTL has expired
     ///
     public func refreshIfNeeded(completion: (() -> Void)? = nil) {
-        guard ttl > 0 else {
+        guard ttl <= 0 else {
             completion?()
             return
         }
