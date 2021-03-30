@@ -26,6 +26,36 @@ class ExPlatTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
     }
 
+    // Does not refresh if ttl hasn't expired
+    //
+    func testRefreshIfNeededOnlyAfterExpiredTtl() {
+        let expectation = XCTestExpectation(description: "Save experiments")
+        let serviceMock = ExPlatServiceMock()
+        serviceMock.ttl = 0
+        let abTesting = ExPlat(configuration: exPlatTestConfiguration, service: serviceMock)
+
+        abTesting.refresh {
+
+            // Should change "experiment" to treatment
+            serviceMock.ttl = 60
+            serviceMock.experimentVariation = "treatment"
+            abTesting.refreshIfNeeded {
+                XCTAssertEqual(abTesting.experiment("experiment"), .treatment(nil))
+
+                // Should not change "experiment" to control
+                serviceMock.experimentVariation = "control"
+                abTesting.refreshIfNeeded {
+                    XCTAssertEqual(abTesting.experiment("experiment"), .treatment(nil))
+                    expectation.fulfill()
+                }
+            }
+        }
+
+
+
+        wait(for: [expectation], timeout: 2.0)
+    }
+
     // Keep the already saved experiments in case of a failure
     //
     func testError() {
@@ -50,6 +80,8 @@ class ExPlatTests: XCTestCase {
 
 private class ExPlatServiceMock: ExPlatService {
     var returnAssignments = true
+    var ttl = 60
+    var experimentVariation: String? = nil
 
     init() {
         super.init(configuration: ExPlatConfiguration(
@@ -68,9 +100,9 @@ private class ExPlatServiceMock: ExPlatService {
 
         completion(
             Assignments(
-                ttl: 60,
+                ttl: ttl,
                 variations: [
-                    "experiment": nil,
+                    "experiment": experimentVariation,
                     "another_experiment": "treatment",
                     "experiment_multiple_variation": "another_treatment"
                 ]
