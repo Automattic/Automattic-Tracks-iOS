@@ -25,6 +25,7 @@ import Cocoa
          service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
         super.init()
+        subscribeToNotifications()
         ExPlat.shared = self
     }
 
@@ -36,6 +37,10 @@ import Cocoa
                                                        oAuthToken: oAuthToken,
                                                        userAgent: userAgent,
                                                        anonId: anonId))
+    }
+
+    deinit {
+        unsubscribeFromNotifications()
     }
 
     /// Only refresh if the TTL has expired
@@ -84,5 +89,35 @@ import Cocoa
         default:
             return .treatment(variation)
         }
+    }
+
+    /// Check if the app is entering background and/or foreground
+    /// and start/stop the timers
+    ///
+    private func subscribeToNotifications() {
+        let notificationCenter = NotificationCenter.default
+
+        #if os(iOS) || os(watchOS) || os(tvOS)
+        notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(macOS)
+        notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
+        #endif
+    }
+
+    private func unsubscribeFromNotifications() {
+        let notificationCenter = NotificationCenter.default
+
+        #if os(iOS) || os(watchOS) || os(tvOS)
+        notificationCenter.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(macOS)
+        notificationCenter.removeObserver(self, name: NSApplication.willBecomeActiveNotification, object: nil)
+        #endif
+    }
+
+    /// When the app enter foreground refresh the assignments or
+    /// start the timer
+    ///
+    @objc private func applicationWillEnterForeground() {
+        refreshIfNeeded()
     }
 }
