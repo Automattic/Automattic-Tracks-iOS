@@ -13,6 +13,8 @@ import Cocoa
     private let assignmentsKey = "ab-testing-assignments"
     private let ttlDateKey = "ab-testing-ttl-date"
 
+    private(set) var experimentNames: [String] = []
+
     private var ttl: TimeInterval {
         guard let ttlDate = UserDefaults.standard.object(forKey: ttlDateKey) as? Date else {
             return 0
@@ -25,6 +27,7 @@ import Cocoa
                 service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
         super.init()
+        register(experiments: ExPlat.shared?.experimentNames ?? [])
         subscribeToNotifications()
         ExPlat.shared = self
     }
@@ -42,6 +45,7 @@ import Cocoa
     /// Register the names of the experiments to be retrieved
     ///
     public func register(experiments experimentNames: [String]) {
+        self.experimentNames = experimentNames
         service.experimentNames = experimentNames
     }
 

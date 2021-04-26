@@ -87,6 +87,18 @@ class ExPlatTests: XCTestCase {
 
         XCTAssertEqual(serviceMock.experimentNames, ["foo", "bar"])
     }
+
+    // Add the experiment names into the service
+    //
+    func testRegisteredEventsAfterNewConfiguration() {
+        let serviceMock = ExPlatServiceMock()
+        let abTesting = ExPlat(configuration: exPlatTestConfiguration, service: serviceMock)
+        abTesting.register(experiments: ["foo", "bar"])
+
+        ExPlat.configure(platform: "ios", oAuthToken: nil, userAgent: nil, anonId: nil)
+
+        XCTAssertEqual(ExPlat.shared?.experimentNames, ["foo", "bar"])
+    }
 }
 
 private class ExPlatServiceMock: ExPlatService {
