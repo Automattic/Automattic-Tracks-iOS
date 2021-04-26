@@ -27,7 +27,8 @@ public class ExPlatService {
     }
 
     func getAssignments(completion: @escaping (Assignments?) -> Void) {
-        guard var urlComponents = URLComponents(string: assignmentsEndpoint) else {
+        guard var urlComponents = URLComponents(string: assignmentsEndpoint),
+              !experimentNames.isEmpty else {
             completion(nil)
             return
         }

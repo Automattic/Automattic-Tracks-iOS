@@ -66,6 +66,21 @@ class ExPlatServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
     }
 
+    // When no experiments names are given, just return nil assignments
+    //
+    func testEmptyExperiments() {
+        let expectation = XCTestExpectation(description: "Do not return assignments")
+        let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = []
+
+        service.getAssignments { assignments in
+            XCTAssertNil(assignments)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 2.0)
+    }
+
     private func stubAssignmentsResponseWithFile(_ filename: String) {
         stubAssignments(withFile: filename)
     }
