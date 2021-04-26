@@ -9,6 +9,7 @@ public struct ExPlatConfiguration {
 
 public class ExPlatService {
     let platform: String
+    let experimentNames: [String]
     let oAuthToken: String?
     let userAgent: String?
     let anonId: String?
@@ -17,8 +18,10 @@ public class ExPlatService {
         return "https://public-api.wordpress.com/wpcom/v2/experiments/0.1.0/assignments/\(platform)"
     }
 
-    init(configuration: ExPlatConfiguration) {
+    init(configuration: ExPlatConfiguration,
+         experimentNames: [String]) {
         self.platform = configuration.platform
+        self.experimentNames = experimentNames
         self.oAuthToken = configuration.oAuthToken
         self.userAgent = configuration.userAgent
         self.anonId = configuration.anonId
@@ -31,7 +34,10 @@ public class ExPlatService {
         }
 
         // Query items
-        urlComponents.queryItems = [URLQueryItem(name: "_locale", value: Locale.current.languageCode)]
+        urlComponents.queryItems = [
+            URLQueryItem(name: "_locale", value: Locale.current.languageCode),
+            URLQueryItem(name: "experiment_names", value: experimentNames.joined(separator: ","))
+        ]
 
         if let anonId = anonId {
             urlComponents.queryItems?.append(URLQueryItem.init(name: "anon_id", value: anonId))
@@ -50,7 +56,7 @@ public class ExPlatService {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
         if let oAuthToken = oAuthToken {
-            request.setValue( "Bearer \(oAuthToken)", forHTTPHeaderField: "Authorization")
+            request.setValue("Bearer \(oAuthToken)", forHTTPHeaderField: "Authorization")
         }
 
         // User-Agent

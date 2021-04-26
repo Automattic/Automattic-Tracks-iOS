@@ -89,7 +89,7 @@ private class ExPlatServiceMock: ExPlatService {
             oAuthToken: nil,
             userAgent: nil,
             anonId: nil
-        ))
+        ), experimentNames: [])
     }
 
     override func getAssignments(completion: @escaping (Assignments?) -> Void) {

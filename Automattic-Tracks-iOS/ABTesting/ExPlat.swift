@@ -23,7 +23,7 @@ import Cocoa
 
     public init(configuration: ExPlatConfiguration,
          service: ExPlatService? = nil) {
-        self.service = service ?? ExPlatService(configuration: configuration)
+        self.service = service ?? ExPlatService(configuration: configuration, experimentNames: [])
         super.init()
         subscribeToNotifications()
         ExPlat.shared = self
