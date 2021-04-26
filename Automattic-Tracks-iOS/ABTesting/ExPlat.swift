@@ -22,8 +22,8 @@ import Cocoa
     }
 
     public init(configuration: ExPlatConfiguration,
-         service: ExPlatService? = nil) {
-        self.service = service ?? ExPlatService(configuration: configuration, experimentNames: [])
+                service: ExPlatService? = nil) {
+        self.service = service ?? ExPlatService(configuration: configuration)
         super.init()
         subscribeToNotifications()
         ExPlat.shared = self

@@ -9,19 +9,18 @@ public struct ExPlatConfiguration {
 
 public class ExPlatService {
     let platform: String
-    let experimentNames: [String]
     let oAuthToken: String?
     let userAgent: String?
     let anonId: String?
+
+    var experimentNames: [String] = []
 
     var assignmentsEndpoint: String {
         return "https://public-api.wordpress.com/wpcom/v2/experiments/0.1.0/assignments/\(platform)"
     }
 
-    init(configuration: ExPlatConfiguration,
-         experimentNames: [String]) {
+    init(configuration: ExPlatConfiguration) {
         self.platform = configuration.platform
-        self.experimentNames = experimentNames
         self.oAuthToken = configuration.oAuthToken
         self.userAgent = configuration.userAgent
         self.anonId = configuration.anonId

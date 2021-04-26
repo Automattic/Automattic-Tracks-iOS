@@ -11,8 +11,6 @@ class ExPlatServiceTests: XCTestCase {
         anonId: nil
     )
 
-    let experimentNames = ["experiment1", "experiment2"]
-
     override func tearDown() {
         super.tearDown()
 
@@ -24,7 +22,8 @@ class ExPlatServiceTests: XCTestCase {
     func testRefresh() {
         let expectation = XCTestExpectation(description: "Return assignments")
         stubAssignmentsResponseWithFile("explat-assignments.json")
-        let service = ExPlatService(configuration: exPlatTestConfiguration, experimentNames: experimentNames)
+        let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = ["experiment1", "experiment2"]
 
         service.getAssignments { assignments in
             XCTAssertEqual(assignments?.ttl, 60)
@@ -40,7 +39,8 @@ class ExPlatServiceTests: XCTestCase {
     func testRefreshDecodeFails() {
         let expectation = XCTestExpectation(description: "Do not return assignments")
         stubAssignmentsResponseWithFile("explat-malformed-assignments.json")
-        let service = ExPlatService(configuration: exPlatTestConfiguration, experimentNames: experimentNames)
+        let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = ["experiment1", "experiment2"]
 
         service.getAssignments { assignments in
             XCTAssertNil(assignments)
@@ -55,7 +55,8 @@ class ExPlatServiceTests: XCTestCase {
     func testRefreshServerFails() {
         let expectation = XCTestExpectation(description: "Do not return assignments")
         stubAssignmentsResponseWithError()
-        let service = ExPlatService(configuration: exPlatTestConfiguration, experimentNames: experimentNames)
+        let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = ["experiment1", "experiment2"]
 
         service.getAssignments { assignments in
             XCTAssertNil(assignments)
