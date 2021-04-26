@@ -39,6 +39,12 @@ import Cocoa
                                                        anonId: anonId))
     }
 
+    /// Register the names of the experiments to be retrieved
+    ///
+    public func register(experiments experimentNames: [String]) {
+        service.experimentNames = experimentNames
+    }
+
     deinit {
         unsubscribeFromNotifications()
     }
