@@ -13,6 +13,8 @@ import Cocoa
     private let assignmentsKey = "ab-testing-assignments"
     private let ttlDateKey = "ab-testing-ttl-date"
 
+    private(set) var experimentNames: [String] = []
+
     private var ttl: TimeInterval {
         guard let ttlDate = UserDefaults.standard.object(forKey: ttlDateKey) as? Date else {
             return 0
@@ -22,9 +24,11 @@ import Cocoa
     }
 
     public init(configuration: ExPlatConfiguration,
-         service: ExPlatService? = nil) {
+                service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
         super.init()
+        register(experiments: ExPlat.shared?.experimentNames ?? [])
+        subscribeToNotifications()
         ExPlat.shared = self
     }
 
@@ -36,6 +40,17 @@ import Cocoa
                                                        oAuthToken: oAuthToken,
                                                        userAgent: userAgent,
                                                        anonId: anonId))
+    }
+
+    /// Register the names of the experiments to be retrieved
+    ///
+    public func register(experiments experimentNames: [String]) {
+        self.experimentNames = experimentNames
+        service.experimentNames = experimentNames
+    }
+
+    deinit {
+        unsubscribeFromNotifications()
     }
 
     /// Only refresh if the TTL has expired
@@ -84,5 +99,35 @@ import Cocoa
         default:
             return .treatment(variation)
         }
+    }
+
+    /// Check if the app is entering background and/or foreground
+    /// and start/stop the timers
+    ///
+    private func subscribeToNotifications() {
+        let notificationCenter = NotificationCenter.default
+
+        #if os(iOS) || os(watchOS) || os(tvOS)
+        notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(macOS)
+        notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
+        #endif
+    }
+
+    private func unsubscribeFromNotifications() {
+        let notificationCenter = NotificationCenter.default
+
+        #if os(iOS) || os(watchOS) || os(tvOS)
+        notificationCenter.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(macOS)
+        notificationCenter.removeObserver(self, name: NSApplication.willBecomeActiveNotification, object: nil)
+        #endif
+    }
+
+    /// When the app enter foreground refresh the assignments or
+    /// start the timer
+    ///
+    @objc private func applicationWillEnterForeground() {
+        refreshIfNeeded()
     }
 }

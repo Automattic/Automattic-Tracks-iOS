@@ -13,6 +13,8 @@ public class ExPlatService {
     let userAgent: String?
     let anonId: String?
 
+    var experimentNames: [String] = []
+
     var assignmentsEndpoint: String {
         return "https://public-api.wordpress.com/wpcom/v2/experiments/0.1.0/assignments/\(platform)"
     }
@@ -25,13 +27,17 @@ public class ExPlatService {
     }
 
     func getAssignments(completion: @escaping (Assignments?) -> Void) {
-        guard var urlComponents = URLComponents(string: assignmentsEndpoint) else {
+        guard var urlComponents = URLComponents(string: assignmentsEndpoint),
+              !experimentNames.isEmpty else {
             completion(nil)
             return
         }
 
         // Query items
-        urlComponents.queryItems = [URLQueryItem(name: "_locale", value: Locale.current.languageCode)]
+        urlComponents.queryItems = [
+            URLQueryItem(name: "_locale", value: Locale.current.languageCode),
+            URLQueryItem(name: "experiment_names", value: experimentNames.joined(separator: ","))
+        ]
 
         if let anonId = anonId {
             urlComponents.queryItems?.append(URLQueryItem.init(name: "anon_id", value: anonId))
@@ -50,7 +56,7 @@ public class ExPlatService {
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
         if let oAuthToken = oAuthToken {
-            request.setValue( "Bearer \(oAuthToken)", forHTTPHeaderField: "Authorization")
+            request.setValue("Bearer \(oAuthToken)", forHTTPHeaderField: "Authorization")
         }
 
         // User-Agent
