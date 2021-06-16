@@ -14,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, readonly) NSString *appName;
 @property (nullable, nonatomic, readonly) NSString *appVersion;
 @property (nullable, nonatomic, readonly) NSString *appBuild;
+@property (nonatomic, readonly) NSString *appBuildConfiguration;
 
 // This information has the tendency to change
 @property (nonatomic, readonly) NSString *deviceLanguage;

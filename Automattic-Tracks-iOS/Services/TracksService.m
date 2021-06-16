@@ -37,6 +37,7 @@ NSString *const DeviceLanguageKey = @"_lg";
 NSString *const DeviceInfoAppNameKey = @"device_info_app_name";
 NSString *const DeviceInfoAppVersionKey = @"device_info_app_version";
 NSString *const DeviceInfoAppBuildKey = @"device_info_app_version_code";
+NSString *const DeviceInfoAppBuildConfigurationKey = @"device_info_app_build_configuration";
 NSString *const DeviceInfoOSKey = @"device_info_os";
 NSString *const DeviceInfoOSVersionKey = @"device_info_os_version";
 NSString *const DeviceInfoBrandKey = @"device_info_brand";
@@ -328,6 +329,7 @@ NSString *const USER_ID_ANON = @"anonId";
 
     return @{ RequestTimestampKey : @(since1970millis),
               DeviceInfoAppBuildKey : self.deviceInformation.appBuild ?: @"Unknown",
+              DeviceInfoAppBuildConfigurationKey: self.deviceInformation.appBuildConfiguration,
               DeviceInfoAppNameKey : self.deviceInformation.appName ?: @"Unknown",
               DeviceInfoAppVersionKey : self.deviceInformation.appVersion ?: @"Unknown",
               DeviceInfoBrandKey : self.deviceInformation.brand,

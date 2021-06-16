@@ -218,4 +218,20 @@
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
 }
 
+- (NSString *)appBuildConfiguration
+{
+#if defined(DEBUG)
+    return @"Debug";
+#elif defined(ALPHA)
+    return @"Alpha"
+#endif
+
+    // This little trick is the only way we can differentiate TestFlight from App Store, since the built app is identical
+    if ([[[[NSBundle mainBundle] appStoreReceiptURL] lastPathComponent] isEqualToString:@"sandboxReceipt"]) {
+        return @"Beta";
+    } else {
+        return @"Production";
+    }
+}
+
 @end
