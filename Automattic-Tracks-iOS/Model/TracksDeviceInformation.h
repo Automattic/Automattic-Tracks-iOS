@@ -1,22 +1,24 @@
 #import <Foundation/Foundation.h>
 #import <CoreGraphics/CoreGraphics.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TracksDeviceInformation : NSObject
 
 @property (nonatomic, readonly) NSString *os;
 @property (nonatomic, readonly) NSString *version;
 @property (nonatomic, readonly) NSString *manufacturer;
 @property (nonatomic, readonly) NSString *brand;
-@property (nonatomic, readonly) NSString *model;
+@property (nullable, nonatomic, readonly) NSString *model;
 
-@property (nonatomic, readonly) NSString *appName;
-@property (nonatomic, readonly) NSString *appVersion;
-@property (nonatomic, readonly) NSString *appBuild;
+@property (nullable, nonatomic, readonly) NSString *appName;
+@property (nullable, nonatomic, readonly) NSString *appVersion;
+@property (nullable, nonatomic, readonly) NSString *appBuild;
 
 // This information has the tendency to change
 @property (nonatomic, readonly) NSString *deviceLanguage;
-@property (nonatomic, readonly) NSString *currentNetworkOperator;
-@property (nonatomic, readonly) NSString *currentNetworkRadioType;
+@property (nullable, nonatomic, readonly) NSString *currentNetworkOperator;
+@property (nullable, nonatomic, readonly) NSString *currentNetworkRadioType;
 @property (nonatomic, assign) BOOL isWiFiConnected;
 /**
  * Indicates whether the device has an Internet connection.
@@ -28,3 +30,5 @@
 @property (nonatomic, readonly) NSString *orientation;
 
 @end
+
+NS_ASSUME_NONNULL_END
