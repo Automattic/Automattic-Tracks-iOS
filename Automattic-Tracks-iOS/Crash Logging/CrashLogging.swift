@@ -57,7 +57,7 @@ public class CrashLogging {
         return !dataProvider.userHasOptedOut
         #endif
     }
-    
+
     func beforeSend(event: Sentry.Event?) -> Sentry.Event? {
 
         DDLogDebug("📜 Firing `beforeSend`")
@@ -296,13 +296,13 @@ extension CrashLogging {
             "releaseName": self.dataProvider.releaseName
         ]
     }
-    
+
     /// Return the current Sentry user.
     /// This helper allows events triggered by other platforms to include the current user.
     public func getSentryUserDict() -> [String: Any]? {
         return dataProvider.currentUser?.sentryUser.serialize()
     }
-    
+
     /// Attachs the current scope to an event and returns it.
     /// This helper allows events triggered by other platforms to include the same scope as if they would be triggered in this platform.
     ///
@@ -310,32 +310,32 @@ extension CrashLogging {
     ///   - eventDict: The event object
     public func attachScopeToEvent(_ eventDict: [String: Any]) -> [String: Any] {
         var scope = SentrySDK.currentHub().getScope().serialize()
-        
+
         // Setup tags
         var tags = scope["tags"] as? [String: String] ?? [String: String]()
         tags["locale"] = NSLocale.current.languageCode
-        
+
         /// Always provide a value in order to determine how often we're unable to retrieve application state
         tags["app.state"] = ApplicationFacade().applicationState ?? "unknown"
-        
+
         tags["release"] = self.dataProvider.releaseName
-        
+
         // Assign scope to event
         var eventWithScope = eventDict
         eventWithScope["tags"] = tags
         eventWithScope["breadcrumbs"] = scope["breadcrumbs"]
         eventWithScope["contexts"] = scope["context"]
-        
+
         return eventWithScope
     }
-    
+
     /// Writes the envelope to the Crash Logging system, the envelope contains all the data required for data ingestion in Sentry.
     /// This function is based on the original Sentry implementation for React native: https://github.com/getsentry/sentry-react-native/blob/aa4eb11415cbb73bbd0033e4f0926b539d22315b/ios/RNSentry.m#L118-L158
     ///
     /// - Parameters:
     ///   - envelopeDict: The envelope object.
     public func logEnvelope(_ envelopeDict: [String: Any]) {
-        if(JSONSerialization.isValidJSONObject(envelopeDict)) {
+        if JSONSerialization.isValidJSONObject(envelopeDict) {
             guard let headerDict = envelopeDict["header"] as? [String: Any] else {
                 DDLogError("⛔️ Unable to send JS exception to Sentry – header is not defined in the envelope.")
                 return
@@ -348,26 +348,26 @@ extension CrashLogging {
                 DDLogError("⛔️ Unable to send JS exception to Sentry – payload is not defined in the envelope.")
                 return
             }
-            
+
             // Define the envelope header
             let skdInfo = SentrySdkInfo.init(dict: headerDict)
             let eventId = SentryId.init(uuidString: headerEventId)
             let envelopeHeader = SentryEnvelopeHeader.init(id: eventId)
-            
+
             guard let envelopeItemData = try? JSONSerialization.data(withJSONObject: payloadDict) else {
                 DDLogError("⛔️ Unable to send JS exception to Sentry – payload could not be serialized.")
                 return
             }
-            
+
             var itemType = payloadDict["type"] as? String ?? "event"
             let envelopeItemHeader = SentryEnvelopeItemHeader.init(type: itemType, length: UInt(bitPattern: envelopeItemData.count))
             let envelopeItem = SentryEnvelopeItem.init(header: envelopeItemHeader, data: envelopeItemData)
             let envelope = SentryEnvelope.init(header: envelopeHeader, singleItem: envelopeItem)
-            
+
             #if DEBUG
             SentrySDK.currentHub().capture(envelope: envelope)
             #else
-            if (envelopeDict["payload"]["level"] == "fatal") {
+            if envelopeDict["payload"]["level"] == "fatal" {
                 // Storing to disk happens asynchronously with captureEnvelope
                 SentrySDK.currentHub().getClient()?.store(envelope)
             } else {
