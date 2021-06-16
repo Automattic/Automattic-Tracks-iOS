@@ -309,7 +309,7 @@ extension CrashLogging {
     /// - Parameters:
     ///   - eventDict: The event object
     public func attachScopeToEvent(_ eventDict: [String: Any]) -> [String: Any] {
-        var scope = SentrySDK.currentHub().getScope().serialize()
+        let scope = SentrySDK.currentHub().getScope().serialize()
 
         // Setup tags
         var tags = scope["tags"] as? [String: String] ?? [String: String]()
@@ -348,30 +348,34 @@ extension CrashLogging {
                 DDLogError("⛔️ Unable to send JS exception to Sentry – payload is not defined in the envelope.")
                 return
             }
+            guard let eventLevel = payloadDict["level"] as? String else {
+                DDLogError("⛔️ Unable to send JS exception to Sentry – level is not defined in the envelope.")
+                return
+            }
 
             // Define the envelope header
-            let skdInfo = SentrySdkInfo.init(dict: headerDict)
+            let sdkInfo = SentrySdkInfo.init(dict: headerDict)
             let eventId = SentryId.init(uuidString: headerEventId)
-            let envelopeHeader = SentryEnvelopeHeader.init(id: eventId)
+            let envelopeHeader = SentryEnvelopeHeader.init(id: eventId, andSdkInfo: sdkInfo)
 
             guard let envelopeItemData = try? JSONSerialization.data(withJSONObject: payloadDict) else {
                 DDLogError("⛔️ Unable to send JS exception to Sentry – payload could not be serialized.")
                 return
             }
 
-            var itemType = payloadDict["type"] as? String ?? "event"
+            let itemType = payloadDict["type"] as? String ?? "event"
             let envelopeItemHeader = SentryEnvelopeItemHeader.init(type: itemType, length: UInt(bitPattern: envelopeItemData.count))
             let envelopeItem = SentryEnvelopeItem.init(header: envelopeItemHeader, data: envelopeItemData)
             let envelope = SentryEnvelope.init(header: envelopeHeader, singleItem: envelopeItem)
 
             #if DEBUG
-            SentrySDK.currentHub().capture(envelope: envelope)
+            SentrySDK.currentHub().getClient()?.capture(envelope: envelope)
             #else
-            if envelopeDict["payload"]["level"] == "fatal" {
+            if eventLevel == "fatal" {
                 // Storing to disk happens asynchronously with captureEnvelope
                 SentrySDK.currentHub().getClient()?.store(envelope)
             } else {
-                SentrySDK.currentHub().capture(envelope: envelope)
+                SentrySDK.currentHub().getClient()?.capture(envelope: envelope)
             }
             #endif
         } else {
