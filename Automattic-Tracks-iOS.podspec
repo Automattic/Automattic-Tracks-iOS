@@ -37,6 +37,6 @@ Pod::Spec.new do |s|
   s.ios.dependency 'UIDeviceIdentifier', '~> 1'
   s.dependency 'CocoaLumberjack', '~> 3'
   s.dependency 'Reachability', '~> 3'
-  s.dependency 'Sentry', '~> 6'
+  s.dependency 'Sentry', '~> 7'
   s.dependency 'Sodium', '>= 0.9.1'
 end

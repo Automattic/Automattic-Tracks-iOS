@@ -7,7 +7,7 @@ project 'Automattic-Tracks-iOS.xcodeproj'
 def shared
   pod 'CocoaLumberjack', '~> 3'
   pod 'Reachability', '~> 3'
-  pod 'Sentry', '~> 6'
+  pod 'Sentry', '~> 7'
   pod 'Sodium', '>= 0.9.1'
 end
 
