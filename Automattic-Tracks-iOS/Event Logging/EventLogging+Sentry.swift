@@ -21,7 +21,11 @@ extension EventLogging {
         /// file for the current session. Other apps may use time-based logs, in which case the same log would be the correct one.
         ///
         /// We also pass the timestamp for the event, as that can be useful for determining the correct log file.
-        guard let logFilePath = dataSource.logFilePath(forErrorLevel: event.errorType, at: event.timestamp) else {
+        guard let timestamp = event.timestamp else {
+            DDLogDebug("📜 Event has no timestamp. Will not request a log file to attach.")
+            return
+        }
+        guard let logFilePath = dataSource.logFilePath(forErrorLevel: event.errorType, at: timestamp) else {
             DDLogDebug("📜 Unable to locate a log file to attach")
             return
         }
