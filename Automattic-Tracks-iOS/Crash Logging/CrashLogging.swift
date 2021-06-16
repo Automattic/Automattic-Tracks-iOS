@@ -50,19 +50,27 @@ public class CrashLogging {
         return self
     }
 
+    public func shouldSendEvent() -> Bool {
+        #if DEBUG
+        return UserDefaults.standard.bool(forKey: "force-crash-logging")
+        #else
+        return !dataProvider.userHasOptedOut
+        #endif
+    }
+    
     func beforeSend(event: Sentry.Event?) -> Sentry.Event? {
 
         DDLogDebug("📜 Firing `beforeSend`")
 
         #if DEBUG
         DDLogDebug("📜 This is a debug build")
-        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging")
-        #else
-        let shouldSendEvent = !dataProvider.userHasOptedOut
         #endif
 
         /// If we shouldn't send the event we have nothing else to do here
-        guard let event = event, shouldSendEvent else {
+        if !shouldSendEvent() {
+            return nil
+        }
+        guard let event = event else {
             return nil
         }
 
