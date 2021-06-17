@@ -337,19 +337,19 @@ extension CrashLogging {
     public func logEnvelope(_ envelopeDict: [String: Any]) {
         if JSONSerialization.isValidJSONObject(envelopeDict) {
             guard let headerDict = envelopeDict["header"] as? [String: Any] else {
-                DDLogError("⛔️ Unable to send JS exception to Sentry – header is not defined in the envelope.")
+                DDLogError("⛔️ Unable to send envelope to Sentry – header is not defined in the envelope.")
                 return
             }
             guard let headerEventId = headerDict["event_id"] as? String else {
-                DDLogError("⛔️ Unable to send JS exception to Sentry – event_id is not defined in the envelope.")
+                DDLogError("⛔️ Unable to send envelope to Sentry – event id is not defined in the envelope header.")
                 return
             }
             guard let payloadDict = envelopeDict["payload"] as? [String: Any] else {
-                DDLogError("⛔️ Unable to send JS exception to Sentry – payload is not defined in the envelope.")
+                DDLogError("⛔️ Unable to send envelope to Sentry – payload is not defined in the envelope.")
                 return
             }
             guard let eventLevel = payloadDict["level"] as? String else {
-                DDLogError("⛔️ Unable to send JS exception to Sentry – level is not defined in the envelope.")
+                DDLogError("⛔️ Unable to send envelope to Sentry – level is not defined in the envelope payload.")
                 return
             }
 
@@ -359,7 +359,7 @@ extension CrashLogging {
             let envelopeHeader = SentryEnvelopeHeader.init(id: eventId, andSdkInfo: sdkInfo)
 
             guard let envelopeItemData = try? JSONSerialization.data(withJSONObject: payloadDict) else {
-                DDLogError("⛔️ Unable to send JS exception to Sentry – payload could not be serialized.")
+                DDLogError("⛔️ Unable to send envelope to Sentry – payload could not be serialized.")
                 return
             }
 
@@ -379,7 +379,7 @@ extension CrashLogging {
             }
             #endif
         } else {
-            DDLogError("⛔️ Unable to send JS exception to Sentry – envelope is not a valid JSON object.")
+            DDLogError("⛔️ Unable to send envelope to Sentry – envelope is not a valid JSON object.")
         }
     }
 }
