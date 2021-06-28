@@ -23,6 +23,9 @@
 		24464FB625B60E0000A34B78 /* SentryTestError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24464FAF25B60E0000A34B78 /* SentryTestError.swift */; };
 		24464FB725B60E0000A34B78 /* SentryClient+Shim.h in Headers */ = {isa = PBXBuildFile; fileRef = 24464FB025B60E0000A34B78 /* SentryClient+Shim.h */; };
 		24464FB825B60E0000A34B78 /* SentryClient+Shim.h in Headers */ = {isa = PBXBuildFile; fileRef = 24464FB025B60E0000A34B78 /* SentryClient+Shim.h */; };
+		24A0CAD426030887008E793B /* SentryEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A0CAD326030887008E793B /* SentryEvent+Extensions.swift */; };
+		24A0CAD526030887008E793B /* SentryEvent+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A0CAD326030887008E793B /* SentryEvent+Extensions.swift */; };
+		24A0CB0126030B7B008E793B /* SentryExtensionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24A0CB0026030B7B008E793B /* SentryExtensionTests.swift */; };
 		3F3919ED25256B5300E56994 /* TracksContexManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F3919EC25256B5300E56994 /* TracksContexManagerTests.swift */; };
 		4FE1FBB22B5CC44AC0EC7CBF /* Pods_Automattic_Tracks_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D834F2F168F81BD31598B29 /* Pods_Automattic_Tracks_OSX.framework */; };
 		57AB7ED12486C50900187234 /* ApplicationFacade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57AB7ED02486C50900187234 /* ApplicationFacade.swift */; };
@@ -193,6 +196,10 @@
 		24464FAE25B60E0000A34B78 /* SentryClient+Shim.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "SentryClient+Shim.m"; sourceTree = "<group>"; };
 		24464FAF25B60E0000A34B78 /* SentryTestError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SentryTestError.swift; sourceTree = "<group>"; };
 		24464FB025B60E0000A34B78 /* SentryClient+Shim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "SentryClient+Shim.h"; sourceTree = "<group>"; };
+		24A0CAD326030887008E793B /* SentryEvent+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SentryEvent+Extensions.swift"; sourceTree = "<group>"; };
+		24A0CB0026030B7B008E793B /* SentryExtensionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryExtensionTests.swift; sourceTree = "<group>"; };
+		24A0CB0626030BF2008E793B /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
+		24A0CB0C26030CB8008E793B /* TestPlan.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = TestPlan.xctestplan; sourceTree = "<group>"; };
 		3458F6511F3E809224A4A8DB /* Pods-Automattic_Tracks_OSXTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.debug.xcconfig"; sourceTree = "<group>"; };
 		371F24E5742FCBB4490DD9A9 /* Pods-Automattic-Tracks-iOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic-Tracks-iOSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic-Tracks-iOSTests/Pods-Automattic-Tracks-iOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		3AF418C8EF68BCAA9CA82B3C /* Pods-Automattic_Tracks_OSXTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Automattic_Tracks_OSXTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Automattic_Tracks_OSXTests/Pods-Automattic_Tracks_OSXTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -566,6 +573,7 @@
 				24464FAE25B60E0000A34B78 /* SentryClient+Shim.m */,
 				24464FAD25B60E0000A34B78 /* SentryEventSerializer.swift */,
 				24464FAF25B60E0000A34B78 /* SentryTestError.swift */,
+				24A0CAD326030887008E793B /* SentryEvent+Extensions.swift */,
 			);
 			path = "Crash Logging";
 			sourceTree = "<group>";
@@ -597,6 +605,8 @@
 				F99D03332422D9F30091C33E /* TracksServiceRemoteTests.swift */,
 				F99D03322422D9F30091C33E /* TracksServiceTests.m */,
 				F9BB41302435B1C600533BCD /* TestExponentialBackoffTimer.swift */,
+				24A0CB0026030B7B008E793B /* SentryExtensionTests.swift */,
+				24A0CB0626030BF2008E793B /* TestPlan.xctestplan */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -619,6 +629,7 @@
 			children = (
 				F9A117B321E69B42002A5CD8 /* Automattic_Tracks_OSX.h */,
 				F9A117B421E69B42002A5CD8 /* Info.plist */,
+				24A0CB0C26030CB8008E793B /* TestPlan.xctestplan */,
 			);
 			path = "Automattic-Tracks-OSX";
 			sourceTree = "<group>";
@@ -1015,6 +1026,7 @@
 				F9788DD92421B4EF000A9BB5 /* TracksService.m in Sources */,
 				8BC586BC25557C740058D0F8 /* ExPlatService.swift in Sources */,
 				24464FB525B60E0000A34B78 /* SentryTestError.swift in Sources */,
+				24A0CAD426030887008E793B /* SentryEvent+Extensions.swift in Sources */,
 				F944563D242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				F99D034A2422DD100091C33E /* TestHelpers.swift in Sources */,
 				F97CBE6024B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,
@@ -1038,6 +1050,7 @@
 			files = (
 				F99D033E2422D9F30091C33E /* TracksServiceTests.m in Sources */,
 				8BC5869E25557C1C0058D0F8 /* ExPlatTests.swift in Sources */,
+				24A0CB0126030B7B008E793B /* SentryExtensionTests.swift in Sources */,
 				F94EE632242D000E0015C18E /* EventLoggingNetworkServiceTests.swift in Sources */,
 				F99D03402422D9F30091C33E /* TracksServiceRemoteTests.swift in Sources */,
 				F94456522429666B009A36B3 /* EventLoggingUploadManagerTests.swift in Sources */,
@@ -1121,6 +1134,7 @@
 				F9788DDA2421B4EF000A9BB5 /* TracksService.m in Sources */,
 				F944563E242965E7009A36B3 /* EventLoggingUploadManager.swift in Sources */,
 				24464FB625B60E0000A34B78 /* SentryTestError.swift in Sources */,
+				24A0CAD526030887008E793B /* SentryEvent+Extensions.swift in Sources */,
 				F99D034B2422DD100091C33E /* TestHelpers.swift in Sources */,
 				57AB7ED22486C50900187234 /* ApplicationFacade.swift in Sources */,
 				F97CBE6124B64BE200A845D7 /* CocoaLumberjack.swift in Sources */,

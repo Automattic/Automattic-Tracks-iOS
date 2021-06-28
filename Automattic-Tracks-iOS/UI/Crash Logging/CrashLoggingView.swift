@@ -21,6 +21,7 @@ public struct CrashLoggingView: View {
             Section(header: Text("Actions")) {
                 Button("Send Test Crash", action: sendTestCrash)
                 Button("Send Test Event", action: sendTestEvent)
+                Button("Send Test Error", action: sendTestError)
                 HStack {
                     Button(action: sendErrorAndWait) {
                         HStack {
@@ -72,6 +73,18 @@ extension CrashLoggingView {
 
     private func sendTestEvent() {
         crashLogging.logMessage("Test Event \(UUID().uuidString)")
+    }
+
+    private func sendTestError() {
+        do {
+            let path = FileManager.default
+                .temporaryDirectory
+                .appendingPathComponent(UUID().uuidString)
+                .path
+            let _ = try Data(contentsOf: URL(fileURLWithPath: path))
+        } catch let err {
+            crashLogging.logError(err)
+        }
     }
 
     private func sendErrorAndWait() {

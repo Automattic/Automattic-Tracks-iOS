@@ -23,6 +23,7 @@ class ExPlatServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Return assignments")
         stubAssignmentsResponseWithFile("explat-assignments.json")
         let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = ["experiment1", "experiment2"]
 
         service.getAssignments { assignments in
             XCTAssertEqual(assignments?.ttl, 60)
@@ -39,6 +40,7 @@ class ExPlatServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Do not return assignments")
         stubAssignmentsResponseWithFile("explat-malformed-assignments.json")
         let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = ["experiment1", "experiment2"]
 
         service.getAssignments { assignments in
             XCTAssertNil(assignments)
@@ -54,6 +56,22 @@ class ExPlatServiceTests: XCTestCase {
         let expectation = XCTestExpectation(description: "Do not return assignments")
         stubAssignmentsResponseWithError()
         let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = ["experiment1", "experiment2"]
+
+        service.getAssignments { assignments in
+            XCTAssertNil(assignments)
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 2.0)
+    }
+
+    // When no experiments names are given, just return nil assignments
+    //
+    func testEmptyExperiments() {
+        let expectation = XCTestExpectation(description: "Do not return assignments")
+        let service = ExPlatService(configuration: exPlatTestConfiguration)
+        service.experimentNames = []
 
         service.getAssignments { assignments in
             XCTAssertNil(assignments)
@@ -72,7 +90,7 @@ class ExPlatServiceTests: XCTestCase {
     }
 
     private func stubAssignments(withFile file: String = "explat-assignments.json", withStatus status: Int32? = nil) {
-        let endpoint = "wpcom/v2/experiments/0.1.0/assignments/wpios_test"
+        let endpoint = "wpcom/v2/experiments/0.1.0/assignments/wpios_test?_locale=\(Locale.current.languageCode!)&experiment_names=experiment1,experiment2"
         stub(condition: { request in
             return (request.url!.absoluteString as NSString).contains(endpoint) && request.httpMethod! == "GET"
         }) { _ in

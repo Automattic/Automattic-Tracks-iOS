@@ -13,6 +13,8 @@ import Cocoa
     private let assignmentsKey = "ab-testing-assignments"
     private let ttlDateKey = "ab-testing-ttl-date"
 
+    private(set) var experimentNames: [String] = []
+
     private var ttl: TimeInterval {
         guard let ttlDate = UserDefaults.standard.object(forKey: ttlDateKey) as? Date else {
             return 0
@@ -21,12 +23,11 @@ import Cocoa
         return ttlDate.timeIntervalSinceReferenceDate - Date().timeIntervalSinceReferenceDate
     }
 
-    private(set) var scheduledTimer: Timer?
-
     public init(configuration: ExPlatConfiguration,
-         service: ExPlatService? = nil) {
+                service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
         super.init()
+        register(experiments: ExPlat.shared?.experimentNames ?? [])
         subscribeToNotifications()
         ExPlat.shared = self
     }
@@ -41,6 +42,13 @@ import Cocoa
                                                        anonId: anonId))
     }
 
+    /// Register the names of the experiments to be retrieved
+    ///
+    public func register(experiments experimentNames: [String]) {
+        self.experimentNames = experimentNames
+        service.experimentNames = experimentNames
+    }
+
     deinit {
         unsubscribeFromNotifications()
     }
@@ -48,9 +56,8 @@ import Cocoa
     /// Only refresh if the TTL has expired
     ///
     public func refreshIfNeeded(completion: (() -> Void)? = nil) {
-        guard ttl > 0 else {
+        guard ttl <= 0 else {
             completion?()
-            scheduleRefresh()
             return
         }
 
@@ -73,7 +80,6 @@ import Cocoa
             var ttlDate = Date()
             ttlDate.addTimeInterval(TimeInterval(assignments.ttl))
             UserDefaults.standard.setValue(ttlDate, forKey: self.ttlDateKey)
-            self.scheduleRefresh()
 
             completion?()
         }
@@ -95,30 +101,6 @@ import Cocoa
         }
     }
 
-    private func scheduleRefresh() {
-        if ttl > 0 {
-            scheduledTimer?.invalidate()
-
-            /// Schedule the refresh on a background thread
-            DispatchQueue.global(qos: .background).async { [weak self] in
-                guard let `self` = self else {
-                    return
-                }
-
-                self.scheduledTimer = Timer.scheduledTimer(withTimeInterval: self.ttl, repeats: true) { [weak self] timer in
-                    self?.refresh()
-                    timer.invalidate()
-                }
-
-                RunLoop.current.run()
-            }
-
-
-        } else {
-            refresh()
-        }
-    }
-
     /// Check if the app is entering background and/or foreground
     /// and start/stop the timers
     ///
@@ -126,10 +108,8 @@ import Cocoa
         let notificationCenter = NotificationCenter.default
 
         #if os(iOS) || os(watchOS) || os(tvOS)
-        notificationCenter.addObserver(self, selector: #selector(applicationDidEnterBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         #elseif os(macOS)
-        notificationCenter.addObserver(self, selector: #selector(applicationDidEnterBackground), name: NSApplication.didResignActiveNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
         #endif
     }
@@ -138,18 +118,10 @@ import Cocoa
         let notificationCenter = NotificationCenter.default
 
         #if os(iOS) || os(watchOS) || os(tvOS)
-        notificationCenter.removeObserver(self, name: UIApplication.didEnterBackgroundNotification, object: nil)
         notificationCenter.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         #elseif os(macOS)
-        notificationCenter.removeObserver(self, name: NSApplication.didResignActiveNotification, object: nil)
         notificationCenter.removeObserver(self, name: NSApplication.willBecomeActiveNotification, object: nil)
         #endif
-    }
-
-    /// When the app goes to background stop the timer
-    ///
-    @objc private func applicationDidEnterBackground() {
-        scheduledTimer?.invalidate()
     }
 
     /// When the app enter foreground refresh the assignments or

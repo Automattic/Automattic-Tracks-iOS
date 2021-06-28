@@ -111,18 +111,13 @@ public extension CrashLogging {
     ///   - level: The level of severity to report in Sentry (`.error` by default)
     func logError(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) {
 
-        let event = Event(level: level)
+        let userInfo = userInfo ?? (error as NSError).userInfo
 
-        /// Use the unlocalized error message for better grouping
-        event.message = SentryMessage(formatted: (error as NSError).description)
-
-        /// If the developer provides their own userInfo, use that – otherwise read it from the Error
-        event.extra = userInfo ?? (error as NSError).userInfo
-
-        /// Attach the localized description in case it has additional data
-        event.extra?["localized-description"] = error.localizedDescription
-
-        event.timestamp = Date()
+        let event = Event.from(
+            error: error as NSError,
+            level: level,
+            extra: userInfo
+        )
 
         SentrySDK.capture(event: event)
         dataProvider.didLogErrorCallback?(event)
@@ -155,11 +150,12 @@ public extension CrashLogging {
         var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
 
         errors.forEach { error in
-            let event = Event(level: level)
-            event.message = SentryMessage(formatted: error.localizedDescription)
-            event.timestamp = Date()
-            event.extra = userInfo ?? (error as NSError).userInfo
-            event.user = dataProvider.currentUser?.sentryUser
+            let event = Event.from(
+                error: error as NSError,
+                level: level,
+                user: dataProvider.currentUser?.sentryUser,
+                extra: userInfo ?? (error as NSError).userInfo
+            )
 
             serializer.add(event: addStackTrace(to: event))
         }
