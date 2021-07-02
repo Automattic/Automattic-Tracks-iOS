@@ -50,19 +50,27 @@ public class CrashLogging {
         return self
     }
 
+    public func shouldSendEvent() -> Bool {
+        #if DEBUG
+        return UserDefaults.standard.bool(forKey: "force-crash-logging")
+        #else
+        return !dataProvider.userHasOptedOut
+        #endif
+    }
+
     func beforeSend(event: Sentry.Event?) -> Sentry.Event? {
 
         DDLogDebug("📜 Firing `beforeSend`")
 
         #if DEBUG
         DDLogDebug("📜 This is a debug build")
-        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging")
-        #else
-        let shouldSendEvent = !dataProvider.userHasOptedOut
         #endif
 
         /// If we shouldn't send the event we have nothing else to do here
-        guard let event = event, shouldSendEvent else {
+        if !shouldSendEvent() {
+            return nil
+        }
+        guard let event = event else {
             return nil
         }
 
@@ -275,6 +283,104 @@ extension CrashLogging {
     /// Calling this method in these situations prevents
     public func setNeedsDataRefresh() {
         SentrySDK.setUser(currentUser)
+    }
+}
+
+// MARK: - Helpers for hybrid SDKs
+extension CrashLogging {
+    /// Returns the options required to initialize Sentry in other platforms.
+    public func getOptionsDict() -> [String: Any] {
+        return [
+            "dsn": self.dataProvider.sentryDSN,
+            "environment": self.dataProvider.buildType,
+            "releaseName": self.dataProvider.releaseName
+        ]
+    }
+
+    /// Return the current Sentry user.
+    /// This helper allows events triggered by other platforms to include the current user.
+    public func getSentryUserDict() -> [String: Any]? {
+        return dataProvider.currentUser?.sentryUser.serialize()
+    }
+
+    /// Attachs the current scope to an event and returns it.
+    /// This helper allows events triggered by other platforms to include the same scope as if they would be triggered in this platform.
+    ///
+    /// - Parameters:
+    ///   - eventDict: The event object
+    public func attachScopeToEvent(_ eventDict: [String: Any]) -> [String: Any] {
+        let scope = SentrySDK.currentHub().getScope().serialize()
+
+        // Setup tags
+        var tags = scope["tags"] as? [String: String] ?? [String: String]()
+        tags["locale"] = NSLocale.current.languageCode
+
+        /// Always provide a value in order to determine how often we're unable to retrieve application state
+        tags["app.state"] = ApplicationFacade().applicationState ?? "unknown"
+
+        tags["release"] = self.dataProvider.releaseName
+
+        // Assign scope to event
+        var eventWithScope = eventDict
+        eventWithScope["tags"] = tags
+        eventWithScope["breadcrumbs"] = scope["breadcrumbs"]
+        eventWithScope["contexts"] = scope["context"]
+
+        return eventWithScope
+    }
+
+    /// Writes the envelope to the Crash Logging system, the envelope contains all the data required for data ingestion in Sentry.
+    /// This function is based on the original Sentry implementation for React native: https://github.com/getsentry/sentry-react-native/blob/aa4eb11415cbb73bbd0033e4f0926b539d22315b/ios/RNSentry.m#L118-L158
+    ///
+    /// - Parameters:
+    ///   - envelopeDict: The envelope object.
+    public func logEnvelope(_ envelopeDict: [String: Any]) {
+        if JSONSerialization.isValidJSONObject(envelopeDict) {
+            guard let headerDict = envelopeDict["header"] as? [String: Any] else {
+                DDLogError("⛔️ Unable to send envelope to Sentry – header is not defined in the envelope.")
+                return
+            }
+            guard let headerEventId = headerDict["event_id"] as? String else {
+                DDLogError("⛔️ Unable to send envelope to Sentry – event id is not defined in the envelope header.")
+                return
+            }
+            guard let payloadDict = envelopeDict["payload"] as? [String: Any] else {
+                DDLogError("⛔️ Unable to send envelope to Sentry – payload is not defined in the envelope.")
+                return
+            }
+            guard let eventLevel = payloadDict["level"] as? String else {
+                DDLogError("⛔️ Unable to send envelope to Sentry – level is not defined in the envelope payload.")
+                return
+            }
+
+            // Define the envelope header
+            let sdkInfo = SentrySdkInfo.init(dict: headerDict)
+            let eventId = SentryId.init(uuidString: headerEventId)
+            let envelopeHeader = SentryEnvelopeHeader.init(id: eventId, andSdkInfo: sdkInfo)
+
+            guard let envelopeItemData = try? JSONSerialization.data(withJSONObject: payloadDict) else {
+                DDLogError("⛔️ Unable to send envelope to Sentry – payload could not be serialized.")
+                return
+            }
+
+            let itemType = payloadDict["type"] as? String ?? "event"
+            let envelopeItemHeader = SentryEnvelopeItemHeader.init(type: itemType, length: UInt(bitPattern: envelopeItemData.count))
+            let envelopeItem = SentryEnvelopeItem.init(header: envelopeItemHeader, data: envelopeItemData)
+            let envelope = SentryEnvelope.init(header: envelopeHeader, singleItem: envelopeItem)
+
+            #if DEBUG
+            SentrySDK.currentHub().getClient()?.capture(envelope: envelope)
+            #else
+            if eventLevel == "fatal" {
+                // Storing to disk happens asynchronously with captureEnvelope
+                SentrySDK.currentHub().getClient()?.store(envelope)
+            } else {
+                SentrySDK.currentHub().getClient()?.capture(envelope: envelope)
+            }
+            #endif
+        } else {
+            DDLogError("⛔️ Unable to send envelope to Sentry – envelope is not a valid JSON object.")
+        }
     }
 }
 
