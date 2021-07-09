@@ -1,6 +1,7 @@
 import XCTest
 import AutomatticTracks
 import OHHTTPStubs
+import OHHTTPStubsSwift
 
 class TracksServiceRemoteTests: XCTestCase {
     var subject: TracksServiceRemote!

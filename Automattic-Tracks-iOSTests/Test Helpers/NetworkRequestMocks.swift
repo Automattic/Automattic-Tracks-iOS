@@ -1,5 +1,6 @@
 import Foundation
 import OHHTTPStubs
+import OHHTTPStubsSwift
 
 func stubResponse(domain: String, status: String, statusCode: Int32 = 200) {
     stub(condition: isHost(domain)) { _ in

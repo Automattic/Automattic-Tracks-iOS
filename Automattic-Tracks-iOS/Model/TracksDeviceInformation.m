@@ -2,7 +2,7 @@
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
-#import <UIDeviceIdentifier/UIDeviceHardware.h>
+@import UIDeviceIdentifier;
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import "WatchSessionManager.h"

@@ -19,7 +19,7 @@ class SentryExtensionTests: XCTestCase {
             _ = try FileManager.default.attributesOfItem(at: URL(fileURLWithPath: "/not-a-real-path"))
         } catch let err {
             let event = Event.from(error: err as NSError)
-            XCTAssertEqual(event.message.formatted, "Error Domain=NSPOSIXErrorDomain Code=2 \"No such file or directory\"")
+            XCTAssertEqual(event.message?.formatted, "Error Domain=NSPOSIXErrorDomain Code=2 \"No such file or directory\"")
         }
     }
 }

@@ -1,8 +1,8 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
 #import "TracksLoggingPrivate.h"
-#import <Reachability/Reachability.h>
 #import <AutomatticTracks/AutomatticTracks-Swift.h>
+#import <Network/Network.h>
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
@@ -18,7 +18,8 @@
 @property (nonatomic, assign) BOOL isHostReachable;
 @property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
-@property (nonatomic, strong) Reachability *reachability;
+@property (nonatomic, strong) nw_path_monitor_t networkMonitor;
+@property (nonatomic, strong) nw_path_t networkPath;
 
 @property (nonatomic, readonly) NSString *userAgent;
 @property (nonatomic, copy) NSString *username;
@@ -82,9 +83,7 @@ NSString *const USER_ID_ANON = @"anonId";
         _tracksEventService = [[TracksEventService alloc] initWithContextManager:contextManager];
         _deviceInformation = [TracksDeviceInformation new];
 
-        _reachability = [Reachability reachabilityWithHostname:@"public-api.wordpress.com"];
-        [_reachability startNotifier];
-
+        [self startNetworkMonitor];
         [self updateDeviceInformationFromReachability];
 
         _isHostReachable = YES;
@@ -95,7 +94,6 @@ NSString *const USER_ID_ANON = @"anonId";
         [self resetTimer];
         
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-        [defaultCenter addObserver:self selector:@selector(reachabilityChanged:) name:kReachabilityChangedNotification object:nil];
         
 #if TARGET_OS_IPHONE
         [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
@@ -109,7 +107,10 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)dealloc
 {
     [self.timer invalidate];
-    [self.reachability stopNotifier];
+
+    if (self.networkMonitor != nil) {
+        nw_path_monitor_cancel(self.networkMonitor);
+    }
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
@@ -250,27 +251,30 @@ NSString *const USER_ID_ANON = @"anonId";
  */
 - (void)updateDeviceInformationFromReachability
 {
-    self.deviceInformation.isWiFiConnected = self.reachability.isReachableViaWiFi;
-    self.deviceInformation.isOnline = self.reachability.isReachable;
+    if (self.networkPath != nil) {
+        nw_path_status_t pathStatus = nw_path_get_status(self.networkPath);
+        self.deviceInformation.isWiFiConnected = nw_path_uses_interface_type(self.networkPath, nw_interface_type_wifi);
+        self.deviceInformation.isOnline = (pathStatus == nw_path_status_satisfied || pathStatus == nw_path_status_satisfiable);
+    }
+    else {
+        self.deviceInformation.isWiFiConnected = NO;
+        self.deviceInformation.isOnline = NO;
+    }
 }
 
-- (void)reachabilityChanged:(NSNotification *)notification
+- (void)networkPathChanged:(nw_path_t)networkPath
 {
-    Reachability *reachability = (Reachability *)notification.object;
-
-    // Because the containing app may already use Reachability, limit this to ours only.
-    if (reachability != self.reachability) {
-        return;
-    }
+    self.networkPath = networkPath;
 
     [self updateDeviceInformationFromReachability];
 
-    if (reachability.isReachable == YES && self.isHostReachable == NO) {
+    if (self.deviceInformation.isOnline && self.isHostReachable == NO) {
+
         DDLogVerbose(@"Tracks host is available. Enabling timer.");
         self.isHostReachable = YES;
         self.timerEnabled = YES;
         [self resetTimer];
-    } else if (reachability.isReachable == NO && self.isHostReachable == YES){
+    } else if (self.deviceInformation.isOnline == NO && self.isHostReachable == YES){
         DDLogVerbose(@"Tracks host is unavailable. Disabling timer.");
         self.isHostReachable = NO;
         self.timerEnabled = NO;
@@ -283,7 +287,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didEnterBackground:(NSNotification *)notification
 {
     self.timerEnabled = NO;
-    [self.reachability stopNotifier];
+    [self stopNetworkMonitor];
     [self sendQueuedEvents];
 }
 
@@ -291,7 +295,7 @@ NSString *const USER_ID_ANON = @"anonId";
 - (void)didBecomeActive:(NSNotification *)notification
 {
     self.timerEnabled = YES;
-    [self.reachability startNotifier];
+    [self startNetworkMonitor];
     [self resetTimer];
 }
 
@@ -301,6 +305,25 @@ NSString *const USER_ID_ANON = @"anonId";
     
     if (self.timerEnabled) {
         self.timer = [NSTimer scheduledTimerWithTimeInterval:self.queueSendInterval target:self selector:@selector(timerFireMethod:) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)startNetworkMonitor {
+    if (self.networkMonitor != nil) {
+        return;
+    }
+
+    __weak typeof(self) weakSelf = self;
+    self.networkMonitor = nw_path_monitor_create();
+    nw_path_monitor_set_update_handler(_networkMonitor, ^(nw_path_t  _Nonnull path) {
+        [weakSelf networkPathChanged:path];
+    });
+    nw_path_monitor_start(_networkMonitor);
+}
+
+- (void)stopNetworkMonitor {
+    if (self.networkMonitor != nil) {
+        nw_path_monitor_cancel(self.networkMonitor);
     }
 }
 
