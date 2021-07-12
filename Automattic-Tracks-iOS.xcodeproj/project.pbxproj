@@ -47,7 +47,6 @@
 		93B5C7D71CE25D7D002820B3 /* TracksLogging.h in Headers */ = {isa = PBXBuildFile; fileRef = E1DBEA181C07071300FF2F73 /* TracksLogging.h */; };
 		B72401F226979AA20021558F /* OHHTTPStubs in Frameworks */ = {isa = PBXBuildFile; productRef = B72401F126979AA20021558F /* OHHTTPStubs */; };
 		B72401F426979B7A0021558F /* OHHTTPStubsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = B72401F326979B7A0021558F /* OHHTTPStubsSwift */; };
-		B72401F726979CB00021558F /* OCMock in Frameworks */ = {isa = PBXBuildFile; productRef = B72401F626979CB00021558F /* OCMock */; };
 		B7593D0B2698BEB300E995BC /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = B7593D0A2698BEB300E995BC /* CocoaLumberjack */; };
 		B7593D0D2698BEB600E995BC /* Sentry in Frameworks */ = {isa = PBXBuildFile; productRef = B7593D0C2698BEB600E995BC /* Sentry */; };
 		B7593D0F2698BEB900E995BC /* Sodium in Frameworks */ = {isa = PBXBuildFile; productRef = B7593D0E2698BEB900E995BC /* Sodium */; };
@@ -57,6 +56,8 @@
 		B79D76A02697822F00958D84 /* Sodium in Frameworks */ = {isa = PBXBuildFile; productRef = B79D769F2697822F00958D84 /* Sodium */; };
 		B79D76A62697880A00958D84 /* UIDeviceIdentifier in Frameworks */ = {isa = PBXBuildFile; productRef = B79D76A52697880A00958D84 /* UIDeviceIdentifier */; };
 		B7B4373F2698BDB100E5E9DD /* UIDeviceIdentifier in Frameworks */ = {isa = PBXBuildFile; productRef = B7B4373E2698BDB100E5E9DD /* UIDeviceIdentifier */; };
+		B7BA4C00269CA351004F33E6 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BA4BFF269CA33F004F33E6 /* OCMock.xcframework */; };
+		B7BA4C01269CA357004F33E6 /* OCMock.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = B7BA4BFF269CA33F004F33E6 /* OCMock.xcframework */; };
 		F9117199240F20F0009A1EC0 /* LogEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9117198240F20F0009A1EC0 /* LogEncryptor.swift */; };
 		F911719A240F20F0009A1EC0 /* LogEncryptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9117198240F20F0009A1EC0 /* LogEncryptor.swift */; };
 		F9445639242965E7009A36B3 /* EventLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9445635242965E7009A36B3 /* EventLoggingDataSource.swift */; };
@@ -233,6 +234,7 @@
 		93B5C7B41CE25D40002820B3 /* Automattic-Tracks-iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Automattic-Tracks-iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		93B5C7BB1CE25D40002820B3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		93C0213E1AB75F770014096A /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		B7BA4BFF269CA33F004F33E6 /* OCMock.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; path = OCMock.xcframework; sourceTree = "<group>"; };
 		E1DBEA181C07071300FF2F73 /* TracksLogging.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracksLogging.h; sourceTree = "<group>"; };
 		F9117198240F20F0009A1EC0 /* LogEncryptor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogEncryptor.swift; sourceTree = "<group>"; };
 		F93FEEE72492E15A00127B55 /* Automattic-Tracks-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Automattic-Tracks-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -317,9 +319,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7BA4C00269CA351004F33E6 /* OCMock.xcframework in Frameworks */,
 				93B5C7B51CE25D40002820B3 /* AutomatticTracks.framework in Frameworks */,
 				B72401F426979B7A0021558F /* OHHTTPStubsSwift in Frameworks */,
-				B72401F726979CB00021558F /* OCMock in Frameworks */,
 				B72401F226979AA20021558F /* OHHTTPStubs in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -328,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B7BA4C01269CA357004F33E6 /* OCMock.xcframework in Frameworks */,
 				F970F42021E7BBD8000664D2 /* AutomatticTracks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -349,6 +352,7 @@
 		1474497F395D1793619DE6B9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B7BA4BFF269CA33F004F33E6 /* OCMock.xcframework */,
 				93771E3A1ACC6FD700B1E5FF /* CoreTelephony.framework */,
 				93AD39921AC713110069344D /* CoreData.framework */,
 			);
@@ -717,7 +721,6 @@
 			packageProductDependencies = (
 				B72401F126979AA20021558F /* OHHTTPStubs */,
 				B72401F326979B7A0021558F /* OHHTTPStubsSwift */,
-				B72401F626979CB00021558F /* OCMock */,
 			);
 			productName = "Automattic-Tracks-iOSTests";
 			productReference = 93B5C7B41CE25D40002820B3 /* Automattic-Tracks-iOSTests.xctest */;
@@ -810,7 +813,6 @@
 				B79D769B2697820000958D84 /* XCRemoteSwiftPackageReference "sentry-cocoa" */,
 				B79D769E2697822F00958D84 /* XCRemoteSwiftPackageReference "swift-sodium" */,
 				B72401F026979AA20021558F /* XCRemoteSwiftPackageReference "OHHTTPStubs" */,
-				B72401F526979CB00021558F /* XCRemoteSwiftPackageReference "ocmock" */,
 				B7B4373D2698BDB100E5E9DD /* XCRemoteSwiftPackageReference "UIDeviceIdentifier" */,
 			);
 			productRefGroup = 93C0211A1AB0A6330014096A /* Products */;
@@ -1484,14 +1486,6 @@
 				minimumVersion = 9.0.0;
 			};
 		};
-		B72401F526979CB00021558F /* XCRemoteSwiftPackageReference "ocmock" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/erikdoe/ocmock";
-			requirement = {
-				kind = revision;
-				revision = b9c7fb949d7afc7087165b9c57fb5d7ddbe2ce4d;
-			};
-		};
 		B79D7698269781B800958D84 /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack";
@@ -1536,11 +1530,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B72401F026979AA20021558F /* XCRemoteSwiftPackageReference "OHHTTPStubs" */;
 			productName = OHHTTPStubsSwift;
-		};
-		B72401F626979CB00021558F /* OCMock */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = B72401F526979CB00021558F /* XCRemoteSwiftPackageReference "ocmock" */;
-			productName = OCMock;
 		};
 		B7593D0A2698BEB300E995BC /* CocoaLumberjack */ = {
 			isa = XCSwiftPackageProductDependency;
