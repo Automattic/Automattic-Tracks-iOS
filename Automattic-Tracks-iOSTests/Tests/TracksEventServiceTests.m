@@ -49,7 +49,7 @@
 
 - (void)testCreateTracksEventForAliasingWordPressComUserValidData
 {
-    OCMStub([self.eventPersistenceMock persistTracksEvent:[OCMArg isNotNil]]);
+    OCMExpect([self.eventPersistenceMock persistTracksEvent:[OCMArg isNotNil]]);
     
     TracksEvent *event = [self.subject createTracksEventForAliasingWordPressComUser:@"wordpress" userID:@"12345" withAnonymousUserID:@"anon123"];
     
