@@ -1,5 +1,5 @@
 #import <Foundation/Foundation.h>
-#import <AutomatticTracks/TracksConstants.h>
+#import <TracksConstants.h>
 
 typedef NS_ENUM(NSUInteger, TracksEventUserType) {
     TracksEventUserTypeAnonymous,

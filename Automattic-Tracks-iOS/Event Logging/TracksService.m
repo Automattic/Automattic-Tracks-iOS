@@ -1,15 +1,19 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
 #import "TracksLoggingPrivate.h"
-#import <AutomatticTracks/AutomatticTracks-Swift.h>
+//#import <AutomatticTracks/AutomatticTracks-Swift.h>
 #import <Network/Network.h>
+
+#if SWIFT_PACKAGE
+@import AutomatticTracksModel;
+#endif
+
 
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
 #import <AppKit/AppKit.h>
 #endif
-
 
 @interface TracksService ()
 
@@ -214,7 +218,7 @@ NSString *const USER_ID_ANON = @"anonId";
     self.token = token;
 
     #if TARGET_OS_IPHONE
-    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
+//    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:nil];
     #endif
 }
 
@@ -228,7 +232,7 @@ NSString *const USER_ID_ANON = @"anonId";
     self.token = nil;
 
     #if TARGET_OS_IPHONE
-    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
+//    [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
     #endif
 }
 

@@ -1,6 +1,10 @@
 import Foundation
 import Sodium
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModel
+#endif
+
 class LogEncryptor {
 
     private let publicKey: Bytes

@@ -1,5 +1,9 @@
 import Foundation
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModel
+#endif
+
 class EventLoggingUploadQueue {
 
     private let fileManager: FileManager

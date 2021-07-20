@@ -1,5 +1,9 @@
 import Foundation
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModel
+#endif
+
 class EventLoggingNetworkService {
 
     typealias ResultCallback = (Result<Data?, Error>) -> Void

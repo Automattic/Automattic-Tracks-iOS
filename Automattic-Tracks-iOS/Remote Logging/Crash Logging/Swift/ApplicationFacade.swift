@@ -9,12 +9,13 @@ import UIKit
 ///
 /// Though in reality, this is only currently useful for iOS. XD
 ///
+
 final class ApplicationFacade {
     /// The current state of the application (e.g. background, active, or inactive). This is
     /// generally used only for `Event` tags.
     ///
     /// - Returns: The string-representation of the state or `nil` if the current platform is
-    ///            not supported.
+    /// not supported.
     ///
     var applicationState: String? {
         #if os(iOS)
@@ -23,7 +24,13 @@ final class ApplicationFacade {
             return "unavailable"
         }
 
-        return UIApplication.shared.applicationState.descriptionForEventTag
+        if let app = UIApplication.sharedIfAvailable {
+            return app.applicationState.descriptionForEventTag
+        }
+        else {
+            return "unavailable"
+        }
+
 
         #else
 
@@ -36,6 +43,30 @@ final class ApplicationFacade {
 // MARK: - iOS Only
 
 #if os(iOS)
+
+private extension UIApplication {
+    // When compiling with Swift Package Manager, it wants us to
+    // use only extension-safe API. We still want to use UIApplication
+    // when it's available, while not using extension-unsafe API
+    // when not available. So we're going to be sneaky about getting
+    // `UIApplication.shared`, but only when it should already be safe.
+    static var sharedIfAvailable: UIApplication? {
+
+        guard Bundle.main.bundleURL.pathExtension != "appex"
+        else { return nil }
+
+        let sharedAppSelector = Selector(("sharedApplication"))
+        if let appClass = NSClassFromString("UIApplication"),
+           let performableClass = (appClass as Any) as? NSObjectProtocol,
+           let performResult = performableClass.perform(sharedAppSelector),
+           let app = performResult.takeUnretainedValue() as? UIApplication
+        {
+            return app
+        }
+        return nil
+    }
+}
+
 
 private extension UIApplication.State {
 

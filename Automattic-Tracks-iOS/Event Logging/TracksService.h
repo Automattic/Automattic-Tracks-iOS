@@ -6,6 +6,7 @@
 extern NSString *const TrackServiceWillSendQueuedEventsNotification;
 extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 
+NS_EXTENSION_UNAVAILABLE_IOS("")
 @interface TracksService : NSObject
 
 @property (nonatomic, strong) TracksEventService *tracksEventService;

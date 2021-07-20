@@ -2,6 +2,10 @@ import Foundation
 import CocoaLumberjack
 import Sodium
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModel
+#endif
+
 class EventLoggingUploadManager {
 
     private let dataSource: EventLoggingDataSource

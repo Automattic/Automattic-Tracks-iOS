@@ -3,6 +3,10 @@ import CommonCrypto
 import CocoaLumberjack
 import Sodium
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModel
+#endif
+
 public class EventLogging {
 
     /// Add a Log File to the list of events that need to be uploaded
@@ -73,6 +77,9 @@ public class EventLogging {
     }
 }
 
+
+
+
 extension EventLogging {
 
     /// Start uploading the next log if the queue, if possible.
@@ -134,6 +141,7 @@ extension EventLogging {
                 /// - the file was deleted while we were reading it
                 /// - the file (or device storage system) is corrupt
                 /// Because this should be extremely rare (and is difficult to reproduce), we'll track it but it's not covered by a test case
+
                 CrashLogging.Internals.crashLogging?.logError(err, userInfo: [
                     "errorFile": #file,
                     "errorLine": #line,
@@ -154,6 +162,10 @@ extension EventLogging {
 
             self.uploadNextLogFileIfNeeded()
         }
+    }
+
+    private func logError(_ error: Error, logFileUUID: String, file: String = #file, errorLine: Int = #line) {
+
     }
 
     // Provides an easier-to-understand way to call `uploadNextLogFileIfNeeded` at the designated time

@@ -1,6 +1,10 @@
 import Foundation
 import Sentry
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModel
+#endif
+
 public enum EventLoggingErrorType {
     case fatal
     case debug
@@ -47,6 +51,18 @@ extension Event {
             return .debug
         @unknown default:
             return .debug
+        }
+    }
+
+
+    private static let logIDKey = "logID"
+
+    var logID: String? {
+        get {
+            return self.extra?[Event.logIDKey] as? String
+        }
+        set {
+            self.extra?[Event.logIDKey] = newValue
         }
     }
 }

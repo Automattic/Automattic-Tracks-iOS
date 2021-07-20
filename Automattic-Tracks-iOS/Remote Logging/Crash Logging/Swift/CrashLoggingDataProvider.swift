@@ -1,4 +1,5 @@
 import Foundation
+import AutomatticTracksModel
 
 public protocol CrashLoggingDataProvider {
     var sentryDSN: String { get }

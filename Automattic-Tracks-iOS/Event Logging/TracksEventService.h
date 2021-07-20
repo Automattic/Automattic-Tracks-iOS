@@ -1,7 +1,8 @@
 #import <Foundation/Foundation.h>
 #import "TracksEvent.h"
-#import "TracksContextManager.h"
 
+
+@class TracksContextManager;
 @class TracksEventPersistenceService;
 
 @interface TracksEventService : NSObject

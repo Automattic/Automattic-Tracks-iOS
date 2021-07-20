@@ -1,5 +1,9 @@
 import Foundation
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModel
+#endif
+
 public protocol EventLoggingDelegate {
     /// The event logging system will call this delegate property prior to attempting to upload, giving the application a chance to determine
     /// whether or not the upload should proceed. If this is not overridden, the default is `false`.

@@ -1,14 +1,14 @@
 import Foundation
 
-typealias FileAttributes = [FileAttributeKey: Any]
+public typealias FileAttributes = [FileAttributeKey: Any]
 
-extension FileAttributes {
+public extension FileAttributes {
     var fileCreationDate: Date? {
         return self[FileAttributeKey.creationDate] as? Date
     }
 }
 
-extension FileManager {
+public extension FileManager {
 
     var documentsDirectory: URL {
         let documentsDirectory = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!

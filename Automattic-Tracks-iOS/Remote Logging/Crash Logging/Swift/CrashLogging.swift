@@ -2,6 +2,12 @@ import Foundation
 import Sentry
 import CocoaLumberjack
 
+#if SWIFT_PACKAGE
+import AutomatticTracksEventLogging
+import AutomatticTracksModel
+import AutomatticCrashLoggingObjC
+#endif
+
 /// A class that provides support for logging crashes. Not compatible with Objective-C.
 public class CrashLogging {
 
@@ -71,7 +77,7 @@ public class CrashLogging {
         }
 
         event.tags?["locale"] = NSLocale.current.languageCode
-
+        
         /// Always provide a value in order to determine how often we're unable to retrieve application state
         event.tags?["app.state"] = ApplicationFacade().applicationState ?? "unknown"
 
@@ -278,17 +284,30 @@ extension CrashLogging {
     }
 }
 
-// MARK: - Event Logging
-extension Event {
+internal extension TracksUser {
 
-    private static let logIDKey = "logID"
+    var sentryUser: Sentry.User {
 
-    var logID: String? {
-        get {
-            return self.extra?[Event.logIDKey] as? String
+        let user = Sentry.User()
+
+        if let userID = self.userID {
+            user.userId = userID
         }
-        set {
-            self.extra?[Event.logIDKey] = newValue
+
+        if let email = self.email {
+            user.email = email
         }
+
+        if let username = user.username {
+            user.username = username
+        }
+
+        return user
+    }
+
+    func sentryUser(withData additionalUserData: [String: Any]) -> Sentry.User {
+        let user = self.sentryUser
+        user.data = additionalUserData
+        return user
     }
 }

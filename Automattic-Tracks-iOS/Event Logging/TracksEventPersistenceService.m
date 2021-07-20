@@ -1,6 +1,11 @@
 #import "TracksEventPersistenceService.h"
-#import "TracksEventCoreData.h"
 #import "TracksLoggingPrivate.h"
+
+#if SWIFT_PACKAGE
+@import AutomatticTracksModel;
+#else
+#import "TracksEventCoreData.h"
+#endif
 
 @interface TracksEventPersistenceService ()
 

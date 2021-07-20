@@ -9,11 +9,11 @@ public struct LogFile {
         self.uuid = uuid
     }
 
-    var fileName: String {
+    public var fileName: String {
         return uuid
     }
 
-    static func fromExistingFile(at url: URL) -> LogFile {
+    static public func fromExistingFile(at url: URL) -> LogFile {
         return LogFile(url: url, uuid: url.lastPathComponent)
     }
 }

@@ -1,4 +1,6 @@
 import Foundation
+import AutomatticTracksInternalLogging
+import AutomatticTracksModelObjC
 
 public enum EventLoggingFileUploadError: Error, LocalizedError {
     /// HTTP Errors should receive the error code, a localized error string, and the HTTP status code

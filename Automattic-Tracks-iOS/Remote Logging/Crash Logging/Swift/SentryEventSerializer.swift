@@ -1,5 +1,6 @@
 import Foundation
 import Sentry
+import Sodium
 
 struct SentryEventSerializer {
 
