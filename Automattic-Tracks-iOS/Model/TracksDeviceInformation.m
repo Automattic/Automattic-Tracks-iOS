@@ -147,7 +147,7 @@
 -(NSString *)orientation{
 #if TARGET_OS_IPHONE
      UIInterfaceOrientation orientation = [self statusBarOrientation];
-    
+
      if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
          return @"Portrait";
      } else if (orientation == UIDeviceOrientationLandscapeLeft || orientation == UIDeviceOrientationLandscapeRight) {
@@ -167,17 +167,17 @@
 // be called from the main thread.
 //
 - (CGRect)statusBarFrame {
-    
+
     if ([NSThread isMainThread]) {
         return UIApplication.sharedApplication.statusBarFrame;
     }
-    
+
     __block CGRect frame = CGRectZero;
-    
+
     dispatch_sync(dispatch_get_main_queue(), ^{
         frame = UIApplication.sharedApplication.statusBarFrame;
     });
-    
+
     return frame;
 }
 #endif
@@ -190,13 +190,13 @@
     if ([NSThread isMainThread]) {
         return UIApplication.sharedApplication.statusBarOrientation;
     }
-    
+
     __block CGFloat orientation = 0;
-    
+
     dispatch_sync(dispatch_get_main_queue(), ^{
         orientation = UIApplication.sharedApplication.statusBarOrientation;
     });
-    
+
     return orientation;
 }
 #endif
@@ -216,6 +216,22 @@
 - (NSString *)appBuild
 {
     return [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleVersion"];
+}
+
+- (NSString *)appBuildConfiguration
+{
+#if defined(DEBUG)
+    return @"Debug";
+#elif defined(ALPHA)
+    return @"Alpha";
+#endif
+
+    // This little trick is the only way we can differentiate TestFlight from App Store, since the built app is identical
+    if ([[[[NSBundle mainBundle] appStoreReceiptURL] lastPathComponent] isEqualToString:@"sandboxReceipt"]) {
+        return @"Beta";
+    } else {
+        return @"Production";
+    }
 }
 
 @end
