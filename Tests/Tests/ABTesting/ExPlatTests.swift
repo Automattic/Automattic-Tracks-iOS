@@ -1,7 +1,7 @@
 import XCTest
 
 #if SWIFT_PACKAGE
-@testable import AutomatticABTesting
+@testable import AutomatticExperiments
 #else
 @testable import AutomatticTracks
 #endif

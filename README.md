@@ -7,19 +7,50 @@ Tracks for iOS is a client library used to help track events inside of an applic
 
 ## Installation
 
-You can install the Tracks component in your app via [CocoaPods](http://cocoapods.org):
+You can install the Tracks component in your app via Swift Package Manager:
 
-```ruby
-pod 'Automattic-Tracks-iOS', :git => 'git@github.com:Automattic/Automattic-Tracks-iOS.git', :branch => 'develop'
+```swift
+.package(url: "https://github.com/Automattic/Automattic-Tracks-iOS", from: "0.10.0")
 ```
+
+You can import the entire library, using `import AutomatticTracks`. Or, you can import just one particular part of the library:
+
+```swift
+// Reporting events to the internal 'Tracks' service
+import AutomatticTracksEventLogging
+
+// Uploading app logs and crash logs to internal monitoring tools
+import AutomatticRemoteLogging
+
+// Running experiments using the internal 'ExPlat' tool
+import AutomatticABTesting
+
+// Displaying crash logs in your app
+import AutomatticCrashLoggingUI
+```
+
+## Usage
+
+### To report events:
 
 1. Create an instance of `TracksService`.
 2. Set an appropriate event name prefix using the propert `eventNamePrefix`. As an Automattician you will know how to get a prefix allowed.
 3. Keep this instance in a stable place and only instantiate one for your application.
 
-## Usage
-
 Check out the **TracksDemo** project for more information on how to track events.
+
+### To run experiments:
+
+1. Call `ExPlat.configure(platform:oauthToken:userAgent:anonId:)` to configure the experiment platform. (If you are using `TracksService`, it will make this call for you when you create the Tracks service.)
+2. Register the experiments the app should use via `Explat.shared.register(experiments:)`.
+3. Check `ExPlat.shared.experiment("my_experiment_name")` to determine which variant of an experiment should be used.
+
+### To upload files:
+
+1. Create an instance of `EventLogging` using `init(dataSource:delegate:)`.
+2. Call `enqueueLogForUpload(log:)` to schedule log files for uploading.
+
+
 
 ## Contributing
 

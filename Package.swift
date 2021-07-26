@@ -12,7 +12,7 @@ let package = Package(
             name: "AutomatticTracksiOS",
             targets: ["AutomatticTracksEventLogging",
                       "AutomatticRemoteLogging",
-                      "AutomatticABTesting",
+                      "AutomatticExperiments",
                       "AutomatticCrashLoggingUI",
                       "AutomatticTracks"
             ]),
@@ -41,11 +41,17 @@ let package = Package(
                            "CocoaLumberjack"
             ],
             path: "Sources/Model/Swift"),
-        
+
+
+        .target(
+            name: "AutomatticExperiments",
+            dependencies: [.product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")],
+            path: "Sources/ABTesting"
+        ),
 
         .target(
             name: "AutomatticTracksEventLogging",
-            dependencies: ["AutomatticTracksModel"],
+            dependencies: ["AutomatticTracksModel", "AutomatticExperiments"],
             path: "Sources/Event Logging",
             publicHeadersPath: ".",
             cSettings: [.headerSearchPath("private")]),
@@ -71,11 +77,6 @@ let package = Package(
             exclude: ["Crash Logging/ObjC"]),
 
 
-        .target(
-            name: "AutomatticABTesting",
-            dependencies: [.product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")],
-            path: "Sources/ABTesting"
-        ),
 
         .target(
             name: "AutomatticCrashLoggingUI",
@@ -85,9 +86,10 @@ let package = Package(
         .target(
             name: "AutomatticTracks",
             dependencies: [
-                "AutomatticABTesting",
+                "AutomatticExperiments",
                 "AutomatticTracksEventLogging",
-                "AutomatticRemoteLogging"
+                "AutomatticRemoteLogging",
+                "AutomatticCrashLoggingUI"
             ],
             path: "Sources/AutomatticTracks"
         ),
@@ -105,6 +107,7 @@ let package = Package(
             path: "Tests",
             exclude: ["Tests/ObjC"],
             resources: [.process("Mock Data")]),
+        
         .testTarget(
             name: "AutomatticTracksTestsObjC",
             dependencies: ["AutomatticTracksEventLogging",

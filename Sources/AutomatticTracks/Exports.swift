@@ -8,7 +8,7 @@
 import Foundation
 
 @_exported import AutomatticTracksEventLogging
-@_exported import AutomatticABTesting
+@_exported import AutomatticExperiments
 @_exported import AutomatticRemoteLogging
 @_exported import AutomatticCrashLoggingUI
 @_exported import AutomatticTracksModelObjC
