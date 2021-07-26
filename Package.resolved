@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "OCMock",
+        "repositoryURL": "https://github.com/erikdoe/ocmock",
+        "state": {
+          "branch": "master",
+          "revision": "b9c7fb949d7afc7087165b9c57fb5d7ddbe2ce4d",
+          "version": null
+        }
+      },
+      {
         "package": "OHHTTPStubs",
         "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs",
         "state": {

@@ -1,0 +1,27 @@
+{
+  "configurations" : [
+    {
+      "id" : "62B70EB6-6BFD-4B9C-8CF2-90F81870296E",
+      "name" : "French",
+      "options" : {
+
+      }
+    },
+    {
+      "id" : "D6CC9A18-0F7D-44BF-9306-61FE4444D3A1",
+      "name" : "English",
+      "options" : {
+        "language" : "en",
+        "region" : "US"
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "language" : "fr",
+    "region" : "FR"
+  },
+  "testTargets" : [
+
+  ],
+  "version" : 1
+}
