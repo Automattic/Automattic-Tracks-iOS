@@ -14,7 +14,7 @@ Pod::Spec.new do |s|
   s.social_media_url = 'https://twitter.com/automattic'
 
   s.ios.deployment_target = '12.0'
-  s.osx.deployment_target = '10.12'
+  s.osx.deployment_target = '10.14'
   s.swift_version = '5.0'
 
   s.source        = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => s.version.to_s }
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
   s.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
   s.osx.exclude_files = ['Automattic-Tracks-iOS/Automattic-Tracks-iOS.h', 'Automattic-Tracks-iOS/ABTesting/*']
 
-  s.private_header_files = 'Automattic-Tracks-iOS/Internal Logging/TracksLoggingPrivate.h'
+  s.private_header_files = 'Automattic-Tracks-iOS/Event Logging/private/TracksLoggingPrivate.h'
   s.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
 
   s.framework        = 'CoreData'
@@ -36,7 +36,6 @@ Pod::Spec.new do |s|
 
   s.ios.dependency 'UIDeviceIdentifier', '~> 1'
   s.dependency 'CocoaLumberjack', '~> 3'
-  s.dependency 'Reachability', '~> 3'
   s.dependency 'Sentry', '~> 6'
   s.dependency 'Sodium', '>= 0.9.1'
 end
