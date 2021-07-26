@@ -1,11 +1,11 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
 #import "TracksLoggingPrivate.h"
-//#import <AutomatticTracks/AutomatticTracks-Swift.h>
 #import <Network/Network.h>
 
 #if SWIFT_PACKAGE
 @import AutomatticTracksModel;
+@import CocoaLumberjack;
 #endif
 
 

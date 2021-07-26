@@ -1,5 +1,7 @@
 #import "AppDelegate.h"
 
+@import CocoaLumberjack;
+
 @interface AppDelegate ()
 
 @end

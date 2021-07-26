@@ -13,7 +13,8 @@ let package = Package(
             targets: ["AutomatticTracksEventLogging",
                       "AutomatticRemoteLogging",
                       "AutomatticABTesting",
-                      "AutomatticCrashLoggingUI"
+                      "AutomatticCrashLoggingUI",
+                      "AutomatticTracks"
             ]),
     ],
     dependencies: [
@@ -60,6 +61,7 @@ let package = Package(
         .target(
             name: "AutomatticRemoteLogging",
             dependencies: ["Sentry",
+                           .product(name: "Clibsodium", package: "Sodium"),
                            "Sodium",
                            .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack"),
                            "AutomatticTracksModel",

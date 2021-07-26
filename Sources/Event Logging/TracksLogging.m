@@ -2,9 +2,9 @@
 #import "TracksLoggingPrivate.h"
 
 DDLogLevel TracksGetLoggingLevel(void) {
-    return ddLogLevel;
+    return tracks_ddLogLevel;
 }
 
 void TracksSetLoggingLevel(DDLogLevel level) {
-    ddLogLevel = level;
+    tracks_ddLogLevel = level;
 }
