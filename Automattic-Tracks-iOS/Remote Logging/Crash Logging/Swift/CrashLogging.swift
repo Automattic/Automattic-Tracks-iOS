@@ -6,6 +6,7 @@ import CocoaLumberjack
 import AutomatticTracksEventLogging
 import AutomatticTracksModel
 import AutomatticCrashLoggingObjC
+import CocoaLumberjackSwift
 #endif
 
 /// A class that provides support for logging crashes. Not compatible with Objective-C.

@@ -1,6 +1,8 @@
 import Foundation
-import AutomatticTracksInternalLogging
+
+#if SWIFT_PACKAGE
 import AutomatticTracksModelObjC
+#endif
 
 public enum EventLoggingFileUploadError: Error, LocalizedError {
     /// HTTP Errors should receive the error code, a localized error string, and the HTTP status code

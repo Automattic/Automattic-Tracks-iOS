@@ -1,5 +1,5 @@
 #import "TracksContextManager.h"
-@import AutomatticTracksInternalLogging;
+#import "TracksLoggingPrivate.h"
 
 @interface TracksContextManager ()
 

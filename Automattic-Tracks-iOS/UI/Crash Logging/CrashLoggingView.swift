@@ -1,6 +1,10 @@
 import SwiftUI
 import Sentry
 
+#if SWIFT_PACKAGE
+import AutomatticRemoteLogging
+#endif
+
 @available(iOS 13.0, OSX 10.15, *)
 public struct CrashLoggingView: View {
 

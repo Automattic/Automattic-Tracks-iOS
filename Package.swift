@@ -5,14 +5,16 @@ import PackageDescription
 
 let package = Package(
     name: "Automattic-Tracks-iOS",
-    platforms: [.macOS(.v10_13), .iOS(.v12)],
+    platforms: [.macOS(.v10_14), .iOS(.v12)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "Automattic-Tracks-iOS",
-            targets: ["AutomatticRemoteLogging"]),
-        .library(name: "Internal Logging",
-                 targets: ["AutomatticTracksInternalLogging"])
+            targets: ["AutomatticTracksEventLogging",
+                      "AutomatticRemoteLogging",
+                      "AutomatticABTesting",
+                      "AutomatticCrashLoggingUI"
+            ]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -25,35 +27,40 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-
         .target(
             name: "AutomatticTracksModelObjC",
-            dependencies: ["AutomatticTracksInternalLogging", "UIDeviceIdentifier"],
+            dependencies: ["UIDeviceIdentifier", "CocoaLumberjack"],
             path: "Automattic-Tracks-iOS/Model/ObjC",
-            publicHeadersPath: "."),
+            publicHeadersPath: ".",
+            cSettings: [.headerSearchPath("../../Event Logging/private")]),
         .target(
             name: "AutomatticTracksModel",
-            dependencies: ["AutomatticTracksModelObjC", "Sentry"],
+            dependencies: ["AutomatticTracksModelObjC", "Sentry",
+                           "CocoaLumberjack"
+            ],
             path: "Automattic-Tracks-iOS/Model/Swift"),
-
-
-        .target(
-            name: "AutomatticTracksInternalLogging",
-            dependencies: ["CocoaLumberjack"],
-            path: "Automattic-Tracks-iOS/Internal Logging",
-            publicHeadersPath: "."),
         
 
         .target(
             name: "AutomatticTracksEventLogging",
             dependencies: ["AutomatticTracksModel"],
             path: "Automattic-Tracks-iOS/Event Logging",
+            publicHeadersPath: ".",
+            cSettings: [.headerSearchPath("private")]),
+
+
+
+        .target(
+            name: "AutomatticCrashLoggingObjC",
+            dependencies: ["Sentry"],
+            path: "Automattic-Tracks-iOS/Remote Logging/Crash Logging/ObjC",
             publicHeadersPath: "."),
 
         .target(
             name: "AutomatticRemoteLogging",
             dependencies: ["Sentry",
                            "Sodium",
+                           .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack"),
                            "AutomatticTracksModel",
                            "AutomatticTracksEventLogging",
                           "AutomatticCrashLoggingObjC"],
@@ -62,9 +69,15 @@ let package = Package(
 
 
         .target(
-            name: "AutomatticCrashLoggingObjC",
-            dependencies: ["Sentry"],
-            path: "Automattic-Tracks-iOS/Remote Logging/Crash Logging/ObjC",
-            publicHeadersPath: "."),
+            name: "AutomatticABTesting",
+            dependencies: [.product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")],
+            path: "Automattic-Tracks-iOS/ABTesting"
+        ),
+
+        .target(
+            name: "AutomatticCrashLoggingUI",
+            dependencies: ["AutomatticRemoteLogging"],
+            path: "Automattic-Tracks-iOS/UI"),
+
     ]
 )

@@ -1,5 +1,9 @@
 import Foundation
 
+#if SWIFT_PACKAGE
+import CocoaLumberjackSwift
+#endif
+
 public struct ExPlatConfiguration {
     var platform: String
     var oAuthToken: String?

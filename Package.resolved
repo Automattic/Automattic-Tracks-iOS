@@ -20,7 +20,7 @@
         }
       },
       {
-        "package": "sentry-cocoa",
+        "package": "Sentry",
         "repositoryURL": "https://github.com/getsentry/sentry-cocoa",
         "state": {
           "branch": null,
@@ -38,7 +38,7 @@
         }
       },
       {
-        "package": "swift-sodium",
+        "package": "Sodium",
         "repositoryURL": "https://github.com/jedisct1/swift-sodium",
         "state": {
           "branch": null,

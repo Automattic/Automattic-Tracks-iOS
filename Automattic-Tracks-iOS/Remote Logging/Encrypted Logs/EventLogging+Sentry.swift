@@ -3,6 +3,7 @@ import Sentry
 
 #if SWIFT_PACKAGE
 import AutomatticTracksModel
+import CocoaLumberjackSwift
 #endif
 
 public enum EventLoggingErrorType {
