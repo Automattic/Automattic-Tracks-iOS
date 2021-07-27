@@ -100,9 +100,9 @@ NSString *const USER_ID_ANON = @"anonId";
         [self switchToAnonymousUserWithAnonymousID:[[NSUUID UUID] UUIDString]];
         [self resetTimer];
         
-        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
-        
+
 #if TARGET_OS_IPHONE
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
         [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [defaultCenter addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
 #endif

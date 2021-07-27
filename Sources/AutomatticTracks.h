@@ -8,5 +8,4 @@ FOUNDATION_EXPORT const unsigned char Automattic_Tracks_iOSVersionString[];
 
 #import <AutomatticTracks/TracksContextManager.h>
 #import <AutomatticTracks/TracksConstants.h>
-#import <AutomatticTracks/SentryClient+Shim.h>
 
