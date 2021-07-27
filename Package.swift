@@ -16,15 +16,18 @@ let package = Package(
                       "AutomatticCrashLoggingUI",
                       "AutomatticTracks"
             ]),
+
+        .library(name: "_WorkaroundSPM",
+                 targets: ["_WorkaroundSPM"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         .package(url: "https://github.com/CocoaLumberjack/CocoaLumberjack", from: "3.0.0"),
         .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "6.0.0"),
-        .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
         .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "1.7.0"),
-        .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master"))
+        .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
+        .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -49,7 +52,6 @@ let package = Package(
         .target(
             name: "AutomatticRemoteLogging",
             dependencies: [
-                .product(name: "Clibsodium", package: "Sodium"),
                 "Sentry",
                 "Sodium",
                 "AutomatticTracksModel",
@@ -109,7 +111,12 @@ let package = Package(
             dependencies: ["AutomatticTracksEvents",
                            "OCMock"
             ],
-            path: "Tests/Tests/ObjC"
-        )
+            path: "Tests/Tests/ObjC"),
+
+        .target(
+            name: "_WorkaroundSPM",
+            dependencies: ["Sodium"],
+            path: "Sources/Workaround-SPM")
+
     ]
 )
