@@ -77,7 +77,12 @@ class CrashLoggingTests: XCTestCase {
     func testWhenRunningOniOSThenEventsAreSentWithApplicationState() throws {
         let crashLogging = try CrashLogging(dataProvider: mockDataProvider).start()
         let event = crashLogging.beforeSend(event: Event(level: .debug))
+        #if SWIFT_PACKAGE
+        // When building for SPM, there is no active application for the tests.
+        XCTAssertEqual("unavailable", event?.tags?["app.state"])
+        #else
         XCTAssertEqual("active", event?.tags?["app.state"])
+        #endif
     }
     #endif
 
