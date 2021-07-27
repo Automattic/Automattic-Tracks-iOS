@@ -7,6 +7,7 @@ Tracks for iOS is a client library used to help track events inside of an applic
 
 ## Installation
 
+
 You can install the Tracks component in your app via Swift Package Manager:
 
 ```swift
@@ -27,6 +28,12 @@ import AutomatticABTesting
 
 // Displaying crash logs in your app
 import AutomatticCrashLoggingUI
+```
+
+Tracks can also be installed via CocoaPods, though we encourage users to use Swift Package Manager instead. To install via Cocoapods:
+
+```ruby
+pod 'Automattic-Tracks-iOS'
 ```
 
 ## Usage
