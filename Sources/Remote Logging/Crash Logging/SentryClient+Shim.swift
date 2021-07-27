@@ -15,7 +15,7 @@ private protocol SentryClient_InternalMethods {
     func prepareEvent(_ e: Sentry.Event,
                       withScope: Sentry.Scope,
                       alwaysAttachStacktrace: Bool,
-                      isCrashEvent:Bool
+                      isCrashEvent: Bool
     ) -> Sentry.Event?
 }
 

@@ -103,7 +103,7 @@ let package = Package(
             path: "Tests",
             exclude: ["Tests/ObjC"],
             resources: [.process("Mock Data")]),
-        
+
         .testTarget(
             name: "AutomatticTracksTestsObjC",
             dependencies: ["AutomatticTracksEvents",

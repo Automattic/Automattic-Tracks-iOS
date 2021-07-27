@@ -60,8 +60,8 @@ private extension UIApplication {
            let performableClass = (appClass as Any) as? NSObjectProtocol,
            performableClass.responds(to: sharedAppSelector),
            let performResult = performableClass.perform(sharedAppSelector),
-           let app = performResult.takeUnretainedValue() as? UIApplication
-        {
+           let app = performResult.takeUnretainedValue() as? UIApplication {
+
             return app
         }
         return nil
