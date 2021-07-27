@@ -18,7 +18,7 @@ You can import the entire library, using `import AutomatticTracks`. Or, you can 
 
 ```swift
 // Reporting events to the internal 'Tracks' service
-import AutomatticTracksEventLogging
+import AutomatticTracksEvents
 
 // Uploading app logs and crash logs to internal monitoring tools
 import AutomatticRemoteLogging

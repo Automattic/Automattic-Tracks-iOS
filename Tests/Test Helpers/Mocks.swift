@@ -2,7 +2,7 @@ import Foundation
 import Sodium
 
 #if SWIFT_PACKAGE
-@testable import AutomatticTracksEventLogging
+@testable import AutomatticTracksEvents
 @testable import AutomatticRemoteLogging
 #else
 @testable import AutomatticTracks

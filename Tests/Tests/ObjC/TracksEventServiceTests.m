@@ -3,7 +3,7 @@
 #import <OCMock/OCMock.h>
 
 #if SWIFT_PACKAGE
-@import AutomatticTracksEventLogging;
+@import AutomatticTracksEvents;
 #else
 #import "TracksEventService.h"
 #import "TracksEventPersistenceService.h"

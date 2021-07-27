@@ -10,7 +10,7 @@ let package = Package(
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AutomatticTracks",
-            targets: ["AutomatticTracksEventLogging",
+            targets: ["AutomatticTracksEvents",
                       "AutomatticRemoteLogging",
                       "AutomatticExperiments",
                       "AutomatticCrashLoggingUI",
@@ -29,69 +29,73 @@ let package = Package(
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
-        .target(
-            name: "AutomatticTracksModelObjC",
-            dependencies: ["UIDeviceIdentifier", "CocoaLumberjack"],
-            path: "Sources/Model/ObjC",
-            publicHeadersPath: ".",
-            cSettings: [.headerSearchPath("../../Event Logging/private")]),
-        
-        .target(
-            name: "AutomatticTracksModel",
-            dependencies: [
-                "AutomatticTracksModelObjC",
-                "Sentry",
-                "CocoaLumberjack"
-            ],
-            path: "Sources/Model/Swift"),
 
 
+        // ExPlat experiments
         .target(
             name: "AutomatticExperiments",
             dependencies: [.product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")],
-            path: "Sources/Experiments"
-        ),
+            path: "Sources/Experiments"),
 
+        // Reporting events to the Tracks service
         .target(
-            name: "AutomatticTracksEventLogging",
+            name: "AutomatticTracksEvents",
             dependencies: ["AutomatticTracksModel", "AutomatticExperiments"],
             path: "Sources/Event Logging",
             publicHeadersPath: ".",
             cSettings: [.headerSearchPath("private")]),
 
+        // Uploading app logs and crash logs
         .target(
             name: "AutomatticRemoteLogging",
-            dependencies: ["Sentry",
-                           .product(name: "Clibsodium", package: "Sodium"),
-                           "Sodium",
-                           .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack"),
-                           "AutomatticTracksModel",
-                           "AutomatticTracksEventLogging"],
+            dependencies: [
+                "Sentry",
+                "Sodium",
+                "AutomatticTracksModel",
+                "AutomatticTracksEvents",
+                .product(name: "Clibsodium", package: "Sodium"),
+                .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")
+            ],
             path: "Sources/Remote Logging"),
 
-
-
+        // UI for displaying crash logs
         .target(
             name: "AutomatticCrashLoggingUI",
             dependencies: ["AutomatticRemoteLogging"],
             path: "Sources/UI"),
 
+
+        // A catch-all target for when you just wat to import everything
         .target(
             name: "AutomatticTracks",
             dependencies: [
                 "AutomatticExperiments",
-                "AutomatticTracksEventLogging",
+                "AutomatticTracksEvents",
                 "AutomatticRemoteLogging",
                 "AutomatticCrashLoggingUI"
             ],
             path: "Sources/AutomatticTracks"
         ),
 
+
+        // Shared code used by multiple targets
+        .target(
+            name: "AutomatticTracksModelObjC",
+            dependencies: ["UIDeviceIdentifier", "CocoaLumberjack"],
+            path: "Sources/Model/ObjC",
+            publicHeadersPath: ".",
+            cSettings: [.headerSearchPath("../../Event Logging/private")]),
+        .target(
+            name: "AutomatticTracksModel",
+            dependencies: ["AutomatticTracksModelObjC", "Sentry", "CocoaLumberjack" ],
+            path: "Sources/Model/Swift"),
+
+        // Tests
         .testTarget(
             name: "AutomatticTracksTests",
             dependencies: [
                 "AutomatticTracks",
-                "AutomatticTracksEventLogging",
+                "AutomatticTracksEvents",
                 "AutomatticTracksModel",
                 .product(name: "OHHTTPStubsSwift", package: "OHHTTPStubs"),
                 .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")
@@ -102,7 +106,7 @@ let package = Package(
         
         .testTarget(
             name: "AutomatticTracksTestsObjC",
-            dependencies: ["AutomatticTracksEventLogging",
+            dependencies: ["AutomatticTracksEvents",
                            "OCMock"
             ],
             path: "Tests/Tests/ObjC"

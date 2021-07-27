@@ -2,7 +2,7 @@
 #import <XCTest/XCTest.h>
 #import <OCMock/OCMock.h>
 
-@import AutomatticTracksEventLogging;
+@import AutomatticTracksEvents;
 #import "TestTracksContextManager.h"
 
 @interface TracksServiceTests : XCTestCase

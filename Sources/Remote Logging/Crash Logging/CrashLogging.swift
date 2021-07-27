@@ -3,7 +3,7 @@ import Sentry
 import CocoaLumberjack
 
 #if SWIFT_PACKAGE
-import AutomatticTracksEventLogging
+import AutomatticTracksEvents
 import AutomatticTracksModel
 import CocoaLumberjackSwift
 #endif

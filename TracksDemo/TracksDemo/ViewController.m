@@ -1,7 +1,7 @@
 #import "ViewController.h"
 @import CoreData;
 
-@import AutomatticTracksEventLogging;
+@import AutomatticTracksEvents;
 
 @interface ViewController () <NSFetchedResultsControllerDelegate>
 
