@@ -1,4 +1,4 @@
-// swift-tools-version:5.4
+// swift-tools-version:5.3
 // The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
@@ -49,11 +49,11 @@ let package = Package(
         .target(
             name: "AutomatticRemoteLogging",
             dependencies: [
+                .product(name: "Clibsodium", package: "Sodium"),
                 "Sentry",
                 "Sodium",
                 "AutomatticTracksModel",
                 "AutomatticTracksEvents",
-                .product(name: "Clibsodium", package: "Sodium"),
                 .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")
             ],
             path: "Sources/Remote Logging"),
