@@ -46,7 +46,7 @@ let package = Package(
         .target(
             name: "AutomatticExperiments",
             dependencies: [.product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")],
-            path: "Sources/ABTesting"
+            path: "Sources/Experiments"
         ),
 
         .target(
