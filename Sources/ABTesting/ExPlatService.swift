@@ -2,6 +2,8 @@ import Foundation
 
 #if SWIFT_PACKAGE
 import CocoaLumberjackSwift
+#else
+import CocoaLumberjack
 #endif
 
 public struct ExPlatConfiguration {

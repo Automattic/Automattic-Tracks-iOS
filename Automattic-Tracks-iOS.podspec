@@ -18,13 +18,13 @@ Pod::Spec.new do |s|
   s.swift_version = '5.0'
 
   s.source        = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => s.version.to_s }
-  s.ios.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
-  s.ios.exclude_files = 'Automattic-Tracks-OSX/Automattic_Tracks_OSX.h'
-  s.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
-  s.osx.exclude_files = ['Automattic-Tracks-iOS/Automattic-Tracks-iOS.h', 'Automattic-Tracks-iOS/ABTesting/*']
+  s.ios.source_files = 'Sources/**/*.{h,m,swift}'
+  s.ios.exclude_files = 'Sources/Automattic_Tracks_OSX.h'
+  s.osx.source_files = 'Sources/**/*.{h,m,swift}'
+  s.osx.exclude_files = ['Sources/Automattic-Tracks-iOS.h', 'Automattic-Tracks-iOS/ABTesting/*']
 
-  s.private_header_files = 'Automattic-Tracks-iOS/Event Logging/private/TracksLoggingPrivate.h'
-  s.resource_bundle = { 'DataModel' => ['Automattic-Tracks-iOS/**/*.xcdatamodeld'] }
+  s.private_header_files = 'Sources/Event Logging/private/TracksLoggingPrivate.h'
+  s.resource_bundle = { 'DataModel' => ['Sources/**/*.xcdatamodeld'] }
 
   s.framework        = 'CoreData'
   s.ios.framework    = 'UIKit'
@@ -35,7 +35,7 @@ Pod::Spec.new do |s|
   s.module_name = 'AutomatticTracks'
 
   s.ios.dependency 'UIDeviceIdentifier', '~> 1'
-  s.dependency 'CocoaLumberjack', '~> 3'
+  s.dependency 'CocoaLumberjack/Swift', '~> 3'
   s.dependency 'Sentry', '~> 6'
   s.dependency 'Sodium', '>= 0.9.1'
 end

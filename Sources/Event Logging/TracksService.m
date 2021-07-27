@@ -7,6 +7,8 @@
 @import AutomatticTracksModel;
 @import AutomatticExperiments;
 @import CocoaLumberjack;
+#else
+#import <AutomatticTracks/AutomatticTracks-Swift.h>
 #endif
 
 

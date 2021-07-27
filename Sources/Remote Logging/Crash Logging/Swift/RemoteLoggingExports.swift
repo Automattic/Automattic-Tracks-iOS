@@ -1,11 +1,7 @@
-//
-//  File.swift
-//  
-//
-//  Created by BJ Homer on 7/26/21.
-//
-
 import Foundation
+
+#if SWIFT_PACKAGE
 @_exported import AutomatticCrashLoggingObjC
 @_exported import AutomatticTracksModel
 @_exported import AutomatticTracksModelObjC;
+#endif

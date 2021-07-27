@@ -1,5 +1,8 @@
 import Foundation
+
+#if SWIFT_PACKAGE
 import AutomatticTracksModel
+#endif
 
 public protocol CrashLoggingDataProvider {
     var sentryDSN: String { get }

@@ -2,6 +2,12 @@
 #import "TracksEventPersistenceService.h"
 #import "TracksLoggingPrivate.h"
 
+#if SWIFT_PACKAGE
+@import AutomatticTracksModel;
+#else
+#import "TracksContextManager.h"
+#endif
+
 @interface TracksEventService ()
 
 @property (nonatomic, strong) TracksContextManager *contextManager;
