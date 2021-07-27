@@ -58,6 +58,7 @@ private extension UIApplication {
         let sharedAppSelector = Selector(("sharedApplication"))
         if let appClass = NSClassFromString("UIApplication"),
            let performableClass = (appClass as Any) as? NSObjectProtocol,
+           performableClass.responds(to: sharedAppSelector),
            let performResult = performableClass.perform(sharedAppSelector),
            let app = performResult.takeUnretainedValue() as? UIApplication
         {

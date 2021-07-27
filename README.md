@@ -24,7 +24,7 @@ import AutomatticTracksEventLogging
 import AutomatticRemoteLogging
 
 // Running experiments using the internal 'ExPlat' tool
-import AutomatticABTesting
+import AutomatticExperiments
 
 // Displaying crash logs in your app
 import AutomatticCrashLoggingUI

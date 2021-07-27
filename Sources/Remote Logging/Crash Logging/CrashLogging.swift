@@ -5,7 +5,6 @@ import CocoaLumberjack
 #if SWIFT_PACKAGE
 import AutomatticTracksEventLogging
 import AutomatticTracksModel
-import AutomatticCrashLoggingObjC
 import CocoaLumberjackSwift
 #endif
 

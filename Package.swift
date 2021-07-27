@@ -35,10 +35,13 @@ let package = Package(
             path: "Sources/Model/ObjC",
             publicHeadersPath: ".",
             cSettings: [.headerSearchPath("../../Event Logging/private")]),
+        
         .target(
             name: "AutomatticTracksModel",
-            dependencies: ["AutomatticTracksModelObjC", "Sentry",
-                           "CocoaLumberjack"
+            dependencies: [
+                "AutomatticTracksModelObjC",
+                "Sentry",
+                "CocoaLumberjack"
             ],
             path: "Sources/Model/Swift"),
 
@@ -56,14 +59,6 @@ let package = Package(
             publicHeadersPath: ".",
             cSettings: [.headerSearchPath("private")]),
 
-
-
-        .target(
-            name: "AutomatticCrashLoggingObjC",
-            dependencies: ["Sentry"],
-            path: "Sources/Remote Logging/Crash Logging/ObjC",
-            publicHeadersPath: "."),
-
         .target(
             name: "AutomatticRemoteLogging",
             dependencies: ["Sentry",
@@ -71,10 +66,8 @@ let package = Package(
                            "Sodium",
                            .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack"),
                            "AutomatticTracksModel",
-                           "AutomatticTracksEventLogging",
-                          "AutomatticCrashLoggingObjC"],
-            path: "Sources/Remote Logging",
-            exclude: ["Crash Logging/ObjC"]),
+                           "AutomatticTracksEventLogging"],
+            path: "Sources/Remote Logging"),
 
 
 
@@ -99,7 +92,6 @@ let package = Package(
             dependencies: [
                 "AutomatticTracks",
                 "AutomatticTracksEventLogging",
-                "AutomatticCrashLoggingObjC",
                 "AutomatticTracksModel",
                 .product(name: "OHHTTPStubsSwift", package: "OHHTTPStubs"),
                 .product(name: "CocoaLumberjackSwift", package: "CocoaLumberjack")
