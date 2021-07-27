@@ -164,10 +164,6 @@ extension EventLogging {
         }
     }
 
-    private func logError(_ error: Error, logFileUUID: String, file: String = #file, errorLine: Int = #line) {
-
-    }
-
     // Provides an easier-to-understand way to call `uploadNextLogFileIfNeeded` at the designated time
     private func retryUploadsAt(_ time: DispatchTime) {
         DispatchQueue.global(qos: .background).asyncAfter(deadline: time, execute: uploadNextLogFileIfNeeded)
