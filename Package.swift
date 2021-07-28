@@ -17,6 +17,14 @@ let package = Package(
                       "AutomatticTracks"
             ]),
 
+        // Xcode 12 has an issue where the first build after
+        // cleaning fails if there is a dependency that vends
+        // a binary .xcframework. We are working around this
+        // on CI by first building this "_WorkaroundSPM"
+        // target that _only_ builds that one dependency.
+        // We ignore any failures when building this target.
+        // Then we go on to build the actual product, which
+        // builds correctly.
         .library(name: "_WorkaroundSPM",
                  targets: ["_WorkaroundSPM"])
     ],
@@ -67,7 +75,7 @@ let package = Package(
             path: "Sources/UI"),
 
 
-        // A catch-all target for when you just wat to import everything
+        // A catch-all target for when you just want to import everything
         .target(
             name: "AutomatticTracks",
             dependencies: [

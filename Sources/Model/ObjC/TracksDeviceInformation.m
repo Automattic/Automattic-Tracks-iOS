@@ -6,6 +6,7 @@
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
 #import <CoreTelephony/CTCarrier.h>
 #import "WatchSessionManager.h"
+#import "UIApplication+Extensions.h"
 #else
 #import <Foundation/Foundation.h>
 #import <AppKit/AppKit.h>
@@ -169,13 +170,13 @@
 - (CGRect)statusBarFrame {
 
     if ([NSThread isMainThread]) {
-        return UIApplication.sharedApplication.statusBarFrame;
+        return UIApplication.sharedIfAvailable.statusBarFrame;
     }
 
     __block CGRect frame = CGRectZero;
 
     dispatch_sync(dispatch_get_main_queue(), ^{
-        frame = UIApplication.sharedApplication.statusBarFrame;
+        frame = UIApplication.sharedIfAvailable.statusBarFrame;
     });
 
     return frame;
@@ -188,13 +189,13 @@
 //
 - (UIInterfaceOrientation)statusBarOrientation {
     if ([NSThread isMainThread]) {
-        return UIApplication.sharedApplication.statusBarOrientation;
+        return UIApplication.sharedIfAvailable.statusBarOrientation;
     }
 
     __block CGFloat orientation = 0;
 
     dispatch_sync(dispatch_get_main_queue(), ^{
-        orientation = UIApplication.sharedApplication.statusBarOrientation;
+        orientation = UIApplication.sharedIfAvailable.statusBarOrientation;
     });
 
     return orientation;
@@ -235,3 +236,7 @@
 }
 
 @end
+
+
+
+
