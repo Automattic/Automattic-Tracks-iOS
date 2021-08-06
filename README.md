@@ -58,6 +58,14 @@ Check out the **TracksDemo** project for more information on how to track events
 2. Call `enqueueLogForUpload(log:)` to schedule log files for uploading.
 
 
+### Logging
+
+Tracks logs about some of its activity. By default, this logging will just go to the console. If you'd like to include this logging in your own logging solution, you can assign a logging delegate:
+
+```swift
+TracksLogging.delegate = MyLoggingHandler()
+```
+
 
 ## Contributing
 
