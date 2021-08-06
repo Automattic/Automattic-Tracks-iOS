@@ -23,7 +23,6 @@ Pod::Spec.new do |s|
   s.osx.source_files = 'Sources/**/*.{h,m,swift}'
   s.osx.exclude_files = ['Sources/Automattic-Tracks-iOS.h', 'Automattic-Tracks-iOS/ABTesting/*']
 
-  s.private_header_files = 'Sources/Event Logging/private/TracksLoggingPrivate.h'
   s.resource_bundle = { 'DataModel' => ['Sources/**/*.xcdatamodeld'] }
 
   s.framework        = 'CoreData'
@@ -35,7 +34,6 @@ Pod::Spec.new do |s|
   s.module_name = 'AutomatticTracks'
 
   s.ios.dependency 'UIDeviceIdentifier', '~> 1'
-  s.dependency 'CocoaLumberjack/Swift', '~> 3'
   s.dependency 'Sentry', '~> 6'
   s.dependency 'Sodium', '>= 0.9.1'
 end

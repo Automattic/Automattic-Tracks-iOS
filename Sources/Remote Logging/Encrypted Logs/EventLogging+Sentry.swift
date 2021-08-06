@@ -3,7 +3,6 @@ import Sentry
 
 #if SWIFT_PACKAGE
 import AutomatticTracksModel
-import CocoaLumberjackSwift
 #endif
 
 public enum EventLoggingErrorType {
@@ -16,7 +15,7 @@ extension EventLogging {
 
         /// Don't enqueue logs for non-fatal events unless directed to by the delegate
         if event.level != .fatal && !delegate.shouldUploadLogFilesForNonFatalEvents {
-            DDLogDebug("📜 Cancelling event log attachment – level is \(String(describing: event.level))")
+            TracksLogDebug("📜 Cancelling event log attachment – level is \(String(describing: event.level))")
             return
         }
 
@@ -27,7 +26,7 @@ extension EventLogging {
         ///
         /// We also pass the timestamp for the event, as that can be useful for determining the correct log file.
         guard let logFilePath = dataSource.logFilePath(forErrorLevel: event.errorType, at: event.timestamp) else {
-            DDLogDebug("📜 Unable to locate a log file to attach")
+            TracksLogDebug("📜 Unable to locate a log file to attach")
             return
         }
 

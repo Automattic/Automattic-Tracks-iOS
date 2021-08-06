@@ -6,4 +6,7 @@ import Foundation
 @_exported import AutomatticRemoteLogging
 @_exported import AutomatticCrashLoggingUI
 @_exported import AutomatticTracksModelObjC
+@_exported import AutomatticTracksModel
 #endif
+
+

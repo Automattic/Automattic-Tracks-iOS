@@ -1,6 +1,5 @@
 import Foundation
 import CommonCrypto
-import CocoaLumberjack
 import Sodium
 
 #if SWIFT_PACKAGE

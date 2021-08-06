@@ -1,5 +1,4 @@
 #import "TracksEventPersistenceService.h"
-#import "TracksLoggingPrivate.h"
 
 #if SWIFT_PACKAGE
 @import AutomatticTracksModel;
@@ -46,7 +45,7 @@
         NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
         
         if (error) {
-            DDLogError(@"Error while fetching all TracksEvent: %@", error);
+            TracksLogError(@"Error while fetching all TracksEvent: %@", error);
             return;
         }
         
@@ -72,7 +71,7 @@
         count = [self.managedObjectContext countForFetchRequest:fetchRequest error:&error];
         
         if (error) {
-            DDLogError(@"Error while fetching count of TracksEvent: %@", error);
+            TracksLogError(@"Error while fetching count of TracksEvent: %@", error);
         }
     }];
     
@@ -89,7 +88,7 @@
             if (tracksEventCoreData) {
                 [self.managedObjectContext deleteObject:tracksEventCoreData];
             } else {
-                DDLogWarn(@"No TracksEventCoreData instance found with UUID: %@", tracksEvent.uuid);
+                TracksLogWarn(@"No TracksEventCoreData instance found with UUID: %@", tracksEvent.uuid);
             }
         }
         
@@ -130,7 +129,7 @@
     NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
     
     if (error) {
-        DDLogError(@"Error while fetching TracksEvent by UUID: %@", error);
+        TracksLogError(@"Error while fetching TracksEvent by UUID: %@", error);
         return nil;
     }
     
@@ -160,7 +159,7 @@
     BOOL result = [self.managedObjectContext save:&error];
     
     if (error) {
-        DDLogError(@"Error while saving context: %@", error);
+        TracksLogError(@"Error while saving context: %@", error);
     }
     
     return result;

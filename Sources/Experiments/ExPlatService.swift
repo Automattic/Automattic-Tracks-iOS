@@ -1,9 +1,7 @@
 import Foundation
 
 #if SWIFT_PACKAGE
-import CocoaLumberjackSwift
-#else
-import CocoaLumberjack
+import AutomatticTracksModel
 #endif
 
 public struct ExPlatConfiguration {
@@ -81,7 +79,7 @@ public class ExPlatService {
                 let assignments = try decoder.decode(Assignments.self, from: data)
                 completion(assignments)
             } catch {
-                DDLogError("Error parsing the experiment response: \(error)")
+                TracksLogError("Error parsing the experiment response: \(error)")
                 completion(nil)
             }
         }

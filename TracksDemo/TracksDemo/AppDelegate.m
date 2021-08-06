@@ -1,6 +1,7 @@
 #import "AppDelegate.h"
 
 @import CocoaLumberjack;
+@import AutomatticTracks;
 
 @interface AppDelegate ()
 
@@ -8,11 +9,12 @@
 
 int ddLogLevel = DDLogLevelVerbose;
 
+
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    [DDLog addLogger:[DDASLLogger sharedInstance]];
+    [DDLog addLogger:[DDOSLogger sharedInstance]];
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
     return YES;

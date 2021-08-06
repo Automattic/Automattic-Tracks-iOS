@@ -1,11 +1,9 @@
 import Foundation
 import Sentry
-import CocoaLumberjack
 
 #if SWIFT_PACKAGE
 import AutomatticTracksEvents
 import AutomatticTracksModel
-import CocoaLumberjackSwift
 #endif
 
 /// A class that provides support for logging crashes. Not compatible with Objective-C.
@@ -58,10 +56,10 @@ public class CrashLogging {
 
     func beforeSend(event: Sentry.Event?) -> Sentry.Event? {
 
-        DDLogDebug("📜 Firing `beforeSend`")
+        TracksLogDebug("📜 Firing `beforeSend`")
 
         #if DEBUG
-        DDLogDebug("📜 This is a debug build")
+        TracksLogDebug("📜 This is a debug build")
         let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") && !dataProvider.userHasOptedOut
         #else
         let shouldSendEvent = !dataProvider.userHasOptedOut
@@ -86,7 +84,7 @@ public class CrashLogging {
 
         /// Everything below this line is related to event logging, so if it's not set up we can exit
         guard let eventLogging = self.eventLogging else {
-            DDLogDebug("📜 Cancelling log file attachment – Event Logging is not initialized")
+            TracksLogDebug("📜 Cancelling log file attachment – Event Logging is not initialized")
             return event
         }
 
@@ -167,7 +165,7 @@ public extension CrashLogging {
         }
 
         guard let requestBody = try? serializer.serialize() else {
-            DDLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
+            TracksLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
             errors.forEach {
                 SentrySDK.capture(error: $0)
             }
@@ -212,7 +210,7 @@ public extension CrashLogging {
 
             switch result {
                 case .success:
-                    DDLogDebug("💥 Successfully transmitted crash data")
+                    TracksLogDebug("💥 Successfully transmitted crash data")
                 case .failure(let err):
                     networkError = err
             }

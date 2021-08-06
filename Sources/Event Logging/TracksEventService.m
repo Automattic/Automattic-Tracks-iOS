@@ -1,6 +1,5 @@
 #import "TracksEventService.h"
 #import "TracksEventPersistenceService.h"
-#import "TracksLoggingPrivate.h"
 
 #if SWIFT_PACKAGE
 @import AutomatticTracksModel;
@@ -58,7 +57,7 @@
     NSError *error;
     BOOL isValid = [tracksEvent validateObject:&error];
     if (!isValid) {
-        DDLogWarn(@"Error when validating TracksEvent: %@", error);
+        TracksLogWarn(@"Error when validating TracksEvent: %@", error);
         return nil;
     }
     

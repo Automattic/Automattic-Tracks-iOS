@@ -1,12 +1,10 @@
 #import "TracksService.h"
 #import "TracksDeviceInformation.h"
-#import "TracksLoggingPrivate.h"
 #import <Network/Network.h>
 
 #if SWIFT_PACKAGE
 @import AutomatticTracksModel;
 @import AutomatticExperiments;
-@import CocoaLumberjack;
 #else
 #import <AutomatticTracks/AutomatticTracks-Swift.h>
 #endif
@@ -178,10 +176,10 @@ NSString *const USER_ID_ANON = @"anonId";
               withSharedProperties:commonProperties
                  completionHandler:^(NSError *error) {
                      if (error) {
-                         DDLogError(@"TracksService Error while remote calling: %@", error);
+                         TracksLogError(@"TracksService Error while remote calling: %@", error);
                          [weakSelf.tracksEventService incrementRetryCountForEvents:events];
                      } else {
-                         DDLogVerbose(@"TracksService sendQueuedEvents completed. Sent %@ events.", @(events.count));
+                         TracksLogVerbose(@"TracksService sendQueuedEvents completed. Sent %@ events.", @(events.count));
                          // Delete the events since they sent or errored
                          [weakSelf.tracksEventService removeTracksEvents:events];
                      }
@@ -277,12 +275,12 @@ NSString *const USER_ID_ANON = @"anonId";
 
     if (self.deviceInformation.isOnline && self.isHostReachable == NO) {
 
-        DDLogVerbose(@"Tracks host is available. Enabling timer.");
+        TracksLogVerbose(@"Tracks host is available. Enabling timer.");
         self.isHostReachable = YES;
         self.timerEnabled = YES;
         [self resetTimer];
     } else if (self.deviceInformation.isOnline == NO && self.isHostReachable == YES){
-        DDLogVerbose(@"Tracks host is unavailable. Disabling timer.");
+        TracksLogVerbose(@"Tracks host is unavailable. Disabling timer.");
         self.isHostReachable = NO;
         self.timerEnabled = NO;
         [self resetTimer];

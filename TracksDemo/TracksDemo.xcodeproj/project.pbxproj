@@ -20,8 +20,9 @@
 		9376329F1AC2026900086BC6 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9376329E1AC2026900086BC6 /* Images.xcassets */; };
 		937632A21AC2026900086BC6 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 937632A01AC2026900086BC6 /* LaunchScreen.xib */; };
 		937632AE1AC2026900086BC6 /* TracksDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632AD1AC2026900086BC6 /* TracksDemoTests.m */; };
-		B71639B426AF298600C9FDAA /* AutomatticTracksiOS in Frameworks */ = {isa = PBXBuildFile; productRef = B71639B326AF298600C9FDAA /* AutomatticTracksiOS */; };
-		B71639B626AF29D900C9FDAA /* AutomatticTracksiOS in Frameworks */ = {isa = PBXBuildFile; productRef = B71639B526AF29D900C9FDAA /* AutomatticTracksiOS */; };
+		B76FDFD926BC5DB90059054B /* AutomatticTracks in Frameworks */ = {isa = PBXBuildFile; productRef = B76FDFD826BC5DB90059054B /* AutomatticTracks */; };
+		B76FDFDB26BC5DC20059054B /* AutomatticTracks in Frameworks */ = {isa = PBXBuildFile; productRef = B76FDFDA26BC5DC20059054B /* AutomatticTracks */; };
+		B76FDFDE26BC5E150059054B /* CocoaLumberjack in Frameworks */ = {isa = PBXBuildFile; productRef = B76FDFDD26BC5E150059054B /* CocoaLumberjack */; };
 		F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93676FA21DFFDC700323458 /* AppDelegate.swift */; };
 		F93676FD21DFFDC700323458 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93676FC21DFFDC700323458 /* ViewController.swift */; };
 		F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F93676FE21DFFDC800323458 /* Assets.xcassets */; };
@@ -73,7 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B71639B426AF298600C9FDAA /* AutomatticTracksiOS in Frameworks */,
+				B76FDFDE26BC5E150059054B /* CocoaLumberjack in Frameworks */,
+				B76FDFD926BC5DB90059054B /* AutomatticTracks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -88,7 +90,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B71639B626AF29D900C9FDAA /* AutomatticTracksiOS in Frameworks */,
+				B76FDFDB26BC5DC20059054B /* AutomatticTracks in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,7 +220,8 @@
 			);
 			name = TracksDemo;
 			packageProductDependencies = (
-				B71639B326AF298600C9FDAA /* AutomatticTracksiOS */,
+				B76FDFD826BC5DB90059054B /* AutomatticTracks */,
+				B76FDFDD26BC5E150059054B /* CocoaLumberjack */,
 			);
 			productName = TracksDemo;
 			productReference = 9376328E1AC2026900086BC6 /* TracksDemo.app */;
@@ -256,7 +259,7 @@
 			);
 			name = "TracksDemo Mac";
 			packageProductDependencies = (
-				B71639B526AF29D900C9FDAA /* AutomatticTracksiOS */,
+				B76FDFDA26BC5DC20059054B /* AutomatticTracks */,
 			);
 			productName = "TracksDemo Mac";
 			productReference = F93676F821DFFDC700323458 /* TracksDemo Mac.app */;
@@ -298,6 +301,9 @@
 				Base,
 			);
 			mainGroup = 937632851AC2026900086BC6;
+			packageReferences = (
+				B76FDFDC26BC5E150059054B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */,
+			);
 			productRefGroup = 9376328F1AC2026900086BC6 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -729,14 +735,30 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCSwiftPackageProductDependency section */
-		B71639B326AF298600C9FDAA /* AutomatticTracksiOS */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AutomatticTracksiOS;
+/* Begin XCRemoteSwiftPackageReference section */
+		B76FDFDC26BC5E150059054B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/CocoaLumberjack/CocoaLumberjack.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.7.2;
+			};
 		};
-		B71639B526AF29D900C9FDAA /* AutomatticTracksiOS */ = {
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		B76FDFD826BC5DB90059054B /* AutomatticTracks */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = AutomatticTracksiOS;
+			productName = AutomatticTracks;
+		};
+		B76FDFDA26BC5DC20059054B /* AutomatticTracks */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutomatticTracks;
+		};
+		B76FDFDD26BC5E150059054B /* CocoaLumberjack */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = B76FDFDC26BC5E150059054B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
+			productName = CocoaLumberjack;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

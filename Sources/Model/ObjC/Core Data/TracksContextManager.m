@@ -1,5 +1,5 @@
 #import "TracksContextManager.h"
-#import "TracksLoggingPrivate.h"
+#import "TracksLogging.h"
 
 @interface TracksContextManager ()
 
@@ -73,7 +73,7 @@
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+            TracksLogError(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }
@@ -109,7 +109,7 @@
     // It seems safe not to handle this error because Application Support should always be
     // available and one should always be able to create a folder in it
     if (error != nil) {
-        DDLogError(@"Failed to create folder for %@ in Application Support: %@, %@", bundleIdentifier, error, [error userInfo]);
+        TracksLogError(@"Failed to create folder for %@ in Application Support: %@, %@", bundleIdentifier, error, [error userInfo]);
         abort();
     }
 
@@ -151,7 +151,7 @@
         if ([managedObjectContext hasChanges] && ![managedObjectContext save:&error]) {
             // Replace this implementation with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            DDLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+            TracksLogError(@"Unresolved error %@, %@", error, [error userInfo]);
             abort();
         }
     }
