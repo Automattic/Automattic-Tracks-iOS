@@ -1,5 +1,9 @@
 import Foundation
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModelObjC
+#endif
+
 // The Swift versions of these functions do not accept format strings
 // and arguments; use string interpolation instead
 public func TracksLogError(_ str: String) {
