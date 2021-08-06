@@ -8,5 +8,3 @@ import Foundation
 @_exported import AutomatticTracksModelObjC
 @_exported import AutomatticTracksModel
 #endif
-
-
