@@ -10,7 +10,7 @@ Class<TracksLoggingConfiguration> TracksLoggingClass() {
 #if SWIFT_PACKAGE
         Class loggingClass = NSClassFromString(@"AutomatticTracksModel.TracksLogging");
 #else
-        Class loggingClass = NSClassFromString(@"TracksLogging")
+        Class loggingClass = NSClassFromString(@"TracksLogging");
 #endif
         if ([loggingClass conformsToProtocol: @protocol(TracksLoggingConfiguration)]) {
             result = loggingClass;

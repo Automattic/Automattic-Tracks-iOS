@@ -88,7 +88,7 @@ let package = Package(
                 "AutomatticTracksModelObjC"
             ],
             path: "Sources/AutomatticTracks",
-            publicHeadersPath: "."
+            exclude: ["AutomatticTracks.h"]
         ),
 
 

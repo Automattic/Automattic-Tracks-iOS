@@ -4,6 +4,7 @@
 @import AutomatticTracksModel;
 #else
 #import "TracksEventCoreData.h"
+#import <AutomatticTracks/AutomatticTracks-Swift.h>
 #endif
 
 @interface TracksEventPersistenceService ()

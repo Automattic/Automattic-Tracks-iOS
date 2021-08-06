@@ -1,11 +1,4 @@
-//
-//  File.swift
-//  
-//
-//  Created by BJ Homer on 8/5/21.
-//
-
-@_exported import AutomatticTracksModelObjC
+import Foundation
 
 // The Swift versions of these functions do not accept format strings
 // and arguments; use string interpolation instead

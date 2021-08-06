@@ -5,6 +5,7 @@
 @import AutomatticTracksModel;
 #else
 #import "TracksContextManager.h"
+#import <AutomatticTracks/AutomatticTracks-Swift.h>
 #endif
 
 @interface TracksEventService ()
