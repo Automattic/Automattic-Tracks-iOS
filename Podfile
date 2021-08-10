@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://cdn.cocoapods.org/'
 
 inhibit_all_warnings!

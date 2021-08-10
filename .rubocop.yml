@@ -1,0 +1,16 @@
+# Opt in to new cops by default
+AllCops:
+  NewCops: enable
+
+# Allow the Podspec filename to match the project
+Naming/FileName:
+  Exclude:
+    - 'Automattic-Tracks-iOS.podspec'
+
+# Override the maximum block length (some pods have long definitions)
+Metrics/BlockLength:
+  Max: 256
+
+# Override the maximum line length
+Layout/LineLength:
+  Max: 160
