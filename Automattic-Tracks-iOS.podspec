@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Pod::Spec.new do |s|
   s.name          = 'Automattic-Tracks-iOS'
   s.version       = '0.9.1'
@@ -6,10 +8,10 @@ Pod::Spec.new do |s|
   s.description   = <<-DESC
                     This framework provides an abstract layer on our Automattic Tracks internal analytics service,
                     and allows to easily send events to Tracks to monitor our app's activity and flows.
-                  DESC
+  DESC
 
   s.homepage      = 'https://github.com/Automattic/Automattic-Tracks-iOS'
-  s.license       = { :type => 'GPLv2', :file => 'LICENSE' }
+  s.license       = { type: 'GPLv2', file: 'LICENSE' }
   s.author        = { 'Automattic' => 'mobile@automattic.com' }
   s.social_media_url = 'https://twitter.com/automattic'
 
@@ -17,7 +19,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.12'
   s.swift_version = '5.0'
 
-  s.source        = { :git => 'https://github.com/Automattic/Automattic-Tracks-iOS.git', :tag => s.version.to_s }
+  s.source        = { git: 'https://github.com/Automattic/Automattic-Tracks-iOS.git', tag: s.version.to_s }
   s.ios.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
   s.ios.exclude_files = 'Automattic-Tracks-OSX/Automattic_Tracks_OSX.h'
   s.osx.source_files = 'Automattic-Tracks-iOS/**/*.{h,m,swift}'
