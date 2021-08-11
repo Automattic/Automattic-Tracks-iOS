@@ -32,3 +32,8 @@ Pods
 
 # Configuration Secrets
 Secrets.swift
+
+# Fastlane
+/fastlane/report.xml
+/fastlane/test_output
+.build
