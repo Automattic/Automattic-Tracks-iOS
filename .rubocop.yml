@@ -1,6 +1,10 @@
 # Opt in to new cops by default
 AllCops:
   NewCops: enable
+  Exclude:
+    - build/**/*
+    - vendor/**/*
+
 
 # Allow the Podspec filename to match the project
 Naming/FileName:
@@ -14,3 +18,4 @@ Metrics/BlockLength:
 # Override the maximum line length
 Layout/LineLength:
   Max: 160
+

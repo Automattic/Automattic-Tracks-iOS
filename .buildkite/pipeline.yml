@@ -13,7 +13,12 @@ steps:
   ######################
   - label: "🧪 Build and Test iOS"
     key: "test_ios"
-    command: "build_and_test_pod 'ios test'"
+    command: |
+      # Build and test the pod twice if needed. This is necessary under Xcode 12 to avoid an error
+      # that occurs the first time after cleaning if one of your dependences uses a binary framework
+      # See https://bugs.swift.org/browse/SR-13803
+
+      build_and_test_pod 'ios test' || build_and_test_pod 'ios test'
     env: *common_env
     plugins: *common_plugins
     artifact_paths: ".build/logs/*.log"
@@ -23,7 +28,12 @@ steps:
   ######################
   - label: "🧪 Build and Test macOS"
     key: "test_macos"
-    command: "build_and_test_pod 'mac test'"
+    command: |
+      # Build and test the pod twice if needed. This is necessary under Xcode 12 to avoid an error
+      # that occurs the first time after cleaning if one of your dependences uses a binary framework
+      # See https://bugs.swift.org/browse/SR-13803
+
+      build_and_test_pod 'mac test' || build_and_test_pod 'mac test'
     env: *common_env
     plugins: *common_plugins
     artifact_paths: ".build/logs/*.log"
