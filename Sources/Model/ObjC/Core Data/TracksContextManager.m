@@ -1,33 +1,9 @@
 #import "TracksContextManager.h"
 #import "TracksLogging.h"
 
-@interface TracksContextManager ()
-
-@property (nonatomic, assign) BOOL sandboxed;
-
-@end
-
 @implementation TracksContextManager
 
-- (instancetype)init {
-    return [self initWithSandboxedMode:YES];
-}
-
-- (instancetype)initWithSandboxedMode:(BOOL)sandboxed {
-    self = [super init];
-    if (!self) { return nil; }
-
-    self.sandboxed = sandboxed;
-
-    return self;
-}
-
 #pragma mark - Core Data stack
-
-- (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "com.automattic.TEst" in the application's documents directory.
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask] lastObject];
-}
 
 - (NSManagedObjectModel *)managedObjectModel {
     // The managed object model for the application. It is a fatal error for the application not to be able to find and load its model.
@@ -86,11 +62,7 @@
 }
 
 - (NSURL *)storeContainerDirectoryURL {
-    if (self.sandboxed == YES) {
-        return [self applicationDocumentsDirectory];
-    } else {
-        return [self applicationSupportURLForContainerApp];
-    }
+    return [self applicationSupportURLForContainerApp];
 }
 
 - (NSURL *)applicationSupportURLForContainerApp {
