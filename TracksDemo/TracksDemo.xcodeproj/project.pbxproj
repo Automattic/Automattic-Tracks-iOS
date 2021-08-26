@@ -40,6 +40,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2470EBC126D84C4600B599BD /* TracksDemo Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "TracksDemo Mac.entitlements"; sourceTree = "<group>"; };
 		24FB4D1925B2AE2B006E4031 /* TracksDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TracksDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		24FB4D1A25B2AE2C006E4031 /* CrashLoggingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingRootViewController.swift; sourceTree = "<group>"; };
 		24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingDataSource.swift; sourceTree = "<group>"; };
@@ -191,6 +192,7 @@
 		F93676F921DFFDC700323458 /* TracksDemo Mac */ = {
 			isa = PBXGroup;
 			children = (
+				2470EBC126D84C4600B599BD /* TracksDemo Mac.entitlements */,
 				F93676FA21DFFDC700323458 /* AppDelegate.swift */,
 				F93676FC21DFFDC700323458 /* ViewController.swift */,
 				24FB4D8325B2B304006E4031 /* CrashLoggingRootViewController.swift */,
@@ -658,6 +660,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "TracksDemo Mac/TracksDemo Mac.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -692,6 +695,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_ENTITLEMENTS = "TracksDemo Mac/TracksDemo Mac.entitlements";
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
