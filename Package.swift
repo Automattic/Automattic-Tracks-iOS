@@ -11,9 +11,9 @@ let package = Package(
         .library(
             name: "AutomatticTracks",
             targets: ["AutomatticTracksEvents",
-                      "AutomatticRemoteLogging",
+//                      "AutomatticRemoteLogging",
                       "AutomatticExperiments",
-                      "AutomatticCrashLoggingUI",
+//                      "AutomatticCrashLoggingUI",
                       "AutomatticTracksModel",
                       "AutomatticTracksModelObjC",
                       "AutomatticTracks",
@@ -36,7 +36,7 @@ let package = Package(
         .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "1.7.0"),
         .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
-        .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
+//        .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -57,7 +57,7 @@ let package = Package(
             path: "Sources/Event Logging",
             publicHeadersPath: ".",
             cSettings: [.headerSearchPath("../Model/ObjC")]),
-
+/*
         // Uploading app logs and crash logs
         .target(
             name: "AutomatticRemoteLogging",
@@ -76,14 +76,15 @@ let package = Package(
             path: "Sources/UI"),
 
 
+         */
         // A catch-all target for when you just want to import everything
         .target(
             name: "AutomatticTracks",
             dependencies: [
                 "AutomatticExperiments",
                 "AutomatticTracksEvents",
-                "AutomatticRemoteLogging",
-                "AutomatticCrashLoggingUI",
+//                "AutomatticRemoteLogging",
+//                "AutomatticCrashLoggingUI",
                 "AutomatticTracksModel",
                 "AutomatticTracksModelObjC"
             ],
@@ -126,7 +127,7 @@ let package = Package(
 
         .target(
             name: "_WorkaroundSPM",
-            dependencies: ["Sodium"],
+//            dependencies: ["Sodium"],
             path: "Sources/Workaround-SPM")
 
     ]
