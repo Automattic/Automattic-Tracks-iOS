@@ -8,7 +8,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @interface UIApplication (SharedIfAvailable)
 
-/// Returns the shared UIApplication if not running in an app extension;
+/// Returns the shared `UIApplication` if not running in an app extension;
 + (nullable UIApplication *)sharedIfAvailable;
 
 @end

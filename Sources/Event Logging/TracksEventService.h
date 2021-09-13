@@ -1,7 +1,6 @@
 #import <Foundation/Foundation.h>
 #import "TracksEvent.h"
 
-
 @class TracksContextManager;
 @class TracksEventPersistenceService;
 

@@ -31,7 +31,7 @@ void TracksLogVerbose(NSString *str, ...) NS_FORMAT_FUNCTION(1, 2);
  better if we define it in Swift. If we define it in ObjC,
  then it doesn't get re-exported when we do
  `@_exported import AutomatticTracksModelObjC` in Swift,
- because @_exported only re-exports Swift symbols. So then
+ because `@_exported` only re-exports Swift symbols. So then
  all clients end up having to `import AutomatticTracksModelObjC`,
  which isn't really a great experience. So we want to define
  it in Swift
