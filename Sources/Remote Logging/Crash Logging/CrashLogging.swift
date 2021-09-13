@@ -17,6 +17,11 @@ public class CrashLogging {
     private let dataProvider: CrashLoggingDataProvider
     private let eventLogging: EventLogging?
 
+    /// If you set this key to `true` in UserDefaults, crash logging will be
+    /// sent even in DEBUG builds. If it is `false` or not present, then
+    /// crash log events will only be sent in Release builds.
+    public static let forceCrashLoggingKey = "force-crash-logging"
+
     /// Initializes the crash logging system
     ///
     /// - Parameters:
@@ -60,7 +65,7 @@ public class CrashLogging {
 
         #if DEBUG
         TracksLogDebug("📜 This is a debug build")
-        let shouldSendEvent = UserDefaults.standard.bool(forKey: "force-crash-logging") && !dataProvider.userHasOptedOut
+        let shouldSendEvent = UserDefaults.standard.bool(forKey: Self.forceCrashLoggingKey) && !dataProvider.userHasOptedOut
         #else
         let shouldSendEvent = !dataProvider.userHasOptedOut
         #endif

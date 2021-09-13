@@ -260,8 +260,7 @@ NSString *const USER_ID_ANON = @"anonId";
         nw_path_status_t pathStatus = nw_path_get_status(self.networkPath);
         self.deviceInformation.isWiFiConnected = nw_path_uses_interface_type(self.networkPath, nw_interface_type_wifi);
         self.deviceInformation.isOnline = (pathStatus == nw_path_status_satisfied || pathStatus == nw_path_status_satisfiable);
-    }
-    else {
+    } else {
         self.deviceInformation.isWiFiConnected = NO;
         self.deviceInformation.isOnline = NO;
     }

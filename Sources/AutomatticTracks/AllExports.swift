@@ -1,5 +1,3 @@
-import Foundation
-
 #if SWIFT_PACKAGE
 @_exported import AutomatticTracksEvents
 @_exported import AutomatticExperiments

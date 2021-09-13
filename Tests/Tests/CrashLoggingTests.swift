@@ -14,12 +14,12 @@ class CrashLoggingTests: XCTestCase {
 
     override func setUp() {
         mockDataProvider.sentryDSN = validDSN
-        UserDefaults.standard.setValue(true, forKey: "force-crash-logging")
+        UserDefaults.standard.setValue(true, forKey: CrashLogging.forceCrashLoggingKey)
     }
 
     override func tearDown() {
         mockDataProvider.reset()
-        UserDefaults.standard.removeObject(forKey: "force-crash-logging")
+        UserDefaults.standard.removeObject(forKey: CrashLogging.forceCrashLoggingKey)
     }
 
     func testInitializationWithInvalidDSN() {

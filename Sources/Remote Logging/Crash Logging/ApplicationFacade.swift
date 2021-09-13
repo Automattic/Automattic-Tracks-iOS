@@ -1,6 +1,10 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+import AutomatticTracksModelObjC
+#endif
+
 #if os(iOS)
 import UIKit
 #endif
@@ -24,13 +28,8 @@ final class ApplicationFacade {
             return "unavailable"
         }
 
-        if let app = UIApplication.sharedIfAvailable {
-            return app.applicationState.descriptionForEventTag
-        }
-        else {
-            return "unavailable"
-        }
-
+        return (UIApplication.sharedIfAvailable()?.applicationState.descriptionForEventTag
+                ?? "unavailable")
 
         #else
 
@@ -43,31 +42,6 @@ final class ApplicationFacade {
 // MARK: - iOS Only
 
 #if os(iOS)
-
-private extension UIApplication {
-    // When compiling with Swift Package Manager, it wants us to
-    // use only extension-safe API. We still want to use UIApplication
-    // when it's available, while not using extension-unsafe API
-    // when not available. So we're going to be sneaky about getting
-    // `UIApplication.shared`, but only when it should already be safe.
-    static var sharedIfAvailable: UIApplication? {
-
-        guard Bundle.main.bundleURL.pathExtension != "appex"
-        else { return nil }
-
-        let sharedAppSelector = Selector(("sharedApplication"))
-        if let appClass = NSClassFromString("UIApplication"),
-           let performableClass = (appClass as Any) as? NSObjectProtocol,
-           performableClass.responds(to: sharedAppSelector),
-           let performResult = performableClass.perform(sharedAppSelector),
-           let app = performResult.takeUnretainedValue() as? UIApplication {
-
-            return app
-        }
-        return nil
-    }
-}
-
 
 private extension UIApplication.State {
 
