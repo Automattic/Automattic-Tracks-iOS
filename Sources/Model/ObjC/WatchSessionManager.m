@@ -54,7 +54,7 @@
     return self;
 }
 
-- (void)setHasBeenPairedIfPossibleWithSession:(nonull WCSession *)session {
+- (void)setHasBeenPairedIfPossibleWithSession:(nonnull WCSession *)session {
     if(session.paired){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"watch-has-been-previously-paired"];
     }
