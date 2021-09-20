@@ -37,8 +37,14 @@
 #if TARGET_OS_IPHONE
         if([WCSession isSupported]){
             self.session = [WCSession defaultSession];
-            self.session.delegate = self;
-            [self.session activateSession];
+            
+            if (self.session.activationState == WCSessionActivationStateActivated) {
+                [setHasBeenPairedIfPossibleWithSession:self.session];
+            } else {
+                self.session.delegate = self;
+                [self.session activateSession];
+            }
+          
 
             self.hasBeenPaired = false;
         }
@@ -46,6 +52,12 @@
     }
 
     return self;
+}
+
+- (void)setHasBeenPairedIfPossibleWithSession:(nonull WCSession *)session {
+    if(session.paired){
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"watch-has-been-previously-paired"];
+    }
 }
 
 - (BOOL)hasBeenPreviouslyPaired{
@@ -58,9 +70,7 @@
 #if TARGET_OS_IPHONE
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
 
-    if(session.paired){
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"watch-has-been-previously-paired"];
-    }
+    [self setHasBeenPairedIfPossibleWithSession:session];
 }
 
 - (void)sessionDidBecomeInactive:(nonnull WCSession *)session {
