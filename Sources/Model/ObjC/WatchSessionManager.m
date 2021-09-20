@@ -39,7 +39,7 @@
             self.session = [WCSession defaultSession];
             
             if (self.session.activationState == WCSessionActivationStateActivated) {
-                [setHasBeenPairedIfPossibleWithSession:self.session];
+                [self setHasBeenPairedIfPossibleWithSession:self.session];
             } else {
                 self.session.delegate = self;
                 [self.session activateSession];
