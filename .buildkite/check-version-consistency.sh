@@ -1,6 +1,6 @@
 #!/bin/bash -eu
 
-SRC_FILE=Automattic-Tracks-iOS/TracksConstants.m
+SRC_FILE=Sources/Model/ObjC/TracksConstants.m
 PODSPEC_FILE=Automattic-Tracks-iOS.podspec
 
 SOURCE_VERS=$(sed -n s/'^.* TracksLibraryVersion = @"\(.*\)";.*$'/'\1'/p $SRC_FILE)

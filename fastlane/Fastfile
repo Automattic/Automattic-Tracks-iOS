@@ -6,7 +6,8 @@ platform :ios do
   desc 'Builds the project and runs tests'
   lane :test do
     run_tests(
-      scheme: 'Automattic-Tracks-iOS',
+      scheme: 'TracksDemo',
+      project: 'TracksDemo/TracksDemo.xcodeproj',
       devices: ['iPhone 11'],
       deployment_target_version: '14.5',
       prelaunch_simulator: true,
@@ -20,7 +21,8 @@ platform :mac do
   desc 'Builds the project and runs tests'
   lane :test do
     run_tests(
-      scheme: 'Automattic-Tracks-OSX',
+      scheme: 'TracksDemo Mac',
+      project: 'TracksDemo/TracksDemo.xcodeproj',
       buildlog_path: File.join(__dir__, '.build', 'logs'),
       derived_data_path: File.join(__dir__, '.build', 'derived-data')
     )

@@ -4,16 +4,51 @@ orbs:
   # Using 1.0 of our Orbs means it will use the latest 1.0.x version from https://github.com/wordpress-mobile/circleci-orbs
   ios: wordpress-mobile/ios@1.0
 
+commands:
+  fix-spm:
+    steps:
+      - run: 
+          # Start: Swift Package Manager Workaround
+          # Ref. https://support.circleci.com/hc/en-us/articles/360044709573-Swift-Package-Manager-fails-to-clone-from-private-Git-repositories
+          name: Swift Package Manager workaround
+          command: for ip in $(dig @8.8.8.8 github.com +short); do ssh-keyscan github.com,$ip; ssh-keyscan $ip; done 2>/dev/null >> ~/.ssh/known_hosts || true
+          # END: Swift Package Manager Workaround
+      - run:
+          name: "Pre-build LibSodium"
+          command: |
+            # Build the _WorkaroundSPM module and ignore errors. This is necessary under Xcode 12 to avoid an error
+            # that occurs the first time after cleaning if one of your dependences uses a binary framework
+            # See https://bugs.swift.org/browse/SR-13803
+
+            xcodebuild COMPILER_INDEX_STORE_ENABLE=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
+                           -scheme '_WorkaroundSPM' \
+                           -destination 'platform=OS X,arch=x86_64' \
+                           -disableAutomaticPackageResolution \
+                           build || true
+
 jobs:
+  TestiOS:
+    executor:
+      name: ios/default
+      xcode-version: "12.5.0"
+    steps:
+      - checkout
+      - fix-spm
+      - ios/test:
+          xcode-version: "12.5.0"
+          scheme: AutomatticTracksiOS-Package
+          device: iPhone 11
+          ios-version: "14.5"
+          bundle-install: false
+          pod-install: false
+          
   TestMacOS:
     executor:
       name: ios/default
-      xcode-version: "12.0.0"
+      xcode-version: "12.5.0"
     steps:
       - checkout
-      - ios/install-dependencies:
-          bundle-install: true
-          pod-install: true
+      - fix-spm
       - run:
           name: Build and Test
           command: |
@@ -22,9 +57,9 @@ jobs:
 
             # Build without code signing to avoid missing cert errors
             xcodebuild COMPILER_INDEX_STORE_ENABLE=NO CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO \
-                       -workspace 'Automattic-Tracks-iOS.xcworkspace' \
-                       -scheme 'Automattic-Tracks-OSX' \
+                       -scheme 'AutomatticTracksiOS-Package' \
                        -destination 'platform=OS X,arch=x86_64' \
+                       -disableAutomaticPackageResolution \
                        test  | tee logs/build-and-test.log | xcpretty -r junit
   CheckVersionConsistency:
     docker:
@@ -34,7 +69,7 @@ jobs:
       - run:
           name: Check pod version consistency
           command: |
-            SRC_FILE=Automattic-Tracks-iOS/TracksConstants.m
+            SRC_FILE=Sources/Model/ObjC/TracksConstants.m
             PODSPEC_FILE=Automattic-Tracks-iOS.podspec
 
             SOURCE_VERS=$(sed -n s/'^.* TracksLibraryVersion = @"\(.*\)";.*$'/'\1'/p $SRC_FILE)
@@ -52,18 +87,9 @@ jobs:
 workflows:
   test_and_validate:
     jobs:
-      - ios/test:
-          name: Test iOS
-          workspace: Automattic-Tracks-iOS.xcworkspace
-          xcode-version: "12.0.0"
-          scheme: Automattic-Tracks-iOS
-          device: iPhone 11
-          ios-version: "14.0"
-          bundle-install: true
-          pod-install: true
       - ios/validate-podspec:
           name: Validate Podspec
-          xcode-version: "12.0.0"
+          xcode-version: "12.5.0"
           podspec-path: Automattic-Tracks-iOS.podspec
           bundle-install: true
           update-specs-repo: true
@@ -82,3 +108,5 @@ workflows:
           name: "Validate Version Values Consistency"
       - TestMacOS:
           name: "Test macOS"
+      - TestiOS:
+          name: "Test iOS"

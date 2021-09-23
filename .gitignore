@@ -17,6 +17,7 @@ DerivedData
 *.ipa
 *.xcuserstate
 .idea
+.swiftpm/xcode
 
 # CocoaPods
 #

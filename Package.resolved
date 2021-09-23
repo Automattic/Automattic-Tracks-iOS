@@ -1,0 +1,52 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "OCMock",
+        "repositoryURL": "https://github.com/erikdoe/ocmock",
+        "state": {
+          "branch": "master",
+          "revision": "b9c7fb949d7afc7087165b9c57fb5d7ddbe2ce4d",
+          "version": null
+        }
+      },
+      {
+        "package": "OHHTTPStubs",
+        "repositoryURL": "https://github.com/AliSoftware/OHHTTPStubs",
+        "state": {
+          "branch": null,
+          "revision": "12f19662426d0434d6c330c6974d53e2eb10ecd9",
+          "version": "9.1.0"
+        }
+      },
+      {
+        "package": "Sentry",
+        "repositoryURL": "https://github.com/getsentry/sentry-cocoa",
+        "state": {
+          "branch": null,
+          "revision": "946cbb6daccedf40d652a12138f78e96f660e1ad",
+          "version": "6.2.1"
+        }
+      },
+      {
+        "package": "Sodium",
+        "repositoryURL": "https://github.com/jedisct1/swift-sodium",
+        "state": {
+          "branch": null,
+          "revision": "4f9164a0a2c9a6a7ff53a2833d54a5c79c957342",
+          "version": "0.9.1"
+        }
+      },
+      {
+        "package": "UIDeviceIdentifier",
+        "repositoryURL": "https://github.com/squarefrog/UIDeviceIdentifier",
+        "state": {
+          "branch": null,
+          "revision": "67b7d4d290a5b8e983f4cc9e4826217bc66899b5",
+          "version": "1.7.0"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
