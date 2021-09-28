@@ -54,11 +54,13 @@
     return self;
 }
 
+#if TARGET_OS_IPHONE
 - (void)setHasBeenPairedIfPossibleWithSession:(nonnull WCSession *)session {
     if(session.paired){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"watch-has-been-previously-paired"];
     }
 }
+#endif
 
 - (BOOL)hasBeenPreviouslyPaired{
     BOOL result = [[NSUserDefaults standardUserDefaults] boolForKey:@"watch-has-been-previously-paired"];
