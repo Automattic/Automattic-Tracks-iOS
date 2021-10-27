@@ -17,8 +17,9 @@ let package = Package(
                       "AutomatticCrashLoggingUI",
                       "AutomatticTracksModel",
                       "AutomatticTracksModelObjC",
+                      "AutomatticTracksConstantsObjC",
                       "AutomatticTracks",
-            ]),
+                     ]),
 
         // This target is seperated out to reduce the number of other dependencies included as part of the other targets.
         .library(
@@ -33,8 +34,8 @@ let package = Package(
         // We ignore any failures when building this target.
         // Then we go on to build the actual product, which
         // builds correctly.
-        .library(name: "_WorkaroundSPM",
-                 targets: ["_WorkaroundSPM"])
+            .library(name: "_WorkaroundSPM",
+                     targets: ["_WorkaroundSPM"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
@@ -79,7 +80,10 @@ let package = Package(
         // Uploading app logs
         .target(
             name: "AutomatticEncryptedLogs",
-            dependencies: [ "Sodium" ],
+            dependencies: [
+                "Sodium",
+                "AutomatticTracksConstantsObjC"
+            ],
             path: "Sources/Encrypted Logs"),
 
         // UI for displaying crash logs
@@ -104,14 +108,22 @@ let package = Package(
             exclude: ["AutomatticTracks.h"]
         ),
 
-
         // Shared code used by multiple targets
         .target(
             name: "AutomatticTracksModelObjC",
-            dependencies: ["UIDeviceIdentifier"],
-            path: "Sources/Model/ObjC",
+            dependencies: [
+                "UIDeviceIdentifier",
+                "AutomatticTracksConstantsObjC"
+            ],
+            path: "Sources/Model/ObjC/Common",
             publicHeadersPath: ".",
             cSettings: [.headerSearchPath("../../Event Logging/private")]),
+        .target(
+            name: "AutomatticTracksConstantsObjC",
+            dependencies: [],
+            path: "Sources/Model/ObjC/Constants",
+            publicHeadersPath: ".",
+            cSettings: []),
         .target(
             name: "AutomatticTracksModel",
             dependencies: ["AutomatticTracksModelObjC", "Sentry"],
@@ -130,17 +142,17 @@ let package = Package(
             exclude: ["Tests/ObjC"],
             resources: [.process("Mock Data")]),
 
-        .testTarget(
-            name: "AutomatticTracksTestsObjC",
-            dependencies: ["AutomatticTracksEvents",
-                           "OCMock"
-            ],
-            path: "Tests/Tests/ObjC"),
+            .testTarget(
+                name: "AutomatticTracksTestsObjC",
+                dependencies: ["AutomatticTracksEvents",
+                               "OCMock"
+                              ],
+                path: "Tests/Tests/ObjC"),
 
-        .target(
-            name: "_WorkaroundSPM",
-            dependencies: ["Sodium"],
-            path: "Sources/Workaround-SPM")
+            .target(
+                name: "_WorkaroundSPM",
+                dependencies: ["Sodium"],
+                path: "Sources/Workaround-SPM")
 
     ]
 )

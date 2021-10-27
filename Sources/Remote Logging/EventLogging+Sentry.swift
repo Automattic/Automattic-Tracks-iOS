@@ -69,25 +69,3 @@ extension Event {
         }
     }
 }
-
-extension EventLoggingFileUploadError: CustomNSError {
-
-    public static var errorDomain: String {
-        return TracksErrorDomain
-    }
-
-    public var errorCode: Int {
-        switch self {
-            case .httpError(_, _, let statusCode): return statusCode
-            case .fileMissing: return TracksErrorCode.fileMissing.rawValue
-            case .cancelledByDelegate: return TracksErrorCode.operationCancelled.rawValue
-        }
-    }
-
-    public var failureReason: String? {
-        switch self {
-            case .httpError(_, let message, _): return message
-            default: return nil
-        }
-    }
-}
