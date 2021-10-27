@@ -4,15 +4,12 @@ import Sentry
 #if SWIFT_PACKAGE
 import AutomatticTracksModel
 import AutomatticTracksModelObjC
+import AutomatticEncryptedLogs
 #endif
 
 public extension EventLoggingDelegate {
     func logError(_ error: Error, userInfo: [String: Any]?) {
-        CrashLogging.Internals.crashLogging?.logError(err, userInfo: [
-            "errorFile": #file,
-            "errorLine": #line,
-            "logFileUUID": log.uuid
-        ])
+        CrashLogging.Internals.crashLogging?.logError(error, userInfo: userInfo)
     }
 }
 

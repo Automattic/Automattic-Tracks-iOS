@@ -26,10 +26,10 @@ public class EventLogging {
     private let uploadManager: EventLoggingUploadManager
 
     /// Data Source
-    let dataSource: EventLoggingDataSource
+    public let dataSource: EventLoggingDataSource
 
     /// Delegate
-    let delegate: EventLoggingDelegate
+    public let delegate: EventLoggingDelegate
 
     public init(dataSource: EventLoggingDataSource,
                 delegate: EventLoggingDelegate,
