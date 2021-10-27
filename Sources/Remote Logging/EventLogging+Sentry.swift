@@ -5,9 +5,14 @@ import Sentry
 import AutomatticTracksModel
 #endif
 
-public enum EventLoggingErrorType {
-    case fatal
-    case debug
+public extension EventLoggingDelegate {
+    func logError(_ error: Error, userInfo: [String: Any]?) {
+        CrashLogging.Internals.crashLogging?.logError(err, userInfo: [
+            "errorFile": #file,
+            "errorLine": #line,
+            "logFileUUID": log.uuid
+        ])
+    }
 }
 
 extension EventLogging {

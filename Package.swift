@@ -19,6 +19,11 @@ let package = Package(
                       "AutomatticTracks",
             ]),
 
+        // This target is seperated out to reduce the number of other dependencies included as part of the other targets.
+        .library(
+            name: "AutomatticEncryptedLogs",
+            targets: ["AutomatticEncryptedLogs"]),
+
         // Xcode 12 has an issue where the first build after
         // cleaning fails if there is a dependency that vends
         // a binary .xcframework. We are working around this
@@ -65,9 +70,19 @@ let package = Package(
                 "Sentry",
                 "Sodium",
                 "AutomatticTracksModel",
-                "AutomatticTracksEvents"
+                "AutomatticTracksEvents",
+                "AutomatticEncryptedLogs"
             ],
             path: "Sources/Remote Logging"),
+
+        // Uploading app logs
+        .target(
+            name: "AutomatticEncryptedLogs",
+            dependencies: [
+                "Sodium",
+                "AutomatticTracksModelObjC"
+            ],
+            path: "Sources/Encrypted Logs"),
 
         // UI for displaying crash logs
         .target(

@@ -2,10 +2,6 @@ import Foundation
 import CommonCrypto
 import Sodium
 
-#if SWIFT_PACKAGE
-import AutomatticTracksModel
-#endif
-
 public class EventLogging {
 
     /// Add a Log File to the list of events that need to be uploaded
@@ -36,8 +32,8 @@ public class EventLogging {
     let delegate: EventLoggingDelegate
 
     public init(dataSource: EventLoggingDataSource,
-         delegate: EventLoggingDelegate,
-         fileManager: FileManager = FileManager.default
+                delegate: EventLoggingDelegate,
+                fileManager: FileManager = FileManager.default
     ) {
         self.dataSource = dataSource
         self.delegate = delegate
@@ -141,7 +137,7 @@ extension EventLogging {
                 /// - the file (or device storage system) is corrupt
                 /// Because this should be extremely rare (and is difficult to reproduce), we'll track it but it's not covered by a test case
 
-                CrashLogging.Internals.crashLogging?.logError(err, userInfo: [
+                self.delegate.logError(err, userInfo: [
                     "errorFile": #file,
                     "errorLine": #line,
                     "logFileUUID": log.uuid
