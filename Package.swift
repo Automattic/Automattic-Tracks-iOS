@@ -78,10 +78,7 @@ let package = Package(
         // Uploading app logs
         .target(
             name: "AutomatticEncryptedLogs",
-            dependencies: [
-                "Sodium",
-                "AutomatticTracksModelObjC"
-            ],
+            dependencies: [ "Sodium" ],
             path: "Sources/Encrypted Logs"),
 
         // UI for displaying crash logs
