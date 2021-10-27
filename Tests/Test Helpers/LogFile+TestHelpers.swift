@@ -2,6 +2,7 @@ import Foundation
 
 #if SWIFT_PACKAGE
 import AutomatticRemoteLogging
+import AutomatticEncryptedLogs
 #else
 import AutomatticTracks
 #endif

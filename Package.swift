@@ -11,6 +11,7 @@ let package = Package(
         .library(
             name: "AutomatticTracks",
             targets: ["AutomatticTracksEvents",
+                      "AutomatticEncryptedLogs",
                       "AutomatticRemoteLogging",
                       "AutomatticExperiments",
                       "AutomatticCrashLoggingUI",

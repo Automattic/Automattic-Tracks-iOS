@@ -4,6 +4,7 @@ import Sodium
 #if SWIFT_PACKAGE
 @testable import AutomatticTracksEvents
 @testable import AutomatticRemoteLogging
+@testable import AutomatticEncryptedLogs
 #else
 @testable import AutomatticTracks
 #endif
