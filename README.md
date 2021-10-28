@@ -11,7 +11,7 @@ Tracks for iOS is a client library used to help track events inside of an applic
 You can install the Tracks component in your app via Swift Package Manager:
 
 ```swift
-.package(url: "https://github.com/Automattic/Automattic-Tracks-iOS", from: "0.11.0")
+.package(url: "https://github.com/Automattic/Automattic-Tracks-iOS", from: "0.10.0")
 ```
 
 You can import the entire library, using `import AutomatticTracks`. Or, you can import just one particular part of the library:
