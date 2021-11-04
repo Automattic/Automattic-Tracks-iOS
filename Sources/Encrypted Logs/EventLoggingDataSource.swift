@@ -1,5 +1,9 @@
 import Foundation
 
+public enum EventLoggingErrorType {
+    case fatal
+    case debug
+}
 public protocol EventLoggingDataSource {
     /// A base-64 encoded representation of the encryption key.
     var loggingEncryptionKey: String { get }

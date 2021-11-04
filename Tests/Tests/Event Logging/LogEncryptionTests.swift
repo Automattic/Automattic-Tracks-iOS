@@ -3,6 +3,7 @@ import Sodium
 
 #if SWIFT_PACKAGE
 @testable import AutomatticRemoteLogging
+@testable import AutomatticEncryptedLogs
 #else
 @testable import AutomatticTracks
 #endif
