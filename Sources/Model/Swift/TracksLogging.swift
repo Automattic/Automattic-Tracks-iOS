@@ -51,6 +51,10 @@ public class TracksLogging: NSObject, TracksLoggingConfiguration {
 
 private class DefaultTracksLogging: NSObject, TracksLoggingDelegate {
 
+    func logPanic(_ str: String) {
+        print("Tracks <☠️>: \(str)")
+    }
+
     func logError(_ str: String) {
         print("Tracks <E>: \(str)")
     }
