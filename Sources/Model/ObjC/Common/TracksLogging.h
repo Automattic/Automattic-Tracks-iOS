@@ -4,6 +4,7 @@ NS_ASSUME_NONNULL_BEGIN
 
 @protocol TracksLoggingDelegate <NSObject>
 
+- (void)logPanic:(NSString *)str;
 - (void)logError:(NSString *)str;
 - (void)logWarning:(NSString *)str;
 - (void)logInfo:(NSString *)str;
@@ -13,6 +14,7 @@ NS_ASSUME_NONNULL_BEGIN
 @end
 
 // Free functions for logging through the TracksLogging delegate.
+void TracksLogPanic(NSString *str, ...) NS_FORMAT_FUNCTION(1, 2);
 void TracksLogError(NSString *str, ...) NS_FORMAT_FUNCTION(1, 2);
 void TracksLogWarn(NSString *str, ...) NS_FORMAT_FUNCTION(1, 2);
 void TracksLogInfo(NSString *str, ...) NS_FORMAT_FUNCTION(1, 2);

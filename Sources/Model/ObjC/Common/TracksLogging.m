@@ -20,6 +20,16 @@ Class<TracksLoggingConfiguration> TracksLoggingClass() {
 }
 
 
+void TracksLogPanic(NSString *format, ...) {
+    va_list args;
+    va_start(args, format);
+
+    NSString *str = [[NSString alloc] initWithFormat:format arguments:args];
+    [[TracksLoggingClass() delegate] logPanic:str];
+
+    va_end(args);
+}
+
 void TracksLogError(NSString *format, ...) {
     va_list args;
     va_start(args, format);
