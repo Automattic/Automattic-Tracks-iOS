@@ -3,11 +3,14 @@ import Sentry
 
 #if SWIFT_PACKAGE
 import AutomatticTracksModel
+import AutomatticTracksModelObjC
+import AutomatticEncryptedLogs
 #endif
 
-public enum EventLoggingErrorType {
-    case fatal
-    case debug
+public extension EventLoggingDelegate {
+    func logError(_ error: Error, userInfo: [String: Any]?) {
+        CrashLogging.Internals.crashLogging?.logError(error, userInfo: userInfo)
+    }
 }
 
 extension EventLogging {

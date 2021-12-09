@@ -1,9 +1,5 @@
 import Foundation
 
-#if SWIFT_PACKAGE
-import AutomatticTracksModel
-#endif
-
 public protocol EventLoggingDelegate {
     /// The event logging system will call this delegate property prior to attempting to upload, giving the application a chance to determine
     /// whether or not the upload should proceed. If this is not overridden, the default is `false`.
@@ -28,6 +24,9 @@ public protocol EventLoggingDelegate {
     /// The event logging system will call this delegate method each time a log file finishes uploading.
     /// It is called after to the `upload` callback.
     func didFinishUploadingLog(_ log: LogFile)
+
+    /// The event logging system will call in the event of an error that needs to be logged.
+    func logError(_ error: Error, userInfo: [String: Any]?)
 }
 
 /// Default implementations for EventLoggingDelegate

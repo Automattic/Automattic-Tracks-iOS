@@ -4,6 +4,7 @@ import Sentry
 #if SWIFT_PACKAGE
 import AutomatticTracksEvents
 import AutomatticTracksModel
+import AutomatticEncryptedLogs
 #endif
 
 /// A class that provides support for logging crashes. Not compatible with Objective-C.

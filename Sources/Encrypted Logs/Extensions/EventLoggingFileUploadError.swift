@@ -1,7 +1,7 @@
 import Foundation
 
 #if SWIFT_PACKAGE
-import AutomatticTracksModelObjC
+import AutomatticTracksConstantsObjC
 #endif
 
 public enum EventLoggingFileUploadError: Error, LocalizedError {
