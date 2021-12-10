@@ -178,6 +178,10 @@ public extension CrashLogging {
             return
         }
 
+        try submitSerializedEvents(payload: requestBody, callback: callback)
+    }
+
+    private func submitSerializedEvents(payload: Data, callback: @escaping ((Result<Bool, Error>) -> Void)) throws {
         let dsn = try SentryDsn(string: dataProvider.sentryDSN)
         guard let authString = dsn.getAuthString() else {
             throw Errors.unableToConstructAuthStringError
@@ -185,7 +189,7 @@ public extension CrashLogging {
 
         var request = URLRequest(url: dsn.getEnvelopeEndpoint())
         request.httpMethod = "POST"
-        request.httpBody = requestBody
+        request.httpBody = payload
         request.addValue(authString, forHTTPHeaderField: "X-Sentry-Auth")
 
         URLSession.shared.dataTask(with: request) { (responseData, urlResponse, error) in
@@ -213,6 +217,59 @@ public extension CrashLogging {
         var networkError: Error?
 
         try logErrorImmediately(error, userInfo: userInfo, level: level) { result in
+
+            switch result {
+                case .success:
+                    TracksLogDebug("💥 Successfully transmitted crash data")
+                case .failure(let err):
+                    networkError = err
+            }
+
+            semaphore.signal()
+        }
+
+        semaphore.wait()
+
+        if let networkError = networkError {
+            throw networkError
+        }
+    }
+
+    /// Sends an `Event` immediately and triggers a callback on completion
+    func logMessageImmediately(_ message: String, properties: [String: Any]? = nil, level: SentryLevel = .info, callback: @escaping (Result<Bool, Error>) -> Void) throws {
+        var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
+
+        let event = Event(level: level)
+        event.message = SentryMessage(formatted: message)
+        event.extra = properties
+        event.timestamp = Date()
+        event.user = dataProvider.currentUser?.sentryUser
+
+        serializer.add(event: addStackTrace(to: event))
+
+        guard let requestBody = try? serializer.serialize() else {
+            TracksLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
+            SentrySDK.capture(event: event)
+            return
+        }
+
+        try submitSerializedEvents(payload: requestBody, callback: callback)
+    }
+
+    /**
+     Writes the error to the Crash Logging system, and includes a stack trace. This method will block the thread until the event is fired.
+
+     - Parameters:
+     - error: The error object
+     - userInfo: A dictionary containing additional data about this error.
+     - level: The level of severity to report in Sentry (`.error` by default)
+    */
+    func logMessageAndWait(_ message: String, properties: [String: Any]? = nil, level: SentryLevel = .info) throws {
+        let semaphore = DispatchSemaphore(value: 0)
+
+        var networkError: Error?
+
+        try logMessageImmediately(message, properties: properties, level: level) { result in
 
             switch result {
                 case .success:
