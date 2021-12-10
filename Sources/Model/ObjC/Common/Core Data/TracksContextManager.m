@@ -1,6 +1,10 @@
 #import "TracksContextManager.h"
 #import "TracksLogging.h"
 
+
+NSString *const TracksApplicationSupportException   = @"TracksApplicationSupportException";
+NSString *const TracksPersistentStoreException      = @"TracksPersistentStoreException";
+
 @implementation TracksContextManager
 
 #pragma mark - Core Data stack
@@ -43,14 +47,21 @@
     NSURL *storeURL = [self storeURL];
     NSError *error = nil;
     if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
-        
+
         // Delete the store and try again
         [[NSFileManager defaultManager] removeItemAtPath:storeURL.path error:nil];
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
             TracksLogError(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
+
+            if (self.shouldThrowUponFatalCondition) {
+                @throw [NSException exceptionWithName:TracksPersistentStoreException
+                                               reason:[NSString stringWithFormat:@"Error initializing Tracks: %@", error]
+                                             userInfo:error.userInfo];
+            } else {
+                abort();
+            }
         }
     }
     
@@ -82,10 +93,23 @@
     // available and one should always be able to create a folder in it
     if (error != nil) {
         TracksLogError(@"Failed to create folder for %@ in Application Support: %@, %@", bundleIdentifier, error, [error userInfo]);
-        abort();
+
+        if (self.shouldThrowUponFatalCondition) {
+            @throw [NSException exceptionWithName:TracksApplicationSupportException
+                                           reason:[NSString stringWithFormat:@"Error creating the ApplicationSupport Folder: %@", error]
+                                         userInfo:error.userInfo];
+        } else {
+            abort();
+        }
     }
 
     return folder;
+}
+
+- (BOOL)shouldThrowUponFatalCondition {
+    // We consider it safe to Throw (whenever a Fatal Condition arises) whenever there is no global
+    // NSException handler set
+    return NSGetUncaughtExceptionHandler() == nil;
 }
 
 // Application Support contains "the files that your app creates and manages on behalf of the user
