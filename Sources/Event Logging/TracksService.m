@@ -24,6 +24,9 @@
 @property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
 @property (nonatomic, strong) nw_path_monitor_t networkMonitor;
+/// The queue on which the Network framework will dispatch all the executions of the update and
+/// cancel events handlers.
+@property (nonatomic, strong) dispatch_queue_t networkMonitorQueue;
 @property (nonatomic, strong) nw_path_t networkPath;
 
 @property (nonatomic, readonly) NSString *userAgent;
@@ -318,6 +321,17 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 
     self.networkMonitor = nw_path_monitor_create();
+
+    // Create and set a queue for where the monitor can execute it's event handlers.
+    //
+    // Without one, the update handler doesn't get called when the monitor starts.
+    dispatch_queue_attr_t attrs = dispatch_queue_attr_make_with_qos_class(
+                                                                          DISPATCH_QUEUE_SERIAL,
+                                                                          QOS_CLASS_UTILITY,
+                                                                          DISPATCH_QUEUE_PRIORITY_DEFAULT
+                                                                          );
+    self.networkMonitorQueue = dispatch_queue_create("com.automattic.tracks.network.monitor", attrs);
+    nw_path_monitor_set_queue(self.networkMonitor, self.networkMonitorQueue);
 
     __weak typeof(self) weakSelf = self;
     nw_path_monitor_set_update_handler(self.networkMonitor, ^(nw_path_t _Nonnull path) {
