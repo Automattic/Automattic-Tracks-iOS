@@ -319,10 +319,10 @@ NSString *const USER_ID_ANON = @"anonId";
 
     __weak typeof(self) weakSelf = self;
     self.networkMonitor = nw_path_monitor_create();
-    nw_path_monitor_set_update_handler(_networkMonitor, ^(nw_path_t  _Nonnull path) {
+    nw_path_monitor_set_update_handler(self.networkMonitor, ^(nw_path_t  _Nonnull path) {
         [weakSelf networkPathChanged:path];
     });
-    nw_path_monitor_start(_networkMonitor);
+    nw_path_monitor_start(self.networkMonitor);
 }
 
 - (void)stopNetworkMonitor {
