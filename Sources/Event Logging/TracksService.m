@@ -317,8 +317,9 @@ NSString *const USER_ID_ANON = @"anonId";
         return;
     }
 
-    __weak typeof(self) weakSelf = self;
     self.networkMonitor = nw_path_monitor_create();
+
+    __weak typeof(self) weakSelf = self;
     nw_path_monitor_set_update_handler(self.networkMonitor, ^(nw_path_t  _Nonnull path) {
         [weakSelf networkPathChanged:path];
     });
