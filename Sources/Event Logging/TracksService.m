@@ -327,8 +327,8 @@ NSString *const USER_ID_ANON = @"anonId";
     // Without one, the update handler doesn't get called when the monitor starts.
     dispatch_queue_attr_t attrs = dispatch_queue_attr_make_with_qos_class(
                                                                           DISPATCH_QUEUE_SERIAL,
-                                                                          QOS_CLASS_UTILITY,
-                                                                          DISPATCH_QUEUE_PRIORITY_DEFAULT
+                                                                          0,
+                                                                          0 // The relative priority within the QOS class. Can range from 0 to -15.
                                                                           );
     self.networkMonitorQueue = dispatch_queue_create("com.automattic.tracks.network.monitor", attrs);
     nw_path_monitor_set_queue(self.networkMonitor, self.networkMonitorQueue);
