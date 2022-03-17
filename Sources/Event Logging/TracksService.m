@@ -322,16 +322,14 @@ NSString *const USER_ID_ANON = @"anonId";
 
     self.networkMonitor = nw_path_monitor_create();
 
-    // Create and set a queue for where the monitor can execute it's event handlers.
+    // Using `dispatch_queue_create_with_target` to create a serial queue that will target one of
+    // the existing concurrent views seems to be the approach Apple recommends.
     //
-    // Without one, the update handler doesn't get called when the monitor starts.
-    dispatch_queue_attr_t attrs = dispatch_queue_attr_make_with_qos_class(
-                                                                          DISPATCH_QUEUE_SERIAL,
-                                                                          QOS_CLASS_UTILITY,
-                                                                          DISPATCH_QUEUE_PRIORITY_DEFAULT
-                                                                          );
-    self.networkMonitorQueue = dispatch_queue_create("com.automattic.tracks.network.monitor", attrs);
-    nw_path_monitor_set_queue(self.networkMonitor, self.networkMonitorQueue);
+    // More at: https://github.com/Automattic/Automattic-Tracks-iOS/pull/199#discussion_r822683662 .
+    dispatch_queue_t utilityQueue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+    self.networkMonitorQueue = dispatch_queue_create_with_target("com.automattic.tracks.network.monitor",
+                                                                 DISPATCH_QUEUE_SERIAL,
+                                                                 utilityQueue);
 
     __weak typeof(self) weakSelf = self;
     nw_path_monitor_set_update_handler(self.networkMonitor, ^(nw_path_t _Nonnull path) {
