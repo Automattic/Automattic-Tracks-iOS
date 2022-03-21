@@ -24,6 +24,9 @@
 @property (nonatomic, strong) TracksContextManager *contextManager;
 @property (nonatomic, strong) TracksDeviceInformation *deviceInformation;
 @property (nonatomic, strong) nw_path_monitor_t networkMonitor;
+/// The queue on which the Network framework will dispatch all the executions of the update and
+/// cancel events handlers.
+@property (nonatomic, strong) dispatch_queue_t networkMonitorQueue;
 @property (nonatomic, strong) nw_path_t networkPath;
 
 @property (nonatomic, readonly) NSString *userAgent;
@@ -317,12 +320,23 @@ NSString *const USER_ID_ANON = @"anonId";
         return;
     }
 
-    __weak typeof(self) weakSelf = self;
     self.networkMonitor = nw_path_monitor_create();
-    nw_path_monitor_set_update_handler(_networkMonitor, ^(nw_path_t  _Nonnull path) {
+
+    // Using `dispatch_queue_create_with_target` to create a serial queue that will target one of
+    // the existing concurrent views seems to be the approach Apple recommends.
+    //
+    // More at: https://github.com/Automattic/Automattic-Tracks-iOS/pull/199#discussion_r822683662 .
+    dispatch_queue_t utilityQueue = dispatch_get_global_queue(QOS_CLASS_UTILITY, 0);
+    self.networkMonitorQueue = dispatch_queue_create_with_target("com.automattic.tracks.network.monitor",
+                                                                 DISPATCH_QUEUE_SERIAL,
+                                                                 utilityQueue);
+    nw_path_monitor_set_queue(self.networkMonitor, self.networkMonitorQueue);
+
+    __weak typeof(self) weakSelf = self;
+    nw_path_monitor_set_update_handler(self.networkMonitor, ^(nw_path_t _Nonnull path) {
         [weakSelf networkPathChanged:path];
     });
-    nw_path_monitor_start(_networkMonitor);
+    nw_path_monitor_start(self.networkMonitor);
 }
 
 - (void)stopNetworkMonitor {
