@@ -103,9 +103,13 @@
     [self removeTracksEvents:[self fetchAllTracksEvents]];
 }
 
-- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents {
+    [self incrementRetryCountForEvents:tracksEvents onComplete:nil];
+}
+
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)())completion
 {
-    [self.managedObjectContext performBlockAndWait:^{
+    [self.managedObjectContext performBlock:^{
         for (TracksEvent *tracksEvent in tracksEvents) {
             TracksEventCoreData *tracksEventCoreData = [self findTracksEventCoreDataWithUUID:tracksEvent.uuid];
             
@@ -113,6 +117,10 @@
         }
         
         [self saveManagedObjectContext];
+        
+        if (completion) {
+            completion();
+        }
     }];
 }
 
