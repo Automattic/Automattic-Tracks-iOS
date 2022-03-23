@@ -60,10 +60,24 @@ let package = Package(
         .target(
             name: "AutomatticTracksEvents",
             dependencies: ["AutomatticTracksModel",
-                           "AutomatticExperiments"],
+                           "AutomatticExperiments",
+                           "AutomatticTracksEventsForSwift"],
             path: "Sources/Event Logging",
             publicHeadersPath: ".",
             cSettings: [.headerSearchPath("../Model/ObjC")]),
+
+        // Reporting events to the Tracks service
+        //
+        // This module offers a convenience incremental migration path
+        // from ObjC to Swift for AutomatticTracksEvents.
+        // Once all of the code is migrated to Swift we can just remove
+        // AutomatticTracksEvents and rename this module to AutomatticTracksEvents
+        //
+        .target(
+            name: "AutomatticTracksEventsForSwift",
+            dependencies: ["AutomatticTracksModel"],
+            path: "Sources/Event Logging (Swift)"
+        ),
 
         // Uploading app logs and crash logs
         .target(

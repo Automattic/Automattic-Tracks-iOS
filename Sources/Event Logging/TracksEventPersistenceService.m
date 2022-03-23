@@ -2,14 +2,18 @@
 
 #if SWIFT_PACKAGE
 @import AutomatticTracksModel;
+@import AutomatticTracksEventsForSwift;
 #else
 #import "TracksEventCoreData.h"
 #import <AutomatticTracks/AutomatticTracks-Swift.h>
 #endif
 
+@import Foundation;
+
 @interface TracksEventPersistenceService ()
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
+@property (nonatomic, strong) TrackEventPersistenceService *swiftPersistenceService;
 
 @end
 
@@ -20,6 +24,7 @@
     self = [self init];
     if (self) {
         _managedObjectContext = managedObjectContext;
+        _swiftPersistenceService = [[TrackEventPersistenceService alloc] initWithManagedObjectContext: managedObjectContext];
     }
     return self;
 }
@@ -107,23 +112,10 @@
     [self incrementRetryCountForEvents:tracksEvents onComplete:nil];
 }
 
-- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)())completion
-{
-    [self.managedObjectContext performBlock:^{
-        for (TracksEvent *tracksEvent in tracksEvents) {
-            TracksEventCoreData *tracksEventCoreData = [self findTracksEventCoreDataWithUUID:tracksEvent.uuid];
-            
-            tracksEventCoreData.retryCount = @(tracksEventCoreData.retryCount.integerValue + 1);
-        }
-        
-        [self saveManagedObjectContext];
-        
-        if (completion) {
-            completion();
-        }
-    }];
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)())completion {
+    
+    [self.swiftPersistenceService incrementRetryCountForEvents:tracksEvents onComplete:completion];
 }
-
 
 #pragma mark - Private methods
 

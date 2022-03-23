@@ -73,11 +73,15 @@ class TracksEventPersistenceServiceTests: XCTestCase {
     }
     
     func testIncrementRetryCount() {
+        let testCompletedExpectation = expectation(description: "The test is run completely")
+        testCompletedExpectation.expectedFulfillmentCount = 1
+        testCompletedExpectation.assertForOverFulfill = true
+        
         let contextManager = TracksTestContextManager()
         let context = contextManager.managedObjectContext
         let service = TracksEventPersistenceService(managedObjectContext: context)
         
-        let uuids = (0 ..< 2000).map { index in
+        let uuids = (0 ..< 2002).map { index in
             UUID()
         }
         
@@ -88,10 +92,15 @@ class TracksEventPersistenceServiceTests: XCTestCase {
             service.persistTracksEvent(event)
         }
         
-        fetchTrackEventCoreData(for: uuids, context: context) { result in
+        // We're adding an extra event that should not have its retry count incremented.
+        let extraUUID = UUID()
+        service.persistTracksEvent(createTestTracksEvent(extraUUID))
+        
+        // The first control includes the extra UUID because all retry counts should be zero
+        fetchTrackEventCoreData(for: uuids + [extraUUID], context: context) { result in
             switch result {
             case .success(let events):
-                XCTAssertEqual(tracksEvents.count, events.count)
+                XCTAssertEqual(tracksEvents.count + 1, events.count) // +1 for the extra event
                 
                 for event in events {
                     XCTAssertEqual(event.retryCount, 0)
@@ -114,6 +123,24 @@ class TracksEventPersistenceServiceTests: XCTestCase {
                     XCTFail("Error: \(String(describing: error))")
                 }
             }
+            
+            // Make sure our extra UUID's retry count hasn't changed
+            self.fetchTrackEventCoreData(for: [extraUUID], context: context) { result in
+                switch result {
+                case .success(let events):
+                    XCTAssertEqual(1, events.count)
+                    
+                    for event in events {
+                        XCTAssertEqual(event.retryCount, 0)
+                    }
+                    
+                    testCompletedExpectation.fulfill()
+                case .failure(let error):
+                    XCTFail("Error: \(String(describing: error))")
+                }
+            }
         }
+
+        waitForExpectations(timeout: 5)
     }
 }
