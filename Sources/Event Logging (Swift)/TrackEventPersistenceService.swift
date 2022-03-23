@@ -7,9 +7,6 @@ import CoreData
 /// Should eventually replace objC class `TracksEventPersistenceService`.  Unfortunately
 /// Swift Packages do not support mixed source classes so we'll instead need to compose.
 ///
-/// The naming is slightly different with "Track" instead of "Tracks", but the class is internal for now so it
-/// should be fairly acceptable to do this.
-///
 @objc
 public class TrackEventPersistenceService: NSObject {
     
