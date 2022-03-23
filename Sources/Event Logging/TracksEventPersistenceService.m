@@ -13,7 +13,7 @@
 @interface TracksEventPersistenceService ()
 
 @property (nonatomic, strong) NSManagedObjectContext *managedObjectContext;
-@property (nonatomic, strong) TrackEventPersistenceService *swiftPersistenceService;
+@property (nonatomic, strong) TracksEventPersistenceServiceSwift *swiftPersistenceService;
 
 @end
 
@@ -24,7 +24,7 @@
     self = [self init];
     if (self) {
         _managedObjectContext = managedObjectContext;
-        _swiftPersistenceService = [[TrackEventPersistenceService alloc] initWithManagedObjectContext: managedObjectContext];
+        _swiftPersistenceService = [[TracksEventPersistenceServiceSwift alloc] initWithManagedObjectContext: managedObjectContext];
     }
     return self;
 }
@@ -112,7 +112,7 @@
     [self incrementRetryCountForEvents:tracksEvents onComplete:nil];
 }
 
-- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)())completion {
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)(void))completion {
     
     [self.swiftPersistenceService incrementRetryCountForEvents:tracksEvents onComplete:completion];
 }

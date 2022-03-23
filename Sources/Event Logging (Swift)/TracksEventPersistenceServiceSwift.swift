@@ -8,7 +8,7 @@ import CoreData
 /// Swift Packages do not support mixed source classes so we'll instead need to compose.
 ///
 @objc
-public class TrackEventPersistenceService: NSObject {
+public class TracksEventPersistenceServiceSwift: NSObject {
 
     private static let incrementRetryCountBatchSize = 500
     private let managedObjectContext: NSManagedObjectContext
