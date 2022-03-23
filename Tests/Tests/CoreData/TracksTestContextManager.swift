@@ -10,19 +10,10 @@ fileprivate var persistentStoreExistsKey: UInt8 = 0
 ///
 class TracksTestContextManager: TracksContextManager {
 
-    private var persistentStoreExists: Bool {
-        get {
-            guard let value = objc_getAssociatedObject(self, &persistentStoreExistsKey) as? Bool else {
-                return false
-            }
-
-            return value
-        }
-
-        set {
-            objc_setAssociatedObject(self, &persistentStoreExistsKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_ASSIGN)
-        }
-    }
+    /// A convenience flag to know whether the persistent store has been created.  We can't use the
+    /// superclass' getter because it will create a persistent store if it hasn't been created before.
+    ///
+    private var persistentStoreExists = false
 
     override var persistentStoreCoordinator: NSPersistentStoreCoordinator {
         set {
