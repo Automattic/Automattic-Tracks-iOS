@@ -29,7 +29,7 @@ public class TrackEventPersistenceService: NSObject {
 
         managedObjectContext.perform {
             for startIndex in stride(from: 0, to: uuidStrings.count, by: Self.incrementRetryCountBatchSize) {
-                
+
                 let isLastBatch = startIndex + Self.incrementRetryCountBatchSize >= uuidStrings.count
                 let results: [TracksEventCoreData]
                 let count = min(uuidStrings.count - startIndex, Self.incrementRetryCountBatchSize)
