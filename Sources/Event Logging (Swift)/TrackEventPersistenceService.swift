@@ -10,6 +10,7 @@ import CoreData
 @objc
 public class TrackEventPersistenceService: NSObject {
     
+    private static let incrementRetryCountBatchSize = 500
     private let managedObjectContext: NSManagedObjectContext
     
     @objc
@@ -26,14 +27,12 @@ public class TrackEventPersistenceService: NSObject {
             event.uuid.uuidString
         }
         
-        let batchSize = 500
-        
-        for startIndex in stride(from: 0, to: uuidStrings.count, by: batchSize) {
-            let isLastBatch = startIndex + batchSize >= uuidStrings.count
+        for startIndex in stride(from: 0, to: uuidStrings.count, by: Self.incrementRetryCountBatchSize) {
+            let isLastBatch = startIndex + Self.incrementRetryCountBatchSize >= uuidStrings.count
             
             managedObjectContext.perform {
                 let results: [TracksEventCoreData]
-                let count = min(uuidStrings.count - startIndex, batchSize)
+                let count = min(uuidStrings.count - startIndex, Self.incrementRetryCountBatchSize)
                 let uuidStringsBatch = Array(uuidStrings[startIndex ..< startIndex + count])
                 
                 do {
