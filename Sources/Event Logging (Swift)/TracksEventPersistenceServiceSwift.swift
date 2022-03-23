@@ -67,6 +67,7 @@ public class TracksEventPersistenceServiceSwift: NSObject {
     func findCoreDataEvents(uuidStrings: [String]) throws -> [TracksEventCoreData] {
         let fetchRequest = NSFetchRequest<TracksEventCoreData>(entityName: "TracksEvent")
         fetchRequest.predicate = NSPredicate(format: "uuid in %@", uuidStrings)
+        fetchRequest.returnsObjectsAsFaults = false
 
         return try fetchRequest.execute()
     }
