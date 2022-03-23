@@ -36,7 +36,7 @@ public class TracksEventPersistenceServiceSwift: NSObject {
                 let uuidStringsBatch = Array(uuidStrings[startIndex ..< startIndex + count])
 
                 do {
-                    results = try self.findTrackEventCoreData(uuidStrings: uuidStringsBatch)
+                    results = try self.findCoreDataEvents(uuidStrings: uuidStringsBatch)
                 } catch {
                     TracksLogError("Error while finding track events: \(String(describing: error))")
 
@@ -64,7 +64,7 @@ public class TracksEventPersistenceServiceSwift: NSObject {
         }
     }
 
-    func findTrackEventCoreData(uuidStrings: [String]) throws -> [TracksEventCoreData] {
+    func findCoreDataEvents(uuidStrings: [String]) throws -> [TracksEventCoreData] {
         let fetchRequest = NSFetchRequest<TracksEventCoreData>(entityName: "TracksEvent")
         fetchRequest.predicate = NSPredicate(format: "uuid in %@", uuidStrings)
 
