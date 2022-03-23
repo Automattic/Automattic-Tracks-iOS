@@ -51,6 +51,10 @@ public class TrackEventPersistenceService: NSObject {
                     return
                 }
                 
+                if results.count != count {
+                    TracksLogError("Not all provided events were found in the persistence layer. This signals a possible logical error in the tracking, persistence and retry-count-incrementing code.  Please review.")
+                }
+                
                 for event in results {
                     event.retryCount = event.retryCount.intValue + 1 as NSNumber
                 }
