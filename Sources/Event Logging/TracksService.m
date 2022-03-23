@@ -37,7 +37,7 @@
 
 @end
 
-static NSTimeInterval const EVENT_TIMER_DEFAULT = 30; // seconds
+static NSTimeInterval const EVENT_TIMER_DEFAULT = 15; // seconds
 NSString *const TrackServiceWillSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 NSString *const TrackServiceDidSendQueuedEventsNotification = @"TrackServiceDidSendQueuedEventsNotification";
 
