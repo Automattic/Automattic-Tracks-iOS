@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Increments the retry count for the specified events, and offers a completion closure with
 /// error handling support.
 /// 
-- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)(NSError * _Nullable error))completion;
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)())completion;
 
 @end
 

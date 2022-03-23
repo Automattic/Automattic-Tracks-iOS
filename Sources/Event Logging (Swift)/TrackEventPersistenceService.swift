@@ -22,7 +22,7 @@ public class TrackEventPersistenceService: NSObject {
 
     /// Increments the retry count for the specified events in batches of
     @objc
-    public func incrementRetryCountForEvents(_ tracksEvents: [TracksEvent], onComplete completion: ((Error?) -> Void)?) {
+    public func incrementRetryCountForEvents(_ tracksEvents: [TracksEvent], onComplete completion: (() -> Void)?) {
         let uuidStrings = tracksEvents.map { event in
             event.uuid.uuidString
         }
@@ -41,7 +41,7 @@ public class TrackEventPersistenceService: NSObject {
                     TracksLogError("Error while finding track events: \(String(describing: error))")
 
                     if isLastBatch {
-                        completion?(error)
+                        completion?()
                     }
 
                     return
@@ -58,7 +58,7 @@ public class TrackEventPersistenceService: NSObject {
                 self.saveManagedObjectContext()
 
                 if isLastBatch {
-                    completion?(nil)
+                    completion?()
                 }
             }
         }

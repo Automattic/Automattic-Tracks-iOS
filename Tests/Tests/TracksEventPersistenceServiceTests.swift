@@ -110,9 +110,7 @@ class TracksEventPersistenceServiceTests: XCTestCase {
             }
         }
 
-        service.incrementRetryCount(forEvents: tracksEvents) { [unowned self] error in
-            XCTAssertNil(error)
-
+        service.incrementRetryCount(forEvents: tracksEvents) { [unowned self] in
             self.fetchTrackEventCoreData(for: uuids, context: context) { result in
                 switch result {
                 case .success(let events):
@@ -179,13 +177,7 @@ class TracksEventPersistenceServiceTests: XCTestCase {
         let extraEvent = createTestTracksEvent(extraUUID)
         service.persistTracksEvent(extraEvent)
 
-        service.incrementRetryCount(forEvents: tracksEvents + [extraEvent]) { error in
-            // Because not finding the events to increase their retry count
-            // are partial errors (ie: they shouldn't stop the overall process), they won't
-            // be reported as an error here, but there should also not be any records for those
-            // events when fetching from core data.
-            XCTAssertNil(error)
-
+        service.incrementRetryCount(forEvents: tracksEvents + [extraEvent]) {
             self.fetchTrackEventCoreData(for: uuids + [extraUUID], context: context) { result in
                 switch result {
                 case .success(let events):

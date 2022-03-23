@@ -112,7 +112,7 @@
     [self incrementRetryCountForEvents:tracksEvents onComplete:nil];
 }
 
-- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)(NSError * _Nullable error))completion {
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)())completion {
     
     [self.swiftPersistenceService incrementRetryCountForEvents:tracksEvents onComplete:completion];
 }
