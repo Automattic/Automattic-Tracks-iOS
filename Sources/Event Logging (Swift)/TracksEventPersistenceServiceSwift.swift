@@ -29,8 +29,6 @@ public class TracksEventPersistenceServiceSwift: NSObject {
 
         managedObjectContext.perform {
             for startIndex in stride(from: 0, to: uuidStrings.count, by: Self.incrementRetryCountBatchSize) {
-
-                let isLastBatch = startIndex + Self.incrementRetryCountBatchSize >= uuidStrings.count
                 let results: [TracksEventCoreData]
                 let count = min(uuidStrings.count - startIndex, Self.incrementRetryCountBatchSize)
                 let uuidStringsBatch = Array(uuidStrings[startIndex ..< startIndex + count])
@@ -39,12 +37,7 @@ public class TracksEventPersistenceServiceSwift: NSObject {
                     results = try self.findCoreDataEvents(uuidStrings: uuidStringsBatch)
                 } catch {
                     TracksLogError("Error while finding track events: \(String(describing: error))")
-
-                    if isLastBatch {
-                        completion?()
-                    }
-
-                    return
+                    continue
                 }
 
                 if results.count != count {
@@ -56,11 +49,9 @@ public class TracksEventPersistenceServiceSwift: NSObject {
                 }
 
                 self.saveManagedObjectContext()
-
-                if isLastBatch {
-                    completion?()
-                }
             }
+            
+            completion?()
         }
     }
 
