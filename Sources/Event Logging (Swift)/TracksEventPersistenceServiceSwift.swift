@@ -50,7 +50,7 @@ public class TracksEventPersistenceServiceSwift: NSObject {
 
                 self.saveManagedObjectContext()
             }
-            
+
             completion?()
         }
     }
