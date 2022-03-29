@@ -2,6 +2,8 @@
 #import <CoreData/CoreData.h>
 #import "TracksEvent.h"
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface TracksEventPersistenceService : NSObject
 
 - (instancetype)initWithManagedObjectContext:(NSManagedObjectContext *)managedObjectContext;
@@ -18,4 +20,11 @@
 
 - (void)incrementRetryCountForEvents:(NSArray *)tracksEvents;
 
+/// Increments the retry count for the specified events, and offers a completion closure with
+/// error handling support.
+/// 
+- (void)incrementRetryCountForEvents:(NSArray *)tracksEvents onComplete:(nullable void(^)(void))completion;
+
 @end
+
+NS_ASSUME_NONNULL_END
