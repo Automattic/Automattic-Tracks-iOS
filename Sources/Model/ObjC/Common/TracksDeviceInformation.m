@@ -110,9 +110,9 @@
     return [[UIDevice currentDevice] systemVersion];
 #else   // Mac
     NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
-    NSInteger *major = version.majorVersion;
-    NSInteger *minor = version.minorVersion;
-    NSInteger *patch = version.patchVersion;
+    NSInteger major = version.majorVersion;
+    NSInteger minor = version.minorVersion;
+    NSInteger patch = version.patchVersion;
     return [NSString stringWithFormat: @"%ld.%ld.%ld", (long)major, (long)minor, (long)patch];
 #endif
 }
