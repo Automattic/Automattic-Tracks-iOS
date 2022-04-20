@@ -109,7 +109,11 @@
 #if TARGET_OS_IPHONE
     return [[UIDevice currentDevice] systemVersion];
 #else   // Mac
-    return [[NSProcessInfo processInfo] operatingSystemVersionString];
+    NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+    NSInteger major = version.majorVersion;
+    NSInteger minor = version.minorVersion;
+    NSInteger patch = version.patchVersion;
+    return [NSString stringWithFormat: @"%ld.%ld.%ld", (long)major, (long)minor, (long)patch];
 #endif
 }
 
