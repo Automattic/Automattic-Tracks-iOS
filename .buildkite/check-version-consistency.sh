@@ -3,6 +3,9 @@
 SRC_FILE=Sources/Model/ObjC/Constants/TracksConstants.m
 PODSPEC_FILE=Automattic-Tracks-iOS.podspec
 
+# Workaround for https://github.com/Automattic/buildkite-ci/issues/79
+gem install bundler
+
 SOURCE_VERS=$(sed -n s/'^.* TracksLibraryVersion = @"\(.*\)";.*$'/'\1'/p $SRC_FILE)
 POD_VERS=$(sed -n s/'^ *s.version *= \([^ ]*\).*$'/'\1'/p $PODSPEC_FILE | tr -d \'\")
 
