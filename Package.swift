@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "AutomatticTracksiOS",
-    platforms: [.macOS(.v10_14), .iOS(.v12)],
+    platforms: [.macOS(.v10_14), .iOS(.v13)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
@@ -44,6 +44,7 @@ let package = Package(
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
         .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
         .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
+        .package(name: "BuildkiteTestCollector", url: "https://github.com/buildkite/test-collector-swift", from: "0.1.1"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -150,23 +151,28 @@ let package = Package(
                 "AutomatticTracks",
                 "AutomatticTracksEvents",
                 "AutomatticTracksModel",
+                "BuildkiteTestCollector",
                 .product(name: "OHHTTPStubsSwift", package: "OHHTTPStubs"),
             ],
             path: "Tests",
             exclude: ["Tests/ObjC"],
-            resources: [.process("Mock Data")]),
+            resources: [.process("Mock Data")]
+        ),
 
-            .testTarget(
-                name: "AutomatticTracksTestsObjC",
-                dependencies: ["AutomatticTracksEvents",
-                               "OCMock"
-                              ],
-                path: "Tests/Tests/ObjC"),
+        .testTarget(
+            name: "AutomatticTracksTestsObjC",
+            dependencies: [
+                "AutomatticTracksEvents",
+                "BuildkiteTestCollector",
+                "OCMock",
+            ],
+            path: "Tests/Tests/ObjC"
+        ),
 
-            .target(
-                name: "_WorkaroundSPM",
-                dependencies: ["Sodium"],
-                path: "Sources/Workaround-SPM")
-
+        .target(
+            name: "_WorkaroundSPM",
+            dependencies: ["Sodium"],
+            path: "Sources/Workaround-SPM"
+        )
     ]
 )
