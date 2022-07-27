@@ -104,6 +104,23 @@ import Cocoa
             return .treatment(variation)
         }
     }
+    
+    /// Checks if the experiment name is contained in the enrolled experiments array
+    /// returns false if there is no dictionary or the experiment is not registered
+    ///
+    public func isEnrolled(_ name: String) -> Bool {
+        guard let enrolled = UserDefaults.standard.object(forKey: enrolledKey) as? [String] else {
+            return false
+        }
+        
+        return enrolled.contains(name)
+    }
+    
+    /// Check to see if ExPlat has stored the names of enrolled experiments
+    ///
+    public func enrolledArrayExists() -> Bool {
+        UserDefaults.standard.object(forKey: enrolledKey) != nil
+    }
 
     /// Check if the app is entering background and/or foreground
     /// and start/stop the timers
