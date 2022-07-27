@@ -12,6 +12,7 @@ import Cocoa
 
     private let assignmentsKey = "ab-testing-assignments"
     private let ttlDateKey = "ab-testing-ttl-date"
+    private let enrolledKey = "enrolled-experiments"
 
     private(set) var experimentNames: [String] = []
 
@@ -80,6 +81,9 @@ import Cocoa
             var ttlDate = Date()
             ttlDate.addTimeInterval(TimeInterval(assignments.ttl))
             UserDefaults.standard.setValue(ttlDate, forKey: self.ttlDateKey)
+            
+            let enrolledExperimentNames = assignments.variations.map({ String($0.key) })
+            UserDefaults.standard.setValue(enrolledExperimentNames, forKey: self.enrolledKey)
 
             completion?()
         }
