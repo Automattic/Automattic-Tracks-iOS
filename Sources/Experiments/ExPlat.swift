@@ -24,6 +24,13 @@ import Cocoa
         return ttlDate.timeIntervalSinceReferenceDate - Date().timeIntervalSinceReferenceDate
     }
 
+    /// Check to see if ExPlat has stored the names of enrolled experiments
+    ///
+    public var enrolledArrayExists: Bool {
+        UserDefaults.standard.object(forKey: enrolledKey) != nil
+    }
+    
+    
     public init(configuration: ExPlatConfiguration,
                 service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
@@ -116,11 +123,6 @@ import Cocoa
         return enrolled.contains(name)
     }
     
-    /// Check to see if ExPlat has stored the names of enrolled experiments
-    ///
-    public func enrolledArrayExists() -> Bool {
-        UserDefaults.standard.object(forKey: enrolledKey) != nil
-    }
 
     /// Check if the app is entering background and/or foreground
     /// and start/stop the timers
