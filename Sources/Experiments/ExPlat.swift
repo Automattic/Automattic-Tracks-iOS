@@ -118,7 +118,7 @@ import Cocoa
         guard let enrolled = UserDefaults.standard.object(forKey: enrolledKey) as? [String] else {
             return false
         }
-        
+
         return enrolled.contains(name)
     }
 
