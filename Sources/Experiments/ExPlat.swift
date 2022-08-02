@@ -88,7 +88,7 @@ import Cocoa
             ttlDate.addTimeInterval(TimeInterval(assignments.ttl))
             UserDefaults.standard.setValue(ttlDate, forKey: self.ttlDateKey)
 
-            let enrolledExperimentNames = assignments.variations.map({ String($0.key) })
+            let enrolledExperimentNames = assignments.variations.map({ $0.key })
             UserDefaults.standard.setValue(enrolledExperimentNames, forKey: self.enrolledKey)
 
             completion?()
