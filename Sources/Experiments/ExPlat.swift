@@ -12,6 +12,7 @@ import Cocoa
 
     private let assignmentsKey = "ab-testing-assignments"
     private let ttlDateKey = "ab-testing-ttl-date"
+    private let enrolledKey = "ab-testing-enrolled-experiments"
 
     private(set) var experimentNames: [String] = []
 
@@ -21,6 +22,12 @@ import Cocoa
         }
 
         return ttlDate.timeIntervalSinceReferenceDate - Date().timeIntervalSinceReferenceDate
+    }
+
+    /// Check to see if ExPlat has stored the names of enrolled experiments
+    ///
+    public var enrolledArrayExists: Bool {
+        UserDefaults.standard.object(forKey: enrolledKey) != nil
     }
 
     public init(configuration: ExPlatConfiguration,
@@ -81,6 +88,9 @@ import Cocoa
             ttlDate.addTimeInterval(TimeInterval(assignments.ttl))
             UserDefaults.standard.setValue(ttlDate, forKey: self.ttlDateKey)
 
+            let enrolledExperimentNames = assignments.variations.map({ $0.key })
+            UserDefaults.standard.setValue(enrolledExperimentNames, forKey: self.enrolledKey)
+
             completion?()
         }
     }
@@ -99,6 +109,17 @@ import Cocoa
         default:
             return .treatment(variation)
         }
+    }
+
+    /// Checks if the experiment name is contained in the enrolled experiments array
+    /// returns false if there is no dictionary or the experiment is not registered
+    ///
+    public func isEnrolled(in name: String) -> Bool {
+        guard let enrolled = UserDefaults.standard.object(forKey: enrolledKey) as? [String] else {
+            return false
+        }
+
+        return enrolled.contains(name)
     }
 
     /// Check if the app is entering background and/or foreground
