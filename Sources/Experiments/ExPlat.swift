@@ -29,8 +29,7 @@ import Cocoa
     public var enrolledArrayExists: Bool {
         UserDefaults.standard.object(forKey: enrolledKey) != nil
     }
-    
-    
+
     public init(configuration: ExPlatConfiguration,
                 service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
@@ -88,7 +87,7 @@ import Cocoa
             var ttlDate = Date()
             ttlDate.addTimeInterval(TimeInterval(assignments.ttl))
             UserDefaults.standard.setValue(ttlDate, forKey: self.ttlDateKey)
-            
+
             let enrolledExperimentNames = assignments.variations.map({ String($0.key) })
             UserDefaults.standard.setValue(enrolledExperimentNames, forKey: self.enrolledKey)
 
@@ -111,7 +110,7 @@ import Cocoa
             return .treatment(variation)
         }
     }
-    
+
     /// Checks if the experiment name is contained in the enrolled experiments array
     /// returns false if there is no dictionary or the experiment is not registered
     ///
@@ -122,7 +121,6 @@ import Cocoa
         
         return enrolled.contains(name)
     }
-    
 
     /// Check if the app is entering background and/or foreground
     /// and start/stop the timers
