@@ -12,7 +12,7 @@ import Cocoa
 
     private let assignmentsKey = "ab-testing-assignments"
     private let ttlDateKey = "ab-testing-ttl-date"
-    private let enrolledKey = "enrolled-experiments"
+    private let enrolledKey = "ab-testing-enrolled-experiments"
 
     private(set) var experimentNames: [String] = []
 
