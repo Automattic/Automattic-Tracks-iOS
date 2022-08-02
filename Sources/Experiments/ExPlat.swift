@@ -114,7 +114,7 @@ import Cocoa
     /// Checks if the experiment name is contained in the enrolled experiments array
     /// returns false if there is no dictionary or the experiment is not registered
     ///
-    public func isEnrolled(_ name: String) -> Bool {
+    public func isEnrolled(in name: String) -> Bool {
         guard let enrolled = UserDefaults.standard.object(forKey: enrolledKey) as? [String] else {
             return false
         }
