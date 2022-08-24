@@ -44,7 +44,7 @@ let package = Package(
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
         .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
         .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
-        .package(name: "BuildkiteTestCollector", url: "https://github.com/buildkite/test-collector-swift", from: "0.1.1"),
+        .package(name: "BuildkiteTestCollector", url: "https://github.com/buildkite/test-collector-swift", from: "0.3.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
