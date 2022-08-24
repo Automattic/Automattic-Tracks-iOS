@@ -2,6 +2,9 @@
 AllCops:
   NewCops: enable
   Exclude:
+    # Notice the `./**/` to handle `DerivedData` in root and subfolders (`./TracksDemo`)
+    - ./**/DerivedData/**/*
+    - Pods/**/*
     - build/**/*
     - vendor/**/*
 
@@ -18,4 +21,3 @@ Metrics/BlockLength:
 # Override the maximum line length
 Layout/LineLength:
   Max: 160
-
