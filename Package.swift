@@ -42,7 +42,7 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "6.0.0"),
+        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "7.0.0"),
         .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
         .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
