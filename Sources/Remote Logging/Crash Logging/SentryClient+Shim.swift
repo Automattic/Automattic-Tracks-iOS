@@ -1,5 +1,5 @@
 import Sentry
-
+import ObjectiveC
 
 @objc
 private protocol SentryClient_InternalMethods {
@@ -31,7 +31,12 @@ extension Sentry.Client {
             return event
         }
 
-        let scope = SentrySDK.currentHub().getScope()
+        guard let hub = SentrySDK._currentHub() else {
+            // FIXME: !
+            fatalError()
+        }
+
+        let scope = hub.scope
         guard let eventWithStackTrace = (self as AnyObject).prepareEvent(event, withScope: scope, alwaysAttachStacktrace: true, isCrashEvent: false)
         else {
             return event
@@ -41,5 +46,14 @@ extension Sentry.Client {
             eventWithStackTrace.stacktrace = stackTrace
         }
         return event
+    }
+}
+
+// TODO: If this works, extract in dedicated file
+extension SentrySDK {
+
+    // FIXME: Returning IUO only till everything compiles
+    static func _currentHub() -> SentryHub? {
+        return SentrySDK.perform(NSSelectorFromString("currentHub"))?.takeRetainedValue() as? SentryHub
     }
 }
