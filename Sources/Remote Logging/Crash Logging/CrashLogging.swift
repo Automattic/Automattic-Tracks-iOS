@@ -129,6 +129,7 @@ public extension CrashLogging {
             extra: userInfo
         )
 
+        // TODO: This does not attach a stacktrace by default from Sentry, is that okay?
         SentrySDK.capture(event: event)
         dataProvider.didLogErrorCallback?(event)
     }
@@ -146,6 +147,7 @@ public extension CrashLogging {
         event.extra = properties
         event.timestamp = Date()
 
+        // TODO: This does not attach a stacktrace by default from Sentry, is that okay?
         SentrySDK.capture(event: event)
         dataProvider.didLogMessageCallback?(event)
     }
