@@ -1,5 +1,4 @@
 // swift-tools-version:5.5
-// The swift-tools-version declares the minimum version of Swift required to build this package.
 
 import PackageDescription
 
@@ -7,24 +6,27 @@ let package = Package(
     name: "AutomatticTracksiOS",
     platforms: [.macOS(.v10_14), .iOS(.v13)],
     products: [
-        // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
             name: "AutomatticTracks",
-            targets: ["AutomatticTracksEvents",
-                      "AutomatticEncryptedLogs",
-                      "AutomatticRemoteLogging",
-                      "AutomatticExperiments",
-                      "AutomatticCrashLoggingUI",
-                      "AutomatticTracksModel",
-                      "AutomatticTracksModelObjC",
-                      "AutomatticTracksConstantsObjC",
-                      "AutomatticTracks",
-                     ]),
+            targets: [
+                "AutomatticTracksEvents",
+                "AutomatticEncryptedLogs",
+                "AutomatticRemoteLogging",
+                "AutomatticExperiments",
+                "AutomatticCrashLoggingUI",
+                "AutomatticTracksModel",
+                "AutomatticTracksModelObjC",
+                "AutomatticTracksConstantsObjC",
+                "AutomatticTracks",
+            ]
+        ),
 
-        // This target is seperated out to reduce the number of other dependencies included as part of the other targets.
+        // This target is seperated out to reduce the number of other
+        // dependencies included as part of the other targets.
         .library(
             name: "AutomatticEncryptedLogs",
-            targets: ["AutomatticEncryptedLogs"]),
+            targets: ["AutomatticEncryptedLogs"]
+        ),
 
         // Xcode 12 has an issue where the first build after
         // cleaning fails if there is a dependency that vends
@@ -34,11 +36,12 @@ let package = Package(
         // We ignore any failures when building this target.
         // Then we go on to build the actual product, which
         // builds correctly.
-            .library(name: "_WorkaroundSPM",
-                     targets: ["_WorkaroundSPM"])
+        .library(
+            name: "_WorkaroundSPM",
+            targets: ["_WorkaroundSPM"]
+        )
     ],
     dependencies: [
-        // Dependencies declare other packages that this package depends on.
         .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "6.0.0"),
         .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
@@ -47,32 +50,33 @@ let package = Package(
         .package(name: "BuildkiteTestCollector", url: "https://github.com/buildkite/test-collector-swift", from: "0.3.0"),
     ],
     targets: [
-        // Targets are the basic building blocks of a package. A target can define a module or a test suite.
-        // Targets can depend on other targets in this package, and on products in packages this package depends on.
-
-
         // ExPlat experiments
         .target(
             name: "AutomatticExperiments",
             dependencies: ["AutomatticTracksModel"],
-            path: "Sources/Experiments"),
+            path: "Sources/Experiments"
+        ),
 
         // Reporting events to the Tracks service
         .target(
             name: "AutomatticTracksEvents",
-            dependencies: ["AutomatticTracksModel",
-                           "AutomatticExperiments",
-                           "AutomatticTracksEventsForSwift"],
+            dependencies: [
+                "AutomatticTracksModel",
+                "AutomatticExperiments",
+                "AutomatticTracksEventsForSwift"
+            ],
             path: "Sources/Event Logging",
             publicHeadersPath: ".",
-            cSettings: [.headerSearchPath("../Model/ObjC")]),
+            cSettings: [.headerSearchPath("../Model/ObjC")]
+        ),
 
         // Reporting events to the Tracks service
         //
         // This module offers a convenience incremental migration path
         // from ObjC to Swift for AutomatticTracksEvents.
         // Once all of the code is migrated to Swift we can just remove
-        // AutomatticTracksEvents and rename this module to AutomatticTracksEvents
+        // AutomatticTracksEvents and rename this module to
+        // AutomatticTracksEvents
         //
         .target(
             name: "AutomatticTracksEventsForSwift",
@@ -90,7 +94,8 @@ let package = Package(
                 "AutomatticTracksEvents",
                 "AutomatticEncryptedLogs"
             ],
-            path: "Sources/Remote Logging"),
+            path: "Sources/Remote Logging"
+        ),
 
         // Uploading app logs
         .target(
@@ -99,13 +104,15 @@ let package = Package(
                 "Sodium",
                 "AutomatticTracksConstantsObjC"
             ],
-            path: "Sources/Encrypted Logs"),
+            path: "Sources/Encrypted Logs"
+        ),
 
         // UI for displaying crash logs
         .target(
             name: "AutomatticCrashLoggingUI",
             dependencies: ["AutomatticRemoteLogging"],
-            path: "Sources/UI"),
+            path: "Sources/UI"
+        ),
 
 
         // A catch-all target for when you just want to import everything
@@ -132,13 +139,16 @@ let package = Package(
             ],
             path: "Sources/Model/ObjC/Common",
             publicHeadersPath: ".",
-            cSettings: [.headerSearchPath("../../Event Logging/private")]),
+            cSettings: [.headerSearchPath("../../Event Logging/private")]
+        ),
+
         .target(
             name: "AutomatticTracksConstantsObjC",
             dependencies: [],
             path: "Sources/Model/ObjC/Constants",
             publicHeadersPath: ".",
-            cSettings: []),
+            cSettings: []
+        ),
         .target(
             name: "AutomatticTracksModel",
             dependencies: ["AutomatticTracksModelObjC", "Sentry"],
