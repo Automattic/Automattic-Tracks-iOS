@@ -25,11 +25,11 @@ final class ApplicationFacade {
         #if os(iOS)
         guard Thread.isMainThread else {
             // UIApplication.applicationState can only be accessed from the main thread.
-            return "unavailable"
+            return UIApplication.State.unavailable
         }
 
         return (UIApplication.sharedIfAvailable()?.applicationState.descriptionForEventTag
-                ?? "unavailable")
+                ?? UIApplication.State.unavailable)
 
         #else
 
@@ -59,6 +59,8 @@ private extension UIApplication.State {
             return "unknown"
         }
     }
+
+    static var unavailable: String { "unavailable" }
 }
 
 #endif
