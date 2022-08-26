@@ -169,6 +169,7 @@ public extension CrashLogging {
                 extra: userInfo ?? (error as NSError).userInfo
             )
 
+            // FIXME: In the current WIP 7.23.0 version migration, the `addStackTrace(to:)` is a no-op.
             serializer.add(event: addStackTrace(to: event))
         }
 
@@ -236,7 +237,12 @@ public extension CrashLogging {
     /// A wrapper around the `SentryClient` shim – keeps each layer clean by avoiding optionality
     private func addStackTrace(to event: Event) -> Event {
         guard let hub = SentrySDK._currentHub() else {
-            // TODO: Log fail here?
+            // FIXME: Where do we get the values from?
+            // See also: https://github.com/getsentry/sentry-cocoa/issues/1451#issuecomment-963986384
+            event.stacktrace = Stacktrace(
+                frames: [],
+                registers: [:]
+            )
             return event
         }
         guard let client = hub.getClient() else {

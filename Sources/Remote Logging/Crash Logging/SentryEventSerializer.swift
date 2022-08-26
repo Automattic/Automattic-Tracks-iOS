@@ -27,9 +27,10 @@ struct SentryEventSerializer {
             try encode(header),
         ]
 
-        try events.forEach {
-            let data = try encode($0.value.serialize())
-            let header = AttachmentHeader(type: "event", length: data.count, content_type: "application/json", filename: $0.key)
+        try events.forEach { eventKeyValue in
+            // NOTE: If you drill into this, you'll see it serializes the stacktrace, if any
+            let data = try encode(eventKeyValue.value.serialize())
+            let header = AttachmentHeader(type: "event", length: data.count, content_type: "application/json", filename: eventKeyValue.key)
             entries.append(try encode(header))
             entries.append(data)
         }
