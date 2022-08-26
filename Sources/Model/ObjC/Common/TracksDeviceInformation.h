@@ -21,6 +21,12 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, readonly) NSString *currentNetworkOperator;
 @property (nullable, nonatomic, readonly) NSString *currentNetworkRadioType;
 @property (nonatomic, assign) BOOL isWiFiConnected;
+
+/// Preferred reading content size based on the accessibility setting of the iOS device.
+/// - This will be null for Mac OS.
+///
+@property (nullable, nonatomic, readonly) NSString *preferredContentSizeCategory;
+
 /**
  * Indicates whether the device has an Internet connection.
  */

@@ -206,6 +206,28 @@
 }
 #endif
 
+/// Preferred reading content size based on the accessibility setting of the iOS device.
+/// 
+/// - This will be null for Mac OS.
+///
+- (NSString *)preferredContentSizeCategory {
+#if TARGET_OS_IPHONE
+    if ([NSThread isMainThread]) {
+        return UIApplication.sharedIfAvailable.preferredContentSizeCategory;
+    }
+
+    __block NSString *preferredContentSizeCategory;
+
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        preferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
+    });
+
+    return preferredContentSizeCategory;
+#else   // Mac
+    return @"Unknown";
+#endif
+}
+
 #pragma mark - App Specific Information
 
 - (NSString *)appName
