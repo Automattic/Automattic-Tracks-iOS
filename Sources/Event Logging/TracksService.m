@@ -401,6 +401,7 @@ NSString *const USER_ID_ANON = @"anonId";
              DeviceInfoStatusBarHeightKey : [NSNumber numberWithFloat:self.deviceInformation.statusBarHeight],
              DeviceInfoOrientation : self.deviceInformation.orientation ?: @"Unknown",
              DeviceInfoPreferredContentSizeCategory : self.deviceInformation.preferredContentSizeCategory ?: @"Unknown",
+             DeviceInfoIsAccessibilityCategory : self.deviceInformation.isAccessibilityCategory ? @"YES" : @"NO",
     };
 }
 
