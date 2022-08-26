@@ -400,7 +400,8 @@ NSString *const USER_ID_ANON = @"anonId";
              DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
              DeviceInfoStatusBarHeightKey : [NSNumber numberWithFloat:self.deviceInformation.statusBarHeight],
              DeviceInfoOrientation : self.deviceInformation.orientation ?: @"Unknown",
-      };
+             DeviceInfoPreferredContentSizeCategory : self.deviceInformation.preferredContentSizeCategory ?: @"Unknown",
+    };
 }
 
 - (NSDictionary *)dictionaryForTracksEvent:(TracksEvent *)tracksEvent withParentCommonProperties:(NSDictionary *)parentCommonProperties
