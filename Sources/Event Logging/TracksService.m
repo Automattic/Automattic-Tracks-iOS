@@ -200,11 +200,6 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.tracksEventService clearTracksEvents];
 }
 
-- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
-{
-    [self switchToAuthenticatedUserWithUsername:username userID:userID anonymousID:nil skipAliasEventCreation:skipEvent];
-}
-
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID anonymousID:(NSString *)anonymousID skipAliasEventCreation:(BOOL)skipEvent
 {
     NSParameterAssert(username.length != 0 || userID.length != 0);
@@ -220,20 +215,25 @@ NSString *const USER_ID_ANON = @"anonId";
     }
 }
 
-- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID wpComToken:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
-{
-    [self switchToAuthenticatedUserWithUsername:username userID:userID anonymousID:nil wpComToken:token skipAliasEventCreation:skipEvent];
-}
-
 - (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID anonymousID:(NSString *)anonymousID wpComToken:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
 {
-    [self switchToAuthenticatedUserWithUsername:username userID:userID anonymousID: anonymousID skipAliasEventCreation:skipEvent];
+    [self switchToAuthenticatedUserWithUsername:username userID:userID anonymousID:anonymousID skipAliasEventCreation:skipEvent];
 
     self.token = token;
 
     #if TARGET_OS_IPHONE
     [ExPlat configureWithPlatform:_eventNamePrefix oAuthToken:token userAgent:self.userAgent anonId:anonymousID];
     #endif
+}
+
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID skipAliasEventCreation:(BOOL)skipEvent
+{
+    [self switchToAuthenticatedUserWithUsername:username userID:userID anonymousID:nil skipAliasEventCreation:skipEvent];
+}
+
+- (void)switchToAuthenticatedUserWithUsername:(NSString *)username userID:(NSString *)userID wpComToken:(NSString *)token skipAliasEventCreation:(BOOL)skipEvent
+{
+    [self switchToAuthenticatedUserWithUsername:username userID:userID anonymousID:nil wpComToken:token skipAliasEventCreation:skipEvent];
 }
 
 - (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID
