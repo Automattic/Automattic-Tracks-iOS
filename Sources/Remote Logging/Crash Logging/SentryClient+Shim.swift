@@ -54,6 +54,8 @@ extension SentrySDK {
 
     // FIXME: Returning IUO only till everything compiles
     static func _currentHub() -> SentryHub? {
-        return SentrySDK.perform(NSSelectorFromString("currentHub"))?.takeRetainedValue() as? SentryHub
+        // TODO: Maybe Sentry does all that we need to do already?
+        return .none
+//        return SentrySDK.perform(NSSelectorFromString("currentHub"))?.takeRetainedValue() as? SentryHub
     }
 }
