@@ -1,5 +1,10 @@
 # frozen_string_literal: true
 
+BUILD_FOLDER = File.join(__dir__, '.build')
+BUILD_LOG_PATH = File.join(BUILD_FOLDER, 'logs')
+DERIVED_DATA_PATH = File.join(BUILD_FOLDER, 'derived-data')
+PROJECT_PATH = File.join(__dir__, 'TracksDemo', 'TracksDemo.xcodeproj')
+
 default_platform(:ios)
 
 platform :ios do
@@ -7,12 +12,12 @@ platform :ios do
   lane :test do
     run_tests(
       scheme: 'TracksDemo',
-      project: 'TracksDemo/TracksDemo.xcodeproj',
+      project: PROJECT_PATH,
       devices: ['iPhone 11'],
       deployment_target_version: '14.5',
       prelaunch_simulator: true,
-      buildlog_path: File.join(__dir__, '.build', 'logs'),
-      derived_data_path: File.join(__dir__, '.build', 'derived-data')
+      buildlog_path: BUILD_LOG_PATH,
+      derived_data_path: DERIVED_DATA_PATH
     )
   end
 end
@@ -22,9 +27,9 @@ platform :mac do
   lane :test do
     run_tests(
       scheme: 'TracksDemo Mac',
-      project: 'TracksDemo/TracksDemo.xcodeproj',
-      buildlog_path: File.join(__dir__, '.build', 'logs'),
-      derived_data_path: File.join(__dir__, '.build', 'derived-data')
+      project: PROJECT_PATH,
+      buildlog_path: BUILD_LOG_PATH,
+      derived_data_path: DERIVED_DATA_PATH
     )
   end
 end
