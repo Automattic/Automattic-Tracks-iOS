@@ -231,7 +231,7 @@
 /// Returns `true` if the preferred reading content size falls under accessibility category.
 ///
 /// - Uses `UIContentSizeCategoryIsAccessibilityCategory` method.
-/// - This will be `false`` for Mac OS.
+/// - This will be `false` for Mac OS.
 ///
 - (BOOL)isAccessibilityCategory {
 #if TARGET_OS_IPHONE

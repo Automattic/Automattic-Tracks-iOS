@@ -30,7 +30,7 @@ NS_ASSUME_NONNULL_BEGIN
 /// Returns `true` if the preferred reading content size falls under accessibility category.
 ///
 /// - Uses `UIContentSizeCategoryIsAccessibilityCategory` method.
-/// - This will be `false`` for Mac OS.
+/// - This will be `false` for Mac OS.
 ///
 @property (nonatomic, readonly) BOOL isAccessibilityCategory;
 
