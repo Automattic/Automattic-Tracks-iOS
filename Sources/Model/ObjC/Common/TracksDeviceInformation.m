@@ -208,7 +208,7 @@
 
 /// Preferred reading content size based on the accessibility setting of the iOS device.
 /// 
-/// - This will be null for Mac OS.
+/// - This will be NULL for Mac OS.
 ///
 - (NSString *)preferredContentSizeCategory {
 #if TARGET_OS_IPHONE
@@ -224,7 +224,7 @@
 
     return preferredContentSizeCategory;
 #else   // Mac
-    return @"Unknown";
+    return NULL;
 #endif
 }
 

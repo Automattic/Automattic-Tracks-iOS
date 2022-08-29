@@ -23,7 +23,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isWiFiConnected;
 
 /// Preferred reading content size based on the accessibility setting of the iOS device.
-/// - This will be null for Mac OS.
+/// - This will be NULL for Mac OS.
 ///
 @property (nullable, nonatomic, readonly) NSString *preferredContentSizeCategory;
 
