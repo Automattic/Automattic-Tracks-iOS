@@ -31,7 +31,10 @@ extension Sentry.Client {
             return event
         }
 
-        let scope = SentrySDK.currentHub().getScope()
+        guard let scope = SentrySDK.currentScope() else {
+            return event
+        }
+
         guard let eventWithStackTrace = (self as AnyObject).prepareEvent(event, withScope: scope, alwaysAttachStacktrace: true, isCrashEvent: false)
         else {
             return event
