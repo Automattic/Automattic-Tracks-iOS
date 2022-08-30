@@ -233,7 +233,7 @@ public extension CrashLogging {
 
     /// A wrapper around the `SentryClient` shim – keeps each layer clean by avoiding optionality
     private func addStackTrace(to event: Event) -> Event {
-        guard let client = SentrySDK.currentHub().getClient() else {
+        guard let client = SentrySDK.currentClient() else {
             return event
         }
 
