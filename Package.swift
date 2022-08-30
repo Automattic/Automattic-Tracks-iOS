@@ -42,11 +42,16 @@ let package = Package(
         )
     ],
     dependencies: [
-        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "7.24.1"),
-        .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
-        .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
-        .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
+        // Runtime dependencies
+        //
+        // When changing these, make sure to update the matching declaration in
+        // the `podspec` file.
+        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "7.25.0"),
         .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
+        .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
+        // Tests dependencies
+        .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
+        .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
         .package(name: "BuildkiteTestCollector", url: "https://github.com/buildkite/test-collector-swift", from: "0.3.0"),
     ],
     targets: [

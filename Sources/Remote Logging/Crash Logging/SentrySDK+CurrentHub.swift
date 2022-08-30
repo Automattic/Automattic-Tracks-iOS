@@ -1,11 +1,5 @@
 import Sentry
 
-@objc
-protocol SentrySDKInternalMethods {
-    @objc
-    var currentHub: SentryHub { get }
-}
-
 /// This is an extension on `SentrySDK` to hides the access to the `currentHub()` methods we use in
 /// the codebase.
 ///
@@ -17,17 +11,18 @@ protocol SentrySDKInternalMethods {
 extension SentrySDK {
 
     /// Returns the `Client` for the current `SentryHub`.
-    /// Since this method uses some Sentry internal methods to work, it may cease working entirely and start returning
-    /// `nil` when Sentry is updated.
     ///
+    /// - Note: Since this method uses some Sentry internal methods to work, it may cease working entirely and start returning
+    /// `nil` when Sentry is updated.
+    /// - SeeAlso: `_currentHub()`
     static func currentClient() -> Sentry.Client? {
         _currentHub()?.getClient()
     }
 
     /// Returns the current `SentryHub`.
-    /// Since this method uses some Sentry internal methods to work, it may cease working entirely and start returning
-    /// `nil` when Sentry is updated.
     ///
+    /// - Note: Since this method uses some Sentry internal methods to work, it may cease working entirely and start returning
+    /// `nil` when Sentry is updated.
     private static func _currentHub() -> SentryHub? {
         let currentHubSelector = #selector(getter: SentrySDKInternalMethods.currentHub)
 
@@ -37,4 +32,10 @@ extension SentrySDK {
 
         return SentrySDK.perform(currentHubSelector).takeUnretainedValue() as? SentryHub
     }
+}
+
+@objc
+protocol SentrySDKInternalMethods {
+    @objc
+    var currentHub: SentryHub { get }
 }
