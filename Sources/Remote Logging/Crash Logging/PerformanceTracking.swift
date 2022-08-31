@@ -17,9 +17,13 @@ public enum PerformanceTracking {
         /// Defaults to `true`.
         public let trackNetwork: Bool
         /// Defaults to `true`.
+        ///
+        /// – Note: This is only read in iOS, tvOS, and Mac Catalyst clients, i.e. those with UIKit.
         public let trackUserInteraction: Bool
         /// Defaults to `true`.
+        ///
         /// - Note: As per the Sentry documentation, this only tracks first-party `UIViewController` subclasses. No SwiftUI views or third-party screens.
+        /// – Note: This is only read in iOS, tvOS, and Mac Catalyst clients, i.e. those with UIKit.
         public let trackViewControllers: Bool
 
         public init(

@@ -127,6 +127,60 @@ class CrashLoggingTests: XCTestCase {
 //
 //        wait(for: [expectation], timeout: 1)
 //    }
+
+    func testPerformanceMonitoringConfigurationMappingWhenDisabled() {
+        let dataProvider = MockCrashLoggingDataProvider()
+        dataProvider.performanceTracking = .disabled
+
+        XCTAssertFalse(dataProvider.enableAutoPerformanceTracking)
+        XCTAssertEqual(dataProvider.tracesSampleRate, 0.0)
+        XCTAssertFalse(dataProvider.enableCoreDataTracking)
+        XCTAssertFalse(dataProvider.enableFileIOTracking)
+        XCTAssertFalse(dataProvider.enableNetworkTracking)
+        #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+            XCTAssertFalse(dataProvider.enableUIViewControllerTracking)
+            XCTAssertFalse(dataProvider.enableUserInteractionTracing)
+        #endif
+    }
+
+    func testPerformanceMonitoringConfigurationMappingWhenEnabled() {
+        let dataProvider = MockCrashLoggingDataProvider()
+        dataProvider.performanceTracking = .enabled(.init(sampleRate: 0.12))
+
+        XCTAssertTrue(dataProvider.enableAutoPerformanceTracking)
+        XCTAssertEqual(dataProvider.tracesSampleRate, 0.12)
+        XCTAssertTrue(dataProvider.enableCoreDataTracking)
+        XCTAssertTrue(dataProvider.enableFileIOTracking)
+        XCTAssertTrue(dataProvider.enableNetworkTracking)
+        #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+            XCTAssertTrue(dataProvider.enableUIViewControllerTracking)
+            XCTAssertTrue(dataProvider.enableUserInteractionTracing)
+        #endif
+    }
+
+    func testPerformanceMonitoringConfigurationMappingWhenEnabledWithCustomValues() {
+        let dataProvider = MockCrashLoggingDataProvider()
+        dataProvider.performanceTracking = .enabled(
+            .init(
+                sampleRate: 0.23,
+                trackCoreData: false,
+                trackFileIO: true,
+                trackNetwork: false,
+                trackUserInteraction: true,
+                trackViewControllers: false
+            )
+        )
+
+        XCTAssertTrue(dataProvider.enableAutoPerformanceTracking)
+        XCTAssertEqual(dataProvider.tracesSampleRate, 0.23)
+        XCTAssertFalse(dataProvider.enableCoreDataTracking)
+        XCTAssertTrue(dataProvider.enableFileIOTracking)
+        XCTAssertFalse(dataProvider.enableNetworkTracking)
+        #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+            XCTAssertFalse(dataProvider.enableUIViewControllerTracking)
+            XCTAssertTrue(dataProvider.enableUserInteractionTracing)
+        #endif
+    }
 }
 
 /// Allow throwing Strings as error
@@ -143,11 +197,13 @@ private class MockCrashLoggingDataProvider: CrashLoggingDataProvider {
     var userHasOptedOut: Bool = false
     var buildType: String = "test"
     var currentUser: TracksUser? = nil
+    var performanceTracking: PerformanceTracking = .disabled
 
     func reset() {
         sentryDSN = ""
         userHasOptedOut = false
         buildType = "test"
         currentUser = nil
+        performanceTracking = .disabled
     }
 }

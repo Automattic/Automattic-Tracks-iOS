@@ -53,6 +53,17 @@ public class CrashLogging {
 
             /// Attach stack traces to non-fatal errors
             options.attachStacktrace = true
+
+            // Performance monitoring options
+            options.enableAutoPerformanceTracking = self.dataProvider.enableAutoPerformanceTracking
+            options.tracesSampleRate = NSNumber(value: self.dataProvider.tracesSampleRate)
+            options.enableNetworkTracking = self.dataProvider.enableNetworkTracking
+            options.enableFileIOTracking = self.dataProvider.enableFileIOTracking
+            options.enableCoreDataTracking = self.dataProvider.enableCoreDataTracking
+            #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+                options.enableUserInteractionTracing = self.dataProvider.enableUserInteractionTracing
+                options.enableUIViewControllerTracking = self.dataProvider.enableUIViewControllerTracking
+            #endif
         }
 
         Internals.crashLogging = self
