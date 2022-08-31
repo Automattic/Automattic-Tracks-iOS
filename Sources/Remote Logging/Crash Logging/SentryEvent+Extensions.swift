@@ -18,7 +18,7 @@ extension Event {
         mutableExtra["error-code"] = error.code
         mutableExtra["error-domain"] = error.domain
 
-        error.userInfo.forEach { (key, value) in
+        error.userInfo.forEach { key, value in
             mutableExtra[key] = value
         }
 
