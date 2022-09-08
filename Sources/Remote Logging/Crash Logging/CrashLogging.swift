@@ -168,7 +168,7 @@ public extension CrashLogging {
             )
 
             event.threads = currentThreads()
-            
+
             serializer.add(event: event)
         }
 

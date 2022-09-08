@@ -30,11 +30,11 @@ extension SentrySDK {
     /// will no longer be available.
     private static func _currentHub() -> SentryHub? {
         let currentHubSelector = #selector(getter: SentrySDKInternalMethods.currentHub)
-        
+
         guard SentrySDK.responds(to: currentHubSelector) else {
             return nil
         }
-        
+
         return SentrySDK.perform(currentHubSelector).takeUnretainedValue() as? SentryHub
     }
 }
