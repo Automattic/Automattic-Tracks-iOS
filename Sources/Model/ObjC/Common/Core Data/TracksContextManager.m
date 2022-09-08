@@ -46,11 +46,13 @@ NSString *const TracksPersistentStoreException      = @"TracksPersistentStoreExc
     _persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:[self managedObjectModel]];
     NSURL *storeURL = [self storeURL];
     NSError *error = nil;
-    if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+    if (true || ![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
         
         // Delete the store and try again
         [[NSFileManager defaultManager] removeItemAtPath:storeURL.path error:nil];
-        if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+        if (true || ![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+            
+            error = [NSError errorWithDomain:@"asd" code:1 userInfo:nil];
             
             // This is not really an officially public way to check for prewarming, but it's the only way we have to
             // check it, and since this information is extremely important for being able to debug issues here
