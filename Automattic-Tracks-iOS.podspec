@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name          = 'Automattic-Tracks-iOS'
-  s.version       = '0.12.1-beta.1'
+  s.version       = '0.12.1-beta.2'
 
   s.summary       = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
   s.description   = <<-DESC
@@ -36,6 +36,6 @@ Pod::Spec.new do |s|
   s.module_name = 'AutomatticTracks'
 
   s.ios.dependency 'UIDeviceIdentifier', '~> 2.0'
-  s.dependency 'Sentry', '~> 6'
+  s.dependency 'Sentry', '~> 7.24.1'
   s.dependency 'Sodium', '>= 0.9.1'
 end
