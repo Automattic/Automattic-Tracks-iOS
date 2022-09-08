@@ -51,9 +51,16 @@ NSString *const TracksPersistentStoreException      = @"TracksPersistentStoreExc
         // Delete the store and try again
         [[NSFileManager defaultManager] removeItemAtPath:storeURL.path error:nil];
         if (![_persistentStoreCoordinator addPersistentStoreWithType:NSSQLiteStoreType configuration:nil URL:storeURL options:nil error:&error]) {
+            
+            // This is not really an officially public way to check for prewarming, but it's the only way we have to
+            // check it, and since this information is extremely important for being able to debug issues here
+            // it's worth including it.  Worst case scenario this could cease working, but should not cause any issues
+            // whatsoever.
+            NSString *prewarming = [NSProcessInfo processInfo].environment[@"ActivePrewarm"] ?: @"0";
+            
             // Replace this with code to handle the error appropriately.
             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-            TracksLogError(@"Unresolved error %@, %@", error, [error userInfo]);
+            TracksLogError(@"Unresolved error %@, %@. Context info {prewarming=%@, storeURL=%@}.", error, [error userInfo], prewarming, storeURL);
             
             @throw [NSException exceptionWithName:TracksPersistentStoreException
                                            reason:[NSString stringWithFormat:@"Error initializing Tracks: %@", error]
