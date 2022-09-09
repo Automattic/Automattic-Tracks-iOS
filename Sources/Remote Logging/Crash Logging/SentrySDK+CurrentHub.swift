@@ -17,17 +17,17 @@ protocol SentrySDKInternalMethods {
 extension SentrySDK {
 
     /// Returns the `Client` for the current `SentryHub`.
+    /// Since this method uses some Sentry internal methods to work, it may cease working entirely and start returning
+    /// `nil` when Sentry is updated.
     ///
-    /// - Note: Once we'll migrate to version 7.x, this will return `.none` because `currentHub`
-    /// will no longer be available.
     static func currentClient() -> Sentry.Client? {
         _currentHub()?.getClient()
     }
 
     /// Returns the current `SentryHub`.
+    /// Since this method uses some Sentry internal methods to work, it may cease working entirely and start returning
+    /// `nil` when Sentry is updated.
     ///
-    /// - Note: Once we'll migrate to version 7.x, this will return `.none` because `currentHub`
-    /// will no longer be available.
     private static func _currentHub() -> SentryHub? {
         let currentHubSelector = #selector(getter: SentrySDKInternalMethods.currentHub)
 
