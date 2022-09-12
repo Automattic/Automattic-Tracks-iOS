@@ -158,10 +158,10 @@ class CrashLoggingTests: XCTestCase {
 
     func testPerformanceMonitoringConfigurationMappingWhenEnabled() {
         let dataProvider = MockCrashLoggingDataProvider()
-        dataProvider.performanceTracking = .enabled(.init(sampleRate: 0.12))
+        dataProvider.performanceTracking = .enabled(.init())
 
         XCTAssertTrue(dataProvider.enableAutoPerformanceTracking)
-        XCTAssertEqual(dataProvider.tracesSampleRate, 0.12)
+        XCTAssertEqual(dataProvider.tracesSampleRate, 0.1)
         XCTAssertTrue(dataProvider.enableCoreDataTracking)
         XCTAssertTrue(dataProvider.enableFileIOTracking)
         XCTAssertTrue(dataProvider.enableNetworkTracking)
@@ -175,7 +175,7 @@ class CrashLoggingTests: XCTestCase {
         let dataProvider = MockCrashLoggingDataProvider()
         dataProvider.performanceTracking = .enabled(
             .init(
-                sampleRate: 0.23,
+                sampleRateGetter: { 0.23 },
                 trackCoreData: false,
                 trackFileIO: true,
                 trackNetwork: false,

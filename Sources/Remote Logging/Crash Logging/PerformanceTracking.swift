@@ -1,6 +1,8 @@
 /// Defines whether to enable performance tracking, and if so, how to configure it.
 public enum PerformanceTracking {
 
+    public typealias SampleRateGetter = () -> Double
+
     case disabled
     case enabled(Configuration)
 
@@ -8,8 +10,10 @@ public enum PerformanceTracking {
     ///
     /// – SeeAlso: The [Sentry docs](https://docs.sentry.io/platforms/apple/guides/ios/performance/instrumentation/automatic-instrumentation/#uiviewcontroller-tracking).
     public struct Configuration {
-        /// - Important: Must be between 0.0 (no events) and 1.0 (all events).
-        public let sampleRate: Double
+        /// This parameter allows clients to change the sample rate at runtime.
+        ///
+        /// - Important: The returned value must be between 0.0 (no events) and 1.0 (all events).
+        public let sampleRateGetter: SampleRateGetter
         /// Defaults to `true`.
         public let trackCoreData: Bool
         /// Defaults to `true`.
@@ -26,16 +30,19 @@ public enum PerformanceTracking {
         /// – Note: This is only read in iOS, tvOS, and Mac Catalyst clients, i.e. those with UIKit.
         public let trackViewControllers: Bool
 
+        // Compute the sample rate at runtime, to account for it accessing mutable state.
+        // Clamp it between 0.0 and 1.0—the values Sentry uses.
+        var sampleRate: Double { min(max(sampleRateGetter(), 0.0), 1.0) }
+
         public init(
-            sampleRate: Double,
+            sampleRateGetter: @escaping SampleRateGetter = { 0.1 },
             trackCoreData: Bool = true,
             trackFileIO: Bool = true,
             trackNetwork: Bool = true,
             trackUserInteraction: Bool = true,
             trackViewControllers: Bool = true
         ) {
-            // Force sample rate to be between 0.0 and 1.0.
-            self.sampleRate = min(max(0.0, sampleRate), 1.0)
+            self.sampleRateGetter = sampleRateGetter
             self.trackCoreData = trackCoreData
             self.trackFileIO = trackFileIO
             self.trackNetwork = trackNetwork

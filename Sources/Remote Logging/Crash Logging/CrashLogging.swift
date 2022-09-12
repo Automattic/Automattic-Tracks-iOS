@@ -56,7 +56,11 @@ public class CrashLogging {
 
             // Performance monitoring options
             options.enableAutoPerformanceTracking = self.dataProvider.enableAutoPerformanceTracking
-            options.tracesSampleRate = NSNumber(value: self.dataProvider.tracesSampleRate)
+            options.tracesSampler = { _ in
+                // To keep our implementation as Sentry agnostic as possible, we don't pass the
+                // input `SamplingContext` down the chain.
+                NSNumber(value: self.dataProvider.tracesSampler())
+            }
             options.enableNetworkTracking = self.dataProvider.enableNetworkTracking
             options.enableFileIOTracking = self.dataProvider.enableFileIOTracking
             options.enableCoreDataTracking = self.dataProvider.enableCoreDataTracking
