@@ -128,6 +128,19 @@ class CrashLoggingTests: XCTestCase {
 //        wait(for: [expectation], timeout: 1)
 //    }
 
+    func testPerformanceMonitoringIsDisabledByDefault() {
+        let dataProvider = CrashLoggingDataProviderWithDefaultValuesOnly(
+            sentryDSN: "ignored-in-this-test",
+            userHasOptedOut: false,
+            buildType: "ignored-in-this-test",
+            currentUser: .none
+        )
+
+        guard case .disabled = dataProvider.performanceTracking else {
+            return XCTFail("Expected `CrashLoggingDataProvider` `performanceTracking` to default to `.disabled`. Got \(dataProvider) instead.")
+        }
+    }
+
     func testPerformanceMonitoringConfigurationMappingWhenDisabled() {
         let dataProvider = MockCrashLoggingDataProvider()
         dataProvider.performanceTracking = .disabled
@@ -206,4 +219,12 @@ private class MockCrashLoggingDataProvider: CrashLoggingDataProvider {
         currentUser = nil
         performanceTracking = .disabled
     }
+}
+
+/// Use this to get a `CrashLoggingDataProvider` implementation that allows testing the default values set via protocol extenstion.
+private struct CrashLoggingDataProviderWithDefaultValuesOnly: CrashLoggingDataProvider {
+    let sentryDSN: String
+    let userHasOptedOut: Bool
+    let buildType: String
+    let currentUser: TracksUser?
 }
