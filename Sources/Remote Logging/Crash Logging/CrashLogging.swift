@@ -167,7 +167,9 @@ public extension CrashLogging {
                 extra: userInfo ?? (error as NSError).userInfo
             )
 
-            serializer.add(event: addStackTrace(to: event))
+            event.threads = currentThreads()
+
+            serializer.add(event: event)
         }
 
         guard let requestBody = try? serializer.serialize() else {
@@ -231,13 +233,17 @@ public extension CrashLogging {
         }
     }
 
-    /// A wrapper around the `SentryClient` shim – keeps each layer clean by avoiding optionality
-    private func addStackTrace(to event: Event) -> Event {
+    /// Returns an array of threads for the current stack trace.  This hack is needed because we don't have
+    /// any public mechanism to access the stack trace threads to add them to our custom events.
+    ///
+    /// Ref: https://github.com/getsentry/sentry-cocoa/issues/1451#issuecomment-1240782406
+    ///
+    private func currentThreads() -> [Sentry.Thread] {
         guard let client = SentrySDK.currentClient() else {
-            return event
+            return []
         }
 
-        return client.addStackTrace(to: event, for: client)
+        return client.currentThreads()
     }
 }
 

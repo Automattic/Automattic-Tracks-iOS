@@ -2,47 +2,47 @@ import Sentry
 
 
 @objc
-private protocol SentryClient_InternalMethods {
+private protocol SentryClientInternalMethods {
     @objc(prepareEvent:withScope:alwaysAttachStacktrace:isCrashEvent:)
     func prepareEvent(_ e: Sentry.Event,
                       withScope: Sentry.Scope,
                       alwaysAttachStacktrace: Bool,
                       isCrashEvent: Bool
     ) -> Sentry.Event?
+
+    @objc(threadInspector)
+    func threadInspector() -> Any
+}
+
+@objc
+private protocol SentryThreadInspectorInternalMethods {
+    @objc(getCurrentThreads)
+    func getCurrentThreads() -> [Sentry.Thread]
+
 }
 
 extension Sentry.Client {
-    /*
-     * A wrapper around a private method in `SentryClient`. If it's unavailable (say the library
-     changes),
-     * the worst that should happen is that the stack trace is no longer available on events sent
-     manually using this method.
-     *
-     * We can remove this once the Sentry SDK allows for capturing events and being notified once
-     they're delivered.
-     * ref: https://github.com/getsentry/sentry-cocoa/issues/660
-     */
-    @objc(addStackTraceToEvent:forClient:)
-    func addStackTrace(to event: Sentry.Event, for client: Sentry.Client) -> Sentry.Event {
 
-        let sel = #selector(SentryClient_InternalMethods.prepareEvent(_:withScope:alwaysAttachStacktrace:isCrashEvent:))
+    /// Returns an array of threads for the current stack trace.  This hack is needed because we don't have
+    /// any public mechanism to access the stack trace threads to add them to our custom events.
+    ///
+    /// Ref: https://github.com/getsentry/sentry-cocoa/issues/1451#issuecomment-1240782406
+    ///
+    func currentThreads() -> [Sentry.Thread] {
+        let threadInspectorSelector = #selector(SentryClientInternalMethods.threadInspector)
 
-        if !client.responds(to: sel) {
-            return event
+        guard responds(to: threadInspectorSelector) else {
+            return []
         }
 
-        guard let scope = SentrySDK.currentScope() else {
-            return event
+        let threadInspector = perform(threadInspectorSelector).takeUnretainedValue()
+        let getCurrentThreadsSelector = #selector(SentryThreadInspectorInternalMethods.getCurrentThreads)
+
+        guard threadInspector.responds(to: getCurrentThreadsSelector) else {
+            return []
         }
 
-        guard let eventWithStackTrace = (self as AnyObject).prepareEvent(event, withScope: scope, alwaysAttachStacktrace: true, isCrashEvent: false)
-        else {
-            return event
-        }
-
-        if let stackTrace = eventWithStackTrace.threads?.first?.stacktrace {
-            eventWithStackTrace.stacktrace = stackTrace
-        }
-        return event
+        let threads = threadInspector.perform(getCurrentThreadsSelector).takeUnretainedValue() as? [Sentry.Thread]
+        return threads ?? []
     }
 }
