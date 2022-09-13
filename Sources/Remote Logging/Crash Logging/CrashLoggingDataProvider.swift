@@ -31,7 +31,7 @@ public extension CrashLoggingDataProvider {
     }
 
     /// Performance tracking is disabled by default to avoid accidentally logging what could be a significant number of extra events
-    /// and blow up our budget monitoring.
+    /// and blow up our events budget.
     var performanceTracking: PerformanceTracking { .disabled }
 
     var enableAutoPerformanceTracking: Bool {
