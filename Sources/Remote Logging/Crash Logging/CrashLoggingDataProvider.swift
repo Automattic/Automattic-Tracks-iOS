@@ -41,9 +41,9 @@ public extension CrashLoggingDataProvider {
         }
     }
 
-    var tracesSampler: PerformanceTracking.SampleRateGetter {
+    var tracesSampler: PerformanceTracking.Sampler {
         guard case .enabled(let config) = performanceTracking else { return { 0.0 } }
-        return config.sampleRateGetter
+        return config.sampler
     }
 
     var tracesSampleRate: Double {

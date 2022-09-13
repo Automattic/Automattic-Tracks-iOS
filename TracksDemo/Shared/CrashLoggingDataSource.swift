@@ -15,5 +15,5 @@ struct CrashLoggingDataSource: CrashLoggingDataProvider {
 
     // This is a demo app, we can afford to sample all events. However, Sentry recomends a lower
     // sample rate in production.
-    var performanceTracking: PerformanceTracking = .enabled(.init(sampleRateGetter: { 1.0 }))
+    var performanceTracking: PerformanceTracking = .enabled(.init(sampler: { 1.0 }))
 }

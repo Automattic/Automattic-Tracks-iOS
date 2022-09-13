@@ -175,7 +175,7 @@ class CrashLoggingTests: XCTestCase {
         let dataProvider = MockCrashLoggingDataProvider()
         dataProvider.performanceTracking = .enabled(
             .init(
-                sampleRateGetter: { 0.23 },
+                sampler: { 0.23 },
                 trackCoreData: false,
                 trackFileIO: true,
                 trackNetwork: false,
