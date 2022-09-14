@@ -22,13 +22,18 @@ extension EventLogging {
             return
         }
 
+        guard let timestamp = event.timestamp else {
+            TracksLogDebug("📜 Unable to locate event timestamp")
+            return
+        }
+
         /// Allow the hosting app to determine the most appropriate log file to send for the error type. For example, in an application using
         /// session-based file logging, the newest log file would be the current session, which is appropriate for debugging logs. However,
         /// the previous session's log file is the correct one for a crash, because when the crash is sent there will already be a new log
         /// file for the current session. Other apps may use time-based logs, in which case the same log would be the correct one.
         ///
         /// We also pass the timestamp for the event, as that can be useful for determining the correct log file.
-        guard let logFilePath = dataSource.logFilePath(forErrorLevel: event.errorType, at: event.timestamp ?? Date()) else {
+        guard let logFilePath = dataSource.logFilePath(forErrorLevel: event.errorType, at: timestamp) else {
             TracksLogDebug("📜 Unable to locate a log file to attach")
             return
         }

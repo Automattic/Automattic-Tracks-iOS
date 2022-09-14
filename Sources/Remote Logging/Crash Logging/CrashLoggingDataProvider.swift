@@ -12,6 +12,7 @@ public protocol CrashLoggingDataProvider {
     var currentUser: TracksUser? { get }
     var additionalUserData: [String: Any] { get }
     var shouldEnableAutomaticSessionTracking: Bool { get }
+    var performanceTracking: PerformanceTracking { get }
 }
 
 /// Default implementations of common protocol properties
@@ -27,5 +28,51 @@ public extension CrashLoggingDataProvider {
 
     var shouldEnableAutomaticSessionTracking: Bool {
         return false
+    }
+
+    /// Performance tracking is disabled by default to avoid accidentally logging what could be a significant number of extra events
+    /// and blow up our events budget.
+    var performanceTracking: PerformanceTracking { .disabled }
+
+    var enableAutoPerformanceTracking: Bool {
+        switch performanceTracking {
+        case .enabled: return true
+        case .disabled: return false
+        }
+    }
+
+    var tracesSampler: PerformanceTracking.Sampler {
+        guard case .enabled(let config) = performanceTracking else { return { 0.0 } }
+        return config.sampler
+    }
+
+    var tracesSampleRate: Double {
+        guard case .enabled(let config) = performanceTracking else { return 0.0 }
+        return config.sampleRate
+    }
+
+    var enableUIViewControllerTracking: Bool {
+        guard case .enabled(let config) = performanceTracking else { return false }
+        return config.trackViewControllers
+    }
+
+    var enableNetworkTracking: Bool {
+        guard case .enabled(let config) = performanceTracking else { return false }
+        return config.trackNetwork
+    }
+
+    var enableFileIOTracking: Bool {
+        guard case .enabled(let config) = performanceTracking else { return false }
+        return config.trackFileIO
+    }
+
+    var enableCoreDataTracking: Bool {
+        guard case .enabled(let config) = performanceTracking else { return false }
+        return config.trackCoreData
+    }
+
+    var enableUserInteractionTracing: Bool {
+        guard case .enabled(let config) = performanceTracking else { return false }
+        return config.trackUserInteraction
     }
 }

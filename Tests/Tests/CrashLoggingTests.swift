@@ -127,6 +127,73 @@ class CrashLoggingTests: XCTestCase {
 //
 //        wait(for: [expectation], timeout: 1)
 //    }
+
+    func testPerformanceMonitoringIsDisabledByDefault() {
+        let dataProvider = CrashLoggingDataProviderWithDefaultValuesOnly(
+            sentryDSN: "ignored-in-this-test",
+            userHasOptedOut: false,
+            buildType: "ignored-in-this-test",
+            currentUser: .none
+        )
+
+        guard case .disabled = dataProvider.performanceTracking else {
+            return XCTFail("Expected `CrashLoggingDataProvider` `performanceTracking` to default to `.disabled`. Got \(dataProvider) instead.")
+        }
+    }
+
+    func testPerformanceMonitoringConfigurationMappingWhenDisabled() {
+        let dataProvider = MockCrashLoggingDataProvider()
+        dataProvider.performanceTracking = .disabled
+
+        XCTAssertFalse(dataProvider.enableAutoPerformanceTracking)
+        XCTAssertEqual(dataProvider.tracesSampleRate, 0.0)
+        XCTAssertFalse(dataProvider.enableCoreDataTracking)
+        XCTAssertFalse(dataProvider.enableFileIOTracking)
+        XCTAssertFalse(dataProvider.enableNetworkTracking)
+        #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+            XCTAssertFalse(dataProvider.enableUIViewControllerTracking)
+            XCTAssertFalse(dataProvider.enableUserInteractionTracing)
+        #endif
+    }
+
+    func testPerformanceMonitoringConfigurationMappingWhenEnabled() {
+        let dataProvider = MockCrashLoggingDataProvider()
+        dataProvider.performanceTracking = .enabled(.init())
+
+        XCTAssertTrue(dataProvider.enableAutoPerformanceTracking)
+        XCTAssertEqual(dataProvider.tracesSampleRate, 0.1)
+        XCTAssertTrue(dataProvider.enableCoreDataTracking)
+        XCTAssertTrue(dataProvider.enableFileIOTracking)
+        XCTAssertTrue(dataProvider.enableNetworkTracking)
+        #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+            XCTAssertTrue(dataProvider.enableUIViewControllerTracking)
+            XCTAssertTrue(dataProvider.enableUserInteractionTracing)
+        #endif
+    }
+
+    func testPerformanceMonitoringConfigurationMappingWhenEnabledWithCustomValues() {
+        let dataProvider = MockCrashLoggingDataProvider()
+        dataProvider.performanceTracking = .enabled(
+            .init(
+                sampler: { 0.23 },
+                trackCoreData: false,
+                trackFileIO: true,
+                trackNetwork: false,
+                trackUserInteraction: true,
+                trackViewControllers: false
+            )
+        )
+
+        XCTAssertTrue(dataProvider.enableAutoPerformanceTracking)
+        XCTAssertEqual(dataProvider.tracesSampleRate, 0.23)
+        XCTAssertFalse(dataProvider.enableCoreDataTracking)
+        XCTAssertTrue(dataProvider.enableFileIOTracking)
+        XCTAssertFalse(dataProvider.enableNetworkTracking)
+        #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
+            XCTAssertFalse(dataProvider.enableUIViewControllerTracking)
+            XCTAssertTrue(dataProvider.enableUserInteractionTracing)
+        #endif
+    }
 }
 
 /// Allow throwing Strings as error
@@ -143,11 +210,21 @@ private class MockCrashLoggingDataProvider: CrashLoggingDataProvider {
     var userHasOptedOut: Bool = false
     var buildType: String = "test"
     var currentUser: TracksUser? = nil
+    var performanceTracking: PerformanceTracking = .disabled
 
     func reset() {
         sentryDSN = ""
         userHasOptedOut = false
         buildType = "test"
         currentUser = nil
+        performanceTracking = .disabled
     }
+}
+
+/// Use this to get a `CrashLoggingDataProvider` implementation that allows testing the default values set via protocol extenstion.
+private struct CrashLoggingDataProviderWithDefaultValuesOnly: CrashLoggingDataProvider {
+    let sentryDSN: String
+    let userHasOptedOut: Bool
+    let buildType: String
+    let currentUser: TracksUser?
 }
