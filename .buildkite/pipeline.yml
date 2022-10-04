@@ -1,10 +1,10 @@
 # Nodes with values to reuse in the pipeline.
 common_params:
   plugins: &common_plugins
-  - &bash_cache automattic/bash-cache#2.7.0: ~
+  - &bash_cache automattic/bash-cache#2.8.0
   # Common environment values to use with the `env` key.
   env: &common_env
-    IMAGE_ID: xcode-13.4.1
+    IMAGE_ID: xcode-14
 
 # This is the default pipeline – it will build and test the app
 steps:
@@ -14,9 +14,6 @@ steps:
   - label: "🧪 Build and Test iOS"
     key: "test_ios"
     command: |
-      # Workaround for https://github.com/Automattic/buildkite-ci/issues/79
-      gem install bundler
-
       # Build and test the pod twice if needed. This is necessary under Xcode 12 to avoid an error
       # that occurs the first time after cleaning if one of your dependences uses a binary framework
       # See https://bugs.swift.org/browse/SR-13803
@@ -32,9 +29,6 @@ steps:
   - label: "🧪 Build and Test macOS"
     key: "test_macos"
     command: |
-      # Workaround for https://github.com/Automattic/buildkite-ci/issues/79
-      gem install bundler
-
       # Build and test the pod twice if needed. This is necessary under Xcode 12 to avoid an error
       # that occurs the first time after cleaning if one of your dependences uses a binary framework
       # See https://bugs.swift.org/browse/SR-13803
@@ -50,9 +44,6 @@ steps:
   - label: "🔬 Validating Podspec"
     key: "validate"
     command: |
-      # Workaround for https://github.com/Automattic/buildkite-ci/issues/79
-      gem install bundler
-
       validate_podspec
     env: *common_env
     plugins: *common_plugins
@@ -73,9 +64,6 @@ steps:
   - label: "🧹 Lint"
     key: "lint"
     command: |
-      # Workaround for https://github.com/Automattic/buildkite-ci/issues/79
-      gem install bundler
-
       lint_pod
     env: *common_env
     plugins: *common_plugins
