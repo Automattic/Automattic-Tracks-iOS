@@ -23,6 +23,9 @@ public class CrashLogging {
     /// crash log events will only be sent in Release builds.
     public static let forceCrashLoggingKey = "force-crash-logging"
 
+    // TODO: This could be made a configurable instance property, with default value in the `init`
+    public static let eventsFlushingTimeout: TimeInterval = 15
+
     /// Initializes the crash logging system
     ///
     /// - Parameters:
@@ -168,54 +171,24 @@ public extension CrashLogging {
     }
 
     /// Sends an `Event` to Sentry and triggers a callback on completion
-    func logErrorImmediately(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
+    func logErrorImmediately(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) throws {
         try logErrorsImmediately([error], userInfo: userInfo, level: level, callback: callback)
     }
 
-    func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
-
-        var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
+    func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) throws {
 
         errors.forEach { error in
-            let event = Event.from(
-                error: error as NSError,
-                level: level,
-                user: dataProvider.currentUser?.sentryUser,
-                extra: userInfo ?? (error as NSError).userInfo
-            )
-
-            event.threads = currentThreads()
-
-            serializer.add(event: event)
-        }
-
-        guard let requestBody = try? serializer.serialize() else {
-            TracksLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
-            errors.forEach {
-                SentrySDK.capture(error: $0)
+            // Amending the global scope on a per-event basis seems like the best way to add the
+            // caller-provided `userInfo` and `level`.
+            SentrySDK.capture(error: error) { scope in
+                // Under the hood, `setExtras` uses `NSMutableDictionary` `addEntriesFromDictionary`
+                // meaning this won't replace the whole extras dictionary.
+                scope.setExtras(userInfo)
+                scope.setLevel(level)
             }
-            return
         }
-
-        let dsn = try SentryDsn(string: dataProvider.sentryDSN)
-        guard let authString = dsn.getAuthString() else {
-            throw Errors.unableToConstructAuthStringError
-        }
-
-        var request = URLRequest(url: dsn.getEnvelopeEndpoint())
-        request.httpMethod = "POST"
-        request.httpBody = requestBody
-        request.addValue(authString, forHTTPHeaderField: "X-Sentry-Auth")
-
-        URLSession.shared.dataTask(with: request) { (responseData, urlResponse, error) in
-            if let error = error {
-                callback(.failure(error))
-                return
-            }
-
-            let didSucceed = 200...299 ~= (urlResponse as! HTTPURLResponse).statusCode
-            callback(.success(didSucceed))
-        }.resume()
+        SentrySDK.flush(timeout: CrashLogging.eventsFlushingTimeout)
+        callback()
     }
 
     /**
@@ -227,26 +200,8 @@ public extension CrashLogging {
      - level: The level of severity to report in Sentry (`.error` by default)
     */
     func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) throws {
-        let semaphore = DispatchSemaphore(value: 0)
-
-        var networkError: Error?
-
-        try logErrorImmediately(error, userInfo: userInfo, level: level) { result in
-
-            switch result {
-                case .success:
-                    TracksLogDebug("💥 Successfully transmitted crash data")
-                case .failure(let err):
-                    networkError = err
-            }
-
-            semaphore.signal()
-        }
-
-        semaphore.wait()
-
-        if let networkError = networkError {
-            throw networkError
+        try logErrorImmediately(error, userInfo: userInfo, level: level) {
+            TracksLogDebug("💥 Events flush completed. When using Sentry, this either mean all events were sent or that the flush timeout was reached.")
         }
     }
 

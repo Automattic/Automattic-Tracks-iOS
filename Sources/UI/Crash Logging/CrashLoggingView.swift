@@ -97,14 +97,8 @@ extension CrashLoggingView {
         let error = SentryTestError(title: "Test Error")
 
         do {
-            try crashLogging.logErrorImmediately(error) { result in
-                switch result {
-                    case .success:
-                        sendErrorAndWaitStatus = .success
-                    case .failure(let err):
-                        sendingError = err
-                        sendErrorAndWaitStatus = .error
-                }
+            try crashLogging.logErrorImmediately(error) {
+                sendErrorAndWaitStatus = .success
             }
         } catch let err {
             sendingError = err
