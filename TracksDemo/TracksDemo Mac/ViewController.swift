@@ -116,8 +116,10 @@ class ViewController: NSViewController {
 
     // MARK: - Helpers
     private func updateObjectCountLabel() {
-        let count = fetchedResultsController.fetchedObjects?.count ?? 0
-        queuedEventsLabel.stringValue = "Number of events queued: \(count)"
+        DispatchQueue.main.async { [weak self] in
+            let count = self?.fetchedResultsController.fetchedObjects?.count ?? 0
+            self?.queuedEventsLabel.stringValue = "Number of events queued: \(count)"
+        }
     }
 
     private func switchToAnonymousUser() {
