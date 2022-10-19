@@ -204,41 +204,6 @@ public extension CrashLogging {
             TracksLogDebug("💥 Events flush completed. When using Sentry, this either mean all events were sent or that the flush timeout was reached.")
         }
     }
-
-    /// Returns an array of threads for the current stack trace.  This hack is needed because we don't have
-    /// any public mechanism to access the stack trace threads to add them to our custom events.
-    ///
-    /// Ref: https://github.com/getsentry/sentry-cocoa/issues/1451#issuecomment-1240782406
-    ///
-    private func currentThreads() -> [Sentry.Thread] {
-        guard let client = SentrySDK.currentClient() else {
-            return []
-        }
-
-        return client.currentThreads()
-    }
-}
-
-extension SentryDsn {
-    func getAuthString() -> String? {
-
-        guard let user = url.user else {
-            return nil
-        }
-
-        var data = [
-            "sentry_version=7",
-            "sentry_client=tracks-manual-upload/\(TracksLibraryVersion)",
-            "sentry_timesetamp=\(Date().timeIntervalSince1970)",
-            "sentry_key=\(user)",
-        ]
-
-        if let password = url.password {
-            data.append("sentry_secret=\(password)")
-        }
-
-        return "Sentry " + data.joined(separator: ",")
-    }
 }
 
 // MARK: - User Tracking
