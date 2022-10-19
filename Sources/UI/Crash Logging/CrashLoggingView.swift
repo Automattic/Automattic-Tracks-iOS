@@ -97,7 +97,10 @@ extension CrashLoggingView {
         let error = SentryTestError(title: "Test Error")
 
         do {
-            try crashLogging.logErrorImmediately(error) {
+            try crashLogging.logErrorImmediately(
+                error,
+                userInfo: ["custom-userInfo-key": "custom-userInfo-value"]
+            ) {
                 sendErrorAndWaitStatus = .success
             }
         } catch let err {
