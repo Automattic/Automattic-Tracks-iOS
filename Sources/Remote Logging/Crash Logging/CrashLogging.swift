@@ -187,8 +187,12 @@ public extension CrashLogging {
                 scope.setLevel(level)
             }
         }
-        SentrySDK.flush(timeout: CrashLogging.eventsFlushingTimeout)
-        callback()
+
+        let queue = DispatchQueue(label: "com.automattic.tracks.flushSentry", qos: .background)
+        queue.async {
+            SentrySDK.flush(timeout: CrashLogging.eventsFlushingTimeout)
+            callback()
+        }
     }
 
     /**
