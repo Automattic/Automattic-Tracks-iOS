@@ -176,7 +176,29 @@ public extension CrashLogging {
     }
 
     func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) throws {
+        logErrorsImmediately(errors, userInfo: userInfo, level: level, andWait: false, callback: callback)
+    }
 
+    /**
+     Writes the error to the Crash Logging system, and includes a stack trace. This method will block the thread until the event is fired.
+
+     - Parameters:
+     - error: The error object
+     - userInfo: A dictionary containing additional data about this error.
+     - level: The level of severity to report in Sentry (`.error` by default)
+     */
+    func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) throws {
+        logErrorsImmediately([error], userInfo: userInfo, level: level, andWait: true, callback: {})
+        TracksLogDebug("💥 Events flush completed. When using Sentry, this either means all events were sent or that the flush timeout was reached.")
+    }
+
+    private func logErrorsImmediately(
+        _ errors: [Error],
+        userInfo: [String: Any]? = nil,
+        level: SentryLevel = .error,
+        andWait wait: Bool,
+        callback: @escaping () -> Void
+    ) {
         errors.forEach { error in
             // Amending the global scope on a per-event basis seems like the best way to add the
             // caller-provided `userInfo` and `level`.
@@ -188,24 +210,15 @@ public extension CrashLogging {
             }
         }
 
-        let queue = DispatchQueue(label: "com.automattic.tracks.flushSentry", qos: .background)
-        queue.async {
+        let flushEventThenCallCallback: () -> Void = {
             SentrySDK.flush(timeout: CrashLogging.eventsFlushingTimeout)
             callback()
         }
-    }
-
-    /**
-     Writes the error to the Crash Logging system, and includes a stack trace. This method will block the thread until the event is fired.
-
-     - Parameters:
-     - error: The error object
-     - userInfo: A dictionary containing additional data about this error.
-     - level: The level of severity to report in Sentry (`.error` by default)
-    */
-    func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) throws {
-        try logErrorImmediately(error, userInfo: userInfo, level: level) {
-            TracksLogDebug("💥 Events flush completed. When using Sentry, this either mean all events were sent or that the flush timeout was reached.")
+        if wait {
+            flushEventThenCallCallback()
+        } else {
+            let queue = DispatchQueue(label: "com.automattic.tracks.flushSentry", qos: .background)
+            queue.async { flushEventThenCallCallback() }
         }
     }
 }
