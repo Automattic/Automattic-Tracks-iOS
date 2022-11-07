@@ -23,17 +23,22 @@ public class CrashLogging {
     /// crash log events will only be sent in Release builds.
     public static let forceCrashLoggingKey = "force-crash-logging"
 
-    // TODO: This could be made a configurable instance property, with default value in the `init`
-    public static let flushTimeout: TimeInterval = 15
+    public let flushTimeout: TimeInterval
 
     /// Initializes the crash logging system
     ///
     /// - Parameters:
     ///   - dataProvider: An object that provides any configuration to the crash logging system
     ///   - eventLogging: An associated `EventLogging` object that provides integration between the Crash Logging and Event Logging subsystems
-    public init(dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
+    ///   - flushTimeout: The `TimeInterval` to wait for when flushing events and crahses queued to be sent to the remote
+    public init(
+        dataProvider: CrashLoggingDataProvider,
+        eventLogging: EventLogging? = nil,
+        flushTimeout: TimeInterval = 15
+    ) {
         self.dataProvider = dataProvider
         self.eventLogging = eventLogging
+        self.flushTimeout = flushTimeout
     }
 
     /// Starts the CrashLogging subsystem by initializing Sentry.
@@ -211,7 +216,7 @@ public extension CrashLogging {
         }
 
         let flushEventThenCallCallback: () -> Void = {
-            SentrySDK.flush(timeout: CrashLogging.flushTimeout)
+            SentrySDK.flush(timeout: self.flushTimeout)
             callback()
         }
         if wait {
