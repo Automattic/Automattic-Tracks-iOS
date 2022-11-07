@@ -24,7 +24,7 @@ public class CrashLogging {
     public static let forceCrashLoggingKey = "force-crash-logging"
 
     // TODO: This could be made a configurable instance property, with default value in the `init`
-    public static let eventsFlushingTimeout: TimeInterval = 15
+    public static let flushTimeout: TimeInterval = 15
 
     /// Initializes the crash logging system
     ///
@@ -211,7 +211,7 @@ public extension CrashLogging {
         }
 
         let flushEventThenCallCallback: () -> Void = {
-            SentrySDK.flush(timeout: CrashLogging.eventsFlushingTimeout)
+            SentrySDK.flush(timeout: CrashLogging.flushTimeout)
             callback()
         }
         if wait {
