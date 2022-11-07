@@ -222,8 +222,7 @@ public extension CrashLogging {
         if wait {
             flushEventThenCallCallback()
         } else {
-            let queue = DispatchQueue(label: "com.automattic.tracks.flushSentry", qos: .background)
-            queue.async { flushEventThenCallCallback() }
+            DispatchQueue.global().async { flushEventThenCallCallback() }
         }
     }
 }
