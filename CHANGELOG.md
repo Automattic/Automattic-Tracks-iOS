@@ -35,6 +35,7 @@ _None._
 ### Breaking Changes
 
 - `logErrorImmediately` and `logErrorsImmediately` no longer have a `Result` parameter in their callback [#232]
+- `logErrorImmediately` and `logErrorsImmediately` no longer `throws` [#236]
 
 ### New Features
 
