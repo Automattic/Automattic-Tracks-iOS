@@ -176,11 +176,11 @@ public extension CrashLogging {
     }
 
     /// Sends an `Event` to Sentry and triggers a callback on completion
-    func logErrorImmediately(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) throws {
-        try logErrorsImmediately([error], userInfo: userInfo, level: level, callback: callback)
+    func logErrorImmediately(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) {
+        logErrorsImmediately([error], userInfo: userInfo, level: level, callback: callback)
     }
 
-    func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) throws {
+    func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) {
         logErrorsImmediately(errors, userInfo: userInfo, level: level, andWait: false, callback: callback)
     }
 
@@ -192,7 +192,7 @@ public extension CrashLogging {
      - userInfo: A dictionary containing additional data about this error.
      - level: The level of severity to report in Sentry (`.error` by default)
      */
-    func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) throws {
+    func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) {
         logErrorsImmediately([error], userInfo: userInfo, level: level, andWait: true, callback: {})
         TracksLogDebug("💥 Events flush completed. When using Sentry, this either means all events were sent or that the flush timeout was reached.")
     }
