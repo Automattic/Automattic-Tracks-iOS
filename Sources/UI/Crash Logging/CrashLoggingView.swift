@@ -42,10 +42,8 @@ public struct CrashLoggingView: View {
                                     Group {} /// An empty view
                                 case .uploading:
                                     Text("⏳")
-                                case .success:
+                                case .done:
                                     Text("✅")
-                                case .error:
-                                    Text("⚠️")
                             }
                         }
                     }
@@ -63,8 +61,7 @@ public struct CrashLoggingView: View {
     enum SendErrorAndWaitStatus {
         case none
         case uploading
-        case success
-        case error
+        case done
     }
 }
 
@@ -96,19 +93,11 @@ extension CrashLoggingView {
 
         let error = SentryTestError(title: "Test Error")
 
-        do {
-            try crashLogging.logErrorImmediately(error) { result in
-                switch result {
-                    case .success:
-                        sendErrorAndWaitStatus = .success
-                    case .failure(let err):
-                        sendingError = err
-                        sendErrorAndWaitStatus = .error
-                }
-            }
-        } catch let err {
-            sendingError = err
-            sendErrorAndWaitStatus = .error
+        crashLogging.logErrorImmediately(
+            error,
+            userInfo: ["custom-userInfo-key": "custom-userInfo-value"]
+        ) {
+            sendErrorAndWaitStatus = .done
         }
     }
 }

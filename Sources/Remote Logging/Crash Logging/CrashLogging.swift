@@ -23,14 +23,22 @@ public class CrashLogging {
     /// crash log events will only be sent in Release builds.
     public static let forceCrashLoggingKey = "force-crash-logging"
 
+    public let flushTimeout: TimeInterval
+
     /// Initializes the crash logging system
     ///
     /// - Parameters:
     ///   - dataProvider: An object that provides any configuration to the crash logging system
     ///   - eventLogging: An associated `EventLogging` object that provides integration between the Crash Logging and Event Logging subsystems
-    public init(dataProvider: CrashLoggingDataProvider, eventLogging: EventLogging? = nil) {
+    ///   - flushTimeout: The `TimeInterval` to wait for when flushing events and crahses queued to be sent to the remote
+    public init(
+        dataProvider: CrashLoggingDataProvider,
+        eventLogging: EventLogging? = nil,
+        flushTimeout: TimeInterval = 15
+    ) {
         self.dataProvider = dataProvider
         self.eventLogging = eventLogging
+        self.flushTimeout = flushTimeout
     }
 
     /// Starts the CrashLogging subsystem by initializing Sentry.
@@ -168,54 +176,12 @@ public extension CrashLogging {
     }
 
     /// Sends an `Event` to Sentry and triggers a callback on completion
-    func logErrorImmediately(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
-        try logErrorsImmediately([error], userInfo: userInfo, level: level, callback: callback)
+    func logErrorImmediately(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) {
+        logErrorsImmediately([error], userInfo: userInfo, level: level, callback: callback)
     }
 
-    func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping (Result<Bool, Error>) -> Void) throws {
-
-        var serializer = SentryEventSerializer(dsn: dataProvider.sentryDSN)
-
-        errors.forEach { error in
-            let event = Event.from(
-                error: error as NSError,
-                level: level,
-                user: dataProvider.currentUser?.sentryUser,
-                extra: userInfo ?? (error as NSError).userInfo
-            )
-
-            event.threads = currentThreads()
-
-            serializer.add(event: event)
-        }
-
-        guard let requestBody = try? serializer.serialize() else {
-            TracksLogError("⛔️ Unable to send errors to Sentry – error could not be serialized. Attempting to schedule delivery for another time.")
-            errors.forEach {
-                SentrySDK.capture(error: $0)
-            }
-            return
-        }
-
-        let dsn = try SentryDsn(string: dataProvider.sentryDSN)
-        guard let authString = dsn.getAuthString() else {
-            throw Errors.unableToConstructAuthStringError
-        }
-
-        var request = URLRequest(url: dsn.getEnvelopeEndpoint())
-        request.httpMethod = "POST"
-        request.httpBody = requestBody
-        request.addValue(authString, forHTTPHeaderField: "X-Sentry-Auth")
-
-        URLSession.shared.dataTask(with: request) { (responseData, urlResponse, error) in
-            if let error = error {
-                callback(.failure(error))
-                return
-            }
-
-            let didSucceed = 200...299 ~= (urlResponse as! HTTPURLResponse).statusCode
-            callback(.success(didSucceed))
-        }.resume()
+    func logErrorsImmediately(_ errors: [Error], userInfo: [String: Any]? = nil, level: SentryLevel = .error, callback: @escaping () -> Void) {
+        logErrorsImmediately(errors, userInfo: userInfo, level: level, andWait: false, callback: callback)
     }
 
     /**
@@ -225,64 +191,39 @@ public extension CrashLogging {
      - error: The error object
      - userInfo: A dictionary containing additional data about this error.
      - level: The level of severity to report in Sentry (`.error` by default)
-    */
-    func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) throws {
-        let semaphore = DispatchSemaphore(value: 0)
+     */
+    func logErrorAndWait(_ error: Error, userInfo: [String: Any]? = nil, level: SentryLevel = .error) {
+        logErrorsImmediately([error], userInfo: userInfo, level: level, andWait: true, callback: {})
+        TracksLogDebug("💥 Events flush completed. When using Sentry, this either means all events were sent or that the flush timeout was reached.")
+    }
 
-        var networkError: Error?
-
-        try logErrorImmediately(error, userInfo: userInfo, level: level) { result in
-
-            switch result {
-                case .success:
-                    TracksLogDebug("💥 Successfully transmitted crash data")
-                case .failure(let err):
-                    networkError = err
+    private func logErrorsImmediately(
+        _ errors: [Error],
+        userInfo: [String: Any]? = nil,
+        level: SentryLevel = .error,
+        andWait wait: Bool,
+        callback: @escaping () -> Void
+    ) {
+        errors.forEach { error in
+            // Amending the global scope on a per-event basis seems like the best way to add the
+            // caller-provided `userInfo` and `level`.
+            SentrySDK.capture(error: error) { scope in
+                // Under the hood, `setExtras` uses `NSMutableDictionary` `addEntriesFromDictionary`
+                // meaning this won't replace the whole extras dictionary.
+                scope.setExtras(userInfo)
+                scope.setLevel(level)
             }
-
-            semaphore.signal()
         }
 
-        semaphore.wait()
-
-        if let networkError = networkError {
-            throw networkError
+        let flushEventThenCallCallback: () -> Void = {
+            SentrySDK.flush(timeout: self.flushTimeout)
+            callback()
         }
-    }
-
-    /// Returns an array of threads for the current stack trace.  This hack is needed because we don't have
-    /// any public mechanism to access the stack trace threads to add them to our custom events.
-    ///
-    /// Ref: https://github.com/getsentry/sentry-cocoa/issues/1451#issuecomment-1240782406
-    ///
-    private func currentThreads() -> [Sentry.Thread] {
-        guard let client = SentrySDK.currentClient() else {
-            return []
+        if wait {
+            flushEventThenCallCallback()
+        } else {
+            DispatchQueue.global().async { flushEventThenCallCallback() }
         }
-
-        return client.currentThreads()
-    }
-}
-
-extension SentryDsn {
-    func getAuthString() -> String? {
-
-        guard let user = url.user else {
-            return nil
-        }
-
-        var data = [
-            "sentry_version=7",
-            "sentry_client=tracks-manual-upload/\(TracksLibraryVersion)",
-            "sentry_timesetamp=\(Date().timeIntervalSince1970)",
-            "sentry_key=\(user)",
-        ]
-
-        if let password = url.password {
-            data.append("sentry_secret=\(password)")
-        }
-
-        return "Sentry " + data.joined(separator: ",")
     }
 }
 
