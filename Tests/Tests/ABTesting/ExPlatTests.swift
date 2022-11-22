@@ -22,8 +22,8 @@ class ExPlatTests: XCTestCase {
 
         abTesting.refresh {
             XCTAssertEqual(abTesting.experiment("experiment"), .control)
-            XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment(nil))
-            XCTAssertEqual(abTesting.experiment("experiment_multiple_variation"), .treatment("another_treatment"))
+            XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment)
+            XCTAssertEqual(abTesting.experiment("experiment_multiple_variation"), .customTreatment(name: "another_treatment"))
             expectation.fulfill()
         }
 
@@ -44,12 +44,12 @@ class ExPlatTests: XCTestCase {
             serviceMock.ttl = 60
             serviceMock.experimentVariation = "treatment"
             abTesting.refreshIfNeeded {
-                XCTAssertEqual(abTesting.experiment("experiment"), .treatment(nil))
+                XCTAssertEqual(abTesting.experiment("experiment"), .treatment)
 
                 // Should not change "experiment" to control
                 serviceMock.experimentVariation = "control"
                 abTesting.refreshIfNeeded {
-                    XCTAssertEqual(abTesting.experiment("experiment"), .treatment(nil))
+                    XCTAssertEqual(abTesting.experiment("experiment"), .treatment)
                     expectation.fulfill()
                 }
             }
@@ -71,8 +71,8 @@ class ExPlatTests: XCTestCase {
             serviceMock.returnAssignments = false
             abTesting.refresh {
                 XCTAssertEqual(abTesting.experiment("experiment"), .control)
-                XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment(nil))
-                XCTAssertEqual(abTesting.experiment("experiment_multiple_variation"), .treatment("another_treatment"))
+                XCTAssertEqual(abTesting.experiment("another_experiment"), .treatment)
+                XCTAssertEqual(abTesting.experiment("experiment_multiple_variation"), .customTreatment(name: "another_treatment"))
                 expectation.fulfill()
             }
 

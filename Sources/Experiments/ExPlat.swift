@@ -105,9 +105,9 @@ import Cocoa
         case "control":
             return .control
         case "treatment":
-            return .treatment(nil)
-        default:
-            return .treatment(variation)
+            return .treatment
+        case let name:
+            return .customTreatment(name: name)
         }
     }
 
