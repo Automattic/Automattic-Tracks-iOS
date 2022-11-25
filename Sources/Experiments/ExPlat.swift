@@ -37,6 +37,7 @@ import Cocoa
         register(experiments: ExPlat.shared?.experimentNames ?? [])
         subscribeToNotifications()
         ExPlat.shared = self
+        refresh()
     }
 
     @objc public static func configure(platform: String,
