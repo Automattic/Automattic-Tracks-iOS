@@ -96,6 +96,10 @@ public class CrashLogging {
         let shouldSendEvent = !dataProvider.userHasOptedOut
         #endif
 
+        if shouldSendEvent == false {
+            TracksLogDebug("📜 Events will not be sent because user has opted-out.")
+        }
+
         /// If we shouldn't send the event we have nothing else to do here
         guard let event = event, shouldSendEvent else {
             return nil
