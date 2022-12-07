@@ -26,7 +26,7 @@ _None._
 
 ### Internal Changes
 
-_None._
+- Log a message if events won't be collected because the user opted out [#239]
 
 -->
 
