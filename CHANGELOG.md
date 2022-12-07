@@ -26,7 +26,7 @@ _None._
 
 ### Internal Changes
 
-- Log a message if events won't be collected because the user opted out [#239]
+_None._
 
 -->
 
@@ -48,3 +48,4 @@ _None._
 ### Internal Changes
 
 - Add this changelog file [#234]
+- Log a message if events won't be collected because the user opted out [#239]
