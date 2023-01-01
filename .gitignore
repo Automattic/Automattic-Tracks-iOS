@@ -39,3 +39,4 @@ Secrets.swift
 /fastlane/test_output
 /fastlane/README.md
 .build
+.git/
