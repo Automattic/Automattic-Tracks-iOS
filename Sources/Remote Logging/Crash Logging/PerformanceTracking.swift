@@ -30,12 +30,18 @@ public enum PerformanceTracking {
         /// – Note: This is only read in iOS, tvOS, and Mac Catalyst clients, i.e. those with UIKit.
         public let trackViewControllers: Bool
 
+        /// The percent of *sampled* transactions that will be included in detailed stack-trace level *profiling*.
+        /// Must be in the range `(0.0)...(1.0)`
+        public let profilingRate: Double
+
         // Compute the sample rate at runtime, to account for it accessing mutable state.
         // Clamp it between 0.0 and 1.0—the values Sentry uses.
         var sampleRate: Double { min(max(sampler(), 0.0), 1.0) }
 
+
         public init(
             sampler: @escaping Sampler = { 0.1 },
+            profilingRate: Double = 0.0,
             trackCoreData: Bool = true,
             trackFileIO: Bool = true,
             trackNetwork: Bool = true,
@@ -43,6 +49,7 @@ public enum PerformanceTracking {
             trackViewControllers: Bool = true
         ) {
             self.sampler = sampler
+            self.profilingRate = min(max(profilingRate, 0.0), 1.0)
             self.trackCoreData = trackCoreData
             self.trackFileIO = trackFileIO
             self.trackNetwork = trackNetwork
