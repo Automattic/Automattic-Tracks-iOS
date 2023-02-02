@@ -1,4 +1,4 @@
 #import "TracksConstants.h"
 
 NSString *const TracksErrorDomain = @"TracksErrorDomain";
-NSString *const TracksLibraryVersion = @"1.0.0";
+NSString *const TracksLibraryVersion = @"1.1.0-beta";
