@@ -2,7 +2,7 @@
 
 Pod::Spec.new do |s|
   s.name          = 'Automattic-Tracks-iOS'
-  s.version       = '1.1.0-beta'
+  s.version       = '1.1.0-beta.1'
 
   s.summary       = 'Simple way to track events in an iOS app with Automattic Tracks internal service'
   s.description   = <<-DESC
