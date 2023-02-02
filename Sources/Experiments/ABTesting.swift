@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Variation: Equatable {
+public enum Variation: Equatable, Codable {
     case control
     case treatment
     case customTreatment(name: String)
