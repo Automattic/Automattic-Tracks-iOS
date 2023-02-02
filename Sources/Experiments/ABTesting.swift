@@ -1,6 +1,6 @@
 import Foundation
 
-public enum Variation: Equatable {
+public enum Variation: Equatable, Codable {
     case control
     case treatment
     case customTreatment(name: String)
@@ -13,5 +13,5 @@ public protocol ABTesting {
     func refresh(completion: (() -> Void)?)
 
     /// Return an experiment variation
-    func experiment(_ name: String) -> Variation
+    func experiment(_ name: String) -> Variation?
 }

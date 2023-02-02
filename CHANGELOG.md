@@ -36,6 +36,7 @@ _None._
 
 - `logErrorImmediately` and `logErrorsImmediately` no longer have a `Result` parameter in their callback [#232]
 - `logErrorImmediately` and `logErrorsImmediately` no longer `throws` [#236]
+- `ExPlat` returns optional instead of assuming `control` as variant. This lets the client know that there is no variant for an experiment. [#247]
 
 ### New Features
 
@@ -49,3 +50,4 @@ _None._
 
 - Add this changelog file [#234]
 - Log a message if events won't be collected because the user opted out [#239]
+- Make `Variation` confirm to cobable. [#247]
