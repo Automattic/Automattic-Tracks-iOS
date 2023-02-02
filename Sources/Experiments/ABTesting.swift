@@ -13,5 +13,5 @@ public protocol ABTesting {
     func refresh(completion: (() -> Void)?)
 
     /// Return an experiment variation
-    func experiment(_ name: String) -> Variation
+    func experiment(_ name: String) -> Variation?
 }
