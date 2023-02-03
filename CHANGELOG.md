@@ -34,9 +34,7 @@ _None._
 
 ### Breaking Changes
 
-- `logErrorImmediately` and `logErrorsImmediately` no longer have a `Result` parameter in their callback [#232]
-- `logErrorImmediately` and `logErrorsImmediately` no longer `throws` [#236]
-- `ExPlat` returns optional instead of assuming `control` as variant. This lets the client know that there is no variant for an experiment. [#247]
+_None._
 
 ### New Features
 
@@ -48,6 +46,27 @@ _None._
 
 ### Internal Changes
 
+_None._
+
+## [2.0.0](https://github.com/Automattic/Automattic-Tracks-iOS/releases/tag/2.0.0)
+
+### Breaking Changes
+
+- `ExPlat` returns optional instead of assuming `control` as variant. This lets the client know that there is no variant for an experiment. [#247]
+
+### Internal Changes
+
+- Make `Variation` confirm to `Codable`. [#247]
+
+## [1.0.0](https://github.com/Automattic/Automattic-Tracks-iOS/releases/tag/1.0.0)
+
+### Breaking Changes
+
+- `logErrorImmediately` and `logErrorsImmediately` no longer have a `Result` parameter in their callback [#232]
+- `logErrorImmediately` and `logErrorsImmediately` no longer `throws` [#236]
+- `ExPlat` returns optional instead of assuming `control` as variant. This lets the client know that there is no variant for an experiment. [#247]
+
+### Internal Changes
+
 - Add this changelog file [#234]
 - Log a message if events won't be collected because the user opted out [#239]
-- Make `Variation` confirm to cobable. [#247]
