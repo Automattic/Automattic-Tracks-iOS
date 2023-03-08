@@ -27,19 +27,6 @@ let package = Package(
             name: "AutomatticEncryptedLogs",
             targets: ["AutomatticEncryptedLogs"]
         ),
-
-        // Xcode 12 has an issue where the first build after
-        // cleaning fails if there is a dependency that vends
-        // a binary .xcframework. We are working around this
-        // on CI by first building this "_WorkaroundSPM"
-        // target that _only_ builds that one dependency.
-        // We ignore any failures when building this target.
-        // Then we go on to build the actual product, which
-        // builds correctly.
-        .library(
-            name: "_WorkaroundSPM",
-            targets: ["_WorkaroundSPM"]
-        )
     ],
     dependencies: [
         // Runtime dependencies
@@ -183,11 +170,5 @@ let package = Package(
             ],
             path: "Tests/Tests/ObjC"
         ),
-
-        .target(
-            name: "_WorkaroundSPM",
-            dependencies: ["Sodium"],
-            path: "Sources/Workaround-SPM"
-        )
     ]
 )
