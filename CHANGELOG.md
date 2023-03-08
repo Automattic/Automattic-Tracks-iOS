@@ -49,4 +49,4 @@ _None._
 
 - Add this changelog file [#234]
 - Log a message if events won't be collected because the user opted out [#239]
-- Tracks now requires at least Xcode 13.
+- Tracks now requires at least Xcode 13. [#244]
