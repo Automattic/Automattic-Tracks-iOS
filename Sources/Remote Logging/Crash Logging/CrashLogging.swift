@@ -65,18 +65,19 @@ public class CrashLogging {
             options.attachStacktrace = true
 
             // Performance monitoring options
-            options.enableAutoPerformanceTracking = self.dataProvider.enableAutoPerformanceTracking
+            options.enableAutoPerformanceTracing = self.dataProvider.enableAutoPerformanceTracking
             options.tracesSampler = { _ in
                 // To keep our implementation as Sentry agnostic as possible, we don't pass the
                 // input `SamplingContext` down the chain.
                 NSNumber(value: self.dataProvider.tracesSampler())
             }
+            options.profilesSampleRate = NSNumber(value: self.dataProvider.profilingRate)
             options.enableNetworkTracking = self.dataProvider.enableNetworkTracking
-            options.enableFileIOTracking = self.dataProvider.enableFileIOTracking
-            options.enableCoreDataTracking = self.dataProvider.enableCoreDataTracking
+            options.enableFileIOTracing = self.dataProvider.enableFileIOTracking
+            options.enableCoreDataTracing = self.dataProvider.enableCoreDataTracking
             #if os(iOS) || os(tvOS) || targetEnvironment(macCatalyst)
                 options.enableUserInteractionTracing = self.dataProvider.enableUserInteractionTracing
-                options.enableUIViewControllerTracking = self.dataProvider.enableUIViewControllerTracking
+                options.enableUIViewControllerTracing = self.dataProvider.enableUIViewControllerTracking
             #endif
         }
 

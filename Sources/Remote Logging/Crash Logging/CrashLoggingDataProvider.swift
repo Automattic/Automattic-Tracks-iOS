@@ -51,6 +51,11 @@ public extension CrashLoggingDataProvider {
         return config.sampleRate
     }
 
+    var profilingRate: Double {
+        guard case .enabled(let config) = performanceTracking else { return 0.0 }
+        return config.profilingRate
+    }
+
     var enableUIViewControllerTracking: Bool {
         guard case .enabled(let config) = performanceTracking else { return false }
         return config.trackViewControllers
