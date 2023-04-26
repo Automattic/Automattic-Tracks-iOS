@@ -39,6 +39,7 @@ _None._
 ### New Features
 
 - The Sentry SDK has been updated to version 8.0.0, and now exposes [Performance Profiling](https://docs.sentry.io/product/profiling/) as an option. [#245]
+- Add a `platform` property to `TracksService` that is used for `ExPlat` configuration. [#253]
 
 ### Bug Fixes
 
