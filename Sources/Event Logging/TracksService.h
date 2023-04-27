@@ -12,7 +12,7 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 @property (nonatomic, strong) TracksServiceRemote *remote;
 
 /*! Used to configure the ExPlat `platform` property. If this property is `nil`, the `eventNamePrefix` property is used instead. Default is `nil`. */
-@property (nonatomic, copy, nullable) NSString *platform;
+@property (nonatomic, copy) NSString *platform;
 
 @property (nonatomic, copy) NSString *eventNamePrefix;
 @property (nonatomic, copy) NSString *anonymousUserTypeKey;
