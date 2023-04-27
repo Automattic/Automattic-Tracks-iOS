@@ -230,8 +230,7 @@ NSString *const USER_ID_ANON = @"anonId";
     self.token = token;
 
     #if TARGET_OS_IPHONE
-    NSString *platform = _platform ? _platform : _eventNamePrefix;
-    [ExPlat configureWithPlatform:platform oAuthToken:token userAgent:self.userAgent anonId:anonymousID];
+    [ExPlat configureWithPlatform:[self platformForExPlat] oAuthToken:token userAgent:self.userAgent anonId:anonymousID];
     #endif
 }
 
@@ -245,8 +244,7 @@ NSString *const USER_ID_ANON = @"anonId";
     self.token = nil;
 
     #if TARGET_OS_IPHONE
-    NSString *platform = _platform ? _platform : _eventNamePrefix;
-    [ExPlat configureWithPlatform:platform oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
+    [ExPlat configureWithPlatform:[self platformForExPlat] oAuthToken:nil userAgent:self.userAgent anonId:anonymousID];
     #endif
 }
 
@@ -260,6 +258,11 @@ NSString *const USER_ID_ANON = @"anonId";
     } else {
         [self.timer invalidate];
     }
+}
+
+- (NSString * _Nullable)platformForExPlat
+{
+    return _platform ? _platform : _eventNamePrefix;
 }
 
 #pragma mark - Reachability
