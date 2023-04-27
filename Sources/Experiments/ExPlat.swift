@@ -30,6 +30,26 @@ import Cocoa
         UserDefaults.standard.object(forKey: enrolledKey) != nil
     }
 
+    // MARK: - Configuration Properties
+
+    var platform: String {
+        return service.platform
+    }
+
+    var oAuthToken: String? {
+        return service.oAuthToken
+    }
+
+    var userAgent: String? {
+        return service.userAgent
+    }
+
+    var anonId: String? {
+        return service.anonId
+    }
+
+    // MARK: - Init
+
     public init(configuration: ExPlatConfiguration,
                 service: ExPlatService? = nil) {
         self.service = service ?? ExPlatService(configuration: configuration)
