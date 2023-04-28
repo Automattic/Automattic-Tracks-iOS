@@ -23,6 +23,10 @@ class ExPlatTests: XCTestCase {
         self.tracksService = TracksService(contextManager: contextManager)
     }
 
+    override func tearDown() {
+        ExPlat.shared = nil
+    }
+
     // Save the returned experiments variation
     //
     func testRefresh() {
@@ -126,11 +130,15 @@ class ExPlatTests: XCTestCase {
         self.tracksService.switchToAnonymousUser(withAnonymousID: anonymousId)
 
         // Then
+#if os(iOS)
         let exPlat = ExPlat.shared
         XCTAssertNotNil(exPlat)
         XCTAssertEqual(exPlat?.platform, eventNamePrefix)
         XCTAssertEqual(exPlat?.oAuthToken, nil)
         XCTAssertEqual(exPlat?.anonId, anonymousId)
+#else
+        XCTAssertNil(ExPlat.shared)
+#endif
     }
 
     // Tests ExPlat user authenticated configuration using TracksService.
@@ -150,11 +158,15 @@ class ExPlatTests: XCTestCase {
         self.tracksService.switchToAuthenticatedUser(withUsername: username, userID: userID, wpComToken: wpComToken, skipAliasEventCreation: skipAliasEventCreation)
 
         // Then
+#if os(iOS)
         let exPlat = ExPlat.shared
         XCTAssertNotNil(exPlat)
         XCTAssertEqual(exPlat?.platform, platform)
         XCTAssertEqual(exPlat?.oAuthToken, wpComToken)
         XCTAssertEqual(exPlat?.anonId, nil)
+#else
+        XCTAssertNil(ExPlat.shared)
+#endif
     }
 }
 
