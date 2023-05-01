@@ -7,7 +7,7 @@ The format of this document is inspired by [Keep a Changelog](https://keepachang
 When releasing a new version:
 
 1. Remove any empty section (those with `_None._`)
-2. Update the `## Unreleased` header to `## [<version_number>](https://github.com/Automattic/Automattic-Tracks-iOS/releases/tag/<version_number>)`
+2. Update the `## Unreleased` header to `## <version_number>`
 3. Add a new "Unreleased" section for the next iteration, by copy/pasting the following template:
 
 ## Unreleased
@@ -48,7 +48,7 @@ _None._
 
 _None._
 
-## [2.0.0](https://github.com/Automattic/Automattic-Tracks-iOS/releases/tag/2.0.0)
+## 2.0.0
 
 ### Breaking Changes
 
@@ -58,7 +58,7 @@ _None._
 
 - Make `Variation` confirm to `Codable`. [#247]
 
-## [1.0.0](https://github.com/Automattic/Automattic-Tracks-iOS/releases/tag/1.0.0)
+## 1.0.0
 
 ### Breaking Changes
 
