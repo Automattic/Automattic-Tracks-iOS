@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-- The Sentry SDK has been updated to version 8.0.0, and now exposes [Performance Profiling](https://docs.sentry.io/product/profiling/) as an option. [#245]
+_None._
 
 ### Bug Fixes
 
@@ -47,6 +47,12 @@ _None._
 ### Internal Changes
 
 _None._
+
+## 2.1.0
+
+### New Features
+
+- The Sentry SDK has been updated to version 8.0.0, and now exposes [Performance Profiling](https://docs.sentry.io/product/profiling/) as an option. [#245]
 
 ## 2.0.0
 
