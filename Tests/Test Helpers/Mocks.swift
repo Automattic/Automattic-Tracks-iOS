@@ -123,3 +123,17 @@ class MockEventLoggingNetworkService: EventLoggingNetworkService {
         shouldSucceed ? completion(.success(Data())) : completion(.failure(MockError.generic))
     }
 }
+
+class MockTracksContextManager: TracksContextManager {
+
+    override init() {
+        super.init()
+        self.persistentStoreCoordinator = Self.makeInMemoryPersistentStoreCoordinator(model: managedObjectModel)
+    }
+
+    private static func makeInMemoryPersistentStoreCoordinator(model: NSManagedObjectModel) -> NSPersistentStoreCoordinator {
+        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: model)
+        _ = try? coordinator.addPersistentStore(ofType: NSInMemoryStoreType, configurationName: nil, at: nil, options: nil)
+        return coordinator
+    }
+}

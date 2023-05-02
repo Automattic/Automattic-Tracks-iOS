@@ -2,17 +2,30 @@ import XCTest
 
 #if SWIFT_PACKAGE
 @testable import AutomatticExperiments
+@testable import AutomatticTracksEvents
 #else
 @testable import AutomatticTracks
 #endif
 
 class ExPlatTests: XCTestCase {
+
     var exPlatTestConfiguration = ExPlatConfiguration(
         platform: "wpios_test",
         oAuthToken: nil,
         userAgent: nil,
         anonId: nil
     )
+
+    var tracksService: TracksService!
+
+    override func setUp() {
+        let contextManager = MockTracksContextManager()
+        self.tracksService = TracksService(contextManager: contextManager)
+    }
+
+    override func tearDown() {
+        ExPlat.shared = nil
+    }
 
     // Save the returned experiments variation
     //
@@ -102,6 +115,56 @@ class ExPlatTests: XCTestCase {
         ExPlat.configure(platform: "ios", oAuthToken: nil, userAgent: nil, anonId: nil)
 
         XCTAssertEqual(ExPlat.shared?.experimentNames, ["foo", "bar"])
+    }
+
+    // Tests ExPlat anonymous configuration using TracksService.
+    //
+    func testTracksServiceAnonymousConfiguration() throws {
+        // Given
+        let eventNamePrefix = "wooios"
+        let anonymousId = "123"
+        self.tracksService.platform = nil
+        self.tracksService.eventNamePrefix = eventNamePrefix
+
+        // When
+        self.tracksService.switchToAnonymousUser(withAnonymousID: anonymousId)
+
+        // Then
+#if os(iOS)
+        let exPlat = try XCTUnwrap(ExPlat.shared)
+        XCTAssertEqual(exPlat.platform, eventNamePrefix)
+        XCTAssertEqual(exPlat.oAuthToken, nil)
+        XCTAssertEqual(exPlat.anonId, anonymousId)
+#else
+        XCTAssertNil(ExPlat.shared)
+#endif
+    }
+
+    // Tests ExPlat user authenticated configuration using TracksService.
+    //
+    func testTracksServiceUserAuthConfiguration() throws {
+        // Given
+        let username = "foobar"
+        let userID = "123"
+        let wpComToken = "abc"
+        let platform = "wpios"
+        let eventNamePrefix = "jpios"
+        let skipAliasEventCreation = true
+        self.tracksService.platform = platform
+        self.tracksService.eventNamePrefix = eventNamePrefix
+
+        // When
+        self.tracksService.switchToAuthenticatedUser(withUsername: username, userID: userID, wpComToken: wpComToken, skipAliasEventCreation: skipAliasEventCreation)
+
+        // Then
+#if os(iOS)
+        let exPlat = try XCTUnwrap(ExPlat.shared)
+        XCTAssertEqual(exPlat.platform, platform)
+        XCTAssertEqual(exPlat.oAuthToken, wpComToken)
+        XCTAssertEqual(exPlat.anonId, nil)
+#else
+        XCTAssertNil(ExPlat.shared)
+#endif
     }
 }
 

@@ -46,7 +46,7 @@ _None._
 
 ### Internal Changes
 
-_None._
+- Refactor `ExPlat` configuration logic to allow clients to explicity specify the platform to use. [#253]
 
 ## 2.1.0
 
