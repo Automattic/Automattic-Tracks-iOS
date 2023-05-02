@@ -119,7 +119,7 @@ class ExPlatTests: XCTestCase {
 
     // Tests ExPlat anonymous configuration using TracksService.
     //
-    func testTracksServiceAnonymousConfiguration() {
+    func testTracksServiceAnonymousConfiguration() throws {
         // Given
         let eventNamePrefix = "wooios"
         let anonymousId = "123"
@@ -131,11 +131,10 @@ class ExPlatTests: XCTestCase {
 
         // Then
 #if os(iOS)
-        let exPlat = ExPlat.shared
-        XCTAssertNotNil(exPlat)
-        XCTAssertEqual(exPlat?.platform, eventNamePrefix)
-        XCTAssertEqual(exPlat?.oAuthToken, nil)
-        XCTAssertEqual(exPlat?.anonId, anonymousId)
+        let exPlat = try XCTUnwrap(ExPlat.shared)
+        XCTAssertEqual(exPlat.platform, eventNamePrefix)
+        XCTAssertEqual(exPlat.oAuthToken, nil)
+        XCTAssertEqual(exPlat.anonId, anonymousId)
 #else
         XCTAssertNil(ExPlat.shared)
 #endif
@@ -143,7 +142,7 @@ class ExPlatTests: XCTestCase {
 
     // Tests ExPlat user authenticated configuration using TracksService.
     //
-    func testTracksServiceUserAuthConfiguration() {
+    func testTracksServiceUserAuthConfiguration() throws {
         // Given
         let username = "foobar"
         let userID = "123"
@@ -159,11 +158,10 @@ class ExPlatTests: XCTestCase {
 
         // Then
 #if os(iOS)
-        let exPlat = ExPlat.shared
-        XCTAssertNotNil(exPlat)
-        XCTAssertEqual(exPlat?.platform, platform)
-        XCTAssertEqual(exPlat?.oAuthToken, wpComToken)
-        XCTAssertEqual(exPlat?.anonId, nil)
+        let exPlat = try XCTUnwrap(ExPlat.shared)
+        XCTAssertEqual(exPlat.platform, platform)
+        XCTAssertEqual(exPlat.oAuthToken, wpComToken)
+        XCTAssertEqual(exPlat.anonId, nil)
 #else
         XCTAssertNil(ExPlat.shared)
 #endif
