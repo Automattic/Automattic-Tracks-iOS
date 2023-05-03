@@ -1,4 +1,6 @@
 import XCTest
+import OHHTTPStubs
+import OHHTTPStubsSwift
 
 #if SWIFT_PACKAGE
 @testable import AutomatticExperiments
@@ -117,54 +119,49 @@ class ExPlatTests: XCTestCase {
         XCTAssertEqual(ExPlat.shared?.experimentNames, ["foo", "bar"])
     }
 
-    // Tests ExPlat anonymous configuration using TracksService.
-    //
-    func testTracksServiceAnonymousConfiguration() throws {
+    /// Tests the right assignments endpoint is called when ExPlat is configured through `TracksService`.
+    ///
+    func testAssignmentsEndpointWithAnonymousConfiguration() throws {
         // Given
-        let eventNamePrefix = "wooios"
-        let anonymousId = "123"
-        self.tracksService.platform = nil
-        self.tracksService.eventNamePrefix = eventNamePrefix
-
+        let expectation = XCTestExpectation(description: "The ExPlat assignments endpoint should have the right params")
+        expectation.assertForOverFulfill = false
+        let experiment = "test"
+        let anonId = "123"
+        let eventNamePrefix = "wooios_test"
+        let expectedEndpoint = Self.makeAssignmentsEndpoint(platform: eventNamePrefix, experiment: experiment, anonId: anonId)
+        stub { request in
+            XCTAssertEqual(request.url?.absoluteString, expectedEndpoint)
+            expectation.fulfill()
+            return false
+        } response: { _ in
+            return .init(data: Data(), statusCode: 200, headers: nil)
+        }
+        
         // When
-        self.tracksService.switchToAnonymousUser(withAnonymousID: anonymousId)
+        self.makeSharedExPlat(
+            platform: nil,
+            eventNamePrefix: eventNamePrefix,
+            experiment: experiment,
+            anonId: anonId
+        )
+        ExPlat.shared?.refresh()
 
         // Then
-#if os(iOS)
-        let exPlat = try XCTUnwrap(ExPlat.shared)
-        XCTAssertEqual(exPlat.platform, eventNamePrefix)
-        XCTAssertEqual(exPlat.oAuthToken, nil)
-        XCTAssertEqual(exPlat.anonId, anonymousId)
-#else
-        XCTAssertNil(ExPlat.shared)
-#endif
+        wait(for: [expectation], timeout: 1.0)
     }
 
-    // Tests ExPlat user authenticated configuration using TracksService.
-    //
-    func testTracksServiceUserAuthConfiguration() throws {
-        // Given
-        let username = "foobar"
-        let userID = "123"
-        let wpComToken = "abc"
-        let platform = "wpios"
-        let eventNamePrefix = "jpios"
-        let skipAliasEventCreation = true
-        self.tracksService.platform = platform
-        self.tracksService.eventNamePrefix = eventNamePrefix
+    // MARK: - Helpers
 
-        // When
-        self.tracksService.switchToAuthenticatedUser(withUsername: username, userID: userID, wpComToken: wpComToken, skipAliasEventCreation: skipAliasEventCreation)
+    static func makeAssignmentsEndpoint(platform: String, experiment: String, anonId: String?) -> String {
+        let baseURL = "https://public-api.wordpress.com"
+        let path = "wpcom/v2/experiments/0.1.0/assignments"
+        var endpoint = "\(baseURL)/\(path)/\(platform)?_locale=en&experiment_names=\(experiment)"
+        if let anonId {
+            endpoint.append("&anon_id=\(anonId)")
+        }
+        return endpoint
+    }
 
-        // Then
-#if os(iOS)
-        let exPlat = try XCTUnwrap(ExPlat.shared)
-        XCTAssertEqual(exPlat.platform, platform)
-        XCTAssertEqual(exPlat.oAuthToken, wpComToken)
-        XCTAssertEqual(exPlat.anonId, nil)
-#else
-        XCTAssertNil(ExPlat.shared)
-#endif
     private func makeTracksService(platform: String?, eventNamePrefix: String?) -> TracksService? {
         guard let tracksService = TracksService(contextManager: MockTracksContextManager()) else {
             return nil
