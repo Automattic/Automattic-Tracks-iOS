@@ -165,6 +165,41 @@ class ExPlatTests: XCTestCase {
 #else
         XCTAssertNil(ExPlat.shared)
 #endif
+    private func makeTracksService(platform: String?, eventNamePrefix: String?) -> TracksService? {
+        guard let tracksService = TracksService(contextManager: MockTracksContextManager()) else {
+            return nil
+        }
+        tracksService.platform = platform
+        tracksService.eventNamePrefix = eventNamePrefix
+        return tracksService
+    }
+
+    private func makeSharedExPlat(platform: String?, eventNamePrefix: String?, experiment: String, anonId: String?) {
+        self.addTeardownBlock {
+            ExPlat.shared = nil
+        }
+        guard let tracksService = makeTracksService(platform: platform, eventNamePrefix: eventNamePrefix) else {
+            return
+        }
+        tracksService.switchToAnonymousUser(withAnonymousID: anonId)
+        guard let exPlat = ExPlat.shared else {
+            return
+        }
+        exPlat.register(experiments: [experiment])
+    }
+
+    private func makeSharedExPlat(platform: String?, eventNamePrefix: String?, experiment: String) {
+        self.addTeardownBlock {
+            ExPlat.shared = nil
+        }
+        guard let tracksService = makeTracksService(platform: platform, eventNamePrefix: eventNamePrefix) else {
+            return
+        }
+        tracksService.switchToAuthenticatedUser(withUsername: "foobar", userID: "123", wpComToken: "abc", skipAliasEventCreation: true)
+        guard let exPlat = ExPlat.shared else {
+            return
+        }
+        exPlat.register(experiments: [experiment])
     }
 }
 
