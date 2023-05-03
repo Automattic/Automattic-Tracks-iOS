@@ -136,7 +136,7 @@ class ExPlatTests: XCTestCase {
         } response: { _ in
             return .init(data: Data(), statusCode: 200, headers: nil)
         }
-        
+
         // When
         self.makeSharedExPlat(
             platform: nil,
