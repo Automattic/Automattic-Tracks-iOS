@@ -108,6 +108,7 @@ class ExPlatTests: XCTestCase {
         XCTAssertEqual(ExPlat.shared?.experimentNames, ["foo", "bar"])
     }
 
+#if os(iOS)
     /// Tests the right assignments endpoint is called when ExPlat is configured through `TracksService`.
     ///
     func testAssignmentsEndpointWithAnonymousConfiguration() {
@@ -164,6 +165,7 @@ class ExPlatTests: XCTestCase {
         // Then
         wait(for: [expectation], timeout: 1.0)
     }
+#endif
 
     // MARK: - Helpers
 
