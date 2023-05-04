@@ -18,17 +18,6 @@ class ExPlatTests: XCTestCase {
         anonId: nil
     )
 
-    var tracksService: TracksService!
-
-    override func setUp() {
-        let contextManager = MockTracksContextManager()
-        self.tracksService = TracksService(contextManager: contextManager)
-    }
-
-    override func tearDown() {
-        ExPlat.shared = nil
-    }
-
     // Save the returned experiments variation
     //
     func testRefresh() {
@@ -121,19 +110,15 @@ class ExPlatTests: XCTestCase {
 
     /// Tests the right assignments endpoint is called when ExPlat is configured through `TracksService`.
     ///
-    func testAssignmentsEndpointWithAnonymousConfiguration() throws {
+    func testAssignmentsEndpointWithAnonymousConfiguration() {
         // Given
         let expectation = XCTestExpectation(description: "The ExPlat assignments endpoint should have the right params")
-        expectation.assertForOverFulfill = false
         let experiment = "test"
         let anonId = "123"
         let eventNamePrefix = "wooios_test"
         let expectedEndpoint = Self.makeAssignmentsEndpoint(platform: eventNamePrefix, experiment: experiment, anonId: anonId)
-        stub { request in
-            XCTAssertEqual(request.url?.absoluteString, expectedEndpoint)
+        stub(condition: isAbsoluteURLString(expectedEndpoint)) { request in
             expectation.fulfill()
-            return false
-        } response: { _ in
             return .init(data: Data(), statusCode: 200, headers: nil)
         }
 
@@ -150,9 +135,39 @@ class ExPlatTests: XCTestCase {
         wait(for: [expectation], timeout: 1.0)
     }
 
+    /// Tests the right assignments endpoint is called when ExPlat is configured through `TracksService`.
+    ///
+    func testAssignmentsEndpointWithUserAuthConfiguration() {
+        // Given
+        let expectation = XCTestExpectation(description: "The ExPlat assignments endpoint should have the right params")
+        let experiment = "test"
+        let platform = "wooios_test"
+        let token = "abc"
+        let expectedEndpoint = Self.makeAssignmentsEndpoint(platform: platform, experiment: experiment)
+        stub(condition: isAbsoluteURLString(expectedEndpoint)) { request in
+            XCTAssertEqual(request.allHTTPHeaderFields?["Authorization"], "Bearer \(token)")
+            expectation.fulfill()
+            return .init(data: Data(), statusCode: 200, headers: nil)
+        }
+
+        // When
+        self.makeSharedExPlat(
+            platform: platform,
+            eventNamePrefix: "jpios",
+            experiment: experiment,
+            username: "foobar",
+            userID: "123",
+            wpComToken: token
+        )
+        ExPlat.shared?.refresh()
+
+        // Then
+        wait(for: [expectation], timeout: 1.0)
+    }
+
     // MARK: - Helpers
 
-    static func makeAssignmentsEndpoint(platform: String, experiment: String, anonId: String?) -> String {
+    static func makeAssignmentsEndpoint(platform: String, experiment: String, anonId: String? = nil) -> String {
         let baseURL = "https://public-api.wordpress.com"
         let path = "wpcom/v2/experiments/0.1.0/assignments"
         var endpoint = "\(baseURL)/\(path)/\(platform)?_locale=en&experiment_names=\(experiment)"
@@ -185,14 +200,21 @@ class ExPlatTests: XCTestCase {
         exPlat.register(experiments: [experiment])
     }
 
-    private func makeSharedExPlat(platform: String?, eventNamePrefix: String?, experiment: String) {
+    private func makeSharedExPlat(
+        platform: String?,
+        eventNamePrefix: String?,
+        experiment: String,
+        username: String,
+        userID: String,
+        wpComToken: String
+    ) {
         self.addTeardownBlock {
             ExPlat.shared = nil
         }
         guard let tracksService = makeTracksService(platform: platform, eventNamePrefix: eventNamePrefix) else {
             return
         }
-        tracksService.switchToAuthenticatedUser(withUsername: "foobar", userID: "123", wpComToken: "abc", skipAliasEventCreation: true)
+        tracksService.switchToAuthenticatedUser(withUsername: username, userID: userID, wpComToken: wpComToken, skipAliasEventCreation: true)
         guard let exPlat = ExPlat.shared else {
             return
         }
