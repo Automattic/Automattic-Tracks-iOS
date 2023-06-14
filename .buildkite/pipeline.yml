@@ -13,7 +13,7 @@ steps:
   ######################
   - label: "🧪 Build and Test iOS"
     key: "test_ios"
-    command: "build_and_test_pod 'ios test'"
+    command: "build_and_test_pod ios test"
     env: *common_env
     plugins: *common_plugins
     artifact_paths: ".build/logs/*.log"
@@ -23,7 +23,7 @@ steps:
   ######################
   - label: "🧪 Build and Test macOS"
     key: "test_macos"
-    command: "build_and_test_pod 'mac test'"
+    command: "build_and_test_pod mac test"
     env: *common_env
     plugins: *common_plugins
     artifact_paths: ".build/logs/*.log"
