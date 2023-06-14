@@ -46,7 +46,7 @@ _None._
 
 ### Internal Changes
 
-- Update the CI Xcode image to `14.3.1` and CI Toolkit to `2.17.0` [#258]
+_None._
 
 ## 2.2.0
 
