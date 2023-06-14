@@ -2,8 +2,7 @@
 @import Foundation;
 @import ObjectiveC;
 
-
-Class<TracksLoggingConfiguration> TracksLoggingClass() {
+Class<TracksLoggingConfiguration> TracksLoggingClass(void) {
     static Class<TracksLoggingConfiguration> result = nil;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
