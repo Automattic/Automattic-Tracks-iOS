@@ -36,6 +36,6 @@ Pod::Spec.new do |s|
   s.module_name = 'AutomatticTracks'
 
   s.ios.dependency 'UIDeviceIdentifier', '~> 2.0'
-  s.dependency 'Sentry', '8.5.0'
+  s.dependency 'Sentry', '8.6.0'
   s.dependency 'Sodium', '>= 0.9.1'
 end
