@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-_None._
+- Expose a Sentry option to improve the capture of async code stack traces. [#260]
 
 ### Bug Fixes
 
