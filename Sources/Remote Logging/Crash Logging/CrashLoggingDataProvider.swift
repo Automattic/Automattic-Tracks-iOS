@@ -7,7 +7,7 @@ import AutomatticTracksModel
 public protocol CrashLoggingDataProvider {
     var sentryDSN: String { get }
     var userHasOptedOut: Bool { get }
-    var swiftAsyncStacktraces: Bool { get }
+    var enhancedAsyncStacktraces: Bool { get }
     var buildType: String { get }
     var releaseName: String { get }
     var currentUser: TracksUser? { get }
@@ -31,7 +31,7 @@ public extension CrashLoggingDataProvider {
         return false
     }
 
-    var swiftAsyncStacktraces: Bool {
+    var enhancedAsyncStacktraces: Bool {
         return false
     }
 

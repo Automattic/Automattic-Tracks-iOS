@@ -63,7 +63,7 @@ public class CrashLogging {
 
             /// Attach stack traces to non-fatal errors
             options.attachStacktrace = true
-            options.swiftAsyncStacktraces = self.dataProvider.swiftAsyncStacktraces
+            options.stitchAsyncCode = self.dataProvider.enhancedAsyncStacktraces
 
             // Performance monitoring options
             options.enableAutoPerformanceTracing = self.dataProvider.enableAutoPerformanceTracking
