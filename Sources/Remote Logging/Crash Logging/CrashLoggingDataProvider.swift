@@ -85,13 +85,13 @@ public extension CrashLoggingDataProvider {
         return config.trackUserInteraction
     }
 
-    /// App hang tracking is enabled by default.
+    /// App hang tracking is disabled by default to avoid unexpected events being tracked.
     var enableAppHangTracking: Bool {
-        return true
+        return false
     }
 
-    /// HTTP client errors are captured by default.
+    /// HTTP client errors are disabled by default to avoid unexpected events being tracked.
     var enableCaptureFailedRequests: Bool {
-        return true
+        return false
     }
 }
