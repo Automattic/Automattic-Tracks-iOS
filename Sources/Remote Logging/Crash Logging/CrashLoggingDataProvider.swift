@@ -13,6 +13,10 @@ public protocol CrashLoggingDataProvider {
     var additionalUserData: [String: Any] { get }
     var shouldEnableAutomaticSessionTracking: Bool { get }
     var performanceTracking: PerformanceTracking { get }
+    /// Whether app hang are captured.
+    var enableAppHangTracking: Bool { get }
+    /// Whether HTTP client errors are captured.
+    var enableCaptureFailedRequests: Bool { get }
 }
 
 /// Default implementations of common protocol properties
@@ -79,5 +83,15 @@ public extension CrashLoggingDataProvider {
     var enableUserInteractionTracing: Bool {
         guard case .enabled(let config) = performanceTracking else { return false }
         return config.trackUserInteraction
+    }
+
+    /// App hang tracking is disabled by default to avoid unexpected events being tracked.
+    var enableAppHangTracking: Bool {
+        return false
+    }
+
+    /// HTTP client errors are disabled by default to avoid unexpected events being tracked.
+    var enableCaptureFailedRequests: Bool {
+        return false
     }
 }

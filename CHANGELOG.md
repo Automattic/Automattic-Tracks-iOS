@@ -30,7 +30,7 @@ _None._
 
 -->
 
-## Unreleased
+## 2.3.0
 
 ### Breaking Changes
 
@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-_None._
+- Add options to configure Sentry's app hang and HTTP client error tracking. [#261]
 
 ### Bug Fixes
 
