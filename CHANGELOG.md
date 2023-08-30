@@ -46,6 +46,8 @@ _None._
 
 ### Internal Changes
 
+- `TracksService.trackEventName:withCustomProperties:` now logs the event name when there is a validation error from creating a Tracks event.
+
 _None._
 
 ## 2.3.0
