@@ -30,6 +30,26 @@ _None._
 
 -->
 
+## 2.4.0
+
+### Breaking Changes
+
+_None._
+
+### New Features
+
+- `TracksService.trackEventName:withCustomProperties:` now returns a boolean that indicates whether the event creation is successful.
+
+### Bug Fixes
+
+- `TracksLogging` now works when the library is integrated with Cocoapods for internal Tracks error/warning messages.
+
+### Internal Changes
+
+- `TracksService.trackEventName:withCustomProperties:` now logs the event name when there is a validation error from creating a Tracks event.
+
+_None._
+
 ## 2.3.0
 
 ### Breaking Changes

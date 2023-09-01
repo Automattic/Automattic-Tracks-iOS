@@ -58,7 +58,7 @@
     NSError *error;
     BOOL isValid = [tracksEvent validateObject:&error];
     if (!isValid) {
-        TracksLogWarn(@"Error when validating TracksEvent: %@", error);
+        TracksLogWarn(@"Error when validating TracksEvent %@: %@", name, error);
         return nil;
     }
     

@@ -134,19 +134,20 @@ NSString *const USER_ID_ANON = @"anonId";
 }
 
 
-- (void)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties
+- (BOOL)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties
 {
     eventName = [NSString stringWithFormat:@"%@_%@", self.eventNamePrefix, eventName];
     
-    [self.tracksEventService createTracksEventWithName:eventName
-                                              username:self.username
-                                                userID:self.userID
-                                             userAgent:self.userAgent
-                                              userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeAuthenticated
-                                             eventDate:[NSDate date]
-                                      customProperties:customProperties
-                                      deviceProperties:[self mutableDeviceProperties]
-                                        userProperties:self.userProperties];
+    TracksEvent * _Nullable event = [self.tracksEventService createTracksEventWithName:eventName
+                                                                            username:self.username
+                                                                              userID:self.userID
+                                                                           userAgent:self.userAgent
+                                                                            userType:self.isAnonymous ? TracksEventUserTypeAnonymous : TracksEventUserTypeAuthenticated
+                                                                           eventDate:[NSDate date]
+                                                                    customProperties:customProperties
+                                                                    deviceProperties:[self mutableDeviceProperties]
+                                                                      userProperties:self.userProperties];
+    return event != nil;
 }
 
 - (NSUInteger)queuedEventCount

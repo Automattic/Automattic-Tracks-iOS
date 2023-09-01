@@ -35,7 +35,12 @@ extern NSString *const TrackServiceDidSendQueuedEventsNotification;
 - (void)switchToAnonymousUserWithAnonymousID:(NSString *)anonymousID;
 
 - (void)trackEventName:(NSString *)eventName;
-- (void)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties;
+
+/// Tracks an event with custom properties and returns a boolean that indicates whether the creation is successful.
+/// - Parameters:
+///   - eventName: Name of the event.
+///   - customProperties: Custom event properties whose property name should only have alpha characters and underscores.
+- (BOOL)trackEventName:(NSString *)eventName withCustomProperties:(NSDictionary *)customProperties;
 
 - (void)sendQueuedEvents;
 - (void)clearQueuedEvents;
