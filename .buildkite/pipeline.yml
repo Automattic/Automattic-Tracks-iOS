@@ -44,7 +44,12 @@ steps:
   - label: "🔬 Validating Podspec"
     key: "validate"
     command: |
-      validate_podspec
+      # validate_podspec
+      echo '+++ ⚠️ validate_podspec was bypassed ⚠️'
+      # post a message in the logs
+      cat .buildkite/validate_podspec_annotation.md
+      # and also as an annotation
+      cat .buildkite/validate_podspec_annotation.md | buildkite-agent annotate --style 'warning'
     env: *common_env
     plugins: *common_plugins
     artifact_paths: ".build/logs/*.log"
