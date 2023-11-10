@@ -28,7 +28,7 @@ public extension CrashLoggingDataProvider {
     //
     // Clients can set a custom releaseName value if needed
     var releaseName: String? {
-        return ""
+        return nil
     }
 
     var additionalUserData: [String: Any] {
