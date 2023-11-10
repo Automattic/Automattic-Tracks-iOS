@@ -27,7 +27,9 @@ public extension CrashLoggingDataProvider {
     // CFBundleShortVersionString, and CFBundleVersion, for example my.project.name@2.3.12+1234"
     //
     // Clients can set a custom releaseName value if needed
-    var releaseName: String?
+    var releaseName: String? {
+        return ""
+    }
 
     var additionalUserData: [String: Any] {
         return [ : ]
