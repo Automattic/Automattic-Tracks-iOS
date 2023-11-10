@@ -22,9 +22,12 @@ public protocol CrashLoggingDataProvider {
 /// Default implementations of common protocol properties
 public extension CrashLoggingDataProvider {
 
-    var releaseName: String {
-        return Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String) as! String
-    }
+    // According to https://docs.sentry.io/platforms/apple/configuration/releases/:
+    // "If no release name is set, the SDK creates a default combined from CFBundleIdentifier, 
+    // CFBundleShortVersionString, and CFBundleVersion, for example my.project.name@2.3.12+1234"
+    //
+    // Clients can set a custom releaseName value if needed
+    var releaseName: String? = nil
 
     var additionalUserData: [String: Any] {
         return [ : ]
