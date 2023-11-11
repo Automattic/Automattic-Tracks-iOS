@@ -27,8 +27,14 @@ public extension CrashLoggingDataProvider {
     // CFBundleShortVersionString, and CFBundleVersion, for example my.project.name@2.3.12+1234"
     //
     // Clients can set a custom releaseName value if needed
-    var releaseName: String? {
-        return nil
+    var releaseName: String {
+        let bundleVersion = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] ?? ""
+        let bundleIdentifer = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] ?? ""
+        let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
+
+        // This is the format that Sentry recommends for version numbers.
+        // See https://docs.sentry.io/platforms/apple/configuration/releases/#bind-the-version
+        return "\(bundleIdentifier)@\(bundleShortVersion)+\(bundleVersion)"
     }
 
     var additionalUserData: [String: Any] {
