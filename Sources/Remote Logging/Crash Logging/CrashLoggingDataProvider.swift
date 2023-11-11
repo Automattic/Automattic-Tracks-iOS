@@ -29,7 +29,7 @@ public extension CrashLoggingDataProvider {
     // Clients can set a custom releaseName value if needed
     var releaseName: String {
         let bundleVersion = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] ?? ""
-        let bundleIdentifer = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] ?? ""
+        let bundleIdentifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] ?? ""
         let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
 
         // This is the format that Sentry recommends for version numbers.
