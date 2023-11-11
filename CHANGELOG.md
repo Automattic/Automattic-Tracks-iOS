@@ -26,7 +26,7 @@ _None._
 
 ### Internal Changes
 
-_None._
+- The default `releaseName` value now includes the CFBundleIdentifierKey, CFBundleShortVersionString, and CFBundleVersionKey [#267]
 
 -->
 
