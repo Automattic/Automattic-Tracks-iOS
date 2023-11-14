@@ -8,7 +8,6 @@ public protocol CrashLoggingDataProvider {
     var sentryDSN: String { get }
     var userHasOptedOut: Bool { get }
     var buildType: String { get }
-    var releaseName: String { get }
     var currentUser: TracksUser? { get }
     var additionalUserData: [String: Any] { get }
     var shouldEnableAutomaticSessionTracking: Bool { get }
