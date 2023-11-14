@@ -22,16 +22,6 @@ public protocol CrashLoggingDataProvider {
 /// Default implementations of common protocol properties
 public extension CrashLoggingDataProvider {
 
-    var releaseName: String {
-        let bundleVersion = Bundle.main.infoDictionary?[kCFBundleVersionKey as String] ?? ""
-        let bundleIdentifier = Bundle.main.infoDictionary?[kCFBundleIdentifierKey as String] ?? ""
-        let bundleShortVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
-
-        // This is the format that Sentry recommends for version numbers.
-        // See https://docs.sentry.io/platforms/apple/configuration/releases/#bind-the-version
-        return "\(bundleIdentifier)@\(bundleShortVersion)+\(bundleVersion)"
-    }
-
     var additionalUserData: [String: Any] {
         return [ : ]
     }
