@@ -12,8 +12,11 @@ class EventLoggingTests: XCTestCase {
     private let domain = "event-logging-tests.example"
     lazy var url = URL(string: "http://\(domain)")!
 
-    func testThatOnlyOneFileIsUploadedSimultaneously() throws {
-        XCTExpectFailure("This test seems to be flaky")
+    func testThatOnlyOneFileIsUploadedSimultaneously() {
+        // This test is only flaky when running on iOS, not Mac
+        #if os(iOS)
+            XCTExpectFailure("This test seems to be flaky")
+        #endif
         stubResponse(domain: domain, status: "ok")
 
         let uploadCount = Int.random(in: 3...10)
@@ -41,7 +44,10 @@ class EventLoggingTests: XCTestCase {
     }
 
     func testThatAllFilesAreEventuallyUploaded() throws {
-        XCTExpectFailure("This test seems to be flaky")
+        // This test is only flaky when running on iOS, not Mac
+        #if os(iOS)
+            XCTExpectFailure("This test seems to be flaky")
+        #endif
         stubResponse(domain: domain, status: "ok")
 
         let uploadCount = Int.random(in: 3...10)
