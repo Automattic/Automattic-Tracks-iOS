@@ -14,7 +14,7 @@ When releasing a new version:
 
 ### Breaking Changes
 
-_None._
+- Sentry: The default `releaseName` value is now the Sentry default of `package@version+build` (e.g. com.bundle.identifier@1.2+1.2.3.4) instead of only providing the `CFBundleVersionKey` [#267]
 
 ### New Features
 
@@ -26,7 +26,7 @@ _None._
 
 ### Internal Changes
 
-- The default `releaseName` value now includes the CFBundleIdentifierKey, CFBundleShortVersionString, and CFBundleVersionKey [#267]
+_None._
 
 -->
 
