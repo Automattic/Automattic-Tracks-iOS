@@ -56,7 +56,6 @@ public class CrashLogging {
             options.diagnosticLevel = .error
 
             options.environment = self.dataProvider.buildType
-            options.releaseName = self.dataProvider.releaseName
             options.enableAutoSessionTracking = self.dataProvider.shouldEnableAutomaticSessionTracking
             options.enableAppHangTracking = self.dataProvider.enableAppHangTracking
             options.enableCaptureFailedRequests = self.dataProvider.enableCaptureFailedRequests
