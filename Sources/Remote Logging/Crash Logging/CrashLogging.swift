@@ -65,6 +65,9 @@ public class CrashLogging {
             /// Attach stack traces to non-fatal errors
             options.attachStacktrace = true
 
+            // Events
+            options.sampleRate = NSNumber(value: self.dataProvider.eventSamplingRate)
+
             // Performance monitoring options
             options.enableAutoPerformanceTracing = self.dataProvider.enableAutoPerformanceTracking
             options.tracesSampler = { _ in
