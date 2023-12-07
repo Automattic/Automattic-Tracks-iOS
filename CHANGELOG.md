@@ -30,6 +30,12 @@ _None._
 
 -->
 
+## 3.1.0
+
+### New Features
+
+- CrashLoggingDataProvider now allows to specify the events sampling rate
+
 ## 3.0.0
 
 ### Breaking Changes
