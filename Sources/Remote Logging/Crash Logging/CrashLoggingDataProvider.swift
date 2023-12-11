@@ -92,6 +92,6 @@ public extension CrashLoggingDataProvider {
     }
 
     var errorEventsSamplingRate: Double {
-        return 0.01
+        return 1.0
     }
 }
