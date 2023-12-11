@@ -66,7 +66,7 @@ public class CrashLogging {
             options.attachStacktrace = true
 
             // Events
-            options.sampleRate = NSNumber(value: self.dataProvider.errorEventsSamplingRate)
+            options.sampleRate = NSNumber(value: min(max(self.dataProvider.errorEventsSamplingRate, 0), 1))
 
             // Performance monitoring options
             options.enableAutoPerformanceTracing = self.dataProvider.enableAutoPerformanceTracking
