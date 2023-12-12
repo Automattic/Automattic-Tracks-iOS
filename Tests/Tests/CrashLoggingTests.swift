@@ -225,7 +225,6 @@ private class MockCrashLoggingDataProvider: CrashLoggingDataProvider {
 
 /// Use this to get a `CrashLoggingDataProvider` implementation that allows testing the default values set via protocol extenstion.
 private struct CrashLoggingDataProviderWithDefaultValuesOnly: CrashLoggingDataProvider {
-    var errorEventsSamplingRate: Double
     let sentryDSN: String
     let userHasOptedOut: Bool
     let buildType: String
