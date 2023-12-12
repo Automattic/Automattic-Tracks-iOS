@@ -10,6 +10,7 @@ public protocol CrashLoggingDataProvider {
     var buildType: String { get }
     var currentUser: TracksUser? { get }
     var additionalUserData: [String: Any] { get }
+    var errorEventsSamplingRate: Double { get }
     var shouldEnableAutomaticSessionTracking: Bool { get }
     var performanceTracking: PerformanceTracking { get }
     /// Whether app hang are captured.
@@ -88,5 +89,9 @@ public extension CrashLoggingDataProvider {
     /// HTTP client errors are disabled by default to avoid unexpected events being tracked.
     var enableCaptureFailedRequests: Bool {
         return false
+    }
+
+    var errorEventsSamplingRate: Double {
+        return 1.0
     }
 }
