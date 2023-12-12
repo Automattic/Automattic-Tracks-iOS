@@ -130,7 +130,6 @@ class CrashLoggingTests: XCTestCase {
 
     func testPerformanceMonitoringIsDisabledByDefault() {
         let dataProvider = CrashLoggingDataProviderWithDefaultValuesOnly(
-            errorEventsSamplingRate: 0.01,
             sentryDSN: "ignored-in-this-test",
             userHasOptedOut: false,
             buildType: "ignored-in-this-test",
@@ -140,6 +139,8 @@ class CrashLoggingTests: XCTestCase {
         guard case .disabled = dataProvider.performanceTracking else {
             return XCTFail("Expected `CrashLoggingDataProvider` `performanceTracking` to default to `.disabled`. Got \(dataProvider) instead.")
         }
+
+        XCTAssertEqual(dataProvider.errorEventsSamplingRate, 1.0)
     }
 
     func testPerformanceMonitoringConfigurationMappingWhenDisabled() {
