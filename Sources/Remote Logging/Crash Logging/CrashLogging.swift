@@ -146,7 +146,28 @@ public class CrashLogging {
 // MARK: - Manual Error Logging
 public extension CrashLogging {
 
+    /// Writes the error to the Crash Logging system, and includes a stack trace. This API supports for rich events.
+    /// By setting a Tag/Value pair, you'll be able to filter these events, directly, with the `has:` operator (Sentry Web Interface).
     ///
+    /// - Parameters:
+    ///   - error: The error object
+    ///   - tagName: Tag name to be associated with the error
+    ///   - tagValue: Tag's value to be associated with the error
+    ///   - level: The level of severity to report in Sentry (`.error` by default)
+    func logError(_ error: Error, tagName: String, tagValue: String, level: SentryLevel = .error) {
+
+        let event = Event.from(
+            error: error as NSError,
+            level: level
+        )
+
+        SentrySDK.capture(event: event) { scope in
+            scope.setTag(value: tagValue, key: tagName)
+        }
+
+        dataProvider.didLogErrorCallback?(event)
+    }
+
     /// Writes the error to the Crash Logging system, and includes a stack trace.
     ///
     /// - Parameters:
