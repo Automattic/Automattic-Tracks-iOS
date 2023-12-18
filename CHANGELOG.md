@@ -48,6 +48,10 @@ _None._
 
 _None._
 
+## 3.2.0
+
+- CrashLogging new API that supports logging Errors with Tag/Value
+
 ## 3.1.0
 
 ### New Features
