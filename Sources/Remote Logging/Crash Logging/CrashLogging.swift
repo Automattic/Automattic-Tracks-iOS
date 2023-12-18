@@ -151,8 +151,7 @@ public extension CrashLogging {
     ///
     /// - Parameters:
     ///   - error: The error object
-    ///   - tagName: Tag name to be associated with the error
-    ///   - tagValue: Tag's value to be associated with the error
+    ///   - tags: Tag Key/Value pairs to be set in the Error's Scope
     ///   - level: The level of severity to report in Sentry (`.error` by default)
     func logError(_ error: Error, tags: [String: String], level: SentryLevel = .error) {
 
