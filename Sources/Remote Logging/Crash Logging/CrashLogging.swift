@@ -154,7 +154,7 @@ public extension CrashLogging {
     ///   - tagName: Tag name to be associated with the error
     ///   - tagValue: Tag's value to be associated with the error
     ///   - level: The level of severity to report in Sentry (`.error` by default)
-    func logError(_ error: Error, tagName: String, tagValue: String, level: SentryLevel = .error) {
+    func logError(_ error: Error, tags: [String: String], level: SentryLevel = .error) {
 
         let event = Event.from(
             error: error as NSError,
@@ -162,7 +162,9 @@ public extension CrashLogging {
         )
 
         SentrySDK.capture(event: event) { scope in
-            scope.setTag(value: tagValue, key: tagName)
+            for (key, value) in tags {
+                scope.setTag(value: value, key: key)
+            }
         }
 
         dataProvider.didLogErrorCallback?(event)
