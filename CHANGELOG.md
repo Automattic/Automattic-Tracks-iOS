@@ -50,13 +50,15 @@ _None._
 
 ## 3.2.0
 
-- CrashLogging new API that supports logging Errors with Tag/Value
+### New Features
+
+- CrashLogging new API that supports logging Errors with Tag/Value [#274]
 
 ## 3.1.0
 
 ### New Features
 
-- CrashLoggingDataProvider now allows to specify the events sampling rate
+- CrashLoggingDataProvider now allows to specify the events sampling rate [#271]
 
 ## 3.0.0
 
