@@ -46,7 +46,7 @@ _None._
 
 ### Internal Changes
 
-_None._
+- Refactor the unit tests for `ExPlat` assignments request. [#256]
 
 ## 3.2.0
 
