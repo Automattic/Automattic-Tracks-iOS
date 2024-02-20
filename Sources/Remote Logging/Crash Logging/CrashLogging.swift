@@ -146,6 +146,27 @@ public class CrashLogging {
 // MARK: - Manual Error Logging
 public extension CrashLogging {
 
+    func logJavaScriptException(_ exception: [AnyHashable: Any]) {
+        let jsException = SentryEventJSException.initWithException(exception)
+        
+        if jsException.context == nil {
+            jsException.context = [:]
+        }
+        
+        var reactNativeContext:[String: Any] = exception["context"] as! [String: Any] ?? [:]
+        jsException.context?["react_native_context"] = reactNativeContext;
+        
+        if jsException.tags == nil {
+            jsException.tags = [:]
+        }
+        
+        if exception["tags"] != nil {
+            jsException.tags = jsException.tags?.merging(exception["tags"] as! [String: String]) { $1 }
+        }
+        
+        SentrySDK.capture(event: jsException)
+    }
+    
     /// Writes the error to the Crash Logging system, and includes a stack trace. This API supports for rich events.
     /// By setting a Tag/Value pair, you'll be able to filter these events, directly, with the `has:` operator (Sentry Web Interface).
     ///
