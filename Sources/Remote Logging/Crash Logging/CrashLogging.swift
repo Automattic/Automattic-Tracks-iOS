@@ -146,7 +146,13 @@ public class CrashLogging {
 // MARK: - Manual Error Logging
 public extension CrashLogging {
 
-    func logJavaScriptException(_ exception: [AnyHashable: Any]) {
+    /// Writes a JavaScript exception to the Crash Logging system, including its stack trace.
+    /// Note that this function is provided mainly for hybrid sources like React Native.
+    ///
+    /// - Parameters:
+    ///   - exception: The exception object
+    ///   - callback: Callback triggered upon completion
+    func logJavaScriptException(_ exception: [AnyHashable: Any], callback: @escaping () -> Void) {
         let jsException = SentryEventJSException.initWithException(exception)
         
         if jsException.context == nil {
@@ -165,6 +171,11 @@ public extension CrashLogging {
         }
         
         SentrySDK.capture(event: jsException)
+        
+        DispatchQueue.global().async {
+            SentrySDK.flush(timeout: self.flushTimeout)
+            callback()
+        }
     }
     
     /// Writes the error to the Crash Logging system, and includes a stack trace. This API supports for rich events.
