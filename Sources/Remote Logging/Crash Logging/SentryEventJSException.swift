@@ -1,6 +1,40 @@
 import Foundation
 import Sentry
 
+public struct JSException {
+    public let type: String
+    public let value: String
+    public let stacktrace: [StacktraceLine]
+    public let context: [String: Any]
+    public let tags: [String: String]
+    public let isHandled: Bool
+    public let handledBy: String
+
+    public init(type: String, value: String, stacktrace: [StacktraceLine], context: [String : Any], tags: [String : String], isHandled: Bool, handledBy: String) {
+        self.type = type
+        self.value = value
+        self.stacktrace = stacktrace
+        self.context = context
+        self.tags = tags
+        self.isHandled = isHandled
+        self.handledBy = handledBy
+    }
+    
+    public struct StacktraceLine {
+        public let filename: String?
+        public let function: String?
+        public let lineno: NSNumber?
+        public let colno: NSNumber?
+        
+        public init(filename: String?, function: String?, lineno: NSNumber?, colno: NSNumber?) {
+            self.filename = filename
+            self.function = function
+            self.lineno = lineno
+            self.colno = colno
+        }
+    }
+}
+
 public class SentryEventJSException: Event {
     override required init() {
         // All JavaScript exceptions should be trated as fatal errors.
