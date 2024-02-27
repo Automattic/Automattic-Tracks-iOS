@@ -36,7 +36,7 @@ public struct JSException {
 }
 
 public class SentryEventJSException: Event {
-    override required init() {
+    required init() {
         // All JavaScript exceptions should be trated as fatal errors
         super.init(level: .fatal)
         // Setting the event's platform to JavaScript is required by Sentry to be processed
@@ -76,7 +76,7 @@ public class SentryEventJSException: Event {
         sentryEvent.context = context
         
         // Set event tags
-        var tags = sentryEvent.tags ?? [:]
+        let tags = sentryEvent.tags ?? [:]
         sentryEvent.tags = tags.merging(jsException.tags) { $1 }
         
         return sentryEvent
