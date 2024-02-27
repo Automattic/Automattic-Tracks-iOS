@@ -152,25 +152,9 @@ public extension CrashLogging {
     /// - Parameters:
     ///   - exception: The exception object
     ///   - callback: Callback triggered upon completion
-    func logJavaScriptException(_ exception: [AnyHashable: Any], callback: @escaping () -> Void) {
-        let jsException = SentryEventJSException.initWithException(exception)
+    func logJavaScriptException(_ jsException: JSException, callback: @escaping () -> Void) {
         
-        if jsException.context == nil {
-            jsException.context = [:]
-        }
-        
-        var reactNativeContext:[String: Any] = exception["context"] as! [String: Any] ?? [:]
-        jsException.context?["react_native_context"] = reactNativeContext;
-        
-        if jsException.tags == nil {
-            jsException.tags = [:]
-        }
-        
-        if exception["tags"] != nil {
-            jsException.tags = jsException.tags?.merging(exception["tags"] as! [String: String]) { $1 }
-        }
-        
-        SentrySDK.capture(event: jsException)
+        SentrySDK.capture(event: SentryEventJSException.initWithException(jsException))
         
         DispatchQueue.global().async {
             SentrySDK.flush(timeout: self.flushTimeout)

@@ -37,35 +37,47 @@ public struct JSException {
 
 public class SentryEventJSException: Event {
     override required init() {
-        // All JavaScript exceptions should be trated as fatal errors.
+        // All JavaScript exceptions should be trated as fatal errors
         super.init(level: .fatal)
-        // Setting the event's platform to JavaScript is required by Sentry to be processed as a JavaScript exception.
-        // Otherwise, Sentry won't symbolicate the stack trace.
+        // Setting the event's platform to JavaScript is required by Sentry to be processed
+        // as a JavaScript exception. Otherwise, Sentry won't symbolicate the stack trace.
         self.platform = "javascript"
     }
     
-    public static func initWithException(_ rawException: [AnyHashable: Any]) -> SentryEventJSException {
+    public static func initWithException(_ jsException: JSException) -> SentryEventJSException {
         let sentryEvent = self.init()
         
-        // Generate exception based on JavaScript exception parameters.
-        let sentryException = Exception(value: rawException["value"] as! String, type: rawException["type"] as! String)
+        // Generate exception based on JavaScript exception parameters
+        let sentryException = Exception(value: jsException.value, type: jsException.type)
         
-        // Generate the stacktrace frames.
-        var frames:[Frame] = []
-        let stacktrace = rawException["stacktrace"] as! [[AnyHashable: Any]]
-        for entry in stacktrace {
+        // Generate the stacktrace frames
+        let frames = jsException.stacktrace.map {
             let frame = Frame()
-            frame.fileName = entry["filename"] as! String
-            frame.function = entry["function"] as! String
+            frame.fileName = $0.filename
+            frame.function = $0.function
             frame.inApp = true
-            frame.lineNumber = entry["lineno"] as? NSNumber ?? 0
-            frame.columnNumber = entry["colno"] as? NSNumber ?? 0
-            frames.append(frame)
+            frame.lineNumber = $0.lineno
+            frame.columnNumber = $0.colno
+            return frame
         }
         sentryException.stacktrace = SentryStacktrace(frames: frames, registers: [:])
         
-        // Attach JavaScript exception to Sentry event.
+        // Add exception mechanism
+        let mechanism = Mechanism(type: jsException.handledBy)
+        mechanism.handled = jsException.isHandled ? 1 : 0
+        sentryException.mechanism = mechanism
+        
+        // Attach JavaScript exception to Sentry event
         sentryEvent.exceptions = [sentryException]
+        
+        // Set event context
+        var context = sentryEvent.context ?? [:]
+        context["react_native_context"] = jsException.context;
+        sentryEvent.context = context
+        
+        // Set event tags
+        var tags = sentryEvent.tags ?? [:]
+        sentryEvent.tags = tags.merging(jsException.tags) { $1 }
         
         return sentryEvent
     }
