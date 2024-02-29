@@ -3,16 +3,16 @@ import Sentry
 
 public struct JSException {
     public let type: String
-    public let value: String
+    public let message: String
     public let stacktrace: [StacktraceLine]
     public let context: [String: Any]
     public let tags: [String: String]
     public let isHandled: Bool
     public let handledBy: String
 
-    public init(type: String, value: String, stacktrace: [StacktraceLine], context: [String : Any], tags: [String : String], isHandled: Bool, handledBy: String) {
+    public init(type: String, message: String, stacktrace: [StacktraceLine], context: [String : Any], tags: [String : String], isHandled: Bool, handledBy: String) {
         self.type = type
-        self.value = value
+        self.message = message
         self.stacktrace = stacktrace
         self.context = context
         self.tags = tags
@@ -48,7 +48,7 @@ public class SentryEventJSException: Event {
         self.init()
         
         // Generate exception based on JavaScript exception parameters
-        let sentryException = Exception(value: jsException.value, type: jsException.type)
+        let sentryException = Exception(value: jsException.message, type: jsException.type)
         
         // Generate the stacktrace frames
         let frames = jsException.stacktrace.map {
