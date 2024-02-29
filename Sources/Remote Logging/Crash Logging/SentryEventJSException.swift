@@ -44,8 +44,8 @@ public class SentryEventJSException: Event {
         self.platform = "javascript"
     }
     
-    public static func initWithException(_ jsException: JSException) -> SentryEventJSException {
-        let sentryEvent = self.init()
+    public convenience init(jsException: JSException) {
+        self.init()
         
         // Generate exception based on JavaScript exception parameters
         let sentryException = Exception(value: jsException.value, type: jsException.type)
@@ -68,18 +68,16 @@ public class SentryEventJSException: Event {
         sentryException.mechanism = mechanism
         
         // Attach JavaScript exception to Sentry event
-        sentryEvent.exceptions = [sentryException]
+        self.exceptions = [sentryException]
         
         // Set event context
-        var context = sentryEvent.context ?? [:]
+        var context = self.context ?? [:]
         context["react_native_context"] = jsException.context;
-        sentryEvent.context = context
+        self.context = context
         
         // Set event tags
-        let tags = sentryEvent.tags ?? [:]
-        sentryEvent.tags = tags.merging(jsException.tags) { $1 }
-        
-        return sentryEvent
+        let tags = self.tags ?? [:]
+        self.tags = tags.merging(jsException.tags) { $1 }
     }
     
     override public func serialize() -> [String : Any] {

@@ -154,7 +154,7 @@ public extension CrashLogging {
     ///   - callback: Callback triggered upon completion
     func logJavaScriptException(_ jsException: JSException, callback: @escaping () -> Void) {
         
-        SentrySDK.capture(event: SentryEventJSException.initWithException(jsException))
+        SentrySDK.capture(event: SentryEventJSException.init(jsException: jsException))
         
         DispatchQueue.global().async {
             SentrySDK.flush(timeout: self.flushTimeout)
