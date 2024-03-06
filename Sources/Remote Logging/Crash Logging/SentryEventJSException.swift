@@ -1,38 +1,21 @@
 import Foundation
 import Sentry
 
-public struct JSException {
-    public let type: String
-    public let message: String
-    public let stacktrace: [StacktraceLine]
-    public let context: [String: Any]
-    public let tags: [String: String]
-    public let isHandled: Bool
-    public let handledBy: String
+public protocol JSException {
+    var type: String { get }
+    var message: String { get }
+    var jsStacktrace: [StacktraceLine] { get }
+    var context: [String: Any] { get }
+    var tags: [String: String] { get }
+    var isHandled: Bool { get }
+    var handledBy: String { get }
+}
 
-    public init(type: String, message: String, stacktrace: [StacktraceLine], context: [String : Any], tags: [String : String], isHandled: Bool, handledBy: String) {
-        self.type = type
-        self.message = message
-        self.stacktrace = stacktrace
-        self.context = context
-        self.tags = tags
-        self.isHandled = isHandled
-        self.handledBy = handledBy
-    }
-    
-    public struct StacktraceLine {
-        public let filename: String?
-        public let function: String?
-        public let lineno: NSNumber?
-        public let colno: NSNumber?
-        
-        public init(filename: String?, function: String?, lineno: NSNumber?, colno: NSNumber?) {
-            self.filename = filename
-            self.function = function
-            self.lineno = lineno
-            self.colno = colno
-        }
-    }
+public protocol StacktraceLine {
+    var filename: String? { get }
+    var function: String { get }
+    var lineno: NSNumber? { get }
+    var colno: NSNumber? { get }
 }
 
 public class SentryEventJSException: Event {
@@ -51,7 +34,7 @@ public class SentryEventJSException: Event {
         let sentryException = Exception(value: jsException.message, type: jsException.type)
         
         // Generate the stacktrace frames
-        let frames = jsException.stacktrace.map {
+        let frames = jsException.jsStacktrace.map {
             let frame = Frame()
             frame.fileName = $0.filename
             frame.function = $0.function
