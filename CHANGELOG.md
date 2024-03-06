@@ -42,7 +42,7 @@ _None._
 
 ### Bug Fixes
 
-_None._
+- Fixed source compatibility when upgrading from <3.2 [#279]
 
 ### Internal Changes
 

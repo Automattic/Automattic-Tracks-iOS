@@ -153,7 +153,7 @@ public extension CrashLogging {
     ///   - error: The error object
     ///   - tags: Tag Key/Value pairs to be set in the Error's Scope
     ///   - level: The level of severity to report in Sentry (`.error` by default)
-    func logError(_ error: Error, tags: [String: String], level: SentryLevel = .error) {
+    func logError(_ error: Error, tags: [String: String] = [:], level: SentryLevel = .error) {
 
         let event = Event.from(
             error: error as NSError,
