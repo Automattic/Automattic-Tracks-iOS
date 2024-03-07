@@ -152,7 +152,7 @@ public extension CrashLogging {
     /// - Parameters:
     ///   - exception: The exception object
     ///   - callback: Callback triggered upon completion
-    func logJavaScriptException(_ jsException: JSException, callback: @escaping () -> Void) {
+    func logJavaScriptException(_ jsException: any JSException, callback: @escaping () -> Void) {
         
         SentrySDK.capture(event: SentryEventJSException.init(jsException: jsException))
         

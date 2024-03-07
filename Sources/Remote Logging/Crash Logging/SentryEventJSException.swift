@@ -2,16 +2,17 @@ import Foundation
 import Sentry
 
 public protocol JSException {
+    associatedtype StacktraceLine: JSStacktraceLine
     var type: String { get }
     var message: String { get }
-    var jsStacktrace: [StacktraceLine] { get }
+    var stacktrace: [StacktraceLine] { get }
     var context: [String: Any] { get }
     var tags: [String: String] { get }
     var isHandled: Bool { get }
     var handledBy: String { get }
 }
 
-public protocol StacktraceLine {
+public protocol JSStacktraceLine {
     var filename: String? { get }
     var function: String { get }
     var lineno: NSNumber? { get }
@@ -27,14 +28,14 @@ public class SentryEventJSException: Event {
         self.platform = "javascript"
     }
     
-    public convenience init(jsException: JSException) {
+    public convenience init(jsException: any JSException) {
         self.init()
         
         // Generate exception based on JavaScript exception parameters
         let sentryException = Exception(value: jsException.message, type: jsException.type)
         
         // Generate the stacktrace frames
-        let frames = jsException.jsStacktrace.map {
+        let frames = jsException.stacktrace.map {
             let frame = Frame()
             frame.fileName = $0.filename
             frame.function = $0.function
