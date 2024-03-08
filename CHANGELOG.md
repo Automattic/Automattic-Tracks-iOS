@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-_None._
+- Add function to log JavaScript exceptions in `CrashLogging` [#278]
 
 ### Bug Fixes
 
