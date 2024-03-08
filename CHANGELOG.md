@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-- Add function to log JavaScript exceptions in `CrashLogging` [#278]
+_None._
 
 ### Bug Fixes
 
@@ -47,6 +47,12 @@ _None._
 ### Internal Changes
 
 _None._
+
+## 3.3.0
+
+### New Features
+
+- Add function to log JavaScript exceptions in `CrashLogging` [#278]
 
 ## 3.2.0
 
