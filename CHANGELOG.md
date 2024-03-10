@@ -46,7 +46,8 @@ _None._
 
 ### Internal Changes
 
-_None._
+- The `device_info_status_bar_height` event property value now will always be zero. [#281]
+- Calculate `device_info_orientation` event property value based on "device orientation" rather than "interface orientation". [#281]
 
 ## 3.3.0
 
