@@ -151,7 +151,7 @@
 
 -(NSString *)orientation{
 #if TARGET_OS_IPHONE
-     UIInterfaceOrientation orientation = [self statusBarOrientation];
+     UIDeviceOrientation orientation = [self deviceOrientation];
 
      if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
          return @"Portrait";
@@ -188,18 +188,18 @@
 #endif
 
 #if TARGET_OS_IPHONE
-// This method was created because UIApplication.sharedApplication.statusBarOrientation should only
+// This method was created because UIDevice.currentDevice.orientation should only
 // be called from the main thread.
 //
-- (UIInterfaceOrientation)statusBarOrientation {
+- (UIDeviceOrientation)deviceOrientation {
     if ([NSThread isMainThread]) {
-        return UIApplication.sharedIfAvailable.statusBarOrientation;
+        return UIDevice.currentDevice.orientation;
     }
 
     __block CGFloat orientation = 0;
 
     dispatch_sync(dispatch_get_main_queue(), ^{
-        orientation = UIApplication.sharedIfAvailable.statusBarOrientation;
+        orientation = UIDevice.currentDevice.orientation;
     });
 
     return orientation;
