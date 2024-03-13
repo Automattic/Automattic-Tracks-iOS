@@ -141,17 +141,9 @@
 #endif
 }
 
--(CGFloat)statusBarHeight{
-#if TARGET_OS_IPHONE
-    return [self statusBarFrame].size.height;
-#else   // Mac
-    return 0;
-#endif
-}
-
 -(NSString *)orientation{
 #if TARGET_OS_IPHONE
-     UIInterfaceOrientation orientation = [self statusBarOrientation];
+     UIDeviceOrientation orientation = [self deviceOrientation];
 
      if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
          return @"Portrait";
@@ -168,38 +160,18 @@
 #pragma mark - Calls that need to run on the main thread
 
 #if TARGET_OS_IPHONE
-// This method was created because UIApplication.sharedApplication.statusBarFrame should only
+// This method was created because UIDevice.currentDevice.orientation should only
 // be called from the main thread.
 //
-- (CGRect)statusBarFrame {
-
+- (UIDeviceOrientation)deviceOrientation {
     if ([NSThread isMainThread]) {
-        return UIApplication.sharedIfAvailable.statusBarFrame;
-    }
-
-    __block CGRect frame = CGRectZero;
-
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        frame = UIApplication.sharedIfAvailable.statusBarFrame;
-    });
-
-    return frame;
-}
-#endif
-
-#if TARGET_OS_IPHONE
-// This method was created because UIApplication.sharedApplication.statusBarOrientation should only
-// be called from the main thread.
-//
-- (UIInterfaceOrientation)statusBarOrientation {
-    if ([NSThread isMainThread]) {
-        return UIApplication.sharedIfAvailable.statusBarOrientation;
+        return UIDevice.currentDevice.orientation;
     }
 
     __block CGFloat orientation = 0;
 
     dispatch_sync(dispatch_get_main_queue(), ^{
-        orientation = UIApplication.sharedIfAvailable.statusBarOrientation;
+        orientation = UIDevice.currentDevice.orientation;
     });
 
     return orientation;
