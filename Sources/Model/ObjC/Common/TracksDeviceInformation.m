@@ -21,9 +21,39 @@
 @property (nonatomic, assign) BOOL isReachableByWiFi;
 @property (nonatomic, assign) BOOL isReachableByWWAN;
 
+@property (nonatomic, assign) UIDeviceOrientation lastKnownDeviceOrientation;
+@property (nonatomic, strong) NSString *lastKnownPreferredContentSizeCategory;
+
 @end
 
 @implementation TracksDeviceInformation
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        [self preloadDeviceProperties];
+    }
+
+    return self;
+}
+
+- (void)preloadDeviceProperties
+{
+#if TARGET_OS_IPHONE
+    void (^preload)(void) = ^(void) {
+        self.lastKnownDeviceOrientation = UIDevice.currentDevice.orientation;
+        self.lastKnownPreferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
+    };
+
+    if ([NSThread isMainThread]) {
+        preload();
+        return;
+    }
+
+    dispatch_async(dispatch_get_main_queue(), preload);
+#endif
+}
 
 - (NSString *)brand
 {
@@ -164,17 +194,7 @@
 // be called from the main thread.
 //
 - (UIDeviceOrientation)deviceOrientation {
-    if ([NSThread isMainThread]) {
-        return UIDevice.currentDevice.orientation;
-    }
-
-    __block CGFloat orientation = 0;
-
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        orientation = UIDevice.currentDevice.orientation;
-    });
-
-    return orientation;
+    return self.lastKnownDeviceOrientation;
 }
 #endif
 
@@ -184,17 +204,7 @@
 ///
 - (NSString *)preferredContentSizeCategory {
 #if TARGET_OS_IPHONE
-    if ([NSThread isMainThread]) {
-        return UIApplication.sharedIfAvailable.preferredContentSizeCategory;
-    }
-
-    __block NSString *preferredContentSizeCategory;
-
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        preferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
-    });
-
-    return preferredContentSizeCategory;
+    return self.lastKnownPreferredContentSizeCategory;
 #else   // Mac
     return NULL;
 #endif
@@ -207,17 +217,12 @@
 ///
 - (BOOL)isAccessibilityCategory {
 #if TARGET_OS_IPHONE
-    __block NSString *preferredContentSizeCategory;
-
-    if ([NSThread isMainThread]) {
-        preferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
-    } else {
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            preferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
-        });
+    if (self.lastKnownPreferredContentSizeCategory == nil) {
+        return NO;
     }
 
-    return UIContentSizeCategoryIsAccessibilityCategory(preferredContentSizeCategory);
+    return UIContentSizeCategoryIsAccessibilityCategory(self.self.lastKnownPreferredContentSizeCategory);
+
 #else   // Mac
     return NO;
 #endif
