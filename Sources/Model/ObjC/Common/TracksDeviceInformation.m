@@ -194,6 +194,10 @@
 // be called from the main thread.
 //
 - (UIDeviceOrientation)deviceOrientation {
+    if ([NSThread isMainThread]) {
+        self.lastKnownDeviceOrientation = UIDevice.currentDevice.orientation;
+    }
+
     return self.lastKnownDeviceOrientation;
 }
 #endif
@@ -204,6 +208,10 @@
 ///
 - (NSString *)preferredContentSizeCategory {
 #if TARGET_OS_IPHONE
+    if ([NSThread isMainThread]) {
+        self.lastKnownPreferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
+    }
+
     return self.lastKnownPreferredContentSizeCategory;
 #else   // Mac
     return NULL;
@@ -217,11 +225,12 @@
 ///
 - (BOOL)isAccessibilityCategory {
 #if TARGET_OS_IPHONE
-    if (self.lastKnownPreferredContentSizeCategory == nil) {
+    NSString *preferredCategory = [self preferredContentSizeCategory];
+    if (preferredCategory == nil) {
         return NO;
     }
 
-    return UIContentSizeCategoryIsAccessibilityCategory(self.self.lastKnownPreferredContentSizeCategory);
+    return UIContentSizeCategoryIsAccessibilityCategory(preferredCategory);
 
 #else   // Mac
     return NO;
