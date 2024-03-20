@@ -21,7 +21,7 @@
 @property (nonatomic, assign) BOOL isReachableByWiFi;
 @property (nonatomic, assign) BOOL isReachableByWWAN;
 
-#if TARGET_OS_SIMULATOR
+#if TARGET_OS_IPHONE
 @property (nonatomic, assign) UIDeviceOrientation lastKnownDeviceOrientation;
 @property (nonatomic, strong) NSString *lastKnownPreferredContentSizeCategory;
 #endif
