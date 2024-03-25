@@ -56,7 +56,10 @@ public class CrashLogging {
             options.diagnosticLevel = .error
 
             options.environment = self.dataProvider.buildType
-            options.releaseName = self.dataProvider.releaseName
+            switch self.dataProvider.releaseName {
+            case .setByApplication(let name): options.releaseName = name
+            case .setByTracksLibrary: options.releaseName = nil
+            }
             options.enableAutoSessionTracking = self.dataProvider.shouldEnableAutomaticSessionTracking
             options.enableAppHangTracking = self.dataProvider.enableAppHangTracking
             options.enableCaptureFailedRequests = self.dataProvider.enableCaptureFailedRequests
