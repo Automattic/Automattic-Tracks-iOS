@@ -48,6 +48,12 @@ _None._
 
 _None._
 
+## 3.4.1
+
+### Bug Fixes
+
+- Fix Xcode 15.4 compatibility by using Sentry 8.26.0 [#286]
+
 ## 3.4.0
 
 ### Bug Fixes
