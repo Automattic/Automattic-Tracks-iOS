@@ -42,7 +42,7 @@ _None._
 
 ### Bug Fixes
 
-_None._
+- Fix Xcode 15.4 compatibility by using Sentry 8.26.0 [#286]
 
 ### Internal Changes
 
