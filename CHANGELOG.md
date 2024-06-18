@@ -42,6 +42,24 @@ _None._
 
 ### Bug Fixes
 
+_None._
+
+### Internal Changes
+
+_None._
+
+## 3.4.2
+
+### Breaking Changes
+
+_None._
+
+### New Features
+
+_None._
+
+### Bug Fixes
+
 - Fix Xcode 16.0 Beta 1 compatibility by using Sentry 8.29.0 [#289]
 
 ### Internal Changes
