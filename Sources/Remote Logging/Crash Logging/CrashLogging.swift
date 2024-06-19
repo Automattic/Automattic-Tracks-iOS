@@ -83,6 +83,8 @@ public class CrashLogging {
                 options.enableUserInteractionTracing = self.dataProvider.enableUserInteractionTracing
                 options.enableUIViewControllerTracing = self.dataProvider.enableUIViewControllerTracking
             #endif
+
+            options.onCrashedLastRun = self.dataProvider.onCrashedLastRun
         }
 
         Internals.crashLogging = self
