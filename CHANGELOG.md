@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-_None._
+- Exposed Sentry's `onCrashedLastRun` to `CrashLoggingDataProvider`.
 
 ### Bug Fixes
 
