@@ -106,7 +106,8 @@ public class CrashLogging {
         }
 
         /// If we shouldn't send the event we have nothing else to do here
-        guard let event = event, shouldSendEvent else {
+        guard let event, shouldSendEvent else {
+            TracksLogVerbose("No event to send or user opted-out. Moving on...")
             return nil
         }
 
