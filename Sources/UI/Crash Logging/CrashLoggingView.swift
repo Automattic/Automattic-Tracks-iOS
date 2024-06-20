@@ -48,6 +48,9 @@ public struct CrashLoggingView: View {
                         }
                     }
                 }
+                CrashButton("Crash with fatalError()") {
+                    fatalError("Manually triggered fatalError()")
+                }
             }
 
             /// Push the form to the top of the screen
@@ -98,6 +101,47 @@ extension CrashLoggingView {
             userInfo: ["custom-userInfo-key": "custom-userInfo-value"]
         ) {
             sendErrorAndWaitStatus = .done
+        }
+    }
+}
+
+struct CrashButton: View {
+    let titleKey: LocalizedStringKey
+    let onCrashTapped: () -> Void
+
+    let message = """
+    For crashes to be reported, make sure no debbuger is attached.
+    If running from Xcode, go to Debug > Detach from <app name>.
+    Alternatively, stop the app from Xcode, then open it directly from the Simulator.
+    After the crash, open the app directly from the Simulator.
+    """
+
+    @State var crashAlertPresented = false
+
+    public init(_ titleKey: LocalizedStringKey, onCrashTapped: @escaping () -> Void) {
+        self.titleKey = titleKey
+        self.onCrashTapped = onCrashTapped
+    }
+
+    public var body: some View {
+        if #available(iOS 15.0, *) {
+            Button(titleKey) {
+                crashAlertPresented = true
+            }
+            .alert(
+                "Before you continue...",
+                isPresented: $crashAlertPresented,
+                actions: {
+                    Button("Cancel", role: .cancel) {}
+                    Button("Crash", role: .destructive, action: onCrashTapped)
+                },
+                message: {
+                    Text(message)
+                }
+            )
+        } else {
+            // TODO: It's really about time we update Tracks to a later iOS deployment target
+            preconditionFailure("Please run the demo app on iOS 15 or above...")
         }
     }
 }
