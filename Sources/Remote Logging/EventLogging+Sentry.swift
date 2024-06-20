@@ -15,9 +15,8 @@ public extension EventLoggingDelegate {
 
 extension EventLogging {
     func attachLogToEventIfNeeded(event: Event) {
-
-        /// Don't enqueue logs for non-fatal events unless directed to by the delegate
-        if event.level != .fatal && !delegate.shouldUploadLogFilesForNonFatalEvents {
+        /// Only enqueue logs for fatal events unless directed to by the delegate
+        guard event.level == .fatal || delegate.shouldUploadLogFilesForNonFatalEvents else {
             TracksLogDebug("""
 📜 Will not attempt to attach log file because event level is \(String(describing: event.level)).
 Bypass this check by setting shouldUploadLogFilesForNonFatalEvents to true via EventLoggingDelegate
