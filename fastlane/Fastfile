@@ -7,6 +7,10 @@ PROJECT_PATH = File.join(__dir__, 'TracksDemo', 'TracksDemo.xcodeproj')
 
 default_platform(:ios)
 
+lane :open_demo_project do
+  sh 'open -a /Applications/Xcode.app ../TracksDemo/TracksDemo.xcodeproj'
+end
+
 platform :ios do
   desc 'Builds the project and runs tests'
   lane :test do
