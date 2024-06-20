@@ -1,0 +1,2 @@
+// See the value set in Package.swift and Automattic-Tracks-iOS.podspec
+IPHONEOS_DEPLOYMENT_TARGET = 13.0
