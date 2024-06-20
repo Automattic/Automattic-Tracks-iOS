@@ -85,6 +85,10 @@ public class CrashLogging {
             #endif
         }
 
+        TracksLogDebug("Successfully intialized SentrySDK.")
+        TracksLogDebug("- crashedLastRun: \(SentrySDK.crashedLastRun)")
+        TracksLogDebug("- detectedStartUpCrash: \(SentrySDK.detectedStartUpCrash)")
+
         Internals.crashLogging = self
 
         return self
