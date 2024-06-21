@@ -19,6 +19,7 @@ public protocol CrashLoggingDataProvider {
     /// Whether HTTP client errors are captured.
     var enableCaptureFailedRequests: Bool { get }
 
+    /// A closure that will run shortly after the crash logging is initialized in case a crash was detected during the previous run.
     var onCrashedLastRun: ((Event) -> Void)? { get }
 }
 
