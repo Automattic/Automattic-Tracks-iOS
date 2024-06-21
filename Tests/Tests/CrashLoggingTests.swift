@@ -196,6 +196,12 @@ class CrashLoggingTests: XCTestCase {
             XCTAssertTrue(dataProvider.enableUserInteractionTracing)
         #endif
     }
+
+    func testOnCrashedLastRunDisabledByDefault() {
+        let dataProvider = MockCrashLoggingDataProvider()
+
+        XCTAssertNil(dataProvider.onCrashedLastRun)
+    }
 }
 
 /// Allow throwing Strings as error
