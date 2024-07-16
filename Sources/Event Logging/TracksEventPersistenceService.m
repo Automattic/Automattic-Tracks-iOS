@@ -9,6 +9,7 @@
 #endif
 
 @import Foundation;
+@import CoreData;
 
 @interface TracksEventPersistenceService ()
 
@@ -40,7 +41,7 @@
 }
 
 
-- (NSArray *)fetchAllTracksEvents
+- (NSArray *)fetchAllTracksEvents 
 {
     __block NSMutableArray *transformedResults;
     
@@ -64,6 +65,32 @@
     
     return transformedResults;
 }
+
+- (NSArray *)fetchTracksEventsWithLimit:(NSInteger)limit {
+    __block NSMutableArray *transformedResults;
+
+    [self.managedObjectContext performBlockAndWait:^{
+        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
+        fetchRequest.fetchLimit = limit;
+
+        NSError *error;
+        NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
+
+        if (error) {
+            TracksLogError(@"Error while fetching all TracksEvent: %@", error);
+            return;
+        }
+
+        transformedResults = [[NSMutableArray alloc] initWithCapacity:results.count];
+        for (TracksEventCoreData *eventCoreData in results) {
+            TracksEvent *tracksEvent = [self mapToTracksEventWithTracksEventCoreData:eventCoreData];
+            [transformedResults addObject:tracksEvent];
+        }
+    }];
+
+    return transformedResults;
+}
+
 
 
 - (NSUInteger)countAllTracksEvents

@@ -11,6 +11,7 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)persistTracksEvent:(TracksEvent *)tracksEvent;
 
 - (NSArray *)fetchAllTracksEvents;
+- (NSArray *)fetchTracksEventsWithLimit:(NSInteger)limit;
 
 - (NSUInteger)countAllTracksEvents;
 

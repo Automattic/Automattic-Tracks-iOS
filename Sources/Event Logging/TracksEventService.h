@@ -25,6 +25,7 @@
                                           withAnonymousUserID:(NSString *)anonymousUserID;
 
 - (NSArray *)allTracksEvents;
+- (NSArray *)tracksEventsWithLimit:(NSInteger)limit;
 
 - (NSUInteger)numberOfTracksEvents;
 
