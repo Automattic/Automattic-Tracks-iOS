@@ -43,27 +43,7 @@
 
 - (NSArray *)fetchAllTracksEvents 
 {
-    __block NSMutableArray *transformedResults;
-    
-    [self.managedObjectContext performBlockAndWait:^{
-        NSFetchRequest *fetchRequest = [NSFetchRequest fetchRequestWithEntityName:@"TracksEvent"];
-        
-        NSError *error;
-        NSArray *results = [self.managedObjectContext executeFetchRequest:fetchRequest error:&error];
-        
-        if (error) {
-            TracksLogError(@"Error while fetching all TracksEvent: %@", error);
-            return;
-        }
-        
-        transformedResults = [[NSMutableArray alloc] initWithCapacity:results.count];
-        for (TracksEventCoreData *eventCoreData in results) {
-            TracksEvent *tracksEvent = [self mapToTracksEventWithTracksEventCoreData:eventCoreData];
-            [transformedResults addObject:tracksEvent];
-        }
-    }];
-    
-    return transformedResults;
+    return [self fetchTracksEventsWithLimit:0];
 }
 
 - (NSArray *)fetchTracksEventsWithLimit:(NSInteger)limit {
