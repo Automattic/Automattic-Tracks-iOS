@@ -41,7 +41,7 @@
 }
 
 
-- (NSArray *)fetchAllTracksEvents 
+- (NSArray *)fetchAllTracksEvents
 {
     return [self fetchTracksEventsWithLimit:0];
 }
@@ -70,8 +70,6 @@
 
     return transformedResults;
 }
-
-
 
 - (NSUInteger)countAllTracksEvents
 {
