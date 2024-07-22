@@ -39,6 +39,7 @@ _None._
 ### New Features
 
 - Exposed Sentry's `onCrashedLastRun` to `CrashLoggingDataProvider`.
+- Tracks events are now reported in batches of up to 1000 events, for better performance under large loads. [#293]
 
 ### Bug Fixes
 

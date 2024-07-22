@@ -161,7 +161,7 @@ NSString *const USER_ID_ANON = @"anonId";
     [self.timer invalidate];
     [[NSNotificationCenter defaultCenter] postNotificationName:TrackServiceWillSendQueuedEventsNotification object:nil];
     
-    NSArray *events = [self.tracksEventService allTracksEvents];
+    NSArray *events = [self.tracksEventService tracksEventsWithLimit:1000];
 
     if (events.count == 0) {
         [self resetTimer];

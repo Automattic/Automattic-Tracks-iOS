@@ -97,6 +97,11 @@
     return [self.persistenceService fetchAllTracksEvents];
 }
 
+- (NSArray *)tracksEventsWithLimit:(NSInteger)limit
+{
+    return [self.persistenceService fetchTracksEventsWithLimit:limit];
+}
+
 
 - (void)removeTracksEvents:(NSArray *)tracksEvents
 {

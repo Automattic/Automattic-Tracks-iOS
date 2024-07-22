@@ -101,7 +101,7 @@
     tracksEvent.eventName = @"Test";
     tracksEvent.userID = @"anonymous123";
     NSArray *events = @[tracksEvent];
-    OCMExpect([self.tracksEventService allTracksEvents]).andReturn(events);
+    OCMExpect([self.tracksEventService tracksEventsWithLimit:1000]).andReturn(events);
     
     OCMExpect([self.subject.remote sendBatchOfEvents:[OCMArg checkWithBlock:^BOOL(id obj) {
         XCTAssertTrue([obj isKindOfClass:[NSArray class]]);
