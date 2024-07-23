@@ -38,8 +38,7 @@ _None._
 
 ### New Features
 
-- Exposed Sentry's `onCrashedLastRun` to `CrashLoggingDataProvider`.
-- Tracks events are now reported in batches of up to 1000 events, for better performance under large loads. [#293]
+_None._
 
 ### Bug Fixes
 
@@ -49,23 +48,23 @@ _None._
 
 _None._
 
-## 3.4.2
 
 ### Breaking Changes
 
 _None._
 
+## 3.5.0
+
 ### New Features
 
-_None._
+- Exposed Sentry's `onCrashedLastRun` to `CrashLoggingDataProvider`. [#292]
+- Tracks events are now reported in batches of up to 1000 events, for better performance under large loads. [#293]
+
+## 3.4.2
 
 ### Bug Fixes
 
 - Fix Xcode 16.0 Beta 1 compatibility by using Sentry 8.29.0 [#289]
-
-### Internal Changes
-
-_None._
 
 ## 3.4.1
 
