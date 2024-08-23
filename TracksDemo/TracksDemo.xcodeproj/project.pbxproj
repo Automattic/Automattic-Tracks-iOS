@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 52;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		24FB4D3D25B2AF02006E4031 /* CrashLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */; };
 		24FB4D8425B2B304006E4031 /* CrashLoggingRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D8325B2B304006E4031 /* CrashLoggingRootViewController.swift */; };
 		24FB4D8E25B2B332006E4031 /* CrashLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */; };
+		3F9FFE712C2442C600E68A22 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3F9FFE6F2C2442C600E68A22 /* Base.xcconfig */; };
 		937632941AC2026900086BC6 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632931AC2026900086BC6 /* main.m */; };
 		937632971AC2026900086BC6 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632961AC2026900086BC6 /* AppDelegate.m */; };
 		9376329A1AC2026900086BC6 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 937632991AC2026900086BC6 /* ViewController.m */; };
@@ -46,6 +47,7 @@
 		24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingDataSource.swift; sourceTree = "<group>"; };
 		24FB4D4125B2AF0C006E4031 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
 		24FB4D8325B2B304006E4031 /* CrashLoggingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingRootViewController.swift; sourceTree = "<group>"; };
+		3F9FFE6F2C2442C600E68A22 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		937539871AFA8A9000B94B2A /* TracksDemo_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracksDemo_Prefix.pch; sourceTree = "<group>"; };
 		9376328E1AC2026900086BC6 /* TracksDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TracksDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		937632921AC2026900086BC6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -107,6 +109,14 @@
 			path = Shared;
 			sourceTree = "<group>";
 		};
+		3F9FFE702C2442C600E68A22 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				3F9FFE6F2C2442C600E68A22 /* Base.xcconfig */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
 		937632851AC2026900086BC6 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +143,7 @@
 		937632901AC2026900086BC6 /* TracksDemo */ = {
 			isa = PBXGroup;
 			children = (
+				3F9FFE702C2442C600E68A22 /* Config */,
 				937632951AC2026900086BC6 /* AppDelegate.h */,
 				937632961AC2026900086BC6 /* AppDelegate.m */,
 				937632981AC2026900086BC6 /* ViewController.h */,
@@ -324,6 +335,7 @@
 				9376329D1AC2026900086BC6 /* Main.storyboard in Resources */,
 				937632A21AC2026900086BC6 /* LaunchScreen.xib in Resources */,
 				9376329F1AC2026900086BC6 /* Images.xcassets in Resources */,
+				3F9FFE712C2442C600E68A22 /* Base.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +474,7 @@
 /* Begin XCBuildConfiguration section */
 		937632AF1AC2026900086BC6 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F9FFE6F2C2442C600E68A22 /* Base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -507,7 +520,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -517,6 +529,7 @@
 		};
 		937632B01AC2026900086BC6 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F9FFE6F2C2442C600E68A22 /* Base.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
@@ -555,7 +568,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;

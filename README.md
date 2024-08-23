@@ -7,7 +7,6 @@ Tracks for iOS is a client library used to help track events inside of an applic
 
 ## Installation
 
-
 You can install the Tracks component in your app via Swift Package Manager:
 
 ```swift
@@ -57,7 +56,6 @@ Check out the **TracksDemo** project for more information on how to track events
 1. Create an instance of `EventLogging` using `init(dataSource:delegate:)`.
 2. Call `enqueueLogForUpload(log:)` to schedule log files for uploading.
 
-
 ### Logging
 
 Tracks logs about some of its activity. By default, this logging will just go to the console. If you'd like to include this logging in your own logging solution, you can create and assign a logging delegate conforming to `TracksLoggingDelegate`:
@@ -66,6 +64,19 @@ Tracks logs about some of its activity. By default, this logging will just go to
 TracksLogging.delegate = MyLoggingHandler()
 ```
 
+## Development
+
+You can open the TracksDemo project with:
+
+```
+open -a /Applications/Xcode.app TracksDemo/TracksDemo.xcodeproj
+```
+
+or by running:
+
+```
+bundle exec fastlane open_demo_project
+```
 
 ## Contributing
 

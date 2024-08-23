@@ -15,22 +15,27 @@ public extension EventLoggingDelegate {
 
 extension EventLogging {
     func attachLogToEventIfNeeded(event: Event) {
-
-        /// Don't enqueue logs for non-fatal events unless directed to by the delegate
-        if event.level != .fatal && !delegate.shouldUploadLogFilesForNonFatalEvents {
-            TracksLogDebug("📜 Cancelling event log attachment – level is \(String(describing: event.level))")
+        /// Only enqueue logs for fatal events unless directed to by the delegate
+        guard event.level == .fatal || delegate.shouldUploadLogFilesForNonFatalEvents else {
+            TracksLogDebug("""
+📜 Will not attempt to attach log file because event level is \(String(describing: event.level)).
+Bypass this check by setting shouldUploadLogFilesForNonFatalEvents to true via EventLoggingDelegate
+"""
+            )
             return
         }
 
         guard let timestamp = event.timestamp else {
-            TracksLogDebug("📜 Unable to locate event timestamp")
+            TracksLogDebug("📜 Will not attempt to attach log file because unable to locate event timestamp")
             return
         }
 
-        /// Allow the hosting app to determine the most appropriate log file to send for the error type. For example, in an application using
-        /// session-based file logging, the newest log file would be the current session, which is appropriate for debugging logs. However,
-        /// the previous session's log file is the correct one for a crash, because when the crash is sent there will already be a new log
-        /// file for the current session. Other apps may use time-based logs, in which case the same log would be the correct one.
+        /// Allow the hosting app to determine the most appropriate log file to send for the error type.
+        ///
+        /// For example, in an application using session-based file logging, the newest log file would be the current session, which is
+        /// appropriate for debugging logs. However, the previous session's log file is the correct one for a crash, because when the
+        /// crash is sent there will already be a new log file for the current session. Other apps may use time-based logs, in which
+        /// case the same log would be the correct one.
         ///
         /// We also pass the timestamp for the event, as that can be useful for determining the correct log file.
         guard let logFilePath = dataSource.logFilePath(forErrorLevel: event.errorType, at: timestamp) else {
@@ -43,8 +48,7 @@ extension EventLogging {
             let logFile = LogFile(url: logFilePath)
             try enqueueLogForUpload(log: logFile)
             event.logID = logFile.uuid
-        }
-        catch let err {
+        } catch let err {
             CrashLogging.Internals.crashLogging?.logError(err)
         }
     }

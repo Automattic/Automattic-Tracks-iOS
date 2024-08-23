@@ -87,6 +87,10 @@ public class CrashLogging {
             options.onCrashedLastRun = self.dataProvider.onCrashedLastRun
         }
 
+        TracksLogDebug("Successfully intialized SentrySDK.")
+        TracksLogDebug("- crashedLastRun: \(SentrySDK.crashedLastRun)")
+        TracksLogDebug("- detectedStartUpCrash: \(SentrySDK.detectedStartUpCrash)")
+
         Internals.crashLogging = self
 
         return self
@@ -108,7 +112,8 @@ public class CrashLogging {
         }
 
         /// If we shouldn't send the event we have nothing else to do here
-        guard let event = event, shouldSendEvent else {
+        guard let event, shouldSendEvent else {
+            TracksLogVerbose("No event to send or user opted-out. Moving on...")
             return nil
         }
 
@@ -124,9 +129,11 @@ public class CrashLogging {
         /// Read the current user from the Data Provider (though the Data Provider can decide not to provide it for functional or privacy reasons)
         event.user = dataProvider.currentUser?.sentryUser
 
+        TracksLogDebug("🐷 \(dataProvider.currentUser.debugDescription)")
+
         /// Everything below this line is related to event logging, so if it's not set up we can exit
-        guard let eventLogging = self.eventLogging else {
-            TracksLogDebug("📜 Cancelling log file attachment – Event Logging is not initialized")
+        guard let eventLogging else {
+            TracksLogDebug("📜 Will not attach log file because `EventLogging` is not initialized")
             return event
         }
 
