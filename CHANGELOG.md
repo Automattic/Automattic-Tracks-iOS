@@ -46,8 +46,7 @@ _None._
 
 ### Internal Changes
 
-_None._
-
+- Fix SwiftUI previews on Mac which broke due to a bug in Sentry [#297]
 
 ### Breaking Changes
 
