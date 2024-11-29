@@ -46,11 +46,13 @@ _None._
 
 ### Internal Changes
 
-- Fix SwiftUI previews on Mac which broke due to a bug in Sentry [#297]
-
-### Breaking Changes
-
 _None._
+
+## 3.5.1
+
+### Internal Changes
+
+- Fix SwiftUI previews on Mac which broke due to a bug in Sentry [#297]
 
 ## 3.5.0
 
