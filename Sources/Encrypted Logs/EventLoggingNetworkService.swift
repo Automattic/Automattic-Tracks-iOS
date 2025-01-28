@@ -6,7 +6,7 @@ class EventLoggingNetworkService {
 
     private let urlSession: URLSession
 
-    init(urlSession: URLSession = URLSession.shared) {
+    init(urlSession: URLSession = URLSession(configuration: .ephemeral)) {
         self.urlSession = urlSession
     }
 
