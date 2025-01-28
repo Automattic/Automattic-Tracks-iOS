@@ -113,4 +113,3 @@ extension EventLoggingTests {
             .withLogUploadUrl(url)
     }
 }
-x
