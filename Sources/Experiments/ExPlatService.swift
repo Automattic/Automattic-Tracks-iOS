@@ -16,6 +16,7 @@ public class ExPlatService {
     let oAuthToken: String?
     let userAgent: String?
     let anonId: String?
+    let urlSession: URLSession
 
     var experimentNames: [String] = []
 
@@ -28,6 +29,7 @@ public class ExPlatService {
         self.oAuthToken = configuration.oAuthToken
         self.userAgent = configuration.userAgent
         self.anonId = configuration.anonId
+        self.urlSession = URLSession(configuration: .ephemeral)
     }
 
     func getAssignments(completion: @escaping (Assignments?) -> Void) {
