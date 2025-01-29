@@ -48,6 +48,12 @@ _None._
 
 _None._
 
+## 3.5.2
+
+### Internal Changes
+
+- Use ephemeral `URLSession` to send encrypted logs [#300]
+
 ## 3.5.1
 
 ### Internal Changes
