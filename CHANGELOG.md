@@ -48,6 +48,12 @@ _None._
 
 _None._
 
+## 3.5.3
+
+### Internal Changes
+
+- Send device model and OS with UserAgent string [#303]
+
 ## 3.5.2
 
 ### Internal Changes
