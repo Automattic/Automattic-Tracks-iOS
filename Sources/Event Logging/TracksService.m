@@ -472,15 +472,10 @@ NSString *const USER_ID_ANON = @"anonId";
 - (NSString *)userAgent
 {
     #if TARGET_OS_IPHONE
-        NSString *osName = @"iOS";
-        if (@available(iOS 13.0, *)) {
-            if (UIDevice.currentDevice.userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-                osName = @"iPadOS";
-            }
-        }
-        return [NSString stringWithFormat:@"Nosara Client for %@ %@", osName, TracksLibraryVersion];
-    #endif
-
+        NSString *deviceModel = self.deviceInformation.device_info_model;
+        NSString *osName = self.deviceInformation.os;
+        NSString *osVersion = self.deviceInformation.version;
+        return [NSString stringWithFormat:@"Nosara Client %@ for %@, %@:%@", TracksLibraryVersion, deviceModel, osName, osVersion];
     #if TARGET_OS_MAC
         return [NSString stringWithFormat:@"Nosara Client for macOS %@", TracksLibraryVersion];
     #endif
