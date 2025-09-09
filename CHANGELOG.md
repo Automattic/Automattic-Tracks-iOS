@@ -48,6 +48,12 @@ _None._
 
 _None._
 
+## 3.5.3
+
+### Internal Changes
+
+- Differentiate between iOS and iPadOS in `userAgent` sent with the events
+
 ## 3.5.2
 
 ### Internal Changes
