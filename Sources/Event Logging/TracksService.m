@@ -476,6 +476,7 @@ NSString *const USER_ID_ANON = @"anonId";
         NSString *osName = self.deviceInformation.os;
         NSString *osVersion = self.deviceInformation.version;
         return [NSString stringWithFormat:@"Nosara Client %@ for %@, %@:%@", TracksLibraryVersion, deviceModel, osName, osVersion];
+    #endif
     #if TARGET_OS_MAC
         return [NSString stringWithFormat:@"Nosara Client for macOS %@", TracksLibraryVersion];
     #endif
