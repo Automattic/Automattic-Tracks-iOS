@@ -52,7 +52,7 @@ _None._
 
 ### Internal Changes
 
-- Differentiate between iOS and iPadOS in `userAgent` sent with the events [#303]
+- Send device model and OS with UserAgent string [#303]
 
 ## 3.5.2
 
