@@ -54,7 +54,7 @@ _None._
 
 - Make user agent compatible with existing values [#304]
 
-### 3.5.3
+## 3.5.3
 
 ### Internal Changes
 
