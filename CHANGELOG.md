@@ -48,6 +48,12 @@ _None._
 
 _None._
 
+## 3.5.4
+
+### Internal Changes
+
+- Make user agent compatible with existing values [#304]
+
 ## 3.5.3
 
 ### Internal Changes
