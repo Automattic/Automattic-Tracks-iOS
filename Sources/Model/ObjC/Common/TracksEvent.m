@@ -1,9 +1,62 @@
 #import "TracksEvent.h"
 
+static NSArray<NSString *> * kReservedNames;
+
+
 @implementation TracksEvent
 
 NSString *const TracksEventNameRegExPattern = @"^(([a-z0-9]+)_){2}([a-z0-9_]+)$";
 NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
+
++ (void)initialize {
+    if (self == [TracksEvent class]) {
+        kReservedNames = @[    @"timestamp",
+                                  @"year",
+                                  @"month",
+                                  @"day",
+                                  @"dateymd",
+                                  @"datetime",
+                                  @"logdateymd",
+                                  @"anonid",
+                                  @"userid",
+                                  @"useridtype",
+                                  @"userlang",
+                                  @"eventnamepartial",
+                                  @"eventname",
+                                  @"eventprops",
+                                  @"eventsource",
+                                  @"geoip",
+                                  @"geocountrycode",
+                                  @"geocountry",
+                                  @"georegion",
+                                  @"geocity",
+                                  @"geolatitude",
+                                  @"geolongitude",
+                                  @"logdate",
+                                  @"logtimestamp",
+                                  @"logmethod",
+                                  @"logreferrer",
+                                  @"requesttimestamp",
+                                  @"eventtimestamp",
+                                  @"browserlang",
+                                  @"browserfamilyversion",
+                                  @"browserfamily",
+                                  @"browserdocumentlocation",
+                                  @"browserdocumentreferrer",
+                                  @"useragent",
+                                  @"devicefamily",
+                                  @"deviceos",
+                                  @"blogid",
+                                  @"bloglang",
+                                  @"blogtimezone",
+                                  @"kafkatopic",
+                                  @"processingtimestamp",
+                                  @"etlmessage",
+                                  @"eventmarker",
+                                  @"record_ymdh"
+        ];
+    }
+}
 
 - (instancetype)init
 {
@@ -157,6 +210,32 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
                 
                 return NO;
             }
+
+            if ([self checkPropertyNameIsReserved:key] == YES) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"User properties dictionary key is reserved on Server",
+                                                              @"validation: TracksEvent, key format userProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationUserPropertiesKeyFormat
+                                                       userInfo:userInfoDict];
+                }
+
+                return NO;
+            }
+
+            if ([self checkPropertyTypeIsValid:dict[key]] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = NSLocalizedString(@"User properties dictionary value is not a valid type. It must be an String, Int or Boolean",
+                                                              @"validation: TracksEvent, value format userProperties error");
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationUserPropertiesKeyFormat
+                                                       userInfo:userInfoDict];
+                }
+
+                return NO;
+            }
         }
         
         return YES;
@@ -253,6 +332,31 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
     return matches.count > 0;
 }
+
+- (BOOL)checkPropertyNameIsReserved:(NSString *)propertyName
+{
+    for (NSString *name in kReservedNames) {
+        if ([propertyName isEqualToString:name]) {
+            return YES;
+        }
+    }
+
+    return NO;
+}
+
+- (BOOL)checkPropertyTypeIsValid:(id) type
+{
+    if ([type isKindOfClass:[NSString class]]) {
+        return YES;
+    }
+
+    if ([type isKindOfClass:[NSNumber class]]) {
+        return YES;
+    }
+
+    return NO;
+}
+
 
 //@property (nonatomic, copy) NSString *username;
 //@property (nonatomic, copy) NSString *userID;
