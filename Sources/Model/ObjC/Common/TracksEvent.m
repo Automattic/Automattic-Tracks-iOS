@@ -214,11 +214,11 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
             if ([self checkPropertyNameIsReserved:key] == YES) {
                 if (outError != NULL) {
-                    NSString *errorString = NSLocalizedString(@"User properties dictionary key is reserved on Server",
-                                                              @"validation: TracksEvent, key format userProperties error");
+                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"User properties dictionary key [%@] is reserved on Server",
+                                                              @"validation: TracksEvent, key format userProperties error"), key];
                     NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
                     *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
-                                                           code:TracksErrorCodeValidationUserPropertiesKeyFormat
+                                                           code:TracksErrorCodeValidationUserPropertiesKeyReservedWord
                                                        userInfo:userInfoDict];
                 }
 
@@ -227,11 +227,11 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
             if ([self checkPropertyTypeIsValid:dict[key]] == NO) {
                 if (outError != NULL) {
-                    NSString *errorString = NSLocalizedString(@"User properties dictionary value is not a valid type. It must be an String, Int or Boolean",
-                                                              @"validation: TracksEvent, value format userProperties error");
+                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"User properties dictionary value for [%@] is not a valid type. It must be an String, Int or Boolean",
+                                                              @"validation: TracksEvent, value format userProperties error"), key];
                     NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
                     *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
-                                                           code:TracksErrorCodeValidationUserPropertiesKeyFormat
+                                                           code:TracksErrorCodeValidationUserPropertiesInvalidType
                                                        userInfo:userInfoDict];
                 }
 

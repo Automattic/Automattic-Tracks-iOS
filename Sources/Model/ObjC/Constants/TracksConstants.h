@@ -18,5 +18,8 @@ typedef NS_ENUM(NSInteger, TracksErrorCode) {
     TracksErrorRemoteResponseError,
 
     TracksErrorFileMissing,
-    TracksErrorOperationCancelled
+    TracksErrorOperationCancelled,
+
+    TracksErrorCodeValidationUserPropertiesKeyReservedWord,
+    TracksErrorCodeValidationUserPropertiesInvalidType
 };
