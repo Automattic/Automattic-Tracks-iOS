@@ -2,7 +2,6 @@
 
 static NSArray<NSString *> * kReservedNames;
 
-
 @implementation TracksEvent
 
 NSString *const TracksEventNameRegExPattern = @"^(([a-z0-9]+)_){2}([a-z0-9_]+)$";
@@ -357,7 +356,6 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
     return NO;
 }
-
 
 //@property (nonatomic, copy) NSString *username;
 //@property (nonatomic, copy) NSString *userID;
