@@ -46,7 +46,7 @@ _None._
 
 ### Internal Changes
 
-_None._
+- Replace deprecated `profilesSampleRate` usage with recommended `configureProfiling -> sessionSampleRate` [#309]
 
 ## 3.5.4
 
