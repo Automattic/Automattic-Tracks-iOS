@@ -9,7 +9,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
 + (void)initialize {
     if (self == [TracksEvent class]) {
-        // List of reserved Property names that is defined here: https://github.com/Automattic/nosara/blob/master/ganymedes2/kafka_staging/src/main/scala/com/automattic/ganymedes2/streaming/tracks/schema/TracksEvent.scala
+        // Reserved property names defined here: https://github.com/Automattic/nosara/blob/master/ganymedes2/kafka_staging/src/main/scala/com/automattic/ganymedes2/streaming/tracks/schema/TracksEvent.scala
         kReservedNames = @[    @"timestamp",
                                   @"year",
                                   @"month",
