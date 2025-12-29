@@ -226,7 +226,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
             if ([self checkPropertyTypeIsValid:dict[key]] == NO) {
                 if (outError != NULL) {
-                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"User properties dictionary value for [%@] is not a valid type. It must be an String, Int or Boolean",
+                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"Custom properties dictionary value for [%@] is not a valid type. It must be a String, Int or Boolean",
                                                               @"validation: TracksEvent, value format userProperties error"), key];
                     NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
                     *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
