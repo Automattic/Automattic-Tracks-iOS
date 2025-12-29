@@ -1,6 +1,6 @@
 #import "TracksEvent.h"
 
-static NSArray<NSString *> * kReservedNames;
+static NSSet<NSString *> * kReservedNames;
 
 @implementation TracksEvent
 
@@ -10,7 +10,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 + (void)initialize {
     if (self == [TracksEvent class]) {
         // List of reserved Property names that is defined here: https://github.com/Automattic/nosara/blob/master/ganymedes2/kafka_staging/src/main/scala/com/automattic/ganymedes2/streaming/tracks/schema/TracksEvent.scala
-        kReservedNames = @[    @"timestamp",
+        kReservedNames = [NSSet setWithArray:@[    @"timestamp",
                                   @"year",
                                   @"month",
                                   @"day",
@@ -54,7 +54,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
                                   @"etlmessage",
                                   @"eventmarker",
                                   @"record_ymdh"
-        ];
+        ]];
     }
 }
 
@@ -335,13 +335,7 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
 - (BOOL)checkPropertyNameIsReserved:(NSString *)propertyName
 {
-    for (NSString *name in kReservedNames) {
-        if ([propertyName isEqualToString:name]) {
-            return YES;
-        }
-    }
-
-    return NO;
+    return [kReservedNames containsObject:propertyName];
 }
 
 - (BOOL)checkPropertyTypeIsValid:(id) type
