@@ -166,7 +166,7 @@
     XCTAssertFalse(valid);
     XCTAssertNotNil(error);
     XCTAssertEqual(error.domain, TracksErrorDomain);
-    XCTAssertEqual(TracksErrorCodeValidationUserPropertiesKeyReservedWord, error.code);
+    XCTAssertEqual(TracksErrorCodeValidationCustomPropertiesKeyReservedWord, error.code);
 }
 
 - (void)testCustomPropertiesInvalidPropertyInvalidValue
@@ -181,7 +181,7 @@
     XCTAssertFalse(valid);
     XCTAssertNotNil(error);
     XCTAssertEqual(error.domain, TracksErrorDomain);
-    XCTAssertEqual(TracksErrorCodeValidationUserPropertiesInvalidType, error.code);
+    XCTAssertEqual(TracksErrorCodeValidationCustomPropertiesInvalidType, error.code);
 }
 
 

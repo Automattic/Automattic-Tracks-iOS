@@ -20,6 +20,6 @@ typedef NS_ENUM(NSInteger, TracksErrorCode) {
     TracksErrorFileMissing,
     TracksErrorOperationCancelled,
 
-    TracksErrorCodeValidationUserPropertiesKeyReservedWord,
-    TracksErrorCodeValidationUserPropertiesInvalidType
+    TracksErrorCodeValidationCustomPropertiesKeyReservedWord,
+    TracksErrorCodeValidationCustomPropertiesInvalidType
 };

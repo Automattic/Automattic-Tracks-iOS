@@ -213,11 +213,11 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
 
             if ([self checkPropertyNameIsReserved:key] == YES) {
                 if (outError != NULL) {
-                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"User properties dictionary key [%@] is reserved on Server",
-                                                              @"validation: TracksEvent, key format userProperties error"), key];
+                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"Custom properties dictionary key [%@] is reserved on Server",
+                                                              @"validation: TracksEvent, key format customProperties error"), key];
                     NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
                     *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
-                                                           code:TracksErrorCodeValidationUserPropertiesKeyReservedWord
+                                                           code:TracksErrorCodeValidationCustomPropertiesKeyReservedWord
                                                        userInfo:userInfoDict];
                 }
 
@@ -227,10 +227,10 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
             if ([self checkPropertyTypeIsValid:dict[key]] == NO) {
                 if (outError != NULL) {
                     NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"Custom properties dictionary value for [%@] is not a valid type. It must be a String, Int or Boolean",
-                                                              @"validation: TracksEvent, value format userProperties error"), key];
+                                                              @"validation: TracksEvent, value format customProperties error"), key];
                     NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
                     *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
-                                                           code:TracksErrorCodeValidationUserPropertiesInvalidType
+                                                           code:TracksErrorCodeValidationCustomPropertiesInvalidType
                                                        userInfo:userInfoDict];
                 }
 
