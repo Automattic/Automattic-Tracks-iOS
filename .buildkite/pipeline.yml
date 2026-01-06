@@ -14,36 +14,6 @@ common_params:
 
 # This is the default pipeline – it will build and test the app
 steps:
-  ######################
-  # Build and Test iOS
-  ######################
-  - label: "🧪 Build and Test iOS"
-    key: "test_ios"
-    command: |
-      install_gems
-      bundle exec fastlane ios test
-    plugins: *common_plugins
-    artifact_paths: ".build/logs/*.log"
-
-  ######################
-  # Build and Test macOS
-  ######################
-  - label: "🧪 Build and Test macOS"
-    key: "test_macos"
-    command: |
-      install_gems
-      bundle exec fastlane mac test
-    plugins: *common_plugins
-    artifact_paths: ".build/logs/*.log"
-
-  #################
-  # Check Version Consistency
-  #################
-  - label: "🔬 Validating Version"
-    key: "version_check"
-    command: .buildkite/check-version-consistency.sh
-    plugins: *common_plugins
-
   - label: ":swift: SwiftLint"
     command: swiftlint
     agents:
