@@ -1,9 +1,62 @@
 #import "TracksEvent.h"
 
+static NSSet<NSString *> * kReservedNames;
+
 @implementation TracksEvent
 
 NSString *const TracksEventNameRegExPattern = @"^(([a-z0-9]+)_){2}([a-z0-9_]+)$";
 NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
+
++ (void)initialize {
+    if (self == [TracksEvent class]) {
+        // Reserved property names defined here: https://github.com/Automattic/nosara/blob/master/ganymedes2/kafka_staging/src/main/scala/com/automattic/ganymedes2/streaming/tracks/schema/TracksEvent.scala
+        kReservedNames = [NSSet setWithArray: @[    @"timestamp",
+                                  @"year",
+                                  @"month",
+                                  @"day",
+                                  @"dateymd",
+                                  @"datetime",
+                                  @"logdateymd",
+                                  @"anonid",
+                                  @"userid",
+                                  @"useridtype",
+                                  @"userlang",
+                                  @"eventnamepartial",
+                                  @"eventname",
+                                  @"eventprops",
+                                  @"eventsource",
+                                  @"geoip",
+                                  @"geocountrycode",
+                                  @"geocountry",
+                                  @"georegion",
+                                  @"geocity",
+                                  @"geolatitude",
+                                  @"geolongitude",
+                                  @"logdate",
+                                  @"logtimestamp",
+                                  @"logmethod",
+                                  @"logreferrer",
+                                  @"requesttimestamp",
+                                  @"eventtimestamp",
+                                  @"browserlang",
+                                  @"browserfamilyversion",
+                                  @"browserfamily",
+                                  @"browserdocumentlocation",
+                                  @"browserdocumentreferrer",
+                                  @"useragent",
+                                  @"devicefamily",
+                                  @"deviceos",
+                                  @"blogid",
+                                  @"bloglang",
+                                  @"blogtimezone",
+                                  @"kafkatopic",
+                                  @"processingtimestamp",
+                                  @"etlmessage",
+                                  @"eventmarker",
+                                  @"record_ymdh"
+        ]];
+    }
+}
 
 - (instancetype)init
 {
@@ -157,6 +210,32 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
                 
                 return NO;
             }
+
+            if ([self checkPropertyNameIsReserved:key] == YES) {
+                if (outError != NULL) {
+                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"Custom properties dictionary key [%@] is reserved on Server",
+                                                              @"validation: TracksEvent, key format customProperties error"), key];
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationCustomPropertiesKeyReservedWord
+                                                       userInfo:userInfoDict];
+                }
+
+                return NO;
+            }
+
+            if ([self checkPropertyTypeIsValid:dict[key]] == NO) {
+                if (outError != NULL) {
+                    NSString *errorString = [NSString stringWithFormat: NSLocalizedString(@"Custom properties dictionary value for [%@] is not a valid type. It must be a String, Int or Boolean",
+                                                              @"validation: TracksEvent, value format customProperties error"), key];
+                    NSDictionary *userInfoDict = @{ NSLocalizedDescriptionKey : errorString };
+                    *outError = [[NSError alloc] initWithDomain:TracksErrorDomain
+                                                           code:TracksErrorCodeValidationCustomPropertiesInvalidType
+                                                       userInfo:userInfoDict];
+                }
+
+                return NO;
+            }
         }
         
         return YES;
@@ -252,6 +331,24 @@ NSString *const TracksPropertiesKeyRegExPattern = @"^[a-z][a-z0-9_]*$";
     NSArray *matches = [regex matchesInString:propertyName options:0 range:NSMakeRange(0, propertyName.length)];
 
     return matches.count > 0;
+}
+
+- (BOOL)checkPropertyNameIsReserved:(NSString *)propertyName
+{
+    return [kReservedNames containsObject:propertyName];
+}
+
+- (BOOL)checkPropertyTypeIsValid:(id) type
+{
+    if ([type isKindOfClass:[NSString class]]) {
+        return YES;
+    }
+
+    if ([type isKindOfClass:[NSNumber class]]) {
+        return YES;
+    }
+
+    return NO;
 }
 
 //@property (nonatomic, copy) NSString *username;

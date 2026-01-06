@@ -36,6 +36,7 @@ Pod::Spec.new do |s|
   s.module_name = 'AutomatticTracks'
 
   s.ios.dependency 'UIDeviceIdentifier', '~> 2.0'
-  s.dependency 'Sentry', '~> 8.39'
+  # See https://linear.app/a8c/project/upgrade-sentry-cocoa-to-9x-0ecbf7d5a91e
+  s.dependency 'Sentry', '~> 8.39', '< 8.49.0'
   s.dependency 'Sodium', '>= 0.9.1'
 end

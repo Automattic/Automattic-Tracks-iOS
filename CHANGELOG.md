@@ -46,7 +46,7 @@ _None._
 
 ### Internal Changes
 
-_None._
+- Constrained version to `< 8.49.0` for CocoaPods installations to avoid deprecation warnings till we upgrade Sentry to version 9.x [#310]
 
 ## 3.5.4
 

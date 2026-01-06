@@ -154,6 +154,37 @@
     XCTAssertEqual(TracksErrorCodeValidationCustomPropertiesKeyFormat, error.code);
 }
 
+- (void)testCustomPropertiesInvalidPropertyReservedKey
+{
+    NSError *error;
+    NSMutableDictionary *customProperties = self.subject.customProperties;
+    customProperties[@"year"] = @"2025";
+
+    BOOL valid = [self.subject validateValue:&customProperties forKey:@"customProperties" error:&error];
+
+    XCTAssertNotNil(customProperties);
+    XCTAssertFalse(valid);
+    XCTAssertNotNil(error);
+    XCTAssertEqual(error.domain, TracksErrorDomain);
+    XCTAssertEqual(TracksErrorCodeValidationCustomPropertiesKeyReservedWord, error.code);
+}
+
+- (void)testCustomPropertiesInvalidPropertyInvalidValue
+{
+    NSError *error;
+    NSMutableDictionary *customProperties = self.subject.customProperties;
+    customProperties[@"categories"] = @[@2025, @2024];
+
+    BOOL valid = [self.subject validateValue:&customProperties forKey:@"customProperties" error:&error];
+
+    XCTAssertNotNil(customProperties);
+    XCTAssertFalse(valid);
+    XCTAssertNotNil(error);
+    XCTAssertEqual(error.domain, TracksErrorDomain);
+    XCTAssertEqual(TracksErrorCodeValidationCustomPropertiesInvalidType, error.code);
+}
+
+
 - (void)testDevicePropertiesNoProperties
 {
     NSError *error;
