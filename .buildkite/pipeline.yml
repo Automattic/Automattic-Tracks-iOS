@@ -44,9 +44,6 @@ steps:
     command: .buildkite/check-version-consistency.sh
     plugins: *common_plugins
 
-  #################
-  # Lint
-  #################
   - label: ":swiftlint: SwiftLint"
     command: swiftlint
     agents:
