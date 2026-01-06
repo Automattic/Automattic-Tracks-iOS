@@ -1,5 +1,7 @@
 # Project configuration
 excluded:
+  # As of 2026/01, CocoaPods is no longer in use.
+  # Leaving here for the time being to avoid false positives on local checkouts.
   - Pods
   - Scripts
   - vendor
