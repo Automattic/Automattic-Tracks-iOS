@@ -53,8 +53,7 @@ steps:
   #################
   # Lint
   #################
-  - label: "🧹 Lint"
-    key: "lint"
-    command: |
-      lint_pod
-    plugins: *common_plugins
+  - label: ":swiftlint: SwiftLint"
+    command: swiftlint
+    agents:
+      queue: linter

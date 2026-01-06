@@ -1,13 +1,16 @@
-# Project configuration
+swiftlint_version: 0.63.0
+
 excluded:
+  - .build
+  - DerivedData
   # As of 2026/01, CocoaPods is no longer in use.
   # Leaving here for the time being to avoid false positives on local checkouts.
   - Pods
   - Scripts
+  - TracksDemo/DerivedData
   - vendor
 
-# Rules
-whitelist_rules:
+only_rules:
   # Colons should be next to the identifier when specifying a type.
   - colon
 
