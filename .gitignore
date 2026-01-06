@@ -20,12 +20,8 @@ DerivedData
 .swiftpm/xcode
 
 # CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
-#
-# Pods/
+# As of 2026/01, CocoaPods is no longer in use.
+# Leaving here for the time being to avoid false positives on local checkouts.
 Pods
 
 \.DS_Store
