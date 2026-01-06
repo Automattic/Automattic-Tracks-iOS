@@ -43,16 +43,6 @@ steps:
     artifact_paths: ".build/logs/*.log"
 
   #################
-  # Validate Podspec
-  #################
-  - label: "🔬 Validating Podspec"
-    key: "validate"
-    command: |
-      validate_podspec --patch-cocoapods
-    plugins: *common_plugins
-    artifact_paths: ".build/logs/*.log"
-
-  #################
   # Check Version Consistency
   #################
   - label: "🔬 Validating Version"
@@ -68,18 +58,3 @@ steps:
     command: |
       lint_pod
     plugins: *common_plugins
-
-  #################
-  # Publish the Podspec (if we're building a tag)
-  #################
-  - label: "⬆️ Publish Podspec"
-    key: "publish"
-    command: .buildkite/publish-pod.sh
-    plugins: *common_plugins
-    depends_on:
-      - "test_ios"
-      - "test_macos"
-      - "validate"
-      - "lint"
-      - "version_check"
-    if: build.tag != null
