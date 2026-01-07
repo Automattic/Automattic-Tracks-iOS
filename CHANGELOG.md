@@ -34,7 +34,7 @@ _None._
 
 ### Breaking Changes
 
-_None._
+- The library no longer includes its version in the User Agent used to send event to the server. [#313]
 
 ### New Features
 
