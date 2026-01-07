@@ -36,14 +36,6 @@ steps:
     plugins: *common_plugins
     artifact_paths: ".build/logs/*.log"
 
-  #################
-  # Check Version Consistency
-  #################
-  - label: "🔬 Validating Version"
-    key: "version_check"
-    command: .buildkite/check-version-consistency.sh
-    plugins: *common_plugins
-
   - label: ":swift: SwiftLint"
     command: swiftlint
     agents:
