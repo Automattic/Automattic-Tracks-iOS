@@ -475,14 +475,14 @@ NSString *const USER_ID_ANON = @"anonId";
         NSString *deviceModel = self.deviceInformation.model;
         NSString *osName = self.deviceInformation.os;
         NSString *osVersion = self.deviceInformation.version;
-        return [NSString stringWithFormat:@"Nosara Client for %@; %@/%@; %@", deviceModel, osName, osVersion, TracksLibraryVersion];
+        return [NSString stringWithFormat:@"Nosara Client for %@; %@/%@", deviceModel, osName, osVersion];
     #endif
 
     #if TARGET_OS_MAC
-        return [NSString stringWithFormat:@"Nosara Client for macOS %@", TracksLibraryVersion];
+        return [NSString stringWithFormat:@"Nosara Client for macOS"];
     #endif
 
-    return [NSString stringWithFormat:@"Nosara Client for Objective-C %@", TracksLibraryVersion];
+    return [NSString stringWithFormat:@"Nosara Client for Objective-C"];
 }
 
 @end
