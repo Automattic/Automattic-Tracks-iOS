@@ -4,19 +4,12 @@ AllCops:
   Exclude:
     # Notice the `./**/` to handle `DerivedData` in root and subfolders (`./TracksDemo`)
     - ./**/DerivedData/**/*
+    # As of 2026/01, CocoaPods is no longer in use.
+    # Leaving here for the time being to avoid false positives on local checkouts.
     - Pods/**/*
     - build/**/*
     - vendor/**/*
 
-
-# Allow the Podspec filename to match the project
-Naming/FileName:
-  Exclude:
-    - 'Automattic-Tracks-iOS.podspec'
-
-# Override the maximum block length (some pods have long definitions)
-Metrics/BlockLength:
-  Max: 256
 
 # Override the maximum line length
 Layout/LineLength:

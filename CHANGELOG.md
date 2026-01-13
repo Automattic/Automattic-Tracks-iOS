@@ -34,7 +34,7 @@ _None._
 
 ### Breaking Changes
 
-_None._
+- The library no longer includes its version in the User Agent used to send event to the server. [#313]
 
 ### New Features
 
@@ -46,7 +46,7 @@ _None._
 
 ### Internal Changes
 
-- Constrained version to `< 8.49.0` for CocoaPods installations to avoid deprecation warnings till we upgrade Sentry to version 9.x [#310]
+- With this version, Tracks only supports distribution via Swift Package Manager [#311]
 
 ## 3.5.4
 

@@ -30,12 +30,6 @@ import AutomatticExperiments
 import AutomatticCrashLoggingUI
 ```
 
-Tracks can also be installed via CocoaPods, though we encourage users to use Swift Package Manager instead. To install via Cocoapods:
-
-```ruby
-pod 'Automattic-Tracks-iOS'
-```
-
 ## Usage
 
 ### To report events:
