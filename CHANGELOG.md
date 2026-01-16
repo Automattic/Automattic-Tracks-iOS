@@ -34,7 +34,7 @@ _None._
 
 ### Breaking Changes
 
-- The library no longer includes its version in the User Agent used to send event to the server. [#313]
+_None._
 
 ### New Features
 
@@ -43,6 +43,16 @@ _None._
 ### Bug Fixes
 
 _None._
+
+### Internal Changes
+
+_None._
+
+## 4.0.0
+
+### Breaking Changes
+
+- The library no longer includes its version in the User Agent used to send event to the server. [#313]
 
 ### Internal Changes
 
