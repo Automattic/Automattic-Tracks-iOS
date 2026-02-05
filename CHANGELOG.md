@@ -46,6 +46,12 @@ _None._
 
 ### Internal Changes
 
+_None._
+
+## 4.1.0
+
+### Internal Changes
+
 - The Sentry version used is now 9.4.0 [#315]
 
 ## 4.0.0
