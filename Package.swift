@@ -30,7 +30,7 @@ let package = Package(
     ],
     dependencies: [
         // Runtime dependencies
-        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "9.1.0"),
+        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "9.4.0"),
         .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
         // Tests dependencies
