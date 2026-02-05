@@ -28,7 +28,7 @@ class CrashLoggingTests: XCTestCase {
             _ = try CrashLogging(dataProvider: mockDataProvider).start()
             XCTFail("The call above should fail")
         } catch let err {
-            XCTAssertEqual("Project ID path component of DSN is missing", err.localizedDescription)
+            XCTAssertEqual("URL scheme of DSN is missing", err.localizedDescription)
         }
     }
 

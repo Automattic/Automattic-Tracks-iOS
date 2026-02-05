@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "AutomatticTracksiOS",
-    platforms: [.macOS(.v10_14), .iOS(.v13)],
+    platforms: [.macOS(.v10_14), .iOS(.v15)],
     products: [
         .library(
             name: "AutomatticTracks",
@@ -30,7 +30,7 @@ let package = Package(
     ],
     dependencies: [
         // Runtime dependencies
-        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "8.39.0"),
+        .package(name: "Sentry", url: "https://github.com/getsentry/sentry-cocoa", from: "9.4.0"),
         .package(name: "Sodium", url: "https://github.com/jedisct1/swift-sodium", from: "0.9.1"),
         .package(url: "https://github.com/squarefrog/UIDeviceIdentifier", from: "2.0.0"),
         // Tests dependencies
