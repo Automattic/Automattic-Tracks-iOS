@@ -1,6 +1,8 @@
 #import "TracksDeviceInformation.h"
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+#import <WatchKit/WatchKit.h>
+#elif TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 @import UIDeviceIdentifier;
 #import <CoreTelephony/CTTelephonyNetworkInfo.h>
@@ -21,7 +23,7 @@
 @property (nonatomic, assign) BOOL isReachableByWiFi;
 @property (nonatomic, assign) BOOL isReachableByWWAN;
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 @property (nonatomic, assign) UIDeviceOrientation lastKnownDeviceOrientation;
 @property (nonatomic, strong) NSString *lastKnownPreferredContentSizeCategory;
 #endif
@@ -42,7 +44,7 @@
 
 - (void)preloadDeviceProperties
 {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
     void (^preload)(void) = ^(void) {
         self.lastKnownDeviceOrientation = UIDevice.currentDevice.orientation;
         self.lastKnownPreferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
@@ -71,6 +73,8 @@
 {
 #if TARGET_OS_SIMULATOR
     return @"Carrier (Simulator)";
+#elif TARGET_OS_WATCH
+    return @"Not Applicable";
 #elif TARGET_OS_IPHONE
     CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
     CTCarrier *carrier = [netInfo subscriberCellularProvider];
@@ -91,6 +95,8 @@
 {
 #if TARGET_OS_SIMULATOR
     return @"None (Simulator)";
+#elif TARGET_OS_WATCH
+    return @"Unknown";
 #elif TARGET_OS_IPHONE
     CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
     NSString *type = nil;
@@ -112,7 +118,9 @@
 
 - (NSString *)model
 {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    return [[WKInterfaceDevice currentDevice] model];
+#elif TARGET_OS_IPHONE
     return [UIDeviceHardware platformString];
 #else   // Mac
     size_t size;
@@ -129,7 +137,9 @@
 
 - (NSString *)os
 {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    return @"watchOS";
+#elif TARGET_OS_IPHONE
     return [[UIDevice currentDevice] systemName];
 #else   // Mac
     return @"OS X";
@@ -138,7 +148,13 @@
 
 - (NSString *)version
 {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
+    NSInteger major = version.majorVersion;
+    NSInteger minor = version.minorVersion;
+    NSInteger patch = version.patchVersion;
+    return [NSString stringWithFormat: @"%ld.%ld.%ld", (long)major, (long)minor, (long)patch];
+#elif TARGET_OS_IPHONE
     return [[UIDevice currentDevice] systemVersion];
 #else   // Mac
     NSOperatingSystemVersion version = [[NSProcessInfo processInfo] operatingSystemVersion];
@@ -150,7 +166,9 @@
 }
 
 -(BOOL)isAppleWatchConnected{
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    return YES;  // We're running on the watch itself
+#elif TARGET_OS_IPHONE
     return [[WatchSessionManager shared] hasBeenPreviouslyPaired];
 #else   // Mac
     return NO;
@@ -159,7 +177,9 @@
 
 -(BOOL)isVoiceOverEnabled{
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    return WKAccessibilityIsVoiceOverRunning();
+#elif TARGET_OS_IPHONE
     return UIAccessibilityIsVoiceOverRunning();
 #else   // Mac
     Boolean exists = false;
@@ -174,7 +194,9 @@
 }
 
 -(NSString *)orientation{
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    return @"Unknown";
+#elif TARGET_OS_IPHONE
      UIDeviceOrientation orientation = [self deviceOrientation];
 
      if (orientation == UIDeviceOrientationPortrait || orientation == UIDeviceOrientationPortraitUpsideDown) {
@@ -191,7 +213,7 @@
 
 #pragma mark - Calls that need to run on the main thread
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 // This method was created because UIDevice.currentDevice.orientation should only
 // be called from the main thread.
 //
@@ -205,11 +227,13 @@
 #endif
 
 /// Preferred reading content size based on the accessibility setting of the iOS device.
-/// 
-/// - This will be NULL for Mac OS.
+///
+/// - This will be NULL for Mac OS and watchOS.
 ///
 - (NSString *)preferredContentSizeCategory {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    return NULL;
+#elif TARGET_OS_IPHONE
     if ([NSThread isMainThread]) {
         self.lastKnownPreferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
     }
@@ -223,10 +247,12 @@
 /// Returns `true` if the preferred reading content size falls under accessibility category.
 ///
 /// - Uses `UIContentSizeCategoryIsAccessibilityCategory` method.
-/// - This will be `false` for Mac OS.
+/// - This will be `false` for Mac OS and watchOS.
 ///
 - (BOOL)isAccessibilityCategory {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    return NO;
+#elif TARGET_OS_IPHONE
     NSString *preferredCategory = [self preferredContentSizeCategory];
     if (preferredCategory == nil) {
         return NO;

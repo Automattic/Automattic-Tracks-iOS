@@ -10,7 +10,9 @@
 #endif
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+#import <WatchKit/WatchKit.h>
+#elif TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
 #import <AppKit/AppKit.h>
@@ -105,7 +107,11 @@ NSString *const USER_ID_ANON = @"anonId";
         [self resetTimer];
         
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+        NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
+        [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:WKApplicationDidEnterBackgroundNotification object:nil];
+        [defaultCenter addObserver:self selector:@selector(didBecomeActive:) name:WKApplicationDidBecomeActiveNotification object:nil];
+#elif TARGET_OS_IPHONE
         NSNotificationCenter *defaultCenter = [NSNotificationCenter defaultCenter];
         [defaultCenter addObserver:self selector:@selector(didEnterBackground:) name:UIApplicationDidEnterBackgroundNotification object:nil];
         [defaultCenter addObserver:self selector:@selector(didBecomeActive:) name:UIApplicationDidBecomeActiveNotification object:nil];
@@ -374,7 +380,9 @@ NSString *const USER_ID_ANON = @"anonId";
 
 - (NSDictionary *)immutableDeviceProperties
 {
-#if TARGET_OS_IPHONE
+#if TARGET_OS_WATCH
+    CGSize screenSize = [[WKInterfaceDevice currentDevice] screenBounds].size;
+#elif TARGET_OS_IPHONE
     CGSize screenSize = [[UIScreen mainScreen] bounds].size;
 #else
     CGSize screenSize = [[NSScreen mainScreen] frame].size;

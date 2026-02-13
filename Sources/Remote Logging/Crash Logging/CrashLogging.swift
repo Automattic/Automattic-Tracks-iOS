@@ -75,10 +75,12 @@ public class CrashLogging {
                 // input `SamplingContext` down the chain.
                 NSNumber(value: self.dataProvider.tracesSampler())
             }
+            #if !os(watchOS)
             options.configureProfiling = { [weak self] in
                 guard let self else { return }
                 $0.sessionSampleRate = Float(self.dataProvider.profilingRate)
             }
+            #endif
             options.enableNetworkTracking = self.dataProvider.enableNetworkTracking
             options.enableFileIOTracing = self.dataProvider.enableFileIOTracking
             options.enableCoreDataTracing = self.dataProvider.enableCoreDataTracking
