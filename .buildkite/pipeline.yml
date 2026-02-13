@@ -22,7 +22,13 @@ steps:
     command: |
       install_gems
       bundle exec fastlane ios test
-    plugins: *common_plugins
+    plugins:
+      - automattic/a8c-ci-toolkit#6.0.0
+      - test-collector#v1.11.0:
+          files: .build/report.junit
+          format: junit
+          missing-error: 0
+          api-token-env-name: BUILDKITE_ANALYTICS_TOKEN
     artifact_paths: ".build/logs/*.log"
 
   ######################
@@ -33,7 +39,13 @@ steps:
     command: |
       install_gems
       bundle exec fastlane mac test
-    plugins: *common_plugins
+    plugins:
+      - automattic/a8c-ci-toolkit#6.0.0
+      - test-collector#v1.11.0:
+          files: .build/report.junit
+          format: junit
+          missing-error: 0
+          api-token-env-name: BUILDKITE_ANALYTICS_TOKEN
     artifact_paths: ".build/logs/*.log"
 
   - label: ":swift: SwiftLint"

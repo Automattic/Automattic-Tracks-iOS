@@ -38,15 +38,6 @@
         }
       },
       {
-        "package": "BuildkiteTestCollector",
-        "repositoryURL": "https://github.com/buildkite/test-collector-swift",
-        "state": {
-          "branch": null,
-          "revision": "77c7f492f5c1c9ca159f73d18f56bbd1186390b0",
-          "version": "0.3.0"
-        }
-      },
-      {
         "package": "UIDeviceIdentifier",
         "repositoryURL": "https://github.com/squarefrog/UIDeviceIdentifier",
         "state": {

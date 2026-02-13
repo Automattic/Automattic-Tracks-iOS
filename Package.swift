@@ -36,7 +36,6 @@ let package = Package(
         // Tests dependencies
         .package(url: "https://github.com/AliSoftware/OHHTTPStubs", from: "9.0.0"),
         .package(name: "OCMock", url: "https://github.com/erikdoe/ocmock", .branch("master")),
-        .package(name: "BuildkiteTestCollector", url: "https://github.com/buildkite/test-collector-swift", from: "0.3.0"),
     ],
     targets: [
         // ExPlat experiments
@@ -150,7 +149,6 @@ let package = Package(
                 "AutomatticTracks",
                 "AutomatticTracksEvents",
                 "AutomatticTracksModel",
-                "BuildkiteTestCollector",
                 .product(name: "OHHTTPStubsSwift", package: "OHHTTPStubs"),
             ],
             path: "Tests",
@@ -162,7 +160,6 @@ let package = Package(
             name: "AutomatticTracksTestsObjC",
             dependencies: [
                 "AutomatticTracksEvents",
-                "BuildkiteTestCollector",
                 "OCMock",
             ],
             path: "Tests/Tests/ObjC"
