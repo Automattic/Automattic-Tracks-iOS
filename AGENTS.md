@@ -56,6 +56,9 @@ bundle exec fastlane ios test
 bundle exec fastlane mac test
 ```
 
+Both lanes accept `clean:true` for a clean build with full SPM dependency resolution.
+The default (`clean:false`) skips SPM resolution for faster incremental builds.
+
 ### Lint
 
 ```
