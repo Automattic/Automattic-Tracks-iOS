@@ -42,7 +42,7 @@ _None._
 
 ### Bug Fixes
 
-_None._
+- Fix `logID` setter silently failing when `event.extra` is nil, causing Sentry crash reports to intermittently miss the encrypted log UUID. [#320]
 
 ### Internal Changes
 

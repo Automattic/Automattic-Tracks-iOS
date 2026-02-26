@@ -202,6 +202,15 @@ class CrashLoggingTests: XCTestCase {
 
         XCTAssertNil(dataProvider.onCrashedLastRun)
     }
+
+    func testLogIDSetterInitializesExtraWhenNil() {
+        let event = Event(level: .fatal)
+        let uuid = UUID().uuidString
+        event.logID = uuid
+
+        XCTAssertEqual(event.extra?["logID"] as? String, uuid)
+        XCTAssertEqual(event.logID, uuid)
+    }
 }
 
 /// Allow throwing Strings as error

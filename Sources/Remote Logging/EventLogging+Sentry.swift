@@ -70,7 +70,9 @@ extension Event {
             return self.extra?[Event.logIDKey] as? String
         }
         set {
-            self.extra?[Event.logIDKey] = newValue
+            var extras = self.extra ?? [:]
+            extras[Event.logIDKey] = newValue
+            self.extra = extras
         }
     }
 }
