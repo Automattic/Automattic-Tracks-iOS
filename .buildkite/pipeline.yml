@@ -5,12 +5,7 @@ agents:
   queue: mac
 
 env:
-  IMAGE_ID: xcode-16.4
-
-# Nodes with values to reuse in the pipeline.
-common_params:
-  plugins: &common_plugins
-    - automattic/a8c-ci-toolkit#6.0.0
+  IMAGE_ID: $IMAGE_ID
 
 # This is the default pipeline – it will build and test the app
 steps:
@@ -18,23 +13,23 @@ steps:
   # Build and Test iOS
   ######################
   - label: "🧪 Build and Test iOS"
-    key: "test_ios"
+    key: test_ios
     command: |
       install_gems
-      bundle exec fastlane ios test
-    plugins: *common_plugins
-    artifact_paths: ".build/logs/*.log"
+      bundle exec fastlane ios test clean:true
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    artifact_paths: .build/logs/*.log
 
   ######################
   # Build and Test macOS
   ######################
   - label: "🧪 Build and Test macOS"
-    key: "test_macos"
+    key: test_macos
     command: |
       install_gems
-      bundle exec fastlane mac test
-    plugins: *common_plugins
-    artifact_paths: ".build/logs/*.log"
+      bundle exec fastlane mac test clean:true
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    artifact_paths: .build/logs/*.log
 
   - label: ":swift: SwiftLint"
     command: swiftlint
