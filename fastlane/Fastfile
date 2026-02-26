@@ -15,7 +15,9 @@ end
 
 platform :ios do
   desc 'Builds the project and runs tests'
-  lane :test do
+  lane :test do |options|
+    clean = options.fetch(:clean, false)
+
     run_tests(
       scheme: 'TracksDemo',
       project: PROJECT_PATH,
@@ -23,19 +25,25 @@ platform :ios do
       deployment_target_version: '14.5',
       prelaunch_simulator: true,
       buildlog_path: BUILD_LOG_PATH,
-      derived_data_path: DERIVED_DATA_PATH
+      derived_data_path: DERIVED_DATA_PATH,
+      clean: clean,
+      skip_package_dependencies_resolution: !clean
     )
   end
 end
 
 platform :mac do
   desc 'Builds the project and runs tests'
-  lane :test do
+  lane :test do |options|
+    clean = options.fetch(:clean, false)
+
     run_tests(
       scheme: 'TracksDemo Mac',
       project: PROJECT_PATH,
       buildlog_path: BUILD_LOG_PATH,
-      derived_data_path: DERIVED_DATA_PATH
+      derived_data_path: DERIVED_DATA_PATH,
+      clean: clean,
+      skip_package_dependencies_resolution: !clean
     )
   end
 end
