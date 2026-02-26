@@ -36,13 +36,18 @@ Tests/
 TracksDemo/                    # Demo apps (iOS + macOS)
 ```
 
-## Commands
+## Bootstrap
 
-### Install dependencies
+Requires the Xcode version in `.xcode-version` and Ruby in `.ruby-version`.
 
 ```
 bundle install
+bundle exec fastlane ios test clean:true
 ```
+
+That's it — SPM dependencies resolve automatically during the build.
+
+## Commands
 
 ### Build and test (iOS)
 
