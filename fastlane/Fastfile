@@ -7,6 +7,12 @@ PROJECT_PATH = File.join(__dir__, 'TracksDemo', 'TracksDemo.xcodeproj')
 
 default_platform(:ios)
 
+before_all do
+  # Bumping the interval Fastlane waits for xcodebuild to provide output before retrying.
+  # See https://github.com/fastlane/fastlane/issues/20919
+  ENV['FASTLANE_XCODEBUILD_SETTINGS_TIMEOUT'] = '120'
+end
+
 platform :ios do
   desc 'Builds the project and runs tests'
   lane :test do
