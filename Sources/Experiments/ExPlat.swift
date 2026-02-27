@@ -1,5 +1,7 @@
 import Foundation
-#if os(iOS) || os(watchOS) || os(tvOS)
+#if os(watchOS)
+import WatchKit
+#elseif os(iOS) || os(tvOS)
 import UIKit
 #elseif os(macOS)
 import Cocoa
@@ -148,7 +150,9 @@ import Cocoa
     private func subscribeToNotifications() {
         let notificationCenter = NotificationCenter.default
 
-        #if os(iOS) || os(watchOS) || os(tvOS)
+        #if os(watchOS)
+        notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: WKApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(iOS) || os(tvOS)
         notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: UIApplication.willEnterForegroundNotification, object: nil)
         #elseif os(macOS)
         notificationCenter.addObserver(self, selector: #selector(applicationWillEnterForeground), name: NSApplication.willBecomeActiveNotification, object: nil)
@@ -158,7 +162,9 @@ import Cocoa
     private func unsubscribeFromNotifications() {
         let notificationCenter = NotificationCenter.default
 
-        #if os(iOS) || os(watchOS) || os(tvOS)
+        #if os(watchOS)
+        notificationCenter.removeObserver(self, name: WKApplication.willEnterForegroundNotification, object: nil)
+        #elseif os(iOS) || os(tvOS)
         notificationCenter.removeObserver(self, name: UIApplication.willEnterForegroundNotification, object: nil)
         #elseif os(macOS)
         notificationCenter.removeObserver(self, name: NSApplication.willBecomeActiveNotification, object: nil)

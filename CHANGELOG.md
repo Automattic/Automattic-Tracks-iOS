@@ -46,7 +46,7 @@ _None._
 
 ### Internal Changes
 
-_None._
+- watchOS compatibility [#317]
 
 ## 4.1.0
 
