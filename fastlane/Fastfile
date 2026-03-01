@@ -17,7 +17,10 @@ platform :ios do
       deployment_target_version: '14.5',
       prelaunch_simulator: true,
       buildlog_path: BUILD_LOG_PATH,
-      derived_data_path: DERIVED_DATA_PATH
+      derived_data_path: DERIVED_DATA_PATH,
+      output_directory: BUILD_FOLDER,
+      result_bundle: true,
+      output_types: 'junit'
     )
   end
 end
@@ -29,7 +32,10 @@ platform :mac do
       scheme: 'TracksDemo Mac',
       project: PROJECT_PATH,
       buildlog_path: BUILD_LOG_PATH,
-      derived_data_path: DERIVED_DATA_PATH
+      derived_data_path: DERIVED_DATA_PATH,
+      output_directory: BUILD_FOLDER,
+      result_bundle: true,
+      output_types: 'junit'
     )
   end
 end
