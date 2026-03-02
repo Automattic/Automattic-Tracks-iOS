@@ -1,7 +1,7 @@
 @import Foundation;
 
 
-#if TARGET_OS_IPHONE
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 @import UIKit;
 
 NS_ASSUME_NONNULL_BEGIN
