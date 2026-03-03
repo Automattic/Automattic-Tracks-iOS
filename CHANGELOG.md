@@ -48,6 +48,12 @@ _None._
 
 _None._
 
+## 4.2.1
+
+### Bug Fixes
+
+- Fix `UIApplication` non-public API usage on watchOS causing App Store rejection (error 90338). [#323]
+
 ## 4.2.0
 
 ### Bug Fixes
