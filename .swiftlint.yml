@@ -1,4 +1,4 @@
-swiftlint_version: 0.58.2
+swiftlint_version: 0.63.2
 
 excluded:
   - .build
@@ -47,8 +47,8 @@ only_rules:
 
 # Rules configuration
 
-control_statement: 
-  severity: error 
+control_statement:
+  severity: error
 
 custom_rules:
 

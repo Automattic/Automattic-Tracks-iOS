@@ -67,10 +67,13 @@ The default (`clean:false`) skips SPM resolution for faster incremental builds.
 ### Lint
 
 ```
-swiftlint
+make lint
 ```
 
-Autofix available via `swiftlint lint --fix`.
+Autofix available via `make format`.
+
+SwiftLint runs via the `BuildTools/` SPM plugin, which reads the version from `.swiftlint.yml`.
+Do not use the global `swiftlint` binary — it may be a different version.
 
 ## Conventions
 
