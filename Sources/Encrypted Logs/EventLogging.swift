@@ -100,11 +100,15 @@ extension EventLogging {
         }
 
         if uploadsPausedByDelegate {
+            // Delegate cancellation is a policy pause rather than a backoff retry:
+            // stay idle until uploads are explicitly allowed again
             guard delegate.shouldUploadLogFiles else {
                 lock.unlock()
                 return
             }
 
+            // Clear the pause state once the delegate allows uploads again so queued
+            // logs can resume on this run
             uploadsPausedByDelegate = false
         }
 
