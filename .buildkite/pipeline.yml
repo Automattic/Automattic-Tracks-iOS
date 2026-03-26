@@ -14,6 +14,7 @@ steps:
   ######################
   - label: "🧪 Build and Test iOS"
     key: test_ios
+    parallelism: 100
     command: |
       install_gems
       bundle exec fastlane ios test clean:true
@@ -25,6 +26,7 @@ steps:
   ######################
   - label: "🧪 Build and Test macOS"
     key: test_macos
+    parallelism: 100
     command: |
       install_gems
       bundle exec fastlane mac test clean:true
