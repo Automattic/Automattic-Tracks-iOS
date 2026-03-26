@@ -16,7 +16,15 @@ class EventLoggingUploadManagerTests: XCTestCase {
         let uploadManager = self.uploadManager(delegate: delegate)
 
         waitForExpectation(timeout: 1.0) { exp in
-            uploadManager.upload(LogFile.containingRandomString(), then: { _ in exp.fulfill() })
+            exp.expectedFulfillmentCount = 2
+
+            delegate.withDidFinishUploadingCallback { _ in
+                exp.fulfill()
+            }
+
+            uploadManager.upload(LogFile.containingRandomString(), then: { _ in
+                exp.fulfill()
+            })
         }
 
         XCTAssertTrue(delegate.didStartUploadingTriggered)

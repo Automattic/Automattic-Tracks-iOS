@@ -21,6 +21,7 @@ public class EventLogging {
     /// Coordinates one-at-a-time file log dequeuing and upload
     private let lock = NSLock()
     private let processingQueue = DispatchQueue(label: "event-logging-upload")
+    private var uploadsPausedByDelegate = false
 
     /// Uploads Events
     private let uploadManager: EventLoggingUploadManager
@@ -98,10 +99,19 @@ extension EventLogging {
             return
         }
 
+        if uploadsPausedByDelegate {
+            guard delegate.shouldUploadLogFiles else {
+                lock.unlock()
+                return
+            }
+
+            uploadsPausedByDelegate = false
+        }
+
         /// If the delegate is reporting that we shouldn't upload log files, pause upload to prevent an endless loop
         guard delegate.shouldUploadLogFiles else {
+            uploadsPausedByDelegate = true
             delegate.uploadCancelledByDelegate(log)
-            retryUploadsAt(.distantFuture)
             lock.unlock()
             return
         }
