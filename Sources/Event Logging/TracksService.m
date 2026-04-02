@@ -66,6 +66,7 @@ NSString *const DeviceInfoStatusBarHeightKey = @"device_info_status_bar_height";
 NSString *const DeviceInfoOrientation = @"device_info_orientation";
 NSString *const DeviceInfoPreferredContentSizeCategory = @"device_info_preferred_content_size_category";
 NSString *const DeviceInfoIsAccessibilityCategory = @"device_info_is_accessibility_category";
+NSString *const DeviceInfoLockdownModeEnabledKey = @"device_info_lockdown_mode_enabled";
 
 NSString *const TracksEventNameKey = @"_en";
 NSString *const TracksUserAgentKey = @"_via_ua";
@@ -422,6 +423,7 @@ NSString *const USER_ID_ANON = @"anonId";
              DeviceInfoOrientation : self.deviceInformation.orientation ?: @"Unknown",
              DeviceInfoPreferredContentSizeCategory : self.deviceInformation.preferredContentSizeCategory ?: @"Unknown",
              DeviceInfoIsAccessibilityCategory : self.deviceInformation.isAccessibilityCategory ? @"YES" : @"NO",
+             DeviceInfoLockdownModeEnabledKey : self.deviceInformation.isLockdownModeEnabled ? @"YES" : @"NO",
     };
 }
 

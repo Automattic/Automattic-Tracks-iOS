@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-_None._
+- Track whether Lockdown Mode is enabled as a device property (`device_info_lockdown_mode_enabled`).
 
 ### Bug Fixes
 

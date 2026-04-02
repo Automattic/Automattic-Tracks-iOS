@@ -22,6 +22,8 @@
 @property (nonatomic, assign) BOOL isReachable;
 @property (nonatomic, assign) BOOL isReachableByWiFi;
 @property (nonatomic, assign) BOOL isReachableByWWAN;
+@property (nonatomic, assign) BOOL cachedLockdownModeEnabled;
+@property (nonatomic, assign) BOOL hasReadLockdownMode;
 
 #if TARGET_OS_IPHONE && !TARGET_OS_WATCH
 @property (nonatomic, assign) UIDeviceOrientation lastKnownDeviceOrientation;
@@ -249,6 +251,14 @@
 /// - Uses `UIContentSizeCategoryIsAccessibilityCategory` method.
 /// - This will be `false` for Mac OS and watchOS.
 ///
+- (BOOL)isLockdownModeEnabled {
+    if (!self.hasReadLockdownMode) {
+        self.cachedLockdownModeEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"LDMGlobalEnabled"];
+        self.hasReadLockdownMode = YES;
+    }
+    return self.cachedLockdownModeEnabled;
+}
+
 - (BOOL)isAccessibilityCategory {
 #if TARGET_OS_WATCH
     return NO;
