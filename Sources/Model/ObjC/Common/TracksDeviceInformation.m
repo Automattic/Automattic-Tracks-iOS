@@ -251,14 +251,6 @@
 /// - Uses `UIContentSizeCategoryIsAccessibilityCategory` method.
 /// - This will be `false` for Mac OS and watchOS.
 ///
-- (BOOL)isLockdownModeEnabled {
-    if (!self.hasReadLockdownMode) {
-        self.cachedLockdownModeEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"LDMGlobalEnabled"];
-        self.hasReadLockdownMode = YES;
-    }
-    return self.cachedLockdownModeEnabled;
-}
-
 - (BOOL)isAccessibilityCategory {
 #if TARGET_OS_WATCH
     return NO;
@@ -273,6 +265,14 @@
 #else   // Mac
     return NO;
 #endif
+}
+
+- (BOOL)isLockdownModeEnabled {
+    if (!self.hasReadLockdownMode) {
+        self.cachedLockdownModeEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"LDMGlobalEnabled"];
+        self.hasReadLockdownMode = YES;
+    }
+    return self.cachedLockdownModeEnabled;
 }
 
 #pragma mark - App Specific Information
