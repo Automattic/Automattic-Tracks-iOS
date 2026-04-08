@@ -57,7 +57,7 @@ class LogEncryptionTests: XCTestCase {
         XCTAssertNotNil(UUID(uuidString: encryptedMessage.uuid), "The UUID must be valid")
         XCTAssertEqual(encryptedMessage.header.count, 32, "The header should be 32 bytes long")
         XCTAssertEqual(encryptedMessage.encryptedKey.count, 108, "The encrypted key should be 108 bytes long")
-        XCTAssert(!encryptedMessage.messages.isEmpty, "There should be at least one message")
+        XCTAssertFalse(encryptedMessage.messages.isEmpty, "There should be at least one message")
     }
 }
 
