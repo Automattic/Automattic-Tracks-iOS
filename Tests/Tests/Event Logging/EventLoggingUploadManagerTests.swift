@@ -16,7 +16,17 @@ class EventLoggingUploadManagerTests: XCTestCase {
         let uploadManager = self.uploadManager(delegate: delegate)
 
         waitForExpectation(timeout: 1.0) { exp in
-            uploadManager.upload(LogFile.containingRandomString(), then: { _ in exp.fulfill() })
+            // The upload callback fires before `didFinishUploadingLog`, so wait for both
+            // to avoid asserting on delegate state before the upload fully settles
+            exp.expectedFulfillmentCount = 2
+
+            delegate.withDidFinishUploadingCallback { _ in
+                exp.fulfill()
+            }
+
+            uploadManager.upload(LogFile.containingRandomString(), then: { _ in
+                exp.fulfill()
+            })
         }
 
         XCTAssertTrue(delegate.didStartUploadingTriggered)

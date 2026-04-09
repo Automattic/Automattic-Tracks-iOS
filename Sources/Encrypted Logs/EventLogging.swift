@@ -21,6 +21,7 @@ public class EventLogging {
     /// Coordinates one-at-a-time file log dequeuing and upload
     private let lock = NSLock()
     private let processingQueue = DispatchQueue(label: "event-logging-upload")
+    private var uploadsPausedByDelegate = false
 
     /// Uploads Events
     private let uploadManager: EventLoggingUploadManager
@@ -98,10 +99,23 @@ extension EventLogging {
             return
         }
 
+        if uploadsPausedByDelegate {
+            // Delegate cancellation is a policy pause rather than a backoff retry:
+            // stay idle until uploads are explicitly allowed again
+            guard delegate.shouldUploadLogFiles else {
+                lock.unlock()
+                return
+            }
+
+            // Clear the pause state once the delegate allows uploads again so queued
+            // logs can resume on this run
+            uploadsPausedByDelegate = false
+        }
+
         /// If the delegate is reporting that we shouldn't upload log files, pause upload to prevent an endless loop
         guard delegate.shouldUploadLogFiles else {
+            uploadsPausedByDelegate = true
             delegate.uploadCancelledByDelegate(log)
-            retryUploadsAt(.distantFuture)
             lock.unlock()
             return
         }
