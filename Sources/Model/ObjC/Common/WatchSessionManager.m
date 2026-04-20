@@ -1,6 +1,6 @@
 #import "WatchSessionManager.h"
 
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 #import <WatchConnectivity/WatchConnectivity.h>
 
 @interface WatchSessionManager()<WCSessionDelegate>
@@ -34,7 +34,7 @@
             return self;
         }
 
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
         if([WCSession isSupported]){
             self.session = [WCSession defaultSession];
 
@@ -54,7 +54,7 @@
     return self;
 }
 
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 - (void)setHasBeenPairedIfPossibleWithSession:(nonnull WCSession *)session {
     if(session.paired){
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"watch-has-been-previously-paired"];
@@ -69,7 +69,7 @@
 
 #pragma mark – WCSessionDelegate
 
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 - (void)session:(nonnull WCSession *)session activationDidCompleteWithState:(WCSessionActivationState)activationState error:(nullable NSError *)error {
 
     [self setHasBeenPairedIfPossibleWithSession:session];

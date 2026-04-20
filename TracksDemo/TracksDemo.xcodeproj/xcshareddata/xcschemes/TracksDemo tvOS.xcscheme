@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1410"
-   version = "1.3">
+   LastUpgradeVersion = "2620"
+   version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
-      buildImplicitDependencies = "YES">
+      buildImplicitDependencies = "YES"
+      buildArchitectures = "Automatic">
       <BuildActionEntries>
          <BuildActionEntry
             buildForTesting = "YES"
@@ -14,9 +15,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9376328D1AC2026900086BC6"
-               BuildableName = "TracksDemo.app"
-               BlueprintName = "TracksDemo"
+               BlueprintIdentifier = "FF3A364F2F961502008D7F03"
+               BuildableName = "TracksDemo tvOS.app"
+               BlueprintName = "TracksDemo tvOS"
                ReferencedContainer = "container:TracksDemo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,39 +27,8 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AutomatticTracksTests"
-               BuildableName = "AutomatticTracksTests"
-               BlueprintName = "AutomatticTracksTests"
-               ReferencedContainer = "container:..">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AutomatticTracksTestsObjC"
-               BuildableName = "AutomatticTracksTestsObjC"
-               BlueprintName = "AutomatticTracksTestsObjC"
-               ReferencedContainer = "container:..">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "937632A61AC2026900086BC6"
-               BuildableName = "TracksDemoTests.xctest"
-               BlueprintName = "TracksDemoTests"
-               ReferencedContainer = "container:TracksDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-      </Testables>
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      shouldAutocreateTestPlan = "YES">
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
@@ -74,18 +44,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9376328D1AC2026900086BC6"
-            BuildableName = "TracksDemo.app"
-            BlueprintName = "TracksDemo"
+            BlueprintIdentifier = "FF3A364F2F961502008D7F03"
+            BuildableName = "TracksDemo tvOS.app"
+            BlueprintName = "TracksDemo tvOS"
             ReferencedContainer = "container:TracksDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <CommandLineArguments>
-         <CommandLineArgument
-            argument = "-force-crash-logging 1"
-            isEnabled = "YES">
-         </CommandLineArgument>
-      </CommandLineArguments>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -97,9 +61,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9376328D1AC2026900086BC6"
-            BuildableName = "TracksDemo.app"
-            BlueprintName = "TracksDemo"
+            BlueprintIdentifier = "FF3A364F2F961502008D7F03"
+            BuildableName = "TracksDemo tvOS.app"
+            BlueprintName = "TracksDemo tvOS"
             ReferencedContainer = "container:TracksDemo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
