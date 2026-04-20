@@ -5,7 +5,7 @@ import Sentry
 import AutomatticRemoteLogging
 #endif
 
-@available(iOS 13.0, OSX 10.15, *)
+@available(iOS 13.0, OSX 10.15, tvOS 15.0, *)
 public struct CrashLoggingView: View {
 
     @State
