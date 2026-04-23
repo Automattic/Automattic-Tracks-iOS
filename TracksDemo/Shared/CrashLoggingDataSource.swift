@@ -1,7 +1,13 @@
 import AutomatticTracks
 
 struct CrashLoggingDataSource: CrashLoggingDataProvider {
-    var sentryDSN: String = Secrets.sentryDsn
+    var sentryDSN: String {
+        if Secrets.sentryDsn.isEmpty {
+            return "https://0000000000000000000000000000000@sentry.io/0000000"
+        }
+
+        return Secrets.sentryDsn
+    }
 
     var userHasOptedOut: Bool = false
 
