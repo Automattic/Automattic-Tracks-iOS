@@ -48,16 +48,6 @@
                ReferencedContainer = "container:..">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "937632A61AC2026900086BC6"
-               BuildableName = "TracksDemoTests.xctest"
-               BlueprintName = "TracksDemoTests"
-               ReferencedContainer = "container:TracksDemo.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction
