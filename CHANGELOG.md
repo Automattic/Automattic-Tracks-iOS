@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-_None._
+- The library can now be used in tvOS targets. [#336]
 
 ### Bug Fixes
 
