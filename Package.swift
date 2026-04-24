@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "AutomatticTracksiOS",
-    platforms: [.macOS(.v10_14), .iOS(.v15)],
+    platforms: [.macOS(.v10_14), .iOS(.v15), .tvOS(.v15)],
     products: [
         .library(
             name: "AutomatticTracks",
