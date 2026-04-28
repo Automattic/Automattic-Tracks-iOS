@@ -98,7 +98,7 @@ import Cocoa
     public func refresh(completion: (() -> Void)? = nil) {
         service.getAssignments { [weak self] assignments in
             guard let `self` = self,
-                  let assignments = assignments else {
+                  let assignments else {
                 completion?()
                 return
             }
