@@ -75,7 +75,7 @@ public class CrashLogging {
                 // input `SamplingContext` down the chain.
                 NSNumber(value: self.dataProvider.tracesSampler())
             }
-            #if !os(watchOS)
+            #if !os(watchOS) && !os(tvOS)
             options.configureProfiling = { [weak self] in
                 guard let self else { return }
                 $0.sessionSampleRate = Float(self.dataProvider.profilingRate)
@@ -113,7 +113,7 @@ public class CrashLogging {
         }
 
         /// If we shouldn't send the event we have nothing else to do here
-        guard let event = event, shouldSendEvent else {
+        guard let event, shouldSendEvent else {
             return nil
         }
 

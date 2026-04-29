@@ -21,8 +21,7 @@ platform :ios do
     run_tests(
       scheme: 'TracksDemo',
       project: PROJECT_PATH,
-      devices: ['iPhone 11'],
-      deployment_target_version: '14.5',
+      devices: ['iPhone 17'],
       prelaunch_simulator: true,
       buildlog_path: BUILD_LOG_PATH,
       derived_data_path: DERIVED_DATA_PATH,
