@@ -51,6 +51,9 @@ only_rules:
   # Prefer `first(where:)` over `filter { }.first`.
   - first_where
 
+  # Prefer `last(where:)` over `filter { }.last`.
+  - last_where
+
   # MARK comment should be in valid format.
   - mark
 
