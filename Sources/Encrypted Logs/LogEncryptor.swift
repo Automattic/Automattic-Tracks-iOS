@@ -52,7 +52,7 @@ class LogEncryptor {
         """.data(using: .utf8)!)
 
         /// Use the `next:` label because of https://bugs.swift.org/browse/SR-1582
-        try inputFileHandle.readChunkedDataToEndOfFile(next: { (data) in
+        try inputFileHandle.readChunkedDataToEndOfFile(next: { data in
             guard let message = stream_enc.push(message: Bytes(data)) else {           // encrypt the data
                 throw LogEncryptorError.unableToEncryptFile
             }

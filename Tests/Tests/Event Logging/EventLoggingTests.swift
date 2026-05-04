@@ -19,7 +19,7 @@ class EventLoggingTests: XCTestCase {
         let uploadCount = Int.random(in: 3...10)
         var isUploading = false
 
-        waitForExpectation() { (exp) in
+        waitForExpectation() { exp in
             exp.expectedFulfillmentCount = uploadCount
 
             let eventLogging = self.eventLogging(delegate: MockEventLoggingDelegate()
@@ -47,7 +47,7 @@ class EventLoggingTests: XCTestCase {
         let uploadCount = Int.random(in: 3...10)
         let logs = (0...uploadCount).map { _ in LogFile.containingRandomString() }
 
-        try waitForExpectation() { (exp) in
+        try waitForExpectation() { exp in
             exp.expectedFulfillmentCount = logs.count
 
             let delegate = MockEventLoggingDelegate()
@@ -70,7 +70,7 @@ class EventLoggingTests: XCTestCase {
 
         let uploadCount = Int.random(in: 3...10)
 
-        waitForExpectation() { (exp) in
+        waitForExpectation() { exp in
             exp.expectedFulfillmentCount = 1
             exp.assertForOverFulfill = true
 
