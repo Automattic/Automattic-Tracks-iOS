@@ -20,6 +20,7 @@ class ExPlatServiceTests: XCTestCase {
         super.tearDown()
 
         HTTPStubs.removeAllStubs()
+        SpyURLProtocol.requestHandled = false
     }
 
     // Return TTL and variations
@@ -71,6 +72,25 @@ class ExPlatServiceTests: XCTestCase {
         wait(for: [expectation], timeout: 2.0)
     }
 
+    // Verify that the service uses the URLSession it was configured with, not URLSession.shared
+    //
+    func testUsesConfiguredURLSession() {
+        let expectation = XCTestExpectation(description: "Request handled by configured session")
+
+        let sessionConfig = URLSessionConfiguration.ephemeral
+        sessionConfig.protocolClasses = [SpyURLProtocol.self]
+        let spySession = URLSession(configuration: sessionConfig)
+        let service = ExPlatService(configuration: exPlatTestConfiguration, urlSession: spySession)
+        service.experimentNames = ["experiment1"]
+
+        service.getAssignments { _ in
+            expectation.fulfill()
+        }
+
+        wait(for: [expectation], timeout: 2.0)
+        XCTAssertTrue(SpyURLProtocol.requestHandled, "ExPlatService must use its configured urlSession, not URLSession.shared")
+    }
+
     // When no experiments names are given, just return nil assignments
     //
     func testEmptyExperiments() {
@@ -108,4 +128,33 @@ class ExPlatServiceTests: XCTestCase {
             return fixture(filePath: stubPath!, status: status ?? 200, headers: ["Content-Type" as NSObject: "application/json" as AnyObject])
         }
     }
+}
+
+// A URLProtocol that records whether it was asked to handle a request.
+// Used to verify that ExPlatService sends requests through its configured URLSession.
+private class SpyURLProtocol: URLProtocol {
+    private static let lock = NSLock()
+    private static var _requestHandled = false
+    static var requestHandled: Bool {
+        get { lock.withLock { _requestHandled } }
+        set { lock.withLock { _requestHandled = newValue } }
+    }
+
+    override class func canInit(with request: URLRequest) -> Bool {
+        requestHandled = true
+        return true
+    }
+
+    override class func canonicalRequest(for request: URLRequest) -> URLRequest {
+        return request
+    }
+
+    override func startLoading() {
+        let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
+        client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
+        client?.urlProtocol(self, didLoadData: Data())
+        client?.urlProtocolDidFinishLoading(self)
+    }
+
+    override func stopLoading() {}
 }
