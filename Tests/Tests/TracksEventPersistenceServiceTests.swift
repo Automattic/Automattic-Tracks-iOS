@@ -81,7 +81,7 @@ class TracksEventPersistenceServiceTests: XCTestCase {
         let context = contextManager.managedObjectContext
         let service = TracksEventPersistenceService(managedObjectContext: context)
 
-        let uuids = (0 ..< 2002).map { index in
+        let uuids = (0 ..< 2002).map { _ in
             UUID()
         }
 
@@ -164,7 +164,7 @@ class TracksEventPersistenceServiceTests: XCTestCase {
         let context = contextManager.managedObjectContext
         let service = TracksEventPersistenceService(managedObjectContext: context)
 
-        let uuids = (0 ..< 2002).map { index in
+        let uuids = (0 ..< 2002).map { _ in
             UUID()
         }
 

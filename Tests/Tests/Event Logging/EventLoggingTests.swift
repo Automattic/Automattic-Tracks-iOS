@@ -23,11 +23,11 @@ class EventLoggingTests: XCTestCase {
             exp.expectedFulfillmentCount = uploadCount
 
             let eventLogging = self.eventLogging(delegate: MockEventLoggingDelegate()
-                    .withDidStartUploadingCallback { log in
+                    .withDidStartUploadingCallback { _ in
                         XCTAssertFalse(isUploading, "Only one upload should be running at the same time")
                         isUploading = true
                     }
-                    .withDidFinishUploadingCallback { log in
+                    .withDidFinishUploadingCallback { _ in
                         XCTAssertTrue(isUploading, "Only one upload should be running at the same time")
                         isUploading = false
                         exp.fulfill()
