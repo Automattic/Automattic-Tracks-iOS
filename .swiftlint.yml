@@ -39,6 +39,9 @@ only_rules:
   # Empty strings should be compared to `""` only if `isEmpty` cannot be used.
   - empty_string
 
+  # Prefer `first(where:)` over `filter { }.first`.
+  - first_where
+
   # MARK comment should be in valid format.
   - mark
 
