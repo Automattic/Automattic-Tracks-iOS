@@ -50,6 +50,9 @@ only_rules:
   # over `CGPoint(x: 0, y: 0)`).
   - prefer_zero_over_explicit_init
 
+  # `nil` coalescing on a non-optional is redundant.
+  - redundant_nil_coalescing
+
   # Use shorthand syntax for optional binding (`if let foo` instead of
   # `if let foo = foo`).
   - shorthand_optional_binding
