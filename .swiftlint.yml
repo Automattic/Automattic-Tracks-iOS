@@ -51,6 +51,9 @@ only_rules:
   # Prefer `first(where:)` over `filter { }.first`.
   - first_where
 
+  # Prefer `flatMap { ... }` over `map { ... }.reduce([], +)`.
+  - flatmap_over_map_reduce
+
   # Prefer `last(where:)` over `filter { }.last`.
   - last_where
 
