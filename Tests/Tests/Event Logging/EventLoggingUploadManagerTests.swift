@@ -61,7 +61,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
 
             let delegate = MockEventLoggingDelegate()
                 .withShouldUploadLogFilesValue(false)
-                .withUploadCancelledCallback { logFile in
+                .withUploadCancelledCallback { _ in
                     exp.fulfill()
                 }
 
@@ -87,7 +87,7 @@ class EventLoggingUploadManagerTests: XCTestCase {
             exp.expectedFulfillmentCount = 2
 
             let delegate = MockEventLoggingDelegate()
-                .withUploadFailedCallback { error, _ in
+                .withUploadFailedCallback { _, _ in
                     exp.fulfill()
                 }
 

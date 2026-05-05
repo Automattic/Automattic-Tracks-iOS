@@ -70,7 +70,7 @@ public class ExPlatService {
             request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         }
 
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
             guard let data, error == nil else {
                 completion(nil)
                 return
