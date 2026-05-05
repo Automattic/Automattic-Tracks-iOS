@@ -56,5 +56,5 @@ struct ExponentialBackoffTimer {
     private(set) internal var next: DispatchTime = .now()
 
     /// A `Date` representation of `next`.
-    private(set) var nextDate: Date = Date()
+    private(set) var nextDate = Date()
 }
