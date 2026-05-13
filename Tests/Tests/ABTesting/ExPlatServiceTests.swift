@@ -152,7 +152,7 @@ private class SpyURLProtocol: URLProtocol {
     override func startLoading() {
         let response = HTTPURLResponse(url: request.url!, statusCode: 200, httpVersion: nil, headerFields: nil)!
         client?.urlProtocol(self, didReceive: response, cacheStoragePolicy: .notAllowed)
-        client?.urlProtocol(self, didLoadData: Data())
+        client?.urlProtocol(self, didLoad: Data())
         client?.urlProtocolDidFinishLoading(self)
     }
 
