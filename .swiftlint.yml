@@ -96,6 +96,9 @@ only_rules:
   # Unused parameters in closures should be replaced with `_`.
   - unused_closure_parameter
 
+  # Empty lines directly before a closing brace should be avoided.
+  - vertical_whitespace_closing_braces
+
   - custom_rules
 
 # Rules configuration
