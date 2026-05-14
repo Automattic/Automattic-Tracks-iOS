@@ -88,7 +88,6 @@ class ExPlatTests: XCTestCase {
                 XCTAssertEqual(abTesting.experiment("experiment_multiple_variation"), .customTreatment(name: "another_treatment"))
                 expectation.fulfill()
             }
-
         }
 
         wait(for: [expectation], timeout: 2.0)
