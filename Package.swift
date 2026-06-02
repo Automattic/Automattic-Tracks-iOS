@@ -21,7 +21,7 @@ let package = Package(
             ]
         ),
 
-        // This target is seperated out to reduce the number of other
+        // This target is separated out to reduce the number of other
         // dependencies included as part of the other targets.
         .library(
             name: "AutomatticEncryptedLogs",
