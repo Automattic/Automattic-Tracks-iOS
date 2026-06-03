@@ -101,7 +101,7 @@
 {
 #if TARGET_OS_SIMULATOR
     return @"None (Simulator)";
-#elif TARGET_OS_WATCH
+#elif TARGET_OS_WATCH || TARGET_OS_TV
     return @"Unknown";
 #elif TARGET_OS_IPHONE
     CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
