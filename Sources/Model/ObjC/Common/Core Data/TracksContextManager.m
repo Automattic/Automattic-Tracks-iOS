@@ -92,28 +92,38 @@ NSString *const TracksPersistentStoreException      = @"TracksPersistentStoreExc
                                               attributes:nil
                                                    error:&error];
     
-    // It seems safe not to handle this error because Application Support should always be
-    // available and one should always be able to create a folder in it
+    // It should normally be safe not to handle this error because the store directory should always
+    // be available and one should always be able to create a folder in it
     if (error != nil) {
-        TracksLogError(@"Failed to create folder for %@ in Application Support: %@, %@", bundleIdentifier, error, [error userInfo]);
-        
+        TracksLogError(@"Failed to create the store directory for %@: %@, %@", bundleIdentifier, error, [error userInfo]);
+
         @throw [NSException exceptionWithName:TracksApplicationSupportException
-                                       reason:[NSString stringWithFormat:@"Error creating the ApplicationSupport Folder: %@", error]
+                                       reason:[NSString stringWithFormat:@"Error creating the store directory: %@", error]
                                      userInfo:error.userInfo];
-        
+
     }
     
     return folder;
 }
 
-// Application Support contains "the files that your app creates and manages on behalf of the user
-// and can include files that contain user data".
+// Returns the base directory under which the Tracks Core Data store is created.
 //
-// See:
-// https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1
+// On most platforms this is Application Support, which "contains the files that your app creates and
+// manages on behalf of the user and can include files that contain user data".
+// See: https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1
+//
+// tvOS is the exception: sandboxed apps may only write to Caches and the temporary directory, so
+// Application Support is unavailable there and trying to create the store in it throws. We fall back
+// to Caches on tvOS. Caches is purgeable, so the store is treated as a rebuildable cache, which is
+// fine for the Tracks event queue whose events are flushed to the server.
 - (NSURL *)applicationSupportURL {
-    // Application Support should always be available, so no checking whether the array is empty
-    return [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
+    // The directory should always be available, so no checking whether the array is empty
+#if TARGET_OS_TV
+    NSSearchPathDirectory directory = NSCachesDirectory;
+#else
+    NSSearchPathDirectory directory = NSApplicationSupportDirectory;
+#endif
+    return [[[NSFileManager defaultManager] URLsForDirectory:directory
                                                    inDomains:NSUserDomainMask] lastObject];
 }
 
