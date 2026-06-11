@@ -112,9 +112,16 @@ NSString *const TracksPersistentStoreException      = @"TracksPersistentStoreExc
 // See:
 // https://developer.apple.com/library/archive/documentation/FileManagement/Conceptual/FileSystemProgrammingGuide/MacOSXDirectories/MacOSXDirectories.html#//apple_ref/doc/uid/TP40010672-CH10-SW1
 - (NSURL *)applicationSupportURL {
+#if TARGET_OS_TV
+    // On tvOS Application support isn't available on real devices, so we need to use the cache directory.
+    //See: https://developer.apple.com/library/archive/documentation/General/Conceptual/AppleTV_PG/iCloudStorage.html#//apple_ref/doc/uid/TP40015241-CH10-SW1
+    return [[[NSFileManager defaultManager] URLsForDirectory:NSCachesDirectory
+                                                   inDomains:NSUserDomainMask] lastObject];
+#else
     // Application Support should always be available, so no checking whether the array is empty
     return [[[NSFileManager defaultManager] URLsForDirectory:NSApplicationSupportDirectory
                                                    inDomains:NSUserDomainMask] lastObject];
+#endif
 }
 
 - (NSManagedObjectContext *)managedObjectContext {
