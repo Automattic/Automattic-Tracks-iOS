@@ -76,16 +76,16 @@ NSString *const TracksPersistentStoreException      = @"TracksPersistentStoreExc
 }
 
 - (NSURL *)storeContainerDirectoryURL {
-    return [self applicationSupportURLForContainerApp];
+    return [self storeDirectoryURLForContainerApp];
 }
 
-- (NSURL *)applicationSupportURLForContainerApp {
+- (NSURL *)storeDirectoryURLForContainerApp {
     // The container app is the one owning the main bundle
-    return [self applicationSupportURLForAppWithBundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
+    return [self storeDirectoryURLForAppWithBundleIdentifier:[[NSBundle mainBundle] bundleIdentifier]];
 }
 
-- (NSURL *)applicationSupportURLForAppWithBundleIdentifier:(NSString *)bundleIdentifier {
-    NSURL *folder = [[self applicationSupportURL] URLByAppendingPathComponent:bundleIdentifier];
+- (NSURL *)storeDirectoryURLForAppWithBundleIdentifier:(NSString *)bundleIdentifier {
+    NSURL *folder = [[self storeBaseDirectoryURL] URLByAppendingPathComponent:bundleIdentifier];
     NSError *error = nil;
     [[NSFileManager defaultManager] createDirectoryAtURL:folder
                              withIntermediateDirectories:true
@@ -116,7 +116,7 @@ NSString *const TracksPersistentStoreException      = @"TracksPersistentStoreExc
 // Application Support is unavailable there and trying to create the store in it throws. We fall back
 // to Caches on tvOS. Caches is purgeable, so the store is treated as a rebuildable cache, which is
 // fine for the Tracks event queue whose events are flushed to the server.
-- (NSURL *)applicationSupportURL {
+- (NSURL *)storeBaseDirectoryURL {
     // The directory should always be available, so no checking whether the array is empty
 #if TARGET_OS_TV
     NSSearchPathDirectory directory = NSCachesDirectory;
