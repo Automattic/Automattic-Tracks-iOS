@@ -41,6 +41,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, assign) BOOL isAppleWatchConnected;
 @property (nonatomic, assign) BOOL isVoiceOverEnabled;
 @property (nonatomic, readonly) NSString *orientation;
+@property (nonatomic, readonly) BOOL isLockdownModeEnabled;
 
 @end
 

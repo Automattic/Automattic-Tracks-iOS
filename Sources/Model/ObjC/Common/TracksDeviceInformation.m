@@ -27,6 +27,8 @@
 @property (nonatomic, assign) BOOL isReachable;
 @property (nonatomic, assign) BOOL isReachableByWiFi;
 @property (nonatomic, assign) BOOL isReachableByWWAN;
+@property (nonatomic, assign) BOOL cachedLockdownModeEnabled;
+@property (nonatomic, assign) BOOL hasReadLockdownMode;
 
 @property (nonatomic, strong) NSString *lastKnownPreferredContentSizeCategory;
 
@@ -271,6 +273,14 @@
 #else   // Mac
     return NO;
 #endif
+}
+
+- (BOOL)isLockdownModeEnabled {
+    if (!self.hasReadLockdownMode) {
+        self.cachedLockdownModeEnabled = [[NSUserDefaults standardUserDefaults] boolForKey:@"LDMGlobalEnabled"];
+        self.hasReadLockdownMode = YES;
+    }
+    return self.cachedLockdownModeEnabled;
 }
 
 #pragma mark - App Specific Information
