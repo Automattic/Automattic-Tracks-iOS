@@ -2,6 +2,11 @@
 
 #if TARGET_OS_WATCH
 #import <WatchKit/WatchKit.h>
+#elif TARGET_OS_TV
+@import UIDeviceIdentifier;
+#import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+#import "UIApplication+Extensions.h"
 #elif TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 @import UIDeviceIdentifier;
@@ -25,9 +30,10 @@
 @property (nonatomic, assign) BOOL cachedLockdownModeEnabled;
 @property (nonatomic, assign) BOOL hasReadLockdownMode;
 
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
-@property (nonatomic, assign) UIDeviceOrientation lastKnownDeviceOrientation;
 @property (nonatomic, strong) NSString *lastKnownPreferredContentSizeCategory;
+
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
+@property (nonatomic, assign) UIDeviceOrientation lastKnownDeviceOrientation;
 #endif
 
 @end
@@ -46,7 +52,7 @@
 
 - (void)preloadDeviceProperties
 {
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
     void (^preload)(void) = ^(void) {
         self.lastKnownDeviceOrientation = UIDevice.currentDevice.orientation;
         self.lastKnownPreferredContentSizeCategory = UIApplication.sharedIfAvailable.preferredContentSizeCategory;
@@ -75,7 +81,7 @@
 {
 #if TARGET_OS_SIMULATOR
     return @"Carrier (Simulator)";
-#elif TARGET_OS_WATCH
+#elif TARGET_OS_WATCH || TARGET_OS_TV
     return @"Not Applicable";
 #elif TARGET_OS_IPHONE
     CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
@@ -97,7 +103,7 @@
 {
 #if TARGET_OS_SIMULATOR
     return @"None (Simulator)";
-#elif TARGET_OS_WATCH
+#elif TARGET_OS_WATCH || TARGET_OS_TV
     return @"Unknown";
 #elif TARGET_OS_IPHONE
     CTTelephonyNetworkInfo *netInfo = [CTTelephonyNetworkInfo new];
@@ -170,6 +176,8 @@
 -(BOOL)isAppleWatchConnected{
 #if TARGET_OS_WATCH
     return YES;  // We're running on the watch itself
+#elif TARGET_OS_TV
+    return NO;  // We're running on tvOS
 #elif TARGET_OS_IPHONE
     return [[WatchSessionManager shared] hasBeenPreviouslyPaired];
 #else   // Mac
@@ -196,7 +204,7 @@
 }
 
 -(NSString *)orientation{
-#if TARGET_OS_WATCH
+#if TARGET_OS_WATCH || TARGET_OS_TV
     return @"Unknown";
 #elif TARGET_OS_IPHONE
      UIDeviceOrientation orientation = [self deviceOrientation];
@@ -215,7 +223,7 @@
 
 #pragma mark - Calls that need to run on the main thread
 
-#if TARGET_OS_IPHONE && !TARGET_OS_WATCH
+#if TARGET_OS_IPHONE && !TARGET_OS_WATCH && !TARGET_OS_TV
 // This method was created because UIDevice.currentDevice.orientation should only
 // be called from the main thread.
 //

@@ -13,7 +13,7 @@ class EventLoggingNetworkService {
     func uploadFile(request: URLRequest, fileURL: URL, completion: @escaping ResultCallback) {
         urlSession.uploadTask(with: request, fromFile: fileURL, completionHandler: { data, response, error in
 
-            if let error = error {
+            if let error {
                 completion(.failure(error))
                 return
             }
@@ -24,7 +24,7 @@ class EventLoggingNetworkService {
 
             if !(200 ... 299).contains(statusCode) {
                 /// Use the server-provided error messaging, if possible
-                if let data = data, let error = self.decodeError(data: data) {
+                if let data, let error = self.decodeError(data: data) {
                     completion(.failure(EventLoggingFileUploadError.httpError(error.error, error.message, statusCode)))
                 }
                 /// Fallback to a reasonable error message based on the HTTP status and response body

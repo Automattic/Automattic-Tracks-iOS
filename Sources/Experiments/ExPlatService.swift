@@ -45,7 +45,7 @@ public class ExPlatService {
             URLQueryItem(name: "experiment_names", value: experimentNames.joined(separator: ","))
         ]
 
-        if let anonId = anonId {
+        if let anonId {
             urlComponents.queryItems?.append(URLQueryItem.init(name: "anon_id", value: anonId))
         }
 
@@ -61,17 +61,17 @@ public class ExPlatService {
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
         request.addValue("application/json", forHTTPHeaderField: "Accept")
 
-        if let oAuthToken = oAuthToken {
+        if let oAuthToken {
             request.setValue("Bearer \(oAuthToken)", forHTTPHeaderField: "Authorization")
         }
 
         // User-Agent
-        if let userAgent = userAgent {
+        if let userAgent {
             request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         }
 
-        let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            guard let data = data, error == nil else {
+        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+            guard let data, error == nil else {
                 completion(nil)
                 return
             }

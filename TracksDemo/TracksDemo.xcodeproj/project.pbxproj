@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 54;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -27,6 +27,9 @@
 		F93676FD21DFFDC700323458 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F93676FC21DFFDC700323458 /* ViewController.swift */; };
 		F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F93676FE21DFFDC800323458 /* Assets.xcassets */; };
 		F936770221DFFDC800323458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F936770021DFFDC800323458 /* Main.storyboard */; };
+		FF3A365F2F961AE9008D7F03 /* AutomatticTracks in Frameworks */ = {isa = PBXBuildFile; productRef = FF3A365E2F961AE9008D7F03 /* AutomatticTracks */; };
+		FF3A36602F9620F2008D7F03 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* Secrets.swift */; };
+		FF3A36612F9620F7008D7F03 /* CrashLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,7 +71,12 @@
 		F936770121DFFDC800323458 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F936770321DFFDC800323458 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F936770421DFFDC800323458 /* TracksDemo_Mac.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TracksDemo_Mac.entitlements; sourceTree = "<group>"; };
+		FF3A36502F961502008D7F03 /* TracksDemo tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TracksDemo tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		FF3A36512F961502008D7F03 /* TracksDemo tvOS */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = "TracksDemo tvOS"; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		9376328B1AC2026900086BC6 /* Frameworks */ = {
@@ -95,6 +103,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FF3A364D2F961502008D7F03 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF3A365F2F961AE9008D7F03 /* AutomatticTracks in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -115,6 +131,7 @@
 				F93676F921DFFDC700323458 /* TracksDemo Mac */,
 				24FB4D3B25B2AEEA006E4031 /* Shared */,
 				937632AA1AC2026900086BC6 /* TracksDemoTests */,
+				FF3A36512F961502008D7F03 /* TracksDemo tvOS */,
 				9376328F1AC2026900086BC6 /* Products */,
 				B71639B226AF298600C9FDAA /* Frameworks */,
 			);
@@ -126,6 +143,7 @@
 				9376328E1AC2026900086BC6 /* TracksDemo.app */,
 				937632A71AC2026900086BC6 /* TracksDemoTests.xctest */,
 				F93676F821DFFDC700323458 /* TracksDemo Mac.app */,
+				FF3A36502F961502008D7F03 /* TracksDemo tvOS.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -268,13 +286,36 @@
 			productReference = F93676F821DFFDC700323458 /* TracksDemo Mac.app */;
 			productType = "com.apple.product-type.application";
 		};
+		FF3A364F2F961502008D7F03 /* TracksDemo tvOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FF3A365A2F961503008D7F03 /* Build configuration list for PBXNativeTarget "TracksDemo tvOS" */;
+			buildPhases = (
+				FF3A364C2F961502008D7F03 /* Sources */,
+				FF3A364D2F961502008D7F03 /* Frameworks */,
+				FF3A364E2F961502008D7F03 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				FF3A36512F961502008D7F03 /* TracksDemo tvOS */,
+			);
+			name = "TracksDemo tvOS";
+			packageProductDependencies = (
+				FF3A365E2F961AE9008D7F03 /* AutomatticTracks */,
+			);
+			productName = "TracksDemo tvOS";
+			productReference = FF3A36502F961502008D7F03 /* TracksDemo tvOS.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		937632861AC2026900086BC6 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1010;
+				LastSwiftUpdateCheck = 2620;
 				LastUpgradeCheck = 1410;
 				ORGANIZATIONNAME = "Automattic Inc.";
 				TargetAttributes = {
@@ -290,6 +331,9 @@
 					F93676F721DFFDC700323458 = {
 						CreatedOnToolsVersion = 10.1;
 						LastSwiftMigration = "";
+					};
+					FF3A364F2F961502008D7F03 = {
+						CreatedOnToolsVersion = 26.2;
 					};
 				};
 			};
@@ -312,6 +356,7 @@
 				9376328D1AC2026900086BC6 /* TracksDemo */,
 				937632A61AC2026900086BC6 /* TracksDemoTests */,
 				F93676F721DFFDC700323458 /* TracksDemo Mac */,
+				FF3A364F2F961502008D7F03 /* TracksDemo tvOS */,
 			);
 		};
 /* End PBXProject section */
@@ -340,6 +385,13 @@
 			files = (
 				F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */,
 				F936770221DFFDC800323458 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF3A364E2F961502008D7F03 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -419,6 +471,15 @@
 				F93676FD21DFFDC700323458 /* ViewController.swift in Sources */,
 				24FB4D8E25B2B332006E4031 /* CrashLoggingDataSource.swift in Sources */,
 				F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FF3A364C2F961502008D7F03 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FF3A36612F9620F7008D7F03 /* CrashLoggingDataSource.swift in Sources */,
+				FF3A36602F9620F2008D7F03 /* Secrets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +785,93 @@
 			};
 			name = Release;
 		};
+		FF3A36582F961503008D7F03 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sergioestevao.TracksDemo-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 18.0;
+			};
+			name = Debug;
+		};
+		FF3A36592F961503008D7F03 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "App Icon & Top Shelf Image";
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Automatic;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sergioestevao.TracksDemo-tvOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = appletvos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 3;
+				TVOS_DEPLOYMENT_TARGET = 18.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -763,6 +911,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		FF3A365A2F961503008D7F03 /* Build configuration list for PBXNativeTarget "TracksDemo tvOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FF3A36582F961503008D7F03 /* Debug */,
+				FF3A36592F961503008D7F03 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -789,6 +946,10 @@
 			isa = XCSwiftPackageProductDependency;
 			package = B76FDFDC26BC5E150059054B /* XCRemoteSwiftPackageReference "CocoaLumberjack" */;
 			productName = CocoaLumberjack;
+		};
+		FF3A365E2F961AE9008D7F03 /* AutomatticTracks */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AutomatticTracks;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

@@ -75,7 +75,7 @@ public class CrashLogging {
                 // input `SamplingContext` down the chain.
                 NSNumber(value: self.dataProvider.tracesSampler())
             }
-            #if !os(watchOS)
+            #if !os(watchOS) && !os(tvOS)
             options.configureProfiling = { [weak self] in
                 guard let self else { return }
                 $0.sessionSampleRate = Float(self.dataProvider.profilingRate)
@@ -113,7 +113,7 @@ public class CrashLogging {
         }
 
         /// If we shouldn't send the event we have nothing else to do here
-        guard let event = event, shouldSendEvent else {
+        guard let event, shouldSendEvent else {
             return nil
         }
 
@@ -298,7 +298,7 @@ extension CrashLogging {
     /// Causes the Crash Logging System to refresh its knowledge about the current state of the system.
     ///
     /// This is required in situations like login / logout, when the system otherwise might not
-    /// know a change has occured.
+    /// know a change has occurred.
     ///
     /// Calling this method in these situations prevents
     public func setNeedsDataRefresh() {

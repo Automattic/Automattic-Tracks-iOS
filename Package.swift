@@ -4,7 +4,7 @@ import PackageDescription
 
 let package = Package(
     name: "AutomatticTracksiOS",
-    platforms: [.macOS(.v10_14), .iOS(.v15)],
+    platforms: [.macOS(.v10_14), .iOS(.v15), .tvOS(.v15)],
     products: [
         .library(
             name: "AutomatticTracks",
@@ -21,7 +21,7 @@ let package = Package(
             ]
         ),
 
-        // This target is seperated out to reduce the number of other
+        // This target is separated out to reduce the number of other
         // dependencies included as part of the other targets.
         .library(
             name: "AutomatticEncryptedLogs",
