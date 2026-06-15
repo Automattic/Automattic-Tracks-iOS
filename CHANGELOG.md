@@ -38,8 +38,7 @@ _None._
 
 ### New Features
 
-- Track whether Lockdown Mode is enabled as a device property (`device_info_lockdown_mode_enabled`). [#331]
-- The library can now be used in tvOS targets. [#336]
+_None._
 
 ### Bug Fixes
 
@@ -48,6 +47,13 @@ _None._
 ### Internal Changes
 
 _None._
+
+## 4.3.0
+
+### New Features
+
+- Track whether Lockdown Mode is enabled as a device property (`device_info_lockdown_mode_enabled`). [#331]
+- The library can now be used in tvOS targets. [#336]
 
 ## 4.2.1
 
