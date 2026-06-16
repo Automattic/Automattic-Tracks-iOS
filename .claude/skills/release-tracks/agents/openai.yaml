@@ -1,0 +1,4 @@
+interface:
+  display_name: "Tracks Release"
+  short_description: "Release Tracks Swift Package versions"
+  default_prompt: "Use $release-tracks to prepare the next Tracks release."
