@@ -8,7 +8,19 @@ import Cocoa
 #endif
 
 @objc public class ExPlat: NSObject, ABTesting {
-    public static var shared: ExPlat!
+    private static let sharedLock = NSLock()
+    private static var _shared: ExPlat?
+
+    public static var shared: ExPlat! {
+        get {
+            sharedLock.lock(); defer { sharedLock.unlock() }
+            return _shared
+        }
+        set {
+            sharedLock.lock(); defer { sharedLock.unlock() }
+            _shared = newValue
+        }
+    }
 
     private let service: ExPlatService
 
