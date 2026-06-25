@@ -17,8 +17,8 @@ struct ExPlatConcurrencyTests {
         anonId: nil
     )
 
-    // Reassigning `ExPlat.shared` on a background queue while reading it must not crash
-    @Test func sharedLifecycleSurvivesConcurrentReassignmentAndReads() async {
+    @Test("Reassigning `ExPlat.shared` on a background queue while reading it must not crash")
+    func sharedLifecycleSurvivesConcurrentReassignmentAndReads() async {
         let iterations = 1_000
 
         _ = ExPlat(configuration: configuration, service: ExPlatServiceStub())
