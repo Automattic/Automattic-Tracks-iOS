@@ -4,8 +4,41 @@ BUILD_FOLDER = File.join(__dir__, '.build')
 BUILD_LOG_PATH = File.join(BUILD_FOLDER, 'logs')
 DERIVED_DATA_PATH = File.join(BUILD_FOLDER, 'derived-data')
 PROJECT_PATH = File.join(__dir__, 'TracksDemo', 'TracksDemo.xcodeproj')
+IOS_SCHEME = 'TracksDemo'
+MAC_SCHEME = 'TracksDemo Mac'
+IOS_TEST_DEVICE = 'iPhone 17'
+EXPLAT_CONCURRENCY_TEST_IDENTIFIER = 'AutomatticTracksTests/ExPlatConcurrencyTests'
 
 default_platform(:ios)
+
+def shared_test_options
+  {
+    project: PROJECT_PATH,
+    buildlog_path: BUILD_LOG_PATH,
+    derived_data_path: DERIVED_DATA_PATH
+  }
+end
+
+def run_ios_tests(clean:, **)
+  run_tests(
+    **shared_test_options,
+    scheme: IOS_SCHEME,
+    devices: [IOS_TEST_DEVICE],
+    prelaunch_simulator: true,
+    clean:,
+    skip_package_dependencies_resolution: !clean,
+    **
+  )
+end
+
+def run_macos_tests(clean:)
+  run_tests(
+    **shared_test_options,
+    scheme: MAC_SCHEME,
+    clean:,
+    skip_package_dependencies_resolution: !clean
+  )
+end
 
 before_all do
   # Bumping the interval Fastlane waits for xcodebuild to provide output before retrying.
@@ -14,35 +47,33 @@ before_all do
 end
 
 platform :ios do
-  desc 'Builds the project and runs tests'
-  lane :test do |options|
-    clean = options.fetch(:clean, false)
+  # Builds the project and runs tests.
+  #
+  # @param clean [Boolean] Build from a clean checkout and resolve Swift packages.
+  #
+  lane :test do |clean: false|
+    run_ios_tests(clean:)
+  end
 
-    run_tests(
-      scheme: 'TracksDemo',
-      project: PROJECT_PATH,
-      devices: ['iPhone 17'],
-      prelaunch_simulator: true,
-      buildlog_path: BUILD_LOG_PATH,
-      derived_data_path: DERIVED_DATA_PATH,
-      clean: clean,
-      skip_package_dependencies_resolution: !clean
+  # Runs the ExPlat shared lifecycle concurrency test with Thread Sanitizer enabled.
+  #
+  # @param clean [Boolean] Build from a clean checkout and resolve Swift packages.
+  #
+  lane :test_explat_concurrency_tsan do |clean: false|
+    run_ios_tests(
+      clean:,
+      thread_sanitizer: true,
+      only_testing: [EXPLAT_CONCURRENCY_TEST_IDENTIFIER]
     )
   end
 end
 
 platform :mac do
-  desc 'Builds the project and runs tests'
-  lane :test do |options|
-    clean = options.fetch(:clean, false)
-
-    run_tests(
-      scheme: 'TracksDemo Mac',
-      project: PROJECT_PATH,
-      buildlog_path: BUILD_LOG_PATH,
-      derived_data_path: DERIVED_DATA_PATH,
-      clean: clean,
-      skip_package_dependencies_resolution: !clean
-    )
+  # Builds the project and runs tests.
+  #
+  # @param clean [Boolean] Build from a clean checkout and resolve Swift packages.
+  #
+  lane :test do |clean: false|
+    run_macos_tests(clean:)
   end
 end
