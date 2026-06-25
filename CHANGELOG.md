@@ -42,7 +42,7 @@ _None._
 
 ### Bug Fixes
 
-- Made `ExPlat.shared` lifecycle thread-safe to fix a crash (`Cannot form weak reference to instance … of class AutomatticExperiments.ExPlat`) when `ExPlat` is reconfigured on a background queue while consumers read `ExPlat.shared` and call `refresh` concurrently. The public API is unchanged.
+- Made `ExPlat.shared` lifecycle thread-safe to fix a crash. [#364]
 
 ### Internal Changes
 
