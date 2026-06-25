@@ -20,6 +20,14 @@ steps:
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths: .build/logs/*.log
 
+  - label: "🧪 ExPlat Thread Sanitizer"
+    key: test_explat_tsan
+    command: |
+      install_gems
+      bundle exec fastlane ios test_explat_concurrency_tsan clean:true
+    plugins: [$CI_TOOLKIT_PLUGIN]
+    artifact_paths: .build/logs/*.log
+
   ######################
   # Build and Test macOS
   ######################

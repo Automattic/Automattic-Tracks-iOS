@@ -42,7 +42,7 @@ _None._
 
 ### Bug Fixes
 
-_None._
+- Made `ExPlat.shared` lifecycle thread-safe to fix a crash. [#364]
 
 ### Internal Changes
 
