@@ -42,11 +42,17 @@ _None._
 
 ### Bug Fixes
 
-- Made `ExPlat.shared` lifecycle thread-safe to fix a crash. [#364]
+_None._
 
 ### Internal Changes
 
 _None._
+
+## 4.3.1
+
+### Bug Fixes
+
+- Made `ExPlat.shared` lifecycle thread-safe to fix a crash. [#364]
 
 ## 4.3.0
 
