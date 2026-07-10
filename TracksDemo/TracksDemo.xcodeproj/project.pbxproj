@@ -229,7 +229,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 937632B11AC2026900086BC6 /* Build configuration list for PBXNativeTarget "TracksDemo" */;
 			buildPhases = (
-				24FB4D4725B2B0E0006E4031 /* Add Sample Secrets */,
 				9376328A1AC2026900086BC6 /* Sources */,
 				9376328B1AC2026900086BC6 /* Frameworks */,
 				9376328C1AC2026900086BC6 /* Resources */,
@@ -269,7 +268,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F936770521DFFDC800323458 /* Build configuration list for PBXNativeTarget "TracksDemo Mac" */;
 			buildPhases = (
-				24723BD926C6FAFA008DC1E8 /* Add Sample Secrets */,
 				F93676F421DFFDC700323458 /* Sources */,
 				F93676F521DFFDC700323458 /* Frameworks */,
 				F93676F621DFFDC700323458 /* Resources */,
@@ -396,49 +394,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		24723BD926C6FAFA008DC1E8 /* Add Sample Secrets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Shared/Secrets.example.swift",
-			);
-			name = "Add Sample Secrets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Shared/Secrets.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSOURCE=\"$SRCROOT/Shared/Secrets.example.swift\"\nDESTINATION=\"$SRCROOT/Shared/Secrets.swift\"\nif [ ! -f $DESTINATION ]; then\n    echo \"Secrets file does not exist at $DESTINATION – copying from example file\"\n    cp $SOURCE $DESTINATION\nfi\n";
-		};
-		24FB4D4725B2B0E0006E4031 /* Add Sample Secrets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Shared/Secrets.example.swift",
-			);
-			name = "Add Sample Secrets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Shared/Secrets.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSOURCE=\"$SRCROOT/Shared/Secrets.example.swift\"\nDESTINATION=\"$SRCROOT/Shared/Secrets.swift\"\nif [ ! -f $DESTINATION ]; then\n    echo \"Secrets file does not exist at $DESTINATION – copying from example file\"\n    cp $SOURCE $DESTINATION\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		9376328A1AC2026900086BC6 /* Sources */ = {
