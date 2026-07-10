@@ -1,14 +1,14 @@
 import AutomatticTracks
 
 struct CrashLoggingDataSource: CrashLoggingDataProvider {
-    var sentryDSN: String = Secrets.sentryDsn
+    var sentryDSN: String = SentryConfig.sentryDsn
 
     var userHasOptedOut: Bool = false
 
     var buildType: String = "test"
 
     var currentUser: TracksUser? {
-        Secrets.tracksUser
+        SentryConfig.tracksUser
     }
 
     var shouldEnableAutomaticSessionTracking = true
