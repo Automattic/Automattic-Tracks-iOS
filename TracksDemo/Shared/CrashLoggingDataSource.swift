@@ -1,7 +1,7 @@
 import AutomatticTracks
 
 struct CrashLoggingDataSource: CrashLoggingDataProvider {
-    var sentryDSN: String = SentryConfig.sentryDsn
+    var sentryDSN: String = SentryConfig.sentryDSN
 
     var userHasOptedOut: Bool = false
 
