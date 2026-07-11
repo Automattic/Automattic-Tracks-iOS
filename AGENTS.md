@@ -129,4 +129,3 @@ In the long run, we wish to remove Core Data in favor of a leaner persistence la
   Be careful with shell commands and path handling.
 - **ObjC interop**: the `Event Logging` module exposes ObjC headers.
   Changes to ObjC public headers can break Swift consumers.
-- **`Secrets.swift` is gitignored**: if demo apps need API keys, create this file locally.
