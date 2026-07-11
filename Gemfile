@@ -3,4 +3,4 @@
 source 'https://rubygems.org'
 
 gem 'fastlane', '~> 2.222'
-gem 'rubocop', '~> 1.65'
+gem 'rubocop', '~> 1.88'
