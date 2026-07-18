@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24723BE026C72630008DC1E8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* Secrets.swift */; };
-		24723BE126C72631008DC1E8 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* Secrets.swift */; };
+		24723BE026C72630008DC1E8 /* SentryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* SentryConfig.swift */; };
+		24723BE126C72631008DC1E8 /* SentryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* SentryConfig.swift */; };
 		24FB4D1B25B2AE2C006E4031 /* CrashLoggingRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D1A25B2AE2C006E4031 /* CrashLoggingRootViewController.swift */; };
 		24FB4D3D25B2AF02006E4031 /* CrashLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */; };
 		24FB4D8425B2B304006E4031 /* CrashLoggingRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D8325B2B304006E4031 /* CrashLoggingRootViewController.swift */; };
@@ -28,7 +28,7 @@
 		F93676FF21DFFDC800323458 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F93676FE21DFFDC800323458 /* Assets.xcassets */; };
 		F936770221DFFDC800323458 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F936770021DFFDC800323458 /* Main.storyboard */; };
 		FF3A365F2F961AE9008D7F03 /* AutomatticTracks in Frameworks */ = {isa = PBXBuildFile; productRef = FF3A365E2F961AE9008D7F03 /* AutomatticTracks */; };
-		FF3A36602F9620F2008D7F03 /* Secrets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* Secrets.swift */; };
+		FF3A36602F9620F2008D7F03 /* SentryConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D4125B2AF0C006E4031 /* SentryConfig.swift */; };
 		FF3A36612F9620F7008D7F03 /* CrashLoggingDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -47,7 +47,7 @@
 		24FB4D1925B2AE2B006E4031 /* TracksDemo-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "TracksDemo-Bridging-Header.h"; sourceTree = "<group>"; };
 		24FB4D1A25B2AE2C006E4031 /* CrashLoggingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingRootViewController.swift; sourceTree = "<group>"; };
 		24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingDataSource.swift; sourceTree = "<group>"; };
-		24FB4D4125B2AF0C006E4031 /* Secrets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Secrets.swift; sourceTree = "<group>"; };
+		24FB4D4125B2AF0C006E4031 /* SentryConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SentryConfig.swift; sourceTree = "<group>"; };
 		24FB4D8325B2B304006E4031 /* CrashLoggingRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashLoggingRootViewController.swift; sourceTree = "<group>"; };
 		937539871AFA8A9000B94B2A /* TracksDemo_Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TracksDemo_Prefix.pch; sourceTree = "<group>"; };
 		9376328E1AC2026900086BC6 /* TracksDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TracksDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -118,7 +118,7 @@
 			isa = PBXGroup;
 			children = (
 				24FB4D3C25B2AF02006E4031 /* CrashLoggingDataSource.swift */,
-				24FB4D4125B2AF0C006E4031 /* Secrets.swift */,
+				24FB4D4125B2AF0C006E4031 /* SentryConfig.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -229,7 +229,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 937632B11AC2026900086BC6 /* Build configuration list for PBXNativeTarget "TracksDemo" */;
 			buildPhases = (
-				24FB4D4725B2B0E0006E4031 /* Add Sample Secrets */,
 				9376328A1AC2026900086BC6 /* Sources */,
 				9376328B1AC2026900086BC6 /* Frameworks */,
 				9376328C1AC2026900086BC6 /* Resources */,
@@ -269,7 +268,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F936770521DFFDC800323458 /* Build configuration list for PBXNativeTarget "TracksDemo Mac" */;
 			buildPhases = (
-				24723BD926C6FAFA008DC1E8 /* Add Sample Secrets */,
 				F93676F421DFFDC700323458 /* Sources */,
 				F93676F521DFFDC700323458 /* Frameworks */,
 				F93676F621DFFDC700323458 /* Resources */,
@@ -397,56 +395,13 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		24723BD926C6FAFA008DC1E8 /* Add Sample Secrets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Shared/Secrets.example.swift",
-			);
-			name = "Add Sample Secrets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Shared/Secrets.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSOURCE=\"$SRCROOT/Shared/Secrets.example.swift\"\nDESTINATION=\"$SRCROOT/Shared/Secrets.swift\"\nif [ ! -f $DESTINATION ]; then\n    echo \"Secrets file does not exist at $DESTINATION – copying from example file\"\n    cp $SOURCE $DESTINATION\nfi\n";
-		};
-		24FB4D4725B2B0E0006E4031 /* Add Sample Secrets */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"$(SRCROOT)/Shared/Secrets.example.swift",
-			);
-			name = "Add Sample Secrets";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(SRCROOT)/Shared/Secrets.swift",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nSOURCE=\"$SRCROOT/Shared/Secrets.example.swift\"\nDESTINATION=\"$SRCROOT/Shared/Secrets.swift\"\nif [ ! -f $DESTINATION ]; then\n    echo \"Secrets file does not exist at $DESTINATION – copying from example file\"\n    cp $SOURCE $DESTINATION\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
 		9376328A1AC2026900086BC6 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				24FB4D3D25B2AF02006E4031 /* CrashLoggingDataSource.swift in Sources */,
-				24723BE026C72630008DC1E8 /* Secrets.swift in Sources */,
+				24723BE026C72630008DC1E8 /* SentryConfig.swift in Sources */,
 				9376329A1AC2026900086BC6 /* ViewController.m in Sources */,
 				24FB4D1B25B2AE2C006E4031 /* CrashLoggingRootViewController.swift in Sources */,
 				937632971AC2026900086BC6 /* AppDelegate.m in Sources */,
@@ -467,7 +422,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				24FB4D8425B2B304006E4031 /* CrashLoggingRootViewController.swift in Sources */,
-				24723BE126C72631008DC1E8 /* Secrets.swift in Sources */,
+				24723BE126C72631008DC1E8 /* SentryConfig.swift in Sources */,
 				F93676FD21DFFDC700323458 /* ViewController.swift in Sources */,
 				24FB4D8E25B2B332006E4031 /* CrashLoggingDataSource.swift in Sources */,
 				F93676FB21DFFDC700323458 /* AppDelegate.swift in Sources */,
@@ -479,7 +434,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FF3A36612F9620F7008D7F03 /* CrashLoggingDataSource.swift in Sources */,
-				FF3A36602F9620F2008D7F03 /* Secrets.swift in Sources */,
+				FF3A36602F9620F2008D7F03 /* SentryConfig.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
