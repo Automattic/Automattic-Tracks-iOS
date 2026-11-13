@@ -16,7 +16,11 @@ steps:
     key: test_ios
     command: |
       install_gems
+      echo "--- :swift: Restoring Swift Package Manager cache"
+      restore_swiftpm_cache --package-resolved TracksDemo/TracksDemo.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved --artifacts .build/derived-data/SourcePackages
       bundle exec fastlane ios test clean:true
+      echo "--- :swift: Saving Swift Package Manager cache"
+      save_swiftpm_cache --package-resolved TracksDemo/TracksDemo.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved --artifacts .build/derived-data/SourcePackages
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths: .build/logs/*.log
 
@@ -24,6 +28,8 @@ steps:
     key: test_explat_tsan
     command: |
       install_gems
+      echo "--- :swift: Restoring Swift Package Manager cache"
+      restore_swiftpm_cache --package-resolved TracksDemo/TracksDemo.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved --artifacts .build/derived-data/SourcePackages
       bundle exec fastlane ios test_explat_concurrency_tsan clean:true
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths: .build/logs/*.log
@@ -35,6 +41,8 @@ steps:
     key: test_macos
     command: |
       install_gems
+      echo "--- :swift: Restoring Swift Package Manager cache"
+      restore_swiftpm_cache --package-resolved TracksDemo/TracksDemo.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/Package.resolved --artifacts .build/derived-data/SourcePackages
       bundle exec fastlane mac test clean:true
     plugins: [$CI_TOOLKIT_PLUGIN]
     artifact_paths: .build/logs/*.log
