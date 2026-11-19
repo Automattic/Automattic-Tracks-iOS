@@ -24,12 +24,12 @@ public class ExPlatService {
         return "https://public-api.wordpress.com/wpcom/v2/experiments/0.1.0/assignments/\(platform)"
     }
 
-    init(configuration: ExPlatConfiguration) {
+    init(configuration: ExPlatConfiguration, urlSession: URLSession = URLSession(configuration: .ephemeral)) {
         self.platform = configuration.platform
         self.oAuthToken = configuration.oAuthToken
         self.userAgent = configuration.userAgent
         self.anonId = configuration.anonId
-        self.urlSession = URLSession(configuration: .ephemeral)
+        self.urlSession = urlSession
     }
 
     func getAssignments(completion: @escaping (Assignments?) -> Void) {
@@ -70,7 +70,7 @@ public class ExPlatService {
             request.setValue(userAgent, forHTTPHeaderField: "User-Agent")
         }
 
-        let task = URLSession.shared.dataTask(with: request) { data, _, error in
+        let task = urlSession.dataTask(with: request) { data, _, error in
             guard let data, error == nil else {
                 completion(nil)
                 return
