@@ -83,6 +83,10 @@ Do not use the global `swiftlint` binary — it may be a different version.
 - PRs should update `CHANGELOG.md` when warranted. See PR template @.github/PULL_REQUEST.md. See PR template @.github/PULL_REQUEST_TEMPLATE.md .
 - `CHANGELOG.md` follows [Keep a Changelog](https://keepachangelog.com/).
 
+### Releases
+
+Use @.claude/skills/release-tracks/SKILL.md when preparing or publishing a Tracks release.
+
 ### Tests
 
 Two test targets in `Package.swift`:
@@ -123,7 +127,7 @@ In the long run, we wish to remove Core Data in favor of a leaner persistence la
 
 ## Common pitfalls
 
-- **Fastlane test scheme**: tests run via the `TracksDemo` / `TracksDemo Mac` Xcode schemes, not the SPM package directly.
+- **fastlane test scheme**: tests run via the `TracksDemo` / `TracksDemo Mac` Xcode schemes, not the SPM package directly.
   The demo project at `TracksDemo/TracksDemo.xcodeproj` must stay buildable.
 - **Spaces in directory names**: several source directories have spaces (`Event Logging`, `Event Logging (Swift)`, `Encrypted Logs`, `Remote Logging`).
   Be careful with shell commands and path handling.
