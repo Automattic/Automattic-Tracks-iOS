@@ -38,7 +38,7 @@ _None._
 
 ### New Features
 
-_None._
+- `JSException` can now provide source-map debug images (`debugImages`) so JavaScript exceptions symbolicate via Sentry Debug IDs, independent of on-device file paths. The property is optional (defaults to empty), so existing conformers are unaffected. [#373]
 
 ### Bug Fixes
 
