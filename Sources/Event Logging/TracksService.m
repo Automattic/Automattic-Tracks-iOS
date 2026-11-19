@@ -417,8 +417,6 @@ NSString *const USER_ID_ANON = @"anonId";
              DeviceInfoIsOnlineKey : self.deviceInformation.isOnline ? @"YES" : @"NO",
              DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
              DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
-             DeviceInfoVoiceOverEnabledKey : self.deviceInformation.isVoiceOverEnabled ? @"YES" : @"NO",
-             DeviceInfoAppleWatchConnectedKey : self.deviceInformation.isAppleWatchConnected ? @"YES" : @"NO",
              DeviceInfoStatusBarHeightKey : @0,
              DeviceInfoOrientation : self.deviceInformation.orientation ?: @"Unknown",
              DeviceInfoPreferredContentSizeCategory : self.deviceInformation.preferredContentSizeCategory ?: @"Unknown",
