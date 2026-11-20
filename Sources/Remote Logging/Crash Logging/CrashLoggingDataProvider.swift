@@ -9,6 +9,7 @@ public protocol CrashLoggingDataProvider {
     var sentryDSN: String { get }
     var userHasOptedOut: Bool { get }
     var buildType: String { get }
+    var releaseName: ReleaseName { get }
     var currentUser: TracksUser? { get }
     var additionalUserData: [String: Any] { get }
     var errorEventsSamplingRate: Double { get }
@@ -23,8 +24,27 @@ public protocol CrashLoggingDataProvider {
     var onCrashedLastRun: ((Event) -> Void)? { get }
 }
 
+public enum ReleaseName {
+    /**
+     Sets the release name attached for every event sent to Sentry. It's intended to use in debug.
+     - Parameter name: The name of the release.
+     */
+    case setByApplication(name: String)
+    
+    /**
+     Delegates setting the release name to the Tracks library. It's intended to use in release
+     builds. The crash logging framework will single-handedly set the release name based on the
+     build configuration.
+     */
+    case setByTracksLibrary
+}
+
 /// Default implementations of common protocol properties
 public extension CrashLoggingDataProvider {
+
+    var releaseName: ReleaseName {
+        return ReleaseName.setByTracksLibrary
+    }
 
     var additionalUserData: [String: Any] {
         return [:]
