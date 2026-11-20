@@ -34,7 +34,7 @@ _None._
 
 ### Breaking Changes
 
-_None._
+- The minimum supported macOS version is now 12.0. [#383]
 
 ### New Features
 
